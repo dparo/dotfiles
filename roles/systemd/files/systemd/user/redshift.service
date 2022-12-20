@@ -1,0 +1,7 @@
+[Unit]
+Description=Adjust color temperature of screen according to time and location
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=redshift
+Restart=on-failure

@@ -1,0 +1,72 @@
+---
+- name: Create target dir
+  ansible.builtin.file:
+    path: "{{ maven_install_dir }}"
+    state: directory
+    mode: "0755"
+  tags:
+    - maven
+
+
+- name: Download and unpack
+  ansible.builtin.unarchive:
+    src: "https://dlcdn.apache.org/maven/maven-3/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.tar.gz"
+    dest: "{{ maven_install_dir }}"
+    remote_src: yes
+  tags:
+    - maven
+
+- name: Symlink maven binaries
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/bin/{{ item | basename }}"
+    state: link
+  loop:
+    - "{{ maven_install_dir }}/apache-maven-{{ maven_version }}/bin/mvn"
+    - "{{ maven_install_dir }}/apache-maven-{{ maven_version }}/bin/mvnDebug"
+    - "{{ maven_install_dir }}/apache-maven-{{ maven_version }}/bin/mvnyjp"
+  tags:
+    - maven
+
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/maven"
+    state: link
+  tags:
+    - maven
+
+
+- name: Create items
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ ansible_user_dir }}/.cache/maven/repository"
+    - "{{ ansible_user_dir }}/.local/share/java/.m2"
+  tags:
+    - maven
+
+- name: Symlink items
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+    force: true
+  loop:
+    - {
+        src: "{{ ansible_user_dir }}/.config/maven/settings_global.xml",
+        dest: "{{ maven_install_dir }}/apache-maven-{{ maven_version }}/conf/settings.xml",
+      }
+    - {
+        src: "{{ ansible_user_dir }}/.cache/maven/repository",
+        dest: "{{ ansible_user_dir }}/.local/share/java/.m2/repository",
+      }
+    - {
+        src: "{{ ansible_user_dir }}/.config/maven/settings_local.xml",
+        dest: "{{ ansible_user_dir }}/.local/share/java/.m2/settings.xml",
+      }
+  tags:
+    - maven

@@ -1,0 +1,18 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - bash
+    state: present
+  become: true
+  tags:
+    - bash
+
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/bash"
+    state: link
+  tags:
+    - bash

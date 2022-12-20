@@ -1,0 +1,35 @@
+---
+- name: Install texlive fundamental packages
+  ansible.builtin.apt:
+    name:
+      - texlive-latex-base
+      - texlive-fonts-recommended
+      - texlive-latex-recommended
+      - texlive-latex-extra
+      - texlive-extra-utils
+      - texlive-science
+      - texlive-bibtex-extra
+      - lmodern
+      - biber
+      - latexmk
+      - chktex         # latex semantic linter: https://www.nongnu.org/chktex/
+      - ghostscript
+    state: present
+    install_recommends: false
+  become: true
+  tags:
+    - tex
+    - texlive
+    - latexmk
+
+- name: Symlink latexmk config
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+    state: link
+  loop:
+    - "{{ role_path }}/files/latexmk"
+  tags:
+    - tex
+    - texlive
+    - latexmk

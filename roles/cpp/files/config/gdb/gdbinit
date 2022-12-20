@@ -1,0 +1,55 @@
+set history save on
+set verbose off
+set confirm off
+set print pretty on
+set print array on
+set print array-indexes on
+set print address on
+set print union on
+set print symbol on
+set print elements 64
+set python print-stack full
+
+set listsize 64
+set disassembly-flavor intel
+set pagination off
+
+set logging file ~/.cache/gdb/log.txt
+set logging on
+
+set history filename ~/.cache/gdb/history.txt
+set history save on
+set history size 10240
+set history remove-duplicates unlimited
+
+set auto-load python-scripts on
+set auto-load local-gdbinit
+
+set style enabled on
+set style sources on
+
+enable pretty-printer
+
+# Disable leak sanitizer when running inside the debugger
+set environment ASAN_OPTIONS=detect_leaks=0:abort_on_error=1
+
+
+set breakpoint pending on
+set backtrace past-main on
+set backtrace limit 64
+set filename-display relative
+
+
+# Disable leak sanitizer when running inside the debugger
+set environment ASAN_OPTIONS=detect_leaks=0:abort_on_error=1
+
+# NOTE: Important!!! The space between the equal signs (left and right) are important for the aliases!!!
+alias il = backtrace -full -past-main on
+alias v = backtrace -full -past-main on
+
+
+break abort
+break __assert_fail
+break UnityFail
+break __asan_on_error@plt
+break __asan_report_error

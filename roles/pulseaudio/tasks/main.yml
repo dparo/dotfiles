@@ -1,0 +1,34 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - pipewire-pulse
+      - pulseaudio-utils
+      - pavucontrol
+    state: present
+  become: true
+  tags:
+    - pulseaudio
+    - pipewire
+    - apt
+
+- name: Create config dirs
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ ansible_user_dir }}/.config/pulse"
+  tags:
+    - pulseaudio
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/pulse/{{ item | basename }}"
+    state: link
+  loop:
+    - "{{ role_path }}/files/client.conf"
+    - "{{ role_path }}/files/default.pa"
+  tags:
+    - pulseaudio

@@ -1,0 +1,17 @@
+# https://www.nano-editor.org/dist/latest/nano.html
+
+set autoindent
+set tabstospaces
+set trimblanks
+set linenumbers
+set mouse
+set multibuffer
+set smarthome
+set unix
+set tabsize 4
+
+unset backup
+unset casesensitive
+unset breaklonglines
+
+bind ^Z undo main

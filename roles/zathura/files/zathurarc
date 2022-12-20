@@ -1,0 +1,112 @@
+set window-title-home-tilde true
+set window-title-basename true
+set statusbar-basename false
+set statusbar-home-tilde true
+
+
+set selection-clipboard clipboard
+set selection-notification false
+
+# Show scrollbars
+set guioptions shv
+
+set zoom-center true
+set vertical-center true
+
+set scroll-step  32
+set scroll-hstep 32
+set scroll-full-overlap 0.5
+set zoom-step 4
+
+set page-padding 2
+
+#  set recolor           # Start in darkmode
+set recolor-keephue
+set recolor-darkcolor "#1a1b26"
+set recolor-lightcolor "#20201d"
+
+set default-fg 			    "#d9e0ee"
+set default-bg 			    "#1a1b26"
+
+set completion-bg		    "#1f2335"
+set completion-fg		    "#a9b1d6"
+set completion-highlight-bg	"#3b4261"
+set completion-highlight-fg	"#7aa2f7"
+set completion-group-bg		"#302d41"
+set completion-group-fg		"#96cdfb"
+
+set statusbar-fg		    "#a9b1d6"
+set statusbar-bg		    "#1f2335"
+
+set notification-bg		    "#302d41"
+set notification-fg		    "#d9e0ee"
+set notification-error-bg	"#302d41"
+set notification-error-fg	"#f28fad"
+set notification-warning-bg	"#302d41"
+set notification-warning-fg	"#fae3b0"
+
+set inputbar-fg			    "#a9b1d6"
+set inputbar-bg 		    "#1f2335"
+
+set recolor-lightcolor		"#1e1d2f"
+set recolor-darkcolor		"#d9e0ee"
+
+set index-fg			    "#d9e0ee"
+set index-bg			    "#1e1d2f"
+set index-active-fg		    "#d9e0ee"
+set index-active-bg		    "#302d41"
+
+set render-loading-bg		"#1e1d2f"
+set render-loading-fg		"#d9e0ee"
+
+map i recolor
+
+# Show boomarks, also mapped to tab
+map b toggle_index
+
+map <C-0> zoom original
+map ) zoom original
+map _ zoom out
+map - zoom out
+map + zoom in
+map = zoom in
+
+
+map <C-=> zoom in
+map <C-+> zoom in
+map <C--> zoom out
+map <C-_> zoom out
+
+
+map n search forward
+map p search backward
+
+map <C-n> navigate next
+map <C-p> navigate previous
+map <C-f> navigate forward
+map <C-b> navigate backward
+map <C-s> search forward
+map <C-r> search backward
+map <C-y> reload
+map <C-r> reload
+map <C-g> goto
+
+
+map <C-r> reload
+map <F11> toggle_fullscreen
+
+
+map <M-Left> jumplist backward
+map <M-Right> jumplist forward
+
+
+map [ navigate previous
+map ] navigate next
+
+
+##
+## Mappings for presentation mode
+##
+
+map [presentation] [ navigate previous
+map [presentation] ] navigate next

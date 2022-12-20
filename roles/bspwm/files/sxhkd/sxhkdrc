@@ -1,0 +1,212 @@
+# Increase decrease gaps
+
+#
+# wm independent hotkeys
+#
+
+Print
+    flameshot gui
+
+super + Print
+    arandr
+
+# terminal emulator
+super + Return
+	kitty
+
+# program launcher
+super + d
+    rofi -show drun || dmenu_run
+
+
+#
+# bspwm hotkeys
+#
+
+# Quit bspwm
+super + alt + q
+    pkill -u "$USER" -f "$HOME/.config/bspwm/bspwmrc"; \
+    systemctl --user stop sxhkd.service; \
+    bspc quit;
+
+# Reload bspwm and configs
+super + shift + r
+    systemctl --user reload sxhkd.service; \
+    "${XDG_CONFIG_HOME:-$HOME/.config}/xorg/refresh-devices-settings.sh" ;\
+    bspwm wm -r
+
+# close and kill window
+super + {_,shift + }q
+	bspc node -{c,k}
+
+
+# alternate between the tiled and monocle layout
+super + z
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest node
+super + g
+	bspc node -s biggest.local
+
+#
+# state/flags
+#
+
+super + f
+    bspc node -t "~fullscreen"
+
+super + shift + space
+    bspc node -t "~floating"
+
+# Rotate
+super + space
+    bspc node @parent -R 90
+
+
+super + t
+    bspc node -t "~tiled"
+
+super + shift + t
+    bspc node -t "~pseudo_tiled"
+
+
+# set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+
+# Select and focus more following up to parent
+super + a
+    bspc node -f @parent
+
+
+# Select and focus brother
+super + e
+    bspc node -f @brother
+
+# Focus next and previous
+super + {comma, period}
+	bspc node -f {next,prev}.local
+
+# focus the next/previous node in the current desktop
+super + {_,shift + }n
+    bspc node -f {next,prev}.local
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+
+# focus the next/previous desktop in the current monitor
+super + {bracketleft,bracketright}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+super + {grave,Tab}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#
+# preselect
+#
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p \~{west,south,north,east}
+
+# preselect the direction
+super + ctrl + {Left,Down,Up,Right}
+	bspc node -p \~{west,south,north,east}
+
+super + v
+    bspc node -p \~south
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+
+# cancel the preselection for the focused node only
+super + Escape
+	bspc node -p cancel
+
+
+# cancel the preselection for all the nodes in the current desktop
+super + shift + Escape
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move, select, resize
+#
+
+# focus the node in the given direction
+super + {_,shift + }{Left,Down,Up,Right}
+	bspc node -{f,s} {west,south,north,east}
+
+
+# I3 like resize, enters resize mode, autodetects wheter to shrink or expand
+super + r : {Left,Down,Up,Right}
+    bspc node -z {left -20 0 || bspc node -z right -20 0, \
+                    bottom 0 20 || bspc node -z top 0 20,\
+                    top 0 -20 || bspc node -z bottom 0 -20,\
+                    right 20 0 || bspc node -z left 20 0}
+
+
+{XF86MonBrightnessUp,XF86MonBrightnessDown}
+    brightnessctl --min-value=20% s {'5%+','5%-'}
+
+
+{XF86AudioLowerVolume,XF86AudioRaiseVolume,XF86AudioMute}
+    wm-volumectl {down 5,up 5,mute}
+
+
+super + shift + Pause
+    xset s activate
+
+super + c
+    kitty -- zsh -c 'node'
+
+super + shift + c
+    kitty -- zsh -c 'cd "$USER_DOTFILES_LOCATION" && tmux new-session -A -s dotfiles'
+
+super + n
+    kitty -- nvim
+
+
+super + m
+    kitty -- ncmpcpp
+
+
+super + shift + m
+    kitty -- zsh -c '/home/dparo/bin/fzf-mpc'
+
+
+XF86AudioPause
+    mpc pause
+
+
+{XF86AudioPlay,super + ctrl + space,XF86AudioStop,super + ctrl + Delete,XF86AudioNext,super + ctrl + n,XF86AudioPrev,super + ctrl + p}
+    mpc {toggle,toggle,stop,stop,next,next,prev,prev}
+
+{super + ctrl + Prior,super + ctrl + Next}
+    mpc {volume +5,volume -5}
+
+Print
+    flameshot gui

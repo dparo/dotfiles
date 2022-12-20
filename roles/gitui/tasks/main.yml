@@ -1,0 +1,23 @@
+- name: Check latest gitui
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/extrawurst/gitui/releases/latest
+    return_content: true
+  register: gitui_latest
+  tags:
+    - gitui
+
+- name: Download and unpack latest gitui
+  ansible.builtin.unarchive:
+    src: "https://github.com/extrawurst/gitui/releases/download/{{ gitui_latest['json']['tag_name'] }}/gitui-linux-musl.tar.gz "
+    dest: "{{ ansible_user_dir }}/.local/bin"
+    remote_src: true
+  tags:
+    - gitui
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/gitui"
+    state: link
+  tags:
+    - gitui

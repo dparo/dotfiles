@@ -1,0 +1,97 @@
+#!/usr/bin/env bash
+
+get_volume() {
+    pactl get-sink-volume @DEFAULT_SINK@ | head -n 1 | grep -Eo '[0-9]+% /' | head -n 1 | grep -Eo '[0-9]+'
+}
+
+is_muted() {
+    if pactl get-sink-mute @DEFAULT_SINK@ | head -n 1 | grep -E yes; then
+        return 0
+    else
+        return 1
+    fi
+}
+
+show_notification() {
+    local -r vol=$(get_volume)
+    local icon
+    local summary
+    local body
+    local urgency
+
+    if is_muted; then
+        printf -v summary "Volume Muted"
+        urgency=critical
+        icon=audio-volume-muted-symbolic
+    else
+        printf -v summary "Volume %3s%%" "$vol"
+        urgency=normal
+        if (( vol == 0 )); then
+            icon=audio-volume-muted-symbolic
+        elif (( vol < 33 )); then
+            icon=audio-volume-low-symbolic
+        elif (( vol >= 33 )) && (( vol < 66 )); then
+            icon=audio-volume-medium-symbolic
+        elif (( vol >= 66 )) && (( vol < 100 )); then
+            icon=audio-volume-high-symbolic
+        else
+            icon=audio-volume-overamplified-symbolic
+        fi
+    fi
+
+    local -ra args=(
+        -t 1000
+        -i "$icon"
+        -r 1000
+        -u "$urgency"
+        -h int:transient:1
+        -h string:synchronous:volume
+        -h string:x-canonical-private-synchronous:volume
+        -h int:value:"$vol"
+    )
+
+    dunstify "${args[@]}" "$summary" "$body"
+}
+
+
+add_volume() {
+    local step="${1}"
+
+    pactl set-sink-volume @DEFAULT_SINK@ "${step}%"
+    show_notification
+}
+
+
+toggle_mute() {
+    pactl set-sink-mute   @DEFAULT_SINK@ toggle
+    show_notification
+}
+
+
+usage() {
+    >&2 echo "Bad command line arguments"
+}
+
+
+main() {
+    COMMAND="${1}"
+    local vol="${2:-5}"
+
+    case "$COMMAND" in
+        up|raise|increase)
+            add_volume "+$vol"
+            ;;
+        down|lower|decrease)
+            add_volume "-$vol"
+            ;;
+        mute)
+            toggle_mute
+            ;;
+        *)
+            usage
+            ;;
+    esac
+}
+
+main "$@"
+exit "$?"

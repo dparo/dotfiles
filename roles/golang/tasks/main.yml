@@ -1,0 +1,39 @@
+---
+- name: Create target dir for installation
+  ansible.builtin.file:
+    path: "{{ go_install_dir }}/v{{ go_version }}"
+    state: directory
+    mode: "0755"
+  become: true
+  register: go_target_dir
+  tags:
+    - golang
+
+- name: Download golang
+  ansible.builtin.unarchive:
+    src: "https://go.dev/dl/go{{ go_version }}.linux-amd64.tar.gz"
+    dest: "{{ go_install_dir }}/v{{ go_version }}"
+    remote_src: yes
+  become: true
+  when: go_target_dir.changed
+  tags:
+    - golang
+
+- name: Symlink GO binaries
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "/usr/local/bin/{{ item | basename }}"
+    state: link
+  with_fileglob: "{{ go_install_dir }}/v{{ go_version }}/go/bin/*"
+  when: go_target_dir.changed
+  become: true
+  tags:
+    - golang
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/config"
+    dest: "{{ ansible_user_dir }}/.config/go"
+    state: link
+  tags:
+    - golang

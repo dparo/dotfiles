@@ -1,0 +1,22 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - feh
+      - nitrogen
+      - sxiv
+      - nomacs
+      - qimgv
+      - scrot
+      - maim
+      - flameshot
+      - copyq
+      - brightnessctl
+      - trash-cli
+      - qt5ct # This utility allows users to configure Qt5 settings
+      - ffmpeg
+    state: present
+  become: true
+  tags:
+    - apt
+    - wm-basics

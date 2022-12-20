@@ -1,0 +1,11 @@
+[Unit]
+Description=Battery status notification
+PartOf=graphical-session.target
+After=dunst.service
+
+[Service]
+ExecStart=zsh -c 'i3-battery-notifier'
+Restart=on-failure
+
+[Install]
+WantedBy=graphical-session.target

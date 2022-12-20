@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+
+link="$1"
+
+if echo "$link" | grep -Ei 'youtube.com' | grep -Ei 'watch\?v'; then
+    nohup mpv "$link" 1> /dev/null 2> /dev/null & disown
+else
+    firefox --new-tab "$link"
+fi

@@ -1,0 +1,19 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - redshift
+    state: present
+  become: true
+  tags:
+    - apt
+    - redshift
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+    state: link
+  with_fileglob: "{{ role_path }}/files/config/*"
+  tags:
+    - redshift

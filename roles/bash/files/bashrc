@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# If not running interactively, don't do anything
+case $- in
+*i*) ;;
+*) return ;;
+esac
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	source /etc/bashrc
+fi
+
+shopt -s globstar
+shopt -s dotglob
+shopt -s histappend
+shopt -s checkwinsize
+shopt -s histappend
+
+# make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+HISTFILE="$XDG_CACHE_HOME/bash/history"
+HISTCONTROL=ignoreboth
+HISTSIZE=10000
+HISTFILESIZE=2000
+
+source "$XDG_CONFIG_HOME/zsh/.zshenv"
+source "$XDG_CONFIG_HOME/zsh/.aliases"

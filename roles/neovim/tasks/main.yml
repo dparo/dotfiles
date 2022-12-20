@@ -1,0 +1,208 @@
+---
+# - name: Dependencies
+#   ansible.builtin.package:
+#     name:
+#       - base-devel
+#       - cmake
+#       - curl
+#       - ninja
+#       - tree-sitter
+#       - unzip
+#     state: latest
+#   become: true
+#
+
+- name: "Install build dependencies (See: https://github.com/neovim/neovim/wiki/Building-Neovim#ubuntu--debian)"
+  ansible.builtin.apt:
+    name:
+      - ninja-build
+      - gettext
+      - libtool
+      - libtool-bin
+      - autoconf
+      - automake
+      - cmake
+      - g++
+      - pkg-config
+      - unzip
+      - curl
+      - doxygen
+    state: present
+  become: true
+  tags:
+    - neovim
+    - apt
+
+- name: Clone NEOVIM {{ neovim_version }}
+  ansible.builtin.git:
+    clone: yes
+    depth: 1
+    dest: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim"
+    force: yes
+    repo: https://github.com/neovim/neovim.git
+    single_branch: yes
+    update: yes
+    version: "{{ neovim_version | default('master') }}"
+  register: clone
+  tags:
+    - neovim
+
+- name: Build
+  community.general.make:
+    chdir: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim"
+    params:
+      CMAKE_BUILD_TYPE: Release
+  when: clone.changed
+  tags:
+    - neovim
+
+- name: Install
+  community.general.make:
+    chdir: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim"
+    target: install
+  become: true
+  when: clone.changed
+  tags:
+    - neovim
+
+- name: Remove build folder
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim/build"
+    state: absent
+  become: true
+  tags:
+    - neovim
+
+- name: Install runtime deps (APT)
+  ansible.builtin.apt:
+    name:
+      - xsel
+      - xclip
+      - fd-find
+      - ripgrep
+      - silversearcher-ag
+      - editorconfig
+      - jq
+      - highlight
+      - python3-pygments
+      - python3-venv
+    state: present
+  become: true
+  tags:
+    - neovim
+    - neovim-runtime
+    - apt
+
+- name: Install runtime deps (CARGO)
+  community.general.cargo:
+    name:
+      - tokei
+      - tree-sitter-cli
+    state: latest
+  tags:
+    - neovim
+    - neovim-runtime
+
+- name: Install runtime deps (PIP)
+  ansible.builtin.pip:
+    name:
+      - httpie
+    state: latest
+  tags:
+    - neovim
+    - neovim-runtime
+
+- name: Install required providers - npm neovim
+  community.general.npm:
+    name: neovim
+    state: latest
+    global: true
+  tags:
+    - neovim
+
+- name: Install required providers - pip3 pynvim
+  ansible.builtin.pip:
+    name: pynvim
+    state: latest
+  tags:
+    - neovim
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/nvim"
+    state: link
+  tags:
+    - neovim
+
+- name: Clean packer.nvim cache
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}.config/nvim/plugin/packer_compiled.lua"
+    state: absent
+  tags:
+    - neovim
+
+- name: Clone packer.nvim
+  ansible.builtin.git:
+    clone: yes
+    depth: 1
+    dest: "{{ ansible_user_dir }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    force: yes
+    repo: https://github.com/wbthomason/packer.nvim
+    single_branch: yes
+    update: yes
+  tags:
+    - neovim
+
+- name: packer.nvim install plugins
+  ansible.builtin.shell: |
+    nvim --headless -c 'autocmd User PackerComplete quitall!' -c 'PackerSync'
+  tags:
+    - neovim
+    - neovim-plugins
+
+- name: Update remote plugins
+  ansible.builtin.shell: |
+    nvim --headless -c 'UpdateRemotePlugins' -c qall
+  tags:
+    - neovim
+    - neovim-plugins
+
+- name: Install lsp-servers, formatters, diagnostics tools
+  ansible.builtin.shell: |
+    nvim --headless -c "MasonInstall {{ item }}" -c "qall"
+  loop:
+    - vim-language-server
+    - stylua
+    - lua-language-server
+    - bash-language-server
+    - pyright
+    - clangd
+    - clang-format
+    - cmakelang
+    - cmake-language-server
+    - rust-analyzer
+    - shellcheck
+    - shellharden
+    - shfmt
+    - typescript-language-server
+    - eslint-lsp
+    - prettier
+    - json-lsp
+    - yamllint
+    - yaml-language-server
+    - texlab
+    - write-good
+    - proselint
+    - codespell
+    - misspell
+    - ltex-ls
+    - ansible-language-server
+    - sqlfluff
+    - jdtls
+    - java-test
+    - java-debug-adapter
+    - hadolint
+  tags:
+    - neovim
+    - neovim-lsp

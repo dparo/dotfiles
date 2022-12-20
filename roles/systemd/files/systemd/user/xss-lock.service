@@ -1,0 +1,16 @@
+[Unit]
+Description=X Automatic Screen locker
+PartOf=graphical-session.target
+
+[Service]
+Environment="XSECURELOCK_AUTH_TIMEOUT=20"
+Environment="XSECURELOCK_BLANK_TIMEOUT=2"
+Environment="XSECURELOCK_SHOW_DATETIME=1"
+Environment="XSECURELOCK_SHOW_HOSTNAME=1"
+Environment="XSECURELOCK_SHOW_USERNAME=1"
+#Environment="XSECURELOCK_XSCREENSAVER_PATH=/usr/bin/xscreensaver"
+#Environment="XSECURELOCK_SAVER=saver_mpv"
+#Environment="XSECURELOCK_IMAGE_DURATION_SECONDS=60"
+#Environment="XSECURELOCK_LIST_VIDEOS_COMMAND=find /home/dparo/.local/share/backgrounds/ -type f"
+ExecStart=xss-lock -n /usr/lib/xsecurelock/dimmer -l -- xsecurelock
+Restart=on-failure

@@ -1,0 +1,36 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - alsa-utils
+      - pipewire-alsa
+    state: present
+  become: true
+  tags:
+    - apt
+    - alsa
+
+
+- name: Create config dirs
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ ansible_user_dir }}/.config/alsa"
+  tags:
+    - alsa
+
+- name: Symlink items
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  loop:
+    - {
+        src: "{{ role_path }}/files/asoundrc",
+        dest: "{{ ansible_user_dir }}/.config/alsa/asoundrc",
+      }
+  tags:
+    - xdg
+    - alsa

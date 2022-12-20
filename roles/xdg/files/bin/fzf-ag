@@ -1,0 +1,20 @@
+#!/bin/bash
+
+
+read -r file line <<<"$(ag -i --nobreak --noheading $@ | fzf -0 -1 | awk -F: '{print $1, $2}')"
+
+if [[ -n $file ]]
+then
+    if [[ $EDITOR == "atom" ]]; then
+        $EDITOR "$file:$line"
+        i3-msg '[class="Atom"] focus';
+    elif [[ $EDITOR == vim* ]]; then
+        $EDITOR "+$line" "$file"
+    elif [[ $EDITOR == emacsclient* ]]; then
+        $EDITOR "+$line" "$file"
+    elif  [[ $EDITOR == ed ]]; then
+        emacsclient -nw -a "" "+$line" "$file"
+    elif [[ $EDITOR == "emacs*" ]]; then
+        emacs -nw -q "+$line" "$file" --eval '(setq buffer-read-only t)'
+    fi
+fi

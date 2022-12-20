@@ -1,0 +1,41 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - qemu-system-x86
+      - ovmf     # ovmf provides virtualized UEFI capable bios
+      - libvirt-daemon
+      - virt-manager
+    state: present
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  become: true
+  tags:
+    - apt
+    - qemu
+    - virt-manager
+
+- name: "Sets the user {{ ansible_env.USER }} additional groups"
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    append: true
+    groups:
+      - kvm
+      - libvirt
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  become: true
+  tags:
+    - qemu
+    - virt-manager
+
+####
+#### Required only for ARCH linux
+####
+# - name: Enable virtd service
+#   ansible.builtin.systemd:
+#     name: libvirt.service
+#     enabled: true
+#   become: true
+#   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+#   tags:
+#     - qemu
+#     - virt-manager

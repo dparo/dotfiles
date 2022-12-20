@@ -1,0 +1,20 @@
+[Unit]
+Description=Xorg session
+; PartOf=graphical-session.target
+; After=graphical.target systemd-user-sessions.service
+
+
+[Service]
+
+; PAMName=login
+Environment=XDG_SESSION_TYPE=x11
+; TTYPath=/dev/tty4
+; StandardInput=tty
+;
+; UtmpIdentifier=tty4
+; UtmpMode=user
+
+
+ExecStart=/usr/bin/startx "${XDG_CONFIG_HOME:-$HOME/.config}/xorg/xinitrc" -- -verbose 3 -logfile /dev/null
+Restart=on-failure
+RestartSec=3

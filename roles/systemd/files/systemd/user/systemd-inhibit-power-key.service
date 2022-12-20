@@ -1,0 +1,7 @@
+[Unit]
+Description=Inhibit the power key button on the PC to turn off the computer without additional logic
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=systemd-inhibit --what=handle-power-key sleep infinity
+ExecRestart=on-failure

@@ -1,0 +1,6 @@
+[pycodestyle]
+count = False
+# E226 = missing whitespace around arithmetic operator
+# E501 = line too long
+ignore = E226,E501
+statistics = True

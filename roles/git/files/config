@@ -1,0 +1,68 @@
+[core]
+	editor = nvim
+    pager = delta
+	excludesFile = vault_pass.txt
+[user]
+	name = Davide Paro
+	email = dparo@outlook.it
+	signingkey = 705FE306C8ABC4C9
+[credential]
+    helper = cache --timeout=7200
+[gpg]
+	program = gpg
+[commit]
+    gpgsign = true
+[global]
+[init]
+	defaultBranch = master
+[github]
+	user = dparo
+[push]
+    autoSetupRemote = true
+    default = simple
+[pull]
+	rebase = false
+    default = current
+[color]
+	ui = auto
+[gui]
+	historybrowser = git-dag
+    editor = nvim
+[alias]
+	lola = log --graph --decorate --oneline --abbrev-commit --all
+[diff]
+    tool = meld
+    colorMoved = default
+[difftool]
+	prompt = false
+[difftool "meld"]
+	cmd = meld "$LOCAL" "$REMOTE"
+[merge]
+    conflictstyle = diff3
+    summary = true
+	keepbackup = false
+    tool = meld
+[mergetool "meld"]
+    cmd = meld --output "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+[delta]
+    navigate=true
+    features = line-numbers decorations
+    whitespace-error-style = 22 reverse
+    syntax-theme = ansi
+    diff-so-fancy=true
+    side-by-side=false
+    # plus-style = syntax bold auto
+    # minus-style = syntax bold auto
+[delta "interactive"]
+    keep-plus-minus-markers = true
+[delta "decorations"]
+    commit-decoration-style = blue ol
+    commit-style = raw
+    file-style = omit
+    hunk-header-decoration-style = blue box
+    hunk-header-file-style = red
+    hunk-header-line-number-style = "#067a00"
+    hunk-header-style = file line-number syntax
+	verbose = false

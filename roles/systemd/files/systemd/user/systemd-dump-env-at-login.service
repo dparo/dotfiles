@@ -1,0 +1,16 @@
+;; Use `systemctl --user status systemd-dump-env-at-login` to show the environment variables
+;;; that systemd was able to pickup automatically at the start of the user default session.
+;;
+;; To add environment variables visible to all systemd user service, edit files "$HOME/.config/environment.d/*"
+;; Environment variables will be picked in alphabetical order by systemd automatically at startup.
+
+[Unit]
+Description=Record ENVIRONMENT at startup
+PartOf=default.target
+
+[Service]
+Type=oneshot
+ExecStart=env
+
+[Install]
+WantedBy=default.target

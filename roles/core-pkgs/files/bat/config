@@ -1,0 +1,4 @@
+# vi: ft=config
+# --theme="TwoDark"
+--theme="ansi"
+--style="header"

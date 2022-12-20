@@ -1,0 +1,50 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - gnome-keyring
+      - seahorse
+    state: present
+  become: true
+  tags:
+    - apt
+    - gnome-keyring
+
+- name: Enable keyring service
+  ansible.builtin.systemd:
+    name: gnome-keyring-daemon.service
+    enabled: true
+    scope: user
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  tags:
+    - keyring
+
+- name: Enable keyring socket
+  ansible.builtin.systemd:
+    name: gnome-keyring-daemon.socket
+    enabled: true
+    scope: user
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+
+  tags:
+    - keyring
+
+- name: Unlock keyring on login
+  ansible.builtin.lineinfile:
+    path: /etc/pam.d/login
+    line: "{{ item.line }}"
+    regexp: "{{ item.regexp }}"
+    create: false
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  become: true
+  loop:
+    - {
+        regexp: '^auth\s+optional\s+pam_gnome_keyring.so$',
+        line: "auth optional pam_gnome_keyring.so",
+      }
+    - {
+        regexp: '^session\s+optional\s+pam_gnome_keyring.so auto_start$',
+        line: "session optional pam_gnome_keyring.so auto_start",
+      }
+  tags:
+    - keyring

@@ -1,0 +1,3 @@
+--no-warnings
+--output %(title)s.%(ext)s
+--format bestvideo[ext=mp4][height<=2160]+bestaudio[ext=m4a]/best[height<=2160]

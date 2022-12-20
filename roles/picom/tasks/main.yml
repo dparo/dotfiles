@@ -1,0 +1,17 @@
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - picom
+    state: present
+  become: true
+  tags:
+    - apt
+    - picom
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/picom"
+    state: link
+  tags:
+    - picom

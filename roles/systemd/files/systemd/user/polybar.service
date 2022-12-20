@@ -1,0 +1,7 @@
+[Unit]
+Description=Polybar Panel
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=polybar --reload main
+Restart=on-failure

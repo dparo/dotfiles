@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# GTK Look and feel
+#java -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel -jar $(dirname $0)/./fidocadj.jar $@
+java -jar $(dirname $0)/./fidocadj.jar $@
+
+# Motif Look and feel
+#java -Dswing.defaultlaf=com.sun.java.swing.plaf.motif.MotifLookAndFeel -jar $(dirname $0)/./fidocadj.jar "$@"

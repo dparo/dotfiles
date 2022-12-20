@@ -1,0 +1,15 @@
+---
+- name: Check latest obsidian
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest
+    return_content: true
+  register: obsidian_latest
+  tags:
+    - obsidian
+
+- name: Install latest obsidian
+  ansible.builtin.apt:
+    deb: "https://github.com/obsidianmd/obsidian-releases/releases/download/{{ obsidian_latest['json']['tag_name'] }}/obsidian_{{ obsidian_latest['json']['name'] }}_amd64.deb"
+  become: true
+  tags:
+    - obsidian

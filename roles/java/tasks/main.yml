@@ -1,0 +1,29 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - openjdk-11-jdk
+      - openjdk-11-source
+      - openjdk-17-jdk
+      - openjdk-17-source
+      - openjdk-18-jdk
+      - openjdk-18-source
+    state: present
+  become: true
+  tags:
+    - apt
+    - java
+    - jdk
+    - openjdk
+
+- name: Create items
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ ansible_user_dir }}/.local/share/java"
+  tags:
+    - java
+    - jdk
+    - openjdk

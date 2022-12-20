@@ -1,0 +1,23 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - brotli
+      - atool
+      - highlight
+      - python3-pygments
+      - ranger
+    state: present
+  become: true
+  tags:
+    - apt
+    - neomutt
+
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/ranger"
+    state: link
+  tags:
+    - ranger

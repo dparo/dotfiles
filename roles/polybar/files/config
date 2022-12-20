@@ -1,0 +1,231 @@
+# vi: ft=dosini
+
+[colors]
+;background = ${xrdb:color0:#222}
+background = #1a1b26
+background-alt = #33467C
+;foreground = ${xrdb:color7:#222}
+foreground = #c0caf5
+foreground-alt = #c0caf5
+primary = #ffb52a
+alert = #f7768e
+
+[bar/main]
+bottom = false
+font-0 = Noto Mono Nerd Font :style=Regular:size=8;2
+
+wm-restack = bspwm
+modules-left = bspwm mpd
+modules-center = xwindow
+modules-right = pulseaudio-master diskusage memory cpu temperature wireless-network wired-network battery date
+fixed-center = false
+tray-position = right
+tray-padding = 0
+
+;monitor = ${env:MONITOR:HDMI-1}
+width = 100%
+height = 24
+radius = 0.0
+; Set offset-x such that:         <width> + 2 <offset-x> = 100%
+offset-x = 0%
+offset-y = 0%
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 1
+line-color = #f00
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+; Do not switch desktop if scrolling on the bar workspaces
+scroll-up =
+scroll-down =
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:256:...%
+
+[module/diskusage]
+type = internal/fs
+interval = 30
+
+mount-0 = /
+mount-1 = /home
+
+label-mounted =  %mountpoint%: %free%
+label-unmounted =
+label-unmounted-foreground = ${colors.foreground-alt}
+
+[module/bspwm]
+type = internal/bspwm
+enable-scroll = false
+
+format = <label-state> <label-mode>
+
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.foreground-alt}
+label-focused-padding = 1
+
+label-occupied = %index%
+label-occupied-padding = 1
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 1
+label-urgent-underline = #9b0a20
+
+label-empty =
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 1
+label-separator =
+
+
+[module/cpu]
+type = internal/cpu
+interval = 2
+format-prefix = " "
+format-underline =
+label = %percentage:2%%
+
+[module/memory]
+type = internal/memory
+interval = 2
+format-prefix = " "
+format-underline =
+label = %free%
+
+
+[module/wireless-network]
+type = internal/network
+; Name of the network interface to display. You can get the names of the
+; interfaces on your machine with `ip link`
+; Wireless interfaces often start with `wl` and ethernet interface with `eno` or `eth`
+interface-type = wireless
+
+
+format-connected = <ramp-signal> <label-connected>
+format-connected-underline =
+format-disconnected =
+
+label-connected = %essid% %signal%% (%local_ip%)
+
+ramp-signal-0 = " "
+ramp-signal-1 = " "
+ramp-signal-2 = " "
+ramp-signal-3 = " "
+ramp-signal-4 = " "
+ramp-signal-5 = " "
+
+[module/wired-network]
+type = internal/network
+; Name of the network interface to display. You can get the names of the
+; interfaces on your machine with `ip link`
+; Wireless interfaces often start with `wl` and ethernet interface with `eno` or `eth`
+interface-type = wired
+
+format-connected = <label-connected>
+format-connected-underline =
+format-disconnected = <label-disconnected>
+
+label-connected-prefix = " "
+label-connected =  %local_ip% (%linkspeed%)
+label-disconnected = ""
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = " %a %d %b %Y"
+
+time = %H:%M
+
+format-prefix = ""
+format-underline =
+
+label = %date%  %time%
+
+[module/pulseaudio-master]
+type = internal/pulseaudio
+
+format-volume = <label-volume>
+label-volume =   %percentage%%
+label-volume-foreground = ${root.foreground}
+
+label-muted = ﱝ 0%
+label-muted-foreground = #666
+
+
+[module/mpd]
+type = internal/mpd
+format-online =
+format-playing =   <label-song>  <label-time>
+format-paused =
+format-stopped =
+label-song = %artist% - %title%
+
+label-offline = 🎜 mpd is offline
+
+; Used to display the state of random/repeat/repeatone/single
+; Only applies if <icon-[random|repeat|repeatone|single]> is used
+toggle-on-foreground = #ff
+toggle-off-foreground = #55
+
+
+[module/battery]
+type = internal/battery
+battery = BAT0
+adapter = AC0
+full-at = 98
+time-format = %H:%M
+
+format-charging-prefix = " "
+format-charging = <label-charging>
+format-charging-underline =
+
+format-discharging-prefix = "  "
+format-discharging = <label-discharging>
+format-discharging-underline =
+
+format-low-prefix = " "
+format-low = <label-low>
+format-low-underline =
+
+
+format-full-prefix = " "
+format-full-underline =
+
+label-low-foreground = ${colors.alert}
+
+label-full = %percentage%%
+label-charging = %percentage%%
+label-discharging = %percentage%% (%time%)
+label-low = LOW BAT (%percentage%%)
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp2_input
+
+format = 糖 <label>
+format-underline =
+format-warn = 糖 <label-warn>
+format-warn-underline =
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}

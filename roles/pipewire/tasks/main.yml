@@ -1,0 +1,72 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - pipewire
+      - wireplumber
+    state: present
+  become: true
+  tags:
+    - pipewire
+    - wireplumber
+    - apt
+
+# https://github.com/werman/noise-suppression-for-voice
+- name: Download and unpack latest noise-suppression-for-voice
+  ansible.builtin.unarchive:
+    src: "https://github.com/werman/noise-suppression-for-voice/releases/latest/download/linux-rnnoise.zip"
+    dest: /opt
+    remote_src: yes
+  become: true
+  tags:
+    - pipewire
+    - noise-suppression-for-voice
+
+- name: Enable pipewire user service
+  ansible.builtin.systemd:
+    name: pipewire
+    enabled: true
+    scope: user
+  tags:
+    - pipewire
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+
+- name: Enable wireplumber user service
+  ansible.builtin.systemd:
+    name: wireplumber
+    enabled: true
+    scope: user
+  tags:
+    - pipewire
+    - wireplumber
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/pipewire"
+    state: link
+  tags:
+    - pipewire
+    - wireplumber
+
+- name: Restart pipewire service
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: yes
+    name: pipewire
+    scope: user
+  tags:
+    - pipewire
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+
+- name: Restart wireplumber service
+  ansible.builtin.systemd:
+    state: restarted
+    daemon_reload: yes
+    name: wireplumber
+    scope: user
+  tags:
+    - pipewire
+    - wireplumber
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined

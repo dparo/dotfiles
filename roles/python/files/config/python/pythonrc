@@ -1,0 +1,42 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import atexit
+import os
+import readline
+from pathlib import Path
+
+# Avoid writing ~/.python_history in HOME directory
+#  readline.write_history_file = lambda *args: None
+
+
+def write_history(readline, history):
+    try:
+        readline.write_history_file(history)
+    except OSError:
+        pass
+
+
+def main():
+    if readline.get_current_history_length() == 0:
+        state_home = os.environ.get("XDG_STATE_HOME")
+        if state_home is None:
+            state_home = Path.home() / ".local" / "state"
+        else:
+            state_home = Path(state_home)
+
+        history_path = state_home / "python_history"
+        if history_path.is_dir():
+            raise OSError(f"'{history_path}' cannot be a directory")
+
+        history = str(history_path)
+
+        try:
+            readline.read_history_file(history)
+        except OSError:
+            pass
+
+        atexit.register(write_history, readline, history)
+
+
+main()

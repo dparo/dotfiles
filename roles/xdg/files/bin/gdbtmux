@@ -1,0 +1,5 @@
+#!/bin/bash
+
+tty="$(tmux split-pane -hPF "#{pane_tty}" "tail -f /dev/null")"
+tmux last-pane
+gdb -ex "dashboard -output $tty" "$@"

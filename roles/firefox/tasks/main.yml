@@ -1,0 +1,10 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - firefox
+    state: present
+  become: true
+  tags:
+    - firefox
+    - apt

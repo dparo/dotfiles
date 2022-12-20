@@ -1,0 +1,17 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - rust-alacritty
+    state: present
+  become: true
+  tags:
+    - alacritty
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/alacritty"
+    state: link
+  tags:
+    - alacritty

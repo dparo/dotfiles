@@ -1,0 +1,68 @@
+$include /etc/inputrc
+
+# Color files by types
+set colored-stats On
+# Append char to indicate type
+set visible-stats On
+# Mark symlinked directories
+set mark-symlinked-directories On
+# Color the common prefix
+set colored-completion-prefix On
+# Color the common prefix in menu-complete
+set menu-complete-display-prefix On
+
+
+
+"\e[[1;5C" forward-word
+"\e[[1;5D" backward-word
+"\e[[3~"   delete-char
+"\e?"      backward-delete-char
+
+
+
+
+$if gdb
+# CTRL + E
+"\eE": "e \C-m"
+
+# F1
+"\e[11~": "e\C-m"
+"\eOP": "e\C-m"
+# F2 - Edit
+"\e[12~": "info locals\C-m"
+"\eOQ": "info locals\C-m"
+# F3
+"\e[13~": "Function Key 3"
+"\eOR": "Function Key 3"
+# F4
+"\e[14~": "Function Key 4"
+"\eOS": "Function Key 4"
+
+# F5
+"\e[15~": "continue\C-m"
+# F6
+"\e[17~": "backtrace\C-m"
+# F7
+"\e[18~": "info args"
+# F8
+"\e[19~": "finish\C-m"
+# Control-F8
+"\C-\e[19~": "until \C-m"
+
+
+# F9 - Start
+"\e[20~": "b "
+
+# F10
+"\e[21~": "next \C-m"
+
+# F11
+"\e[23~": "step \C-m"
+
+# F12
+"\e[24~": "finish \C-m"
+
+# F???
+"\e[16~": "Function Key 16"
+"\e[22~": "Function Key 22"
+$endif

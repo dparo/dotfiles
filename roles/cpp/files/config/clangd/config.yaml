@@ -1,0 +1,9 @@
+CompileFlags:
+  Add: [-Wall, -Wextra, -Wunreachable-code, -Wunreachable-code-aggressive]
+
+Diagnostics:
+  ClangTidy:
+    CheckOptions:
+      readability-identifier-naming.VariableCase: lower_case
+    Checks:
+      Add: [ '-*', 'clang-diagnostic-*', 'clang-analyzer-*', 'clang-analyzer-cplusplus-*', 'cppcoreguidelines-*' ]

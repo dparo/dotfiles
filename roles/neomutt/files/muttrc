@@ -1,0 +1,61 @@
+# Allow Mutt to open a new IMAP connection automatically.
+unset imap_passive
+set editor=nvim
+
+source "gpg -dq ~/.config/mutt/passwd.gpg |"
+
+
+set realname='Davide Paro'
+set my_user="paro.dav.95@gmail.com"
+set imap_pass="$my_pass"
+set smtp_pass="$my_pass"
+set from="$my_user"
+set imap_user="$my_user"
+set use_from = yes
+
+
+# set smtp_authenticators="login"
+set smtp_url="smtps://$my_user@smtp.gmail.com"
+set ssl_force_tls = yes
+set ssl_starttls = yes
+
+
+set folder = "imaps://$imap_user@imap.gmail.com"
+set spoolfile = "+INBOX"
+set postponed = "+[Gmail]/Drafts"
+set record = "+[Gmail]/Sent Mail"
+set trash = "+[Gmail]/Trash"
+
+set imap_check_subscribed
+
+# Store messages locally to speed things up, like searching message bodies.
+# Can be the same folder as header_cache.
+# This will cost important disk usage according to your e-mail amount.
+set header_cache        = ~/.cache/.mutt/headers
+set message_cachedir    = ~/.cache/.mutt/bodies
+set certificate_file    = ~/.cache/.mutt/certificates
+
+# Keep the IMAP connection alive by polling intermittently (time in seconds).
+set imap_keepalive = 300
+
+# How often to check for new mail (time in seconds).
+set mail_check = 120
+
+
+set beep=no
+set sort=reverse-date
+set sort_aux=last-date-received
+# Index page format. Default "%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s"
+set index_format="%4C %Z %{%b %d %R} %-15.15L (%?l?%4l&%4c?) %s"
+set sidebar_visible
+set sidebar_format="%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats
+
+
+set edit_headers=yes
+set sleep_time = 0
+
+
+
+color status black white
+set new_mail_command="notify-send --icon=mail-unread.png 'New Email' '%n new messages, %u unread' &"

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.0
+Name=FidocadJ
+Comment=FidocadJ
+Exec=fidocadj
+TryExec=fidocadj
+Icon=fidocadj
+Terminal=false
+Categories=Education;Programming;Development;Languages;

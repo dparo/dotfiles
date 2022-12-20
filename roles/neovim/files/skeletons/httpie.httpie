@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+
+endpoint=""
+method=GET
+
+http "$method" "${HTTPIE_URL:-localhost}:${HTTPIE_PORT:-8080}/${endpoint}" \
+           'Accept-Encoding: gzip, deflate' \
+           'Content-Type: application/json' \
+           'Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c' \
+<<JSONBLOCKDELIMITER
+{
+    name: "Davide"
+}
+JSONBLOCKDELIMITER

@@ -1,0 +1,3 @@
+player=mpv
+title="{title} -- {author} -- {category}"
+default-stream="1080p,720p,best,480p,worst"

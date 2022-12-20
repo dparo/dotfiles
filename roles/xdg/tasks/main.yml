@@ -1,0 +1,149 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - xdg-desktop-portal
+    state: present
+  become: true
+  tags:
+    - apt
+    - xdg
+
+- name: Create items
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "{{ ansible_user_dir }}/Desktop"
+    - "{{ ansible_user_dir }}/Downloads"
+    - "{{ ansible_user_dir }}/Documents"
+    - "{{ ansible_user_dir }}/Pictures"
+    - "{{ ansible_user_dir }}/Music"
+    - "{{ ansible_user_dir }}/Videos"
+    - "{{ ansible_user_dir }}/.local/share/Templates"
+    - "{{ ansible_user_dir }}/opt"
+    - "{{ ansible_user_dir }}/.local/bin"
+    - "{{ ansible_user_dir }}/.local/share/bin"
+    - "{{ ansible_user_dir }}/.local/share/fonts"
+    - "{{ ansible_user_dir }}/.local/share/sounds"
+    - "{{ ansible_user_dir }}/.local/share/backgrounds"
+    - "{{ ansible_user_dir }}/.local/share/applications"
+    - "{{ ansible_user_dir }}/.local/share/keyrings"
+    - "{{ ansible_user_dir }}/.local/share/pki"
+    - "{{ ansible_user_dir }}/.cache"
+    - "{{ ansible_user_dir }}/.cache/bash"
+    - "{{ ansible_user_dir }}/.cache/zsh"
+    - "{{ ansible_user_dir }}/.config"
+  tags:
+    - xdg
+
+- name: Delete items
+  ansible.builtin.file:
+    path: "{{item}}"
+    state: absent
+  loop:
+    - "{{ ansible_user_dir }}/.bash_history"
+    - "{{ ansible_user_dir }}/.bash_profile"
+    - "{{ ansible_user_dir }}/.bash_logout"
+    - "{{ ansible_user_dir }}/.bashrc"
+    - "{{ ansible_user_dir }}/.profile"
+    - "{{ ansible_user_dir }}/.python_history"
+    - "{{ ansible_user_dir }}/.lesshst"
+    - "{{ ansible_user_dir }}/.sudo_as_admin_successful"
+    - "{{ ansible_user_dir }}/.xsession-errors"
+    - "{{ ansible_user_dir }}/Templates"
+  tags:
+    - xdg
+
+- name: Symlink items
+  ansible.builtin.file:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    state: link
+  loop:
+    - {
+        src: "{{ ansible_user_dir }}/.local/share/pki",
+        dest: "{{ ansible_user_dir }}/.pki",
+      }
+  tags:
+    - xdg
+
+- name: Remove broken symlinks in directories
+  ansible.builtin.command: find -L "{{ item }}" -maxdepth 1 -type l -delete
+  loop:
+    - "{{ ansible_user_dir }}"
+    - "{{ ansible_user_dir }}/.config"
+    - "{{ ansible_user_dir }}/.local/bin"
+    - "{{ ansible_user_dir }}/.local/share/bin"
+    - "{{ ansible_user_dir }}/.local/share/applications"
+  tags:
+    - xdg
+
+- name: Update desktop database
+  ansible.builtin.shell: |
+    update-desktop-database ~/.local/share/applications
+  ignore_errors: true
+  tags:
+    - xdg
+
+- name: Symlink desktop applications
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/share/applications/{{ item | basename }}"
+    state: link
+  with_fileglob: "{{ role_path }}/files/applications/*"
+  tags:
+    - xdg
+
+- name: Symlink scripts
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/share/bin/{{ item | basename }}"
+    state: link
+  with_fileglob: "{{ role_path }}/files/bin/*"
+  tags:
+    - xdg
+
+- name: Symlink backgrounds
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/share/backgrounds/{{ item | basename }}"
+    state: link
+  with_fileglob: "{{ role_path }}/files/backgrounds/*"
+  tags:
+    - xdg
+
+- name: Symlink sounds
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/share/sounds/{{ item | basename }}"
+    state: link
+  with_fileglob: "{{ role_path }}/files/sounds/*"
+  tags:
+    - xdg
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+    state: link
+    force: true
+  with_fileglob: "{{ role_path }}/files/config/*"
+  tags:
+    - xdg
+
+- name: Clone xdg-ninja
+  ansible.builtin.git:
+    clone: yes
+    depth: 1
+    dest: "{{ ansible_user_dir }}/opt/github.com/xdg-ninja"
+    force: yes
+    repo: https://github.com/b3nj5m1n/xdg-ninja
+    single_branch: yes
+    update: yes
+    version: main
+  register: clone
+  tags:
+    - xdg
+    - xdg-ninja

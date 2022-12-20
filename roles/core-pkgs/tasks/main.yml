@@ -1,0 +1,82 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - nano
+      - git
+      - gnupg2
+      - direnv
+      - ca-certificates
+      - openssh-client
+      - polkitd
+      - sqlite
+      - wget
+      - curl
+      - jq
+      - rsync
+      - p7zip-full
+      - unrar
+      - unzip
+      - atool # atool is a script for managing file archives of various types (tar,tar+gzip, zip etc)
+      - build-essential
+      - python3-pip
+      - bat
+      - exa
+      - tree
+      - fd-find
+      - htop
+      - btop
+      - net-tools
+      - lm-sensors
+      - ffmpeg
+    state: present
+  become: true
+  tags:
+    - core-pkgs
+    - apt
+
+
+- name: Install sad (https://github.com/ms-jpq/sad)
+  ansible.builtin.apt:
+    deb: "https://github.com/ms-jpq/sad/releases/latest/download/x86_64-unknown-linux-gnu.deb"
+  become: true
+  tags:
+    - core-pkgs
+    - apt
+    - sad
+
+
+- name: Symlink config files
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+    state: link
+  loop:
+    - "{{ role_path }}/files/direnv"
+    - "{{ role_path }}/files/bat"
+    - "{{ role_path }}/files/nano"
+    - "{{ role_path }}/files/readline"
+    - "{{ role_path }}/files/wgetrc"
+  tags:
+    - core-pkgs
+
+
+- name: Symlink batcat
+  ansible.builtin.file:
+    src: /usr/bin/batcat
+    dest: /usr/local/bin/bat
+    state: link
+  become: true
+  tags:
+    - core-pkgs
+    - bat
+
+- name: Symlink fdfind
+  ansible.builtin.file:
+    src: /usr/bin/fdfind
+    dest: /usr/local/bin/fd
+    state: link
+  become: true
+  tags:
+    - core-pkgs
+    - bat

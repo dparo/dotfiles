@@ -1,0 +1,5 @@
+#!/bin/bash
+for term in "$@" ; do
+    search="$search%20$term"
+done
+firefox --new-window "http://www.google.com/search?q=$search"

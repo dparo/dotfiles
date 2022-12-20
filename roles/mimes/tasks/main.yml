@@ -1,0 +1,26 @@
+---
+- name: Check latest handlr
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/chmln/handlr/releases/latest
+    return_content: true
+  register: handlr_latest
+  tags:
+    - handlr
+
+- name: Download and unpack latest handlr
+  ansible.builtin.unarchive:
+    src: "https://github.com/handlr/chmln/releases/download/{{ handlr_latest['json']['tag_name'] }}/handlr"
+    dest: "{{ ansible_user_dir }}/.local/bin"
+    remote_src: true
+  tags:
+    - handlr
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+    state: link
+    force: true
+  with_fileglob: "{{ role_path }}/files/config/*"
+  tags:
+    - mimes

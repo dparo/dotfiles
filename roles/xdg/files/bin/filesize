@@ -1,0 +1,3 @@
+#!/bin/bash
+
+du --all -hc -d 2 "$@" 2>/dev/null | sort -h

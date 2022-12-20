@@ -1,0 +1,145 @@
+#!/bin/bash
+# vi: ft=sh
+
+# By aliasing sudo, we permit the shell to expand further aliases after sudo.
+#  For example `sudo v` where `v` is an alias to `nvim` works only if this sudo alias
+#  is defined
+alias sudo='sudo '
+
+alias :q=exit
+alias :q!=exit
+alias v=nvim
+alias vim=nvim
+alias vi=nvim
+alias ec="emacsclient --create-frame"
+
+function valid_shell_command {
+	builtin type "$1" 1>/dev/null 2>/dev/null
+}
+
+if valid_shell_command fdfind; then
+	alias fd=fdfind
+fi
+
+if valid_shell_command exa; then
+	alias ls='exa --icons'
+	alias la='exa -lah --icons'
+	alias ll='exa -laFh --icons'
+else
+	alias ls='ls --color=auto -h'
+	alias la='ls --color=auto -lah'
+	alias ll='ls --color=auto -laFh'
+fi
+
+if valid_shell_command bat; then
+	alias cat='bat'
+	alias less='bat'
+fi
+
+# Tokei is a better RUST replacement for cloc for counting line numbers in a code base
+if valid_shell_command tokei; then
+	alias cloc=tokei
+fi
+
+if valid_shell_command yt-dlp; then
+	alias youtube-dl=yt-dlp
+fi
+
+run() {
+	nohup "$@" >/dev/null 2>&1 &
+	disown
+}
+
+if valid_shell_command handlr; then
+	alias open='handlr'
+elif valid_shell_command mimeopen; then
+	alias open='mimeopen'
+else
+	alias open='run xdg-open'
+fi
+
+if valid_shell_command yay; then
+	alias update='yay -Syu && sudo flatpak update -y'
+elif valid_shell_command pacman; then
+	alias update="sudo bash -c 'pacman -Syu && flatpak update -y'"
+elif valid_shell_command apt; then
+	alias update="sudo bash -c 'apt update && apt full-upgrade && apt autoremove --yes && snap refresh'"
+elif valid_shell_command dnf; then
+	alias update="sudo bash -c 'dnf update && flatpak update -y'"
+fi
+
+alias ..='cd ..'
+alias ..1='cd ..'
+alias ..2='cd ../..'
+alias ..3='cd ../../..'
+
+alias dir='dir --color=auto'
+alias vdir='vdir --color=auto'
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+
+alias watchmake=watchman-make
+
+alias count='wc -l'
+alias copy='xclip -sel clip'
+alias ag='ag --hidden --follow --ignore .git'
+alias rg='rg --hidden --follow --glob=!.git/'
+alias cls='printf "\033c"'
+alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias svn="svn --config-dir \"\$XDG_CONFIG_HOME/subversion\""
+alias dragon="dragon -x -a"
+alias fm="run spacefm"
+alias gksu='pkexec env DISPLAY=$DISPLAY XAUTHORITY=$XAUTHORITY'
+alias cheat='cht.sh'
+alias feh='feh --scale-down -Z'
+alias lola="git log --graph --decorate --oneline --abbrev-commit --all"
+
+alias nvidia-settings='nvidia-settings --verbose --config="$XDG_CONFIG_HOME"/nvidia/settings'
+alias edit-shell-hist='fc -W; "$EDITOR" "$HISTFILE"; fc -R;'
+
+# Kitty cat image to stdout (yes, show the image on the terminal)
+alias icat="kitty +kitten icat"
+
+if valid_shell_command "qemu-system-x86_64"; then
+	alias kvm="qemu-system-x86_64 -enable-kvm -machine type=q35,accel=kvm -device intel-iommu -cpu host -vga vmware"
+fi
+
+nohup() {
+	command nohup "$@" 1>/dev/null 2>/dev/null &
+	disown
+}
+
+alias mkdir='mkdir -pv'
+mkfile() {
+	command mkdir -pv "$(dirname "$@")" && touch "$@"
+}
+
+alias run='nohup'
+
+alias rm='rm -I'
+alias ln='ln -i -s'
+alias gg='lazygit'
+alias gp='git push origin'
+alias gP='git pull origin'
+alias gap='git add -p'
+
+addlicense() {
+	command addlicense -l mit -c "$(git config --get user.name)" "$@"
+}
+
+__dparo_alias_nvr_or_nvim() {
+	nvr --nostart --remote-tab-wait-silent "$@" || nvim "$@"
+}
+
+mvn_run() {
+	local classpath="$1"
+	shift
+	mvn compile exec:java -Dexec.mainClass="$classpath" "$@"
+}
+
+alias curl_json="curl -H 'Content-Type: application/json'"
+
+if valid_shell_command nvr && [ "$NVIM_LISTEN_ADDRESS" != "" ]; then
+	alias nvr=__dparo_alias_nvr_or_nvim
+fi

@@ -1,0 +1,134 @@
+#!/usr/bin/bash
+
+set -x
+
+
+# The xhost program is used to add and delete host names or user names to
+# the list allowed to make connections to the X server.
+[ -x /usr/bin/xhost ] && [ -x /usr/bin/id ] &&
+    xhost "+si:localuser:$(id -un)" >& /dev/null
+
+
+# xrandr --setprovideroutputsource modesetting NVIDIA-0
+xrandr --auto
+
+# NOTE(dparo): command nvidia-settings avoids alias expansion of the nvidia-settings
+if [ -f "$XDG_CONFIG_HOME/nvidia/settings" ]; then
+	command nvidia-settings --verbose --load-config-only --config "$XDG_CONFIG_HOME/nvidia/settings"
+elif [ -f "$HOME/.nvidia-settings-rc" ]; then
+	# Default place where nvidia-settings places the config file
+	command nvidia-settings --verbose --load-config-only --config "$HOME/.nvidia-settings-rc"
+fi
+
+if [ "$HOST" = "dparo-pc" ]; then
+	# NOTE(dparo): `-q/--query` or `-a/--assign` do not automatically
+	#              update the ~/.nvidia-settings-rc config file
+	# NOTE(dparo): run `nvidia-settings -q all` to show all available options
+
+	# Set PowerMizerMode to prefer performance mode:
+	#     When in Adaptive mode, the GPU automatically downclocks itself when there's little load,
+	#     to reduce power consumption
+
+    # Necessari???
+	# command nvidia-settings --verbose -a '[gpu:0]/GpuPowerMizerMode=1'
+    # command nvidia-settings --verbose -a 'AllowFlipping=1'
+	# command nvidia-settings --verbose -a 'CurrentMetaMode=nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }'
+    true
+fi
+
+[[ -f "/etc/X11/xinit/.Xresources" ]] && xrdb -merge "/etc/X11/xinit/.Xresources"
+[[ -f "$XDG_CONFIG_HOME/xorg/.Xresources" ]] && xrdb -merge "$XDG_CONFIG_HOME/xorg/.Xresources"
+[[ -f "/etc/X11/xinit/.Xmodmap" ]] && xmodmap "/etc/X11/xinit/.Xmodmap"
+[[ -f "$XDG_CONFIG_HOME/xorg/.Xmodmap" ]] && xmodmap "$XDG_CONFIG_HOME/xorg/.Xmodmap"
+
+
+"${XDG_CONFIG_HOME:-$HOME/.config}/xorg/refresh-devices-settings.sh"
+
+xset s off # Disables screen saver
+xset -dpms # Disables DPMS (Display Power Management Signaling)
+# Timing for automatic locking (see xss-lock and xsecurelock (https://github.com/google/xsecurelock))
+xset s 300 5
+
+xsetroot -solid darkgray
+xsetroot -cursor_name left_ptr
+
+
+# Explicitly adding the ssh-keys is required if using ssh-agent | gpg-agent
+# gnome-keyring-daemon, instead, does the ssh-add autonomously at startup
+# ssh-add
+
+
+# Source system-wide xinitrc dependencies
+# NOTE(dparo): Unrecommended. Some linux distros (eg Fedora) contains scripts to autostart dbus.
+#              We don't want to start dbus manually from startx. Instead we rely on systemd
+#              to automatically start dbus when it is necessary.
+source_distro_xinit_scripts() {
+    if [ -d /etc/X11/xinit/xinitrc.d ]; then
+        for f in /etc/X11/xinit/xinitrc.d/?*.sh; do
+            [ -f "$f" ] && source "$f"
+        done
+        unset f
+    fi
+}
+
+
+exec_wm() {
+	WM="$1"
+
+	case "$WM" in
+	bspwm | dwm | xmonad)
+		export _JAVA_AWT_WM_NONREPARENTING=1
+		export AWT_TOOLKIT=MToolkit
+		;;
+	*) ;;
+	esac
+
+    # Import all environment variables exported from xinitrc script
+    # and, most importantly, the variables exported from the .zprofile
+    # This env variables will be available to systemd services, including the service
+    # which will start the window manager.
+    # NOTE(d.paro): `systemctl --user import-environment` is deprecated when importing the ENTIRE environment,
+    #               and therefore might be removed in later versions (who knows).
+    #               Just for a fail safe case, revert to using `dbus-update-activation-environment  --systemd --all`,
+    #               which will also update the DBUS environment on top of the systemd one
+    systemctl --user import-environment || dbus-update-activation-environment --systemd --all
+
+
+	# NOTE(dparo): 27 Jan 2022
+	#     dbus-launch is now deprecated, since it is now part of systemd
+	#     and it is started automatically.
+	#     Using dbus-launch would export DBUS_SESSION_BUS_ADDRESS to an invalid
+	#     path, thus breaking normal keychain operations
+	#
+	#     ArchLinux: Do not use dbus-launch nor dbus-run-session !!!!!!!!!!!!
+	#
+	# NOTE(dparo): 29 April 2022
+	#     From Ubuntu 22.04, running `dbus-launch --sh-syntax --exit-with-session "$WM"` is not anymore
+	#     necessary. Running dbus-launch in this way would brake snap packages since they wouldn't
+	#     be able to connect to the dbus socket
+	#     Up to to Ubuntu 21.10 and before, `dbus-launch --sh-syntax --exit-with-session "$WM"`
+	#     was necessary but nowadays it is not anymore
+
+
+    if test -f "$HOME/.config/systemd/user/$WM.service"; then
+        exec systemctl --user start --wait "${WM}.service"
+    else
+        >&2 echo "Did not find a systemd user service file for ${WM}.service"
+        if which "$WM"; then
+            exec "$WM"
+        else
+            >&2 echo "$WM: Was not found"
+            exit 1
+        fi
+    fi
+}
+
+
+systemctl --user daemon-reload
+
+## Try out different WMs using precedence and resolve the first installed
+for WM in i3 bspwm dwm; do
+	if type "$WM" 1>/dev/null 2>/dev/null; then
+		exec_wm "$WM"
+	fi
+done

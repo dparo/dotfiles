@@ -1,0 +1,14 @@
+[Unit]
+Description=bspwm window manager
+PartOf=graphical-session.target
+After=xsession.target
+Wants=xsession.target
+
+Wants=sxhkd.service
+Wants=polybar.service
+
+[Service]
+ExecStart=bspwm
+ExecReload=bspwm wm -r
+ExecStopPost=/bin/systemctl --user stop --no-block graphical-session.target
+Restart=on-failure

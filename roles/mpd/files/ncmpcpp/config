@@ -1,0 +1,11 @@
+mouse_support = yes
+enable_window_title = yes
+user_interface = alternative
+statusbar_visibility = yes
+use_console_editor = yes
+
+
+mpd_connection_timeout = 20
+mpd_crossfade_time = 5
+
+lyrics_directory = ~/.local/share/lyrics

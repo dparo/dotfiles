@@ -1,0 +1,39 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - zsh
+      - command-not-found
+      - zsh-syntax-highlighting
+      - zsh-autosuggestions
+    state: present
+  become: true
+  tags:
+    - zsh
+    - apt
+
+- name: Setup ZDOTDIR to point to the user XDG config location
+  ansible.builtin.lineinfile:
+    path: /etc/zsh/zshenv
+    line: export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
+    regexp: "^export ZDOTDIR="
+    create: true
+  become: true
+  tags:
+    - zsh
+
+- name: "Sets the user {{ ansible_env.USER }} shell to zsh"
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    shell: /bin/zsh
+  become: true
+  tags:
+    - zsh
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/zsh"
+    state: link
+  tags:
+    - zsh

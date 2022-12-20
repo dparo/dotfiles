@@ -1,0 +1,20 @@
+---
+
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - awesome
+      - awesome-extra
+    state: present
+  become: true
+  tags:
+    - awesomewm
+
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/awesome"
+    state: link
+  tags:
+    - awesomewm

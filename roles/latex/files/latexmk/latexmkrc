@@ -1,0 +1,23 @@
+# vi: ft=config
+@default_files = ( 'main.tex' );
+
+$jobname = 'build';
+$out_dir = 'build';
+$aux_dir = 'build';
+
+$pdflatex = 'pdflatex -synctex=1 -file-line-error -halt-on-error -interaction=nonstopmode';
+$success_cmd = 'cp build/%R.pdf build/main.pdf';
+
+$pdf_previewer = 'zathura';
+
+
+# Avoid linebreaks in LaTeX console / log output (or increase columns in terminal)
+#      https://tex.stackexchange.com/questions/52988/avoid-linebreaks-in-latex-console-log-output-or-increase-columns-in-terminal
+$ENV{max_print_line} = 1000;
+$ENV{log_wrap} = 1000;
+$ENV{error_line} = 256;
+$ENV{error_line} = 238;
+
+
+# $pdf_update_method = 2;
+# $pdf_previewer = 'mupdf';

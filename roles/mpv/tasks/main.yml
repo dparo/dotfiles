@@ -1,0 +1,28 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - brotli
+      - ffmpeg
+      - mpv
+      - yt-dlp
+      - streamlink
+    state: present
+  become: true
+  tags:
+    - apt
+    - mpv
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+    state: link
+  loop:
+    - "{{ role_path }}/files/mpv"
+    - "{{ role_path }}/files/yt-dlp"
+    - "{{ role_path }}/files/streamlink"
+  tags:
+    - mpv
+    - yt-dlp
+    - streamlink

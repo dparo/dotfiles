@@ -1,0 +1,8 @@
+---
+- name: Install
+  ansible.builtin.command: snap install onlyoffice-desktopeditors
+  become: true
+  ignore_errors: true
+  tags:
+    - snap
+    - onlyoffice

@@ -1,0 +1,77 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - network-manager
+      - openvpn
+      - openvpn-systemd-resolved
+      - openfortivpn
+      - openconnect
+      - network-manager-openvpn
+      - network-manager-openconnect
+    state: present
+  become: true
+  tags:
+    - apt
+    - network-manager
+    - vpn
+
+- name: Enable service
+  ansible.builtin.systemd:
+    name: NetworkManager
+    enabled: true
+  become: true
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  tags:
+    - network-manager
+
+- name: Ensure NetworkManager config dirs exists
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    mode: "0755"
+  loop:
+    - "/etc/NetworkManager/conf.d/"
+    - "/etc/NetworkManager/dispatcher.d/"
+  become: true
+  tags:
+    - network-manager
+
+- name: Setup mutually exclusive wifi / ethernet script dns servers
+  ansible.builtin.copy:
+    dest: /etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive.sh
+    content: |
+      #!/bin/bash
+      export LC_ALL=C
+
+      toggle_wifi ()
+      {
+        result=$(nmcli dev | grep "ethernet" | grep -w "connected")
+        if [ -n "$result" ]; then
+           nmcli radio wifi off
+        else
+           nmcli radio wifi on
+        fi
+      }
+
+      if [ "$2" = "up" ]; then
+        toggle_wifi
+      fi
+
+      if [ "$2" = "down" ]; then
+        toggle_wifi
+      fi
+    mode: "u=rwx,g=rwx,o=rx"
+  become: true
+  tags:
+    - network-manager
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+    state: link
+  loop:
+    - "{{ role_path }}/files/config/networkmanager-dmenu"
+  tags:
+    - network-manager

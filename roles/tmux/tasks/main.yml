@@ -1,0 +1,27 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - tmux
+    state: present
+  become: true
+  tags:
+    - apt
+    - tmux
+
+- name: Install tmuxp
+  ansible.builtin.pip:
+    name:
+      - tmuxp
+    state: latest
+  tags:
+    - tmux
+    - tmuxp
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/tmux"
+    state: link
+  tags:
+    - tmux

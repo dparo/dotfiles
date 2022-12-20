@@ -1,0 +1,21 @@
+name: CI
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ ubuntu-latest ]
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Docker build
+      run: docker build -t dparo-dotfiles .
+
+    - name: Docker run
+      run: docker run dparo-dotfiles

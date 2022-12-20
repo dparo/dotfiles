@@ -1,0 +1,19 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - feh
+    state: present
+  become: true
+  tags:
+    - apt
+    - feh
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+    state: link
+  with_fileglob: "{{ role_path }}/files/config/*"
+  tags:
+    - feh

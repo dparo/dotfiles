@@ -1,0 +1,2 @@
+maven_version: 3.8.6
+maven_install_dir: "{{ ansible_user_dir }}/opt"

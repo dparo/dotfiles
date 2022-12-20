@@ -1,0 +1,109 @@
+---
+- name: Install python formatters packages
+  ansible.builtin.pip:
+    name:
+      - pycodestyle
+      - flake8
+      - autopep8
+      - autoflake
+      - black
+      - yapf
+      - rope
+    state: latest
+  tags:
+    - devel
+
+- name: Install python diagnostics tools
+  ansible.builtin.pip:
+    name:
+      - pylint
+      - mypy
+      - pyre-check
+    state: latest
+  tags:
+    - devel
+
+- name: Install python LSP
+  ansible.builtin.pip:
+    name:
+      - "python-lsp-server[all]"
+      - pyls-isort
+      - pyls-black
+      - python-lsp-black
+      - pyls-memestra
+      - jedi
+      - jedi-language-server
+    state: latest
+  tags:
+    - devel
+
+- name: Install python DAP
+  ansible.builtin.pip:
+    name:
+      - debugpy
+    state: latest
+  tags:
+    - devel
+
+- name: Install additional language tools
+  ansible.builtin.pip:
+    name:
+      - httpie
+      - codespell
+      - cmakelang
+      - cmake-language-server
+      - gitlint
+      - vim-vint
+      - proselint
+    state: latest
+  tags:
+    - devel
+
+- name: Install JavaScript / TypeScript development packages
+  community.general.npm:
+    name: "{{ item }}"
+    global: true
+    state: latest
+  loop:
+    - typescript
+    - "@types/node"
+    - ts-node
+    - eslint
+    - prettier
+  tags: devel
+
+- name: Install additional NPM tools
+  community.general.npm:
+    name: "{{ item }}"
+    global: true
+    state: latest
+  loop:
+    - gramma # Command line grammar checker: Checks markdown files against the `https://languagetool.org/` api, or by hosting languagetool locally
+    - "@marp-team/marp-cli" # Presentation mode for markdown files. Support conversions to HTML interactive presentations (through electron) or native static PDF presentations.
+  tags: devel
+
+- name: Install additional GO tools
+  ansible.builtin.shell: |
+    # pprof: https://github.com/google/pprof
+    # pprof is a tool for visualization and analysis of profiling data.
+    go install github.com/google/pprof@latest
+
+    # The program ensures source code files have copyright license headers by
+    # scanning directory patterns recursively.
+    # It modifies all source files in place and
+    # avoids adding a license header to any file that already has one.
+    go install github.com/google/addlicense@latest
+
+    # Slides presentation in the terminal from Markdown
+    go install github.com/maaslalani/slides@latest
+  tags: devel
+
+- name: Symlink additional config files
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+    state: link
+    force: true
+  with_fileglob: "{{ role_path }}/files/config/*"
+  tags:
+    - devel

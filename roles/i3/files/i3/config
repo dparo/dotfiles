@@ -1,0 +1,70 @@
+# vi: ft=i3config
+
+
+# Variables are shared between all config files, but beware of the following limitation:
+# 1. You can define a variable and use it within an included file.
+# 2. You cannot use (in the parent file) a variable that was defined within an included file.
+
+
+set $mod Mod4
+set $alt Mod1
+set $move_amt 32
+set $font Noto Mono Nerd Font 8
+set $bar_font Noto Mono Nerd Font 8
+
+
+##########################################################
+## Theme
+##########################################################
+
+set_from_resource $bg     i3wm.background       #24283b
+set_from_resource $bgalt  i3wm.background_dark  #1f2335
+set_from_resource $fg     i3wm.foreground       #c0caf5
+set_from_resource $fgalt  i3wm.foreground_dark  #a9b1d6
+set_from_resource $selbg  i3wm.bg_highlight     #292e42
+
+set_from_resource $col0   i3wm.color0           #1d202f
+set_from_resource $col1   i3wm.color1           #f7768e
+set_from_resource $col2   i3wm.color2           #9ece6a
+set_from_resource $col3   i3wm.color3           #e0af68
+set_from_resource $col4   i3wm.color4           #7aa2f7
+set_from_resource $col5   i3wm.color5           #bb9af7
+set_from_resource $col6   i3wm.color6           #7dcfff
+set_from_resource $col7   i3wm.color7           #a9b1d6
+
+set_from_resource $col8   i3wm.color8           #414868
+set_from_resource $col9   i3wm.color9           #f7768e
+set_from_resource $col10  i3wm.color10          #9ece6a
+set_from_resource $col11  i3wm.color11          #e0af68
+set_from_resource $col12  i3wm.color12          #7aa2f7
+set_from_resource $col13  i3wm.color13          #bb9af7
+set_from_resource $col14  i3wm.color14          #7dcfff
+set_from_resource $col15  i3wm.color15          #c0caf5
+
+###########################################################
+###########################################################
+###########################################################
+
+font pango:$font
+floating_modifier $alt
+tiling_drag modifier
+
+focus_follows_mouse yes
+mouse_warping output
+popup_during_fullscreen leave_fullscreen
+focus_wrapping yes
+focus_on_window_activation smart
+workspace_layout tabbed
+workspace_auto_back_and_forth no
+force_display_urgency_hint 1000 ms
+default_border normal 1
+default_floating_border normal 1
+for_window [all] border normal 1
+for_window [all] title_window_icon padding 4px
+
+
+include config.d/rules.conf
+include config.d/binds.conf
+include config.d/theme.conf
+include config.d/bar.conf
+include config.d/startup.conf

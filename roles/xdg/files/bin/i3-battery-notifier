@@ -1,0 +1,88 @@
+#!/usr/bin/env bash
+# -*- coding: utf-8 -*-
+
+cd "$(dirname "$0")" || exit 1
+
+
+POLL_INTERVAL=120    # seconds at which to check battery level
+LOW_BAT=20           # lesser than this is considered low battery
+CRITICAL_BAT=15      # Critical battery level
+
+
+# Try a bunch of BATTERY paths
+BAT_PATH=/sys/class/power_supply/BAT0
+if [ ! -d "$BAT_PATH" ]; then
+    BAT_PATH=/sys/class/power_supply/BAT1
+elif [ ! -d "$BAT_PATH" ]; then
+    BAT_PATH=/sys/class/power_supply/BAT2
+elif [ ! -d "$BAT_PATH" ]; then
+    BAT_PATH=/sys/class/power_supply/BAT3
+fi
+
+
+BAT_STAT=$BAT_PATH/status
+SOUND_FILE="$HOME/.local/share/sounds/battery-critical.wav"
+
+
+if [[ -f $BAT_PATH/charge_full ]]; then
+    BAT_FULL=$BAT_PATH/charge_full
+    BAT_NOW=$BAT_PATH/charge_now
+elif [[ -f $BAT_PATH/energy_full ]]; then
+    BAT_FULL=$BAT_PATH/energy_full
+    BAT_NOW=$BAT_PATH/energy_now
+else
+    exit
+fi
+
+
+
+kill_running() {     # stop older instances to not get multiple notifications
+    ps aux | \
+        grep -P "${BASH_SOURCE[0]}" | \
+        grep -v $$ | \
+        grep -P "bash" | \
+        grep -oP "^[[:alnum:]]+\s+\d+\s" | \
+        grep -oP "\d+" | \
+        xargs kill -9
+}
+
+
+play_sound() {
+    if [ -n "$SOUND_FILE" ] && [ -f "$SOUND_FILE" ]; then
+        paplay "$SOUND_FILE"
+    fi
+}
+
+main() {
+    local launched=0
+    local critical_launched=0
+    while true; do
+        bf=$(cat $BAT_FULL)
+        bn=$(cat $BAT_NOW)
+        bs=$(cat $BAT_STAT)
+
+        bat_percent=$(( 100 * bn / bf ))
+
+        if [[ $bs == "Discharging" ]]; then
+            if [[ $launched -lt 3 && $bat_percent -gt $CRITICAL_BAT && $bat_percent -lt $LOW_BAT ]]; then
+                launched=$((launched+1))
+                dunstify -u normal -i battery-caution "$bat_percent% : Low Battery!"
+            elif [[ $critical_launched -lt 3 && $bat_percent -lt $CRITICAL_BAT ]]; then
+                critical_launched=$((critical_launched+1))
+                dunstify -u critical -i battery-caution "$bat_percent% : Critical Battery!"
+                play_sound &
+            fi
+        elif [[ "$bs" = "Charging" ]]; then
+                launched=0
+                critical_launched=0
+        fi
+        sleep $POLL_INTERVAL
+    done
+}
+
+# Run only if battery is detected
+if command ls -1qA /sys/class/power_supply/ | grep -q BAT && \
+    [ -f "$BAT_FULL" ] && [ -f "$BAT_NOW" ] && [ -f "$BAT_STAT" ]; then
+    kill_running 1> /dev/null 2> /dev/null
+    main
+fi

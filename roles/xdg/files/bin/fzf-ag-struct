@@ -1,0 +1,7 @@
+#!/bin/bash
+
+
+
+word=${1:-\\w+}
+param="(typedef)?(\\s|\\n)*struct(\\s|\\n)*($word)"
+fag "$param"

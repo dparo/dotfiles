@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+
+#    systemctl --user daemon-reload
+#    systemctl --user import-environment || dbus-update-activation-environment --systemd --all
+#    exec systemctl --user restart x11.service
+
+
+# Refetch the DISPLAY env variable from systemd
+eval "export $(systemctl --user show-environment | grep -E 'DISPLAY=:[0-9]+')" 1> /dev/null 2> /dev/null
+
+# This two ENV vars are required if running `gnome-session` from this .xinitrc script
+export XDG_SESSION_TYPE=x11
+export GDK_BACKEND=x11
+
+# For fixing libreoffice styling under non gnome desktop environments
+export OOO_FORCE_DESKTOP="gnome"
+
+
+# Test connection to Xserver. If it's already running do not create a new one
+if ! timeout 1s xset q 1> /dev/null 2> /dev/null; then
+    export DISPLAY=":$XDG_VTNR"
+
+    systemctl --user import-environment DISPLAY XAUTHORITY
+    dbus-update-activation-environment --systemd DISPLAY XAUTHORITY
+
+
+    # TODO: Rootless XORG + systemd
+    # - https://wiki.archlinux.org/title/Systemd/User#Xorg_as_a_systemd_user_service
+    # - https://wiki.ubuntu.com/X/Rootless
+    # - https://wiki.archlinux.org/title/Xorg#Rootless_Xorg
+    # - https://man.archlinux.org/man/extra/xorg-server/Xorg.wrap.1.en
+    # TODO: Look ``-auth` flag : specifies  a  file which contains a collection of authorization
+    #           records used to authenticate access.  See also the  xdm(1)  and
+    #           Xsecurity(7) manual pages.`
+
+    # See manpages for command line: Xorg(1), Xserver(1)
+    exec /usr/bin/startx "${XDG_CONFIG_HOME:-$HOME/.config}/xorg/xinitrc" -- \
+        /usr/bin/Xorg "$DISPLAY" vt"$XDG_VTNR" -keeptty -nolisten tcp \
+        -ardelay 300 -arinterval 33.333
+else
+    echo "Xorg is already running at DISPLAY=$DISPLAY"
+    exit 1
+fi

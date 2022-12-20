@@ -1,0 +1,12 @@
+---
+- name: "Sets the user {{ ansible_env.USER }} additional groups"
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    append: true
+    groups:
+      - sudo
+      - video
+      - input
+  become: true
+  tags:
+    - user

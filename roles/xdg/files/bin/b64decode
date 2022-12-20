@@ -1,0 +1,9 @@
+#!/usr/bin/env python3
+
+
+import sys
+import base64
+
+
+for i in range(1, len(sys.argv)):
+    print(base64.b64decode(sys.argv[i].encode("utf-8")).decode("utf-8"))

@@ -1,0 +1,31 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - python3
+      - python3-pip
+      - python3-venv
+    state: present
+  become: true
+  tags:
+    - apt
+    - python
+
+- name: Clean PIP cache
+  ansible.builtin.shell: |
+    pip3 cache purge 2> /dev/null || true
+  ignore_errors: true
+  tags:
+    - python
+    - pip
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+    state: link
+    force: true
+  with_fileglob: "{{ role_path }}/files/config/*"
+  tags:
+    - python
+    - pip

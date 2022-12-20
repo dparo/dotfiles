@@ -1,0 +1,27 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name: docker.io
+    state: present
+  become: true
+  tags:
+    - docker
+
+- name: Enable service
+  ansible.builtin.systemd:
+    name: docker
+    enabled: false
+  become: true
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  tags:
+    - docker
+
+- name: "Add the user {{ ansible_env.USER }} to the docker group"
+  ansible.builtin.user:
+    name: "{{ ansible_env.USER }}"
+    append: true
+    groups:
+      - docker
+  become: true
+  tags:
+    - docker

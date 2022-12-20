@@ -1,0 +1,7 @@
+include /usr/share/doc/newsboat/contrib/colorschemes/inkpot
+
+browser "~/bin/newsboat-open-url"
+
+notify-always no
+notify-program "dunstify"
+notify-format "%d new articles (%n unread articles, %f unread feeds)"

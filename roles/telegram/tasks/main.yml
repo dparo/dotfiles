@@ -1,0 +1,18 @@
+---
+- name: "Download and unpack Telegram"
+  ansible.builtin.unarchive:
+    src: https://telegram.org/dl/desktop/linux
+    dest: "{{ ansible_user_dir }}/opt"
+    remote_src: yes
+  when: ansible_user_id == "dparo"
+  tags:
+    - telegram
+
+- name: Symlink binaries
+  ansible.builtin.file:
+    src: "{{ ansible_user_dir }}/opt/Telegram/Telegram"
+    dest: "{{ ansible_user_dir }}/.local/bin/telegram"
+    state: link
+  when: ansible_user_id == "dparo"
+  tags:
+    - telegram

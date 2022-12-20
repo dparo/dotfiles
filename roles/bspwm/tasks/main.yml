@@ -1,0 +1,24 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - bspwm
+      - sxhkd
+    state: present
+  become: true
+  tags:
+    - apt
+    - bpswm
+    - sxhkd
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+    state: link
+  loop:
+    - "{{ role_path }}/files/bspwm"
+    - "{{ role_path }}/files/sxhkd"
+  tags:
+    - bpswm
+    - sxhkd

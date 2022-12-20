@@ -1,0 +1,19 @@
+---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - dunst
+    state: present
+  become: true
+  tags:
+    - apt
+    - dunst
+
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files"
+    dest: "{{ ansible_user_dir }}/.config/dunst"
+    state: link
+  tags:
+    - dunst

@@ -1,0 +1,7 @@
+[Unit]
+Description=Sets the XRoot window background picture
+PartOf=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=%h/.config/xorg/setup_background.sh

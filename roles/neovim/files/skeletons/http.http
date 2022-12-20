@@ -1,0 +1,8 @@
+###
+POST localhost:8080/api/foobar
+Content-Type: application/json
+
+{
+    "name": "entity",
+    "value": "content"
+}

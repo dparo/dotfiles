@@ -1,0 +1,53 @@
+---
+- name: Disable services
+  ansible.builtin.systemd:
+    name: "{{item}}"
+    enabled: false
+  become: true
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  loop:
+    - "gdm"
+    - "gdm3"
+  tags:
+    - systemd
+    - display-manager
+
+- name: Create a script to execute the user's XINITRC
+  ansible.builtin.copy:
+    dest: /etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive.sh
+    content: |
+      #!/usr/bin/env zsh
+
+      entry=""
+      if [ -n "$XINITRC" ]; then
+          entry="$XINITRC"
+      elif [ -f "$XDG_CONFIG_HOME/xorg/xinitrc" ]; then
+          entry="$XDG_CONFIG_HOME/xorg/xinitrc"
+      elif [ -f "$HOME/.config/xorg/xinitrc" ]; then
+          entry="$HOME/.config/xorg/xinitrc"
+      elif [ -f "$HOME/.xinitrc" ]; then
+          entry="$HOME/.xinitrc"
+      fi
+      if [ -n "$entry" ]; then
+        exec "$entry"
+      fi
+    mode: "0775"
+  become: true
+  tags:
+    - display-manager
+
+
+- name: Create desktop entry to allow display managers to execute the user's XINITRC
+  ansible.builtin.copy:
+    dest: /etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive.sh
+    content: |
+      [Desktop Entry]
+      Name=xinitrc
+      Comment=Executes the .xinitrc script in your home directory
+      Exec=xinitrcsession-run
+      TryExec=xinitrcsession-run
+      Type=Application
+    mode: "0664"
+  become: true
+  tags:
+    - display-manager
