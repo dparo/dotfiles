@@ -133,7 +133,7 @@ M.list = {
                     -- NOTE(d.paro): At the time of writing, Wed 23 2022, eclipse.jdt.ls requires Java 17 or higher
                     --         See https://github.com/mfussenegger/nvim-jdtls#configuration-quickstart
                     --         If this ever changes in the future
-                    "/usr/lib/jvm/java-17-openjdk/bin/java",
+                    "/usr/lib/jvm/java-17-openjdk-amd64/bin/java",
                     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
                     "-Dosgi.bundles.defaultStartLevel=4",
                     "-Declipse.product=org.eclipse.jdt.ls.core.product",
