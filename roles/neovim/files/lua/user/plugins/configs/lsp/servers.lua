@@ -193,11 +193,11 @@ M.list = {
                             runtimes = {
                                 {
                                     name = "JavaSE-11",
-                                    path = "/usr/lib/jvm/java-11-openjdk/",
+                                    path = "/usr/lib/jvm/java-11-openjdk-amd64/",
                                 },
                                 {
                                     name = "JavaSE-17",
-                                    path = "/usr/lib/jvm/java-17-openjdk/",
+                                    path = "/usr/lib/jvm/java-17-openjdk-amd64/",
                                 },
                             },
                         },
