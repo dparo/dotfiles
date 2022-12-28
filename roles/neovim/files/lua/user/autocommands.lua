@@ -34,6 +34,7 @@ core.utils.augroup("USER_SKELETONS", {
     { "BufNewFile", { pattern = "*.{http}", command = [[0r ~/.config/nvim/skeletons/http.http]] } },
     { "BufNewFile", { pattern = ".envrc,.direnvrc,direnvrc", command = [[0r ~/.config/nvim/skeletons/.envrc]] } },
     { "BufNewFile", { pattern = "Makefile", command = [[0r ~/.config/nvim/skeletons/Makefile]] } },
+    { "BufNewFile", { pattern = ".editorconfig", command = [[0r ~/.config/nvim/skeletons/.editorconfig]] } },
 })
 
 -- Filetypes autocommand
