@@ -38,7 +38,7 @@
 - name: Remove unwanted packages
   ansible.builtin.apt:
     name:
-      - plymout
+      - plymouth
     state: absent
     autoremove: true
   become: true
