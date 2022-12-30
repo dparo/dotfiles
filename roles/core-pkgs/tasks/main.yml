@@ -35,6 +35,16 @@
     - core-pkgs
     - apt
 
+- name: Remove unwanted packages
+  ansible.builtin.apt:
+    name:
+      - plymout
+    state: absent
+    autoremove: true
+  become: true
+  tags:
+    - core-pkgs
+    - apt
 
 - name: Install sad (https://github.com/ms-jpq/sad)
   ansible.builtin.apt:
