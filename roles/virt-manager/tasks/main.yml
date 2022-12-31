@@ -39,3 +39,15 @@
 #   tags:
 #     - qemu
 #     - virt-manager
+
+
+- name: Disable libvirt-guests service (causing problems on shutdown on certain PC)
+  ansible.builtin.systemd:
+    name: libvirt-guests
+    enabled: false
+    state: stopped
+  become: true
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  tags:
+    - qemu
+    - virt-manager
