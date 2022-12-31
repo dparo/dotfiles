@@ -58,7 +58,7 @@ main() {
             echo ""
             echo ""
             echo "It is recommended to reboot after installing the dotfiles for the first time."
-            read -p -r "Do you want to reboot now? [yn]" yn
+            read -r -p "Do you want to reboot now? [yn]" yn
             case $yn in
             [Yy]*) systemctl reboot ;;
             [Nn]*) ;;
