@@ -20,9 +20,10 @@
   ansible.builtin.systemd:
     daemon_reload: true
     scope: user
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  ignore_errors: true
   tags:
     - systemd
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
 
 - name: Enable user services
   ansible.builtin.systemd:
