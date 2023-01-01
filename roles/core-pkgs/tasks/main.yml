@@ -35,17 +35,6 @@
     - core-pkgs
     - apt
 
-- name: Remove unwanted packages
-  ansible.builtin.apt:
-    name:
-      - plymouth
-    state: absent
-    autoremove: true
-  become: true
-  tags:
-    - core-pkgs
-    - apt
-
 - name: Install sad (https://github.com/ms-jpq/sad)
   ansible.builtin.apt:
     deb: "https://github.com/ms-jpq/sad/releases/latest/download/x86_64-unknown-linux-gnu.deb"
