@@ -25,7 +25,13 @@
     dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
     state: link
     force: true
-  with_fileglob: "{{ role_path }}/files/config/*"
+  loop:
+    - "{{ role_path }}/files/config/flake8"
+    - "{{ role_path }}/files/config/ipython"
+    - "{{ role_path }}/files/config/pycodestyle"
+    - "{{ role_path }}/files/config/pylintrc"
+    - "{{ role_path }}/files/config/python"
+    - "{{ role_path }}/files/config/python_keyring"
   tags:
     - python
     - pip

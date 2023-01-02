@@ -12,7 +12,8 @@
     src: "{{ item }}"
     dest: "{{ ansible_user_dir }}/.local/share/anaconda3/etc/conda/activate.d/{{ item | basename }}"
     state: link
-  with_fileglob: "{{ role_path }}/files/activate.d/*"
+  loop:
+    - "{{ role_path }}/files/activate.d/env_vars.sh"
   tags:
     - anaconda3
 
