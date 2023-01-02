@@ -1,4 +1,15 @@
 ---
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - policykit-1-gnome
+    state: present
+  become: true
+  tags:
+    - apt
+    - systemd
+
+
 - name: Symlink config
   ansible.builtin.file:
     src: "{{ item.src }}"
