@@ -7,6 +7,7 @@
   become: true
   tags:
     - apt
+    - x509
     - certs
 
 
@@ -20,8 +21,11 @@
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   loop_control:
     loop_var: cert_item
-  with_items: "{{ certs | default({}) | dict2items }}"
+  with_items: "{{ x509_certs | default({}) | dict2items }}"
   register: install_certificates_status
+  tags:
+    - x509
+    - certs
 
 
 - name: Update ca-trust
@@ -30,4 +34,5 @@
   no_log: True
   become: True
   tags:
-    - fonts
+    - x509
+    - certs
