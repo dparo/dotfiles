@@ -10,7 +10,7 @@
     - ssh
 
 - name: Copy SSH keys
-  copy:
+  ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/.ssh/{{ ssh_key_item.key }}"
     content: "{{ ssh_key_item.value }}"
     mode: 0400

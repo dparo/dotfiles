@@ -1,0 +1,33 @@
+# https://docs.fedoraproject.org/en-US/quick-docs/using-shared-system-certificates/
+- name: Install
+  ansible.builtin.apt:
+    name:
+      - p11-kit
+    state: present
+  become: true
+  tags:
+    - apt
+    - certs
+
+
+- name: Install certificates
+  ansible.builtin.copy:
+    dest: "/etc/pki/ca-trust/source/anchors/{{ cert_item.key }}"
+    content: "{{ ssh_key_item.value }}"
+    mode: 0444
+  no_log: true
+  become: True
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  loop_control:
+    loop_var: cert_item
+  with_items: "{{ certs | default({}) | dict2items }}"
+  register: install_certificates_status
+
+
+- name: Update ca-trust
+  ansible.builtin.command: update-ca-trust
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and install_certificates_status.changed
+  no_log: True
+  become: True
+  tags:
+    - fonts
