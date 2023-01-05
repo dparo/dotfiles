@@ -1,13 +1,12 @@
 ---
-
-- name: Install
-  ansible.builtin.apt:
-    name: snapd
-    state: present
-  become: true
-  tags:
-    - apt
-    - snap
+# - name: Install
+#   ansible.builtin.apt:
+#     name: snapd
+#     state: present
+#   become: true
+#   tags:
+#     - apt
+#     - snap
 
 - name: Allow snap to refresh only on certain times of day
   ansible.builtin.shell: snap set system refresh.timer=4:00-7:00,19:00-22:10
