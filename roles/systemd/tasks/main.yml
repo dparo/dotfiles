@@ -14,7 +14,6 @@
   ansible.builtin.systemd:
     name: "{{ item }}"
     enabled: true
-    scope: user
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   loop:
