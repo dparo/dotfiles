@@ -14,7 +14,7 @@
 - name: Install certificates
   ansible.builtin.copy:
     dest: "/etc/pki/ca-trust/source/anchors/{{ cert_item.key }}"
-    content: "{{ ssh_key_item.value }}"
+    content: "{{ cert_item.value }}"
     mode: 0444
   no_log: true
   become: True
