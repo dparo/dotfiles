@@ -2,7 +2,7 @@
 - name: Install
   ansible.builtin.dnf:
     name:
-      - pipewire-pulse
+      - pipewire-pulseaudio
       - pulseaudio-utils
       - pavucontrol
     state: present
