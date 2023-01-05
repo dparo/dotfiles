@@ -1,6 +1,6 @@
 ---
 - name: Install texlive fundamental packages
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - texlive-base
       - texlive-collection-fontsrecommended
