@@ -15,7 +15,6 @@
     - network-manager
     - vpn
 
-
 - name: Enable service
   ansible.builtin.systemd:
     name: NetworkManager
@@ -66,7 +65,6 @@
   tags:
     - network-manager
 
-
 - name: Clone openvpn-systemd-resolved
   ansible.builtin.git:
     clone: yes
@@ -77,7 +75,7 @@
     single_branch: yes
     update: yes
     version: master
-  register: clone
+  become: True
   tags:
     - openvpn
     - openvpn-systemd-resolved
