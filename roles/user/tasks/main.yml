@@ -4,7 +4,7 @@
     name: "{{ ansible_env.USER }}"
     append: true
     groups:
-      - sudo
+      - wheel
       - video
       - input
   become: true
