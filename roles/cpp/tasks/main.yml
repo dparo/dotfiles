@@ -8,11 +8,13 @@
 # - hyperfine (cargo)    benchmarking tool
 
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
-      - build-essential
+      - make
+      - automake
       - gcc
-      - g++
+      - gcc-c++
+      - kernel-devel
       - gdb
       - cmake
       - ninja-build
