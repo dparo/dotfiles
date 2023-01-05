@@ -6,8 +6,7 @@
   become: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   loop:
-    - "gdm"
-    - "gdm3"
+    - gdm
   tags:
     - systemd
     - display-manager
