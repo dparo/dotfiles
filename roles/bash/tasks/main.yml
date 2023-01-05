@@ -1,13 +1,13 @@
 ---
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - bash
     state: present
   become: true
   tags:
     - bash
-
+    - apt
 
 - name: Symlink config
   ansible.builtin.file:
