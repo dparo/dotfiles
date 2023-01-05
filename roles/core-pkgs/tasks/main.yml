@@ -1,12 +1,8 @@
 ---
 
 - name: Enable the RPM Fusion repository
-  ansible.builtin.dnf:
-    name:
-      - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm"
-      - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm"
-    state: present
-    validate_certs: True
+  ansible.builtin.bash: |
+    dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   become: True
   when: ansible_distribution == 'Fedora'
 
@@ -18,7 +14,7 @@
       - gnupg2
       - direnv
       - ca-certificates
-      - openssh-client
+      - openssh
       - polkitd
       - sqlite
       - wget
@@ -29,7 +25,11 @@
       - unrar
       - unzip
       - atool # atool is a script for managing file archives of various types (tar,tar+gzip, zip etc)
-      - build-essential
+      - make
+      - automake
+      - gcc
+      - gcc-c++
+      - kernel-devel
       - python3-pip
       - bat
       - exa
@@ -38,7 +38,7 @@
       - htop
       - btop
       - net-tools
-      - lm-sensors
+      - lm_sensors
       - ffmpeg
     state: present
   become: true
