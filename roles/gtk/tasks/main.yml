@@ -1,8 +1,8 @@
 ---
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
-      - adwaita-icon-theme-full
+      - adwaita-icon-theme
     state: present
   become: true
   tags:

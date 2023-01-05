@@ -1,6 +1,6 @@
 ---
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - xsettingsd
     state: present
@@ -8,7 +8,6 @@
   tags:
     - apt
     - xsettingsd
-
 
 - name: Symlink config
   ansible.builtin.file:

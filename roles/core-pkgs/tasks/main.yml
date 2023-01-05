@@ -1,14 +1,15 @@
 ---
-
 - name: Enable the RPM Fusion repository
   ansible.builtin.shell: |
     dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    dnf check-update
   become: True
   when: ansible_distribution == 'Fedora'
 
 - name: Install
   ansible.builtin.dnf:
     name:
+      - dnf-plugins-core
       - nano
       - git
       - gnupg2
@@ -46,7 +47,6 @@
     - core-pkgs
     - apt
 
-
 - name: Remove unwanted packages
   ansible.builtin.dnf:
     name:
@@ -58,17 +58,15 @@
     - core-pkgs
     - apt
 
-
 - name: Install sad (https://github.com/ms-jpq/sad)
   ansible.builtin.unarchive:
     src: "https://github.com/ms-jpq/sad/releases/latest/download/x86_64-unknown-linux-gnu.zip"
-    dest:  "{{ ansible_user_dir }}/.local/bin"
+    dest: "{{ ansible_user_dir }}/.local/bin"
     remote_src: true
   tags:
     - core-pkgs
     - apt
     - sad
-
 
 - name: Symlink config files
   ansible.builtin.file:

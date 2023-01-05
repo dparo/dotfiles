@@ -1,26 +1,15 @@
 ---
-# - name: Install
-#   ansible.builtin.apt:
-#     name:
-#       - i3-wm
-#       - i3status
-#       - i3lock
-#     state: present
-#   become: true
-#   tags:
-#     - apt
-#     - i3
-
-- name: Install latest i3 from Debian Testing
-  ansible.builtin.apt:
-    deb: "{{ item }}"
+- name: Install
+  ansible.builtin.dnf:
+    name:
+      - i3
+      - i3status
+      - i3lock
+    state: present
   become: true
-  loop:
-    - "http://ftp.de.debian.org/debian/pool/main/i/i3-wm/i3-wm_4.21.1-1_amd64.deb"
-    - "http://ftp.de.debian.org/debian/pool/main/i/i3status/i3status_2.14-1_amd64.deb"
   tags:
-    - i3
     - apt
+    - i3
 
 - name: Install i3ipc
   ansible.builtin.pip:
@@ -29,7 +18,6 @@
     state: latest
   tags:
     - i3
-
 
 - name: Symlink config
   ansible.builtin.file:
@@ -47,7 +35,6 @@
       }
   tags:
     - i3
-
 
 - name: Reload i3
   ansible.builtin.command: i3-msg reload

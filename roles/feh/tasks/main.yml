@@ -1,6 +1,6 @@
 ---
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - feh
     state: present

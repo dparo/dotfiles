@@ -1,15 +1,15 @@
 ---
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - zathura
+      - girara
       - zathura-pdf-poppler
     state: present
   become: true
   tags:
     - apt
     - zathura
-
 
 - name: Symlink config
   ansible.builtin.file:

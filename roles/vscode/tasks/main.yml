@@ -1,4 +1,21 @@
 ---
+- name: Install repository
+  ansible.builtin.shell: |
+    rpm --import https://packages.microsoft.com/keys/microsoft.asc
+    sh -c 'echo -e "[code]\nname=Visual Studio Code\nbaseurl=https://packages.microsoft.com/yumrepos/vscode\nenabled=1\ngpgcheck=1\ngpgkey=https://packages.microsoft.com/keys/microsoft.asc" > /etc/yum.repos.d/vscode.repo'
+    dnf check-update
+  become: True
+  tags:
+    - vscode
+
+- name: Install latest vscode
+  ansible.builtin.dnf:
+    name:
+      - code
+  become: true
+  tags:
+    - vscode
+
 - name: Create additional dirs
   ansible.builtin.file:
     path: "{{ item }}"
@@ -22,11 +39,4 @@
       }
   tags:
     - xdg
-    - vscode
-
-- name: Install latest vscode
-  ansible.builtin.apt:
-    deb: "https://go.microsoft.com/fwlink/?LinkID=760868"
-  become: true
-  tags:
     - vscode

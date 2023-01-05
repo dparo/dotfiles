@@ -1,7 +1,17 @@
 ---
+
+- name: Adding docker repo
+  ansible.builtin.shell: |
+    dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+  become: True
+  tags:
+    - docker
+
 - name: Install
-  ansible.builtin.apt:
-    name: docker.io
+  ansible.builtin.dnf:
+    name:
+    - docker
+
     state: present
   become: true
   tags:

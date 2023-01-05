@@ -60,13 +60,12 @@
     - rofi
     - papis
     - zathura
-    - picom
     - misc
     - fonts
     - docker
     - firefox
     - vscode
     - telegram
-    - obsidian
-    - onlyoffice
+    # - obsidian
+    # - onlyoffice
     - devel

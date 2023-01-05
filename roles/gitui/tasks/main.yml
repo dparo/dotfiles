@@ -8,7 +8,7 @@
 
 - name: Download and unpack latest gitui
   ansible.builtin.unarchive:
-    src: "https://github.com/extrawurst/gitui/releases/download/{{ gitui_latest['json']['tag_name'] }}/gitui-linux-musl.tar.gz "
+    src: "https://github.com/extrawurst/gitui/releases/download/{{ gitui_latest['json']['tag_name'] }}/gitui-linux-musl.tar.gz"
     dest: "{{ ansible_user_dir }}/.local/bin"
     remote_src: true
   tags:

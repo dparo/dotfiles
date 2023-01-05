@@ -1,6 +1,6 @@
 ---
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - brotli
       - atool
@@ -11,8 +11,7 @@
   become: true
   tags:
     - apt
-    - neomutt
-
+    - ranger
 
 - name: Symlink config
   ansible.builtin.file:

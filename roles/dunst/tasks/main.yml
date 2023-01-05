@@ -1,6 +1,6 @@
 ---
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - dunst
     state: present
@@ -8,7 +8,6 @@
   tags:
     - apt
     - dunst
-
 
 - name: Symlink config
   ansible.builtin.file:

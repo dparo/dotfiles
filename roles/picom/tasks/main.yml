@@ -1,5 +1,5 @@
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - picom
     state: present
