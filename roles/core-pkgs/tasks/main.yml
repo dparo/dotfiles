@@ -15,7 +15,7 @@
       - direnv
       - ca-certificates
       - openssh
-      - polkitd
+      - polkit
       - sqlite
       - wget
       - curl
