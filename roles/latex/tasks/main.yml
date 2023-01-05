@@ -16,7 +16,6 @@
       - latexmk
       - ghostscript
     state: present
-    install_recommends: false
   become: true
   tags:
     - tex
