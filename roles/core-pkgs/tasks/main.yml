@@ -1,4 +1,13 @@
 ---
+
+- name: Enable the RPM Fusion repository
+  ansible.builtin.dnf:
+    name:
+      - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version}}.noarch.rpm"
+      - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ansible_distribution_major_version}}.noarch.rpm"
+    state: present
+  when: ansible_distribution == 'Fedora'
+
 - name: Install
   ansible.builtin.dnf:
     name:
@@ -14,7 +23,7 @@
       - curl
       - jq
       - rsync
-      - p7zip-full
+      - p7zip
       - unrar
       - unzip
       - atool # atool is a script for managing file archives of various types (tar,tar+gzip, zip etc)
