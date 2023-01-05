@@ -19,9 +19,8 @@
       - cmake
       - ninja-build
       - meson
-      - clangd
-      - clang-tidy
-      - clang-tools
+      - clang
+      - clang-tools-extra
       - cppcheck
       - bear # Generate compilation database for clangtooling
       - valgrind
