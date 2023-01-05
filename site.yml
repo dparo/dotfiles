@@ -55,6 +55,7 @@
     - gtk
     - gnome
     - xsettingsd
+    - codecs
     - mpd
     - mpv
     - rofi

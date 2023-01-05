@@ -10,8 +10,9 @@
 - name: Install
   ansible.builtin.dnf:
     name:
-    - docker
-
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
     state: present
   become: true
   tags:
