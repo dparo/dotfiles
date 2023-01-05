@@ -1,6 +1,6 @@
 # https://docs.fedoraproject.org/en-US/quick-docs/using-shared-system-certificates/
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - p11-kit
     state: present
