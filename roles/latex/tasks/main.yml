@@ -2,17 +2,18 @@
 - name: Install texlive fundamental packages
   ansible.builtin.apt:
     name:
-      - texlive-latex-base
-      - texlive-fonts-recommended
-      - texlive-latex-recommended
-      - texlive-latex-extra
-      - texlive-extra-utils
-      - texlive-science
-      - texlive-bibtex-extra
-      - lmodern
+      - texlive-base
+      - texlive-collection-fontsrecommended
+      - texlive-collection-latexrecommended
+      - texlive-collection-latexextra
+      - texlive-collection-mathextra
+      - texlive-collection-genericextra
+      - texlive-collection-science
+      - texlive-collection-bibtexextra
+      - texlive-lm # lmodern
+      - texlive-chktex # latex semantic linter: https://www.nongnu.org/chktex/
       - biber
       - latexmk
-      - chktex         # latex semantic linter: https://www.nongnu.org/chktex/
       - ghostscript
     state: present
     install_recommends: false

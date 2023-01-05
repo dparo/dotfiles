@@ -1,6 +1,6 @@
 ---
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - alsa-utils
       - pipewire-alsa
@@ -9,7 +9,6 @@
   tags:
     - apt
     - alsa
-
 
 - name: Create config dirs
   ansible.builtin.file:
