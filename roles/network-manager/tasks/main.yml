@@ -1,20 +1,20 @@
 ---
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
-      - network-manager
+      - systemd-resolved
+      - NetworkManager
+      - NetworkManager-tui
       - openvpn
-      - openvpn-systemd-resolved
       - openfortivpn
       - openconnect
-      - network-manager-openvpn
-      - network-manager-openconnect
     state: present
   become: true
   tags:
     - apt
     - network-manager
     - vpn
+
 
 - name: Enable service
   ansible.builtin.systemd:
@@ -65,6 +65,22 @@
   become: true
   tags:
     - network-manager
+
+
+- name: Clone openvpn-systemd-resolved
+  ansible.builtin.git:
+    clone: yes
+    depth: 1
+    dest: "/etc/openvpn-systemd-resolved"
+    force: yes
+    repo: https://github.com/jonathanio/update-systemd-resolved
+    single_branch: yes
+    update: yes
+    version: master
+  register: clone
+  tags:
+    - openvpn
+    - openvpn-systemd-resolved
 
 - name: Symlink config
   ansible.builtin.file:

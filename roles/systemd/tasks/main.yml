@@ -2,6 +2,7 @@
 - name: Install
   ansible.builtin.dnf:
     name:
+      - systemd-resolved
       - polkit-gnome
     state: present
   become: true
@@ -9,6 +10,17 @@
     - apt
     - systemd
 
+- name: Enable services
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: true
+    scope: user
+  become: True
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  loop:
+    - systemd-resolved
+  tags:
+    - systemd
 
 - name: Symlink config
   ansible.builtin.file:
