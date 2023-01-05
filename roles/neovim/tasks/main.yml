@@ -1,32 +1,30 @@
 ---
-# - name: Dependencies
-#   ansible.builtin.package:
-#     name:
-#       - base-devel
-#       - cmake
-#       - curl
-#       - ninja
-#       - tree-sitter
-#       - unzip
-#     state: latest
-#   become: true
-#
+- name: Install (Package Manager)
+  ansible.builtin.dnf:
+    name:
+      - neovim
+    state: present
+  become: true
+  tags:
+    - kitty
+    - apt
 
-- name: "Install build dependencies (See: https://github.com/neovim/neovim/wiki/Building-Neovim#ubuntu--debian)"
-  ansible.builtin.apt:
+- name: "Install build dependencies (See: https://github.com/neovim/neovim/wiki/Building-Neovim#centos--rhel--fedora)"
+  ansible.builtin.dnf:
     name:
       - ninja-build
-      - gettext
       - libtool
-      - libtool-bin
       - autoconf
       - automake
       - cmake
-      - g++
-      - pkg-config
+      - gcc
+      - gcc-c++
+      - make
+      - pkgconfig
       - unzip
+      - patch
+      - gettext
       - curl
-      - doxygen
     state: present
   become: true
   tags:
@@ -74,18 +72,18 @@
     - neovim
 
 - name: Install runtime deps (APT)
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - xsel
       - xclip
       - fd-find
       - ripgrep
-      - silversearcher-ag
+      - the_silver_searcher
       - editorconfig
       - jq
       - highlight
       - python3-pygments
-      - python3-venv
+      - python3-virtualenv
     state: present
   become: true
   tags:

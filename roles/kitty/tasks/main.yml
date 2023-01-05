@@ -1,5 +1,16 @@
 ---
-- name: Install / Update
+
+- name: Install (Package Manager)
+  ansible.builtin.dnf:
+    name:
+      - kitty
+    state: present
+  become: true
+  tags:
+    - kitty
+    - apt
+
+- name: Install / Update (Manually)
   ansible.builtin.shell: |
     curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin dest="$HOME/opt" launch=n
   tags:

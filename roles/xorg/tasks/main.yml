@@ -1,8 +1,8 @@
 ---
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
-      - x11-xserver-utils
+      - xset
       - xsettingsd
       - xss-lock
       - xsecurelock
