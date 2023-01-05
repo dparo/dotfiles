@@ -10,7 +10,6 @@
     - x509
     - certs
 
-
 - name: Install certificates
   ansible.builtin.copy:
     dest: "/etc/pki/ca-trust/source/anchors/{{ cert_item.key }}"
@@ -27,10 +26,9 @@
     - x509
     - certs
 
-
 - name: Update ca-trust
   ansible.builtin.command: update-ca-trust
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and install_certificates_status.changed
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   no_log: True
   become: True
   tags:
