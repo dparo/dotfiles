@@ -1,8 +1,8 @@
 ---
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
-      - policykit-1-gnome
+      - polkit-gnome
     state: present
   become: true
   tags:
