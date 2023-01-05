@@ -1,6 +1,6 @@
 ---
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - blueman # A full featured Graphical Bluetooth Manager
       - bluez-tools # Set of tools to manage Bluetooth devices for linux

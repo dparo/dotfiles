@@ -14,9 +14,9 @@
 
 - name: Create a script to execute the user's XINITRC
   ansible.builtin.copy:
-    dest: /etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive.sh
+    dest: /usr/bin/xinitrcsession-helper
     content: |
-      #!/usr/bin/env zsh
+      #!/usr/bin/env bash
 
       entry=""
       if [ -n "$XINITRC" ]; then
@@ -36,16 +36,15 @@
   tags:
     - display-manager
 
-
 - name: Create desktop entry to allow display managers to execute the user's XINITRC
   ansible.builtin.copy:
-    dest: /etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive.sh
+    dest: /usr/share/xsessions/xinitrc.desktop
     content: |
       [Desktop Entry]
       Name=xinitrc
       Comment=Executes the .xinitrc script in your home directory
-      Exec=xinitrcsession-run
-      TryExec=xinitrcsession-run
+      Exec=xinitrcsession-helper
+      TryExec=xinitrcsession-helper
       Type=Application
     mode: "0664"
   become: true
