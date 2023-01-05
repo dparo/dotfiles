@@ -1,9 +1,10 @@
 ---
 - name: Install git
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - git
       - git-crypt
+      - git-delta
     state: present
   become: true
   tags:
@@ -17,20 +18,3 @@
     state: link
   tags:
     - git
-
-- name: Check latest git-delta
-  ansible.builtin.uri:
-    url: https://api.github.com/repos/dandavison/delta/releases/latest
-    return_content: true
-  register: gitdelta_latest
-  tags:
-    - git
-    - git-delta
-
-- name: Install latest git-delta
-  ansible.builtin.apt:
-    deb: "https://github.com/dandavison/delta/releases/download/{{ gitdelta_latest['json']['tag_name'] }}/git-delta_{{ gitdelta_latest['json']['tag_name'] }}_amd64.deb"
-  become: true
-  tags:
-    - git
-    - git-delta

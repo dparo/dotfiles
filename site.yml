@@ -6,24 +6,24 @@
     - x509-certs
     - ssh
     - gnupg
-    - systemd
-    - sudo
-    - wget
-    - core-pkgs
-    - filesystem
-    - snap
-    - locale
+    - git
     - xdg
+    - locale
+    - wget
+    - sudo
+    - core-pkgs
     - bash
     - zsh
     - user
+    - systemd
+    - filesystem
+    - snap
     - keyring
     - bluetooth-manager
     - display-manager
     - network-manager
     - virt-manager
     - dns
-    - git
     - python
     - anaconda3
     - cpp
