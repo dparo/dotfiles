@@ -153,12 +153,9 @@ fi
 source "$HOME/opt/fzf/shell/key-bindings.zsh"
 
 
-source "/etc/zsh_command_not_found" 1> /dev/null 2> /dev/null || source "$XDG_CONFIG_HOME/zsh/command-not-found.zsh"
+source "$XDG_CONFIG_HOME/zsh/command-not-found.zsh"
 
 
-## Fish like greyed out autosuggestions as you type based on history
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh 1> /dev/null 2> /dev/null || source "$USER_DOTFILES_LOCATION/core/vendor/zsh-autosuggestions/zsh-autosuggestions.zsh"
-
-
-source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 1> /dev/null 2> /dev/null || source "$USER_DOTFILES_LOCATION/core/vendor/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_STYLES[comment]=fg=yellow,bold
