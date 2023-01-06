@@ -16,6 +16,17 @@
     - network-manager
     - vpn
 
+- name: Download openvpn-systemd-resolved script
+  ansible.builtin.copy:
+    src: 'https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved'
+    dest: /etc/openvpn/update-systemd-resolved
+    remote_src: true
+    mode: 0755
+  become: True
+  tags:
+    - openvpn
+    - openvpn-systemd-resolved
+
 - name: Enable service
   ansible.builtin.systemd:
     name: NetworkManager
@@ -65,17 +76,6 @@
   become: true
   tags:
     - network-manager
-
-- name: Download openvpn-systemd-resolved script
-  ansible.builtin.copy:
-    src: 'https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved'
-    dest: /etc/openvpn/update-systemd-resolved
-    remote_src: true
-    mode: 0755
-  become: True
-  tags:
-    - openvpn
-    - openvpn-systemd-resolved
 
 - name: Symlink config
   ansible.builtin.file:
