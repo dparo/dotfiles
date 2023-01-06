@@ -65,16 +65,12 @@
   tags:
     - network-manager
 
-- name: Clone openvpn-systemd-resolved
-  ansible.builtin.git:
-    clone: yes
-    depth: 1
-    dest: "/etc/openvpn-systemd-resolved"
-    force: yes
-    repo: https://github.com/jonathanio/update-systemd-resolved
-    single_branch: yes
-    update: yes
-    version: master
+- name: Download openvpn-systemd-resolved script
+  ansible.builtin.copy:
+    src: 'https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved'
+    dest: /etc/openvpn/update-systemd-resolved
+    remote_src: true
+    mode: 0755
   become: True
   tags:
     - openvpn
