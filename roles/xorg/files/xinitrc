@@ -2,6 +2,13 @@
 
 set -x
 
+# This two ENV vars are required if running `gnome-session` from this .xinitrc script
+export XDG_SESSION_TYPE=x11
+export GDK_BACKEND=x11
+
+# For fixing libreoffice styling under non gnome desktop environments
+export OOO_FORCE_DESKTOP="gnome"
+
 # The xhost program is used to add and delete host names or user names to
 # the list allowed to make connections to the X server.
 [ -x /usr/bin/xhost ] && [ -x /usr/bin/id ] &&
