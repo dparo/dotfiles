@@ -1,15 +1,15 @@
 ---
-- name: Disable services
-  ansible.builtin.systemd:
-    name: "{{item}}"
-    enabled: false
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  loop:
-    - gdm
-  tags:
-    - systemd
-    - display-manager
+# - name: Disable services
+#   ansible.builtin.systemd:
+#     name: "{{item}}"
+#     enabled: false
+#   become: true
+#   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+#   loop:
+#     - gdm
+#   tags:
+#     - systemd
+#     - display-manager
 
 - name: Create a script to execute the user's XINITRC
   ansible.builtin.copy:
