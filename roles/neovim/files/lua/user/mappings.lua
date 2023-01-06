@@ -139,9 +139,9 @@ local function setup_leader_key()
     ----
     ---- Setup the leader key
     ----
-    keymap("", "\\", "")
-    vim.g.mapleader = "\\"
-    vim.g.maplocalleader = "\\"
+    local leaderkey = " "
+    vim.g.mapleader = leaderkey
+    vim.g.maplocalleader = leaderkey
 end
 
 local function setup_cursor_movements()
@@ -242,7 +242,6 @@ local function setup_basic_functionalities()
     nmap("<BS>", '"_Xi')
     nmap("<Del>", '"_xi')
 
-    nmap("<Space>", "i")
     vmap("<Space>", "c")
     -- Pressing leader 2 times enters insert mode
     nmap("<leader><leader>", "i")
@@ -346,7 +345,24 @@ local function setup_plugins()
     nimap("<F5>", exec_cmd "UndotreeToggle")
     nimap("<C-b>", exec_cmd "Telescope buffers theme=ivy")
 
-    vim.keymap.set("n", "<leader>ff", require("telescope.builtin").find_files, { desc = "[F]ind [F]iles" })
+    vim.keymap.set("n", "<leader>ff", function()
+        require("telescope.builtin").find_files {
+            find_command = {
+                "rg",
+                "-S",
+                "--files",
+                "--hidden",
+                "-g",
+                "!.ccls-cache",
+                "-g",
+                "!.git",
+                "-g",
+                "!.vcs",
+                "-g",
+                "!.svn",
+            },
+        }
+    end, { desc = "[F]ind [F]iles" })
 
     nmap("<C-r>", exec_cmd "Telescope command_history")
     nmap("<M-x>", exec_cmd "Telescope commands")

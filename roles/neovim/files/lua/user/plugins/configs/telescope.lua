@@ -27,7 +27,7 @@ require("telescope").setup {
             preview_cutoff = 120,
         },
 
-
+        find_command = { "rg", "-S", "--files", "--hidden", "-g", "!.ccls-cache", "-g", "!.git", "-g", "!.vcs", "-g", "!.svn" },
         vimgrep_arguments = {
             "rg",
             "--color=never",
@@ -46,6 +46,6 @@ require("telescope").setup {
                 ["<C-c>"] = actions.close,
                 ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
             },
-        }
+        },
     },
 }
