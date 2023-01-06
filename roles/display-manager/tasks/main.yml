@@ -35,31 +35,6 @@
   tags:
     - display-manager
 
-
-- name: Create a script to execute startx
-  ansible.builtin.copy:
-    dest: /usr/bin/startx-helper
-    content: |
-      #!/usr/bin/env bash
-
-      entry=""
-      if [ -n "$STARTX" ]; then
-          entry="$XINITRC"
-      elif [ -f "$XDG_DATA_HOME/bin/startx" ]; then
-          entry="$XDG_DATA_HOME/bin/startx"
-      elif [ -f "$HOME/.local/bin/startx" ]; then
-          entry="$HOME/.local/bin/startx"
-      elif [ -f "$HOME/.xinitrc" ]; then
-          entry=/usr/bin/startx
-      fi
-      if [ -n "$entry" ]; then
-        exec "$entry"
-      fi
-    mode: "0775"
-  become: true
-  tags:
-    - display-manager
-
 - name: Create desktop entry to allow display managers to execute the user's XINITRC
   ansible.builtin.copy:
     dest: /usr/share/xsessions/xinitrc.desktop
@@ -69,21 +44,6 @@
       Comment=Executes the .xinitrc script in your home directory
       Exec=xinitrcsession-helper
       TryExec=xinitrcsession-helper
-      Type=Application
-    mode: "0664"
-  become: true
-  tags:
-    - display-manager
-
-- name: Create desktop entry to allow display managers to execute startx
-  ansible.builtin.copy:
-    dest: /usr/share/xsessions/startx.desktop
-    content: |
-      [Desktop Entry]
-      Name=startx
-      Comment=Executes startx
-      Exec=startx-helper
-      TryExec=startx-helper
       Type=Application
     mode: "0664"
   become: true
