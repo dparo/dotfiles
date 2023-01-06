@@ -80,7 +80,7 @@
     dest: /usr/share/xsessions/startx.desktop
     content: |
       [Desktop Entry]
-      Name=xinitrc
+      Name=startx
       Comment=Executes startx
       Exec=startx-helper
       TryExec=startx-helper
