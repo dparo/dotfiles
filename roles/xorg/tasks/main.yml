@@ -3,6 +3,8 @@
   ansible.builtin.dnf:
     name:
       - xset
+      - xprop
+      - xsetroot
       - xsettingsd
       - xss-lock
       - xsecurelock
