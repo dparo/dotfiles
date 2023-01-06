@@ -57,11 +57,13 @@
 - name: Reload font cache
   ansible.builtin.command: fc-cache -fvr
   when: fonts_download.changed
+  ignore_errors: True
   tags:
     - fonts
 
 - name: Refresh X11 font cache
   ansible.builtin.command: xset fp rehash
+  ignore_errors: True
   when: fonts_download.changed
   tags:
     - fonts
