@@ -7,8 +7,8 @@
       - openvpn
       - openfortivpn
       - openconnect
-      - openresolv       # http://roy.marples.name/projects/openresolv/
-      - systemd-resolved  # Modern alternative of handling /etc/resolv.conf through centralized systemd
+      - openresolv # http://roy.marples.name/projects/openresolv/
+      - systemd-resolved # Modern alternative of handling /etc/resolv.conf through centralized systemd
     state: present
   become: true
   tags:
@@ -17,10 +17,9 @@
     - vpn
 
 - name: Download openvpn-systemd-resolved script
-  ansible.builtin.copy:
-    src: 'https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved'
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved"
     dest: /etc/openvpn/update-systemd-resolved
-    remote_src: true
     mode: 0755
   become: True
   tags:
