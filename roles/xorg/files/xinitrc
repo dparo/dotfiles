@@ -77,6 +77,8 @@ exec_wm() {
     *) ;;
     esac
 
+    dbus-update-activation-environment --systemd DISPLAY XAUTHORITY
+
     # Import all environment variables exported from xinitrc script
     # and, most importantly, the variables exported from the .zprofile
     # This env variables will be available to systemd services, including the service
