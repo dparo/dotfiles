@@ -1,2 +1,2 @@
-swapfile_size: 32768
+swapfile_size: 16384
 modify_filesystem: true
