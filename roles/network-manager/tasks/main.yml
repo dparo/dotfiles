@@ -5,6 +5,7 @@
       - NetworkManager
       - NetworkManager-tui
       - openvpn
+      - openssl
       - openfortivpn
       - openconnect
       - openresolv # http://roy.marples.name/projects/openresolv/
