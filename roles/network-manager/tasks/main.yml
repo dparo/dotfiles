@@ -2,12 +2,13 @@
 - name: Install
   ansible.builtin.dnf:
     name:
-      - systemd-resolved
       - NetworkManager
       - NetworkManager-tui
       - openvpn
       - openfortivpn
       - openconnect
+      - openresolv       # http://roy.marples.name/projects/openresolv/
+      - systemd-resolved  # Modern alternative of handling /etc/resolv.conf through centralized systemd
     state: present
   become: true
   tags:
