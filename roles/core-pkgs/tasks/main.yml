@@ -10,6 +10,7 @@
   ansible.builtin.dnf:
     name:
       - dnf-plugins-core
+      - openssl
       - nano
       - git
       - gnupg2

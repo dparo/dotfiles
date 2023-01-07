@@ -5,6 +5,7 @@
       - NetworkManager
       - NetworkManager-tui
       - openvpn
+      - openssl
       - openfortivpn
       - openconnect
       - openresolv # http://roy.marples.name/projects/openresolv/
@@ -22,6 +23,17 @@
     dest: /etc/openvpn/update-systemd-resolved
     mode: 0755
   become: True
+  loop:
+    - {
+        url: "https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved",
+        dest: "/etc/openvpn/update-systemd-resolved",
+        mode: 0755,
+      }
+    - {
+        url: "https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved.conf",
+        dest: "/etc/openvpn/update-systemd-resolved.conf",
+        mode: 0644,
+      }
   tags:
     - openvpn
     - openvpn-systemd-resolved

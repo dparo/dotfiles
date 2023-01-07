@@ -4,17 +4,18 @@
 cd "$(dirname "$0")" || exit 1
 
 touchpad_setup() {
-	xinput --set-prop "Elan Touchpad" 'libinput Accel Speed' 0
-	xinput --set-prop "Elan Touchpad" "Device Accel Profile" 0
+    for input in "Elan touchpad" "MSFT0001:01 06CB:CE2D Touchpad"; do
+        xinput --set-prop "$input" 'libinput Accel Speed' 0
+        xinput --set-prop "$input" "Device Accel Profile" 0
 
-	xinput --set-prop "Elan Touchpad" "libinput Tapping Enabled" 1
-	xinput --set-prop "Elan Touchpad" "libinput Middle Emulation Enabled" 1
-	xinput --set-prop "Elan Touchpad" "libinput Disable While Typing Enabled" 1
-	xinput --set-prop "Elan Touchpad" "libinput Natural Scrolling Enabled" 1 # Reverse scrolling
+        xinput --set-prop "$input" "libinput Tapping Enabled" 1
+        xinput --set-prop "$input" "libinput Middle Emulation Enabled" 1
+        xinput --set-prop "$input" "libinput Disable While Typing Enabled" 1
+        xinput --set-prop "$input" "libinput Natural Scrolling Enabled" 1 # Reverse scrolling
+    done
 }
 
-touchpad_setup 1> /dev/null 2> /dev/null
-
+touchpad_setup 1>/dev/null 2>/dev/null
 
 xset -b # disable bell
 
