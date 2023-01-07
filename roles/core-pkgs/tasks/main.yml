@@ -20,6 +20,8 @@
       - sqlite
       - wget
       - curl
+      - rclone
+      - rsync
       - jq
       - rsync
       - p7zip
