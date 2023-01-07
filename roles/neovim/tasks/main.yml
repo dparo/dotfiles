@@ -84,6 +84,7 @@
       - highlight
       - python3-pygments
       - python3-virtualenv
+      - tidy     # XML, HTML formatter / diagnostic tool
     state: present
   become: true
   tags:

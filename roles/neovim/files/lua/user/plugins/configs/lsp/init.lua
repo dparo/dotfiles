@@ -127,6 +127,10 @@ null_ls.setup {
             },
         },
 
+        -- XML, HTML
+        null_ls.builtins.formatting.tidy,
+        null_ls.builtins.diagnostics.tidy,
+
         null_ls.builtins.formatting.shfmt.with {
             args = { "--indent", "4", "-filename", "$FILENAME" }, -- Default to use 4 spaces for indentation
         },

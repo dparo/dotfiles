@@ -1,4 +1,17 @@
 ---
+
+- name: Install tidy (XML * HTML formatter, diagnostic tool)
+  ansible.builtin.dnf:
+    name:
+      - tidy
+    state: present
+  become: true
+  tags:
+    - devel
+    - neovim
+    - neovim-runtime
+
+
 - name: Install python formatters packages
   ansible.builtin.pip:
     name:
