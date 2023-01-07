@@ -18,6 +18,20 @@
     - xorg
     - apt
 
+- name: Change default keyboard repeat rate
+  ansible.builtin.lineinfile:
+    path: /etc/X11/xorg.conf.d/00-keyboard.conf
+    content: |
+      Section "InputClass"
+        Identifier "system-keyboard"
+        Option "AutoRepeat" "300 30"
+      EndSection
+    mode: 0644
+  become: true
+  tags:
+    - sudo
+
+
 - name: Symlink config
   ansible.builtin.file:
     src: "{{ role_path }}/files"
