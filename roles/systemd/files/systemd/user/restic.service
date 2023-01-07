@@ -1,0 +1,11 @@
+[Unit]
+Description=Restic backup
+After=syslog.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/restic backup --files-from %h/.config/restic/backup.files
+
+[Install]
+WantedBy=multi-user.target
