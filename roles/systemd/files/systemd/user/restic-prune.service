@@ -1,0 +1,11 @@
+[Unit]
+Description=Restic Prune old snapshots
+After=syslog.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/restic forget --prune --keep-monthly 6
+
+[Install]
+WantedBy=multi-user.target
