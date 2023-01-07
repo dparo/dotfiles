@@ -177,6 +177,7 @@
     - pyright
     - clangd
     - clang-format
+    - codelldb
     - cmakelang
     - cmake-language-server
     - rust-analyzer
