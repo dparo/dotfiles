@@ -24,6 +24,7 @@
     content: |
       Section "InputClass"
         Identifier "system-keyboard"
+        MatchIsKeyboard "on"
         Option "AutoRepeat" "300 30"
       EndSection
     mode: 0644
