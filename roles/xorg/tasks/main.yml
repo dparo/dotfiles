@@ -19,8 +19,8 @@
     - apt
 
 - name: Change default keyboard repeat rate
-  ansible.builtin.lineinfile:
-    path: /etc/X11/xorg.conf.d/00-keyboard.conf
+  ansible.builtin.copy:
+    dest: /etc/X11/xorg.conf.d/00-keyboard-rate.conf
     content: |
       Section "InputClass"
         Identifier "system-keyboard"
