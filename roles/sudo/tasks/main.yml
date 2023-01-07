@@ -1,4 +1,29 @@
 ---
+
+- name: 'Allow user {{ ansible_user_id }} to run specific SUID programs without password'
+  ansible.builtin.lineinfile:
+    path: '/etc/sudoers.d/{{ ansible_user_id }}'
+    line: '{{ ansible_user_id }} ALL=(ALL) NOPASSWD: {{ item }}'
+    regexp: '^{{ ansible_user_id }} ALL=(ALL) NOPASSWD: {{ item }}$'
+    create: true
+  loop:
+    - /usr/sbin/openconnect
+    - /usr/sbin/openvpn
+  become: true
+  tags:
+    - sudo
+
+- name: Disable password prompt timeout
+  ansible.builtin.lineinfile:
+    path: /etc/sudoers.d/98-disable-password-prompt-timeout
+    line: Defaults passwd_timeout=0
+    regexp: '^Defaults'
+    create: true
+  become: true
+  tags:
+    - sudo
+
+
 - name: Disable creation of .sudo_as_admin_successful file in user HOME dir
   ansible.builtin.lineinfile:
     path: /etc/sudoers.d/99-disable_admin_file_in_home
