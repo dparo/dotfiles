@@ -1,7 +1,7 @@
 # vi: ft=cfg
 
 [global]
-    font = Noto Mono Nerd Font 11
+    font = Blex Mono Nerd Font 11
 
     icon_position = left
 

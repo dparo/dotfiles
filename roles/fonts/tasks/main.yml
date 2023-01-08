@@ -36,7 +36,7 @@
 - name: Find Windows compatible fonts
   ansible.builtin.find:
     paths: /usr/local/share/fonts
-    patterns: "Windows Compatible.ttf$"
+    patterns: "^.*Windows Compatible.*.ttf$"
     use_regex: yes
   become: true
   when: fonts_download.changed

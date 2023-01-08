@@ -9,8 +9,8 @@
 set $mod Mod4
 set $alt Mod1
 set $move_amt 32
-set $font Noto Mono Nerd Font 8
-set $bar_font Noto Mono Nerd Font 8
+set $font Noto Sans 8
+set $bar_font Blex Mono Nerd Font 8
 
 
 ##########################################################
