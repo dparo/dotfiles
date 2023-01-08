@@ -342,7 +342,6 @@ local function setup_plugins()
     ----
     ---- Plugins
     ----
-    nimap("<F5>", exec_cmd "UndotreeToggle")
     nimap("<C-b>", exec_cmd "Telescope buffers theme=ivy")
 
     vim.keymap.set("n", "<leader>ff", function()
@@ -371,7 +370,7 @@ local function setup_plugins()
 
     -- Toggle between C source file and H header files
     -- nimap(fn_key(12), exec_cmd "ClangdSwitchSourceHeader")
-    nmap(fn_key(5), exec_cmd "UndotreeToggle")
+    nmap("<leader>u", exec_cmd "UndotreeToggle")
     -- Move lines up and down
     vmap("<M-S-Up>", "<Plug>MoveBlockUp", remappable_opts)
     vmap("<M-S-Down>", "<Plug>MoveBlockDown", remappable_opts)
