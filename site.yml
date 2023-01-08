@@ -16,7 +16,7 @@
     - zsh
     - user
     - systemd
-    - filesystem
+    # - swap
     - snap
     - keyring
     - bluetooth-manager
