@@ -85,6 +85,7 @@
       - python3-pygments
       - python3-virtualenv
       - tidy     # XML, HTML formatter / diagnostic tool
+      - tree-sitter-cli
     state: present
   become: true
   tags:
