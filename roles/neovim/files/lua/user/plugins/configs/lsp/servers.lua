@@ -14,7 +14,7 @@ local jdtls_root_path = path.concat { nvim_data_path, "mason", "packages", "jdtl
 
 local function deno_root_dir(fname)
     -- If the top level directory __DOES__ contain a file named `deno.proj` determine that this is a Deno project.
-    if (vim.env.DENO_VERSION ~= nil) or (lspconfig.util.root_pattern "deno.proj" (fname) ~= nil) then
+    if (vim.env.DENO_VERSION ~= nil) or (lspconfig.util.root_pattern "deno.proj"(fname) ~= nil) then
         return lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git")(fname)
     end
     return nil
@@ -23,9 +23,7 @@ end
 local function nodejs_root_dir(fname)
     -- If the top level directory __DOES NOT__ contain a file named `deno.proj` determine that this is a Nodejs project
     if deno_root_dir(fname) == nil then
-        return (
-            lspconfig.util.root_pattern "tsconfig.json" (fname) or
-                lspconfig.util.root_pattern("package.json", "jsconfig.json", ".git")(fname))
+        return (lspconfig.util.root_pattern "tsconfig.json"(fname) or lspconfig.util.root_pattern("package.json", "jsconfig.json", ".git")(fname))
     end
     return nil
 end
@@ -135,7 +133,7 @@ M.list = {
                     -- NOTE(d.paro): At the time of writing, Wed 23 2022, eclipse.jdt.ls requires Java 17 or higher
                     --         See https://github.com/mfussenegger/nvim-jdtls#configuration-quickstart
                     --         If this ever changes in the future
-                    "/usr/lib/jvm/java-19-openjdk/bin/java",
+                    "/usr/lib/jvm/java-17-openjdk/bin/java",
                     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
                     "-Dosgi.bundles.defaultStartLevel=4",
                     "-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -202,8 +200,8 @@ M.list = {
                                     path = "/usr/lib/jvm/java-11-openjdk/",
                                 },
                                 {
-                                    name = "JavaSE-19",
-                                    path = "/usr/lib/jvm/java-19-openjdk/",
+                                    name = "JavaSE-17",
+                                    path = "/usr/lib/jvm/java-17-openjdk/",
                                 },
                             },
                         },
