@@ -46,6 +46,7 @@
       - net-tools
       - lm_sensors
       - ffmpeg
+      - plantuml
     state: present
   become: true
   tags:
