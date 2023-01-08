@@ -98,6 +98,7 @@ local generic = {
     -- Utils functions for common Unix like utilities such as mkdir, touch, mv inside of vim
     { "tpope/vim-eunuch" },
     { "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } },
+    { "tpope/vim-surround" }, -- Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more
 
     -- Automatically detect shiftwidth and tabstop heuristically from file
     { "tpope/vim-sleuth" },
@@ -387,9 +388,28 @@ local generic = {
         requires = { "nvim-treesitter/playground", "p00f/nvim-ts-rainbow", "nvim-treesitter/nvim-treesitter-context" },
         config = function()
             require("nvim-treesitter.configs").setup {
-                ensure_installed = { "help", "bash", "lua", "markdown", "yaml", "json", "javascript", "typescript", "java", "make", "ninja", "cmake", "meson", "c", "cpp", "rust", "zig", "go" }, -- "all" or a list of languages
-		sync_install = true,
-		auto_install = true,
+                ensure_installed = {
+                    "help",
+                    "bash",
+                    "lua",
+                    "markdown",
+                    "yaml",
+                    "json",
+                    "javascript",
+                    "typescript",
+                    "java",
+                    "make",
+                    "ninja",
+                    "cmake",
+                    "meson",
+                    "c",
+                    "cpp",
+                    "rust",
+                    "zig",
+                    "go",
+                }, -- "all" or a list of languages
+                sync_install = true,
+                auto_install = true,
                 highlight = {
                     enable = true, -- false will disable the whole extension
                     additional_vim_regex_highlighting = false,
