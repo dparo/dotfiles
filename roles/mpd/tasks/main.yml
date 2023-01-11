@@ -30,6 +30,7 @@
     mode: "0755"
   loop:
     - "{{ ansible_user_dir }}/.cache/mpd"
+    - "{{ ansible_user_dir }}/.local/share/mpd/playlists"
   tags:
     - mpd
     - xdg
