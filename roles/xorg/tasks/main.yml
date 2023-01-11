@@ -6,6 +6,7 @@
       - xprop
       - xsetroot
       - xinput
+      - xdotool
       - xsettingsd
       - xss-lock
       - xsecurelock
