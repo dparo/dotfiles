@@ -5,10 +5,10 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-ExecStartPre=/usr/bin/notify-send "(RESTIC) Started backup"
+ExecStartPre=-/usr/bin/notify-send "(RESTIC) Started backup"
 ExecStart=/usr/bin/restic backup --files-from %h/.config/restic/backup.files
-ExecStartPost=/usr/bin/notify-send "(RESTIC) Backup finished"
-ExecStopPost=/usr/bin/notify-send -u critical "(RESTIC) Backup failed"
+ExecStartPost=-/usr/bin/notify-send "(RESTIC) Backup finished"
+ExecStopPost=-/usr/bin/notify-send -u critical "(RESTIC) Backup failed"
 
 [Install]
 WantedBy=multi-user.target
