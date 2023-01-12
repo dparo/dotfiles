@@ -183,6 +183,7 @@
     - cmakelang
     - cmake-language-server
     - rust-analyzer
+    - gopls
     - shellcheck
     - shellharden
     - shfmt
