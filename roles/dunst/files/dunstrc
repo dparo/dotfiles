@@ -72,8 +72,7 @@
     # split notifications into multiple lines if they don't fit into geometry
     word_wrap = yes
 
-    # Position the notification in the top right corner
-    origin = top-right
+    origin = bottom-left
 
     ### geometry
     height = 128
