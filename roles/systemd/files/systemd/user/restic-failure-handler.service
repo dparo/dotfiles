@@ -1,0 +1,11 @@
+[Unit]
+Description=Restic backup failure callback
+After=syslog.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=-/usr/bin/notify-send -u critical "(RESTIC) Backup failed"
+
+[Install]
+WantedBy=multi-user.target

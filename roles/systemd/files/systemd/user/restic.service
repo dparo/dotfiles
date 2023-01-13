@@ -8,7 +8,7 @@ Type=oneshot
 ExecStartPre=-/usr/bin/notify-send "(RESTIC) Started backup"
 ExecStart=/usr/bin/restic backup --files-from %h/.config/restic/backup.files
 ExecStartPost=-/usr/bin/notify-send "(RESTIC) Backup finished"
-ExecStopPost=-/usr/bin/notify-send -u critical "(RESTIC) Backup failed"
+OnFailure=restic-failure-handler.service
 
 [Install]
 WantedBy=multi-user.target
