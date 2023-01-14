@@ -1,0 +1,22 @@
+- name: Install
+  ansible.builtin.dnf:
+    name:
+      - mangohud
+      - gamemode
+    state: present
+  become: true
+  tags:
+    - gaming
+    - steam
+
+
+- name: Install steamtinkerlaunch script
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/sonic2kk/steamtinkerlaunch/master/steamtinkerlaunch"
+    dest: "/usr/local/bin/steamtinkerlaunch"
+    mode: 0755
+  become: True
+  tags:
+    - gaming
+    - steam
+    - steamtinkerlaunch
