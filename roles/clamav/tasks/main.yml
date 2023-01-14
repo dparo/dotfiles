@@ -42,11 +42,15 @@
 
       LogFile /var/log/clamd.scan
       LogSyslog yes
+
       MaxThreads 8
+      MaxScanSize 1024M
+      MaxFileSize 512M
 
       ExcludePath ^/proc/
       ExcludePath ^/sys/
       ExcludePath ^/run/
+      ExcludePath ^/swapfile
 
       ###
       ### On Access Scanning
@@ -60,6 +64,7 @@
       OnAccessExcludePath /proc/
       OnAccessExcludePath /sys/
       OnAccessExcludePath /run/
+      OnAccessExcludePath /swapfile
 
     dest: /etc/clam.d/scan.conf
     mode: 0644
@@ -104,4 +109,16 @@
     - clamav
 
 
-## TODO: Use clamdscan and a custom service / timer to perform scheduled full scans
+- name: Enable clamav On Access Scanning service
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: true
+  become: True
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  loop:
+    - clamav-clamonacc.service
+  tags:
+    - clamav
+
+
+## TODO: Use `clamdscan --recursive --multiscan --fdpass /` and a custom service / timer to perform scheduled full scans at specific times
