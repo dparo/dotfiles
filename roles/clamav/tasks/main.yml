@@ -38,7 +38,7 @@
     content: |
       User clamscan
 
-      VirusEvent /etc/clamav/virus-event.bash
+      VirusEvent /etc/clam.d/virus-event.bash
 
       LogFile /var/log/clamd.scan
       LogSyslog yes
@@ -72,6 +72,8 @@
 - name: Setup Virus Event Script
   ansible.builtin.copy:
     content: |
+      #!/bin/bash
+
       PATH=/usr/bin
       ALERT="Signature detected by clamav: $CLAM_VIRUSEVENT_VIRUSNAME in $CLAM_VIRUSEVENT_FILENAME"
 
@@ -80,7 +82,7 @@
         /usr/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" PATH="$PATH" \
             /usr/bin/notify-send -u critical -i dialog-warning "Virus found!" "$ALERT"
       done
-    dest: /etc/clamav/virus-event.bash
+    dest: /etc/clam.d/virus-event.bash
     mode: 0755
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
@@ -100,3 +102,6 @@
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
     - clamav
+
+
+## TODO: Use clamdscan and a custom service / timer to perform scheduled full scans
