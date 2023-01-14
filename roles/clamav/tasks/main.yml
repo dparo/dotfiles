@@ -1,0 +1,50 @@
+---
+
+- name: Install
+  ansible.builtin.dnf:
+    name:
+      - clamav
+      - clamav-update
+      - clamd
+    state: present
+  become: true
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  tags:
+    - clamav
+
+
+- name: Refresh clamav database
+  ansible.builtin.command: freshclam
+  become: true
+  ignore_errors: true
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  tags:
+    - clamav
+
+- name: Enable service to refresh clamav database at boot
+  ansible.builtin.systemd:
+    name: "{{ item }}"
+    enabled: true
+  become: True
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  loop:
+    - clamav-freshclam.service
+  tags:
+    - clamav
+
+
+- name: Setup clamav daemon config
+  ansible.builtin.copy:
+    content: |
+      User clamscan
+      LogFile /var/log/clamd.scan
+      LogSyslog yes
+      MaxThreads 8
+      ExcludePath ^/proc/
+      ExcludePath ^/sys/
+    dest: /etc/clam.d/scan.conf
+    mode: 0644
+  become: True
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  tags:
+    - clamav
