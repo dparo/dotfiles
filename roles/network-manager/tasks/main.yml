@@ -17,11 +17,11 @@
     - network-manager
     - vpn
 
-- name: Download openvpn-systemd-resolved script
+- name: Install openvpn-systemd-resolved script and config
   ansible.builtin.get_url:
-    url: "https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved"
-    dest: /etc/openvpn/update-systemd-resolved
-    mode: 0755
+    url: "{{ item.url }}"
+    dest: "{{ item.dest }}"
+    mode: "{{ item.mode }}"
   become: True
   loop:
     - {
