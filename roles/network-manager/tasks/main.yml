@@ -27,12 +27,12 @@
     - {
         url: "https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved",
         dest: "/etc/openvpn/update-systemd-resolved",
-        mode: 0755,
+        mode: "755",
       }
     - {
         url: "https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved.conf",
         dest: "/etc/openvpn/update-systemd-resolved.conf",
-        mode: 0644,
+        mode: "644",
       }
   tags:
     - openvpn
