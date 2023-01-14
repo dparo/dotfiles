@@ -3,8 +3,10 @@
 
 cd "$(dirname "$0")" || exit 1
 
+set -x
+
 touchpad_setup() {
-    for input in "Elan touchpad" "MSFT0001:01 06CB:CE2D Touchpad"; do
+    for input in "Elan Touchpad" "MSFT0001:01 06CB:CE2D Touchpad"; do
         xinput --set-prop "$input" 'libinput Accel Speed' 0
         xinput --set-prop "$input" "Device Accel Profile" 0
 
@@ -15,7 +17,7 @@ touchpad_setup() {
     done
 }
 
-touchpad_setup 1>/dev/null 2>/dev/null
+touchpad_setup 1> /dev/null 2> /dev/null
 
 xset -b # disable bell
 
