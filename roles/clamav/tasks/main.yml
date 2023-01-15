@@ -24,13 +24,13 @@
 
 - name: Setup clamav daemon config
   ansible.builtin.copy:
-    dest: /etc/clam.d/scan.conf
+    dest: /etc/clamd.d/scan.conf
     mode: 0644
     content: |
       User clamscan
       LocalSocket /run/clamd.scan/clamd.sock
 
-      VirusEvent /etc/clam.d/virus-event.bash
+      VirusEvent /etc/clamd.d/virus-event.bash
 
       LogFile /var/log/clamd.scan
       LogSyslog yes
@@ -65,7 +65,7 @@
 
 - name: Setup Virus Event Script
   ansible.builtin.copy:
-    dest: /etc/clam.d/virus-event.bash
+    dest: /etc/clamd.d/virus-event.bash
     mode: 0755
     content: |
       #!/bin/bash
@@ -99,7 +99,7 @@
     content: |
       [Service]
       ExecStart=
-      ExecStart=/usr/sbin/clamonacc -F --config-file=/etc/clam.d/scan.conf --fdpass --log=/var/log/clamav/clamonacc.log
+      ExecStart=/usr/sbin/clamonacc -F --config-file=/etc/clamd.d/scan.conf --fdpass --log=/var/log/clamav/clamonacc.log
     dest: /etc/systemd/system/clamav-clamonacc.service.d/override.conf
     mode: 0644
   become: True
