@@ -26,6 +26,7 @@
   ansible.builtin.copy:
     content: |
       User clamscan
+      LocalSocket /run/clamd.scan/clamd.sock
 
       VirusEvent /etc/clam.d/virus-event.bash
 
@@ -83,6 +84,16 @@
   tags:
     - clamav
 
+- name: Create a clamav-clamonacc.service override directory
+  ansible.builtin.file:
+    owner: root
+    group: root
+    mode: 0755
+    path: /etc/systemd/system/clamav-clamonacc.service.d
+    state: directory
+  become: True
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+
 
 - name: Override clamav-clamonacc.service (On Access Scanning) to use --fdpass
   ansible.builtin.copy:
@@ -109,25 +120,16 @@
     - systemd
 
 
-- name: Enable service to refresh clamav database at boot
+- name: Enable services
   ansible.builtin.systemd:
     name: "{{ item }}"
     enabled: true
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   loop:
-    - clamav-freshclam.service
-  tags:
-    - clamav
-
-- name: Enable clamav On Access Scanning service
-  ansible.builtin.systemd:
-    name: "{{ item }}"
-    enabled: true
-  become: True
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  loop:
-    - clamav-clamonacc.service
+    - clamav-freshclam.service       # Refresh Virus Database at boot
+    - clamav-clamonacc.service       # On Access Scanning
+    - clamd@scan.service             # Enable daemon autostarting with /etc/clamd.d/{scan}.service
   tags:
     - clamav
 
