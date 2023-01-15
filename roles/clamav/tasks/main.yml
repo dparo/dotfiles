@@ -33,7 +33,7 @@
       LogFile /var/log/clamd.scan
       LogSyslog yes
 
-      MaxThreads 8
+      MaxThreads 2
       MaxScanSize 1024M
       MaxFileSize 512M
 
