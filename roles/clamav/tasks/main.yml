@@ -24,6 +24,8 @@
 
 - name: Setup clamav daemon config
   ansible.builtin.copy:
+    dest: /etc/clam.d/scan.conf
+    mode: 0644
     content: |
       User clamscan
       LocalSocket /run/clamd.scan/clamd.sock
@@ -55,9 +57,6 @@
       OnAccessExcludePath /sys/
       OnAccessExcludePath /run/
       OnAccessExcludePath /swapfile
-
-    dest: /etc/clam.d/scan.conf
-    mode: 0644
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
@@ -66,6 +65,8 @@
 
 - name: Setup Virus Event Script
   ansible.builtin.copy:
+    dest: /etc/clam.d/virus-event.bash
+    mode: 0755
     content: |
       #!/bin/bash
 
@@ -77,8 +78,6 @@
         /usr/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" PATH="$PATH" \
             /usr/bin/notify-send -u critical -i dialog-warning "Virus found!" "$ALERT"
       done
-    dest: /etc/clam.d/virus-event.bash
-    mode: 0755
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
