@@ -1,0 +1,15 @@
+---
+- name: Install
+  ansible.builtin.dnf:
+    name:
+      - flatpak
+  become: true
+  tags:
+    - apt
+    - flatpak
+
+- name: Add the flathub flatpak repository remote to the user installation
+  community.general.flatpak_remote:
+    name: flathub
+    state: present
+    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo

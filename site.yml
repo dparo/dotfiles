@@ -67,8 +67,10 @@
     - firefox
     - vscode
     - telegram
-    # - obsidian
-    # - onlyoffice
     - devel
     # - gaming
     # - clamav
+    - flatpak
+    - obsidian
+    - drawio
+    - onlyoffice
