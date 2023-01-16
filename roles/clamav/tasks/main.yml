@@ -22,6 +22,26 @@
     - clamav
 
 
+- name: Setup freshclam (clamav-update)
+  ansible.builtin.copy:
+    dest: /etc/freshclam.conf
+    mode: 0600
+    content: |
+      UpdateLogFile /var/log/freshclam.log
+      LogFileMaxSize 10M
+      LogTime yes
+
+      NotifyClamd /etc/clamd.d/scan.conf
+
+      Checks 1
+      DatabaseOwner clamupdate
+      DatabaseMirror database.clamav.net
+  become: True
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  tags:
+    - clamav
+
+
 - name: Setup clamav daemon config
   ansible.builtin.copy:
     dest: /etc/clamd.d/scan.conf
