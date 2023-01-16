@@ -43,6 +43,7 @@
       ExcludePath ^/sys/
       ExcludePath ^/run/
       ExcludePath ^/swapfile
+      ExcludePath ^/var/log/audit/
 
       ###
       ### On Access Scanning
@@ -57,6 +58,7 @@
       OnAccessExcludePath /sys/
       OnAccessExcludePath /run/
       OnAccessExcludePath /swapfile
+      OnAccessExcludePath /var/log/audit
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
