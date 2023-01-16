@@ -126,7 +126,18 @@
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   ignore_errors: true
   tags:
+    - clamav
     - systemd
+
+
+- name: Setup SELinux to allow clamav to scan the system
+  ansible.builtin.shell: |
+    setsebool -P antivirus_can_scan_system 1
+    setsebool -P clamd_use_jit 1
+  become: True
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  tags:
+    - clamav
 
 
 - name: Enable services
