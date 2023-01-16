@@ -93,6 +93,16 @@
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
 
+- name: Create log dir
+  ansible.builtin.file:
+    owner: clamscan
+    group: clamscan
+    mode: 0755
+    path: /var/log/clamav
+    state: directory
+  become: True
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+
 
 - name: Override clamav-clamonacc.service (On Access Scanning) to use --fdpass
   ansible.builtin.copy:
