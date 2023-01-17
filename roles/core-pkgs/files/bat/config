@@ -1,4 +1,6 @@
 # vi: ft=config
-# --theme="TwoDark"
---theme="ansi"
+#--theme="Visual Studio Dark+"
+#--theme="base16-256"
+#--theme="ansi"
+--theme="OneHalfDark"
 --style="header"

@@ -89,7 +89,7 @@ setopt HIST_VERIFY            # show command with history expansion to user befo
 setopt INC_APPEND_HISTORY   # append history and not share it between terminals (unlike share_history)
 
 # Make the tab completion matcher case insensitive
-zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' matcher-list '' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
 ### Fish-like menulist
 zmodload zsh/complist
