@@ -15,6 +15,7 @@ do
                     ["direnvrc$"] = "sh",
                     [".*.curl$"] = "sh",
                     [".*.httpie$"] = "sh",
+                    [".*.properties$"] = "config",
                     [".*.socket$"] = "systemd",
                     [".*.service$"] = "systemd",
                     [".*.session$"] = "systemd",
