@@ -62,6 +62,7 @@
       ExcludePath ^/proc/
       ExcludePath ^/sys/
       ExcludePath ^/run/
+      ExcludePath ^/dev/
       ExcludePath ^/swapfile
       ExcludePath ^/var/log/audit/
 
@@ -77,6 +78,7 @@
       OnAccessExcludePath /proc/
       OnAccessExcludePath /sys/
       OnAccessExcludePath /run/
+      OnAccessExcludePath /dev/
       OnAccessExcludePath /swapfile
       OnAccessExcludePath /var/log/audit
   become: True
