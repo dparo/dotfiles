@@ -65,7 +65,7 @@
       ExcludePath ^/dev/
       ExcludePath ^/swapfile
       ExcludePath ^/var/log/audit/
-      ExcludePath ^/etc
+      ExcludePath ^/etc/
 
       ###
       ### On Access Scanning
@@ -76,10 +76,10 @@
       OnAccessExtraScanning true
       OnAccessMountPath /
       OnAccessIncludePath /home
-      OnAccessExcludePath /proc/
-      OnAccessExcludePath /sys/
-      OnAccessExcludePath /run/
-      OnAccessExcludePath /dev/
+      OnAccessExcludePath /proc
+      OnAccessExcludePath /sys
+      OnAccessExcludePath /run
+      OnAccessExcludePath /dev
       OnAccessExcludePath /swapfile
       OnAccessExcludePath /var/log/audit
       OnAccessExcludePath /etc
