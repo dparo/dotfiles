@@ -82,6 +82,7 @@
     - ts-node
     - eslint
     - prettier
+    - create-docusaurus@latest      # https://docusaurus.io
   tags: devel
 
 - name: Install additional NPM tools
