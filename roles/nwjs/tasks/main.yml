@@ -1,22 +1,17 @@
 ---
-
 - name: "Download and unpack NW.js {{ nwjs_version }}"
   ansible.builtin.unarchive:
     src: "https://dl.nwjs.io/v{{ nwjs_version }}/nwjs-sdk-v{{ nwjs_version }}-linux-x64.tar.gz"
-    dest: "/opt"
+    dest: "{{ ansible_user_dir }}/opt"
     remote_src: yes
-    owner: root
-  become: True
-  become_user: root
   tags:
     - nwjs
 
 - name: Symlink binaries
   ansible.builtin.file:
-    src: "/opt/nwjs-sdk-v{{ nwjs_version }}-linux-x64/{{ item }}"
-    dest: "/usr/local/bin/{{ item }}"
+    src: "{{ ansible_user_dir }}/opt/nwjs-sdk-v{{ nwjs_version }}-linux-x64/{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
     state: link
-  become: True
   loop:
     - nw
     - nwjc
