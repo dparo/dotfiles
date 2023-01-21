@@ -1,12 +1,4 @@
 ---
-# List of additional commands that didn't make it:
-# - coz-profiler: https://github.com/plasma-umass/coz
-# - valgrind + kcachegrind
-# - gperf
-# - doxygen
-# - flamegraph (cargo)   profiling tool
-# - hyperfine (cargo)    benchmarking tool
-
 - name: Install
   ansible.builtin.dnf:
     name:
@@ -24,11 +16,14 @@
       - cppcheck
       - bear # Generate compilation database for clangtooling
       - valgrind
+      # - kcachegrind
       - gperf
-      - hyperfine
-      # - flamegraph
+      - hyperfine       # (RUST) Benchmarking tool
+      # - flamegraph    # (RUST) Visualization of profiled code
       # - hotspot
       # - heaptrack
+      # - coz-profiler      # Causal Profiling (https://github.com/plasma-umass/coz): Finding Code that Counts with Causal Profiling
+      # - doxygen           # C/C++ documentation tool
     state: present
   become: true
   tags:
