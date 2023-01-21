@@ -109,14 +109,12 @@ cpu_temperature 0 {
 
 disk "/" {
         format = " / %avail"
-        prefix_type	= custom
         low_threshold = 20
         threshold_type = percentage_avail
 }
 
 disk "/home" {
         format = " /home %avail"
-        prefix_type	= custom
         low_threshold = 20
         threshold_type = percentage_avail
 }
