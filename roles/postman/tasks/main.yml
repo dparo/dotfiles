@@ -6,3 +6,13 @@
     remote_src: yes
   tags:
     - postman
+
+- name: Download and install latest postman-cli
+  ansible.builtin.unarchive:
+    src: "https://dl-cli.pstmn.io/download/latest/linux64"
+    dest: "/usr/local/bin"
+    remote_src: true
+  become: True
+  tags:
+    - postman
+    - postman-cli

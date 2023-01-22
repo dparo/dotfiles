@@ -1,0 +1,19 @@
+---
+- name: Install insomnia (flatpak)
+  community.general.flatpak:
+    name: rest.insomnia.Insomnia
+    state: present
+    remote: flathub
+  tags:
+    - insomnia
+    - flatpak
+
+
+- name: Download and unpack insomnia-cli version {{ insomnia_cli_version }}
+  ansible.builtin.unarchive:
+    src: "https://github.com/Kong/insomnia/releases/download/lib@{{ insomnia_cli_version }}/inso-linux-{{ insomnia_cli_version }}.tar.xz"
+    dest: "{{ ansible_user_dir }}/.local/bin"
+    remote_src: true
+  tags:
+    - insomnia
+    - insomnia-cli
