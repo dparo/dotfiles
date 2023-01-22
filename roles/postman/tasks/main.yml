@@ -1,0 +1,8 @@
+---
+- name: "Download and unpack Postman"
+  ansible.builtin.unarchive:
+    src: https://dl.pstmn.io/download/latest/linux64
+    dest: "{{ ansible_user_dir }}/opt"
+    remote_src: yes
+  tags:
+    - postman
