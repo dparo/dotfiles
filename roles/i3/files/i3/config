@@ -63,6 +63,10 @@ for_window [all] border normal 1
 for_window [all] title_window_icon padding 4px
 
 
+gaps inner 16
+smart_gaps on
+
+
 include config.d/rules.conf
 include config.d/binds.conf
 include config.d/theme.conf
