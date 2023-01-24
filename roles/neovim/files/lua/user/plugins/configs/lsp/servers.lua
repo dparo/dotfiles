@@ -209,6 +209,7 @@ M.list = {
                             enabled = true,
                             tabSize = 4,
                             insertSpaces = true,
+                            onType = false,
                             settings = {
                                 profile = "GoogleStyle",
                                 url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
