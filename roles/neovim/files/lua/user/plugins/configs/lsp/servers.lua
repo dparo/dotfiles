@@ -205,6 +205,15 @@ M.list = {
                                 },
                             },
                         },
+                        format = {
+                            enabled = true,
+                            tabSize = 4,
+                            insertSpaces = true,
+                            settings = {
+                                profile = "GoogleStyle",
+                                url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+                            },
+                        },
                     },
                 },
                 init_options = {
