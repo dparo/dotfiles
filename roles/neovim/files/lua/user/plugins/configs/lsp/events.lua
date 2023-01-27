@@ -91,7 +91,11 @@ function M.on_attach(client, bufnr)
     end
 
     if client.server_capabilities.documentRangeFormattingProvider then
-        buf_set_keymap(bufnr, "v", "<leader>lf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+        if vim.fn.has "nvim-0.8" == 1 then
+            buf_set_keymap(bufnr, "v", "<leader>lf", "<cmd>lua vim.lsp.buf.format()<CR>", opts)
+        else
+            buf_set_keymap(bufnr, "v", "<leader>lf", "<cmd>lua vim.lsp.buf.range_formatting()<CR>", opts)
+        end
     end
 
     -- Setup highlight references of word under cursor using lsp
