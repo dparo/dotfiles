@@ -303,6 +303,15 @@ local generic = {
         end,
     },
 
+    {
+        "akinsho/bufferline.nvim",
+        tag = "v3.*",
+        requires = "nvim-tree/nvim-web-devicons",
+        config = function()
+            require("bufferline").setup {}
+        end,
+    },
+
     -- Automatically close braces but only when pressing enter (more conservative approach)
     --      NOTE: It does not work since it collides with our custom <CR> key, and there's
     --            no way to tell the plugin, to not catch the <CR> key by default and let us
