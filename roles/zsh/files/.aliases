@@ -59,13 +59,13 @@ else
 fi
 
 if valid_shell_command yay; then
-	alias update='yay -Syu && sudo flatpak update -y && sudo flatpak uninstall --unused'
+	alias update='yay -Syu && sudo flatpak update -y && sudo flatpak uninstall --unused -y'
 elif valid_shell_command pacman; then
-	alias update="sudo bash -c 'pacman -Syu && flatpak update -y && flatpak uninstall --unused'"
+	alias update="sudo bash -c 'pacman -Syu && flatpak update -y && flatpak uninstall --unused -y'"
 elif valid_shell_command apt; then
 	alias update="sudo bash -c 'apt update && apt full-upgrade && apt autoremove --yes && snap refresh'"
 elif valid_shell_command dnf; then
-	alias update="sudo bash -c 'dnf update && flatpak update -y && flatpak uninstall --unused'"
+	alias update="sudo bash -c 'dnf update && flatpak update -y && flatpak uninstall --unused -y'"
 fi
 
 alias ..='cd ..'
