@@ -9,11 +9,18 @@
       - nwdiag # logical network diagram
       - texlive-bytefield
       # - kroki (online)     # Creates diagrams from textual descriptions
-      #   - vega     # Word cloud
-      #   - vega-lite # Barcharts
-      #   - erd # entity relation graph
+      #   - erd # entity relation graph (https://github.com/BurntSushi/erd)
     state: present
   become: true
   tags:
     - diagram-tools
     - apt
+
+- name: Install vega-cli (A Visualization Grammar, interactive visualization designs)
+  community.general.npm:
+    name: "{{ item }}"
+    global: true
+    state: latest
+  loop:
+    - vega-cli
+  tags: diagram-tools
