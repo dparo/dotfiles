@@ -1,0 +1,19 @@
+- name: Install
+  ansible.builtin.dnf:
+    name:
+      - graphviz
+      - plantuml
+      - blockdiag # block diagram
+      - seqdiag # sequence diagram
+      - actdiag # activity diagram
+      - nwdiag # logical network diagram
+      - texlive-bytefield
+      # - kroki (online)     # Creates diagrams from textual descriptions
+      #   - vega     # Word cloud
+      #   - vega-lite # Barcharts
+      #   - erd # entity relation graph
+    state: present
+  become: true
+  tags:
+    - diagram-tools
+    - apt
