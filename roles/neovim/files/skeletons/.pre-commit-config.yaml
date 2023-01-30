@@ -3,4 +3,4 @@ repos:
     rev: v0.3.3
     hooks:
     -   id: maven
-        args: ['clean compile sonar:sonar -Pcoverage']
+        args: ['clean test com.diffplug.spotless-maven-plugin:apply']
