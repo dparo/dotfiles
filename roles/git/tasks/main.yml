@@ -5,6 +5,7 @@
       - git
       - git-crypt
       - git-delta
+      - pre-commit
     state: present
   become: true
   tags:
