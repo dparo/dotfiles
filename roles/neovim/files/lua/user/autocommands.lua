@@ -36,6 +36,7 @@ core.utils.augroup("USER_SKELETONS", {
     { "BufNewFile", { pattern = ".envrc,.direnvrc,direnvrc", command = [[0r ~/.config/nvim/skeletons/.envrc]] } },
     { "BufNewFile", { pattern = "Makefile", command = [[0r ~/.config/nvim/skeletons/Makefile]] } },
     { "BufNewFile", { pattern = ".editorconfig", command = [[0r ~/.config/nvim/skeletons/.editorconfig]] } },
+    { "BufNewFile", { pattern = ".pre-commit-config.yaml", command = [[0r ~/.config/nvim/skeletons/.pre-commit-config.yaml]] } },
 })
 
 -- Filetypes autocommand
