@@ -84,7 +84,7 @@
       - highlight
       - python3-pygments
       - python3-virtualenv
-      - tidy     # XML, HTML formatter / diagnostic tool
+      - tidy # XML, HTML formatter / diagnostic tool
       - tree-sitter-cli
     state: present
   become: true
@@ -172,6 +172,7 @@
   ansible.builtin.shell: |
     nvim --headless -c "MasonInstall {{ item }}" -c "qall"
   loop:
+    - markdownlint
     - vim-language-server
     - stylua
     - lua-language-server
@@ -205,6 +206,8 @@
     - java-test
     - java-debug-adapter
     - hadolint
+    - angular-language-server
+    - cucumber-language-server
   tags:
     - neovim
     - neovim-lsp
