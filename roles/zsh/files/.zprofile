@@ -86,6 +86,9 @@ export ANDROID_EMULATOR_HOME="$ANDROID_USER_HOME"
 export ANDROID_AVD_HOME="$ANDROID_HOME/avd"
 export WINEPREFIX="$XDG_DATA_HOME/wine"
 
+export REDISCLI_HISTFILE="$XDG_STATE_HOME"/rediscli_history
+export REDISCLI_RCFILE="$XDG_CONFIG_HOME"/redis/redisclirc
+
 export PSQL_HISTORY="$XDG_CACHE_HOME/psql_history"
 
 
