@@ -95,6 +95,9 @@ alias cheat='cht.sh'
 alias feh='feh --scale-down -Z'
 alias lola="git log --graph --decorate --oneline --abbrev-commit --all"
 
+alias mitmproxy="mitmproxy --set confdir=$XDG_CONFIG_HOME/mitmproxy"
+alias mitmweb="mitmweb --set confdir=$XDG_CONFIG_HOME/mitmproxy"
+
 alias nvidia-settings='nvidia-settings --verbose --config="$XDG_CONFIG_HOME"/nvidia/settings'
 alias edit-shell-hist='fc -W; "$EDITOR" "$HISTFILE"; fc -R;'
 
