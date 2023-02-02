@@ -72,6 +72,7 @@
     - nwjs
     - postman
     - insomnia
+    - mitmproxy
     # - gaming
     # - clamav
     - flatpak
