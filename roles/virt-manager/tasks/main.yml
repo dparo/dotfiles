@@ -5,6 +5,11 @@
     description: virtio-win builds roughly matching what was shipped in latest RHEL
     baseurl: https://fedorapeople.org/groups/virt/virtio-win/repo/stable
     state: present
+  become: True
+  tags:
+    - qemu
+    - virt-manager
+
 
 - name: Install
   ansible.builtin.dnf:
