@@ -178,6 +178,7 @@
     - lua-language-server
     - bash-language-server
     - pyright
+    - debugpy
     - clangd
     - clang-format
     - codelldb
