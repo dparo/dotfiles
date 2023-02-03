@@ -101,7 +101,8 @@ local generic = {
     { "tpope/vim-surround" }, -- Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more
 
     -- Automatically detect shiftwidth and tabstop heuristically from file
-    { "tpope/vim-sleuth" },
+    -- { "tpope/vim-sleuth" },
+
     { "nvim-lua/plenary.nvim" },
     {
         "rcarriga/nvim-notify",
