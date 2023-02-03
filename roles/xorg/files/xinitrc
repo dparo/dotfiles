@@ -2,6 +2,12 @@
 
 set -x
 
+USERXSESSION="$XDG_CACHE_HOME/xorg/xsession"
+USERXSESSIONRC="$XDG_CACHE_HOME/xorg/xsessionrc"
+ALTUSERXSESSION="$XDG_CACHE_HOME/xorg/Xsession"
+ERRFILE="$XDG_CACHE_HOME/xorg/xsession-errors"
+
+
 # This two ENV vars are required if running `gnome-session` from this .xinitrc script
 export XDG_SESSION_TYPE=x11
 export GDK_BACKEND=x11

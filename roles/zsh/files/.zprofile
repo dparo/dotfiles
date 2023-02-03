@@ -33,12 +33,6 @@ export LC_NUMERIC="en_US.UTF-8"
 export LC_CTYPE="en_US.UTF-8"
 
 
-# NOTE(d.paro): Are these environment variables necessary??
-export USERXSESSION="$XDG_CACHE_HOME/xorg/xsession"
-export USERXSESSIONRC="$XDG_CACHE_HOME/xorg/xsessionrc"
-export ALTUSERXSESSION="$XDG_CACHE_HOME/xorg/Xsession"
-export ERRFILE="$XDG_CACHE_HOME/xorg/xsession-errors"
-
 export ANSIBLE_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/ansible"
 export ANSIBLE_GALAXY_CACHE_DIR="${ANSIBLE_HOME}/galaxy_cache"
 export ANSIBLE_LOCAL_TEMP="$ANSIBLE_HOME/tmp"
