@@ -1,24 +1,22 @@
 ---
-- name: VirtIO drivers for creating Windows VMs under Fedora (https://docs.fedoraproject.org/en-US/quick-docs/creating-windows-virtual-machines-using-virtio-drivers)
-  ansible.builtin.yum_repository:
-    name: virtio-win-stable
-    description: virtio-win builds roughly matching what was shipped in latest RHEL
-    baseurl: https://fedorapeople.org/groups/virt/virtio-win/repo/stable
-    state: present
-  become: True
+- name: Enable VirtIO drivers repository for speeding up Windows VMs (https://docs.fedoraproject.org/en-US/quick-docs/creating-windows-virtual-machines-using-virtio-drivers)
+  ansible.builtin.get_url:
+    dest: /etc/yum.repos.d/virtio-win.repo
+    url: https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
+    mode: "0664"
+  become: true
   tags:
     - qemu
     - virt-manager
-
 
 - name: Install
   ansible.builtin.dnf:
     name:
       - qemu-system-x86
-      - edk2-ovmf     # ovmf provides virtualized UEFI capable bios
+      - edk2-ovmf # ovmf provides virtualized UEFI capable bios
       - libvirt-daemon
       - virt-manager
-      - virtio-win     # https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md
+      - virtio-win # https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md
     state: present
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   become: true
@@ -39,7 +37,6 @@
   tags:
     - qemu
     - virt-manager
-
 ####
 #### Required only for ARCH linux
 ####
