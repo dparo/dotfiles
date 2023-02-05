@@ -154,7 +154,8 @@ null_ls.setup {
         -- null_ls.builtins.formatting.autopep8,
         -- null_ls.builtins.diagnostics.pydocstyle,
         -- Uncompromising Python code formatter.
-        null_ls.builtins.formatting.black,
+        -- null_ls.builtins.formatting.black,       -- Black8 is too aggressive for my liking
+        null_ls.builtins.formatting.yapf,
         -- python utility / library to sort imports alphabetically and automatically separate them into sections and by type.
         null_ls.builtins.formatting.isort,
         -- Mypy is an optional static type checker for Python that aims to combine the benefits of dynamic (or "duck") typing and static typing.
