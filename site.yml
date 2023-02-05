@@ -65,6 +65,8 @@
     - fonts
     - docker
     - firefox
+    - brave-browser
+    - google-chrome
     - vscode
     - telegram
     - devel
