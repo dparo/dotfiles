@@ -1,4 +1,20 @@
 ---
+- name: Enable google-chrome repo
+  ansible.builtin.copy:
+    dest: /etc/yum.repos.d/google-chrome.repo
+    content: |
+      [google-chrome]
+      name=google-chrome
+      baseurl=https://dl.google.com/linux/chrome/rpm/stable/x86_64
+      skip_if_unavailable=True
+      gpgcheck=1
+      gpgkey=https://dl.google.com/linux/linux_signing_key.pub
+      enabled=1
+    mode: "0664"
+  become: true
+  tags:
+    - brave-browser
+
 - name: Install google-chrome-stable
   ansible.builtin.dnf:
     name:

@@ -10,6 +10,7 @@
   ansible.builtin.dnf:
     name:
       - dnf-plugins-core
+      - fedora-workstation-repositories      # Enable Third party repositories
       - openssl
       - nano
       - git
