@@ -17,6 +17,17 @@ function valid_shell_command {
 	builtin type "$1" 1>/dev/null 2>/dev/null
 }
 
+
+function load-env {
+    for var in "$@"; do
+        if [ -f "$var" ]; then
+            set -o allexport
+            source "$var"
+            set +o allexport
+        fi
+    done
+}
+
 if valid_shell_command fdfind; then
 	alias fd=fdfind
 fi
