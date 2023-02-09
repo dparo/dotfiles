@@ -1,0 +1,7 @@
+[Unit]
+Description=Local HTTP proxy
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=mitmweb -p 10000 --web-port 10001
+Restart=on-failure
