@@ -3,7 +3,7 @@ Description=Local HTTP proxy
 PartOf=graphical-session.target
 
 [Service]
-ExecStart=mitmweb -p 10000 --web-port 10001
+ExecStart=%h/.local/bin/mitmweb -p 10000 --web-port 10001 --config=%h/.config/mitmproxy
 Restart=on-failure
 
 [Install]
