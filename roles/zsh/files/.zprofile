@@ -169,7 +169,9 @@ if systemctl -q is-active graphical.target \
 
     # Test connection to Xserver. If it's already running do not create a new one
     if test -z "$DISPLAY" || ! timeout 1s xset q 1> /dev/null 2> /dev/null; then
-        exec "${XDG_CONFIG_HOME-:$HOME/.config}/xorg/startx"
+	if test -x "${XDG_CONFIG_HOME-:$HOME/.config}/xorg/startx"; then
+	    exec "${XDG_CONFIG_HOME-:$HOME/.config}/xorg/startx"
+	fi
     else
         echo "Xorg is already running at DISPLAY=$DISPLAY"
     fi
