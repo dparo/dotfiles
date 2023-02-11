@@ -1,6 +1,11 @@
 local actions = require "telescope.actions"
 
 require("telescope").setup {
+    pickers = {
+        find_files = {
+            theme = "ivy",
+        },
+    },
     defaults = {
         color_devicons = true,
         winblend = 0,
@@ -11,20 +16,15 @@ require("telescope").setup {
         entry_prefix = "  ",
         initial_mode = "insert",
         selection_strategy = "reset",
-        sorting_strategy = "ascending",
+        sorting_strategy = "descending",
         layout_strategy = "horizontal",
         layout_config = {
-            horizontal = {
-                prompt_position = "top",
-                preview_width = 0.55,
-                results_width = 0.8,
-            },
-            vertical = {
-                mirror = false,
-            },
-            width = 0.87,
+            prompt_position = "top",
+            mirror = false,
+            width = 0.80,
             height = 0.80,
             preview_cutoff = 120,
+            preview_width = 0.35,
         },
 
         find_command = { "rg", "-S", "--files", "--hidden", "-g", "!.ccls-cache", "-g", "!.git", "-g", "!.vcs", "-g", "!.svn" },
