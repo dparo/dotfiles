@@ -22,6 +22,9 @@ local generic = {
     -- Better quickfix window in Neovim, polish old quickfix window.
     { "kevinhwang91/nvim-bqf" },
 
+    -- A search panel for neovim: Find the enemy and replace them with dark power
+    { "windwp/nvim-spectre" },
+
     --- Trim trailing whitespaces
     {
         "cappyzawa/trim.nvim",

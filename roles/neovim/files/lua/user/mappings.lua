@@ -396,6 +396,10 @@ local function setup_plugins()
     nmap("<leader>xl", exec_cmd "TroubleToggle loclist")
     nmap("gR", exec_cmd "TroubleToggle lsp_references")
 
+    vim.keymap.set("n", "<leader>S", function()
+        require("spectre").open()
+    end)
+
     -- Git
     nmap("<leader>gG", exec_cmd "Git")
     nmap("<leader>gg", exec_cmd "LazyGit")
