@@ -316,7 +316,7 @@ M.list = {
     { name = "marksman", config = {} },
     { name = "julials", config = {} },
     {
-        name = "sumneko_lua",
+        name = "lua_ls",
         config = function()
             local runtime_path = vim.split(package.path, ";")
             table.insert(runtime_path, "lua/?.lua")

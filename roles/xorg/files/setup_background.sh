@@ -10,5 +10,5 @@ set_wallpaper() {
 }
 
 set_wallpaper \
+    /usr/share/backgrounds/gnome/adwaita-d.webp \
     /usr/share/backgrounds/fedora-workstation/glasscurtains_dark.webp \
-    /usr/share/backgrounds/gnome/adwaita-d.webp

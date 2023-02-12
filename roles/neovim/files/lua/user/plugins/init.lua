@@ -641,6 +641,7 @@ local themes = {
     { "metalelf0/jellybeans-nvim", requires = { "rktjmp/lush.nvim" } },
     { "tjdevries/gruvbuddy.nvim", requires = { "tjdevries/colorbuddy.nvim" } },
     { "Th3Whit3Wolf/spacebuddy", requires = { "tjdevries/colorbuddy.nvim" } },
+    { "catppuccin/nvim", as = "catppuccin" },
     {
         "marko-cerovac/material.nvim",
         config = function()

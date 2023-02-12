@@ -156,29 +156,38 @@ XTerm.vt100.faceName: Monospace:size=11:antialias=true
 XTerm.vt100.font: 7x13
 
 
-! TokyoNight colors for Xresources
+! Catpuccin mocha theme: https://github.com/catppuccin/xresources/blob/main/mocha.Xresources
+*background: #1E1E2E
+*foreground: #CDD6F4
 
-*background: #24283b
-*foreground: #c0caf5
+! black
+*color0: #45475A
+*color8: #585B70
 
-*background_dark: #1f2335
-*foreground_dark: #a9b1d6
-*bg_highlight:    #292e42
+! red
+*color1: #F38BA8
+*color9: #F38BA8
 
-*color0: #1d202f
-*color1: #f7768e
-*color2: #9ece6a
-*color3: #e0af68
-*color4: #7aa2f7
-*color5: #bb9af7
-*color6: #7dcfff
-*color7: #a9b1d6
+! green
+*color2: #A6E3A1
+*color10: #A6E3A1
 
-*color8: #414868
-*color9: #f7768e
-*color10: #9ece6a
-*color11: #e0af68
-*color12: #7aa2f7
-*color13: #bb9af7
-*color14: #7dcfff
-*color15: #c0caf5
+! yellow
+*color3: #F9E2AF
+*color11: #F9E2AF
+
+! blue
+*color4: #89B4FA
+*color12: #89B4FA
+
+! magenta
+*color5: #F5C2E7
+*color13: #F5C2E7
+
+! cyan
+*color6: #94E2D5
+*color14: #94E2D5
+
+! white
+*color7: #BAC2DE
+*color15: #A6ADC8

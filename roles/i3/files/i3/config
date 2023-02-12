@@ -14,32 +14,34 @@ set $bar_font Blex Mono Nerd Font 8
 
 
 ##########################################################
-## Theme
+## catpccin-mocha: https://github.com/catppuccin/i3/blob/main/themes/catppuccin-mocha
 ##########################################################
 
-set_from_resource $bg     i3wm.background       #24283b
-set_from_resource $bgalt  i3wm.background_dark  #1f2335
-set_from_resource $fg     i3wm.foreground       #c0caf5
-set_from_resource $fgalt  i3wm.foreground_dark  #a9b1d6
-set_from_resource $selbg  i3wm.bg_highlight     #292e42
-
-set_from_resource $col0   i3wm.color0           #1d202f
-set_from_resource $col1   i3wm.color1           #f7768e
-set_from_resource $col2   i3wm.color2           #9ece6a
-set_from_resource $col3   i3wm.color3           #e0af68
-set_from_resource $col4   i3wm.color4           #7aa2f7
-set_from_resource $col5   i3wm.color5           #bb9af7
-set_from_resource $col6   i3wm.color6           #7dcfff
-set_from_resource $col7   i3wm.color7           #a9b1d6
-
-set_from_resource $col8   i3wm.color8           #414868
-set_from_resource $col9   i3wm.color9           #f7768e
-set_from_resource $col10  i3wm.color10          #9ece6a
-set_from_resource $col11  i3wm.color11          #e0af68
-set_from_resource $col12  i3wm.color12          #7aa2f7
-set_from_resource $col13  i3wm.color13          #bb9af7
-set_from_resource $col14  i3wm.color14          #7dcfff
-set_from_resource $col15  i3wm.color15          #c0caf5
+set $rosewater #f5e0dc
+set $flamingo  #f2cdcd
+set $pink      #f5c2e7
+set $mauve     #cba6f7
+set $red       #f38ba8
+set $maroon    #eba0ac
+set $peach     #fab387
+set $green     #a6e3a1
+set $teal      #94e2d5
+set $sky       #89dceb
+set $sapphire  #74c7ec
+set $blue      #89b4fa
+set $lavender  #b4befe
+set $text      #cdd6f4
+set $subtext1  #bac2de
+set $subtext0  #a6adc8
+set $overlay2  #9399b2
+set $overlay1  #7f849c
+set $overlay0  #6c7086
+set $surface2  #585b70
+set $surface1  #45475a
+set $surface0  #313244
+set $base      #1e1e2e
+set $mantle    #181825
+set $crust     #11111b
 
 ###########################################################
 ###########################################################
