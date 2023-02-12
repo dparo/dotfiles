@@ -10,5 +10,6 @@ set_wallpaper() {
 }
 
 set_wallpaper \
+    "$HOME/.local/share/backgrounds/tetris.png" \
     /usr/share/backgrounds/gnome/adwaita-d.webp \
     /usr/share/backgrounds/fedora-workstation/glasscurtains_dark.webp \
