@@ -396,8 +396,16 @@ local function setup_plugins()
     nmap("<leader>xl", exec_cmd "TroubleToggle loclist")
     nmap("gR", exec_cmd "TroubleToggle lsp_references")
 
+    -- Spectre
     vim.keymap.set("n", "<leader>S", function()
         require("spectre").open()
+    end)
+    vim.keymap.set("n", "<leader>sw", function()
+        require("spectre").open_visual { select_word = true }
+    end)
+    -- Spectre
+    vim.keymap.set("v", "<leader>s", function()
+        require("spectre").open_visual()
     end)
 
     -- Git
