@@ -1,6 +1,6 @@
 include /usr/share/doc/newsboat/contrib/colorschemes/inkpot
 
-browser "~/bin/newsboat-open-url"
+browser "~/.local/share/bin/newsboat-open-url"
 
 notify-always no
 notify-program "dunstify"
