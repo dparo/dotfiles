@@ -1,0 +1,8 @@
+- name: Install
+  ansible.builtin.dnf:
+    name:
+      - syncthing
+    state: present
+  become: true
+  tags:
+    - syncthing
