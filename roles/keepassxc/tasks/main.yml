@@ -1,0 +1,8 @@
+- name: Install
+  ansible.builtin.dnf:
+    name:
+      - keepassxc
+    state: present
+  become: true
+  tags:
+    - keepassxc

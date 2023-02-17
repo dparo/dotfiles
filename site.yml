@@ -64,6 +64,7 @@
     - misc
     - fonts
     - docker
+    - keepassxc
     - firefox
     - brave-browser
     - google-chrome
