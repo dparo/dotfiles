@@ -1,0 +1,11 @@
+[Unit]
+Description=Refresh rssfeed using newsboat
+After=syslog.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/newsboat -x reload
+
+[Install]
+WantedBy=multi-user.target
