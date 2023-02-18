@@ -5,15 +5,37 @@
 
     <profiles>
         <profile>
-            <id>downloadSources</id>
+            <id>common-maven-profile</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
                 <downloadSources>true</downloadSources>
                 <downloadJavadocs>false</downloadJavadocs>
+
+                <!-- Equivalent to -DtrimStackTrace=false
+                     Makes `mvn test` (surefire:test plugin) display the full stacktrace on error.
+                     Useful to trace the real cause of the error
+                    See:
+                    - https://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html#trimStackTrace
+                    - https://stackoverflow.com/questions/2928548/make-mavens-surefire-show-stacktrace-in-console
+                -->
+                <trimStackTrace>false</trimStackTrace>
             </properties>
         </profile>
-    </profiles>
 
+
+        <!-- Activate by using `mvn -P local ...` -->
+        <profile>
+            <id>local</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <properties>
+                <!-- Equivalent to `java -jar ... -Dspring.profiles.active=local ...` command line argument` -->
+                <spring.profiles.active>local</spring.profiles.active>
+            </properties>
+        </profile>
+
+    </profiles>
 </settings>
