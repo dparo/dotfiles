@@ -6,6 +6,11 @@
     <localRepository>${env.XDG_CACHE_HOME}/maven/repository</localRepository>
     <offline>false</offline>
 
+    <pluginGroups>
+        <!-- https://docs.sonarqube.org/9.6/analyzing-source-code/scanners/sonarscanner-for-maven/ -->
+        <pluginGroup>org.sonatype.plugins</pluginGroup>
+        <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+    </pluginGroups>
 
     <profiles>
         <profile>
