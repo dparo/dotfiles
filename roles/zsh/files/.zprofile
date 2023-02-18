@@ -103,6 +103,10 @@ export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djava.util.prefs.userRoot=\"$XDG_CONFIG_HO
 #   The openjdk implementation hardcodes the location of the fontcache file regardless if the user specified java.util.prefs.userRoot to a different location
 export _JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=\"$JAVA_USER_HOME\""
 
+# See: https://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html#trimStackTrace
+# Makes `mvn test` dump the full stack trace instead of a useless oneline msg
+export _JAVA_OPTIONS="$_JAVA_OPTIONS -DtrimStackTrace=false"
+
 
 export MAVEN_HOME="$HOME/opt/apache-maven-3.8.6/"
 # M2_HOME is used from mvnw (Maven wrapper script)
