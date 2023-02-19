@@ -1,18 +1,10 @@
 # vi: ft=dosini
 
-[colors]
-;background = ${xrdb:color0:#222}
-background = #1a1b26
-background-alt = #33467C
-;foreground = ${xrdb:color7:#222}
-foreground = #c0caf5
-foreground-alt = #c0caf5
-primary = #ffb52a
-alert = #f7768e
+include-file = $HOME/.config/polybar/themes/catppuccin-mocha.ini
 
 [bar/main]
 bottom = false
-font-0 = Noto Mono Nerd Font :style=Regular:size=8;2
+font-0 = Blex Mono Nerd Font :style=Regular:size=8;2
 
 wm-restack = bspwm
 modules-left = bspwm mpd
@@ -30,8 +22,8 @@ radius = 0.0
 offset-x = 0%
 offset-y = 0%
 
-background = ${colors.background}
-foreground = ${colors.foreground}
+background = ${colors.base}
+foreground = ${colors.text}
 
 line-size = 1
 line-color = #f00
