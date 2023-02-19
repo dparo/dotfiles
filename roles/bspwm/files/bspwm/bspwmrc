@@ -51,6 +51,9 @@ bspc config normal_border_color "#1a1b26"
 bspc config presel_feedback_color "#33467C"
 
 
+systemctl --user start polybar
+
+
 ##
 ## Startup the programs (wait one second so that polybar and the notification daemon has enough time to startup)
 ##
