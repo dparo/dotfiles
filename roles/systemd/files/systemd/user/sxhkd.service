@@ -3,6 +3,6 @@ Description=Simple X Hotkey Daemon (sxhkd)
 PartOf=graphical-session.target
 
 [Service]
-ExecStart=sxhdk
+ExecStart=sxhkd
 ExecReload=kill -USR1 $MAINPID
 Restart=on-failure
