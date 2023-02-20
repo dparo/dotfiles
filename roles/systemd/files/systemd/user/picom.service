@@ -1,0 +1,7 @@
+[Unit]
+Description=picom compositor
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=/usr/bin/picom
+Slice=session.slice
