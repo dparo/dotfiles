@@ -24,7 +24,6 @@ require("telescope").setup {
             width = 0.80,
             height = 0.80,
             preview_cutoff = 120,
-            preview_width = 0.35,
         },
 
         find_command = { "rg", "-S", "--files", "--hidden", "-g", "!.ccls-cache", "-g", "!.git", "-g", "!.vcs", "-g", "!.svn" },
