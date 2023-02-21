@@ -8,5 +8,5 @@ notify-format "%d new articles (%n unread articles, %f unread feeds)"
 
 # Reload FEEDS on startup
 auto-reload yes
-# Reload FEEDS every 10 minutes
-reload-time 10
+# Reload FEEDS every 5 minutes
+reload-time 5
