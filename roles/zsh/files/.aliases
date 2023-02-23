@@ -129,6 +129,11 @@ mkfile() {
 	command mkdir -pv "$(dirname "$@")" && touch "$@"
 }
 
+mkcdir () {
+    mkdir -p -- "$1" &&
+       cd -P -- "$1" || return "$?"
+}
+
 alias run='nohup'
 
 alias rm='rm -I'
