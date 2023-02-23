@@ -117,6 +117,8 @@ export MAVEN_ARGS="-gs $XDG_CONFIG_HOME/maven/settings.xml"
 # For compatibility with maven-wrapper scripts (https://github.com/takari/maven-wrapper)
 export MAVEN_CONFIG="-gs $XDG_CONFIG_HOME/maven/settings.xml"
 
+export MAVEN_DEBUG_ADDRESS=5005
+
 export SPRING_PROFILES_ACTIVE="local"
 
 
