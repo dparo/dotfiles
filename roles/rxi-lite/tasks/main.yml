@@ -1,0 +1,36 @@
+---
+
+- name: Check latest rxi-lite
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/rxi/lite/releases/latest
+    return_content: true
+  register: rxilite_latest
+  tags:
+    - rxi-lite
+
+
+- name: Create install dir
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/opt/lite"
+    state: directory
+    mode: '0755'
+  tags:
+    - rxi-lite
+
+- name: Install latest rxi-lite
+  ansible.builtin.unarchive:
+    src: "https://github.com/rxi/lite/releases/download/{{ rxilite_latest['json']['tag_name'] }}/lite.zip"
+    dest: "{{ ansible_user_dir }}/opt/lite"
+    remote_src: yes
+  tags:
+    - rxi-lite
+
+- name: Symlink binary
+  ansible.builtin.file:
+    src:  "{{ ansible_user_dir }}/opt/lite/{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+    state: link
+  loop:
+    - lite
+  tags:
+    - rxi-lite

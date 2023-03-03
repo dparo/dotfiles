@@ -42,6 +42,7 @@
     - tmux
     - fzf
     - neovim
+    - rxi-lite
     - git-utils
     - lazygit
     - gitui
