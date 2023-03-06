@@ -660,24 +660,7 @@ local themes = {
             }
         end,
     },
-    { "joshdick/onedark.vim" },
-    {
-        "olimorris/onedarkpro.nvim",
-        config = function()
-            require("onedarkpro").setup {
-                styles = {
-                    comments = "italic",
-                    functions = "NONE",
-                    keywords = "bold",
-                    strings = "NONE",
-                    variables = "NONE",
-                },
-                options = {
-                    italic = false,
-                },
-            }
-        end,
-    },
+    { "navarasu/onedark.nvim" },
 
     { "arcticicestudio/nord-vim" },
     {
