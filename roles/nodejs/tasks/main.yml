@@ -1,27 +1,29 @@
 ---
-- name: Create dir {{ node_install_dir }}
+- name: Create dir {{ node_versions }}
   ansible.builtin.file:
-    path: "{{ node_install_dir }}/node-v{{ node_version }}-linux-x64"
+    path: "{{ node_install_dir }}/node-v{{ item }}-linux-x64"
     state: directory
     mode: "0755"
   register: node_target_dir
+  loop: "{{ node_versions }}"
   tags:
     - node
     - npm
 
-- name: "Download and unpack Node {{ node_version }}"
+- name: "Download and unpack Node {{ node_versions }}"
   ansible.builtin.unarchive:
-    src: https://nodejs.org/dist/v{{ node_version }}/node-v{{ node_version }}-linux-x64.tar.xz
+    src: https://nodejs.org/dist/v{{ item }}/node-v{{ item }}-linux-x64.tar.xz
     dest: "{{ node_install_dir }}"
     remote_src: yes
   when: node_target_dir.changed
+  loop: "{{ node_versions }}"
   tags:
     - node
     - npm
 
-- name: Symlink binaries
+- name: Symlink binaries {{ default_node_version }}
   ansible.builtin.file:
-    src: "{{ node_install_dir }}/node-v{{ node_version }}-linux-x64/bin/{{ item }}"
+    src: "{{ node_install_dir }}/node-v{{ default_node_version }}-linux-x64/bin/{{ item }}"
     dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
     state: link
   loop:
@@ -33,13 +35,13 @@
     - npm
 
 
-- name: Symlink config
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
-    state: link
-  loop:
-    - "{{ role_path }}/files/npm"
-  tags:
-    - node
-    - npm
+# - name: Symlink config
+#   ansible.builtin.file:
+#     src: "{{ item }}"
+#     dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+#     state: link
+#   loop:
+#     - "{{ role_path }}/files/npm"
+#   tags:
+#     - node
+#     - npm
