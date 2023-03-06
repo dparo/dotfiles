@@ -82,6 +82,7 @@
     - eslint
     - prettier
     - create-docusaurus@latest # https://docusaurus.io
+    - husky
   tags: devel
 
 - name: Install additional NPM tools

@@ -163,13 +163,20 @@ null_ls.setup {
         -- Mypy is an optional static type checker for Python that aims to combine the benefits of dynamic (or "duck") typing and static typing.
         -- null_ls.builtins.diagnostics.mypy,
         -- flake8 is a python tool that glues together pycodestyle, pyflakes, mccabe, and third-party plugins to check the style and quality of some python code
-        null_ls.builtins.diagnostics.flake8,
+        -- null_ls.builtins.diagnostics.flake8,
+
+        -- https://github.com/charliermarsh/ruff
+        null_ls.builtins.diagnostics.ruff,
+        null_ls.builtins.diagnostics.mypy.with {
+             method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+        },
+
 
         -- Pylint is a Python static code analysis tool which looks for programming errors, helps enforcing a coding standard, sniffs for code smells and offers simple refactoring suggestions.
         -- NOTE(dparo): Run pylint only on save due to its shitty performance
-        null_ls.builtins.diagnostics.pylint.with {
-            method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-        },
+        -- null_ls.builtins.diagnostics.pylint.with {
+        --     method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+        -- },
     },
 }
 
