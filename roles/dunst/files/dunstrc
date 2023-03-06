@@ -1,7 +1,7 @@
 # vi: ft=cfg
 
 [global]
-    font = Blex Mono Nerd Font 11
+    font = Blex Mono Nerd Font 10.5
 
     icon_position = left
 
@@ -76,6 +76,7 @@
 
     ### geometry
     height = 128
+    width = 480
     offset = 16x32
 
     # The transparency of the window. range: [0; 100]
