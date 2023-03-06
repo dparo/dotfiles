@@ -182,6 +182,7 @@
     - bash-language-server
     - pyright
     - debugpy
+    - ruff
     - clangd
     - clang-format
     - codelldb
