@@ -167,6 +167,8 @@ null_ls.setup {
 
         -- https://github.com/charliermarsh/ruff
         null_ls.builtins.diagnostics.ruff,
+        null_ls.builtins.formatting.ruff,
+
         null_ls.builtins.diagnostics.mypy.with {
              method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
         },
