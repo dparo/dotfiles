@@ -1,8 +1,9 @@
 ---
-- name: Install tidy (XML * HTML formatter, diagnostic tool)
+- name: Install generic devel deps
   ansible.builtin.dnf:
     name:
       - tidy
+      - just # https://github.com/casey/just: A command runner: just is a handy way to save and run project-specific commands.
     state: present
   become: true
   tags:
