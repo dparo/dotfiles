@@ -2,7 +2,7 @@
 # defaults file for nodejs
 
 node_versions:
-  - 16.10.0
+  - 16.13.0
   - 18.12.1
 default_node_version: 18.12.1
 node_install_dir: "{{ ansible_user_dir }}/opt"
