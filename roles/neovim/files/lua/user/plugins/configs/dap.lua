@@ -4,6 +4,7 @@ local path = require "core.os.path"
 local nvim_data_path = path.get_nvim_data_path()
 
 local chrome_debug_adapter_path = path.concat { nvim_data_path, "mason", "packages", "chrome-debug-adapter" }
+local firefox_debug_adapter_path = path.concat { nvim_data_path, "mason", "packages", "firefox-debug-adapter" }
 
 require("dap-vscode-js").setup {
     debugger_path = vim.fn.stdpath "data" .. "/mason/packages/js-debug-adapter",
@@ -44,14 +45,19 @@ require("dap-go").setup()
 dap.adapters.cppdbg = {
     id = "cppdbg",
     type = "executable",
-    command = path.concat { nvim_data_path, "mason", "packages", "cpptools", "extension", "debugAdapters", "bin",
-        "OpenDebugAD7" },
+    command = path.concat { nvim_data_path, "mason", "packages", "cpptools", "extension", "debugAdapters", "bin", "OpenDebugAD7" },
 }
 
 dap.adapters.chrome = {
     type = "executable",
     command = "node",
     args = { path.concat { chrome_debug_adapter_path, "out", "src", "chromeDebug.js" } },
+}
+
+dap.adapters.firefox = {
+    type = "executable",
+    command = "node",
+    args = { path.concat { firefox_debug_adapter_path, "firefox-debug-adapter" } },
 }
 
 dap.configurations.cpp = {
@@ -114,7 +120,7 @@ dap.configurations.java = {
     },
 }
 
-for _, language in ipairs { "typescript", "javascript" } do
+for _, language in ipairs { "typescript", "javascript", "typescriptreact" } do
     dap.configurations[language] = {}
 
     vim.list_extend(dap.configurations[language], {
@@ -194,7 +200,7 @@ for _, language in ipairs { "typescript", "javascript" } do
             url = "http://127.0.0.1",
             hostName = "127.0.0.1",
             port = function()
-                return vim.fn.input("Port: ", 4200)
+                return vim.fn.input("Port: ", "4200")
             end,
             webRoot = "${workspaceFolder}",
         },
@@ -204,7 +210,7 @@ for _, language in ipairs { "typescript", "javascript" } do
             request = "launch",
             reAttach = true,
             url = function()
-                return "http://127.0.0.1" + vim.fn.input("Port: ", 4200)
+                return "http://127.0.0.1" .. vim.fn.input("Port: ", "4200")
             end,
             webRoot = "${workspaceFolder}",
         },
