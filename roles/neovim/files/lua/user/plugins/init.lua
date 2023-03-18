@@ -571,7 +571,7 @@ local generic = {
 
     {
         "mfussenegger/nvim-dap",
-        requires = { "rcarriga/nvim-dap-ui", "leoluz/nvim-dap-go", "theHamsta/nvim-dap-virtual-text" },
+        requires = { "rcarriga/nvim-dap-ui", "leoluz/nvim-dap-go", "theHamsta/nvim-dap-virtual-text", "mxsdev/nvim-dap-vscode-js" },
         config = function()
             require "user.plugins.configs.dap"
         end,
