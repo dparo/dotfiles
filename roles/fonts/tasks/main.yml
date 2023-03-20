@@ -49,7 +49,7 @@
     paths: /usr/local/share/fonts
     patterns: "^.*Windows Compatible.*.ttf$"
     use_regex: yes
-  become: true
+    recurse: True
   when: fonts_download.changed
   register: windows_compatible_fonts
   tags:
@@ -57,7 +57,7 @@
 
 - name: Remove Windows compatible fonts
   ansible.builtin.file:
-    path: "{{ item }}"
+    path: "{{ item.path }}"
     state: absent
   become: true
   when: fonts_download.changed
