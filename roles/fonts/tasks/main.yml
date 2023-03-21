@@ -1,4 +1,15 @@
 ---
+- name: Install minimal fonts (DNF)
+  ansible.builtin.dnf:
+    name:
+      - ibm-plex-mono-fonts
+      - ibm-plex-sans-fonts
+      - ibm-plex-serif-fonts
+    state: present
+  become: true
+  tags:
+    - fonts
+
 - name: Symlink fontconfig
   ansible.builtin.file:
     src: "{{ item }}"
@@ -10,64 +21,68 @@
     - fonts
     - fontconfig
 
-- name: Create target dirs for installation
+
+- name: Create NerdFonts subdir
   ansible.builtin.file:
-    path: "/usr/local/share/fonts/{{ item }}"
+    path: "/usr/local/share/fonts/NerdFonts"
     state: directory
     mode: "0755"
   become: true
-  register: fonts_target_dirs
-  loop: "{{ fonts }}"
   tags:
     - fonts
 
-- name: Install fonts (DNF)
-  ansible.builtin.dnf:
-    name:
-      - ibm-plex-mono-fonts
-      - ibm-plex-sans-fonts
-      - ibm-plex-serif-fonts
-    state: present
+- name: Check if Nerd fonts are already installed
+  ansible.builtin.stat:
+    path: "/usr/local/share/fonts/NerdFonts/{{ item }}"
+  loop: '{{ nerd_fonts }}'
+  register: fonts_dir
+
+
+- name: Create necessary NerdFonts subdir
+  ansible.builtin.file:
+    path: "/usr/local/share/fonts/NerdFonts/{{ item }}"
+    state: directory
+    mode: "0755"
+  loop: "{{ nerd_fonts }}"
   become: true
   tags:
     - fonts
 
-- name: Download fonts
+
+- name: Download Nerd Fonts
   ansible.builtin.unarchive:
-    src: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/{{ item }}.zip"
-    dest: "/usr/local/share/fonts/{{ item }}"
+    src: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/{{ item.item }}.zip"
+    dest: "/usr/local/share/fonts/NerdFonts/{{ item.item }}"
     remote_src: yes
   become: true
-  when: fonts_target_dirs.changed
-  loop: "{{ fonts }}"
-  register: fonts_download
+  when: 'item.stat.exists == False'
+  loop: "{{ fonts_dir.results }}"
   tags:
     - fonts
 
-- name: Find Windows compatible fonts
+- name: Find Windows compatible Nerd fonts
   ansible.builtin.find:
-    paths: /usr/local/share/fonts
+    paths: /usr/local/share/fonts/NerdFonts
     patterns: "^.*Windows Compatible.*.ttf$"
     use_regex: yes
     recurse: True
-  when: fonts_download.changed
   register: windows_compatible_fonts
   tags:
     - fonts
 
-- name: Remove Windows compatible fonts
+
+- name: Remove Windows compatible Nerd fonts
   ansible.builtin.file:
     path: "{{ item.path }}"
     state: absent
   become: true
-  when: fonts_download.changed
   loop: "{{ windows_compatible_fonts.files | flatten(levels=1) }}"
   tags:
     - fonts
 
 - name: Reload font cache
   ansible.builtin.command: fc-cache -fvr
-  when: fonts_download.changed
+  when: "fonts_dir.results | length > 0"
   ignore_errors: True
   tags:
     - fonts
@@ -75,6 +90,6 @@
 - name: Refresh X11 font cache
   ansible.builtin.command: xset fp rehash
   ignore_errors: True
-  when: fonts_download.changed
+  when: "fonts_dir.results | length > 0"
   tags:
     - fonts
