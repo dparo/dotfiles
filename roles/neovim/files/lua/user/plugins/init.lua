@@ -1,7 +1,7 @@
 local dbs_plugin = {
     { "tpope/vim-dadbod" },
-    { "kristijanhusak/vim-dadbod-ui", requires = { "tpope/vim-dadbod" } },
-    { "kristijanhusak/vim-dadbod-completion", requires = { "tpope/vim-dadbod", "vim-dadbod-completion" } },
+    { "kristijanhusak/vim-dadbod-ui", dependencies = { "tpope/vim-dadbod" } },
+    { "kristijanhusak/vim-dadbod-completion", dependencies = { "tpope/vim-dadbod", "vim-dadbod-completion" } },
 }
 
 local generic = {
@@ -57,7 +57,7 @@ local generic = {
     { "mbbill/undotree" },
     {
         "junegunn/fzf.vim",
-        requires = {
+        dependencies = {
             vim.env.HOME .. "/opt/fzf",
         },
         config = function()
@@ -100,7 +100,7 @@ local generic = {
 
     -- Utils functions for common Unix like utilities such as mkdir, touch, mv inside of vim
     { "tpope/vim-eunuch" },
-    { "tpope/vim-dispatch", opt = true, cmd = { "Dispatch", "Make", "Focus", "Start" } },
+    { "tpope/vim-dispatch", lazy = true, cmd = { "Dispatch", "Make", "Focus", "Start" } },
     { "tpope/vim-surround" }, -- Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more
 
     -- Automatically detect shiftwidth and tabstop heuristically from file
@@ -116,10 +116,10 @@ local generic = {
             }
         end,
     },
-    { "nvim-lua/popup.nvim", requires = { "nvim-lua/plenary.nvim" } },
+    { "nvim-lua/popup.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
     {
         "nvim-telescope/telescope.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
+        dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require "user.plugins.configs.telescope"
         end,
@@ -127,8 +127,8 @@ local generic = {
 
     {
         "nvim-telescope/telescope-fzf-native.nvim",
-        requires = { "nvim-telescope/telescope.nvim" },
-        run = "make",
+        dependencies = { "nvim-telescope/telescope.nvim" },
+        build = "make",
         cond = vim.fn.executable "make" == 1,
         config = function()
             pcall(require("telescope").load_extension, "fzf")
@@ -141,7 +141,7 @@ local generic = {
     -- so that's exactly what this plugin does.
     {
         "https://github.com/stevearc/dressing.nvim",
-        requires = { "nvim-telescope/telescope.nvim" },
+        dependencies = { "nvim-telescope/telescope.nvim" },
         config = function()
             require("dressing").setup {}
         end,
@@ -190,7 +190,7 @@ local generic = {
     -- Better status line
     {
         "hoob3rt/lualine.nvim",
-        requires = { "kyazdani42/nvim-web-devicons" },
+        dependencies = { "kyazdani42/nvim-web-devicons" },
         config = function()
             require "user.plugins.configs.lualine"
         end,
@@ -200,7 +200,7 @@ local generic = {
     ---- Plugins for cursor motion or for text editing
     ----
     { "junegunn/vim-easy-align" },
-    { "andymass/vim-matchup", event = "VimEnter" },
+    { "andymass/vim-matchup", lazy = true, event = "VimEnter" },
 
     -- "Jetpack" like movement within the buffer. Quickly jump where you want to go
     {
@@ -215,7 +215,7 @@ local generic = {
     -- Clipboard manager neovim plugin with telescope integration
     {
         "AckslD/nvim-neoclip.lua",
-        requires = {
+        dependencies = {
             "nvim-telesope/telescope.nvim",
         },
         config = function()
@@ -291,7 +291,7 @@ local generic = {
     -- Highlight todo in comments
     {
         "folke/todo-comments.nvim",
-        requires = { "nvim-lua/plenary.nvim", "folke/trouble.nvim", "nvim-telescope/telescope.nvim" },
+        dependencies = { "nvim-lua/plenary.nvim", "folke/trouble.nvim", "nvim-telescope/telescope.nvim" },
         config = function()
             require("todo-comments").setup {
                 highlight = {
@@ -309,8 +309,8 @@ local generic = {
 
     {
         "akinsho/bufferline.nvim",
-        tag = "v3.*",
-        requires = "nvim-tree/nvim-web-devicons",
+        version = "v3.*",
+        dependencies = "nvim-tree/nvim-web-devicons",
         config = function()
             require("bufferline").setup {}
         end,
@@ -363,7 +363,7 @@ local generic = {
     },
     {
         "kyazdani42/nvim-tree.lua",
-        requires = { "kyazdani42/nvim-web-devicons" },
+        dependencies = { "kyazdani42/nvim-web-devicons" },
         config = function()
             require("nvim-tree").setup {
                 hijack_netrw = false,
@@ -395,10 +395,10 @@ local generic = {
     {
         "nvim-treesitter/nvim-treesitter",
         branch = "master",
-        run = function()
+        build = function()
             vim.cmd [[:TSUpdateSync all]]
         end,
-        requires = { "nvim-treesitter/playground", "p00f/nvim-ts-rainbow", "nvim-treesitter/nvim-treesitter-context" },
+        dependencies = { "nvim-treesitter/playground", "p00f/nvim-ts-rainbow", "nvim-treesitter/nvim-treesitter-context" },
         config = function()
             require("nvim-treesitter.configs").setup {
                 ensure_installed = {
@@ -509,7 +509,7 @@ local generic = {
 
     {
         "m-demare/hlargs.nvim",
-        requires = { "nvim-treesitter/nvim-treesitter" },
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
         config = function()
             require("hlargs").setup()
         end,
@@ -517,7 +517,7 @@ local generic = {
     -- Install LuaSnip and load friendly-snippets (a set of already pre-packaged set of snippets)
     {
         "L3MON4D3/LuaSnip",
-        requires = { "rafamadriz/friendly-snippets" },
+        dependencies = { "rafamadriz/friendly-snippets" },
         config = function()
             require("luasnip.loaders.from_vscode").lazy_load()
         end,
@@ -529,7 +529,7 @@ local generic = {
     -- Snippets
     {
         "hrsh7th/nvim-cmp",
-        requires = {
+        dependencies = {
             "nvim-lua/plenary.nvim",
             "windwp/nvim-autopairs",
             "L3MON4D3/LuaSnip",
@@ -552,7 +552,7 @@ local generic = {
 
     {
         "neovim/nvim-lspconfig",
-        requires = {
+        dependencies = {
             "hrsh7th/nvim-cmp",
             "hrsh7th/cmp-nvim-lsp",
             "nvim-lua/lsp_extensions.nvim",
@@ -571,7 +571,7 @@ local generic = {
 
     {
         "mfussenegger/nvim-dap",
-        requires = { "rcarriga/nvim-dap-ui", "leoluz/nvim-dap-go", "theHamsta/nvim-dap-virtual-text", "mxsdev/nvim-dap-vscode-js" },
+        dependencies = { "rcarriga/nvim-dap-ui", "leoluz/nvim-dap-go", "theHamsta/nvim-dap-virtual-text", "mxsdev/nvim-dap-vscode-js" },
         config = function()
             require "user.plugins.configs.dap"
         end,
@@ -600,7 +600,7 @@ local syntax_highligthing = {
 local vcs_integration = {
     {
         "TimUntersberger/neogit",
-        requires = "nvim-lua/plenary.nvim",
+        dependencies = "nvim-lua/plenary.nvim",
         config = function()
             local neogit = require "neogit"
 
@@ -611,8 +611,9 @@ local vcs_integration = {
     { "tpope/vim-fugitive" },
     {
         "kdheepak/lazygit.nvim",
+        lazy = true,
         cmd = { "LazyGit" },
-        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
+        dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
         config = function()
             require("telescope").load_extension "lazygit"
         end,
@@ -620,7 +621,7 @@ local vcs_integration = {
 
     {
         "sindrets/diffview.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
+        dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("diffview").setup {}
         end,
@@ -640,11 +641,11 @@ local themes = {
     { "rktjmp/lush.nvim" },
     { "tjdevries/colorbuddy.nvim" },
 
-    { "dracula/vim", as = "dracula" },
-    { "metalelf0/jellybeans-nvim", requires = { "rktjmp/lush.nvim" } },
-    { "tjdevries/gruvbuddy.nvim", requires = { "tjdevries/colorbuddy.nvim" } },
-    { "Th3Whit3Wolf/spacebuddy", requires = { "tjdevries/colorbuddy.nvim" } },
-    { "catppuccin/nvim", as = "catppuccin" },
+    { "dracula/vim", name = "dracula" },
+    { "metalelf0/jellybeans-nvim", dependencies = { "rktjmp/lush.nvim" } },
+    { "tjdevries/gruvbuddy.nvim", dependencies = { "tjdevries/colorbuddy.nvim" } },
+    { "Th3Whit3Wolf/spacebuddy", dependencies = { "tjdevries/colorbuddy.nvim" } },
+    { "catppuccin/nvim", name = "catppuccin" },
     {
         "marko-cerovac/material.nvim",
         config = function()
@@ -740,7 +741,7 @@ local themes = {
 }
 
 local language_specific_toolings = {
-    { "iamcco/markdown-preview.nvim", run = "cd app && yarn install", cmd = "MarkdownPreview" },
+    { "iamcco/markdown-preview.nvim", build = "cd app && yarn install", lazy = true, cmd = "MarkdownPreview" },
     -- Plugin that provides nice wrapper commands to build with cmake
     {
         "cdelledonne/vim-cmake",
@@ -793,11 +794,44 @@ local unused = {
     },
 }
 
-local M = {}
-vim.list_extend(M, dbs_plugin)
-vim.list_extend(M, generic)
-vim.list_extend(M, syntax_highligthing)
-vim.list_extend(M, themes)
-vim.list_extend(M, vcs_integration)
-vim.list_extend(M, language_specific_toolings)
-return M
+local plugins = {}
+vim.list_extend(plugins, dbs_plugin)
+vim.list_extend(plugins, generic)
+vim.list_extend(plugins, syntax_highligthing)
+vim.list_extend(plugins, themes)
+vim.list_extend(plugins, vcs_integration)
+vim.list_extend(plugins, language_specific_toolings)
+
+
+
+
+
+-- Setup lazy.nvim
+
+local running_headless = next(vim.api.nvim_list_uis()) == nil -- If dictionaries of UIs is empty => headless mode
+
+local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
+
+if not running_headless and not vim.loop.fs_stat(lazypath) then
+    vim.api.nvim_set_hl(0, "NormalFloat", { bg = "#1e222a" })
+    print "Cloning lazy.nvim .."
+
+    vim.fn.system {
+        "git",
+        "clone",
+        "--filter=blob:none",
+        "https://github.com/folke/lazy.nvim.git",
+        "--branch=stable", -- latest stable release
+        lazypath,
+    }
+
+    vim.fn.system {
+        "rm",
+        "-rf",
+        vim.env.HOME .. "/.config/nvim/plugin/packer_compiled.lua",
+    }
+end
+
+vim.opt.rtp:prepend(lazypath)
+require("lazy").startup(plugins)
+return plugins
