@@ -1,7 +1,7 @@
 # vi: ft=cfg
 
 [global]
-    font = Blex Mono Nerd Font 10.5
+    font = IBM Plex Sans 10.5
 
     icon_position = left
 
