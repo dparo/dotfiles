@@ -742,7 +742,6 @@ local themes = {
 }
 
 local language_specific_toolings = {
-    { "iamcco/markdown-preview.nvim", build = "cd app && yarn install", lazy = true, cmd = "MarkdownPreview" },
     -- Plugin that provides nice wrapper commands to build with cmake
     {
         "cdelledonne/vim-cmake",
@@ -802,9 +801,6 @@ vim.list_extend(plugins, syntax_highligthing)
 vim.list_extend(plugins, themes)
 vim.list_extend(plugins, vcs_integration)
 vim.list_extend(plugins, language_specific_toolings)
-
-
-
 
 
 -- Setup lazy.nvim
