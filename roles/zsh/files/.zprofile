@@ -79,6 +79,7 @@ export ANDROID_USER_HOME="$XDG_DATA_HOME/android"
 export ANDROID_EMULATOR_HOME="$ANDROID_USER_HOME"
 export ANDROID_AVD_HOME="$ANDROID_HOME/avd"
 export WINEPREFIX="$XDG_DATA_HOME/wine"
+export NPM_CONFIG_REGISTRY="https://registry.npmjs.org/"
 
 export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 export PSQL_HISTORY="$XDG_DATA_HOME/psql_history"
