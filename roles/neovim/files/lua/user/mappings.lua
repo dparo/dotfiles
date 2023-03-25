@@ -325,7 +325,6 @@ local function setup_commands()
     ----
     ---- Commands
     ----
-    nmap("<leader>rr", exec_lua "source ~/.config/nvim/init.lua")
     nimap(fn_key(1), exec_cmd "noh")
     nmap({ "<leader>cc", fn_key(7) }, exec_lua "user.utils.build()")
     nmap({ "<leader>c<F2>", "<leader>ce", "<leader>cr", unpack(shift_fn_key(7)) }, exec_lua "user.utils.set_makeprg()")
@@ -416,6 +415,10 @@ local function setup_plugins()
     nmap("<leader>gs", exec_cmd "Git status")
     nmap("<leader>gp", exec_cmd "Git push")
     nmap("<leader>gP", exec_cmd "Git pull")
+
+    vim.keymap.set("n", "<leader>rr", function()
+        vim.fn.execute("source ~/.config/nvim/init.lua")
+    end, { silent = false })
 end
 
 setup_unbinds()
