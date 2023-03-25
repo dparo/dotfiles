@@ -444,23 +444,3 @@ end
 local feedkey = function(key, mode)
     vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes(key, true, true, true), mode, true)
 end
-
-local M = {}
-M.plugins = {}
-
-M.plugins["telescope"] = function()
-    local actions = require "telescope.actions"
-
-    return {
-        n = {
-            ["q"] = actions.close,
-        },
-        i = {
-            ["<Esc>"] = actions.close,
-            ["<C-c>"] = actions.close,
-            ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
-        },
-    }
-end
-
-return M

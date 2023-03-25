@@ -55,10 +55,11 @@ local generic = {
     },
 
     { "mbbill/undotree" },
+
     {
         "junegunn/fzf.vim",
         dependencies = {
-            vim.env.HOME .. "/opt/fzf",
+            { "junegunn/fzf", dir = vim.env.HOME .. "/opt/fzf" },
         },
         config = function()
             vim.g.fzf_buffers_jump = 1
@@ -155,7 +156,7 @@ local generic = {
     },
     -- Web dev icons, requires font support. Use NerdFonts in your terminal
     {
-        "kyazdani42/nvim-web-devicons",
+        "nvim-tree/nvim-web-devicons",
         config = function()
             require("nvim-web-devicons").setup {}
         end,
@@ -190,7 +191,7 @@ local generic = {
     -- Better status line
     {
         "hoob3rt/lualine.nvim",
-        dependencies = { "kyazdani42/nvim-web-devicons" },
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             require "user.plugins.configs.lualine"
         end,
@@ -216,7 +217,7 @@ local generic = {
     {
         "AckslD/nvim-neoclip.lua",
         dependencies = {
-            "nvim-telesope/telescope.nvim",
+            "nvim-telescope/telescope.nvim",
         },
         config = function()
             require("neoclip").setup {
@@ -362,8 +363,8 @@ local generic = {
         end,
     },
     {
-        "kyazdani42/nvim-tree.lua",
-        dependencies = { "kyazdani42/nvim-web-devicons" },
+        "nvim-tree/nvim-tree.lua",
+        dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             require("nvim-tree").setup {
                 hijack_netrw = false,
@@ -539,7 +540,7 @@ local generic = {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
-            "kyazdani42/nvim-web-devicons",
+            "nvim-tree/nvim-web-devicons",
             "jose-elias-alvarez/null-ls.nvim",
             "hrsh7th/cmp-nvim-lsp-signature-help",
             "petertriho/cmp-git",
@@ -833,5 +834,5 @@ if not running_headless and not vim.loop.fs_stat(lazypath) then
 end
 
 vim.opt.rtp:prepend(lazypath)
-require("lazy").startup(plugins)
+require("lazy").setup(plugins, {})
 return plugins

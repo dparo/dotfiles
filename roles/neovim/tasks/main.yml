@@ -149,17 +149,18 @@
   ansible.builtin.git:
     clone: yes
     depth: 1
-    dest: "{{ ansible_user_dir }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
+    dest: "{{ ansible_user_dir }}/.local/share/nvim/lazy/lazy.nvim"
     force: yes
-    repo: https://github.com/wbthomason/packer.nvim
+    repo: https://github.com/folke/lazy.nvim.git
     single_branch: yes
+    version: stable
     update: yes
   tags:
     - neovim
 
-- name: packer.nvim install plugins
+- name: Lazy.nvim install plugins
   ansible.builtin.shell: |
-    nvim --headless -c 'autocmd User PackerComplete quitall!' -c 'PackerSync'
+    nvim --headless -c 'autocmd User LazySync quitall!' -c 'Lazy sync'
   tags:
     - neovim
     - neovim-plugins
@@ -214,8 +215,8 @@
     - hadolint
     - angular-language-server
     - cucumber-language-server
-    - js-debug-adapter          # https://github.com/microsoft/vscode-js-debug
-    - chrome-debug-adapter      # Deprecated in favour of js-debug-adapter
+    - js-debug-adapter # https://github.com/microsoft/vscode-js-debug
+    - chrome-debug-adapter # Deprecated in favour of js-debug-adapter
     - firefox-debug-adapter
   tags:
     - neovim
