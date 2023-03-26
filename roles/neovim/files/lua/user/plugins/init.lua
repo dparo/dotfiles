@@ -786,12 +786,7 @@ local unused = {
         config = function()
             require("alpha").setup(require("alpha.themes.dashboard").config)
         end,
-    },
-
-    -- Speed up loading Lua modules in Neovim to improve startup time
-    {
-        "lewis6991/impatient.nvim",
-    },
+    }
 }
 
 local plugins = {}
