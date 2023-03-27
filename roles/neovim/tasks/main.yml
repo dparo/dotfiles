@@ -218,6 +218,7 @@
     - js-debug-adapter # https://github.com/microsoft/vscode-js-debug
     - chrome-debug-adapter # Deprecated in favour of js-debug-adapter
     - firefox-debug-adapter
+    - html-lsp
   tags:
     - neovim
     - neovim-lsp
