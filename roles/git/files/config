@@ -31,19 +31,31 @@
 [alias]
 	lola = log --graph --decorate --oneline --abbrev-commit --all
 [diff]
-    tool = meld
+    tool = p4merge
     colorMoved = default
-[difftool]
-	prompt = false
 [difftool "meld"]
 	cmd = meld "$LOCAL" "$REMOTE"
+    prompt = false
+[difftool "p4merge"]
+	cmd = p4merge "$LOCAL" "$REMOTE"
+    keepBackup = false
+	keepTemporaries = false
+	trustExitCode = false
+	prompt = false
 [merge]
     conflictstyle = diff3
     summary = true
 	keepbackup = false
-    tool = meld
+	tool = p4merge
 [mergetool "meld"]
     cmd = meld --output "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
+[mergetool "p4merge"]
+# See https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
+    cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
+    keepBackup = false
+	keepTemporaries = false
+	trustExitCode = true
+	prompt = false
 [interactive]
     diffFilter = delta --color-only --features=interactive
 [delta]
