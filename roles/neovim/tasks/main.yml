@@ -159,7 +159,7 @@
     - neovim
 # - name: Lazy.nvim install plugins
 #   ansible.builtin.shell: |
-#     zsh -c 'source ~/.confi/zsh/.zshenv && source ~/.config/zsh/.zprofile && nvim --headless -c "autocmd User LazySync quitall!" -c "Lazy sync"'
+#     nvim --headless -c "Lazy! restore" -c qall
 #   tags:
 #     - neovim
 #     - neovim-plugins

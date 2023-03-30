@@ -397,7 +397,7 @@ local generic = {
         "nvim-treesitter/nvim-treesitter",
         branch = "master",
         build = function()
-            vim.cmd [[:TSUpdate]]
+            vim.cmd [[:TSUpdateSync ]]
         end,
         dependencies = { "nvim-treesitter/playground", "p00f/nvim-ts-rainbow", "nvim-treesitter/nvim-treesitter-context" },
         config = function()
