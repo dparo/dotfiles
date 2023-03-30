@@ -1,0 +1,33 @@
+---
+
+# https://www.perforce.com/downloads/perforce/r23.1/bin.linux26x86_64/p4v.tgz
+
+- name: Create installation dir
+  ansible.builtin.file:
+    dest: "{{ ansible_user_dir }}/opt/p4merge-r{{ p4merge_release_version }}"
+    state: directory
+    mode: "0755"
+  tags:
+    - maven
+
+
+- name: "Download and unarchive p4merge"
+  ansible.builtin.unarchive:
+    src: 'https://www.perforce.com/downloads/perforce/r{{ p4merge_release_version }}/bin.linux26x86_64/p4v.tgz'
+    dest: "{{ ansible_user_dir }}/opt/p4merge-r{{ p4merge_release_version }}"
+    remote_src: yes
+    extra_opts: [--strip-components=1]
+  tags:
+    - p4merge
+
+
+- name: Symlink binaries
+  ansible.builtin.file:
+    src: "{{ ansible_user_dir }}/opt/p4merge-r{{ p4merge_release_version }}/bin/{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+    state: link
+  loop:
+    - p4merge
+  tags:
+    - node
+    - npm
