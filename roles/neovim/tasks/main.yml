@@ -145,7 +145,7 @@
   tags:
     - neovim
 
-- name: Clone packer.nvim
+- name: Clone lazy.nvim
   ansible.builtin.git:
     clone: yes
     depth: 1
@@ -157,67 +157,68 @@
     update: yes
   tags:
     - neovim
-# - name: Lazy.nvim install plugins
-#   ansible.builtin.shell: |
-#     nvim --headless -c "Lazy! restore" -c qall
-#   tags:
-#     - neovim
-#     - neovim-plugins
-#
-# - name: Update remote plugins
-#   ansible.builtin.shell: |
-#     nvim --headless -c 'UpdateRemotePlugins' -c qall
-#   tags:
-#     - neovim
-#     - neovim-plugins
-#
-# - name: Install lsp-servers, formatters, diagnostics tools
-#   ansible.builtin.shell: |
-#     nvim --headless -c "MasonInstall {{ item }}" -c "qall"
-#   loop:
-#     - markdownlint
-#     - vim-language-server
-#     - stylua
-#     - lua-language-server
-#     - bash-language-server
-#     - pyright
-#     - debugpy
-#     - ruff
-#     - clangd
-#     - clang-format
-#     - codelldb
-#     - cpptools
-#     - cmakelang
-#     - cmake-language-server
-#     - rust-analyzer
-#     - gopls
-#     - shellcheck
-#     - shellharden
-#     - shfmt
-#     - typescript-language-server
-#     - eslint-lsp
-#     - prettier
-#     - json-lsp
-#     - yamllint
-#     - yaml-language-server
-#     - texlab
-#     - write-good
-#     - proselint
-#     - codespell
-#     - misspell
-#     - ltex-ls
-#     - ansible-language-server
-#     - sqlfluff
-#     - jdtls
-#     - java-test
-#     - java-debug-adapter
-#     - hadolint
-#     - angular-language-server
-#     - cucumber-language-server
-#     - js-debug-adapter # https://github.com/microsoft/vscode-js-debug
-#     - chrome-debug-adapter # Deprecated in favour of js-debug-adapter
-#     - firefox-debug-adapter
-#     - html-lsp
-#   tags:
-#     - neovim
-#     - neovim-lsp
+
+- name: Lazy.nvim install plugins
+  ansible.builtin.shell: |
+    nvim --headless -c "Lazy! restore" -c qall
+  tags:
+    - neovim
+    - neovim-plugins
+
+- name: Update remote plugins
+  ansible.builtin.shell: |
+    nvim --headless -c 'UpdateRemotePlugins' -c qall
+  tags:
+    - neovim
+    - neovim-plugins
+
+- name: Install lsp-servers, formatters, diagnostics tools
+  ansible.builtin.shell: |
+    nvim --headless -c "MasonInstall {{ item }}" -c "qall"
+  loop:
+    - markdownlint
+    - vim-language-server
+    - stylua
+    - lua-language-server
+    - bash-language-server
+    - pyright
+    - debugpy
+    - ruff
+    - clangd
+    - clang-format
+    - codelldb
+    - cpptools
+    - cmakelang
+    - cmake-language-server
+    - rust-analyzer
+    - gopls
+    - shellcheck
+    - shellharden
+    - shfmt
+    - typescript-language-server
+    - eslint-lsp
+    - prettier
+    - json-lsp
+    - yamllint
+    - yaml-language-server
+    - texlab
+    - write-good
+    - proselint
+    - codespell
+    - misspell
+    - ltex-ls
+    - ansible-language-server
+    - sqlfluff
+    - jdtls
+    - java-test
+    - java-debug-adapter
+    - hadolint
+    - angular-language-server
+    - cucumber-language-server
+    - js-debug-adapter # https://github.com/microsoft/vscode-js-debug
+    - chrome-debug-adapter # Deprecated in favour of js-debug-adapter
+    - firefox-debug-adapter
+    - html-lsp
+  tags:
+    - neovim
+    - neovim-lsp
