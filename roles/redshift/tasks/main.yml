@@ -17,6 +17,6 @@
     state: link
   loop:
     - "{{ role_path }}/files/config/redshift.conf"
-    - "{{ role_path }}/files/config/gammastep/"
+    - "{{ role_path }}/files/config/gammastep"
   tags:
     - redshift
