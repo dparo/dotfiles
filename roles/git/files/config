@@ -34,10 +34,10 @@
     tool = p4merge
     colorMoved = default
 [difftool "meld"]
-	cmd = meld "$REMOTE" "$LOCAL"
+	cmd = meld "$LOCAL" "$REMOTE"
     prompt = false
 [difftool "p4merge"]
-	cmd = p4merge "$REMOTE" "$LOCAL"
+	cmd = p4merge "$LOCAL" "$REMOTE"
     keepBackup = false
 	keepTemporaries = false
 	trustExitCode = false
