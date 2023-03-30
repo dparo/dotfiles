@@ -47,6 +47,11 @@
     summary = true
 	keepbackup = false
 	tool = p4merge
+[mergetool]
+	keepBackup = false
+	keepTemporaries = false
+	trustExitCode = true
+	prompt = false
 [mergetool "meld"]
     cmd = meld --output "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
 [mergetool "p4merge"]
