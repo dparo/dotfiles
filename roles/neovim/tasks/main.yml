@@ -222,3 +222,6 @@
   tags:
     - neovim
     - neovim-lsp
+    - mason
+    - mason.nvim
+    - nvim-mason
