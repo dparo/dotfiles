@@ -106,6 +106,7 @@ local generic = {
 
     -- Automatically detect shiftwidth and tabstop heuristically from file
     -- { "tpope/vim-sleuth" },
+    { "editorconfig/editorconfig-vim" },
 
     { "nvim-lua/plenary.nvim" },
     {
@@ -796,7 +797,6 @@ vim.list_extend(plugins, syntax_highligthing)
 vim.list_extend(plugins, themes)
 vim.list_extend(plugins, vcs_integration)
 vim.list_extend(plugins, language_specific_toolings)
-
 
 
 return plugins
