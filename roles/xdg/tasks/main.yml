@@ -149,3 +149,15 @@
   tags:
     - xdg
     - xdg-ninja
+
+
+- name: Symlink xdg-ninja binaries
+  ansible.builtin.file:
+    src: "{{ ansible_user_dir }}/opt/github.com/xdg-ninja/{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+    state: link
+  loop:
+    - xdg-ninja.sh
+  tags:
+    - xdg
+    - xdg-ninja
