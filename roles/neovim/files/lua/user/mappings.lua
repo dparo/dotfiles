@@ -407,6 +407,9 @@ local function setup_plugins()
         require("spectre").open_visual()
     end)
 
+    -- SSR: Structurale search and replace
+    vim.keymap.set({ "n", "x" }, "<leader>sr", function() require("ssr").open() end)
+
     -- Git
     nmap("<leader>gG", exec_cmd "Git")
     nmap("<leader>gg", exec_cmd "LazyGit")

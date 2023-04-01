@@ -76,6 +76,7 @@
   "smart-term-esc.nvim": { "branch": "main", "commit": "168cd1a9e4649038e356b293005e5714e6e9f190" },
   "sonokai": { "branch": "master", "commit": "bf1e4d016a08cc3fb2a3060309d00e04dbd4fc22" },
   "spacebuddy": { "branch": "main", "commit": "ec198c4b51e23107f48a9a96eefc648e410d7f4e" },
+  "ssr.nvim": { "branch": "main", "commit": "a30674d07b220304ed81f1f46a8f1de36ce74c38" },
   "telescope-fzf-native.nvim": { "branch": "main", "commit": "580b6c48651cabb63455e97d7e131ed557b8c7e2" },
   "telescope.nvim": { "branch": "master", "commit": "942fe5faef47b21241e970551eba407bc10d9547" },
   "todo-comments.nvim": { "branch": "main", "commit": "14e2cd9a6e5e67483a03660f08471ca9a981c4a5" },

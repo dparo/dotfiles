@@ -25,6 +25,15 @@ local generic = {
     -- A search panel for neovim: Find the enemy and replace them with dark power
     { "windwp/nvim-spectre" },
 
+
+    -- Treesitter based structural search and replace plugin for Neovim.
+    {
+        "cshuaimin/ssr.nvim",
+        config = function()
+            require("ssr").setup {}
+        end
+    },
+
     --- Trim trailing whitespaces
     {
         "cappyzawa/trim.nvim",
