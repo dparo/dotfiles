@@ -7,6 +7,10 @@ local cachePath = path.get_nvim_cache_path()
 
 vim.o.shell = "zsh"
 
+local leaderkey = " "
+vim.g.mapleader = leaderkey
+vim.g.maplocalleader = leaderkey
+
 -- The shada file remembers the last state of vim: command line history, search history, file marks
 vim.o.shadafile = path.concat {cachePath, "shada" }
 vim.o.undodir = path.concat { cachePath, "nvim", "undo" }

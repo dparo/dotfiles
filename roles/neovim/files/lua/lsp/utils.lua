@@ -14,7 +14,7 @@ function M.update_server_config(config)
     capabilities = vim.tbl_deep_extend("force", capabilities,  require("cmp_nvim_lsp").default_capabilities())
 
     config.capabilities = capabilities
-    config.on_attach = require("user.plugins.configs.lsp.events").on_attach
+    config.on_attach = require("lsp.events").on_attach
     config.flags = vim.tbl_deep_extend("force", config.flags or {}, { debounce_text_changes = 500 })
 
     return config

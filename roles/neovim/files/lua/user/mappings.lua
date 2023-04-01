@@ -135,14 +135,6 @@ local function setup_unbinds()
     nvmap("<S-Left>", "")
 end
 
-local function setup_leader_key()
-    ----
-    ---- Setup the leader key
-    ----
-    local leaderkey = " "
-    vim.g.mapleader = leaderkey
-    vim.g.maplocalleader = leaderkey
-end
 
 local function setup_cursor_movements()
     ----
@@ -425,7 +417,6 @@ local function setup_plugins()
 end
 
 setup_unbinds()
-setup_leader_key()
 setup_cursor_movements()
 setup_basic_functionalities()
 setup_window_controls()
