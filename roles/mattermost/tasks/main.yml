@@ -1,0 +1,43 @@
+---
+- name: Check latest mattermost
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/mattermost/desktop/releases/latest
+    return_content: true
+  register: mattermost_latest
+  tags:
+    - mattermost
+
+
+- name: Download and unpack latest mattermost
+  ansible.builtin.unarchive:
+    src: https://releases.mattermost.com/desktop/{{ mattermost_latest['json']['tag_name'][1:] }}/mattermost-desktop-{{ mattermost_latest['json']['tag_name'][1:] }}-linux-x64.tar.gz
+    dest: "{{ ansible_user_dir }}/opt/"
+  tags:
+    - mattermost
+
+- name: Symlink binaries {{ default_node_version }}
+  ansible.builtin.file:
+    src: "{{ ansible_user_dir }}/opt/mattermost-desktop-{{ mattermost_latest['json']['tag_name'][1:] }}-linux-x64/{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+    state: link
+  loop:
+    - mattermost-desktop
+  tags:
+    - mattermost
+
+
+- name: Create desktop file
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.local/share/applications/Mattermost.desktop"
+    mode: 0755
+    content: |
+      [Desktop Entry]
+      Name=Mattermost
+      Comment=Mattermost Desktop application for Linux
+      Exec="{{ ansible_user_dir }}/opt/mattermost-desktop-{{ mattermost_latest['json']['tag_name'][1:] }}-linux-x64/mattermost-desktop"
+      Terminal=false
+      Type=Application
+      Icon={{ ansible_user_dir }}/opt/mattermost-desktop-{{ mattermost_latest['json']['tag_name'][1:] }}-linux-x64/app_icon.png
+      Categories=Network;InstantMessaging;
+  tags:
+    - mattermost
