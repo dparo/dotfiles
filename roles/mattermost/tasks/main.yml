@@ -12,6 +12,7 @@
   ansible.builtin.unarchive:
     src: https://releases.mattermost.com/desktop/{{ mattermost_latest['json']['tag_name'][1:] }}/mattermost-desktop-{{ mattermost_latest['json']['tag_name'][1:] }}-linux-x64.tar.gz
     dest: "{{ ansible_user_dir }}/opt/"
+    remote_src: True
   tags:
     - mattermost
 
