@@ -47,6 +47,7 @@
       - net-tools
       - lm_sensors
       - ffmpeg
+      - python3-speedtest-cli
     state: present
   become: true
   tags:
