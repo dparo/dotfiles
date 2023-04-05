@@ -3,7 +3,10 @@
 
 import sys
 import base64
+import urllib.parse
 
 
 for i in range(1, len(sys.argv)):
-    print(base64.b64decode(sys.argv[i].encode("utf-8")).decode("utf-8"))
+    b = str(sys.argv[i])
+    b = urllib.parse.unquote(b, encoding = 'utf-8')
+    print(base64.b64decode(b.encode("utf-8")).decode("utf-8"))
