@@ -67,6 +67,7 @@
       - gitlint
       - vim-vint
       - proselint
+      - reuse # https://github.com/fsfe/reuse-tool: reuse is a tool for compliance with the REUSE recommendations.
     state: latest
   tags:
     - devel
