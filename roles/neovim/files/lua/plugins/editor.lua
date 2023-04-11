@@ -22,7 +22,6 @@ return {
     },
 
 
-
     --- Trim trailing whitespaces
     {
         "cappyzawa/trim.nvim",
@@ -84,7 +83,6 @@ return {
             }
         end,
     },
-
 
 
     -- Automatically close braces but only when pressing enter (more conservative approach)
@@ -156,9 +154,6 @@ return {
     },
 
 
-
-
-
     -- Utils functions for common Unix like utilities such as mkdir, touch, mv inside of vim
     { "tpope/vim-eunuch" },
     { "tpope/vim-dispatch", lazy = true, cmd = { "Dispatch", "Make", "Focus", "Start" } },
@@ -166,8 +161,12 @@ return {
 
     -- Automatically detect shiftwidth and tabstop heuristically from file
     -- { "tpope/vim-sleuth" },
-    { "editorconfig/editorconfig-vim" },
-
+    { "editorconfig/editorconfig-vim",
+      cond = function()
+        -- From neovim 0.9, editor-config support is built-in (no plugin required)
+        return ~ vim.fn.has "nvim-0.9" == 1
+      end
+    },
 
 
     { "nathom/filetype.nvim" },
