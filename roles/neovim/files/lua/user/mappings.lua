@@ -270,6 +270,7 @@ local function setup_window_controls()
 
     -- Create new tab
     nmap("<leader>fn", exec_cmd "enew")
+    nmap("<leader>e", exec_cmd "enew")
     nmap({ "<leader>w|", "<leader>wh" }, exec_cmd "vsplit")
     nmap({ "<leader>w-", "<leader>w_", "<leader>wv" }, exec_cmd "split")
 end
