@@ -13,14 +13,13 @@ return {
     -- A search panel for neovim: Find the enemy and replace them with dark power
     { "windwp/nvim-spectre" },
 
-            -- Treesitter based structural search and replace plugin for Neovim.
+    -- Treesitter based structural search and replace plugin for Neovim.
     {
         "cshuaimin/ssr.nvim",
         config = function()
             require("ssr").setup {}
-        end
+        end,
     },
-
 
     --- Trim trailing whitespaces
     {
@@ -53,7 +52,6 @@ return {
 
     { "mbbill/undotree" },
 
-
     -- Highlight todo in comments
     {
         "folke/todo-comments.nvim",
@@ -83,7 +81,6 @@ return {
             }
         end,
     },
-
 
     -- Automatically close braces but only when pressing enter (more conservative approach)
     --      NOTE: It does not work since it collides with our custom <CR> key, and there's
@@ -136,7 +133,6 @@ return {
         end,
     },
 
-
     ----
     ---- Plugins for cursor motion or for text editing
     ----
@@ -153,7 +149,6 @@ return {
         end,
     },
 
-
     -- Utils functions for common Unix like utilities such as mkdir, touch, mv inside of vim
     { "tpope/vim-eunuch" },
     { "tpope/vim-dispatch", lazy = true, cmd = { "Dispatch", "Make", "Focus", "Start" } },
@@ -161,14 +156,13 @@ return {
 
     -- Automatically detect shiftwidth and tabstop heuristically from file
     -- { "tpope/vim-sleuth" },
-    { "editorconfig/editorconfig-vim",
-      cond = function()
-        -- From neovim 0.9, editor-config support is built-in (no plugin required)
-        return ~ vim.fn.has "nvim-0.9" == 1
-      end
+    {
+        "editorconfig/editorconfig-vim",
+        cond = function()
+            -- From neovim 0.9, editor-config support is built-in (no plugin required)
+            return vim.fn.has "nvim-0.9" == 0
+        end,
     },
 
-
     { "nathom/filetype.nvim" },
-
 }
