@@ -42,6 +42,8 @@
 	keepTemporaries = false
 	trustExitCode = false
 	prompt = false
+[rebase]
+	autosquash = true
 [merge]
     conflictstyle = diff3
     summary = true
