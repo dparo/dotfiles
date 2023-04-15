@@ -1,5 +1,19 @@
 ---
 
+- name: Install gaming platforms / launchers (DNF)
+  ansible.builtin.dnf:
+    name:
+      - steam
+      - lutris
+    state: present
+  become: true
+  tags:
+    - never
+    - gaming
+    - steam
+    - lutris
+
+
 - name: Create proton-ge installation directory
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.steam/root/compatibilitytools.d/"
