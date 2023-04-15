@@ -1,4 +1,45 @@
-- name: Install
+---
+
+- name: Create proton-ge installation directory
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.steam/root/compatibilitytools.d/"
+    state: directory
+    mode: "0755"
+  tags:
+    - never
+    - gaming
+    - steam
+    - proton
+    - proton-ge
+
+
+- name: Check latest proton-ge
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/GloriousEggroll/proton-ge-custom/releases/latest
+    return_content: true
+  register: proton_ge_latest
+  tags:
+    - never
+    - gaming
+    - steam
+    - proton
+    - proton-ge
+
+- name: Download and unpack latest proton-ge
+  ansible.builtin.unarchive:
+    src: "https://github.com/GloriousEggroll/proton-ge-custom/releases/latest/download/{{ proton_ge_latest['json']['tag_name'] }}.tar.gz"
+    dest: "{{ ansible_user_dir }}/.steam/root/compatibilitytools.d/"
+    remote_src: yes
+  become: true
+  tags:
+    - never
+    - gaming
+    - steam
+    - proton
+    - proton-ge
+
+
+- name: Install gaming utilities
   ansible.builtin.dnf:
     name:
       - mangohud
@@ -6,6 +47,7 @@
     state: present
   become: true
   tags:
+    - never
     - gaming
     - steam
 
@@ -17,6 +59,7 @@
     mode: 0755
   become: True
   tags:
+    - never
     - gaming
     - steam
     - steamtinkerlaunch

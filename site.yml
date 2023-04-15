@@ -83,8 +83,8 @@
     - insomnia
     - mattermost
     - mitmproxy
-    # - gaming
-    # - clamav
+    - gaming
+    - clamav
     - flatpak
     - obsidian
     - drawio

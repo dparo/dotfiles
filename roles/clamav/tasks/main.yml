@@ -1,5 +1,4 @@
 ---
-
 - name: Install
   ansible.builtin.dnf:
     name:
@@ -10,8 +9,8 @@
   become: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
+    - never
     - clamav
-
 
 - name: Refresh clamav database
   ansible.builtin.command: freshclam
@@ -19,8 +18,8 @@
   ignore_errors: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
+    - never
     - clamav
-
 
 - name: Setup freshclam (clamav-update)
   ansible.builtin.copy:
@@ -39,8 +38,8 @@
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
+    - never
     - clamav
-
 
 - name: Setup clamav daemon config
   ansible.builtin.copy:
@@ -86,8 +85,8 @@
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
+    - never
     - clamav
-
 
 - name: Setup Virus Event Script
   ansible.builtin.copy:
@@ -107,6 +106,7 @@
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
+    - never
     - clamav
 
 - name: Create a clamav-clamonacc.service override directory
@@ -118,6 +118,9 @@
     state: directory
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  tags:
+    - never
+    - clamav
 
 - name: Create log dir
   ansible.builtin.file:
@@ -128,7 +131,9 @@
     state: directory
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-
+  tags:
+    - never
+    - clamav
 
 - name: Override clamav-clamonacc.service (On Access Scanning) to use --fdpass
   ansible.builtin.copy:
@@ -141,8 +146,8 @@
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
+    - never
     - clamav
-
 
 - name: Reload system services
   ansible.builtin.systemd:
@@ -152,9 +157,9 @@
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   ignore_errors: true
   tags:
+    - never
     - clamav
     - systemd
-
 
 - name: Setup SELinux to allow clamav to scan the system
   ansible.builtin.shell: |
@@ -163,8 +168,8 @@
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
+    - never
     - clamav
-
 
 - name: Enable services
   ansible.builtin.systemd:
@@ -173,11 +178,10 @@
   become: True
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   loop:
-    - clamav-freshclam.service       # Refresh Virus Database at boot
-    - clamav-clamonacc.service       # On Access Scanning
-    - clamd@scan.service             # Enable daemon autostarting with /etc/clamd.d/{scan}.service
+    - clamav-freshclam.service # Refresh Virus Database at boot
+    - clamav-clamonacc.service # On Access Scanning
+    - clamd@scan.service # Enable daemon autostarting with /etc/clamd.d/{scan}.service
   tags:
+    - never
     - clamav
-
-
 ## TODO: Use `clamdscan --recursive --multiscan --fdpass /` and a custom service / timer to perform scheduled full scans at specific times
