@@ -12,7 +12,7 @@ return {
     },
     { "nvim-lua/popup.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 
-        --  With the release of Neovim 0.6 we were given the start of extensible core UI hooks
+    --  With the release of Neovim 0.6 we were given the start of extensible core UI hooks
     -- (vim.ui.select and vim.ui.input). They exist to allow plugin authors
     -- to override them with improvements upon the default behavior,
     -- so that's exactly what this plugin does.
@@ -266,7 +266,6 @@ return {
 
             -- Now don't forget to initialize lualine
             lualine.setup(config)
-
         end,
     },
 
@@ -305,7 +304,6 @@ return {
             require("nvim-tree").setup {
                 hijack_netrw = false,
                 disable_netrw = false,
-                open_on_setup = false,
                 hijack_directories = {
                     enable = false,
                     auto_open = false,
@@ -326,7 +324,6 @@ return {
         end,
     },
 
-
     {
         "akinsho/bufferline.nvim",
         version = "v3.*",
@@ -336,7 +333,6 @@ return {
         end,
     },
 
-
     -- Dashboard startup page
     {
         "goolord/alpha-nvim",
@@ -345,7 +341,7 @@ return {
         end,
     },
 
-     ----
+    ----
     ---- Plugins to manage windows
     ----
     {
@@ -415,5 +411,4 @@ return {
             }
         end,
     },
-
 }
