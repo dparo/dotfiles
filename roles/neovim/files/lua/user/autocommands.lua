@@ -36,7 +36,10 @@ core.utils.augroup("USER_SKELETONS", {
     { "BufNewFile", { pattern = ".envrc,.direnvrc,direnvrc", command = [[0r ~/.config/nvim/skeletons/.envrc]] } },
     { "BufNewFile", { pattern = "Makefile", command = [[0r ~/.config/nvim/skeletons/Makefile]] } },
     { "BufNewFile", { pattern = ".editorconfig", command = [[0r ~/.config/nvim/skeletons/.editorconfig]] } },
-    { "BufNewFile", { pattern = ".pre-commit-config.yaml", command = [[0r ~/.config/nvim/skeletons/.pre-commit-config.yaml]] } },
+    {
+        "BufNewFile",
+        { pattern = ".pre-commit-config.yaml", command = [[0r ~/.config/nvim/skeletons/.pre-commit-config.yaml]] },
+    },
 })
 
 -- Filetypes autocommand
@@ -66,22 +69,25 @@ core.utils.augroup("USER_FILETYPES", {
     { { "BufWritePost" }, { pattern = "*", command = [[ setlocal formatoptions-=cro ]] } },
 
     -- Resource specific configuration files for external programs
-    { { "BufWritePost" }, { pattern = { "*.config/i3/config", "*.config/i3/config.d/*" }, command = [[ silent !i3-msg restart ]] } },
+    {
+        { "BufWritePost" },
+        { pattern = { "*.config/i3/config", "*.config/i3/config.d/*" }, command = [[ silent !i3-msg restart ]] },
+    },
     { { "BufWritePost" }, { pattern = "*.config/sxhkd/sxhkdrc", command = [[ silent !pkill -USR1 -x sxhkd ]] } },
 })
 
 core.utils.augroup("USER_GENERIC", {
     -- Reload the buffer if it was changed externally
-    { { "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" }, { pattern = "*", command = [[if mode() != 'c' | checktime | endif]] } },
+    {
+        { "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" },
+        { pattern = "*", command = [[if mode() != 'c' | checktime | endif]] },
+    },
 
     -- Notification after file change
     {
         { "FileChangedShellPost" },
         { pattern = "*", command = [[ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None ]] },
     },
-
-    -- Reset cursor when vim exits
-    { { "VimLeave" }, { pattern = "*", command = [[ silent !echo -ne "\033]112\007" ]] } },
 
     -- Readjusts window dimension when vim changes size
     { { "VimResized" }, { pattern = "*", command = [[tabdo wincmd =]] } },
