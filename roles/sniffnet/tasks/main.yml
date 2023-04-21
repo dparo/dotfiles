@@ -1,0 +1,9 @@
+---
+- name: Install sniffnet (CARGO)
+  community.general.cargo:
+    name:
+      - sniffnet
+    state: latest
+  tags:
+    - never
+    - sniffnet
