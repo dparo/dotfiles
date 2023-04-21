@@ -3,6 +3,7 @@
   ansible.builtin.dnf:
     name:
       - adwaita-icon-theme
+      - breeze-icon-theme
     state: present
   become: true
   tags:
