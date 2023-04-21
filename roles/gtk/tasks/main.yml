@@ -4,6 +4,7 @@
     name:
       - adwaita-icon-theme
       - breeze-icon-theme
+      - breeze-cursor-theme
     state: present
   become: true
   tags:
@@ -49,7 +50,7 @@
 - name: Update x-cursor-theme alternatives
   ansible.builtin.lineinfile:
     path: /etc/alternatives/x-cursor-theme
-    line: "Inherits=Adwaita"
+    line: "Inherits=Breeze"
     regexp: "^Inherits"
     create: true
   become: true
