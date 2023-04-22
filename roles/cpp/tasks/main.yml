@@ -12,7 +12,7 @@
       - ninja-build
       - meson
       - clang
-      - clang-tools-extra
+      - clang-tools-extra  # Provides clang-tidy, among other extra clang tools
       - cppcheck
       - bear # Generate compilation database for clangtooling
       - valgrind
