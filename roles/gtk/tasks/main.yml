@@ -36,7 +36,6 @@
     - cursor-theme
     - phinger-cursors
 
-
 - name: Symlink config
   ansible.builtin.file:
     src: "{{ item.src }}"
@@ -60,11 +59,20 @@
     - gtk
     - gtk-theme
 
+- name: Symlink default cursor
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/icons/default"
+    dest: "{{ ansible_user_dir }}/.local/share/icons/default"
+    state: link
+    force: true
+  tags:
+    - gtk
+    - gtk-theme
 
 - name: Update x-cursor-theme alternatives
   ansible.builtin.lineinfile:
     path: /etc/alternatives/x-cursor-theme
-    line: "Inherits=Breeze"
+    line: "Inherits=Breeze_Snow"
     regexp: "^Inherits"
     create: true
   become: true

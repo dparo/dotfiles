@@ -31,6 +31,7 @@
     - "{{ ansible_user_dir }}/.local/share/applications"
     - "{{ ansible_user_dir }}/.local/share/keyrings"
     - "{{ ansible_user_dir }}/.local/share/pki"
+    - "{{ ansible_user_dir }}/.local/share/icons"
     - "{{ ansible_user_dir }}/.cache"
     - "{{ ansible_user_dir }}/.cache/bash"
     - "{{ ansible_user_dir }}/.cache/zsh"
@@ -66,6 +67,11 @@
     - {
         src: "{{ ansible_user_dir }}/.local/share/pki",
         dest: "{{ ansible_user_dir }}/.pki",
+      }
+    - {
+        # Necessary to allow xresources / xorg to find cursor themes
+        src: "{{ ansible_user_dir }}/.local/share/icons",
+        dest: "{{ ansible_user_dir }}/.icons"
       }
   tags:
     - xdg
@@ -149,7 +155,6 @@
   tags:
     - xdg
     - xdg-ninja
-
 
 - name: Symlink xdg-ninja binaries
   ansible.builtin.file:

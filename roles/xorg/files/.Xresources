@@ -3,7 +3,7 @@
 !-------------------------------------------------------------------------------
 
 ! Synced automatically from gtk3/settings.ini from the install.conf.yaml script
-Xcursor.theme: Breeze_Snow
+Xcursor.theme: default
 
 Xft.dpi:                    96
 Xft.antialias:              true
