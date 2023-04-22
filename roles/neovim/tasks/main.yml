@@ -189,6 +189,7 @@
     - clang-format
     - codelldb
     - cpptools
+    - cpplint
     - cmakelang
     - cmake-language-server
     - rust-analyzer
