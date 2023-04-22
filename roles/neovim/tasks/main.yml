@@ -110,6 +110,7 @@
   ansible.builtin.pip:
     name:
       - httpie
+      - cpplint
     state: latest
   tags:
     - neovim

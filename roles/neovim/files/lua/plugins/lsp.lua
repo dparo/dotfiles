@@ -26,7 +26,6 @@ return {
                         package_installed = " ",
                         package_uninstalled = " ﮊ",
                     },
-
                     keymaps = {
                         toggle_server_expand = "<CR>",
                         install_server = "i",
@@ -207,7 +206,8 @@ return {
                 only_current_line = false,
                 enabled = { "ChainingHint" },
             }
-
         end,
     },
+}
+   },
 }
