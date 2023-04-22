@@ -68,11 +68,6 @@
         src: "{{ ansible_user_dir }}/.local/share/pki",
         dest: "{{ ansible_user_dir }}/.pki",
       }
-    - {
-        # Necessary to allow xresources / xorg to find cursor themes
-        src: "{{ ansible_user_dir }}/.local/share/icons",
-        dest: "{{ ansible_user_dir }}/.icons"
-      }
   tags:
     - xdg
 

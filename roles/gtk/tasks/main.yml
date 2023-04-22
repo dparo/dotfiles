@@ -59,12 +59,36 @@
     - gtk
     - gtk-theme
 
-- name: Symlink default cursor
+
+- name: gtk-4.0 Prefer dark mode
+  ansible.builtin.shell: gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+  ignore_errors: true
+  tags:
+    - gtk
+    - gtk-theme
+
+- name: Create default cursor install target
   ansible.builtin.file:
-    src: "{{ role_path }}/files/icons/default"
-    dest: "{{ ansible_user_dir }}/.local/share/icons/default"
-    state: link
+    state: directory
+    path: /usr/share/icons/default
+    state: directory
+    mode: '0755'
+  become: True
+  tags:
+    - gtk
+    - gtk-theme
+
+- name: Install default cursor
+  ansible.builtin.copy:
+    dest: /usr/share/icons/default/index.theme
+    content: |
+      [Icon Theme]
+      Name=default
+      Comment=Default Cursor Theme
+      Inherits=Breeze_Snow
+    mode: "0644"
     force: true
+  become: True
   tags:
     - gtk
     - gtk-theme
@@ -80,8 +104,9 @@
     - gtk
     - gtk-theme
 
-- name: gtk-4.0 Prefer dark mode
-  ansible.builtin.shell: gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+
+- name: Gnome set default cursor
+  ansible.builtin.shell: gsettings set org.gnome.desktop.interface cursor-theme default
   ignore_errors: true
   tags:
     - gtk
