@@ -183,6 +183,7 @@
     - lua-language-server
     - bash-language-server
     - pyright
+    - mypy
     - debugpy
     - ruff
     - clangd
