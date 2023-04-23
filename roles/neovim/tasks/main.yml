@@ -222,6 +222,7 @@
     - chrome-debug-adapter # Deprecated in favour of js-debug-adapter
     - firefox-debug-adapter
     - html-lsp
+    - gitlint
   tags:
     - neovim
     - neovim-lsp
