@@ -24,18 +24,6 @@
     - gtk
     - gtk-theme
 
-- name: Unpack phinger-cursors
-  ansible.builtin.unarchive:
-    src: https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2
-    dest: /usr/share/icons/
-    remote_src: True
-  become: True
-  tags:
-    - gtk
-    - gtk-theme
-    - cursor-theme
-    - phinger-cursors
-
 - name: Symlink config
   ansible.builtin.file:
     src: "{{ item.src }}"
@@ -65,6 +53,18 @@
   tags:
     - gtk
     - gtk-theme
+
+- name: Unpack phinger-cursors
+  ansible.builtin.unarchive:
+    src: https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2
+    dest: /usr/share/icons/
+    remote_src: True
+  become: True
+  tags:
+    - gtk
+    - gtk-theme
+    - cursor-theme
+    - phinger-cursors
 
 - name: Create default cursor install target
   ansible.builtin.file:
