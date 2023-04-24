@@ -13,3 +13,5 @@
     name: org.onlyoffice.desktopeditors
     state: present
     remote: flathub
+  tags:
+    - onlyoffice
