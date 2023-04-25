@@ -161,3 +161,14 @@
   tags:
     - xdg
     - xdg-ninja
+
+
+- name: Download background
+  ansible.builtin.get_url:
+    url: 'https://www.dropbox.com/s/092y4nkywd2pj1m/blue_ai_background.webp?dl=1'
+    dest: "{{ ansible_user_dir }}/.local/share/backgrounds"
+    mode: '0644'
+    force: True
+  tags:
+    - xdg
+    - background
