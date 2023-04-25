@@ -28,6 +28,7 @@
     - anaconda3
     - cpp
     - rust
+    - zig
     - golang
     - nodejs
     - java

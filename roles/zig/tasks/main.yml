@@ -1,0 +1,18 @@
+---
+- name: "Download and unpack ZIG {{ zig_version }}"
+  ansible.builtin.unarchive:
+    src: "https://ziglang.org/download/0.10.1/zig-linux-x86_64-{{ zig_version }}.tar.xz"
+    dest: "{{ ansible_user_dir }}/opt"
+    remote_src: yes
+  tags:
+    - zig
+
+- name: Symlink binaries
+  ansible.builtin.file:
+    src: "{{ ansible_user_dir }}/opt/zig-linux-x86_64-{{ zig_version }}/{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+    state: link
+  loop:
+    - zig
+  tags:
+    - zig
