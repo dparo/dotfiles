@@ -1,0 +1,19 @@
+---
+
+- name: "Download and unpack pycharm {{ pycharm_version }}"
+  ansible.builtin.unarchive:
+    src: "https://download.jetbrains.com/python/pycharm-community-{{ pycharm_version }}.tar.gz"
+    dest: "{{ ansible_user_dir }}/opt"
+    remote_src: yes
+  tags:
+    - pycharm
+
+- name: Symlink binaries
+  ansible.builtin.file:
+    src: "{{ ansible_user_dir }}/opt/pycharm-community-{{ pycharm_version }}/bin/{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+    state: link
+  loop:
+    - pycharm.sh
+  tags:
+    - pycharm
