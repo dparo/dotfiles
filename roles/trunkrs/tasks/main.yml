@@ -1,0 +1,19 @@
+---
+
+# https://trunkrs.dev/
+
+- name: Check latest trunkrs
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/thedodd/trunk/releases/latest
+    return_content: true
+  register: trunkrs_latest
+  tags:
+    - trunkrs
+
+- name: Download and unpack latest trunkrs
+  ansible.builtin.unarchive:
+    src: https://github.com/thedodd/trunk/releases/download/{{ trunkrs_latest['json']['tag_name'] }}/trunk-x86_64-unknown-linux-gnu.tar.gz
+    dest: ~/.local/bin
+    remote_src: yes
+  tags:
+    - trunkrs
