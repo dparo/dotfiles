@@ -3,6 +3,9 @@
   shell: command -v cargo
   register: cargo_exists
   ignore_errors: true
+  tags:
+    - rust
+    - cargo
 
 - name: Download Installer
   when: cargo_exists is failed
@@ -13,9 +16,18 @@
     force: "yes"
   tags:
     - rust
+    - cargo
 
 - name: install rust/cargo
   when: cargo_exists is failed
   shell: /tmp/sh.rustup.rs -y --no-modify-path --profile default --component rustc,cargo,rust-src,rustfmt,clippy
   tags:
     - rust
+    - cargo
+
+- name: Update
+  shell: rustup update
+  when: cargo_exists is success
+  tags:
+    - rust
+    - cargo
