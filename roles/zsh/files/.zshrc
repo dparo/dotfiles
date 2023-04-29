@@ -20,6 +20,12 @@ zle -N edit-command-line
 bindkey "^X^E" edit-command-line
 
 
+# [Home] bind
+bindkey "${terminfo[khome]}" beginning-of-line
+# [End] bind
+bindkey "${terminfo[kend]}"  end-of-line
+
+
 function zle-clipboard-paste {
   if ((REGION_ACTIVE)); then
     zle kill-region
