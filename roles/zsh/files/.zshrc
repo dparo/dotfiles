@@ -21,9 +21,18 @@ bindkey "^X^E" edit-command-line
 
 
 # [Home] bind
-bindkey "${terminfo[khome]}" beginning-of-line
+if [[ -n "$TMUX" ]] && [[ "${terminfo[khome]}" != "" ]]; then
+    bindkey "${terminfo[khome]}" beginning-of-line
+else
+    bindkey "^[[H" beginning-of-line
+fi
+
 # [End] bind
-bindkey "${terminfo[kend]}"  end-of-line
+if [[ -n "$TMUX" ]] && [[ "${terminfo[kend]}" != "" ]]; then
+    bindkey "${terminfo[kend]}"  end-of-line
+else
+    bindkey "^[[F"  end-of-line
+fi
 
 
 function zle-clipboard-paste {
