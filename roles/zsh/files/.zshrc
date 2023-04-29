@@ -14,6 +14,12 @@ select-word-style normal      # Word characters are alphanumerics plus $WORDCHAR
 # Emacs style keybinds
 bindkey -e
 
+# Edit the current command line in $EDITOR (C-x C-e)
+autoload -z edit-command-line
+zle -N edit-command-line
+bindkey "^X^E" edit-command-line
+
+
 function zle-clipboard-paste {
   if ((REGION_ACTIVE)); then
     zle kill-region
