@@ -194,6 +194,7 @@
     - cmakelang
     - cmake-language-server
     - rust-analyzer
+    - zls # Zig language server
     - gopls
     - shellcheck
     - shellharden
