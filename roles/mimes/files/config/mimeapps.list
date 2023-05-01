@@ -14,6 +14,7 @@ text/markdown=nvim.desktop;
 audio/aac=mpv.desktop;
 text/x-bibtex=nvim.desktop;
 x-scheme-handler/terminal=kitty.desktop
+application/x-xz-compressed-tar=org.gnome.FileRoller.desktop;
 
 [Default Applications]
 application/ppdf=zathura.desktop
@@ -47,3 +48,4 @@ image/bmp=nomacs.desktop;feh.desktop;
 application/pdf=org.pwmt.zathura-pdf-poppler.desktop;
 text/x-bibtex=nvim.desktop
 x-scheme-handler/terminal=kitty.desktop
+application/x-xz-compressed-tar=org.gnome.FileRoller.desktop
