@@ -195,6 +195,7 @@
     - cmake-language-server
     - rust-analyzer
     - zls # Zig language server
+    - nimlsp
     - gopls
     - shellcheck
     - shellharden
