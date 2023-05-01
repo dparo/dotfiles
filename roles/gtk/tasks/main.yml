@@ -84,7 +84,7 @@
       [Icon Theme]
       Name=default
       Comment=Default Cursor Theme
-      Inherits=Breeze_Snow
+      Inherits=Adwaita
     mode: "0644"
     force: true
   become: True
@@ -95,7 +95,7 @@
 - name: Update x-cursor-theme alternatives
   ansible.builtin.lineinfile:
     path: /etc/alternatives/x-cursor-theme
-    line: "Inherits=Breeze_Snow"
+    line: "Inherits=Adwaita"
     regexp: "^Inherits"
     create: true
   become: true
