@@ -15,7 +15,7 @@ set disassembly-flavor intel
 set pagination off
 
 set logging file ~/.cache/gdb/log.txt
-set logging on
+set logging enabled on
 
 set history filename ~/.cache/gdb/history.txt
 set history save on

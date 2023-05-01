@@ -44,3 +44,11 @@
     - cpp
     - gcc
     - gdb
+
+- name: Create gdb cache dir
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.cache/gdb"
+    state: directory
+    mode: "0755"
+  tags:
+    - gdb
