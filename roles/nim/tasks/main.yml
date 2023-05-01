@@ -17,7 +17,7 @@
     - atlas
     - nim
     - nimble
-    - nim_db
+    - nim_dbg
     - nim-gdb
     - nimgrep
     - nimpretty
