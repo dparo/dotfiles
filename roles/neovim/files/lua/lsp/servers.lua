@@ -154,7 +154,6 @@ M.list = {
                     "-data",
                     path.concat { nvim_cache_path, "jdtls", string.gsub(project_path, path.separator, "%%") },
                 },
-
                 root_dir = require("jdtls.setup").find_root {
                     ".git",
                     "mvnw",
@@ -305,7 +304,8 @@ M.list = {
     { name = "gopls", config = {} },
     { name = "vimls", config = {} },
     { name = "html", config = {} },
-    { name = "zls",      config = {} },
+    { name = "zls", config = {} },
+    { name = "nimls", config = {} },
 
     -- NOTE: We use null-ls now, which is more richer in terms of features
     --       and lives inside the neovim process space instead of being a separate
