@@ -29,6 +29,7 @@
     - cpp
     - rust
     - zig
+    - nim
     - golang
     - nodejs
     - java

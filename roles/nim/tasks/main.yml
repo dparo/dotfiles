@@ -1,0 +1,27 @@
+---
+
+- name: Download and unpack NIM {{ nim_version }}
+  ansible.builtin.unarchive:
+    src: "https://nim-lang.org/download/nim-{{ nim_version }}-linux_x64.tar.xz"
+    dest: "{{ ansible_user_dir }}/opt"
+    remote_src: yes
+  tags:
+    - nim
+
+- name: Symlink NIM {{ nim_version }} binaries
+  ansible.builtin.file:
+    src: "{{ ansible_user_dir }}/opt/nim-{{ nim_version }}/bin/{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+    state: link
+  loop:
+    - atlas
+    - nim
+    - nimble
+    - nim_db
+    - nim-gdb
+    - nimgrep
+    - nimpretty
+    - nimsuggest
+    - testament
+  tags:
+    - nim
