@@ -8,7 +8,7 @@ export XDG_MUSIC_DIR="$HOME/Music"
 # find distribution specific application files (including snap/flatpak installed applications)
 # it is important to populate the XDG_DATA_DIRS, which is analogue to
 # the XDG_DATA_HOME but for system wide stuff
-export XDG_DATA_DIRS="$XDG_DATA_HOME/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop:$XDG_DATA_DIRS"
+export XDG_DATA_DIRS="$XDG_DATA_HOME/flatpak/exports/share:/var/lib/flatpak/exports/share:/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop"
 
 
 export USER_DOTFILES_LOCATION="${XDG_DATA_HOME}/dotfiles"
