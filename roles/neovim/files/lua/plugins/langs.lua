@@ -16,7 +16,7 @@ return {
         end,
     },
 
-        ----
+    ----
     ---- Language specific plugins, for syntax highlighting or working with the language
     ----
     {
@@ -29,7 +29,6 @@ return {
         config = function()
             require("nvim-treesitter.configs").setup {
                 ensure_installed = {
-                    "help",
                     "bash",
                     "lua",
                     "markdown",
