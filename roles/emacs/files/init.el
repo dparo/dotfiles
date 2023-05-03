@@ -46,9 +46,6 @@
 
 
 (use-package git-commit)
-(use-package gitignore-mode)
-(use-package gitconfig-mode)
-(use-package gitattributes-mode)
 
 ;; Programming languages mode
 (use-package rust-mode)
@@ -75,8 +72,6 @@
   :after rust-mode
   :hook
   (rust-mode . cargo-minor-mode))
-
-
 
 
 (use-package edit-indirect)
@@ -165,7 +160,6 @@
   )
 
 
-
 (use-package modus-vivendi-theme :ensure t :defer t)
 (use-package vscode-dark-plus-theme :ensure t :defer t)
 (use-package ample-theme :ensure t :defer t)
@@ -215,7 +209,6 @@
 ;;           ("ESC ESC" . mc/keyboard-quit)
 ;;           )
 ;;   )
-
 
 
 ;; (use-package helm
@@ -308,7 +301,6 @@
 (use-package smex)
 
 
-
 (use-package counsel-projectile
   :requires projectile smex
   :bind
@@ -322,7 +314,6 @@
   (tex-mode . company-mode)
   (TeX-mode . company-mode)
   (company-mode . company-tng-mode)
-
 
 
   :bind (:map company-active-map
@@ -387,7 +378,6 @@
                                 ("mp4" . "rifle"))))
 
 
-
 (use-package all-the-icons)
 
 ;;;; Disabled cause it is kinda weird, and makes the buffer less readable with tab-mode displayed
@@ -441,12 +431,9 @@
   )
 
 
-
 (use-package yasnippet-snippets
   :after
   yasnippet)
-
-
 
 
 (if (functionp 'module-load)
@@ -530,7 +517,6 @@
   :after lsp-mode
   :config
   (lsp-treemacs-sync-mode 0))
-
 
 
 (use-package dap-mode
@@ -618,7 +604,6 @@
   (add-to-list 'lsp-file-watch-ignored  "[/\\\\]build-release\\'")
   (add-to-list 'lsp-file-watch-ignored  "[/\\\\]build-debug\\'")
   (add-to-list 'lsp-file-watch-ignored  "[/\\\\]dist\\'")
-
 
 
   :hook
@@ -868,7 +853,6 @@
 (require 'saveplace)
 
 
-
 ;; Emacs customization
 (defvar winparams
   '(window-parameters . ((no-other-window . t)
@@ -897,7 +881,6 @@
 (setenv "PROJ_WORKING_DIR" (getenv "PWD") t)
 
 (setq-default save-place t)
-
 
 
 (defvar original-font-size nil)
@@ -987,7 +970,6 @@
 ;; (global-subword-mode 1)
 
 
-
 ;; Major mode for specific files
 (add-to-list 'auto-mode-alist '("\\.y$" . text-mode))
 (add-to-list 'auto-mode-alist '("\\.m$"  . octave-mode))
@@ -1001,7 +983,6 @@
 (setq whitespace-style '(empty tabs indentation trailing lines-tail space-after-tab space-before-tab tab-mark trailing-mark))
 (setq-default show-trailing-whitespace t)
 (global-whitespace-mode 1)
-
 
 
 (setq auto-insert-query nil)
@@ -1076,7 +1057,6 @@
     (call-interactively 'pop-global-mark))
   (call-interactively 'pop-global-mark)
   (setq global-mark-ring (nreverse global-mark-ring)))
-
 
 
 ;; (load "~/.emacs.d/binds.el")
