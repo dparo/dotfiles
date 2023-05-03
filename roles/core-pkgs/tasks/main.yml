@@ -48,6 +48,7 @@
       - lm_sensors
       - ffmpeg
       - speedtest-cli
+      - parallel # GNU Parallel is a shell tool for executing jobs in parallel
     state: present
   become: true
   tags:
