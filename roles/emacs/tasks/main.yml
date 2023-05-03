@@ -1,12 +1,12 @@
 ---
 - name: Install
-  ansible.builtin.apt:
+  ansible.builtin.dnf:
     name:
       - emacs
     state: present
   become: true
   tags:
-    - apt
+    - never
     - emacs
 
 - name: Symlink config
@@ -15,4 +15,5 @@
     dest: "{{ ansible_user_dir }}/.config/emacs"
     state: link
   tags:
+    - never
     - emacs
