@@ -6,6 +6,22 @@
   become: True
   when: ansible_distribution == 'Fedora'
 
+- name: Delete unused repositories
+  ansible.builtin.file:
+    path: "/etc/yum.repos.d/{{ item }}"
+    state: absent
+  become: True
+  when: ansible_distribution == 'Fedora'
+  loop:
+    - _copr_phracek-PyCharm.repo
+    - rpmfusion-nonfree-nvidia-driver.repo
+    - rpmfusion-nonfree-steam.repo
+  tags:
+    - dnf
+    - fedora
+    - yum.repos.d
+
+
 - name: Install
   ansible.builtin.dnf:
     name:
