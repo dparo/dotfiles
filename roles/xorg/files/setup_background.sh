@@ -13,6 +13,7 @@ set_wallpaper() {
 
 set_wallpaper \
     /usr/share/backgrounds/default* \
+    /usr/share/backgrounds/f37/default/f37.webp  \
     /usr/share/backgrounds/gnome/adwaita-d.webp \
     /usr/share/backgrounds/fedora-workstation/glasscurtains_dark.webp \
     || xsetroot -solid darkgray
