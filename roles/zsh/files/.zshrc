@@ -180,3 +180,10 @@ source "$XDG_CONFIG_HOME/zsh/command-not-found.zsh"
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_STYLES[comment]=fg=yellow,bold
+
+
+if command -v krabby 1> /dev/null 2> /dev/null; then
+    krabby random 1-3   # https://github.com/yannjor/krabby: cargo install krabby
+elif command -v pokemon-colorscripts 1> /dev/null 2> /dev/null; then
+    pokemon-colorscripts -r 1-3 # https://gitlab.com/phoneybadger/pokemon-colorscripts#similar-projects
+fi
