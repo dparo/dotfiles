@@ -11,6 +11,7 @@
       - ninja-build
       - cmake
       - conan
+      - vcpkg
       - meson
       - clang
       - clang-tools-extra  # Provides clang-tidy, among other extra clang tools
