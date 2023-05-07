@@ -8,8 +8,9 @@
       - gcc-c++
       - kernel-devel
       - gdb
-      - cmake
       - ninja-build
+      - cmake
+      - conan
       - meson
       - clang
       - clang-tools-extra  # Provides clang-tidy, among other extra clang tools
