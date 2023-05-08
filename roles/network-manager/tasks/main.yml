@@ -5,6 +5,7 @@
       - NetworkManager
       - NetworkManager-tui
       - openvpn
+      - wireguard-tools # Wireguard: fast, modern and secure VPN general-purpose tunnel
       - openssl
       - openfortivpn
       - openconnect
