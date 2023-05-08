@@ -27,6 +27,8 @@
       # - heaptrack
       # - coz-profiler      # Causal Profiling (https://github.com/plasma-umass/coz): Finding Code that Counts with Causal Profiling
       # - doxygen           # C/C++ documentation tool
+      - libasan
+      - libubsan
     state: present
   become: true
   tags:
