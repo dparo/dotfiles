@@ -9,7 +9,7 @@
   tags:
     - golang
 
-- name: Download golang
+- name: Download golang {{ go_version }}
   ansible.builtin.unarchive:
     src: "https://go.dev/dl/go{{ go_version }}.linux-amd64.tar.gz"
     dest: "{{ go_install_dir }}/v{{ go_version }}"
@@ -19,7 +19,7 @@
   tags:
     - golang
 
-- name: Symlink GO binaries
+- name: Symlink GO {{ go_version }} binaries
   ansible.builtin.file:
     src: "{{ item }}"
     dest: "/usr/local/bin/{{ item | basename }}"
