@@ -1,0 +1,37 @@
+---
+- name: Create target dir for installation
+  ansible.builtin.file:
+    path: "{{ kotlin_install_dir }}/v{{ kotlin_version }}"
+    state: directory
+    mode: "0755"
+  become: true
+  register: kotlin_dir
+  tags:
+    - kotlin
+
+- name: Download kotlin compiler {{ kotlin_version }}
+  ansible.builtin.unarchive:
+    src: "https://github.com/JetBrains/kotlin/releases/download/v{{ kotlin_version }}/kotlin-compiler-{{ kotlin_version }}.zip"
+    dest: "{{ kotlin_install_dir }}/v{{ kotlin_version }}"
+    remote_src: yes
+  become: true
+  when: kotlin_dir.changed
+  tags:
+    - kotlin
+
+- name: Symlink kotlin compiler {{ kotlin_version }} binaries
+  ansible.builtin.file:
+    src: "{{ kotlin_install_dir }}/v{{ kotlin_version }}/kotlinc/bin/{{ item }}"
+    dest: "/usr/local/bin/{{ item | basename }}"
+    state: link
+  loop:
+    - kapt
+    - kotlin
+    - kotlinc
+    - kotlinc-js
+    - kotlinc-jvm
+    - kotlinc-jvm
+    - kotlin-dce-js
+  become: true
+  tags:
+    - kotlin
