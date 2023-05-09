@@ -170,7 +170,11 @@ M.list = {
                 -- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
                 -- for a list of options
                 settings = {
+                    jdt_uri_timeout_ms = 20000,
                     java = {
+                        maven = {
+                            downloadSources = true,
+                        },
                         signatureHelp = { enabled = true },
                         sources = {
                             organizeImports = {
