@@ -1,7 +1,13 @@
 return {
     {
         "mfussenegger/nvim-dap",
-        dependencies = { "rcarriga/nvim-dap-ui", "leoluz/nvim-dap-go", "theHamsta/nvim-dap-virtual-text", "mxsdev/nvim-dap-vscode-js" },
+        dependencies = {
+            "rcarriga/nvim-dap-ui",
+            "leoluz/nvim-dap-go",
+            "theHamsta/nvim-dap-virtual-text",
+            "mxsdev/nvim-dap-vscode-js",
+            "folke/neodev.nvim",
+        },
         config = function()
             local dap = require "dap"
             local path = require "core.os.path"
@@ -30,13 +36,15 @@ return {
 
             -- Automatically open/close the UI when starting/finishing debugging
             dap.listeners.after.event_initialized["dapui_config"] = function()
-                dapui.open { nil, true }
+                dapui.open()
             end
             dap.listeners.before.event_terminated["dapui_config"] = function()
-                dapui.close { nil }
+                dapui.close()
+                require("nvim-dap-virtual-text/virtual_text").clear_virtual_text()
             end
             dap.listeners.before.event_exited["dapui_config"] = function()
-                dapui.close { nil }
+                dapui.close()
+                require("nvim-dap-virtual-text/virtual_text").clear_virtual_text()
             end
 
             dap.listeners.after.event_exited["nvim-dap-virtual-text"] = function()
@@ -49,7 +57,16 @@ return {
             dap.adapters.cppdbg = {
                 id = "cppdbg",
                 type = "executable",
-                command = path.concat { nvim_data_path, "mason", "packages", "cpptools", "extension", "debugAdapters", "bin", "OpenDebugAD7" },
+                command = path.concat {
+                    nvim_data_path,
+                    "mason",
+                    "packages",
+                    "cpptools",
+                    "extension",
+                    "debugAdapters",
+                    "bin",
+                    "OpenDebugAD7",
+                },
             }
 
             dap.adapters.chrome = {
@@ -221,17 +238,12 @@ return {
                 })
             end
 
-            local function terminate_callback()
-                dapui.close { nil }
-                require("nvim-dap-virtual-text/virtual_text").clear_virtual_text()
-            end
-
             vim.keymap.set("n", "<F5>", dap.continue)
             vim.keymap.set("n", "<S-F5>", function()
-                dap.terminate(nil, nil, terminate_callback)
+                dap.terminate()
             end)
             vim.keymap.set("n", "<F17>", function()
-                dap.terminate(nil, nil, terminate_callback)
+                dap.terminate()
             end)
             vim.keymap.set("n", "<F53>", function()
                 dap.run_last()
@@ -271,7 +283,6 @@ return {
             vim.keymap.set("n", "<leader>deB", function()
                 dap.set_exception_breakpoints {}
             end) -- Clear exception breaks
-
         end,
     },
 }

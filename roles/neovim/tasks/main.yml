@@ -198,6 +198,7 @@
     - zls # Zig language server
     - nimlsp
     - gopls
+    - delve
     - shellcheck
     - shellharden
     - shfmt
