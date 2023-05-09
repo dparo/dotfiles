@@ -15,7 +15,6 @@ return {
 
             local augroup = vim.api.nvim_create_augroup("USER_DAP", { clear = true })
 
-
             local chrome_debug_adapter_path = path.concat { nvim_data_path, "mason", "packages", "chrome-debug-adapter" }
             local firefox_debug_adapter_path = path.concat { nvim_data_path, "mason", "packages", "firefox-debug-adapter" }
 
@@ -273,7 +272,6 @@ return {
                 end,
             })
 
-
             vim.keymap.set("n", "<F34>", dap.run_to_cursor) -- C-F10
             vim.keymap.set("n", "<leader>dc", dap.continue)
             vim.keymap.set("n", "<F10>", dap.step_over)
@@ -294,6 +292,11 @@ return {
             vim.keymap.set("n", "<leader>ds", function()
                 dap.goto_()
             end)
+
+            vim.keymap.set("n", "<leader>dk", dap.up)
+            vim.keymap.set("n", "<leader>d<Up>", dap.up)
+            vim.keymap.set("n", "<leader>dj", dap.down)
+            vim.keymap.set("n", "<leader>d<Down>", dap.up)
 
             vim.keymap.set("n", "<leader>deb", function()
                 dap.set_exception_breakpoints()
