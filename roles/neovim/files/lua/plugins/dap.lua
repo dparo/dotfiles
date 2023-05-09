@@ -13,6 +13,9 @@ return {
             local path = require "core.os.path"
             local nvim_data_path = path.get_nvim_data_path()
 
+            local augroup = vim.api.nvim_create_augroup("USER_DAP", { clear = true })
+
+
             local chrome_debug_adapter_path = path.concat { nvim_data_path, "mason", "packages", "chrome-debug-adapter" }
             local firefox_debug_adapter_path = path.concat { nvim_data_path, "mason", "packages", "firefox-debug-adapter" }
 
@@ -41,10 +44,11 @@ return {
             dap.listeners.before.event_terminated["dapui_config"] = function()
                 dapui.close()
                 require("nvim-dap-virtual-text/virtual_text").clear_virtual_text()
+                vim.fn.execute [[bd dap-preview]]
             end
             dap.listeners.before.event_exited["dapui_config"] = function()
                 dapui.close()
-                require("nvim-dap-virtual-text/virtual_text").clear_virtual_text()
+                vim.fn.execute [[bd dap-preview]]
             end
 
             dap.listeners.after.event_exited["nvim-dap-virtual-text"] = function()
@@ -242,12 +246,16 @@ return {
             vim.keymap.set("n", "<S-F5>", function()
                 dap.terminate()
             end)
+
+            -- <S-F5>
             vim.keymap.set("n", "<F17>", function()
                 dap.terminate()
             end)
+
+            -- <M-F5>
             vim.keymap.set("n", "<F53>", function()
                 dap.run_last()
-            end) -- M-F5
+            end)
 
             vim.keymap.set("n", "<leader>dh", function()
                 require("dap.ui.widgets").hover()
@@ -255,6 +263,16 @@ return {
             vim.keymap.set("n", "<leader>dp", function()
                 require("dap.ui.widgets").preview()
             end)
+
+            vim.api.nvim_create_autocmd({ "CursorHold" }, {
+                group = augroup,
+                callback = function()
+                    if dap.status() ~= "" then
+                        pcall(require("dap.ui.widgets").preview, nil)
+                    end
+                end,
+            })
+
 
             vim.keymap.set("n", "<F34>", dap.run_to_cursor) -- C-F10
             vim.keymap.set("n", "<leader>dc", dap.continue)
