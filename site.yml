@@ -51,6 +51,7 @@
     - lazygit
     - gitui
     - ranger
+    - jless
     - dunst
     - wm-basics
     - feh
@@ -77,6 +78,7 @@
     - firefox
     - brave-browser
     - google-chrome
+    - masterpdfeditor5
     - p4merge
     - vscode
     - intellij
