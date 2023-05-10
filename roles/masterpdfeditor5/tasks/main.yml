@@ -18,3 +18,13 @@
   become: True
   tags:
     - masterpdfeditor5
+
+
+- name:  "Symlink binary"
+  ansible.builtin.file:
+    src: "/opt/master-pdf-editor-5/masterpdfeditor5"
+    dest: "/usr/local/bin/masterpdfeditor5"
+    state: link
+  become: True
+  tags:
+    - masterpdfeditor5
