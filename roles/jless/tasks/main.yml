@@ -9,7 +9,7 @@
   tags:
     - jless
 
-- name: Download and unpack latest starship
+- name: Download and unpack latest jless
   ansible.builtin.unarchive:
     src: "https://github.com/PaulJuliusMartinez/jless/releases/download/{{ jless_latest['json']['tag_name'] }}/jless-{{ jless_latest['json']['tag_name'] }}-x86_64-unknown-linux-gnu.zip "
     dest: "{{ ansible_user_dir }}/.local/bin"
