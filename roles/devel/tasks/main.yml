@@ -125,11 +125,11 @@
     - devel
 
 
-- name: Install additional Rust tools (CARGO)
-  community.general.cargo:
-    name:
-      - jless
-    state: latest
-  tags:
-    - devel
-    - jless
+# - name: Install additional Rust tools (CARGO)
+#   community.general.cargo:
+#     name:
+#       - jless
+#     state: latest
+#   tags:
+#     - devel
+#     - jless
