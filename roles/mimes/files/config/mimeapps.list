@@ -15,6 +15,7 @@ audio/aac=mpv.desktop;
 text/x-bibtex=nvim.desktop;
 x-scheme-handler/terminal=kitty.desktop
 application/x-xz-compressed-tar=org.gnome.FileRoller.desktop;
+application/vnd.excalidraw+json=chrome-kmcnjdcipmgchfndpapkoecbidofdpbc-Default.desktop
 
 [Default Applications]
 application/ppdf=zathura.desktop
@@ -49,3 +50,4 @@ application/pdf=org.pwmt.zathura-pdf-poppler.desktop;
 text/x-bibtex=nvim.desktop
 x-scheme-handler/terminal=kitty.desktop
 application/x-xz-compressed-tar=org.gnome.FileRoller.desktop
+application/vnd.excalidraw+json=chrome-kmcnjdcipmgchfndpapkoecbidofdpbc-Default.desktop;
