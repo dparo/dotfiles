@@ -6,6 +6,7 @@ set -e
 
 source "$PWD/scripts/lib.sh"
 
+
 show_all_facts() {
     # Dumps all the ansible facts / variables available
     ansible localhost -m ansible.builtin.setup
@@ -51,6 +52,11 @@ else
 fi
 
 rc=$?
+
+
+if test "$USER" = "dparo"; then
+    git conifg user.email "dparo@outlook.it"
+fi
 
 if test "$rc" -eq 0; then
     git remote set-url origin 'git@github.com:dparo/dotfiles.git'
