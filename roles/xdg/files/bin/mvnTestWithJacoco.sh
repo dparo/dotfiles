@@ -4,7 +4,7 @@
 # This approach to Jacoco instrumentation is called OFFLINE instrumetnation
 # It is deprecated. The preferred approach is to use agent-instrumentation
 
-mvn clean compile org.jacoco:jacoco-maven-plugin:instrument \
+mvn compile org.jacoco:jacoco-maven-plugin:instrument \
     && mvn -DtrimStackTrace=false test
 
 status="$?"
