@@ -55,7 +55,7 @@ rc=$?
 
 
 if test "$USER" = "dparo"; then
-    git conifg user.email "dparo@outlook.it"
+    git config user.email "dparo@outlook.it"
 fi
 
 if test "$rc" -eq 0; then
