@@ -5,7 +5,6 @@
       - adwaita-icon-theme
       - breeze-icon-theme
       - breeze-cursor-theme
-      - bluecurve-cursor-theme
     state: present
   become: true
   tags:
