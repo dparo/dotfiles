@@ -1,0 +1,13 @@
+---
+
+# See https://fedoraproject.org/wiki/Changes/IncreaseVmMaxMapCount
+- name: Setup vm.max_map_count
+  ansible.builtin.lineinfile:
+    path: /etc/sysctl.conf
+    line: vm.max_map_count = 2147483642
+    regexp: '^vm.max_map_count\s*='
+    create: true
+  become: true
+  tags:
+    - sysctl
+    - gaming

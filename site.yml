@@ -3,6 +3,7 @@
   connection: local
   roles:
     - debug
+    - sysctl
     - x509-certs
     - ssh
     - gnupg
