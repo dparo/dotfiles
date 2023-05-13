@@ -1,0 +1,35 @@
+---
+
+- name: Setup max_parallel_downloads
+  ansible.builtin.lineinfile:
+    path: /etc/dnf/dnf.conf
+    line: max_parallel_downloads=10
+    regexp: '^max_parallel_downloads\s*='
+    create: true
+  become: true
+  tags:
+    - dnf
+    - dnf.conf
+
+
+- name: Disable delta_rpm
+  ansible.builtin.lineinfile:
+    path: /etc/dnf/dnf.conf
+    line: delta_rpm=False
+    regexp: '^delta_rpm\s*='
+    create: true
+  become: true
+  tags:
+    - dnf
+    - dnf.conf
+
+- name: Disable deltarpm_percentage
+  ansible.builtin.lineinfile:
+    path: /etc/dnf/dnf.conf
+    line: deltarpm_percentage=0
+    regexp: '^deltarpm_percentage\s*='
+    create: true
+  become: true
+  tags:
+    - dnf
+    - dnf.conf

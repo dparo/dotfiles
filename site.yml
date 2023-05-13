@@ -4,6 +4,7 @@
   roles:
     - debug
     - sysctl
+    - dnf
     - x509-certs
     - ssh
     - gnupg
