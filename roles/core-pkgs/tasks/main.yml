@@ -29,6 +29,7 @@
       - dnf-plugins-core
       - rpmconf
       - symlinks
+      - remove-retired-packages
        ###
       - fedora-workstation-repositories      # Enable Third party repositories
       - openssl
