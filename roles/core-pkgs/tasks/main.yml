@@ -25,7 +25,11 @@
 - name: Install
   ansible.builtin.dnf:
     name:
+      # https://docs.fedoraproject.org/en-US/quick-docs/dnf-system-upgrade/
       - dnf-plugins-core
+      - rpmconf
+      - symlinks
+       ###
       - fedora-workstation-repositories      # Enable Third party repositories
       - openssl
       - nano
