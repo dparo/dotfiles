@@ -76,7 +76,7 @@ elif valid_shell_command pacman; then
 elif valid_shell_command apt; then
 	alias update="sudo bash -c 'apt update && apt full-upgrade && apt autoremove --yes && snap refresh'"
 elif valid_shell_command dnf; then
-	alias update="sudo bash -c 'dnf update && flatpak update -y && flatpak uninstall --unused -y'"
+	alias update="sudo bash -c 'dnf upgrade && flatpak update -y && flatpak uninstall --unused -y'"
 fi
 
 alias ..='cd ..'
