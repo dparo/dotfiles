@@ -29,3 +29,12 @@
   become: true
   tags:
     - brave-browser
+
+- name: Delete GPU Cache. Fixes issues caused by upgrading to some mesa-libGL versions
+  ansible.builtin.file:
+    path: "{{item}}"
+    state: absent
+  loop:
+    - "{{ ansible_user_dir }}/.config/BraveSoftware/Brave-Browser/Default/GPUCache"
+  tags:
+    - brave-browser
