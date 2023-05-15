@@ -13,7 +13,8 @@
     mode: "0664"
   become: true
   tags:
-    - brave-browser
+    - google-chrome
+    - google-chrome-stable
 
 - name: Install google-chrome-stable
   ansible.builtin.dnf:
@@ -22,4 +23,16 @@
     state: present
   become: true
   tags:
+    - google-chrome
+    - google-chrome-stable
+
+
+- name: Delete GPU Cache. Fixes issues caused by upgrading to some mesa-libGL versions
+  ansible.builtin.file:
+    path: "{{item}}"
+    state: absent
+  loop:
+    - "{{ ansible_user_dir }}/.config/google-chrome/Default/GPUCache"
+  tags:
+    - google-chrome
     - google-chrome-stable
