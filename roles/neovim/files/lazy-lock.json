@@ -44,7 +44,6 @@
   "mason.nvim": { "branch": "main", "commit": "057ac5ca159c83e302a55bd839a96ff1ea2396db" },
   "material.nvim": { "branch": "main", "commit": "0c725897bc3d22c45fbf25a602002ee02f06f619" },
   "molokai": { "branch": "master", "commit": "c67bdfcdb31415aa0ade7f8c003261700a885476" },
-  "neodev.nvim": { "branch": "main", "commit": "6498a07601702349c31909005bb333003e4687d4" },
   "neogit": { "branch": "master", "commit": "917fb24c9b7e0506ebfa94ccdbeaaea5eff2f916" },
   "nightfox.nvim": { "branch": "main", "commit": "a53ff3f99c3cf4e598c5febad367fd3cad341b90" },
   "nord-vim": { "branch": "main", "commit": "f13f5dfbb784deddbc1d8195f34dfd9ec73e2295" },

@@ -6,7 +6,7 @@ return {
             "leoluz/nvim-dap-go",
             "theHamsta/nvim-dap-virtual-text",
             "mxsdev/nvim-dap-vscode-js",
-            "folke/neodev.nvim",
+            -- "folke/neodev.nvim",
         },
         config = function()
             local dap = require "dap"
