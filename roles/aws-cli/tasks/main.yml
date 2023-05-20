@@ -1,0 +1,28 @@
+---
+
+- name: Download aws-cli
+  ansible.builtin.unarchive:
+    src: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
+    dest: "/opt"
+    remote_src: yes
+    include:
+     - 'aws/dist/*'
+  become: true
+  tags:
+    - never
+    - aws
+    - aws-cli
+
+- name: Symlink binaries
+  ansible.builtin.file:
+    src: "/opt/aws/dist/{{ item }}"
+    dest: /usr/local/bin/{{ item }}
+    state: link
+  become: true
+  loop:
+    - aws
+    - aws_completer
+  tags:
+    - never
+    - aws
+    - aws-cli
