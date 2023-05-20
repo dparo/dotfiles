@@ -36,6 +36,8 @@
     path: "/usr/local/share/fonts/NerdFonts/{{ item }}"
   loop: '{{ nerd_fonts }}'
   register: fonts_dir
+  tags:
+    - fonts
 
 
 - name: Create necessary NerdFonts subdir
