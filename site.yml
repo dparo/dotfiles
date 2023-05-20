@@ -44,6 +44,7 @@
     - xorg
     - kitty
     - starship
+    - powershell
     - tmux
     - fzf
     - neovim

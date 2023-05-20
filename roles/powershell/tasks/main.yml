@@ -1,0 +1,47 @@
+---
+
+- name: Create powershell install directory
+  ansible.builtin.file:
+    path: "{{ powershell_install_dir }}"
+    state: directory
+    mode: "0755"
+  become: true
+  tags:
+    - never
+    - powershell
+    - pwsh
+
+
+- name: Download Powershell {{ powershell_version }}
+  ansible.builtin.unarchive:
+    src: 'https://github.com/PowerShell/PowerShell/releases/download/v{{ powershell_version }}/powershell-{{ powershell_version }}-linux-x64.tar.gz'
+    dest: "{{ powershell_install_dir }}"
+    remote_src: yes
+  become: true
+  tags:
+    - never
+    - powershell
+    - pwsh
+
+
+- name: Symlink binaries
+  ansible.builtin.file:
+    src: "{{ powershell_install_dir }}/pwsh"
+    dest: /usr/local/bin/pwsh
+    state: link
+  become: true
+  tags:
+    - never
+    - powershell
+    - pwsh
+
+
+- name: Symlink config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/config"
+    dest: "{{ ansible_user_dir }}/.config/powershell"
+    state: link
+  tags:
+    - never
+    - powershell
+    - pwsh
