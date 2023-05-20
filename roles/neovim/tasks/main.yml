@@ -179,6 +179,7 @@
     nvim --headless -c "MasonInstall {{ item }}" -c "qall"
   loop:
     - markdownlint
+    - marksman
     - vim-language-server
     - stylua
     - lua-language-server
