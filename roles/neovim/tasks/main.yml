@@ -184,6 +184,7 @@
     - stylua
     - lua-language-server
     - bash-language-server
+    - pyre
     - pyright
     - mypy
     - debugpy
