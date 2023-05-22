@@ -45,6 +45,7 @@
     - kitty
     - starship
     - powershell
+    - aws-cli
     - tmux
     - fzf
     - neovim
