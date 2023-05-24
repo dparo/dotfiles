@@ -20,6 +20,8 @@
 [push]
     autoSetupRemote = true
     default = simple
+[fetch]
+	prune = true
 [pull]
 	rebase = false
     default = current
@@ -93,5 +95,3 @@
     hunk-header-line-number-style = "#067a00"
     hunk-header-style = file line-number syntax
 	verbose = false
-[remote "origin"]
-	prune = true
