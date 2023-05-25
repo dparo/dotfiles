@@ -1,6 +1,4 @@
 return {
-    { "simrat39/rust-tools.nvim" },
-    { "mfussenegger/nvim-jdtls" },
     {
         "neovim/nvim-lspconfig",
         dependencies = {
@@ -14,6 +12,9 @@ return {
             "SmiteshP/nvim-navic",
             "b0o/SchemaStore.nvim",
             "j-hui/fidget.nvim",
+            "simrat39/rust-tools.nvim",
+            "mfussenegger/nvim-jdtls",
+            "scalameta/nvim-metals",
         },
         config = function()
             -- Portable package manager for Neovim that runs everywhere Neovim runs.
@@ -80,6 +81,8 @@ return {
                     }
                 elseif name == "jdtls" then
                     -- NOTE(dparo): jdtls plugin is automatically started from an autocommand triggered from `ftplugin/java.lua`
+                elseif name == 'metals'
+                    -- NOTE(dparo): metals plugin needs to be attached in another way
                 else
                     lspconfig[name].setup(config)
                 end

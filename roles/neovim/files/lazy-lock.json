@@ -59,6 +59,7 @@
   "nvim-dap-vscode-js": { "branch": "main", "commit": "03bd29672d7fab5e515fc8469b7d07cc5994bbf6" },
   "nvim-jdtls": { "branch": "master", "commit": "355de7458fd63ccef9c6485d952ea118ba2cb46a" },
   "nvim-lspconfig": { "branch": "master", "commit": "5ba7ab746d814413c84ed98c0214c71cd28f130a" },
+  "nvim-metals": { "branch": "main", "commit": "51cd9fabe8ba7ff9abafd0c1ec4292f3a2eb1a31" },
   "nvim-navic": { "branch": "master", "commit": "83dc174da915f9dbc9b51169e9b62a2e0d42b527" },
   "nvim-neoclip.lua": { "branch": "main", "commit": "591f1b62343efe3e369e4831cd91e1875f3a08f4" },
   "nvim-notify": { "branch": "master", "commit": "159c6cf1be25a933f35e97499314c9faab55c98f" },

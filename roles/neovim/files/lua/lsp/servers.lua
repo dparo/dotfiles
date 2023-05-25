@@ -294,6 +294,10 @@ M.list = {
         end,
     },
     {
+        name = 'metals',
+        config = {},
+    },
+    {
         name = "denols",
         config = {
             -- cmd = { "deno", "lsp"},
