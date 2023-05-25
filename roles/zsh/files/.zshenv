@@ -51,6 +51,7 @@ pathprepend \
     "$HOME/.local/bin" \
     "${PYTHONUSERBASE:-$XDG_DATA_HOME/python}/bin" \
     "${GOPATH:-$XDG_DATA_HOME/go}/bin" \
+    "${XDG_DATA_HOME:-$HOME/.local/share}/coursier/bin" \
     "${CARGO_HOME:-$XDG_DATA_HOME/cargo}/bin" \
     "${NPM_CONFIG_PREFIX:-$XDG_DATA_HOME/npm}/bin" \
     "${DENO_DIR:-$XDG_DATA_HOME/deno}/bin" \
