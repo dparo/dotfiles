@@ -81,7 +81,7 @@ return {
                     }
                 elseif name == "jdtls" then
                     -- NOTE(dparo): jdtls plugin is automatically started from an autocommand triggered from `ftplugin/java.lua`
-                elseif name == 'metals'
+                elseif name == 'metals' then
                     -- NOTE(dparo): metals plugin needs to be attached in another way
                 else
                     lspconfig[name].setup(config)
