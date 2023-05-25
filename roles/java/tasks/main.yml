@@ -16,6 +16,17 @@
     - jdk
     - openjdk
 
+- name: Install scala
+  ansible.builtin.dnf:
+    name:
+      - scala
+    state: present
+  become: true
+  tags:
+    - never
+    - scala
+
+
 - name: Create items
   ansible.builtin.file:
     path: "{{ item }}"
