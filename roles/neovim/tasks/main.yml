@@ -21,7 +21,6 @@
       become: true
       tags:
         - neovim
-        - apt
 
     - name: Clone NEOVIM {{ neovim_version }}
       ansible.builtin.git:
@@ -73,7 +72,6 @@
   when: neovim_build_from_source == False
   tags:
     - kitty
-    - apt
 
 - name: Install runtime deps (package manager)
   ansible.builtin.dnf:
@@ -95,7 +93,6 @@
   tags:
     - neovim
     - neovim-runtime
-    - apt
 
 - name: Install runtime deps (CARGO)
   community.general.cargo:

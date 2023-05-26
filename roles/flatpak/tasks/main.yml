@@ -5,7 +5,6 @@
       - flatpak
   become: true
   tags:
-    - apt
     - flatpak
 
 - name: Add the flathub flatpak repository remote to the user installation

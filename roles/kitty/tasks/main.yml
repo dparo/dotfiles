@@ -1,5 +1,4 @@
 ---
-
 - name: Install (Package Manager)
   ansible.builtin.dnf:
     name:
@@ -8,7 +7,6 @@
   become: true
   tags:
     - kitty
-    - apt
 
 - name: Install / Update (Manually)
   ansible.builtin.shell: |
@@ -47,7 +45,6 @@
   tags:
     - kitty
 
-
 # Setup xdg-terminal-exec (Overrides default terminal used by `glib/gio/gdesktopappinfo.c` which affects programs such as `gtk-launch` and `nautilus`)
 # See: https://gitlab.gnome.org/GNOME/glib/-/blob/main/gio/gdesktopappinfo.c, known_terminals[] array. Glib uses a predefined set of terminals with precedence.
 # See: https://gitlab.freedesktop.org/xdg/xdg-specs/-/issues/54
@@ -59,14 +56,13 @@
   tags:
     - kitty
 
-
 - name: Setup GNOME preferred terminal to kitty
   ansible.builtin.shell: |
-        gsettings set org.gnome.desktop.default-applications.terminal exec kitty
-        gsettings set org.gnome.desktop.default-applications.terminal exec-arg '--'
-        gsettings set org.cinnamon.desktop.default-applications.terminal exec kitty
-        gsettings set org.cinnamon.desktop.default-applications.terminal exec-arg '--'
-        true
+    gsettings set org.gnome.desktop.default-applications.terminal exec kitty
+    gsettings set org.gnome.desktop.default-applications.terminal exec-arg '--'
+    gsettings set org.cinnamon.desktop.default-applications.terminal exec kitty
+    gsettings set org.cinnamon.desktop.default-applications.terminal exec-arg '--'
+    true
   ignore_errors: true
   tags:
     - kitty

@@ -7,7 +7,6 @@
     state: present
   become: true
   tags:
-    - apt
     - gnome-keyring
 
 - name: Enable keyring service

@@ -15,13 +15,13 @@
       - vcpkg
       - meson
       - clang
-      - clang-tools-extra  # Provides clang-tidy, among other extra clang tools
+      - clang-tools-extra # Provides clang-tidy, among other extra clang tools
       - cppcheck
       - bear # Generate compilation database for clangtooling
       - valgrind
       # - kcachegrind
       - gperf
-      - hyperfine       # (RUST) Benchmarking tool
+      - hyperfine # (RUST) Benchmarking tool
       # - flamegraph    # (RUST) Visualization of profiled code
       # - hotspot
       # - heaptrack
@@ -32,9 +32,10 @@
     state: present
   become: true
   tags:
-    - apt
     - cpp
     - gcc
+    - gdb
+    - clang
 
 - name: Symlink config
   ansible.builtin.file:
@@ -49,6 +50,8 @@
     - cpp
     - gcc
     - gdb
+    - clang
+    - clangd
 
 - name: Create gdb cache dir
   ansible.builtin.file:

@@ -6,7 +6,6 @@
     state: present
   become: true
   tags:
-    - apt
     - xdg
 
 - name: Create items
@@ -162,13 +161,12 @@
     - xdg
     - xdg-ninja
 
-
 - name: Download background
   ansible.builtin.get_url:
     # https://www.reddit.com/r/wallpaper/comments/12yenwu/night_landscape_3840x2160/?utm_source=share&utm_medium=android_app&utm_name=androidcss&utm_term=14&utm_content=share_button
-    url: 'https://www.dropbox.com/s/092y4nkywd2pj1m/blue_ai_background.webp?dl=1'
+    url: "https://www.dropbox.com/s/092y4nkywd2pj1m/blue_ai_background.webp?dl=1"
     dest: "{{ ansible_user_dir }}/.local/share/backgrounds"
-    mode: '0644'
+    mode: "0644"
     force: True
   tags:
     - xdg

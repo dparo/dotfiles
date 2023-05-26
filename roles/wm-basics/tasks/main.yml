@@ -20,5 +20,4 @@
     state: present
   become: true
   tags:
-    - apt
     - wm-basics

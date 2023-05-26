@@ -10,7 +10,6 @@
   tags:
     - pulseaudio
     - pipewire
-    - apt
 
 - name: Create config dirs
   ansible.builtin.file:

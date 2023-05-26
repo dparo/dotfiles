@@ -9,7 +9,6 @@
   tags:
     - pipewire
     - wireplumber
-    - apt
 
 # https://github.com/werman/noise-suppression-for-voice
 - name: Download and unpack latest noise-suppression-for-voice

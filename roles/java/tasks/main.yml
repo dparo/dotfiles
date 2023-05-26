@@ -7,11 +7,10 @@
       - java-11-openjdk-devel
       - java-11-openjdk-src
       - java-17-openjdk-devel
-      - jacoco        # JaCoCo is a free code coverage library for Java
+      - jacoco # JaCoCo is a free code coverage library for Java
     state: present
   become: true
   tags:
-    - apt
     - java
     - jdk
     - openjdk
@@ -25,7 +24,6 @@
   tags:
     - never
     - scala
-
 
 - name: Create items
   ansible.builtin.file:

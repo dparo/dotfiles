@@ -7,7 +7,6 @@
   become: true
   tags:
     - bash
-    - apt
 
 - name: Symlink config
   ansible.builtin.file:

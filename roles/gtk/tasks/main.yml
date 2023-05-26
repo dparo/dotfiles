@@ -8,7 +8,6 @@
     state: present
   become: true
   tags:
-    - apt
     - gtk
     - gtk-theme
 

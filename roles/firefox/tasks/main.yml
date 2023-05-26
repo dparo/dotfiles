@@ -7,4 +7,3 @@
   become: true
   tags:
     - firefox
-    - apt

@@ -21,7 +21,6 @@
     - fedora
     - yum.repos.d
 
-
 - name: Install
   ansible.builtin.dnf:
     name:
@@ -30,8 +29,8 @@
       - rpmconf
       - symlinks
       - remove-retired-packages
-       ###
-      - fedora-workstation-repositories      # Enable Third party repositories
+        ###
+      - fedora-workstation-repositories # Enable Third party repositories
       - openssl
       - nano
       - git
@@ -44,7 +43,7 @@
       - wget
       - curl
       - rclone
-      - restic      # Modern backup program with support for rclone (Cloud based backups)
+      - restic # Modern backup program with support for rclone (Cloud based backups)
       - rsync
       - jq
       - rsync
@@ -74,7 +73,6 @@
   become: true
   tags:
     - core-pkgs
-    - apt
 
 - name: Remove unwanted packages
   ansible.builtin.dnf:
@@ -85,7 +83,6 @@
   become: true
   tags:
     - core-pkgs
-    - apt
 
 - name: Install sad (https://github.com/ms-jpq/sad)
   ansible.builtin.unarchive:
@@ -94,7 +91,6 @@
     remote_src: true
   tags:
     - core-pkgs
-    - apt
     - sad
 
 - name: Symlink config files

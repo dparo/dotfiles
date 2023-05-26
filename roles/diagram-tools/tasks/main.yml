@@ -14,7 +14,6 @@
   become: true
   tags:
     - diagram-tools
-    - apt
 
 - name: Install vega-cli (A Visualization Grammar, interactive visualization designs)
   community.general.npm:

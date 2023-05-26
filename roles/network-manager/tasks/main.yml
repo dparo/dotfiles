@@ -14,7 +14,6 @@
     state: present
   become: true
   tags:
-    - apt
     - network-manager
     - vpn
 

@@ -8,5 +8,4 @@
     state: present
   become: true
   tags:
-    - apt
     - bluetooth

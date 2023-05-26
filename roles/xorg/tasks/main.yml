@@ -18,7 +18,6 @@
   become: true
   tags:
     - xorg
-    - apt
 
 - name: Change default keyboard repeat rate
   ansible.builtin.copy:
@@ -33,7 +32,6 @@
   become: true
   tags:
     - sudo
-
 
 - name: Symlink config
   ansible.builtin.file:

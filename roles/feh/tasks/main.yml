@@ -6,7 +6,6 @@
     state: present
   become: true
   tags:
-    - apt
     - feh
 
 - name: Symlink config

@@ -10,7 +10,6 @@
     state: present
   become: true
   tags:
-    - apt
     - git
 
 - name: Symlink config

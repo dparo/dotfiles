@@ -7,7 +7,6 @@
     state: present
   become: true
   tags:
-    - apt
     - rofi
     - dmenu
 
@@ -18,3 +17,4 @@
     state: link
   tags:
     - rofi
+    - dmenu

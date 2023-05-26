@@ -1,5 +1,4 @@
 ---
-
 - name: Install
   ansible.builtin.apt:
     name:
@@ -9,5 +8,4 @@
     state: present
   become: true
   tags:
-    - apt
     - neomutt
