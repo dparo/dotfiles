@@ -95,6 +95,8 @@ super + {comma, period}
 # focus the next/previous node in the current desktop
 super + {_,shift + }n
     bspc node -f {next,prev}.local
+super + p
+    bspc node -f prev.local
 
 #
 # focus/swap
