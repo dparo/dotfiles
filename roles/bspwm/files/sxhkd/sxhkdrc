@@ -115,6 +115,11 @@ super + {bracketleft,bracketright}
 super + {grave,Tab}
 	bspc {node,desktop} -f last
 
+# focus the last node/desktop
+alt + Tab
+	bspc desktop -f last
+
+
 # focus the older or newer node in the focus history
 super + {o,i}
 	bspc wm -h off; \
