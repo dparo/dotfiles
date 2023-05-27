@@ -197,7 +197,7 @@ super + n
     kitty -- nvim
 
 
-super + m
+super + ctrl + Home
     kitty -- ncmpcpp
 
 
