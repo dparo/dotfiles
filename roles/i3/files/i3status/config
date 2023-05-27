@@ -37,21 +37,21 @@ order += "tztime local"
 
 wireless _first_ {
     format_up = " %quality %essid %ip"
-    format_down = "睊"
+    format_down = "󱚼"
 }
 
 
 ethernet "enp30s0" {
     #if you use %speed, i3status requires root privileges
-    format_up = " %ip (%speed)"
-    format_down = ""
+    format_up = "󰈁 %ip (%speed)"
+    format_down = "󰈂"
 }
 
 
 ethernet _first_ {
     #if you use %speed, i3status requires root privileges
-    format_up = " %ip (%speed)"
-    format_down = ""
+    format_up = "󰈁 %ip (%speed)"
+    format_down = "󰈂"
 }
 
 battery all {
@@ -62,10 +62,10 @@ battery all {
     low_threshold = 11
     threshold_type = percentage
     hide_seconds = true
-    status_chr = " "
-    status_bat = " "
-    status_unk = ""
-    status_full = ""
+    status_chr = "󱊥 "
+    status_bat = "󰁾"
+    status_unk = "󱃍"
+    status_full = "󰂅 "
 }
 
 run_watch DHCP {
@@ -77,7 +77,7 @@ run_watch VPN {
 }
 
 tztime local {
-    format = " %a %d %b %Y   %H:%M"
+    format = " %a %d %b %Y   %H:%M"
 }
 
 load {
@@ -108,20 +108,20 @@ cpu_temperature 0 {
 }
 
 disk "/" {
-        format = " / %avail"
+        format = "󰋊 / %avail"
         low_threshold = 20
         threshold_type = percentage_avail
 }
 
 disk "/home" {
-        format = " /home %avail"
+        format = "󰋊 /home %avail"
         low_threshold = 20
         threshold_type = percentage_avail
 }
 
 
 memory {
-        format = " %available"
+        format = "󰍛 %available"
         format_degraded = " %available"
         threshold_degraded =  10%
         threshold_critical =  5%
@@ -129,7 +129,7 @@ memory {
 
 volume master {
     format = " %volume"
-    format_muted = "ﱝ"
+    format_muted = " "
     device = "pulse"
     mixer = "Master"
     mixer_idx = 0
