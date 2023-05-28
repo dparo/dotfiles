@@ -15,6 +15,7 @@ Wants=xsettingsd.service
 Wants=xss-lock.service
 Wants=background-setter.service
 Wants=xrdb-load.service
+Wants=i3-battery-notifier
 
 Wants=picom.service
 # Wants=redshift.service
