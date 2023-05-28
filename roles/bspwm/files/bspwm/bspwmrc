@@ -1,21 +1,13 @@
 #!/usr/bin/env bash
 
 cd "$HOME" || exit 1
-
 set -x
-config() {
-    bspc config automatic_scheme longest_side
-    bspc config top_padding 0
-    bspc config bottom_padding 0
 
-
-    bspc monitor -d 1 2 3 4 5 6 7 8 9 10
-
-    bspc config remove_disabled_monitors true
-    bspc config remove_unplugged_monitors true
-
+setup_monitors() {
     MONITORS="$(xrandr --listactivemonitors | tail -n +2 | awk {'print $4'})"
     PRIMARY=$(xrandr --query | grep " connected" | grep "primary" | cut -d" " -f1)
+
+    bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
     M="$(echo "$MONITORS" | wc -l)"
     if test "$M" -eq 1; then
@@ -44,6 +36,22 @@ config() {
         bspc monitor "$(echo "$MONITORS" | awk NR==4)" -d 7 8
         bspc monitor "$(echo "$MONITORS" | awk NR==5)" -d 9 10
     fi
+
+    systemctl --user restart background-setter.service
+}
+
+padding_config() {
+    bspc config top_padding 0
+    bspc config bottom_padding 0
+}
+
+config() {
+
+    bspc config automatic_scheme longest_side
+
+    bspc config remove_disabled_monitors true
+    bspc config remove_unplugged_monitors true
+
 
     # mod1 is alt, mod4 is super (windows key)
     bspc config pointer_modifier mod1
@@ -86,7 +94,30 @@ config() {
     bspc config focused_border_color "#eba0ac"
     bspc config normal_border_color "#11111b"
     bspc config presel_feedback_color "#a6e3a1"
+
+    setup_monitors
 }
+
+run_polybar_async() {
+    "$XDG_CONFIG_HOME/polybar/launch.sh" &
+    # systemctl --user start polybar
+}
+
+event_subscription() {
+    bspc subscribe monitor | while read -r line; do
+        case "$line" in
+            monitor_geometry*):
+                padding_config
+                run_polybar
+                ;;
+            monitor_add*|monitor_remove*):
+                padding_config
+                run_polybar_async
+
+        esac
+    done
+}
+
 
 "${XDG_CONFIG_HOME:-$HOME/.config}/xorg/refresh-devices-settings.sh"
 
@@ -94,12 +125,11 @@ if test "$1" = "--config"; then
     config
 else
     config
-
-
-    "$XDG_CONFIG_HOME/polybar/launch.sh" &
-    # systemctl --user start polybar
+    event_subscription &
 
     autorandr --change
+    run_polybar_async
+
 
     ##
     ## Startup the programs (wait one second so that polybar and the notification daemon has enough time to startup)

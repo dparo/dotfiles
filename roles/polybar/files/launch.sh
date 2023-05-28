@@ -26,7 +26,7 @@ main() {
     THERMAL_ZONE_TYPE="TCPU"
     THERMAL_ZONE="$(for i in /sys/class/thermal/thermal_zone*; do echo "$i $(<$i/type)"; done | grep "$THERMAL_ZONE_TYPE" | awk {'print $1'} | sed 's@/sys/class/thermal/thermal_zone@@g')"
 
-    env MONITOR="$PRIMARY" PRIMARY="$PRIMARY" BAT="$BAT" THERMAL_ZONE="$THERMAL_ZONE" polybar --reload main &
+    env MONITOR="$PRIMARY" PRIMARY="$PRIMARY" BAT="$BAT" THERMAL_ZONE="$THERMAL_ZONE" polybar --reload main
 }
 
 set -x
