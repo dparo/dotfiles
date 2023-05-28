@@ -9,31 +9,37 @@ config() {
     bspc config bottom_padding 0
 
 
-    bspc monitor -d 1 2 3 4 5 6 7 8 9 0
+    bspc monitor -d 1 2 3 4 5 6 7 8 9 10
 
-    local monitors
-    monitors="$(xrandr --listactivemonitors | tail -n +2 | awk {'print $4'})"
-    M="$(echo "$monitors" | wc -l)"
+    MONITORS="$(xrandr --listactiveMONITORS | tail -n +2 | awk {'print $4'})"
+    PRIMARY=$(xrandr --query | grep " connected" | grep "primary" | cut -d" " -f1)
+
+    M="$(echo "$MONITORS" | wc -l)"
     if test "$M" -eq 1; then
+        bspc wm -O "$(echo "$MONITORS" | awk NR==1)"
         bspc monitor -d 1 2 3 4 5 6 7 8 9 10
     elif test "$M" -eq 2; then
-        bspc monitor "$(echo "$monitors" | awk NR==1)" -d 1 2 3 4 5
-        bspc monitor "$(echo "$monitors" | awk NR==2)" -d  6 7 8 9 10
+        bspc wm -O "$(echo "$MONITORS" | awk NR==1)" "$(echo "$MONITORS" | awk NR==2)"
+        bspc monitor "$(echo "$MONITORS" | awk NR==1)" -d 1 2 3 4 5
+        bspc monitor "$(echo "$MONITORS" | awk NR==2)" -d 6 7 8 9 10
     elif test "$M" -eq  3; then
-        bspc monitor "$(echo "$monitors" | awk NR==1)" -d 1 2 3 4
-        bspc monitor "$(echo "$monitors" | awk NR==2)" -d 5 6 7
-        bspc monitor "$(echo "$monitors" | awk NR==3)" -d 8 9 10
+        bspc wm -O "$(echo "$MONITORS" | awk NR==1)" "$(echo "$MONITORS" | awk NR==2)" "$(echo "$MONITORS" | awk NR==3)"
+        bspc monitor "$(echo "$MONITORS" | awk NR==1)" -d 1 2 3 4
+        bspc monitor "$(echo "$MONITORS" | awk NR==2)" -d 5 6 7
+        bspc monitor "$(echo "$MONITORS" | awk NR==3)" -d 8 9 10
     elif test "$M" -eq 4; then
-        bspc monitor "$(echo "$monitors" | awk NR==1)" -d 1 2 3
-        bspc monitor "$(echo "$monitors" | awk NR==2)" -d 4 5 6
-        bspc monitor "$(echo "$monitors" | awk NR==3)" -d 7 8
-        bspc monitor "$(echo "$monitors" | awk NR==4)" -d 9 10
+        bspc wm -O "$(echo "$MONITORS" | awk NR==1)" "$(echo "$MONITORS" | awk NR==2)" "$(echo "$MONITORS" | awk NR==3)" "$(echo "$MONITORS" | awk NR==4)"
+        bspc monitor "$(echo "$MONITORS" | awk NR==1)" -d 1 2 3
+        bspc monitor "$(echo "$MONITORS" | awk NR==2)" -d 4 5 6
+        bspc monitor "$(echo "$MONITORS" | awk NR==3)" -d 7 8
+        bspc monitor "$(echo "$MONITORS" | awk NR==4)" -d 9 10
     elif test "$M" -eq 5; then
-        bspc monitor "$(echo "$monitors" | awk NR==1)" -d I II
-        bspc monitor "$(echo "$monitors" | awk NR==2)" -d III IV
-        bspc monitor "$(echo "$monitors" | awk NR==3)" -d V VI
-        bspc monitor "$(echo "$monitors" | awk NR==4)" -d VII VIII
-        bspc monitor "$(echo "$monitors" | awk NR==5)" -d IX X
+        bspc wm -O "$(echo "$MONITORS" | awk NR==1)" "$(echo "$MONITORS" | awk NR==2)" "$(echo "$MONITORS" | awk NR==3)" "$(echo "$MONITORS" | awk NR==4)" "$(echo "$MONITORS" | awk NR==5)"
+        bspc monitor "$(echo "$MONITORS" | awk NR==1)" -d 1 2
+        bspc monitor "$(echo "$MONITORS" | awk NR==2)" -d 3 4
+        bspc monitor "$(echo "$MONITORS" | awk NR==3)" -d 5 6
+        bspc monitor "$(echo "$MONITORS" | awk NR==4)" -d 7 8
+        bspc monitor "$(echo "$MONITORS" | awk NR==5)" -d 9 10
     fi
 
     # mod1 is alt, mod4 is super (windows key)
