@@ -28,7 +28,7 @@
           entry="$HOME/.xinitrc"
       fi
       if [ -n "$entry" ]; then
-        exec "$entry"
+        exec "$entry" "$@"
       fi
     mode: "0775"
   become: true
@@ -37,15 +37,18 @@
 
 - name: Create desktop entry to allow display managers to execute the user's XINITRC
   ansible.builtin.copy:
-    dest: /usr/share/xsessions/xinitrc.desktop
+    dest: '/usr/share/xsessions/xinitrc-{{ item }}.desktop'
     content: |
       [Desktop Entry]
       Name=xinitrc
-      Comment=Executes the .xinitrc script in your home directory
-      Exec=xinitrcsession-helper
-      TryExec=xinitrcsession-helper
+      Comment=Executes the .xinitrc script in your home directory with {{ item }}
+      Exec=xinitrcsession-helper {{ item }}
+      TryExec=xinitrcsession-helper {{ item }}
       Type=Application
     mode: "0664"
   become: true
+  loop:
+    - i3
+    - bspwm
   tags:
     - display-manager
