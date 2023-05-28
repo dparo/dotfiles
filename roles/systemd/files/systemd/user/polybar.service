@@ -3,5 +3,7 @@ Description=Polybar Panel
 PartOf=graphical-session.target
 
 [Service]
-ExecStart=polybar --reload main
+ExecStart=%h/.config/polybar/launch.sh
+ExecReload=%h/.config/polybar/launch.sh
+ExecStop=killall --quiet --user polybar
 Restart=on-failure
