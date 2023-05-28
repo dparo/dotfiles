@@ -4,7 +4,8 @@ include-file = $HOME/.config/polybar/themes/catppuccin-mocha.ini
 
 [bar/main]
 bottom = false
-font-0 =  Ubuntu Nerd Font :style=Regular:size=10;2
+font-0 =  Noto Sans :style=Regular:size=10;2
+font-1 =  Ubuntu Nerd Font :style=Regular:size=10;2
 
 wm-restack = bspwm
 modules-left = bspwm mpd
@@ -57,7 +58,7 @@ mount-1 = /home
 
 label-mounted =  %mountpoint%: %free%
 label-unmounted =
-label-unmounted-foreground = ${colors.foreground-alt}
+label-unmounted-foreground = ${colors.red}
 
 [module/bspwm]
 type = internal/bspwm
@@ -66,20 +67,22 @@ enable-scroll = false
 format = <label-state> <label-mode>
 
 label-focused = %index%
-label-focused-background = ${colors.background-alt}
-label-focused-underline= ${colors.foreground-alt}
+label-focused-background = ${colors.crust}
+label-focused-foreground = ${colors.yellow}
+label-focused-underline= ${colors.yellow}
 label-focused-padding = 1
 
 label-occupied = %index%
 label-occupied-padding = 1
 
 label-urgent = %index%!
-label-urgent-background = ${colors.alert}
+label-urgent-background = ${colors.crust}
+label-urgent-foreground = ${colors.red}
 label-urgent-padding = 1
-label-urgent-underline = #9b0a20
+label-urgent-underline = ${colors.red}
 
 label-empty =
-label-empty-foreground = ${colors.foreground-alt}
+label-empty-foreground = ${colors.subtext0}
 label-empty-padding = 1
 label-separator =
 
@@ -162,12 +165,12 @@ label-muted-foreground = #666
 [module/mpd]
 type = internal/mpd
 format-online =
-format-playing =   <label-song>  <label-time>
+format-playing = 󰝚 <label-song>  [<label-time>]
 format-paused =
 format-stopped =
 label-song = %artist% - %title%
 
-label-offline =  mpd is offline
+label-offline = 󰝛 mpd is offline
 
 ; Used to display the state of random/repeat/repeatone/single
 ; Only applies if <icon-[random|repeat|repeatone|single]> is used
@@ -198,7 +201,7 @@ format-low-underline =
 format-full-prefix = "󰂅 "
 format-full-underline =
 
-label-low-foreground = ${colors.alert}
+label-low-foreground = ${colors.red}
 
 label-full = %percentage%%
 label-charging = %percentage%%
@@ -220,4 +223,4 @@ format-warn-underline =
 
 label = %temperature-c%
 label-warn = %temperature-c%
-label-warn-foreground = ${colors.secondary}
+label-warn-foreground = ${colors.red}
