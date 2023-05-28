@@ -15,13 +15,18 @@ main() {
 
     MONITORS="$(polybar --list-monitors | cut -d":" -f1)"
     PRIMARY=$(xrandr --query | grep " connected" | grep "primary" | cut -d" " -f1)
+    BAT="$(command ls -1 /sys/class/power_supply | grep -Ei BAT | head -n 1)"
     readarray -t list_of_monitors_array i <<<"$MONITORS"
 
+    # Spawn on all active monitors
     # for m in "${list_of_monitors_array[@]}"; do
     #     env MONITOR="$m" PRIMARY="$PRIMARY" polybar --reload main &
     # done
 
-    env MONITOR="$PRIMARY" PRIMARY="$PRIMARY" polybar --reload main &
+    THERMAL_ZONE_TYPE="TCPU"
+    THERMAL_ZONE="$(for i in /sys/class/thermal/thermal_zone*; do echo "$i $(<$i/type)"; done | grep "$THERMAL_ZONE_TYPE" | awk {'print $1'} | sed 's@/sys/class/thermal/thermal_zone@@g')"
+
+    env MONITOR="$PRIMARY" PRIMARY="$PRIMARY" BAT="$BAT" THERMAL_ZONE="$THERMAL_ZONE" polybar --reload main &
 }
 
 set -x
