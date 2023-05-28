@@ -3,7 +3,7 @@
   ansible.builtin.get_url:
     dest: /etc/yum.repos.d/virtio-win.repo
     url: https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
-    mode: "0664"
+    mode: "0644"
   become: true
   tags:
     - qemu

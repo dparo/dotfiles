@@ -50,3 +50,14 @@
     - "{{ role_path }}/files/startx"
   tags:
     - xorg
+
+- name: Setup autorandr udev rule to use systemd to run autorandr
+  ansible.builtin.copy:
+    dest: /lib/udev/rules.d/40-monitor-hotplug.rules
+    content: |
+      ACTION=="change", SUBSYSTEM=="drm", RUN+="/bin/systemctl start --no-block autorandr.service"
+    mode: "0644"
+  become: True
+  tags:
+    - xorg
+    - autorandr

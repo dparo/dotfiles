@@ -45,7 +45,7 @@
       Name=xinitrc {{ item }}
       Comment=Executes the .xinitrc script in your home directory with {{ item }}
       Exec=xinitrcsession-helper {{ item }}
-    mode: "0664"
+    mode: "0644"
   become: true
   loop:
     - i3

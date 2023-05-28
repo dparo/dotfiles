@@ -8,7 +8,7 @@
       enabled=1
       autorefresh=1
       baseurl=https://brave-browser-rpm-release.s3.brave.com/$basearch
-    mode: "0664"
+    mode: "0644"
   become: true
   tags:
     - brave-browser

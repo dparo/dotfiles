@@ -10,7 +10,7 @@
       gpgcheck=1
       gpgkey=https://dl.google.com/linux/linux_signing_key.pub
       enabled=1
-    mode: "0664"
+    mode: "0644"
   become: true
   tags:
     - google-chrome
