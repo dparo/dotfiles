@@ -108,11 +108,12 @@ event_subscription() {
         monitor_geometry*)
             :
             padding_config
-            run_polybar_async
+            polybar-msg cmd restart
             ;;
         monitor_add* | monitor_remove*)
             :
             padding_config
+            polybar-msg cmd restart
             run_polybar_async
             ;;
 
