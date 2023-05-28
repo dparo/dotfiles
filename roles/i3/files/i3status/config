@@ -122,7 +122,7 @@ disk "/home" {
 
 memory {
         format = "󰍛 %available"
-        format_degraded = " %available"
+        format_degraded = "󰍛 %available"
         threshold_degraded =  10%
         threshold_critical =  5%
 }

@@ -4,7 +4,7 @@ include-file = $HOME/.config/polybar/themes/catppuccin-mocha.ini
 
 [bar/main]
 bottom = false
-font-0 = Blex Mono Nerd Font :style=Regular:size=8;2
+font-0 =  Ubuntu Nerd Font :style=Regular:size=10;2
 
 wm-restack = bspwm
 modules-left = bspwm mpd
@@ -94,7 +94,7 @@ label = %percentage:2%%
 [module/memory]
 type = internal/memory
 interval = 2
-format-prefix = " "
+format-prefix = "󰍛 "
 format-underline =
 label = %free%
 
@@ -143,7 +143,7 @@ date = " %a %d %b %Y"
 
 time = %H:%M
 
-format-prefix = ""
+format-prefix = " "
 format-underline =
 
 label = %date%  %time%
@@ -155,7 +155,7 @@ format-volume = <label-volume>
 label-volume =   %percentage%%
 label-volume-foreground = ${root.foreground}
 
-label-muted = ﱝ 0%
+label-muted =   0%
 label-muted-foreground = #666
 
 
@@ -167,7 +167,7 @@ format-paused =
 format-stopped =
 label-song = %artist% - %title%
 
-label-offline = 🎜 mpd is offline
+label-offline =  mpd is offline
 
 ; Used to display the state of random/repeat/repeatone/single
 ; Only applies if <icon-[random|repeat|repeatone|single]> is used
@@ -182,20 +182,20 @@ adapter = AC0
 full-at = 98
 time-format = %H:%M
 
-format-charging-prefix = " "
+format-charging-prefix = "󱊥 "
 format-charging = <label-charging>
 format-charging-underline =
 
-format-discharging-prefix = "  "
+format-discharging-prefix = "󰁾"
 format-discharging = <label-discharging>
 format-discharging-underline =
 
-format-low-prefix = " "
+format-low-prefix = "󰁻"
 format-low = <label-low>
 format-low-underline =
 
 
-format-full-prefix = " "
+format-full-prefix = "󰂅 "
 format-full-underline =
 
 label-low-foreground = ${colors.alert}
@@ -213,9 +213,9 @@ warn-temperature = 60
 
 hwmon-path = /sys/devices/pci0000:00/0000:00:18.3/hwmon/hwmon0/temp2_input
 
-format = 糖 <label>
+format =   <label>
 format-underline =
-format-warn = 糖 <label-warn>
+format-warn =  <label-warn>
 format-warn-underline =
 
 label = %temperature-c%
