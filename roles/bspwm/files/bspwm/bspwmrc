@@ -97,10 +97,6 @@ config() {
     setup_monitors
 }
 
-run_polybar_async() {
-    "$XDG_CONFIG_HOME/polybar/launch.sh" &
-    # systemctl --user start polybar
-}
 
 event_subscription() {
     bspc subscribe monitor | while read -r line; do
@@ -108,12 +104,12 @@ event_subscription() {
         monitor_geometry*)
             :
             padding_config
-            polybar-msg cmd restart
+            systemctl --user reload polybar
             ;;
         monitor_add* | monitor_remove*)
             :
             padding_config
-            polybar-msg cmd restart
+            systemctl --user reload polybar
             run_polybar_async
             ;;
 
@@ -130,11 +126,12 @@ main() {
         event_subscription &
 
         autorandr --change
-        run_polybar_async
+        systemctl --user start polybar.service
 
         ##
         ## Startup the programs (wait one second so that polybar and the notification daemon has enough time to startup)
         ##
+        sleep 4
         copyq &
         ~/opt/Telegram/Telegram -startintray &
     fi
