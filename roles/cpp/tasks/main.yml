@@ -19,6 +19,7 @@
       - cppcheck
       - bear # Generate compilation database for clangtooling
       - valgrind
+      - lcov
       # - kcachegrind
       - gperf
       - hyperfine # (RUST) Benchmarking tool
