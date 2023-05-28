@@ -40,11 +40,11 @@
     dest: '/usr/share/xsessions/xinitrc-{{ item }}.desktop'
     content: |
       [Desktop Entry]
+      Encoding=UTF-8
+      Type=Application
       Name=xinitrc {{ item }}
       Comment=Executes the .xinitrc script in your home directory with {{ item }}
       Exec=xinitrcsession-helper {{ item }}
-      TryExec=xinitrcsession-helper {{ item }}
-      Type=Application
     mode: "0664"
   become: true
   loop:
