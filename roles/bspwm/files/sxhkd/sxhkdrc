@@ -24,9 +24,8 @@ super + d
 #
 
 # Quit bspwm
-# super + shift + e
-#     systemctl --user stop sxhkd.service; \
-#     systemctl --user stop bspwm.service;
+super + shift + e
+    systemctl --user stop bspwm.service;
 
 # Reload bspwm and configs
 super + shift + r
