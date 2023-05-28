@@ -9,5 +9,6 @@ Wants=sxhkd.service
 [Service]
 ExecStart=bspwm
 ExecReload=bspwm wm -r
+ExecStopPre=bspc quit
 ExecStopPost=/bin/systemctl --user stop --no-block graphical-session.target
 Restart=on-failure

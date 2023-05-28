@@ -5,5 +5,5 @@ PartOf=graphical-session.target
 [Service]
 ExecStart=%h/.config/polybar/launch.sh
 ExecReload=%h/.config/polybar/launch.sh
-ExecStop=killall --quiet --user polybar
+ExecStop=killall --quiet --user %u polybar
 Restart=on-failure

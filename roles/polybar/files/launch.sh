@@ -10,19 +10,19 @@ else
 fi
 
 main() {
-    killall --quiet --user polybar
-    while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
+    killall --quiet --user "$USER" polybar | true
+    while pgrep -u "$UID" -x polybar >/dev/null; do sleep 1; done
 
+    MONITORS="$(polybar --list-monitors | cut -d":" -f1)"
+    PRIMARY=$(xrandr --query | grep " connected" | grep "primary" | cut -d" " -f1)
+    readarray -t list_of_monitors_array i <<<"$MONITORS"
 
-    local list_of_monitors
-    list_of_monitors="$(polybar --list-monitors | cut -d":" -f1)"
+    # for m in "${list_of_monitors_array[@]}"; do
+    #     env MONITOR="$m" PRIMARY="$PRIMARY" polybar --reload main &
+    # done
 
-    readarray -t list_of_monitors_array i <<<"$list_of_monitors"
-
-    for m in "${list_of_monitors_array[@]}"; do
-        env MONITOR="$m" polybar --reload main &
-    done
+    env MONITOR="$PRIMARY" PRIMARY="$PRIMARY" polybar --reload main &
 }
 
-set -e
+set -x
 main "$@"
