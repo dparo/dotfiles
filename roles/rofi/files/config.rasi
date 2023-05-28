@@ -63,10 +63,10 @@ configuration {
     display-ssh: "SSH";
 	display-combi: "Combi";
 	display-keys: "Keys";
-	display-filebrowser: "Files";
-    display-drun: "   Apps ";
+	display-filebrowser: "   Files";
+    display-drun: " 󰀻 Apps ";
     display-run: "   Run ";
-    display-window: " 﩯  Window";
+    display-window: "   Window";
     display-Network: " 󰤨  Network";
     sidebar-mode: true;
     hide-scrollbar: true;
