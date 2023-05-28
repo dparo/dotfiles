@@ -40,7 +40,7 @@
     dest: '/usr/share/xsessions/xinitrc-{{ item }}.desktop'
     content: |
       [Desktop Entry]
-      Name=xinitrc
+      Name=xinitrc {{ item }}
       Comment=Executes the .xinitrc script in your home directory with {{ item }}
       Exec=xinitrcsession-helper {{ item }}
       TryExec=xinitrcsession-helper {{ item }}
