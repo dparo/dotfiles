@@ -102,6 +102,5 @@ else
     ## Startup the programs (wait one second so that polybar and the notification daemon has enough time to startup)
     ##
     copyq &
-    flameshot &
     ~/opt/Telegram/Telegram -startintray &
 fi
