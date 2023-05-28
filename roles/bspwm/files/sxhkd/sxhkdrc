@@ -25,7 +25,7 @@ super + d
 
 # Quit bspwm
 super + shift + e
-    systemctl --user stop bspwm.service;
+    "$HOME/.config/i3/menu.sh" # systemctl --user stop bspwm.service;
 
 # Reload bspwm and configs
 super + shift + r
