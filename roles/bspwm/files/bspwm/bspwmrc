@@ -17,7 +17,7 @@ setup_monitors() {
         bspc wm -O "$(echo "$MONITORS" | awk NR==1)" "$(echo "$MONITORS" | awk NR==2)"
         bspc monitor "$(echo "$MONITORS" | awk NR==1)" -d 1 2 3 4 5
         bspc monitor "$(echo "$MONITORS" | awk NR==2)" -d 6 7 8 9 10
-    elif test "$M" -eq  3; then
+    elif test "$M" -eq 3; then
         bspc wm -O "$(echo "$MONITORS" | awk NR==1)" "$(echo "$MONITORS" | awk NR==2)" "$(echo "$MONITORS" | awk NR==3)"
         bspc monitor "$(echo "$MONITORS" | awk NR==1)" -d 1 2 3 4
         bspc monitor "$(echo "$MONITORS" | awk NR==2)" -d 5 6 7
@@ -51,7 +51,6 @@ config() {
 
     bspc config remove_disabled_monitors true
     bspc config remove_unplugged_monitors true
-
 
     # mod1 is alt, mod4 is super (windows key)
     bspc config pointer_modifier mod1
@@ -106,34 +105,39 @@ run_polybar_async() {
 event_subscription() {
     bspc subscribe monitor | while read -r line; do
         case "$line" in
-            monitor_geometry*):
-                padding_config
-                run_polybar
-                ;;
-            monitor_add*|monitor_remove*):
-                padding_config
-                run_polybar_async
+        monitor_geometry*)
+            :
+            padding_config
+            run_polybar_async
+            ;;
+        monitor_add* | monitor_remove*)
+            :
+            padding_config
+            run_polybar_async
+            ;;
 
         esac
     done
 }
 
+main() {
+    "${XDG_CONFIG_HOME:-$HOME/.config}/xorg/refresh-devices-settings.sh"
+    if test "$1" = "--config"; then
+        config
+    else
+        config
+        event_subscription &
 
-"${XDG_CONFIG_HOME:-$HOME/.config}/xorg/refresh-devices-settings.sh"
+        autorandr --change
+        run_polybar_async
 
-if test "$1" = "--config"; then
-    config
-else
-    config
-    event_subscription &
+        ##
+        ## Startup the programs (wait one second so that polybar and the notification daemon has enough time to startup)
+        ##
+        copyq &
+        ~/opt/Telegram/Telegram -startintray &
+    fi
 
-    autorandr --change
-    run_polybar_async
+}
 
-
-    ##
-    ## Startup the programs (wait one second so that polybar and the notification daemon has enough time to startup)
-    ##
-    copyq &
-    ~/opt/Telegram/Telegram -startintray &
-fi
+main "$@"
