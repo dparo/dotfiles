@@ -125,7 +125,7 @@ main() {
         config
         event_subscription &
 
-        systemctl start autorandr.service
+        # autorandr --change --default default
         systemctl --user start polybar.service
 
         ##
