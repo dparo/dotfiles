@@ -16,3 +16,31 @@
   tags:
     - postman
     - postman-cli
+
+
+- name: Install desktop file integration
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.local/share/applications/postman.desktop"
+    content: |
+      [Desktop Entry]
+      Name=Postman
+      Exec={{ ansible_user_dir }}/opt/Postman/Postman %U
+      Terminal=false
+      Type=Application
+      Icon={{ ansible_user_dir }}/.local/share/icons/hicolor/Postman.svg
+      Categories=Development;WebDevelopment;
+      MimeType=x-scheme-handler/postman;
+      StartupNotify=true
+      StartupWMClass=postman
+    mode: "0644"
+  tags:
+    - postman
+
+
+- name: Install Postman Icon
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/flathub/com.getpostman.Postman/master/logo-mark.svg"
+    dest: "{{ ansible_user_dir }}/.local/share/icons/hicolor/Postman.svg"
+    mode: 0755
+  tags:
+    - postman
