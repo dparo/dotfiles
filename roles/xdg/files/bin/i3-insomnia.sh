@@ -5,4 +5,4 @@ FILTER='instance="insomnia" class="Insomnia"'
 
 i3-msg "[ $FILTER ] scratchpad show, move position center" ||
     i3-msg "[ $FILTER ] focus" ||
-    exec insomnia
+    exec gtk-launch insomnia
