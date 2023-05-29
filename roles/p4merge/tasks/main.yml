@@ -28,3 +28,21 @@
     - p4merge
   tags:
     - p4merge
+
+
+- name: Install desktop file integration
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.local/share/applications/insomnia.desktop"
+    content: |
+      [Desktop Entry]
+      Name=P4Merge
+      Exec=p4merge %U
+      Terminal=false
+      Type=Application
+      Icon={{ ansible_user_dir }}/opt/p4merge-r{{ p4merge_release_version }}/lib/P4VResources/icons/p4merge.svg
+      Categories=Development;
+      StartupNotify=true
+      StartupWMClass=p4merge
+    mode: "0644"
+  tags:
+    - p4merge
