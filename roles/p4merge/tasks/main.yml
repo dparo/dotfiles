@@ -35,7 +35,7 @@
     dest: "{{ ansible_user_dir }}/.local/share/applications/insomnia.desktop"
     content: |
       [Desktop Entry]
-      Name=P4Merge
+      Name=Helix Visual Merge Tool (P4Merge)
       Exec=p4merge %U
       Terminal=false
       Type=Application
