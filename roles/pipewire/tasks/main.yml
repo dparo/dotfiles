@@ -4,6 +4,7 @@
     name:
       - pipewire
       - wireplumber
+      - qpwgraph # PipeWire Graph Qt GUI Interface: https://gitlab.freedesktop.org/rncbc/qpwgraph
     state: present
   become: true
   tags:
