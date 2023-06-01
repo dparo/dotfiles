@@ -1,0 +1,12 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Terminal=false
+Name=Name of the application
+Exec=exec command line flags
+Icon=IconPath
+
+#StartupWMClass=Optional startupwmclass
+#TryExec=Optional Try Exec: Pass path to executable. Used to determine if the program is in PATH/launchable.
