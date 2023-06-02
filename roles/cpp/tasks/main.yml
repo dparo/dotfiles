@@ -38,6 +38,17 @@
     - gdb
     - clang
 
+- name: "pip install cmake-init (https://github.com/friendlyanon/cmake-init): The missing CMake project initializer"
+  ansible.builtin.pip:
+    name:
+      - cmake-init
+    state: latest
+  tags:
+    - cpp
+    - cmake
+    - cmake-init
+
+
 - name: Symlink config
   ansible.builtin.file:
     src: "{{ item }}"
