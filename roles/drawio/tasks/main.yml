@@ -4,3 +4,6 @@
     name: com.jgraph.drawio.desktop
     state: present
     remote: flathub
+  tags:
+    - drawio
+    - diagrams.net
