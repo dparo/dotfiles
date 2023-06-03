@@ -15,7 +15,8 @@
 	#         certain flatpak programs to not function since they cannot find the DBUS session
 	#       - Ubuntu 22.04, Fixes GUI invocation for GPG password when using git commit signing.
 if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
-    eval "export $(systemctl --user show-environment | grep DBUS_SESSION_BUS_ADDRESS)"
+    # eval "export $(systemctl --user show-environment | grep DBUS_SESSION_BUS_ADDRESS)"
+    export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$UID/bus"
 fi
 
 # From gnoome-keyring-daemon which is automatically started (enabled) freom systemd at login
