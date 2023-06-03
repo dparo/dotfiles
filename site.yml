@@ -42,6 +42,7 @@
     - pulseaudio
     - pipewire
     - xorg
+    - wayland
     - kitty
     - starship
     - powershell

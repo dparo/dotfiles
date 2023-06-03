@@ -1,0 +1,14 @@
+---
+
+- name: Install
+  ansible.builtin.dnf:
+    name:
+      - wayland-utils
+      - wlroots
+      - xdg-desktop-portal-wlr
+      - wl-clipboard
+      - foot
+    state: present
+  become: true
+  tags:
+    - wayland
