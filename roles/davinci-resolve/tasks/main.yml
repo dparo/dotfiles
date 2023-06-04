@@ -1,0 +1,35 @@
+---
+- name: Get download link
+  ansible.builtin.uri:
+    url: "https://www.blackmagicdesign.com/api/register/us/download/{{ davinci_resolve_download_id }}"
+    method: POST
+    body_format: json
+    body:
+      city: AUR
+      company: someone@archlinux.org
+      country: us
+      state: New York
+      email: someone@archlinux.org
+      firstname: Arch
+      lastname: Linux
+      phone: 202-555-0194
+      platform: Linux
+      policy: true
+      product: DaVinci Resolve
+    headers:
+      Referer: https://www.blackmagicdesign.com/products/davinciresolve
+    return_content: True
+    status_code: 200
+  register: download_url
+  tags:
+    - never
+    - davinci-resolve
+
+- name: Download DaVinci Resolve
+  ansible.builtin.unarchive:
+    src: "{{ download_url['content'] }}"
+    dest: "{{ ansible_user_dir }}/Downloads"
+    remote_src: yes
+  tags:
+    - never
+    - davinci-resolve
