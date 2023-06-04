@@ -1,0 +1,5 @@
+# Sources: https://aur.archlinux.org/packages/splunk
+#          https://aur.archlinux.org/splunk.git
+
+splunk_baseversion: 9.0.4.1
+splunk_version: "{{ splunk_baseversion }}-419ad9369127"

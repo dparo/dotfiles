@@ -1,0 +1,13 @@
+---
+
+# Sources: https://aur.archlinux.org/packages/splunk
+#          https://aur.archlinux.org/splunk.git
+
+- name: Download and unpack splunk
+  ansible.builtin.unarchive:
+    src: "https://download.splunk.com/products/splunk/releases/{{ splunk_baseversion }}/linux/splunk-{{ splunk_version }}-Linux-x86_64.tgz"
+    dest: "{{ ansible_user_dir }}/opt/mysplunk"
+    remote_src: True
+  tags:
+    - never
+    - splunk
