@@ -20,3 +20,5 @@
     name: md.obsidian.Obsidian
     state: present
     remote: flathub
+  tags:
+    - obsidian

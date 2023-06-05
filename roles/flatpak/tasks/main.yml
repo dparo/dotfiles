@@ -12,3 +12,15 @@
     name: flathub
     state: present
     flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+  tags:
+    - flatpak
+
+
+- name: Install flatseal (flatpak)
+  community.general.flatpak:
+    name: flathub com.github.tchx84.Flatseal
+    state: present
+    remote: flathub
+  tags:
+    - flatpak
+    - flatseal
