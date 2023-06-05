@@ -126,6 +126,7 @@ export MAVEN_DEBUG_ADDRESS=5005
 
 export SPRING_PROFILES_ACTIVE="local"
 
+export SPLUNK_HOME="$HOME/opt/splunk"
 
 # Default CMAKE_GENERATOR
 export CMAKE_GENERATOR=Ninja

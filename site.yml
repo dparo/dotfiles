@@ -73,6 +73,7 @@
     - mpd
     - mpv
     - rofi
+    - clipboard
     - papis
     - zathura
     - misc
