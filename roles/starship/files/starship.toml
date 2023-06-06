@@ -4,15 +4,42 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
-
 [directory]
-read_only = " "
+read_only = " "
 truncation_length = 3
 truncate_to_repo = false
 truncation_symbol=''
 
+[hostname]
+ssh_symbol = "󰖟 "
+
+[package]
+symbol = " "
+
+[pijul_channel]
+symbol = "🪺 "
+
+[python]
+symbol = " "
+
+[rlang]
+symbol = "󰟔 "
+
+[ruby]
+symbol = " "
+
+[rust]
+symbol = " "
+
+[scala]
+symbol = " "
+
+[spack]
+symbol = "🅢 "
+
+
 [aws]
-symbol = "  "
+symbol = " "
 
 [buf]
 symbol = " "
@@ -56,8 +83,6 @@ symbol = "⌘ "
 [hg_branch]
 symbol = " "
 
-[hostname]
-ssh_symbol = " "
 
 [java]
 symbol = " "
@@ -69,13 +94,13 @@ symbol = " "
 symbol = " "
 
 [memory_usage]
-symbol = " "
+symbol = "󰍛 "
 
 [meson]
-symbol = "喝 "
+symbol = "󱂟 "
 
 [nim]
-symbol = " "
+symbol = " "
 
 [nix_shell]
 symbol = " "
@@ -88,12 +113,12 @@ format = "[$saymbol $version]($style)"
 disabled = true
 
 [os.symbols]
-# Alpaquita = " "
+Alpaquita = " "
 Alpine = " "
 Amazon = " "
 Android = " "
 Arch = " "
-# Artix = " "
+Artix = " "
 CentOS = " "
 Debian = " "
 DragonFly = " "
@@ -106,7 +131,7 @@ Gentoo = " "
 HardenedBSD = "ﲊ "
 Illumos = " "
 Linux = " "
-# Mabox = " "
+Mabox = " "
 Macos = " "
 Manjaro = " "
 Mariner = " "
@@ -114,7 +139,7 @@ MidnightBSD = " "
 Mint = " "
 NetBSD = " "
 NixOS = " "
-OpenBSD = " "
+OpenBSD = " "
 openSUSE = " "
 OracleLinux = " "
 Pop = " "
@@ -126,28 +151,4 @@ Solus = "ﴱ "
 SUSE = " "
 Ubuntu = " "
 Unknown = " "
-Windows = " "
-
-[package]
-symbol = " "
-
-[pijul_channel]
-symbol = "🪺 "
-
-[python]
-symbol = " "
-
-[rlang]
-symbol = "ﳒ "
-
-[ruby]
-symbol = " "
-
-[rust]
-symbol = " "
-
-[scala]
-symbol = " "
-
-[spack]
-symbol = "🅢 "
+Windows = " "
