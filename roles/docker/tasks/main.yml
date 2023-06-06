@@ -10,6 +10,7 @@
 - name: Install
   ansible.builtin.dnf:
     name:
+    - podman
     - docker-ce
     - docker-ce-cli
     - containerd.io
