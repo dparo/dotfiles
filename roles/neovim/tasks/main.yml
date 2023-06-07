@@ -203,6 +203,8 @@
     - shfmt
     - typescript-language-server
     - eslint-lsp
+    - stylelint
+    - stylelint-lsp
     - prettier
     - json-lsp
     - yamllint
