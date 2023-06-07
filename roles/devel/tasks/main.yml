@@ -114,6 +114,9 @@
 
     # Slides presentation in the terminal from Markdown
     go install github.com/maaslalani/slides@latest
+
+    # Render markdown on the CLI, with pizzazz! 💅🏻: https://github.com/charmbracelet/glow
+    go install github.com/charmbracelet/glow@latest
   tags: devel
 
 - name: Symlink additional config files
