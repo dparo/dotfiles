@@ -88,6 +88,7 @@
       - python3-virtualenv
       - tidy # XML, HTML formatter / diagnostic tool
       - tree-sitter-cli
+      - tokei
     state: present
   become: true
   tags:
