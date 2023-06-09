@@ -133,7 +133,11 @@ return {
                     },
 
                     null_ls.builtins.formatting.google_java_format,
-                    null_ls.builtins.diagnostics.semgrep,
+
+                    null_ls.builtins.diagnostics.semgrep.with {
+                        args = { "--config", "auto", "-q", "--json", "$FILENAME" },
+                    },
+
 
                     null_ls.builtins.formatting.prettier.with {
                         filetypes = {
