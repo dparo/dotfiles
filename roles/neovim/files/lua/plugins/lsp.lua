@@ -137,6 +137,7 @@ return {
                     null_ls.builtins.diagnostics.semgrep.with {
                         args = { "--config", "auto", "-q", "--json", "$FILENAME" },
                     },
+                    null_ls.builtins.diagnostics.pmd,
 
 
                     null_ls.builtins.formatting.prettier.with {

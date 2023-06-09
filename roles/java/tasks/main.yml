@@ -36,3 +36,25 @@
     - java
     - jdk
     - openjdk
+
+
+- name: Fetch PMD binary (https://github.com/pmd/pmd)
+  ansible.builtin.unarchive:
+    src: "https://github.com/pmd/pmd/releases/download/pmd_releases%2F7.0.0-rc3/pmd-dist-7.0.0-rc3-bin.zip"
+    dest: "{{ ansible_user_dir }}/opt/"
+    remote_src: yes
+  tags:
+    - java
+    - pmd
+
+
+- name: Symlink PMD binary
+  ansible.builtin.file:
+    src: "{{ ansible_user_dir }}/opt/pmd-bin-7.0.0-rc3/bin/pmd"
+    dest: "{{ ansible_user_dir }}/.local/bin/{{ item | basename }}"
+    state: link
+  loop:
+    - "{{ ansible_user_dir }}/opt/pmd-bin-7.0.0-rc3/bin/pmd"
+  tags:
+    - java
+    - pmd
