@@ -11,4 +11,6 @@ status="$?"
 
 mvn org.jacoco:jacoco-maven-plugin:restore-instrumented-classes org.jacoco:jacoco-maven-plugin:report surefire-report:report-only
 
+xdg-open target/site/jacoco/index.html
+
 exit "$status"
