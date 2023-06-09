@@ -9,7 +9,13 @@ mvn compile org.jacoco:jacoco-maven-plugin:instrument \
 
 status="$?"
 
+if test "$status" -neq 0; then
+    mvn org.jacoco:jacoco-maven-plugin:restore-instrumented-classes
+    exit "$status"
+fi
+
 mvn org.jacoco:jacoco-maven-plugin:restore-instrumented-classes org.jacoco:jacoco-maven-plugin:report surefire-report:report-only
+status="$?"
 
 xdg-open target/site/jacoco/index.html
 
