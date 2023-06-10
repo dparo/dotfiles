@@ -137,7 +137,17 @@ return {
                     null_ls.builtins.diagnostics.semgrep.with {
                         args = { "--config", "auto", "-q", "--json", "$FILENAME" },
                     },
-                    null_ls.builtins.diagnostics.pmd,
+                    null_ls.builtins.diagnostics.pmd.with {
+                        args = {
+                            "check",
+                            "--format",
+                            "json",
+                            "--dir",
+                            "$ROOT",
+                            "--rulesets",
+                            "category/java/bestpractices.xml,category/jsp/bestpractices.xml",
+                        },
+                    },
 
                     null_ls.builtins.diagnostics.ansiblelint,
                     null_ls.builtins.diagnostics.terraform_validate,
