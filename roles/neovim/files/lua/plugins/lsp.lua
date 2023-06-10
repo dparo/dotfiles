@@ -145,7 +145,7 @@ return {
                             "--dir",
                             "$ROOT",
                             "--rulesets",
-                            "category/java/bestpractices.xml,category/jsp/bestpractices.xml",
+                            "category/java/bestpractices.xml,category/java/errorprone.xml,category/java/multithreading.xml,category/java/performance.xml,category/java/codestyle.xml,category/jsp/bestpractices.xml",
                         },
                     },
 
