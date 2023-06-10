@@ -79,6 +79,7 @@
     - misc
     - fonts
     - docker
+    - terraform
     - syncthing
     - keepassxc
     - firefox
