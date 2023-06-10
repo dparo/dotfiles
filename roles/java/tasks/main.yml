@@ -46,7 +46,6 @@
     - java
     - pmd
 
-
 - name: Create binary wrapper
   ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/.local/bin/pmd"
@@ -58,7 +57,6 @@
   tags:
     - java
     - pmd
-
 
 - name: Check latest spotbugs (https://github.com/spotbugs/spotbugs)
   ansible.builtin.uri:
@@ -81,7 +79,7 @@
 - name: chmod +x spotbugs
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs_latest['json']['tag_name'] }}/bin/{{ item }}"
-    mode: '0755'
+    mode: "0755"
   loop:
     - spotbugs
   tags:
@@ -90,11 +88,29 @@
 
 - name: Symlink binary
   ansible.builtin.file:
-    src:  "{{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs_latest['json']['tag_name'] }}/bin/{{ item }}"
+    src: "{{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs_latest['json']['tag_name'] }}/bin/{{ item }}"
     dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
     state: link
   loop:
     - spotbugs
+  tags:
+    - java
+    - spotbugs
+
+- name: Create spotbugs desktop file integration
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.local/share/applications/spotbugs.desktop"
+    content: |
+      [Desktop Entry]
+      Name=Spotbugs
+      Exec=spotbugs %U
+      Terminal=false
+      Type=Application
+      Icon={{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs_latest['json']['tag_name'] }}/bin/spotbugs.ico
+      Categories=Development;
+      StartupNotify=true
+      StartupWMClass=spotbugs
+    mode: "0644"
   tags:
     - java
     - spotbugs
