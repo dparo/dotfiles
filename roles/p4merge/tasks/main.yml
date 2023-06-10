@@ -29,10 +29,9 @@
   tags:
     - p4merge
 
-
 - name: Install desktop file integration
   ansible.builtin.copy:
-    dest: "{{ ansible_user_dir }}/.local/share/applications/insomnia.desktop"
+    dest: "{{ ansible_user_dir }}/.local/share/applications/p4merge.desktop"
     content: |
       [Desktop Entry]
       Name=Helix Visual Merge Tool (P4Merge)
