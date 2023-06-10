@@ -51,7 +51,6 @@
     - fzf
     - neovim
     - emacs
-    - rxi-lite
     - git-utils
     - lazygit
     - gitui
