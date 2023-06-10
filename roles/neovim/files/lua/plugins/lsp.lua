@@ -81,7 +81,7 @@ return {
                     }
                 elseif name == "jdtls" then
                     -- NOTE(dparo): jdtls plugin is automatically started from an autocommand triggered from `ftplugin/java.lua`
-                elseif name == 'metals' then
+                elseif name == "metals" then
                     -- NOTE(dparo): metals plugin needs to be attached in another way
                 else
                     lspconfig[name].setup(config)
@@ -139,6 +139,10 @@ return {
                     },
                     null_ls.builtins.diagnostics.pmd,
 
+                    null_ls.builtins.diagnostics.ansiblelint,
+                    null_ls.builtins.diagnostics.terraform_validate,
+                    null_ls.builtins.diagnostics.tfsec,
+                    null_ls.builtins.formatting.terraform_fmt,
 
                     null_ls.builtins.formatting.prettier.with {
                         filetypes = {
@@ -163,8 +167,6 @@ return {
                     },
                     null_ls.builtins.diagnostics.shellcheck,
                     null_ls.builtins.formatting.shellharden,
-
-                    null_ls.builtins.diagnostics.ansiblelint,
 
                     null_ls.builtins.formatting.stylua,
 
@@ -198,7 +200,6 @@ return {
                     null_ls.builtins.diagnostics.mypy.with {
                         method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
                     },
-
 
                     -- Pylint is a Python static code analysis tool which looks for programming errors, helps enforcing a coding standard, sniffs for code smells and offers simple refactoring suggestions.
                     -- NOTE(dparo): Run pylint only on save due to its shitty performance
