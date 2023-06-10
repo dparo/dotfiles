@@ -99,6 +99,7 @@
     - splunk
     - mitmproxy
     - trunkrs
+    - infer # https://github.com/facebook/infer
     - gaming
     - clamav
     - flatpak
