@@ -14,7 +14,7 @@ local jdtls_root_path = path.concat { nvim_data_path, "mason", "packages", "jdtl
 
 local function deno_root_dir(fname)
     -- If the top level directory __DOES__ contain a file named `deno.proj` determine that this is a Deno project.
-    if (vim.env.DENO_VERSION ~= nil) or (lspconfig.util.root_pattern "deno.proj"(fname) ~= nil) then
+    if (vim.env.DENO_VERSION ~= nil) or (lspconfig.util.root_pattern "deno.proj" (fname) ~= nil) then
         return lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git")(fname)
     end
     return nil
@@ -23,7 +23,7 @@ end
 local function nodejs_root_dir(fname)
     -- If the top level directory __DOES NOT__ contain a file named `deno.proj` determine that this is a Nodejs project
     if deno_root_dir(fname) == nil then
-        return (lspconfig.util.root_pattern "tsconfig.json"(fname) or lspconfig.util.root_pattern("package.json", "jsconfig.json", ".git")(fname))
+        return (lspconfig.util.root_pattern "tsconfig.json" (fname) or lspconfig.util.root_pattern("package.json", "jsconfig.json", ".git")(fname))
     end
     return nil
 end
@@ -84,7 +84,7 @@ M.list = {
             },
         },
     },
-    { name = "cmake", config = {} },
+    { name = "cmake",   config = {} },
     {
         name = "bashls",
         config = {
@@ -106,7 +106,7 @@ M.list = {
             },
         },
     },
-    { name = "ltex", config = {} }, --- LateX language server: LSP language server for LanguageTool (requires ltex-ls binary in path)
+    { name = "ltex",        config = {} }, --- LateX language server: LSP language server for LanguageTool (requires ltex-ls binary in path)
     {
         name = "jsonls",
         config = {
@@ -118,13 +118,14 @@ M.list = {
             },
         },
     },
-    { name = "yamlls", config = { settings = {yaml = {keyOrdering = false} }}},
-    { name = "tsserver", config = { root_dir = nodejs_root_dir } },
-    { name = "eslint", config = {} },
+    { name = "yamlls",      config = { settings = { yaml = { keyOrdering = false } } } },
+    { name = "tsserver",    config = { root_dir = nodejs_root_dir } },
+    { name = "eslint",      config = {} },
     -- { name = "rome", config = {} },
     -- { name = "relay_lsp", config = {} }, -- https://github.com/facebook/relay
-    { name = "angularls", config = {} },
-    { name = "ansiblels", config = {} },
+    { name = "angularls",   config = {} },
+    { name = "ansiblels",   config = {} },
+    { name = "terraformls", config = {} },
     {
         name = "jdtls",
         config = function()
@@ -216,7 +217,8 @@ M.list = {
                             onType = false,
                             settings = {
                                 profile = "GoogleStyle",
-                                url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+                                url =
+                                "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
                             },
                         },
                     },
@@ -294,7 +296,7 @@ M.list = {
         end,
     },
     {
-        name = 'metals',
+        name = "metals",
         config = {},
     },
     {
@@ -309,12 +311,12 @@ M.list = {
             root_dir = deno_root_dir,
         },
     },
-    { name = "vuels", config = {} },
-    { name = "gopls", config = {} },
-    { name = "vimls", config = {} },
-    { name = "html", config = {} },
-    { name = "zls", config = {} },
-    { name = "nimls", config = {} },
+    { name = "vuels",    config = {} },
+    { name = "gopls",    config = {} },
+    { name = "vimls",    config = {} },
+    { name = "html",     config = {} },
+    { name = "zls",      config = {} },
+    { name = "nimls",    config = {} },
 
     -- NOTE: We use null-ls now, which is more richer in terms of features
     --       and lives inside the neovim process space instead of being a separate
@@ -324,7 +326,7 @@ M.list = {
     --     filetypes = { "lua", "sh", "bash", "make"}
     -- }},
     { name = "marksman", config = {} },
-    { name = "julials", config = {} },
+    { name = "julials",  config = {} },
     {
         name = "lua_ls",
         config = function()

@@ -217,6 +217,7 @@
     - misspell
     - ltex-ls
     - ansible-language-server
+    - terraform-ls
     - sqlfluff
     - jdtls
     - java-test
