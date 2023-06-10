@@ -1,0 +1,29 @@
+---
+
+- name: Check latest infer (https://github.com/facebook/infer)
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/facebook/infer/releases/latest
+    return_content: true
+  register: infer_latest
+  tags:
+    - infer
+
+
+- name: Download and unpack latest infer {{ infer_latest['json']['tag_name'] }}
+  ansible.builtin.unarchive:
+    src: "https://github.com/facebook/infer/releases/download/{{ infer_latest['json']['tag_name'] }}/infer-linux64-{{ infer_latest['json']['tag_name'] }}.tar.xz"
+    dest: "{{ ansible_user_dir }}/opt/"
+    remote_src: true
+  tags:
+    - infer
+
+
+- name: Symlink binaries
+  ansible.builtin.file:
+    src: "{{ ansible_user_dir }}/opt/infer-linux64-{{ infer_latest['json']['tag_name'] }}/bin/{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+    state: link
+  loop:
+    - infer
+  tags:
+    - infer
