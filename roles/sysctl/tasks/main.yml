@@ -11,3 +11,15 @@
   tags:
     - sysctl
     - gaming
+
+
+- name: Setup fs.inotify.max_user_watches
+  ansible.builtin.lineinfile:
+    path: /etc/sysctl.conf
+    line: fs.inotify.max_user_watches=524288
+    regexp: '^fs.inotify.max_user_watches\s*='
+    create: true
+  become: true
+  tags:
+    - sysctl
+    - vscode
