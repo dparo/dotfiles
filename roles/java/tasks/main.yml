@@ -58,3 +58,43 @@
   tags:
     - java
     - pmd
+
+
+- name: Check latest spotbugs (https://github.com/spotbugs/spotbugs)
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/spotbugs/spotbugs/releases/latest
+    return_content: true
+  register: spotbugs_latest
+  tags:
+    - java
+    - spotbugs
+
+- name: Unpack latest spotbugs
+  ansible.builtin.unarchive:
+    src: "https://github.com/spotbugs/spotbugs/releases/download/{{ spotbugs_latest['json']['tag_name'] }}/spotbugs-{{ spotbugs_latest['json']['tag_name'] }}.tgz"
+    dest: "{{ ansible_user_dir }}/opt"
+    remote_src: yes
+  tags:
+    - java
+    - spotbugs
+
+- name: chmod +x spotbugs
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs_latest['json']['tag_name'] }}/bin/{{ item }}"
+    mode: '0755'
+  loop:
+    - spotbugs
+  tags:
+    - java
+    - spotbugs
+
+- name: Symlink binary
+  ansible.builtin.file:
+    src:  "{{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs_latest['json']['tag_name'] }}/bin/{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+    state: link
+  loop:
+    - spotbugs
+  tags:
+    - java
+    - spotbugs
