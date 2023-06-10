@@ -1,13 +1,9 @@
 ---
-- name: Enable brave-browser repo
-  ansible.builtin.copy:
+
+- name: Enable brave-browser repo (https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo)
+  ansible.builtin.get_url:
     dest: /etc/yum.repos.d/brave-browser.repo
-    content: |
-      [brave-browser]
-      name=Brave Browser
-      enabled=1
-      autorefresh=1
-      baseurl=https://brave-browser-rpm-release.s3.brave.com/$basearch
+    url: https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
     mode: "0644"
   become: true
   tags:

@@ -1,7 +1,7 @@
 ---
 
 - name: Import key
-  ansible.builtin.rpm:
+  ansible.builtin.rpm_key:
     state: present
     key: https://packages.microsoft.com/keys/microsoft.asc
   become: True
