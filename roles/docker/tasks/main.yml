@@ -48,5 +48,5 @@
     remote: flathub
   tags:
     - podman
-    - podmna-desktop
+    - podman-desktop
     - docker
