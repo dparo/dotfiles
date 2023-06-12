@@ -18,6 +18,7 @@
   become: true
   tags:
     - docker
+    - podman
 
 - name: Enable service
   ansible.builtin.systemd:
@@ -36,4 +37,15 @@
       - docker
   become: true
   tags:
+    - docker
+
+
+- name: Install podman-desktop
+  community.general.flatpak:
+    name: flathub io.podman_desktop.PodmanDesktop
+    state: present
+    remote: flathub
+  tags:
+    - podman
+    - podmna-desktop
     - docker
