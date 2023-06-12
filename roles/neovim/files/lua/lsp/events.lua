@@ -78,6 +78,7 @@ function M.on_attach(client, bufnr)
         buffer = bufnr,
         callback = function()
             user.utils.lsp.show_line_diagnostics()
+            vim.lsp.codelens.run()
         end,
     })
 
