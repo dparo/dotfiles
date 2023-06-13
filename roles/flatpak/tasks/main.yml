@@ -15,10 +15,9 @@
   tags:
     - flatpak
 
-
 - name: Install flatseal (flatpak)
   community.general.flatpak:
-    name: flathub com.github.tchx84.Flatseal
+    name: com.github.tchx84.Flatseal
     state: present
     remote: flathub
   tags:
