@@ -10,10 +10,11 @@
 - name: Install
   ansible.builtin.dnf:
     name:
-    - podman
     - docker-ce
     - docker-ce-cli
     - containerd.io
+    - podman
+    - podman-tui
     state: present
   become: true
   tags:
