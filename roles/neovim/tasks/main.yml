@@ -208,6 +208,7 @@
     - stylelint-lsp
     - prettier
     - json-lsp
+    - lemminx
     - yamllint
     - yaml-language-server
     - texlab

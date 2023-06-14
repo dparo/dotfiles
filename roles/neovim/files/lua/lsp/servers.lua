@@ -107,6 +107,7 @@ M.list = {
         },
     },
     { name = "ltex",        config = {} }, --- LateX language server: LSP language server for LanguageTool (requires ltex-ls binary in path)
+    { name = "lemminx", config = {} },
     {
         name = "jsonls",
         config = {
