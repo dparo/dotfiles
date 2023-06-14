@@ -20,3 +20,25 @@
     state: link
   tags:
     - git
+
+- name: Check latest glab CLI
+  ansible.builtin.uri:
+    url: https://gitlab.com/api/v4/projects/gitlab-org%2Fcli/releases/permalink/latest
+    return_content: true
+  register: glab_cli_latest
+  tags:
+    - git
+    - glab
+    - glab-cli
+
+
+- name: Install latet glab CLI {{ glab_cli_latest["json"]["tag_name"] }}
+  ansible.builtin.dnf:
+    name: 'https://gitlab.com/gitlab-org/cli/-/releases/{{ glab_cli_latest["json"]["tag_name"] }}/downloads/glab_{{ glab_cli_latest["json"]["tag_name"][1:] }}_Linux_x86_64.rpm'
+    state: present
+    disable_gpg_check: True
+  become: true
+  tags:
+    - git
+    - glab
+    - glab-cli
