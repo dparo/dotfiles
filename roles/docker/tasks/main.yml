@@ -22,7 +22,7 @@
     - docker
     - podman
 
-- name: Enable service
+- name: Disable docker service
   ansible.builtin.systemd:
     name: docker
     enabled: false
