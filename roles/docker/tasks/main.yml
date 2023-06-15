@@ -52,3 +52,15 @@
     - podman
     - podman-desktop
     - docker
+
+- name: Symlink docker config
+  ansible.builtin.file:
+    src: "{{ item }}"
+    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+    state: link
+  loop:
+    - "{{ role_path }}/files/config/docker"
+  tags:
+    - podman
+    - podman-desktop
+    - docker
