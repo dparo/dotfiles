@@ -34,12 +34,22 @@
 	lola = log --graph --decorate --oneline --abbrev-commit --all
 [diff]
     tool = p4merge
+    keepBackup = false
+	keepTemporaries = false
+	trustExitCode = false
+	prompt = false
     colorMoved = default
 [difftool "meld"]
 	cmd = meld "$LOCAL" "$REMOTE"
     prompt = false
 [difftool "p4merge"]
 	cmd = p4merge "$LOCAL" "$REMOTE"
+    keepBackup = false
+	keepTemporaries = false
+	trustExitCode = false
+	prompt = false
+[difftool "vscode"]
+    cmd = code --wait --diff $LOCAL $REMOTE
     keepBackup = false
 	keepTemporaries = false
 	trustExitCode = false
@@ -54,6 +64,7 @@
 	tool = p4merge
 [mergetool]
 	keepBackup = false
+    keepBackup = false
 	keepTemporaries = false
 	trustExitCode = true
     writeToTemp = true
@@ -68,6 +79,13 @@
 [mergetool "p4merge"]
 # See https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
     cmd = p4merge "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+    keepBackup = false
+	keepTemporaries = false
+    writeToTemp = true
+	trustExitCode = true
+	prompt = false
+[mergetool "vscode"]
+    cmd = code --wait --merge "$REMOTE" "$LOCAL" "$BASE" "$MERGED"
     keepBackup = false
 	keepTemporaries = false
     writeToTemp = true
