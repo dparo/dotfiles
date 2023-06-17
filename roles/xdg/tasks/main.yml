@@ -36,6 +36,7 @@
     - "{{ ansible_user_dir }}/.cache/bash"
     - "{{ ansible_user_dir }}/.cache/zsh"
     - "{{ ansible_user_dir }}/.config"
+    - "{{ ansible_user_dir }}/.config/autostart"
   tags:
     - xdg
 
