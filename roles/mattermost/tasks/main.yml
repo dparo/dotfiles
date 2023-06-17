@@ -5,6 +5,7 @@
     return_content: true
   register: mattermost_latest
   tags:
+    - never
     - mattermost
 
 
@@ -14,6 +15,7 @@
     dest: "{{ ansible_user_dir }}/opt/"
     remote_src: True
   tags:
+    - never
     - mattermost
 
 - name: Symlink binaries {{ default_node_version }}
@@ -24,6 +26,7 @@
   loop:
     - mattermost-desktop
   tags:
+    - never
     - mattermost
 
 
@@ -41,4 +44,5 @@
       Icon={{ ansible_user_dir }}/opt/mattermost-desktop-{{ mattermost_latest['json']['tag_name'][1:] }}-linux-x64/app_icon.png
       Categories=Network;InstantMessaging;
   tags:
+    - never
     - mattermost
