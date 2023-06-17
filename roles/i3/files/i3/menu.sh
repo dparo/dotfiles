@@ -43,7 +43,7 @@ commands['Bluetooth Assistant']='blueman-assistant'
 commands['Bluetooth Applet']='blueman-applet'
 commands['Bluetooth Tray']='blueman-tray'
 commands['Session control']="i3-nagbar -t warning -m 'Session Control' \
-                            -B 'Logout' 'systemctl --user stop i3.service' \
+                            -B 'Logout' 'systemctl --user stop graphical-session.target' \
                             -B 'Reboot' 'systemctl reboot' \
                             -B 'Shutdown' 'systemctl poweroff' \
                             -B 'Suspend (RAM)' 'systemctl suspend' \
