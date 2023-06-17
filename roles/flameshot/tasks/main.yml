@@ -1,0 +1,34 @@
+---
+- name: Install
+  ansible.builtin.dnf:
+    name:
+      - flameshot
+    state: present
+  become: true
+  tags:
+    - flameshot
+
+
+- name: Create config dir
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/flameshot"
+    state: directory
+    mode: "0755"
+  tags:
+    - flameshot
+
+
+- name: Setup flameshot config - General
+  community.general.ini_file:
+    path: "{{ ansible_user_dir }}/.config/flameshot/flameshot.ini"
+    section: General
+    option: "{{ item.key }}"
+    value: "{{ item.value }}"
+    no_extra_spaces: True
+  loop:
+    - { key: autoCloseIdleDaemon, value: 'true' }
+    - { key: disabledTrayIcon, value: 'true' }
+    - { key: contrastOpacity, value: 188 }
+    - { key: savePath, value: "{{ ansible_user_dir }}/Pictures" }
+  tags:
+    - flameshot
