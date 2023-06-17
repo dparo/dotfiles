@@ -11,7 +11,6 @@
       - scrot
       - maim
       - flameshot
-      - copyq
       - brightnessctl
       - trash-cli
       - qt5ct # This utility allows users to configure Qt5 settings

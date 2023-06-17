@@ -1,0 +1,54 @@
+---
+
+- name: Install
+  ansible.builtin.dnf:
+    name:
+      - copyq
+    state: present
+  become: true
+  tags:
+    - copyq
+
+
+- name: Create config dir
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/.config/copyq"
+    state: directory
+    mode: "0755"
+  tags:
+    - copyq
+
+
+- name: Setup copyq config - Options
+  community.general.ini_file:
+    path: "{{ ansible_user_dir }}/.config/copyq/copyq.conf"
+    section: Options
+    option: "{{ item.key }}"
+    value: "{{ item.value }}"
+    no_extra_spaces: True
+  loop:
+    - { key: maxitems, value: 200 }
+    - { key: activate_closes, value: True }
+    - { key: activate_focuses, value: True }
+    - { key: activate_item_with_single_click, value: True }
+    - { key: activate_pastes, value: True }
+    - { key: always_on_top, value: False }
+    - { key: autostart, value: False }
+    - { key: autocompletion, value: True }
+    - { key: check_clipboard, value: True }
+    - { key: check_selection, value: False }
+    - { key: close_on_unfocus, value: False }
+    - { key: close_on_unfocus_delay_ms, value: 1000 }
+    - { key: confirm_exit, value: False }
+    - { key: copy_clipboard, value: False }
+    - { key: copy_selection, value: False }
+    - { key: disable_tray, value: False }
+    - { key: disable_tray, value: False }
+    - { key: editor, value: 'kitty -- nvim %1'}
+    - { key: filter_case_insensitive, value: True }
+    - { key: hide_main_window, value: False }
+    - { key: native_menu_bar, value: True }
+    - { key: native_tray_menu, value: True }
+    - { key: restore_geometry, value: True }
+  tags:
+    - copyq
