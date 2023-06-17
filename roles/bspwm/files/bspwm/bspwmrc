@@ -133,7 +133,6 @@ main() {
         ##
         sleep 4
         copyq &
-        ~/opt/Telegram/Telegram -startintray &
     fi
 
 }
