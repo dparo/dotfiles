@@ -1,5 +1,7 @@
 ---
 - name: Debug msg
   ansible.builtin.debug:
-    msg: Detected running inside DOCKER
-  when: ansible_env.RUNNING_INSIDE_DOCKER is defined
+    msg: '{{ ansible_hostname }}'
+  tags:
+  - never
+  - debug

@@ -4,7 +4,7 @@
     src: https://telegram.org/dl/desktop/linux
     dest: "{{ ansible_user_dir }}/opt"
     remote_src: yes
-  when: ansible_user_id == "dparo"
+  when: ansible_user_id == "dparo" and ansible_hostname is regex('^dparo.*')
   tags:
     - telegram
 
@@ -13,6 +13,6 @@
     src: "{{ ansible_user_dir }}/opt/Telegram/Telegram"
     dest: "{{ ansible_user_dir }}/.local/bin/telegram"
     state: link
-  when: ansible_user_id == "dparo"
+  when: ansible_user_id == "dparo" and ansible_hostname is regex('^dparo.*')
   tags:
     - telegram
