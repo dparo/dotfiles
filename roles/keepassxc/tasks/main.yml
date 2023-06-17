@@ -15,7 +15,6 @@
   tags:
     - keepassxc
 
-
 - name: Setup keepassxc config - General
   community.general.ini_file:
     path: "{{ ansible_user_dir }}/.config/keepassxc/keepassxc.ini"
@@ -25,10 +24,9 @@
     no_extra_spaces: True
   loop:
     - { key: ConfigVersion, value: 2 }
-    - { key: MinimizeAfterUnlock, value: True }
+    - { key: MinimizeAfterUnlock, value: "true" }
   tags:
     - keepassxc
-
 
 - name: Setup keepassxc config - Browser
   community.general.ini_file:
@@ -38,10 +36,9 @@
     value: "{{ item.value }}"
     no_extra_spaces: True
   loop:
-    - { key: Enabled, value: True }
+    - { key: Enabled, value: "true" }
   tags:
     - keepassxc
-
 
 - name: Setup keepassxc config - GUI
   community.general.ini_file:
@@ -52,10 +49,10 @@
     no_extra_spaces: True
   loop:
     - { key: ApplicationTheme, value: dark }
-    - { key: MinimizeOnClose, value: True }
-    - { key: MinimizeOnStartup, value: False }
-    - { key: MonospaceNotes, value: True }
-    - { key: ShowTrayIcon, value: True }
+    - { key: MinimizeOnClose, value: "true" }
+    - { key: MinimizeOnStartup, value: "false" }
+    - { key: MonospaceNotes, value: "true" }
+    - { key: ShowTrayIcon, value: "true" }
     - { key: TrayIconAppearance, value: monochrome-light }
   tags:
     - keepassxc
