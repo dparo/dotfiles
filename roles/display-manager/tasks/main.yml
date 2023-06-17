@@ -55,50 +55,17 @@
     - display-manager
     - gdm
 
-
-- name: GDM config - Wayland Enable
+- name: GDM config
   community.general.ini_file:
     path: /etc/gdm/custom.conf
     section: daemon
-    option: WaylandEnable
-    value: true
+    option: "{{ item.key }}"
+    value: "{{ item.value }}"
     no_extra_spaces: True
-  become: True
-  tags:
-    - display-manager
-    - gdm
-
-- name: GDM config - AutomaticLogin username
-  community.general.ini_file:
-    path: /etc/gdm/custom.conf
-    section: daemon
-    option: AutomaticLogin
-    value: dparo
-    no_extra_spaces: True
-  become: True
-  tags:
-    - display-manager
-    - gdm
-
-- name: GDM config - AutomaticLogin enable
-  community.general.ini_file:
-    path: /etc/gdm/custom.conf
-    section: daemon
-    option: AutomaticLoginEnable
-    value: True
-    no_extra_spaces: True
-  become: True
-  tags:
-    - display-manager
-    - gdm
-
-- name: GDM config - AutomaticLogin enable
-  community.general.ini_file:
-    path: /etc/gdm/custom.conf
-    section: daemon
-    option: AutomaticLoginEnable
-    value: True
-    no_extra_spaces: True
+  loop:
+    - {key: WaylandEnable, value: True }
+    - {key: AutomaticLoginEnable, value: True }
+    - {key: AutomaticLogin, value: 'dparo' }
   become: True
   tags:
     - display-manager
