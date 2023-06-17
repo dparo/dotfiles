@@ -38,7 +38,7 @@
 
 - name: Create desktop entry to allow display managers to execute the user's XINITRC
   ansible.builtin.copy:
-    dest: '/usr/share/xsessions/xinitrc-{{ item }}.desktop'
+    dest: "/usr/share/xsessions/xinitrc-{{ item }}.desktop"
     content: |
       [Desktop Entry]
       Encoding=UTF-8
@@ -71,7 +71,6 @@
     - display-manager
     - gdm
 
-
 - name: GDM config - Automatic Login default session
   ansible.builtin.copy:
     dest: "/var/lib/AccountsService/users/{{ ansible_user_id }}"
@@ -80,8 +79,8 @@
       Languages=en_US.UTF-8;
       Session=xinitrc-i3
       PasswordHint=
-      Icon=/usr/share/pixmaps/faces/calculator.jpg
       SystemAccount=false
+      Icon={%- if ansible_user_id == 'dparo' -%} /usr/share/pixmaps/faces/calculator.jpg {%- else -%} /usr/share/pixmaps/faces/gamepad.jpg {%- endif -%}
     mode: "0600"
   become: True
   tags:
