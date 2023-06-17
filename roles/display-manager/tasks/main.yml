@@ -105,16 +105,18 @@
     - gdm
 
 
-###
-### DOES NOT WORK FOR SOME REASON
-###
-# - name: GDM config - Automatic Login default session
-#   ansible.builtin.copy:
-#     dest: "/var/lib/AccountsService/users/{{ ansible_user_id }}"
-#     content: |
-#       XSession=xinitrc-bspwm
-#     mode: "0777"
-#   become: True
-#   tags:
-#     - display-manager
-#     - gdm
+- name: GDM config - Automatic Login default session
+  ansible.builtin.copy:
+    dest: "/var/lib/AccountsService/users/{{ ansible_user_id }}"
+    content: |
+      [User]
+      Languages=en_US.UTF-8;
+      Session=xinitrc-i3
+      PasswordHint=
+      Icon=/usr/share/pixmaps/faces/calculator.jpg
+      SystemAccount=false
+    mode: "0600"
+  become: True
+  tags:
+    - display-manager
+    - gdm
