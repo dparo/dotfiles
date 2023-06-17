@@ -56,12 +56,12 @@ rc=$?
 
 if test "$USER" = "dparo"; then
     git config user.email "dparo@outlook.it"
+    if test "$rc" -eq 0; then
+        git remote set-url origin 'git@github.com:dparo/dotfiles.git'
+        git remote add origin-https 'https://github.com:dparo/dotfiles' || true
+    fi
 fi
 
-if test "$rc" -eq 0; then
-    git remote set-url origin 'git@github.com:dparo/dotfiles.git'
-    git remote add origin-https 'https://github.com:dparo/dotfiles' || true
-fi
 
 rm -rf "$HOME/.ansible"
 rm -rf "$HOME/.bash_history"
