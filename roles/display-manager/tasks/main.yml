@@ -34,6 +34,7 @@
   become: true
   tags:
     - display-manager
+    - gdm
 
 - name: Create desktop entry to allow display managers to execute the user's XINITRC
   ansible.builtin.copy:
@@ -52,3 +53,68 @@
     - bspwm
   tags:
     - display-manager
+    - gdm
+
+
+- name: GDM config - Wayland Enable
+  community.general.ini_file:
+    path: /etc/gdm/custom.conf
+    section: daemon
+    option: WaylandEnable
+    value: true
+    no_extra_spaces: True
+  become: True
+  tags:
+    - display-manager
+    - gdm
+
+- name: GDM config - AutomaticLogin username
+  community.general.ini_file:
+    path: /etc/gdm/custom.conf
+    section: daemon
+    option: AutomaticLogin
+    value: dparo
+    no_extra_spaces: True
+  become: True
+  tags:
+    - display-manager
+    - gdm
+
+- name: GDM config - AutomaticLogin enable
+  community.general.ini_file:
+    path: /etc/gdm/custom.conf
+    section: daemon
+    option: AutomaticLoginEnable
+    value: True
+    no_extra_spaces: True
+  become: True
+  tags:
+    - display-manager
+    - gdm
+
+- name: GDM config - AutomaticLogin enable
+  community.general.ini_file:
+    path: /etc/gdm/custom.conf
+    section: daemon
+    option: AutomaticLoginEnable
+    value: True
+    no_extra_spaces: True
+  become: True
+  tags:
+    - display-manager
+    - gdm
+
+
+###
+### DOES NOT WORK FOR SOME REASON
+###
+# - name: GDM config - Automatic Login default session
+#   ansible.builtin.copy:
+#     dest: "/var/lib/AccountsService/users/{{ ansible_user_id }}"
+#     content: |
+#       XSession=xinitrc-bspwm
+#     mode: "0777"
+#   become: True
+#   tags:
+#     - display-manager
+#     - gdm
