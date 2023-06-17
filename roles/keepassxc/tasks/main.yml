@@ -56,6 +56,6 @@
     - { key: MinimizeOnStartup, value: False }
     - { key: MonospaceNotes, value: True }
     - { key: ShowTrayIcon, value: True }
-    - { key: TrayIconAppearence, value: monochrome-light }
+    - { key: TrayIconAppearance, value: monochrome-light }
   tags:
     - keepassxc
