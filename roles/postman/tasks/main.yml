@@ -25,6 +25,7 @@
       [Desktop Entry]
       Name=Postman
       Exec={{ ansible_user_dir }}/opt/Postman/Postman %U
+      TryExec={{ ansible_user_dir }}/opt/Postman/Postman
       Terminal=false
       Type=Application
       Icon={{ ansible_user_dir }}/.local/share/icons/hicolor/Postman.svg

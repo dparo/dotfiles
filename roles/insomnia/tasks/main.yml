@@ -69,6 +69,7 @@
       [Desktop Entry]
       Name=Insomnia
       Exec="{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/insomnia" %U
+      TryExec="{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/insomnia"
       Terminal=false
       Type=Application
       Icon={{ ansible_user_dir }}/.local/share/icons/hicolor/insomnia.png

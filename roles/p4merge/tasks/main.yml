@@ -36,6 +36,7 @@
       [Desktop Entry]
       Name=Helix Visual Merge Tool (P4Merge)
       Exec=p4merge %U
+      TryExec=p4merge
       Terminal=false
       Type=Application
       Icon={{ ansible_user_dir }}/opt/p4merge-r{{ p4merge_release_version }}/lib/P4VResources/icons/p4merge.svg
