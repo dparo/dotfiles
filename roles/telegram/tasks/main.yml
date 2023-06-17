@@ -63,7 +63,6 @@
         X-GNOME-SingleWindow=true
       mode: "0755"
 
-  # when: ansible_user_id == "dparo" and ansible_hostname is regex('^dparo.*')
-  when: false
+  when: ansible_user_id == "dparo" and ansible_hostname is regex('^dparo.*')
   tags:
     - telegram
