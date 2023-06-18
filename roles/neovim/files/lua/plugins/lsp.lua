@@ -11,7 +11,7 @@ return {
             "williamboman/mason-lspconfig.nvim",
             "SmiteshP/nvim-navic",
             "b0o/SchemaStore.nvim",
-            "j-hui/fidget.nvim",
+            { "j-hui/fidget.nvim", branch = "legacy" },
             "simrat39/rust-tools.nvim",
             "mfussenegger/nvim-jdtls",
             "scalameta/nvim-metals",
