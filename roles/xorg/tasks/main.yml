@@ -61,3 +61,15 @@
   tags:
     - xorg
     - autorandr
+
+- name: Install jumpapp (https://github.com/mkropat/jumpapp)
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/mkropat/jumpapp/master/{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+    mode: 0755
+  loop:
+    - jumpapp
+    - jumpappify-desktop-entry
+  tags:
+    - xorg
+    - jumpapp

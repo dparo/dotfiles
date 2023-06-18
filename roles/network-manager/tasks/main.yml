@@ -97,3 +97,21 @@
     - "{{ role_path }}/files/config/networkmanager-dmenu"
   tags:
     - network-manager
+
+- name: Install networkmanager-dmenu (https://github.com/firecat53/networkmanager-dmenu)
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/firecat53/networkmanager-dmenu/main/networkmanager_dmenu"
+    dest: "{{ ansible_user_dir }}/.local/bin/networkmanager_dmenu"
+    mode: 0755
+  tags:
+    - network-manager
+    - networkmanager-dmenu
+
+- name: Install rofi-wifi-menu (https://github.com/zbaylin/rofi-wifi-menu)
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/zbaylin/rofi-wifi-menu/master/rofi-wifi-menu.sh"
+    dest: "{{ ansible_user_dir }}/.local/bin/rofi-wifi-menu.sh"
+    mode: 0755
+  tags:
+    - network-manager
+    - rofi-wifi-menu

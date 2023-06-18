@@ -23,3 +23,13 @@
     - never
     - bpswm
     - sxhkd
+
+- name: Install bspswallow (https://github.com/JopStro/bspswallow)
+  ansible.builtin.get_url:
+    url: "https://raw.githubusercontent.com/JopStro/bspswallow/master/bspswallow"
+    dest: "{{ ansible_user_dir }}/.local/bin/bspswallow"
+    mode: 0755
+  tags:
+    - never
+    - bspwm
+    - bspswallow
