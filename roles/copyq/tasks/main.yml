@@ -43,7 +43,6 @@
     - { key: copy_clipboard, value: 'false' }
     - { key: copy_selection, value: 'false' }
     - { key: disable_tray, value: 'false' }
-    - { key: disable_tray, value: 'false' }
     - { key: editor, value: 'kitty -- nvim %1'}
     - { key: filter_case_insensitive, value: 'true' }
     - { key: hide_main_window, value: 'false' }
@@ -64,7 +63,7 @@
       GenericName=Clipboard Manager
       Type=Application
       Terminal=false
-      Exec=copyq
+      Exec=bash -c 'sleep 3 && exec copyq'
       TryExec=copyq
       X-GNOME-Autostart-enabled=true
       X-GNOME-Autostart-Delay=3
