@@ -33,7 +33,7 @@
     - { key: activate_item_with_single_click, value: 'true' }
     - { key: activate_pastes, value: 'true' }
     - { key: always_on_top, value: 'false' }
-    - { key: autostart, value: 'false' }
+    - { key: autostart, value: 'true' }
     - { key: autocompletion, value: 'true' }
     - { key: check_clipboard, value: 'true' }
     - { key: check_selection, value: 'false' }
@@ -50,5 +50,29 @@
     - { key: native_menu_bar, value: 'true' }
     - { key: native_tray_menu, value: 'true' }
     - { key: restore_geometry, value: 'true' }
+  tags:
+    - copyq
+
+
+- name: Create autostart desktop file
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.config/autostart/copyq.desktop"
+    content: |
+      [Desktop Entry]
+      Name=CopyQ
+      Icon=copyq
+      GenericName=Clipboard Manager
+      Type=Application
+      Terminal=false
+      Exec=copyq
+      TryExec=copyq
+      X-GNOME-Autostart-enabled=true
+      X-GNOME-Autostart-Delay=3
+      X-KDE-autostart-after=panel
+      X-KDE-StartupNotify=false
+      X-KDE-UniqueApplet=true
+      Categories=Qt;KDE;Utility;
+      Hidden=false
+    mode: "0644"
   tags:
     - copyq

@@ -132,7 +132,6 @@ main() {
         ## Startup the programs (wait one second so that polybar and the notification daemon has enough time to startup)
         ##
         sleep 4
-        copyq &
     fi
 
 }
