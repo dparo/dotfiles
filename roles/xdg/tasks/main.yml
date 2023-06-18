@@ -18,6 +18,7 @@
     - "{{ ansible_user_dir }}/Downloads"
     - "{{ ansible_user_dir }}/Documents"
     - "{{ ansible_user_dir }}/Pictures"
+    - "{{ ansible_user_dir }}/Pictures/Screenshots"
     - "{{ ansible_user_dir }}/Music"
     - "{{ ansible_user_dir }}/Videos"
     - "{{ ansible_user_dir }}/.local/share/Templates"

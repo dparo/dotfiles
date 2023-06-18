@@ -8,7 +8,6 @@
   tags:
     - flameshot
 
-
 - name: Create config dir
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.config/flameshot"
@@ -16,7 +15,6 @@
     mode: "0755"
   tags:
     - flameshot
-
 
 - name: Setup flameshot config - General
   community.general.ini_file:
@@ -26,9 +24,11 @@
     value: "{{ item.value }}"
     no_extra_spaces: True
   loop:
-    - { key: autoCloseIdleDaemon, value: 'true' }
-    - { key: disabledTrayIcon, value: 'true' }
+    - { key: autoCloseIdleDaemon, value: "true" }
+    - { key: disabledTrayIcon, value: "true" }
     - { key: contrastOpacity, value: 188 }
-    - { key: savePath, value: "{{ ansible_user_dir }}/Pictures" }
+    - { key: saveAfterCopy, value: "true" }
+    - { key: savePath, value: "{{ ansible_user_dir }}/Pictures/Screenshots" }
+    - { key: filenamePattern, value: "Screenshot_%F_%H-%M" }
   tags:
     - flameshot

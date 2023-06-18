@@ -5,7 +5,7 @@
 #
 
 {Print, super shift + s}
-    flameshot gui
+    flameshot gui -p "$HOME/Pictures/Screenshots" -c
 
 super + Print
     arandr
