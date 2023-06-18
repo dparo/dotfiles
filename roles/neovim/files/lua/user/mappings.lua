@@ -135,7 +135,6 @@ local function setup_unbinds()
     nvmap("<S-Left>", "")
 end
 
-
 local function setup_cursor_movements()
     ----
     ---- Cursor movements
@@ -328,6 +327,11 @@ local function setup_commands()
     nimap(shift_fn_key(6), exec_cmd "cw")
     nmap({ "<leader>n", "<leader>cn", fn_key(8) }, exec_cmd "cnext")
     nmap({ "<leader>p", "<leader>cp", unpack(shift_fn_key(8)) }, exec_cmd "cprev")
+
+    -- Copy releative path of file to clipboard
+    vim.keymap.set("n", "yp", function()
+        vim.fn.execute [[let @+ = expand("%")]]
+    end)
 end
 
 local function setup_plugins()
@@ -401,7 +405,9 @@ local function setup_plugins()
     end)
 
     -- SSR: Structurale search and replace
-    vim.keymap.set({ "n", "x" }, "<leader>sr", function() require("ssr").open() end)
+    vim.keymap.set({ "n", "x" }, "<leader>sr", function()
+        require("ssr").open()
+    end)
 
     -- Git
     nmap("<leader>gG", exec_cmd "Git")
@@ -413,7 +419,7 @@ local function setup_plugins()
     nmap("<leader>gP", exec_cmd "Git pull")
 
     vim.keymap.set("n", "<leader>rr", function()
-        vim.fn.execute("source ~/.config/nvim/init.lua")
+        vim.fn.execute "source ~/.config/nvim/init.lua"
     end, { silent = false })
 end
 
