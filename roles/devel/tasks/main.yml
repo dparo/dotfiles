@@ -140,3 +140,14 @@
 #   tags:
 #     - devel
 #     - jless
+
+
+- name: Install cht.sh (https://github.com/chubin/cheat.sh)
+  ansible.builtin.get_url:
+    url: "https://cht.sh/:cht.sh"
+    dest: "{{ ansible_user_dir }}/.local/bin/cht.sh"
+    mode: 0755
+  tags:
+    - devel
+    - cheat.sh
+    - cht.sh
