@@ -2,10 +2,12 @@ vim.o.background = "dark"
 vim.o.guifont = "JetBrainsMono Nerd Font:h10.0"
 
 local signs = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
+    { name = "DiagnosticSignError", text = "", numhl = "" },
+    { name = "DiagnosticSignWarn", text = "", numhl = "" },
+    { name = "DiagnosticSignHint", text = "", numhl = "" },
+    { name = "DiagnosticSignInfo", text = "", numhl = "" },
+    { name = "DapBreakpoint", text = "", numhl = "DapBreakpoint" },
+    { name = "DapStopped", text = "", numhl = "DapStopped" },
 }
 
 vim.diagnostic.config {
@@ -58,26 +60,42 @@ local function theme_overrides()
         vim.api.nvim_set_hl(0, "DiagnosticUnderlineInformation", { link = "DiagnosticSignInformation" })
         vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", { link = "DiagnosticSignHint" })
 
-        vim.api.nvim_set_hl(
-            0,
-            "DiagnosticUnderlineError",
-            { cterm = { undercurl = true }, ctermbg = "none", ctermfg = "none", undercurl = true, sp = "#FF0000", fg = "none", bg = "none" }
-        )
-        vim.api.nvim_set_hl(
-            0,
-            "DiagnosticUnderlineWarning",
-            { cterm = { undercurl = true }, ctermbg = "none", ctermfg = "none", undercurl = true, sp = "#FFFF00", fg = "none", bg = "none" }
-        )
-        vim.api.nvim_set_hl(
-            0,
-            "DiagnosticUnderlineInformation",
-            { cterm = { undercurl = true }, ctermbg = "none", ctermfg = "none", undercurl = true, sp = "#FFFF00", fg = "none", bg = "none" }
-        )
-        vim.api.nvim_set_hl(
-            0,
-            "DiagnosticUnderlineHint",
-            { cterm = { undercurl = true }, ctermbg = "none", ctermfg = "none", undercurl = true, sp = "#AAFFAA", fg = "none", bg = "none" }
-        )
+        vim.api.nvim_set_hl(0, "DiagnosticUnderlineError", {
+            cterm = { undercurl = true },
+            ctermbg = "none",
+            ctermfg = "none",
+            undercurl = true,
+            sp = "#FF0000",
+            fg = "none",
+            bg = "none",
+        })
+        vim.api.nvim_set_hl(0, "DiagnosticUnderlineWarning", {
+            cterm = { undercurl = true },
+            ctermbg = "none",
+            ctermfg = "none",
+            undercurl = true,
+            sp = "#FFFF00",
+            fg = "none",
+            bg = "none",
+        })
+        vim.api.nvim_set_hl(0, "DiagnosticUnderlineInformation", {
+            cterm = { undercurl = true },
+            ctermbg = "none",
+            ctermfg = "none",
+            undercurl = true,
+            sp = "#FFFF00",
+            fg = "none",
+            bg = "none",
+        })
+        vim.api.nvim_set_hl(0, "DiagnosticUnderlineHint", {
+            cterm = { undercurl = true },
+            ctermbg = "none",
+            ctermfg = "none",
+            undercurl = true,
+            sp = "#AAFFAA",
+            fg = "none",
+            bg = "none",
+        })
     end
 
     -- Vscode colors for Cmp Completion window, Some themes do not set good defaults for this
