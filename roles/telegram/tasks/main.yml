@@ -61,7 +61,8 @@
         SingleMainWindow=true
         X-GNOME-UsesNotifications=true
         X-GNOME-SingleWindow=true
-      mode: "0755"
+      mode: "0644"
+
 
   when: ansible_user_id == "dparo" and ansible_hostname is regex('^dparo.*')
   tags:
