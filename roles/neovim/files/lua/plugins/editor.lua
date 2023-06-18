@@ -28,9 +28,9 @@ return {
             require("trim").setup {
                 ft_blocklist = {},
                 patterns = {
-                    [[%s/\s\+$//e]], -- remove unwanted spaces
-                    [[%s/\($\n\s*\)\+\%$//]], -- trim last line
-                    [[%s/\%^\n\+//]], -- trim first line
+                    [[%s/\s\+$//e]],           -- remove unwanted spaces
+                    [[%s/\($\n\s*\)\+\%$//]],  -- trim last line
+                    [[%s/\%^\n\+//]],          -- trim first line
                     [[%s/\(\n\n\n\)\n\+/\1/]], -- replace more than 3 blank lines with 3 blank lines
                 },
             }
@@ -137,7 +137,7 @@ return {
     ---- Plugins for cursor motion or for text editing
     ----
     { "junegunn/vim-easy-align" },
-    { "andymass/vim-matchup", lazy = true, event = "VimEnter" },
+    { "andymass/vim-matchup",   lazy = true, event = "VimEnter" },
 
     -- "Jetpack" like movement within the buffer. Quickly jump where you want to go
     {
@@ -165,34 +165,4 @@ return {
     },
 
     { "nathom/filetype.nvim" },
-
-    {
-        "folke/noice.nvim",
-        event = "VeryLazy",
-        config = function()
-            require("noice").setup {
-                lsp = {
-                    -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-                    override = {
-                        ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                        ["vim.lsp.util.stylize_markdown"] = true,
-                        ["cmp.entry.get_documentation"] = true,
-                    },
-                },
-                -- you can enable a preset for easier configuration
-                presets = {
-                    bottom_search = true, -- use a classic bottom cmdline for search
-                    command_palette = true, -- position the cmdline and popupmenu together
-                    long_message_to_split = true, -- long messages will be sent to a split
-                    inc_rename = false, -- enables an input dialog for inc-rename.nvim
-                    lsp_doc_border = false, -- add a border to hover docs and signature help
-                },
-            }
-        end,
-        opts = {},
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
-        },
-    },
 }
