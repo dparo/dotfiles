@@ -71,16 +71,27 @@ function M.on_attach(client, bufnr)
 
     buf_set_keymap(bufnr, "n", "<F2>", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
     buf_set_keymap(bufnr, "n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
+    buf_set_keymap(bufnr, "n", "<leader>lc", "<cmd>lua vim.lsp.codelens.run()<CR>", opts)
 
     local augroup = vim.api.nvim_create_augroup("USER_LSP", { clear = true })
+
     vim.api.nvim_create_autocmd({ "CursorHold" }, {
         group = augroup,
         buffer = bufnr,
         callback = function()
             user.utils.lsp.show_line_diagnostics()
-            vim.lsp.codelens.run()
         end,
     })
+
+    if client.server_capabilities.codeLensProvider then
+        vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.codelens.refresh()
+            end,
+        })
+    end
 
     -- Set some keybinds conditional on server capabilities
     if client.server_capabilities.documentFormattingProvider then
