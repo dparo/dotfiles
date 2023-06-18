@@ -83,6 +83,7 @@
     - "{{ ansible_user_dir }}/.local/share/applications"
   tags:
     - xdg
+    - remove-broken-symlinks
 
 - name: Update desktop database
   ansible.builtin.shell: |
@@ -172,5 +173,6 @@
     mode: "0644"
     force: True
   tags:
+    - never
     - xdg
     - background
