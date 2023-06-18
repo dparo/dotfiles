@@ -69,6 +69,8 @@
       - ffmpeg
       - speedtest-cli
       - parallel # GNU Parallel is a shell tool for executing jobs in parallel
+      - zbar      # QR Code reader
+      - qrencode # QR Code encoder
     state: present
   become: true
   tags:
