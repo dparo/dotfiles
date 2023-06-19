@@ -30,6 +30,7 @@ symbol = " "
 symbol = " "
 
 [scala]
+disabled = true
 symbol = " "
 
 [spack]
