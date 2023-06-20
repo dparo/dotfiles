@@ -33,6 +33,7 @@
     - "{{ ansible_user_dir }}/.local/share/pki"
     - "{{ ansible_user_dir }}/.local/share/icons"
     - "{{ ansible_user_dir }}/.local/share/icons/hicolor"
+    - "{{ ansible_user_dir }}/.local/share/dotnet"
     - "{{ ansible_user_dir }}/.cache"
     - "{{ ansible_user_dir }}/.cache/bash"
     - "{{ ansible_user_dir }}/.cache/zsh"
