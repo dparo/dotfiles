@@ -99,6 +99,7 @@
     - insomnia
     - mattermost
     - splunk
+    - wireshark
     - mitmproxy
     - trunkrs
     - infer # https://github.com/facebook/infer
