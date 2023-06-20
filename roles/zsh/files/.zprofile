@@ -35,8 +35,9 @@ export LC_CTYPE="en_US.UTF-8"
 
 
 export ANSIBLE_HOME="${XDG_DATA_HOME:-$HOME/.local/share}/ansible"
-export ANSIBLE_GALAXY_CACHE_DIR="${ANSIBLE_HOME}/galaxy_cache"
-export ANSIBLE_LOCAL_TEMP="$ANSIBLE_HOME/tmp"
+export ANSIBLE_CONFIG="${XDG_CONFIG_HOME}/ansible.cfg"
+export ANSIBLE_GALAXY_CACHE_DIR="${XDG_CACHE_DIR:-$HOME/.cache}/ansible/galaxy"
+export ANSIBLE_LOCAL_TEMP="${XDG_CACHE_DIR:-$HOME/.cache}/ansible/tmp"
 
 
 # Setup programs default config location to avoid cluttering the HOME directory
