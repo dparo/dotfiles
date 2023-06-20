@@ -205,7 +205,7 @@ local function setup_basic_functionalities()
     nmap("<C-c>", exec_key "Vy")
     imap("<C-c>", exec_key "Vy")
     vmap("<C-c>", exec_key "y")
-    nmap({ "<C-v>", "<S-Insert>", "p" }, exec_key "gP")
+    nmap({ "<C-v>", "<S-Insert>" }, exec_key "gP")
     imap({ "<C-v>", "<S-Insert>" }, exec_key "gP")
     cmap({ "<C-v>", "<S-Insert>" }, "<C-r>+", { silent = false })
     vmap({ "<C-v>", "<S-Insert>", "p" }, exec_key '"_dgP') -- When pasting over selected region, do not yank replaced region
