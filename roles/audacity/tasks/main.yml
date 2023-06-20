@@ -1,0 +1,10 @@
+---
+- name: Install
+  ansible.builtin.dnf:
+    name:
+      - audacity
+    state: present
+  become: true
+  tags:
+    - never
+    - audacity
