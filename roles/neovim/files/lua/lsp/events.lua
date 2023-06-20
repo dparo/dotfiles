@@ -166,12 +166,26 @@ function M.on_attach(client, bufnr)
     })
 
     if client.server_capabilities.codeLensProvider then
-        vim.api.nvim_create_autocmd({ "BufEnter", "CursorHold", "InsertLeave" }, {
+        vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", --[[ "CursorHold"  ]]}, {
             group = augroup,
             buffer = bufnr,
             callback = function()
                 vim.lsp.codelens.refresh()
             end,
+        })
+    end
+
+    if client.server_capabilities.inlayHintProvider and vim.lsp.buf.inlay_hint ~= nil then
+        vim.api.nvim_create_autocmd({ "InsertEnter" }, {
+            group = augroup,
+            buffer = bufnr,
+            callback = function() vim.lsp.buf.inlay_hint(bufnr, true) end,
+        })
+
+        vim.api.nvim_create_autocmd({ "InsertLeave" }, {
+            group = augroup,
+            buffer = bufnr,
+            callback = function() vim.lsp.buf.inlay_hint(bufnr, false) end,
         })
     end
 
