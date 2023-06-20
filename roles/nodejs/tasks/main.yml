@@ -44,3 +44,13 @@
   tags:
     - node
     - npm
+
+- name: Symlink Angular config
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/angular"
+    dest: "{{ ansible_user_dir }}/.config/angular"
+    state: link
+  tags:
+    - node
+    - npm
+    - angular
