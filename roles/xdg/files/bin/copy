@@ -5,5 +5,5 @@ if test "$WAYLAND_DISPLAY" != ""; then
 elif test "$DISPLAY" != ""; then
     exec xclip -sel clip "$@"
 else
-    exec cb "$@"
+    exec cb copy "$@"
 fi
