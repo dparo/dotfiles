@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if test "$WAYLAND_DISPLAY" != ""; then
+    exec wl-paste "$@"
+elif test "$DISPLAY" != ""; then
+    exec xclip -sel clip -out "$@"
+else
+    # TODO
+    exec cb "$@"
+fi

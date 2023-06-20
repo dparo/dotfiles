@@ -39,7 +39,7 @@ function zle-clipboard-paste {
   if ((REGION_ACTIVE)); then
     zle kill-region
   fi
-  LBUFFER+="$(xclip -selection clipboard -out)"
+  LBUFFER+="$(paste)"
 }
 zle -N zle-clipboard-paste
 
@@ -47,7 +47,7 @@ zle -N zle-clipboard-paste
 ## X11 clipboard
 x-copy-region-as-kill () {
   zle copy-region-as-kill
-  print -rn $CUTBUFFER | xclip -selection clipboard
+  print -rn $CUTBUFFER | copy
 }
 zle -N x-copy-region-as-kill
 bindkey -e '\ew' x-copy-region-as-kill
