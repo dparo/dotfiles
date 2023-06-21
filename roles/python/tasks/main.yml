@@ -34,6 +34,7 @@
     - "{{ role_path }}/files/config/pylintrc"
     - "{{ role_path }}/files/config/python"
     - "{{ role_path }}/files/config/python_keyring"
+    - "{{ role_path }}/files/config/pip"
   tags:
     - python
     - pip
