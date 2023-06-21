@@ -37,6 +37,10 @@ symbol = " "
 symbol = "🅢 "
 
 
+[gcloud]
+symbol = " "
+
+
 [aws]
 symbol = " "
 
