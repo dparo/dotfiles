@@ -5,6 +5,12 @@
     dnf check-update; true
   become: True
   when: ansible_distribution == 'Fedora'
+    - dnf
+    - fedora
+    - yum.repos.d
+    - rpmfusion
+    - core-pkgs
+
 
 - name: Delete unused repositories
   ansible.builtin.file:
@@ -20,6 +26,8 @@
     - dnf
     - fedora
     - yum.repos.d
+    - rpmfusion
+    - core-pkgs
 
 - name: Install
   ansible.builtin.dnf:
