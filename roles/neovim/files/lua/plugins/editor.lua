@@ -28,9 +28,9 @@ return {
             require("trim").setup {
                 ft_blocklist = {},
                 patterns = {
-                    [[%s/\s\+$//e]],           -- remove unwanted spaces
-                    [[%s/\($\n\s*\)\+\%$//]],  -- trim last line
-                    [[%s/\%^\n\+//]],          -- trim first line
+                    [[%s/\s\+$//e]], -- remove unwanted spaces
+                    [[%s/\($\n\s*\)\+\%$//]], -- trim last line
+                    [[%s/\%^\n\+//]], -- trim first line
                     [[%s/\(\n\n\n\)\n\+/\1/]], -- replace more than 3 blank lines with 3 blank lines
                 },
             }
@@ -137,15 +137,18 @@ return {
     ---- Plugins for cursor motion or for text editing
     ----
     { "junegunn/vim-easy-align" },
-    { "andymass/vim-matchup",   lazy = true, event = "VimEnter" },
+    { "andymass/vim-matchup", lazy = true, event = "VimEnter" },
+
+    { "tpope/vim-repeat" },
 
     -- "Jetpack" like movement within the buffer. Quickly jump where you want to go
     {
-        "ggandor/lightspeed.nvim",
+        "ggandor/leap.nvim",
+        dependencies = {
+            "tpope/vim-repeat",
+        },
         config = function()
-            require("lightspeed").setup {
-                ignore_case = false,
-            }
+            require("leap").add_default_mappings()
         end,
     },
 
