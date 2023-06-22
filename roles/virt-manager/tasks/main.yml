@@ -16,6 +16,7 @@
       - edk2-ovmf # ovmf provides virtualized UEFI capable bios
       - libvirt-daemon
       - virt-manager
+      - virt-viewer
       - virtio-win # https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md
     state: present
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
