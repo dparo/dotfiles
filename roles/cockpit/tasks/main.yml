@@ -1,0 +1,15 @@
+---
+
+- name: Install
+  ansible.builtin.dnf:
+    name:
+      - cockpit
+      - cockpit-machines
+      - cockpit-podman
+    state: present
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  become: true
+  tags:
+    - qemu
+    - kvm
+    - cockpit

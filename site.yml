@@ -25,6 +25,7 @@
     - display-manager
     - network-manager
     - virt-manager
+    - cockpit
     - dns
     - python
     - anaconda3
