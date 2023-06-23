@@ -82,6 +82,7 @@
     - fonts
     - docker
     - terraform
+    - vagrant
     - syncthing
     - keepassxc
     - firefox
