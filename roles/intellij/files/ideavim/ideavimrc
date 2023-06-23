@@ -1,1 +1,4 @@
 set clipboard+=unnamed
+let mapleader = " "
+
+nmap <leader>ff :action GotoFile<CR>
