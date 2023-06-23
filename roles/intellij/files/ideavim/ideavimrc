@@ -1,4 +1,7 @@
 set clipboard+=unnamed
 let mapleader = " "
 
+set smartcase
+set ignorecase
+
 nmap <leader>ff :action GotoFile<CR>
