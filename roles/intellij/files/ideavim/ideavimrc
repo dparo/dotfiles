@@ -5,5 +5,6 @@ set smartcase
 set ignorecase
 
 nmap <leader>ff :action GotoFile<CR>
+nmap <M-x> :action GotoAction<CR>
 nmap <C-`> :action Terminal<CR>
 nmap <F4> :action Terminal<CR>
