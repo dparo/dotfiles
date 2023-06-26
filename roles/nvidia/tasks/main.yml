@@ -1,0 +1,34 @@
+---
+
+##
+## More info at https://rpmfusion.org/Howto/NVIDIA
+##
+
+- name: Enable the RPM Fusion repository
+  ansible.builtin.shell: |
+    dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    dnf check-update; true
+  become: True
+  when: ansible_distribution == 'Fedora'
+  tags:
+  - never
+  - nvidia
+
+# Enable modesetting in GRUB (default)
+# sudo grubby --update-kernel=ALL --args='nvidia-drm.modeset=1'
+
+- name: Install
+  ansible.builtin.dnf:
+    name:
+    - akmod-nvidia
+    - xorg-x11-drv-nvidia-cuda
+    - xorg-x11-drv-nvidia-cuda-libs
+    - vulkan
+    - nvidia-vaapi-driver
+    - libva-utils
+    - vdpauinfo
+    state: present
+  become: true
+  tags:
+    - never
+    - nvidia
