@@ -1,16 +1,19 @@
 ---
-- name: Enable the RPM Fusion repository
-  ansible.builtin.shell: |
-    dnf install -y https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-    dnf check-update; true
+
+- name: "Enable the RPM Fusion repository for {{ ansible_distribution }} {{ ansible_distribution_major_version }}"
+  ansible.builtin.dnf:
+    name:
+    - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+    - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+    state: latest
   become: True
   when: ansible_distribution == 'Fedora'
+  tags:
     - dnf
     - fedora
     - yum.repos.d
     - rpmfusion
     - core-pkgs
-
 
 - name: Delete unused repositories
   ansible.builtin.file:
