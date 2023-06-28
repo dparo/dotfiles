@@ -3,6 +3,7 @@
   ansible.builtin.dnf:
     name:
       - p11-kit
+      - ca-certificates
     state: present
   become: true
   tags:
@@ -16,7 +17,7 @@
     mode: 0444
   no_log: true
   become: True
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and ansible_distribution == 'Fedora'
   loop_control:
     loop_var: cert_item
   with_items: "{{ x509_certs | default({}) | dict2items }}"
@@ -27,7 +28,7 @@
 
 - name: Update ca-trust
   ansible.builtin.command: update-ca-trust
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and ansible_distribution == 'Fedora'
   no_log: True
   become: True
   tags:
