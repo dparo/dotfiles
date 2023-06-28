@@ -1,8 +1,15 @@
-set clipboard+=unnamedplus
-let mapleader = " "
+set idearefactormode=keep
+set ideajoin
+set surround
+set NERDTree
 
 set smartcase
 set ignorecase
+
+set clipboard+=unnamedplus
+
+
+let mapleader = " "
 
 nmap <leader>ff :action GotoFile<CR>
 nmap <M-x> :action GotoAction<CR>
