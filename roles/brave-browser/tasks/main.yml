@@ -21,7 +21,8 @@
   ansible.builtin.dnf:
     name:
       - brave-browser
-    state: present
+      - brave-keyring
+    state: latest
   become: true
   tags:
     - brave-browser
