@@ -46,7 +46,7 @@
     - java
     - pmd
 
-- name: Create binary wrapper
+- name: Create PMD binary wrapper
   ansible.builtin.copy:
     dest: "{{ ansible_user_dir }}/.local/bin/pmd"
     content: |
@@ -116,3 +116,39 @@
   tags:
     - java
     - spotbugs
+
+
+- name: Check latest checkstyle (https://github.com/checkstyle/checkstyle)
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/checkstyle/checkstyle/releases/latest
+    return_content: true
+  register: checkstyle_latest
+  tags:
+    - java
+    - checkstyle
+
+
+- name: Fetch latest checkstyle
+  ansible.builtin.get_url:
+    url: "https://github.com/checkstyle/checkstyle/releases/download/{{ checkstyle_latest['json']['tag_name'] }}/{{ checkstyle_latest['json']['tag_name'] }}-all.jar"
+    dest: "{{ ansible_user_dir }}/opt/{{ checkstyle_latest['json']['tag_name'] }}-all.jar"
+    mode: "0644"
+    force: True
+  tags:
+    - java
+    - checkstyle
+
+
+- name: Create checkstyle binary wrapper
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.local/bin/checkstyle"
+    content: |
+      #!/usr/bin/env bash
+
+      # export CHECKSTYLE_JAVA_OPTS="$_JAVA_OPTIONS"
+      # unset _JAVA_OPTIONS
+      exec java -jar "{{ ansible_user_dir }}/opt/{{ checkstyle_latest['json']['tag_name'] }}-all.jar" "$@"
+    mode: "0755"
+  tags:
+    - java
+    - checkstyle
