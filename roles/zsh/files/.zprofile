@@ -122,10 +122,10 @@ export M2_HOME="$MAVEN_HOME"
 export MAVEN_OPTS="$JAVA_OPTS -Xmx512m -Xverify:none -XX:TieredStopAtLevel=1 -XX:-TieredCompilation"
 
 # Supported only from Maven 4
-export MAVEN_ARGS="-gs $XDG_CONFIG_HOME/maven/settings.xml"
+export MAVEN_ARGS="-gs $XDG_CONFIG_HOME/maven/settings_global.xml"
 
 # For compatibility with maven-wrapper scripts (https://github.com/takari/maven-wrapper)
-export MAVEN_CONFIG="-gs $XDG_CONFIG_HOME/maven/settings.xml"
+export MAVEN_CONFIG="-gs $XDG_CONFIG_HOME/maven/settings_global.xml"
 
 export MAVEN_DEBUG_ADDRESS=5005
 
