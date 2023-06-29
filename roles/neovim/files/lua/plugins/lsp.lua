@@ -133,6 +133,9 @@ return {
                     },
 
                     null_ls.builtins.formatting.google_java_format,
+                    null_ls.builtins.diagnostics.checkstyle.with({
+                        extra_args = { "-c", "checkstyle.xml" },
+                    }),
 
                     null_ls.builtins.diagnostics.semgrep.with {
                         args = { "--config", "auto", "-q", "--json", "$FILENAME" },
