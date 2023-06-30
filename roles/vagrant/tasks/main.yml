@@ -1,5 +1,5 @@
 ---
-- name: Enable hashicorpo.repo (https://rpm.releases.hashicorp.com/fedora/hashicorp.repo)
+- name: Enable hashicorp.repo (https://rpm.releases.hashicorp.com/fedora/hashicorp.repo)
   ansible.builtin.get_url:
     dest: /etc/yum.repos.d/hashicorp.repo
     url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
