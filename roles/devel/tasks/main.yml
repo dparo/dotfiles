@@ -89,6 +89,7 @@
     - prettier
     - create-docusaurus@latest # https://docusaurus.io
     - husky
+    - npm-check-updates
   tags: devel
 
 - name: Install additional NPM tools
