@@ -3,6 +3,6 @@
 
 node_versions:
   - 16.13.0
-  - 18.12.1
-default_node_version: 18.12.1
+  - 18.16.1
+default_node_version: 18.16.1
 node_install_dir: "{{ ansible_user_dir }}/opt"
