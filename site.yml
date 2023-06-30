@@ -85,6 +85,7 @@
     - terraform
     - vagrant
     - vault
+    - consul
     - liquibase
     - syncthing
     - keepassxc
