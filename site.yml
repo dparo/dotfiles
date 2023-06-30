@@ -84,6 +84,7 @@
     - docker
     - terraform
     - vagrant
+    - vault
     - liquibase
     - syncthing
     - keepassxc
