@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+watch_link="$(curl -s https://www.youtube.com/results?search_query="$1" | grep -Eo '/watch\?v=.{11}' | head -n1)"
+yt_link="https://music.youtube.com$watch_link"
+
+(notify-send -i emblem-music-symbolic "Playing: $(yt-dlp --get-title "$yt_link")") &
+
+exec mpc add "$(yt-dlp -f bestaudio --get-url "$yt_link")"
