@@ -5,4 +5,5 @@ yt_link="https://music.youtube.com$watch_link"
 
 (notify-send -i emblem-music-symbolic "Playing: $(yt-dlp --get-title "$yt_link")") &
 
-exec mpc add "$(yt-dlp -f bestaudio --get-url "$yt_link")"
+mpc add "$(yt-dlp -f bestaudio --get-url "$yt_link")"
+mpc play
