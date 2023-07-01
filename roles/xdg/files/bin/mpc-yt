@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
-watch_link="$(curl -s https://www.youtube.com/results?search_query="$1" | grep -Eo '/watch\?v=.{11}' | head -n1)"
+set -x
+
+watch_link="$(curl -s --url-query "search_query=$*" https://www.youtube.com/results | grep -Eo '/watch\?v=.{11}' | head -n1)"
 yt_link="https://music.youtube.com$watch_link"
 
 (notify-send -i emblem-music-symbolic "Playing: $(yt-dlp --get-title "$yt_link")") &
 
-mpc stop
-mpc clear
 mpc add "$(yt-dlp -f bestaudio --get-url "$yt_link")"
-mpc play
+
+# Play last added song to the queue
+mpc play "$(mpc -f "%position%" playlist | tail -n 1)"
