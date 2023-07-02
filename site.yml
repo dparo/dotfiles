@@ -89,6 +89,7 @@
     - liquibase
     - syncthing
     - keepassxc
+    - bitwarden
     - firefox
     - brave-browser
     - google-chrome
