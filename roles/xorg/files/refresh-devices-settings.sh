@@ -24,5 +24,5 @@ xset -b # disable bell
 xset r rate 300 30
 
 # Set keyboard layout, and compose international chars with R-Alt
-setxkbmap -layout us -option compose:ralt,terminate:ctrl_alt_bksp
-# setxkbmap -layout us -option compose:ralt,terminate:ctrl_alt_bksp,ctrl:nocaps      # Remaps also CapsLock to Ctrl
+# setxkbmap -layout us -option compose:ralt,terminate:ctrl_alt_bksp
+setxkbmap -layout us -option compose:ralt,terminate:ctrl_alt_bksp,ctrl:nocaps      # Remaps also CapsLock to Ctrl
