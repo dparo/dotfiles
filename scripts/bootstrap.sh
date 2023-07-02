@@ -18,20 +18,8 @@ if ! test -x "$(command -v ansible)"; then
     esac
 fi
 
-install() {
-    source "$PWD/scripts/lib.sh" || exit 1
-
-    set +x
-    ask_vault_pass
-    set -x
-
-    git_exclude
-
-    ./scripts/install.sh "$@"
-}
-
 main() {
-    if test -n "$1"; then
+    if test "$1" != ""; then
         DOTFILES_LOCATION="$1"
         shift 1
     else
@@ -45,12 +33,10 @@ main() {
         cloned=1
     fi
 
-
     pushd "$DOTFILES_LOCATION" || exit 1
-    install "$@"
+    ./scripts/install.sh "$@"
     local rc=$?
     popd || exit 1
-
 
     if test "$rc" -eq 0 && test "$cloned" -eq 1; then
         while true; do
