@@ -8,6 +8,9 @@
 	signingkey = 705FE306C8ABC4C9
 [credential]
     helper = cache --timeout=7200
+[credential "https://git-codecommit.eu-south-1.amazonaws.com"]
+    helper = !aws --profile saml codecommit credential-helper $@
+    UseHttpPath = true
 [gpg]
 	program = gpg
 [commit]
