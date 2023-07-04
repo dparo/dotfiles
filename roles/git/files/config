@@ -2,6 +2,8 @@
 	editor = nvim
     pager = delta
 	excludesFile = vault_pass.txt
+	excludesFile = keepassxc_pass.txt
+	excludesFile = keepass_pass.txt
 [user]
 	name = Davide Paro
 	email = dparo@outlook.it
