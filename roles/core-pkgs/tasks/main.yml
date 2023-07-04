@@ -83,6 +83,7 @@
       - zbar      # QR Code reader
       - qrencode # QR Code encoder
       - oathtool # A command line tool for generating and validating OTPs
+      - openldap-clients
     state: present
   become: true
   tags:
