@@ -4,9 +4,6 @@ cd "$(dirname "$0")/../" || exit
 
 set -e
 
-source "$PWD/scripts/lib.sh"
-
-
 show_all_facts() {
     # Dumps all the ansible facts / variables available
     ansible localhost -m ansible.builtin.setup
@@ -42,7 +39,6 @@ fi
 
 set -x
 
-
 if test "${RUNNING_INSIDE_DOCKER:-0}" -eq 1; then
     ansible-playbook "$PWD/site.yml" "$@"
 elif test -f "$PWD/vault_pass.txt"; then
@@ -53,7 +49,6 @@ fi
 
 rc=$?
 
-
 if test "$USER" = "dparo"; then
     git config user.email "dparo@outlook.it"
     if test "$rc" -eq 0; then
@@ -61,7 +56,6 @@ if test "$USER" = "dparo"; then
         git remote add origin-https 'https://github.com:dparo/dotfiles' || true
     fi
 fi
-
 
 rm -rf "$HOME/.ansible"
 rm -rf "$HOME/.bash_history"
