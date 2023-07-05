@@ -1,4 +1,5 @@
 [Added Associations]
+x-scheme-handler/postman=Postman.desktop
 application/xml=nvim.desktop;
 text/x-c++src=nvim.desktop;
 text/x-tex=nvim.desktop;
@@ -16,6 +17,8 @@ text/x-bibtex=nvim.desktop;
 x-scheme-handler/terminal=kitty.desktop
 application/x-xz-compressed-tar=org.gnome.FileRoller.desktop;
 application/vnd.excalidraw+json=chrome-kmcnjdcipmgchfndpapkoecbidofdpbc-Default.desktop
+application/x-shellscript=nvim.desktop;
+application/xml=nvim.desktop;
 
 [Default Applications]
 application/ppdf=zathura.desktop
@@ -35,6 +38,7 @@ application/json=nvim.desktop
 text/x-chdr=nvim.desktop;
 text/vnd.qt.linguist=nvim.desktop;
 application/x-shellscript=nvim.desktop;
+application/xml=nvim.desktop;
 text/plain=nvim.desktop;
 application/zip=org.gnome.FileRoller.desktop;
 text/csv=libreoffice-calc.desktop;
