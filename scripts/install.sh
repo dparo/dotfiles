@@ -27,7 +27,6 @@ cd "$(dirname "$0")/../" || exit 1
 
 set -e
 
-source "$PWD/scripts/lib.sh"
 source ./roles/zsh/files/.zshenv
 source ./roles/zsh/files/.zprofile
 
