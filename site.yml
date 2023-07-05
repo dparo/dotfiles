@@ -10,6 +10,7 @@
     - gnupg
     - git
     - xdg
+    - mimes
     - locale
     - wget
     - sudo
