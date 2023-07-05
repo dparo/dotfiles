@@ -8,6 +8,7 @@
   loop: "{{ node_versions }}"
   tags:
     - node
+    - nodejs
     - npm
 
 - name: "Download and unpack Node {{ node_versions }}"
@@ -19,6 +20,7 @@
   loop: "{{ node_versions }}"
   tags:
     - node
+    - nodejs
     - npm
 
 - name: Symlink binaries {{ default_node_version }}
@@ -32,6 +34,7 @@
     - npx
   tags:
     - node
+    - nodejs
     - npm
 
 - name: Symlink config
@@ -43,6 +46,7 @@
     - "{{ role_path }}/files/npm"
   tags:
     - node
+    - nodejs
     - npm
 
 - name: Symlink Angular config
@@ -52,5 +56,6 @@
     state: link
   tags:
     - node
+    - nodejs
     - npm
     - angular
