@@ -19,22 +19,32 @@ application/x-xz-compressed-tar=org.gnome.FileRoller.desktop;
 application/vnd.excalidraw+json=chrome-kmcnjdcipmgchfndpapkoecbidofdpbc-Default.desktop;
 application/x-shellscript=nvim.desktop;
 application/xml=nvim.desktop;
+application/pkix-cert=nvim.desktop;
+video/x-matroska=mpv.desktop;
+text/csv=code.desktop
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=org.onlyoffice.desktopeditors.desktop
+application/pkix-cert=nvim.desktop;
+
 
 [Default Applications]
+application/pkix-cert=nvim.desktop;
+video/x-matroska=mpv.desktop;
+application/pkix-cert=nvim.desktop;
+application/vnd.openxmlformats-officedocument.wordprocessingml.document=org.onlyoffice.desktopeditors.desktop
 application/ppdf=zathura.desktop;
 x-scheme-handler/eclipse+installer=_home_dparo_Downloads_eclipse-installer_.desktop;
 x-scheme-handler/mailspring=mailspring.desktop;
 x-scheme-handler/tg=userapp-Telegram Desktop-15QM80.desktop;
 application/x-gnome-saved-search=nemo.desktop;
-image/jpeg=nomacs.desktop;feh.desktop;
-image/png=nomacs.desktop;feh.desktop;
+image/png=nomacs.desktop;qimgv.desktop;sxiv.desktop;feh.desktop;
+image/jpeg=nomacs.desktop;qimgv.desktop;sxiv.desktop;feh.desktop;
 image/svg+xml=nomacs.desktop;feh.desktop;
 text/x-markdown=com.github.marktext.marktext.desktop;
 text/markdown=com.github.marktext.marktext.desktop;
 text/x-csrc=nvim.desktop;
 text/x-matlab=nvim.desktop;
 text/x-makefile=nvim.desktop;
-application/json=nvim.desktop;
+application/json=nvim.desktop;code.desktop;
 text/x-chdr=nvim.desktop;
 text/vnd.qt.linguist=nvim.desktop;
 application/x-shellscript=nvim.desktop;
