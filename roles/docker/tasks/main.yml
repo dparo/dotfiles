@@ -4,8 +4,10 @@
   ansible.builtin.shell: |
     dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
   become: True
+  when: podman_docker_emulation == False
   tags:
     - docker
+
 
 - name: Install
   ansible.builtin.dnf:
@@ -18,18 +20,20 @@
     - podman-tui
     state: present
   become: true
+  when: podman_docker_emulation == False
   tags:
     - docker
     - podman
 
-- name: Disable docker service
+- name: Enable docker service
   ansible.builtin.systemd:
     name: docker
-    enabled: false
+    enabled: '{{ podman_docker_emulation == False }}'
   become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined && podman_docker_emulation == False
   tags:
     - docker
+    - podman
 
 - name: "Add the user {{ ansible_env.USER }} to the docker group"
   ansible.builtin.user:
@@ -40,6 +44,7 @@
   become: true
   tags:
     - docker
+    - podman
 
 
   # TODO: https://github.com/containers/podman-desktop/releases/download/v1.1.0/podman-desktop-1.1.0.tar.gz
@@ -63,4 +68,26 @@
   tags:
     - podman
     - podman-desktop
+    - docker
+
+
+- name: Install podman-docker
+  ansible.builtin.dnf:
+    - podman-docker
+    - podman-compose
+  become: true
+  when: podman_docker_emulation == True
+  tags:
+    - docker
+    - podman
+
+
+- name: Enable podman service
+  ansible.builtin.systemd:
+    name: podman
+    enabled: '{{ podman_docker_emulation == True }}'
+  become: true
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined && podman_docker_emulation == True
+  tags:
+    - podman
     - docker
