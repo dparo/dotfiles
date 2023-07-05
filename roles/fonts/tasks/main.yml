@@ -82,6 +82,28 @@
   tags:
     - fonts
 
+
+- name: Find Jetbrains Mono No Ligatures (NL) fonts
+  ansible.builtin.find:
+    paths: /usr/local/share/fonts/NerdFonts/JetBrainsMono/
+    patterns: "^.*JetBrainsMonoNLNerdFont.*.ttf$"
+    use_regex: yes
+    recurse: True
+  register: jetbrains_mono_nl_fonts
+  tags:
+    - fonts
+
+
+- name: Remove Jetbrains Mono No Ligatures (NL) fonts
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  become: true
+  loop: "{{ jetbrains_mono_nl_fonts.files | flatten(levels=1) }}"
+  tags:
+    - fonts
+
+
 - name: Reload font cache
   ansible.builtin.command: fc-cache -fvr
   when: "fonts_dir.results | length > 0"
