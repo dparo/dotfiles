@@ -1,0 +1,30 @@
+---
+
+- name: "Download and unpack Apache LDAP Studio {{ apache_ldap_studio_version }}"
+  ansible.builtin.unarchive:
+    src: "https://dlcdn.apache.org/directory/studio/{{ apache_ldap_studio_version }}/ApacheDirectoryStudio-{{ apache_ldap_studio_version }}-linux.gtk.x86_64.tar.gz"
+    dest: "{{ ansible_user_dir }}/opt"
+    remote_src: yes
+  tags:
+    - never
+    - apache-ldap-studio
+
+
+- name: Install desktop file integration
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.local/share/applications/apache-ldap-studio.desktop"
+    content: |
+      [Desktop Entry]
+      Name=Apache Directory (LDAP) studio
+      Exec={{ ansible_user_dir }}/opt/ApacheDirectoryStudio/ApacheDirectoryStudio %U
+      TryExec={{ ansible_user_dir }}/opt/ApacheDirectoryStudio/ApacheDirectoryStudio
+      Terminal=false
+      Type=Application
+      Icon={{ ansible_user_dir }}/opt/ApacheDirectoryStudio/icon.xpm
+      Categories=Development;LDAP;
+      StartupNotify=true
+      StartupWMClass=ApacheDirectoryStudio
+    mode: "0644"
+  tags:
+    - never
+    - apache-ldap-studio
