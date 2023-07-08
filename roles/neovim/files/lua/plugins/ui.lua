@@ -115,12 +115,47 @@ return {
 
     -- Dashboard startup page
     {
-        "goolord/alpha-nvim",
+        "glepnir/dashboard-nvim",
+        event = "VimEnter",
         config = function()
-            require("alpha").setup(require("alpha.themes.dashboard").config)
-        end,
-    },
+            require("dashboard").setup {
+                change_to_vcs_roo = true,
+                config = {
+                    shortcut = {
 
+                        {
+                            desc = "  New file ",
+                            action = "enew",
+                            group = "@string",
+                            key = "n",
+                        },
+                        {
+                            desc = " 󰚰  Update ",
+                            action = "Lazy sync",
+                            group = "@string",
+                            key = "u",
+                        },
+                        {
+                            desc = "   File/path ",
+                            action = "Telescope find_files find_command=rg,--hidden,--files",
+                            group = "@string",
+                            key = "f",
+                        },
+                        {
+                            desc = " 󰩈  Quit ",
+                            action = "q!",
+                            group = "@macro",
+                            key = "q",
+                        },
+                    },
+                    week_header = {
+                        enable = true,
+                    },
+                },
+            }
+        end,
+        dependencies = { { "nvim-tree/nvim-web-devicons" } },
+    },
     ----
     ---- Plugins to manage windows
     ----
