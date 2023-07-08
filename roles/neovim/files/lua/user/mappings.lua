@@ -211,10 +211,6 @@ local function setup_basic_functionalities()
     -- Join lines
     vmap("<C-j>", "gq")
 
-    -- Search word under cursor forward and backward
-    nvmap("<C-g>", exec_key "*")
-    nvmap("<C-S-g>", exec_key "#")
-
     --- Repeat q recorded macro
     nmap(",", "@q")
 end
