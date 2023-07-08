@@ -13,6 +13,16 @@
   tags:
     - python
 
+- name: Install ipython
+  ansible.builtin.pip:
+    name:
+      - ipython
+    state: latest
+  tags:
+    - python
+    - ipython
+
+
 - name: Clean PIP cache
   ansible.builtin.shell: |
     pip3 cache purge 2> /dev/null || true
