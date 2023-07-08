@@ -132,6 +132,7 @@ local function setup_unbinds()
     nvmap("<S-Down>", "")
     nvmap("<S-Right>", "")
     nvmap("<S-Left>", "")
+    vmap("<C-z>", "")
 end
 
 local function setup_cursor_movements()
@@ -168,18 +169,22 @@ local function setup_basic_functionalities()
     nmap("<leader>fw", exec_cmd "w")
     nmap("<leader>q", exec_cmd "q")
 
-    nimap("<C-s>", exec_cmd "up")
+    nmap("<C-s>", "<Cmd>update<CR>")
+    imap("<C-s>", "<Esc><Cmd>update<CR>gi")
+
     nimap("<M-s>", exec_cmd "wa")
-    nvimap("<C-z>", exec_key "u")
-    nvimap({ "<C-S-z>", "<C-y>" }, exec_cmd "redo")
-    nvmap({ "U" }, exec_cmd "redo")
-    nmap("<C-c>", exec_key "Vy")
-    imap("<C-c>", exec_key "Vy")
-    vmap("<C-c>", exec_key "y")
-    nmap({ "<C-v>", "<S-Insert>" }, exec_key "gP")
+    nmap("<C-z>", "u")
+    imap("<C-z>", "<C-O>u")
+
+    nmap({ "<C-S-z>", "<C-y>", "U" }, "<C-R>")
+    imap({ "<C-S-z>", "<C-y>" }, "<C-O><C-R>")
+    nmap("<C-c>", "yy")
+    imap("<C-c>", "<C-O>yy")
+    vmap("<C-c>", "y")
+    nmap({ "<C-v>", "<S-Insert>" }, "gP")
     imap({ "<C-v>", "<S-Insert>" }, "<C-R><C-P>+", { silent = false })
     cmap({ "<C-v>", "<S-Insert>" }, "<C-R>+", { silent = false })
-    vmap({ "<C-v>", "<S-Insert>", "p" }, exec_key '"_dgP') -- When pasting over selected region, do not yank replaced region
+    vmap({ "<C-v>", "<S-Insert>", "p" }, '"_dgP') -- When pasting over selected region, do not yank replaced region
 
     -- Cut, delete word and stuff
     local delete_backward_word_keys = { "<C-w>", "<C-BS>", "<C-h>" }
@@ -196,8 +201,8 @@ local function setup_basic_functionalities()
     nimap("<C-k>", exec_key '"_D')
 
     -- Indent, unindent
-    vmap({ ">", "<Tab>" }, exec_key ">gv")
-    vmap({ "<", "<S-Tab>" }, exec_key "<gv")
+    vmap({ ">", "<Tab>" }, ">gv")
+    vmap({ "<", "<S-Tab>" }, "<gv")
     imap("<S-Tab>", "<C-d>")
 
     -- Pressing backspace and delete in normal mode deletes and switches to insert mode
