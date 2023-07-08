@@ -8,6 +8,7 @@ set ignorecase
 
 set clipboard+=unnamedplus
 
+set selection=exclusive
 
 let mapleader = " "
 

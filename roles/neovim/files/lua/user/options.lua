@@ -6,6 +6,8 @@ vim.o.ignorecase = true
 vim.o.lazyredraw = false
 vim.o.history = 4096
 
+vim.o.selection = "exclusive"
+
 vim.o.background = "dark"
 vim.o.guifont = "JetBrainsMono Nerd Font Mono:h10.5"
 
