@@ -11,7 +11,6 @@ _G.user.binds = _G.user.binds or {}
 local default_opts = { remap = false, silent = true }
 local remappable_opts = vim.tbl_deep_extend("force", default_opts, { remap = true })
 local term_opts = { silent = true }
-local term_opts = { silent = true }
 
 local function fn_key(key)
     return "<F" .. tostring(key) .. ">"
@@ -145,8 +144,7 @@ local function setup_cursor_movements()
     cmap("<C-a>", "<Home>", { noremap = false, silent = false })
     -- Begininning and of line
     nvimap("<C-a>", exec_lua "user.binds.beginning_of_line()")
-    nvimap("<C-e>", exec_key "$l")
-    nvmap("$", exec_key "$l")
+    nvimap("<C-e>", exec_key "$")
 
     -- Ctrl+Arrow keys to jump paragraphs and by words.
     nvimap("<C-Up>", exec_key "{")
@@ -160,34 +158,6 @@ local function setup_cursor_movements()
 
     -- Visual block remapped to M-v
     nmap("<M-v>", exec_key "<C-V>")
-
-    -- Select text with shift arrow keys
-    for _, v in ipairs { "Up", "Down", "Right", "Left" } do
-        local vcommand = nil
-        local command = nil
-        if v == "Up" then
-            vcommand = "v{"
-            command = "{"
-        elseif v == "Down" then
-            vcommand = "v}"
-            command = "}"
-        elseif v == "Left" then
-            vcommand = "vb"
-            command = "b"
-        elseif v == "Right" then
-            vcommand = "vw"
-            command = "w"
-        end
-
-        local keys = {
-            "<S-" .. v .. ">",
-            "<M-" .. v .. ">",
-            "<M-C-" .. v .. ">",
-        }
-
-        nimap(keys, exec_key(vcommand))
-        vmap(keys, exec_key(command))
-    end
 end
 
 local function setup_basic_functionalities()
@@ -244,16 +214,9 @@ local function setup_basic_functionalities()
     nvmap("<C-g>", exec_key "*")
     nvmap("<C-S-g>", exec_key "#")
 
-    -- Search and replace
-    ---     TODO: Do not work inside lua, but work under normal vimscript binds
-    -- vmap('<C-f>', ':s@@\0@gc<Left><Left><Left><Left><Left><Left>')
-    -- nmap('<C-f>', ':%s@@\0@gc<Left><Left><Left><Left><Left><Left>')
-
     --- Repeat q recorded macro
     nmap(",", "@q")
 
-    --- Maximize current window
-    nmap("<leader>z", "<C-W>_<C-W>|")
 end
 
 local function setup_window_controls()
@@ -272,6 +235,8 @@ local function setup_window_controls()
     nmap("<leader>e", exec_cmd "enew")
     nmap({ "<leader>w|", "<leader>wh" }, exec_cmd "vsplit")
     nmap({ "<leader>w-", "<leader>w_", "<leader>wv" }, exec_cmd "split")
+    --- Maximize current window
+    nmap("<leader>wz", "<C-W>_<C-W>|")
 end
 
 local function setup_saner_defaults()
@@ -293,9 +258,6 @@ local function setup_saner_defaults()
 
     -- Allow gf to open non existing files
     nmap("gf", exec_cmd "edit <cfile>")
-
-    -- When changing regions, do not pollute the clipboard
-    vmap("c", exec_key '"_c')
 
     nmap("[[", "[[zz")
     nmap("]]", "]]zz")

@@ -10,18 +10,19 @@ vim.o.background = "dark"
 vim.o.guifont = "JetBrainsMono Nerd Font Mono:h10.5"
 
 vim.o.list = true
-vim.o.listchars = "tab:› ,eol:¬,trail:⋅"
+-- vim.o.listchars = "tab:› ,eol:¬,trail:⋅
+vim.o.listchars = "tab:› ,trail:⋅"
 
 vim.o.swapfile = false
 vim.o.backup = false
 vim.o.undofile = true
-vim.writebackup = false
+vim.o.writebackup = false
 
 vim.o.showmode = false
 vim.o.cursorline = true
 vim.o.scrolloff = 4
 vim.o.sidescrolloff = 8
-vim.o.signcolumn = "auto:2"
+vim.o.signcolumn = "auto:3"
 vim.o.hlsearch = true
 vim.o.number = true
 vim.o.wrap = false
@@ -54,13 +55,7 @@ vim.o.completeopt = "menuone,noinsert,noselect"
 vim.o.shortmess = vim.o.shortmess .. "c"
 vim.o.pumheight = 16
 
--- Behave mswin
-vim.o.virtualedit = "onemore"
 vim.o.mouse = "a"
--- vim.o.selectmode = 'mouse,key'
-vim.o.selection = "exclusive"
-vim.o.mousemodel = "extend"
--- vim.o.keymodel = 'startsel,stopsel'
 vim.o.errorbells = false
 vim.o.conceallevel = 0
 vim.o.whichwrap = "b,s,<,>,[,]"
@@ -69,7 +64,7 @@ vim.o.clipboard = "unnamedplus"
 -- Global status line
 vim.o.laststatus = 3
 
-vim.o.showbreak = "|"
+vim.o.showbreak = "↳ "
 vim.o.belloff = "all"
 
 vim.o.splitbelow = true
@@ -80,7 +75,7 @@ vim.o.autoread = true
 
 -- Remove the `c` from formatoptions to avoid continuining
 -- comments when creating a newline
-vim.o.formatoptions = "jql"
+vim.o.formatoptions = "tcqj"
 
 -- Timeout used to resolve ambiguity about key sequence presses
 -- That is if `<C-x><C-s>` and `<C-x>` alone are both mapped to
