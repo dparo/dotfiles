@@ -47,6 +47,7 @@
     - xorg
     - wayland
     - kitty
+    - alacritty
     - starship
     - powershell
     - aws-cli
