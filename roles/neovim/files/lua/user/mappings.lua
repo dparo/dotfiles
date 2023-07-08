@@ -179,7 +179,7 @@ local function setup_basic_functionalities()
     nmap({ "<C-v>", "<S-Insert>" }, exec_key "gP")
     imap({ "<C-v>", "<S-Insert>" }, exec_key "gP")
     cmap({ "<C-v>", "<S-Insert>" }, "<C-r>+", { silent = false })
-    vmap({ "<C-v>", "<S-Insert>", "p" }, exec_key '"_dgP') -- When pasting over selected region, do not yank replaced region
+    vmap({ "<C-v>", "<S-Insert>", "p" }, exec_key '"_dgp') -- When pasting over selected region, do not yank replaced region
 
     -- Cut, delete word and stuff
     local delete_backward_word_keys = { "<C-w>", "<C-BS>", "<C-h>" }
