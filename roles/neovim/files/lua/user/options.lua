@@ -18,14 +18,17 @@ vim.o.backup = false
 vim.o.undofile = true
 vim.o.writebackup = false
 
+vim.o.wrap = false
+vim.o.showbreak = "↳"
+
+vim.o.signcolumn = "auto:3"
+
 vim.o.showmode = false
 vim.o.cursorline = true
 vim.o.scrolloff = 4
 vim.o.sidescrolloff = 8
-vim.o.signcolumn = "auto:3"
 vim.o.hlsearch = true
 vim.o.number = true
-vim.o.wrap = false
 vim.o.ruler = true
 vim.o.autoindent = true
 vim.o.backspace = "indent,eol,start"
@@ -64,7 +67,6 @@ vim.o.clipboard = "unnamedplus"
 -- Global status line
 vim.o.laststatus = 3
 
-vim.o.showbreak = "↳ "
 vim.o.belloff = "all"
 
 vim.o.splitbelow = true
