@@ -144,8 +144,7 @@ local function setup_cursor_movements()
     cmap("<C-a>", "<Home>", { noremap = false, silent = false })
     -- Begininning and of line
     nvimap("<C-a>", exec_lua "user.binds.beginning_of_line()")
-    nvmap("<C-e>", exec_key "$")
-    imap("<C-e>", "<End>")
+    nvimap("<C-e>", "<End>")
     cmap("<C-e>", "<End>")
 
     -- Ctrl+Arrow keys to jump paragraphs and by words.
