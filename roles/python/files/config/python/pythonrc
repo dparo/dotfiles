@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
-# Avoid writing ~/.python_history in HOME directory
-#  readline.write_history_file = lambda *args: None
 
 import atexit
 import os
 import readline
 from pathlib import Path
 
-histfile = os.path.join(os.path.expanduser("~"), ".python_history")
 
+# histfile = os.path.join(str(Path.home() / ".python_history"))
 
-histfile = str(
-    Path(os.environ.get("XDG_STATE_HOME", str(Path.home() / ".local" / "state")))
-    / "python_history"
-)
+base_dir = Path(os.environ.get("XDG_STATE_HOME", str(Path.home() / ".local" / "state")))
+if not base_dir.is_dir():
+    os.makedirs(str(base_dir))
+
+histfile = str(base_dir / "python_history")
+
 try:
     readline.read_history_file(histfile)
     h_len = readline.get_current_history_length()
@@ -24,11 +24,11 @@ except FileNotFoundError:
     h_len = 0
 
 
-def save(prev_h_len, histfile):
+def save_history_callback(prev_h_len, histfile):
     import readline
     new_h_len = readline.get_current_history_length()
     readline.set_history_length(1000)
     readline.append_history_file(new_h_len - prev_h_len, histfile)
 
 
-atexit.register(save, h_len, histfile)
+atexit.register(save_history_callback, h_len, histfile)
