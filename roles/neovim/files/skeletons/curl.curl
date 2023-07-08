@@ -11,6 +11,6 @@ curl -X "$method" "${CURL_URL:-localhost}:{$CURL_PORT:-8080}/${endpoint}" \
            --data-binary @- \
 <<JSONBLOCKDELIMITER
 {
-    name: "Davide"
+    "name": "foo"
 }
 JSONBLOCKDELIMITER
