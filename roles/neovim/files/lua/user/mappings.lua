@@ -1,3 +1,10 @@
+-- NOTE(d.paro): Using i_CTRL-O command to execute normal mode commands
+--               while remaining in insert mode is highly discouraged if possible.
+--               It exists insert mode, executes autocommands, runs the key sequence,
+--               and goes back to insert mode.
+--               Running the autocommands can be quite expensive, so use with care.
+--               Prefer :exec normal! if possible
+
 -- TODO(dparo)  11 June 2022
 -- Should rewrite this entire file to use the new
 --   vim.keymap API available from NVIM 0.7
@@ -85,14 +92,15 @@ local function exec_cmd(cmd)
     return "<Cmd> " .. cmd .. "<CR>"
 end
 
-local function exec_key(key, allow_modify_jumplist)
+local function exec_keepjumps(key)
     local escaped_key = user.utils.escape(key, [['\]])
-    local preamble = ""
-    if not allow_modify_jumplist then
-        preamble = "exec 'keepjumps normal! "
-    else
-        preamble = "exec 'normal! "
-    end
+    local preamble = "exec 'keepjumps normal! "
+    return exec_cmd(preamble .. escaped_key .. "'")
+end
+
+local function exec_normal(key)
+    local escaped_key = user.utils.escape(key, [['\]])
+    local preamble = "exec 'normal! "
     return exec_cmd(preamble .. escaped_key .. "'")
 end
 
@@ -149,35 +157,40 @@ local function setup_cursor_movements()
     cmap("<C-e>", "<End>")
 
     -- Ctrl+Arrow keys to jump paragraphs and by words.
-    nvimap("<C-Up>", exec_key "{")
-    nvimap("<C-Down>", exec_key "}")
-    nvimap("<C-Right>", exec_key "w")
-    nvimap("<C-Left>", exec_key "b")
+    nvmap("<C-Up>", exec_keepjumps "{zz")
+    nvmap("<C-Down>", exec_keepjumps "}zz")
+    nvmap("<C-Right>", "w")
+    nvmap("<C-Left>", "b")
+
+    imap("<C-Up>", exec_keepjumps "{zz")
+    imap("<C-Down>", exec_keepjumps "}zz")
+    imap("<C-Right>", "<S-Right>")
+    imap("<C-Left>", "<S-Left>")
 
     -- Refresh screen and show where i am, and redraw the screen
     nvmap("<C-l>", "zz:redraw!<CR>")
     imap("<C-l>", "<C-O>zz<C-O>:redraw!<CR>")
 
     -- Visual block remapped to M-v
-    nmap("<M-v>", exec_key "<C-V>")
+    nmap("<M-v>", "<C-V>")
 end
 
 local function setup_basic_functionalities()
     ----
     ---- Save, Undo, Redo, Copy, Cut, Delete, Search, Replace, Indent
     ----
+
     nmap("<leader>fw", exec_cmd "w")
     nmap("<leader>q", exec_cmd "q")
 
     nmap("<C-s>", "<Cmd>update<CR>")
     imap("<C-s>", "<Esc><Cmd>update<CR>gi")
 
-    nimap("<M-s>", exec_cmd "wa")
     nmap("<C-z>", "u")
-    imap("<C-z>", "<C-O>u")
+    imap("<C-z>", exec_normal "u")
 
     nmap({ "<C-S-z>", "<C-y>", "U" }, "<C-R>")
-    imap({ "<C-S-z>", "<C-y>" }, "<C-O><C-R>")
+    imap({ "<C-S-z>", "<C-y>" }, exec_normal "<C-R>")
     nmap("<C-c>", "yy")
     imap("<C-c>", "<C-O>yy")
     vmap("<C-c>", "y")
@@ -188,17 +201,18 @@ local function setup_basic_functionalities()
 
     -- Cut, delete word and stuff
     local delete_backward_word_keys = { "<C-w>", "<C-BS>", "<C-h>" }
-    imap(delete_backward_word_keys, exec_key '"_db')
+    imap(delete_backward_word_keys, exec_normal '"_db')
     nmap(delete_backward_word_keys, '"_dbi')
 
     cmap({ "<C-BS>", "<C-h>" }, "<C-w>")
 
     vmap({ "x", "d", "<C-w>", "<C-BS>", "<BS>", "<Del>" }, "d")
-    nimap("<C-x>", exec_key "dd")
-    vmap("<C-x>", exec_key "d")
+    nmap("<C-x>", "dd")
+    imap("<C-x>", exec_normal "dd")
+    vmap("<C-x>", "d")
 
     -- Kill line
-    nimap("<C-k>", exec_key '"_D')
+    nimap("<C-k>", exec_normal '"_D')
 
     -- Indent, unindent
     vmap({ ">", "<Tab>" }, ">gv")
@@ -250,9 +264,9 @@ local function setup_saner_defaults()
     nmap("gQ", "")
 
     --- Goto next, previous matches centers the line
-    nvmap("n", exec_key("nzzzv", true))
-    nvmap("N", exec_key("Nzzzv", true))
-    nmap("J", exec_key("mzJ`z", true))
+    nvmap("n", exec_normal "nzzzv")
+    nvmap("N", exec_normal "Nzzzv")
+    nmap("J", exec_normal "mzJ`z")
 
     -- Remap <C-v> to <C-q> to test what nvim receives from the terminal
     imap("<C-q>", "<C-v>")
