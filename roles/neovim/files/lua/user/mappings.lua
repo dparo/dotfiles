@@ -252,7 +252,7 @@ local function setup_saner_defaults()
     --- Goto next, previous matches centers the line
     nvmap("n", exec_key("nzzzv", true))
     nvmap("N", exec_key("Nzzzv", true))
-    nvmap("J", exec_key("mzJ`z", true))
+    nmap("J", exec_key("mzJ`z", true))
 
     -- Remap <C-v> to <C-q> to test what nvim receives from the terminal
     imap("<C-q>", "<C-v>")
@@ -331,15 +331,12 @@ local function setup_plugins()
     -- nimap(fn_key(12), exec_cmd "ClangdSwitchSourceHeader")
     nmap("<leader>u", exec_cmd "UndotreeToggle")
     -- Move lines up and down
-    vmap("<M-S-Up>", "<Plug>MoveBlockUp", remappable_opts)
-    vmap("<M-S-Down>", "<Plug>MoveBlockDown", remappable_opts)
-    vmap("<M-S-Right>", "<Plug>MoveBlockRight", remappable_opts)
-    vmap("<M-S-Left>", "<Plug>MoveBlockLeft", remappable_opts)
-    vmap("<M-S-PageUp>", "<Plug>MoveBlockHalfPageUp", remappable_opts)
-    vmap("<M-S-PageDown>", "<Plug>MoveBlockHalfPageDown", remappable_opts)
-
-    nmap("<M-S-Up>", "<Plug>MoveLineUp", remappable_opts)
-    nmap("<M-S-Down>", "<Plug>MoveLineDown", remappable_opts)
+    vmap("K", "<Plug>MoveBlockUp", remappable_opts)
+    vmap("J", "<Plug>MoveBlockDown", remappable_opts)
+    vmap("L", "<Plug>MoveBlockRight", remappable_opts)
+    vmap("H", "<Plug>MoveBlockLeft", remappable_opts)
+    vmap("<S-PageUp>", "<Plug>MoveBlockHalfPageUp", remappable_opts)
+    vmap("<S-PageDown>", "<Plug>MoveBlockHalfPageDown", remappable_opts)
 
     nimap({ "<M-p>" }, exec_cmd 'lua require("telescope").extensions.neoclip.default()')
 
