@@ -193,7 +193,7 @@ local function setup_basic_functionalities()
 
     cmap({ "<C-BS>", "<C-h>" }, "<C-w>")
 
-    vmap({ "x", "d", "<C-w>", "<C-BS>", "<BS>", "<Del>" }, exec_key "d")
+    vmap({ "x", "d", "<C-w>", "<C-BS>", "<BS>", "<Del>" }, "d")
     nimap("<C-x>", exec_key "dd")
     vmap("<C-x>", exec_key "d")
 
