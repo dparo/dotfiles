@@ -28,10 +28,9 @@ return {
             require("trim").setup {
                 ft_blocklist = {},
                 patterns = {
-                    [[%s/\s\+$//e]], -- remove unwanted spaces
+                    [[%s/\s\+$//e]],          -- remove unwanted spaces
                     [[%s/\($\n\s*\)\+\%$//]], -- trim last line
-                    [[%s/\%^\n\+//]], -- trim first line
-                    [[%s/\(\n\n\n\)\n\+/\1/]], -- replace more than 3 blank lines with 3 blank lines
+                    [[%s/\%^\n\+//]],         -- trim first line
                 },
             }
         end,
@@ -148,7 +147,7 @@ return {
     ---- Plugins for cursor motion or for text editing
     ----
     { "junegunn/vim-easy-align" },
-    { "andymass/vim-matchup", lazy = true, event = "VimEnter" },
+    { "andymass/vim-matchup",   lazy = true, event = "VimEnter" },
 
     { "tpope/vim-repeat" },
 
