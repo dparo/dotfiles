@@ -117,6 +117,7 @@ return {
     {
         "glepnir/dashboard-nvim",
         event = "VimEnter",
+        enabled = false,
         config = function()
             require("dashboard").setup {
                 change_to_vcs_roo = true,
