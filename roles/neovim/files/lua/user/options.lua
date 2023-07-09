@@ -15,7 +15,7 @@ vim.o.list = true
 -- vim.o.listchars = "tab:› ,eol:¬,trail:⋅
 vim.o.listchars = "tab:› ,trail:⋅"
 
-vim.o.statusline = "%f %h%w%m%r %y%=%{&fileformat} %{&fileencoding?&fileencoding:&encoding}    %-14.(%l,%c%V%) %P"
+vim.o.statusline = "%f %h%w%m%r%=%y %{&fileformat} %{&fileencoding?&fileencoding:&encoding}    %-14.(%l,%c%V%) %P"
 
 vim.o.swapfile = false
 vim.o.backup = false
