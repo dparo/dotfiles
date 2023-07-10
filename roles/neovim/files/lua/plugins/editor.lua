@@ -147,7 +147,6 @@ return {
     ---- Plugins for cursor motion or for text editing
     ----
     { "junegunn/vim-easy-align" },
-    { "andymass/vim-matchup",   lazy = true, event = "VimEnter" },
 
     { "tpope/vim-repeat" },
 
