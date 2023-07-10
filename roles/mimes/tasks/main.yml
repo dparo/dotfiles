@@ -9,7 +9,7 @@
 
 - name: Download and unpack latest handlr
   ansible.builtin.unarchive:
-    src: "https://github.com/handlr/chmln/releases/download/{{ handlr_latest['json']['tag_name'] }}/handlr"
+    src: "https://github.com/chmln/handlr/releases/download/{{ handlr_latest['json']['tag_name'] }}/handlr"
     dest: "{{ ansible_user_dir }}/.local/bin"
     remote_src: true
   tags:
