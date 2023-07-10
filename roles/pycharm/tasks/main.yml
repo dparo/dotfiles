@@ -6,6 +6,7 @@
     dest: "{{ ansible_user_dir }}/opt"
     remote_src: yes
   tags:
+    - never
     - pycharm
 
 - name: Symlink binaries
@@ -16,4 +17,5 @@
   loop:
     - pycharm.sh
   tags:
+    - never
     - pycharm
