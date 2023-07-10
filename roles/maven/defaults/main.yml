@@ -1,2 +1,2 @@
-maven_version: 3.9.1
+maven_version: 3.9.3
 maven_install_dir: "{{ ansible_user_dir }}/opt"
