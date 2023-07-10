@@ -24,6 +24,7 @@ video/x-matroska=mpv.desktop;
 text/csv=code.desktop
 application/vnd.openxmlformats-officedocument.wordprocessingml.document=org.onlyoffice.desktopeditors.desktop
 application/pkix-cert=nvim.desktop;
+application/x-7z-compressed=org.gnome.FileRoller.desktop
 
 
 [Default Applications]
@@ -65,3 +66,4 @@ text/x-bibtex=nvim.desktop;
 x-scheme-handler/terminal=kitty.desktop;
 application/x-xz-compressed-tar=org.gnome.FileRoller.desktop;
 application/vnd.excalidraw+json=chrome-kmcnjdcipmgchfndpapkoecbidofdpbc-Default.desktop;
+application/x-7z-compressed=org.gnome.FileRoller.desktop
