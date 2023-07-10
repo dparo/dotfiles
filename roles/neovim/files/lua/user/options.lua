@@ -22,6 +22,9 @@ vim.o.backup = false
 vim.o.undofile = true
 vim.o.writebackup = false
 
+vim.o.number = true
+vim.o.relativenumber = true
+
 vim.o.wrap = false
 vim.o.showbreak = "↳"
 
@@ -32,7 +35,6 @@ vim.o.cursorline = true
 vim.o.scrolloff = 4
 vim.o.sidescrolloff = 8
 vim.o.hlsearch = true
-vim.o.number = true
 vim.o.ruler = true
 vim.o.autoindent = true
 vim.o.backspace = "indent,eol,start"
