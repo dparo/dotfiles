@@ -1,2 +1,62 @@
 neovim_build_from_source: false
 neovim_version: v0.8.3
+
+mason_dependencies:
+  - markdownlint
+  - marksman
+  - vim-language-server
+  - stylua
+  - lua-language-server
+  - bash-language-server
+  - pyre
+  - pyright
+  - mypy
+  - debugpy
+  - ruff
+  - clangd
+  - clang-format
+  - codelldb
+  - cpptools
+  - cpplint
+  - cmakelang
+  - cmake-language-server
+  - rust-analyzer
+  - zls # Zig language server
+  - nimlsp
+  - gopls
+  - delve
+  - shellcheck
+  - shellharden
+  - shfmt
+  - typescript-language-server
+  - eslint-lsp
+  - stylelint
+  - stylelint-lsp
+  - prettier
+  - json-lsp
+  - lemminx
+  - yamllint
+  - yaml-language-server
+  - texlab
+  - write-good
+  - proselint
+  - codespell
+  - misspell
+  - ltex-ls
+  - ansible-language-server
+  - terraform-ls
+  - tfsec
+  - sqlfluff
+  - jdtls
+  - java-test
+  - java-debug-adapter
+  - semgrep
+  - sonarlint-language-server
+  - hadolint
+  - angular-language-server
+  - cucumber-language-server
+  - js-debug-adapter # https://github.com/microsoft/vscode-js-debug
+  - chrome-debug-adapter # Deprecated in favour of js-debug-adapter
+  - firefox-debug-adapter
+  - html-lsp
+  - gitlint

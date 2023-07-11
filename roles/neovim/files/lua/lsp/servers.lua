@@ -348,6 +348,7 @@ M.list = {
     { name = "html", config = {} },
     { name = "zls", config = {} },
     { name = "nimls", config = {} },
+    { name = "cucumber_language_server", config = {} },
 
     -- NOTE: We use null-ls now, which is more richer in terms of features
     --       and lives inside the neovim process space instead of being a separate
