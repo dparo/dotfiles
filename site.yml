@@ -121,6 +121,7 @@
     - onlyoffice
     - dbeaver
     - beekeeper-studio
+    - dbgate
     - apache-ldap-studio
     - davinci-resolve
     - audacity
