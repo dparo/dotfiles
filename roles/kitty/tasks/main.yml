@@ -44,9 +44,12 @@
 
 - name: Symlink binary
   ansible.builtin.file:
-    src: "{{ ansible_user_dir }}/opt/kitty/bin/kitty"
-    dest: "{{ ansible_user_dir }}/.local/bin/kitty"
+    src: "{{ ansible_user_dir }}/opt/kitty/bin/{{ item }}"
+    dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
     state: link
+  loop:
+    - kitty
+    - kitten
   tags:
     - kitty
 
