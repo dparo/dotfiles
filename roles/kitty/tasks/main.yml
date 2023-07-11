@@ -8,26 +8,47 @@
   tags:
     - kitty
 
-- name: Install / Update (Manually)
-  ansible.builtin.shell: |
-    curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin dest="$HOME/opt" launch=n
+- name: Check latest kitty
+  ansible.builtin.uri:
+    url: https://api.github.com/repos/kovidgoyal/kitty/releases/latest
+    return_content: true
+  register: kitty_latest
+  tags:
+    - kitty
+
+- name: Create install dir
+  ansible.builtin.file:
+    path: "{{ ansible_user_dir }}/opt/kitty"
+    state: directory
+    mode: "0755"
+  tags:
+    - kitty
+
+- name: "Download and unpack kitty {{ kitty_latest['json']['tag_name'] }}"
+
+  ansible.builtin.unarchive:
+    src: "https://github.com/kovidgoyal/kitty/releases/download/{{ kitty_latest['json']['tag_name'] }}/kitty-{{ kitty_latest['json']['tag_name'][1:] }}-x86_64.txz"
+    dest: "{{ ansible_user_dir }}/opt/kitty"
+    remote_src: true
   tags:
     - kitty
 
 - name: Desktop integration
   ansible.builtin.shell: |
-    cp -f ~/opt/kitty.app/share/applications/kitty.desktop ~/.local/share/applications/
-    cp -f ~/opt/kitty.app/share/applications/kitty-open.desktop ~/.local/share/applications/
-    sed -i "s|Icon=kitty|Icon=/home/$USER/opt/kitty.app/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-    sed -i "s|Exec=kitty|Exec=/home/$USER/opt/kitty.app/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+    cp -f ~/opt/kitty/share/applications/kitty.desktop ~/.local/share/applications/
+    cp -f ~/opt/kitty/share/applications/kitty-open.desktop ~/.local/share/applications/
+    sed -i "s|Icon=kitty|Icon=/home/$USER/opt/kitty/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
+    sed -i "s|Exec=kitty|Exec=/home/$USER/opt/kitty/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
   tags:
     - kitty
 
 - name: Symlink binary
   ansible.builtin.file:
-    src: "{{ ansible_user_dir }}/opt/kitty.app/bin/kitty"
+    src: "{{ ansible_user_dir }}/opt/kitty/bin/kitty"
     dest: "{{ ansible_user_dir }}/.local/bin/kitty"
     state: link
+  tags:
+    - kitty
 
 - name: Symlink config
   ansible.builtin.file:

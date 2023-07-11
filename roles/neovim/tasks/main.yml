@@ -71,7 +71,7 @@
   become: true
   when: neovim_build_from_source == False
   tags:
-    - kitty
+    - neovim
 
 - name: Install runtime deps (package manager)
   ansible.builtin.dnf:
