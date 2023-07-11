@@ -122,6 +122,7 @@
     - dbeaver
     - beekeeper-studio
     - dbgate
+    - redisinsight
     - apache-ldap-studio
     - davinci-resolve
     - audacity
