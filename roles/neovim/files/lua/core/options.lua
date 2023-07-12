@@ -12,7 +12,7 @@ vim.g.mapleader = leaderkey
 vim.g.maplocalleader = leaderkey
 
 -- The shada file remembers the last state of vim: command line history, search history, file marks
-vim.o.shadafile = path.concat {cachePath, "shada" }
+vim.o.shadafile = path.concat { cachePath, "shada" }
 vim.o.undodir = path.concat { cachePath, "nvim", "undo" }
 
 vim.cmd [[
@@ -20,6 +20,13 @@ vim.cmd [[
     filetype plugin on
     syntax enable
 ]]
+
+if vim.regex([[^\(linux\|rxvt\|interix\|putty\)\(-.*\)\?$]]):match_str(vim.env.TERM) then
+    vim.o.termguicolors = false
+elseif vim.regex([[^\(tmux\|screen\|iterm\|xterm\|vte\|gnome\|xterm-kitty\|kitty\|alacritty\)\(-.*\)\?$]]):match_str(vim.env.TERM) then
+    vim.o.termguicolors = true
+end
+
 
 -- Setup the LUA package path so that require-ing works
 package.path = configPath .. "/?.lua;" .. package.path

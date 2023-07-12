@@ -1,3 +1,6 @@
+vim.o.background = "dark"
+vim.o.guifont = "JetBrainsMono Nerd Font:h10.0"
+
 -- Spell checking
 vim.o.encoding = "utf-8"
 vim.o.spelllang = "en"
