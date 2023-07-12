@@ -12,7 +12,11 @@ set selection=exclusive
 
 let mapleader = " "
 
-nmap <leader>ff :action GotoFile<CR>
-nmap <M-x> :action GotoAction<CR>
-nmap <C-`> :action Terminal<CR>
-nmap <F4> :action Terminal<CR>
+nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <M-x> :action GotoAction<CR>
+nnoremap <C-`> :action Terminal<CR>
+nnoremap <F4> :action Terminal<CR>
+
+vnoremap <C-c> y
+vnoremap <C-v> y _dgP
+inoremap <C-v> <C-R><C-P>+
