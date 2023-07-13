@@ -92,7 +92,7 @@ alias egrep='egrep --color=auto'
 alias watchmake=watchman-make
 
 alias count='wc -l'
-alias ag='ag --hidden --follow --ignore .git'
+alias ag='rg --hidden --follow --glob=!.git/'
 alias rg='rg --hidden --follow --glob=!.git/'
 alias cls='printf "\033c"'
 alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
