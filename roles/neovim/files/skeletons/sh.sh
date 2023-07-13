@@ -11,6 +11,8 @@ else
 fi
 
 
+echoerr() { echo "$@" 1>&2; }
+
 main() {
     cd "$SELF_BASH_SCRIPT_DIR" || exit 1
 
