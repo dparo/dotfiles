@@ -27,3 +27,9 @@ inoremap <C-v> <C-R><C-P>+
 
 inoremap <C-e> <End>
 inoremap <C-a> <Home>
+
+nnoremap <C-e> <End>
+nnoremap <C-a> <Home>
+
+vnoremap <C-e> <End>
+vnoremap <C-a> <Home>
