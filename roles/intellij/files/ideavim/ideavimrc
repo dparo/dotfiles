@@ -12,6 +12,9 @@ set selection=exclusive
 
 let mapleader = " "
 
+
+nnoremap <leader><leader> :action ActivateProjectToolWindow<CR>
+
 nnoremap <leader>ff :action GotoFile<CR>
 nnoremap <M-x> :action GotoAction<CR>
 nnoremap <C-`> :action Terminal<CR>
