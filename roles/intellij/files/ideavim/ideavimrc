@@ -23,3 +23,7 @@ nnoremap <F4> :action Terminal<CR>
 vnoremap <C-c> y
 vnoremap <C-v> y _dgP
 inoremap <C-v> <C-R><C-P>+
+
+
+inoremap <C-e> <End>
+inoremap <C-a> <Home>
