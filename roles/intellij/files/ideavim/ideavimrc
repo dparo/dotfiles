@@ -13,6 +13,8 @@ set selection=exclusive
 let mapleader = " "
 
 
+sethandler <M-CR> n-v:ide i:ide
+
 sethandler <M-Left> n:vim i:ide
 sethandler <M-Right> n:vim i:ide
 sethandler <M-Up> n:vim i:ide
@@ -34,6 +36,7 @@ nnoremap <M-x> :action GotoAction<CR>
 nnoremap <C-`> :action Terminal<CR>
 nnoremap <F4> :action Terminal<CR>
 
+nnoremap <C-c> yy
 vnoremap <C-c> y
 vnoremap <C-v> y _dgP
 inoremap <C-v> <C-R><C-P>+
@@ -80,4 +83,4 @@ vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
 nnoremap <C-k> "_D
-inoremap <C-K> <Esc>Da
+inoremap <C-K> <C-o>D
