@@ -80,4 +80,4 @@ vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
 nnoremap <C-k> "_D
-inoremap <C-k> <C-O>"_D
+inoremap <C-K> <Esc>Da
