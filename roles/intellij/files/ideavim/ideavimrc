@@ -13,6 +13,20 @@ set selection=exclusive
 let mapleader = " "
 
 
+sethandler <M-Left> n:vim i:ide
+sethandler <M-Right> n:vim i:ide
+sethandler <M-Up> n:vim i:ide
+sethandler <M-Down> n:vim i:ide
+
+sethandler <C-a> n:vim
+sethandler <C-a> n:vim
+
+sethandler <C-Left> n-v:vim
+sethandler <C-Right> n-v:vim
+sethandler <C-Up> n-v:vim
+sethandler <C-Down> n-v:vim
+
+
 nnoremap <leader><leader> :action ActivateProjectToolWindow<CR>
 
 nnoremap <leader>ff :action GotoFile<CR>
@@ -35,24 +49,24 @@ vnoremap <C-e> <End>
 vnoremap <C-a> <Home>
 
 
-nnoremap <C-Left> w
-vnoremap <C-Left> w
-nnoremap <C-Right> b
-vnoremap <C-Right> b
+nnoremap <C-Left> b
+vnoremap <C-Left> b
+nnoremap <C-Right> w
+vnoremap <C-Right> w
 
 nnoremap <C-Down> }zz
 vnoremap <C-Down> }zz
 nnoremap <C-Up> {zz
 vnoremap <C-Up> {zz
 
-nnoreamp <M-Left> :action VimWindowLeft
-nnoreamp <leader><Left> :action VimWindowLeft
-nnoreamp <M-Right> :action VimWindowRight
-nnoreamp <leader><Right> :action VimWindowRight
-nnoreamp <M-Up> :action VimWindowUp
-nnoreamp <leader><Up> :action VimWindowUp
-nnoreamp <M-Down> :action VimWindowDown
-nnoreamp <leader><Down> :action VimWindowDown
+nnoreamp <M-Left> :action VimWindowLeft<CR>
+nnoreamp <leader><Left> :action VimWindowLeft<CR>
+nnoreamp <M-Right> :action VimWindowRight<CR>
+nnoreamp <leader><Right> :action VimWindowRight<CR>
+nnoreamp <M-Up> :action VimWindowUp<CR>
+nnoreamp <leader><Up> :action VimWindowUp<CR>
+nnoreamp <M-Down> :action VimWindowDown<CR>
+nnoreamp <leader><Down> :action VimWindowDown<CR>
 
 vnoremap > >gv
 vnoremap < <gv
