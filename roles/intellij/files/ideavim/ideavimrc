@@ -59,6 +59,12 @@ vnoremap <C-Down> }zz
 nnoremap <C-Up> {zz
 vnoremap <C-Up> {zz
 
+nnoremap } }zz
+vnoremap } }zz
+nnoremap { {zz
+vnoremap { {zz
+
+
 nnoreamp <M-Left> :action VimWindowLeft<CR>
 nnoreamp <leader><Left> :action VimWindowLeft<CR>
 nnoreamp <M-Right> :action VimWindowRight<CR>
