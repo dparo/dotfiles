@@ -328,7 +328,10 @@ M.list = {
     },
     {
         name = "metals",
-        config = {},
+        config = {
+            showImplicitArguments = true,
+            excludedPackages = { "akka.actor.typed.javadsl", "com.github.swagger.akka.javadsl" },
+        },
     },
     {
         name = "denols",
