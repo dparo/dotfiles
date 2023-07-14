@@ -33,3 +33,28 @@ nnoremap <C-a> <Home>
 
 vnoremap <C-e> <End>
 vnoremap <C-a> <Home>
+
+
+nnoremap <C-Left> w
+vnoremap <C-Left> w
+nnoremap <C-Right> b
+vnoremap <C-Right> b
+
+nnoremap <C-Down> }zz
+vnoremap <C-Down> }zz
+nnoremap <C-Up> {zz
+vnoremap <C-Up> {zz
+
+nnoreamp <M-Left> :action VimWindowLeft
+nnoreamp <leader><Left> :action VimWindowLeft
+nnoreamp <M-Right> :action VimWindowRight
+nnoreamp <leader><Right> :action VimWindowRight
+nnoreamp <M-Up> :action VimWindowUp
+nnoreamp <leader><Up> :action VimWindowUp
+nnoreamp <M-Down> :action VimWindowDown
+nnoreamp <leader><Down> :action VimWindowDown
+
+vnoremap > >gv
+vnoremap < <gv
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
