@@ -89,6 +89,7 @@ export DOCKER_CONFIG="$XDG_CONFIG_HOME/docker"
 
 export MYSQL_HISTFILE="$XDG_DATA_HOME/mysql_history"
 export PSQL_HISTORY="$XDG_DATA_HOME/psql_history"
+export SQLITE_HISTORY="$XDG_CACHE_HOME/sqlite_history"
 export REDISCLI_HISTFILE="$XDG_STATE_HOME/rediscli_history"
 export REDISCLI_RCFILE="$XDG_CONFIG_HOME/redis/redisclirc"
 
