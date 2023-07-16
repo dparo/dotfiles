@@ -1,5 +1,4 @@
 ---
-
 - name: Import key
   ansible.builtin.rpm_key:
     state: present
@@ -7,7 +6,6 @@
   become: True
   tags:
     - vscode
-
 
 - name: Enable vscode repo
   ansible.builtin.copy:
@@ -55,4 +53,17 @@
       }
   tags:
     - xdg
+    - vscode
+
+- name: Modify argv.json
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.vscode/argv.json"
+    content: |
+      {
+        "disable-hardware-acceleration": false,
+        "enable-crash-reporter": false,
+        "password-store": "gnome"
+      }
+    mode: "0644"
+  tags:
     - vscode
