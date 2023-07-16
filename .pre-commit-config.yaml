@@ -1,0 +1,9 @@
+---
+# For use with pre-commit.
+# See usage instructions at http://pre-commit.com
+
+repos:
+  - repo: https://github.com/ansible/ansible-lint
+    rev: v6.17.2
+    hooks:
+    - id: ansible-lint

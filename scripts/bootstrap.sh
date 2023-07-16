@@ -9,11 +9,15 @@ if ! test -x "$(command -v ansible)"; then
     case $ID in
     ubuntu)
         sudo apt update
-        sudo apt install -y git ansible
+        sudo apt install -y git ansible pre-commit
         ;;
 
     arch)
-        sudo pacman -S --noconfirm git ansible
+        sudo pacman -S --noconfirm git ansible pre-commit
+        ;;
+    fedora)
+        sudo dnf updgrade -y
+        sudo dnf install -y git ansible pre-commit
         ;;
     esac
 fi

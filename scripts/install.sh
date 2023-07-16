@@ -76,3 +76,8 @@ fi
 
 rm -rf "$HOME/.ansible"
 rm -rf "$HOME/.bash_history"
+
+
+if command -v pre-commit 1> /dev/null 2> /dev/null; then
+    pre-commit install
+fi
