@@ -13,6 +13,10 @@ set selection=exclusive
 let mapleader = " "
 
 
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
+Plug 'preservim/nerdtree'
+
 sethandler <M-CR> n-v:ide i:ide
 
 sethandler <M-Left> n:vim i:ide
@@ -29,7 +33,7 @@ sethandler <C-Up> n-v:vim
 sethandler <C-Down> n-v:vim
 
 
-nnoremap <leader><leader> :action ActivateProjectToolWindow<CR>
+nnoremap <leader><leader> :NERDTreeToggle<CR>
 
 nnoremap <leader>ff :action GotoFile<CR>
 nnoremap <M-x> :action GotoAction<CR>
