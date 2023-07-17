@@ -1,6 +1,10 @@
 ---
 
-- block:
+- name: Telegram
+  when: ansible_user_id == "dparo" and ansible_hostname is regex('^dparo.*')
+  tags:
+    - telegram
+  block:
     - name: "Download and unpack Telegram"
       ansible.builtin.unarchive:
         src: https://telegram.org/dl/desktop/linux
@@ -62,7 +66,3 @@
           X-GNOME-UsesNotifications=true
           X-GNOME-SingleWindow=true
         mode: "0644"
-
-  when: ansible_user_id == "dparo" and ansible_hostname is regex('^dparo.*')
-  tags:
-    - telegram

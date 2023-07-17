@@ -1,5 +1,8 @@
 ---
-- block:
+
+- name: Neovim build from source
+  when: neovim_build_from_source
+  block:
     - name: "Install build dependencies (See: https://github.com/neovim/neovim/wiki/Building-Neovim#centos--rhel--fedora)"
       ansible.builtin.dnf:
         name:
@@ -61,7 +64,6 @@
       become: true
       tags:
         - neovim
-  when: neovim_build_from_source
 
 - name: Install (Package Manager)
   ansible.builtin.dnf:
