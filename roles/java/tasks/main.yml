@@ -7,6 +7,7 @@
       - java-11-openjdk-devel
       - java-11-openjdk-src
       - java-17-openjdk-devel
+      - java-17-openjdk-src
       - jacoco # JaCoCo is a free code coverage library for Java
     state: present
   become: true
