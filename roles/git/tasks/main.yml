@@ -31,10 +31,9 @@
     - glab
     - glab-cli
 
-
 - name: Install latest glab CLI {{ glab["json"]["tag_name"] }}
   ansible.builtin.dnf:
-    name: 'https://gitlab.com/gitlab-org/cli/-/releases/{{ glab["json"]["tag_name"] }}/downloads/glab_{{ glab["json"]["tag_name"][1:] }}_Linux_x86_64.rpm'
+    name: https://gitlab.com/gitlab-org/cli/-/releases/{{ glab["json"]["tag_name"] }}/downloads/glab_{{ glab["json"]["tag_name"][1:] }}_Linux_x86_64.rpm
     state: present
     disable_gpg_check: true
   become: true

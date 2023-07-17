@@ -1,14 +1,12 @@
 ---
-
-- name: "Download and unpack Apache LDAP Studio {{ version }}"
+- name: Download and unpack Apache LDAP Studio {{ version }}
   ansible.builtin.unarchive:
-    src: "https://dlcdn.apache.org/directory/studio/{{ version }}/ApacheDirectoryStudio-{{ version }}-linux.gtk.x86_64.tar.gz"
+    src: https://dlcdn.apache.org/directory/studio/{{ version }}/ApacheDirectoryStudio-{{ version }}-linux.gtk.x86_64.tar.gz
     dest: "{{ ansible_user_dir }}/opt"
     remote_src: true
   tags:
     - never
     - apache-ldap-studio
-
 
 - name: Install desktop file integration
   ansible.builtin.copy:

@@ -1,6 +1,4 @@
 ---
-
-
 - name: Install papis (https://github.com/papis/papis)
   ansible.builtin.pip:
     name:

@@ -8,9 +8,9 @@
 #     - insomnia
 #     - flatpak
 
-- name: "Download and unpack Insomnia Core {{ insomnia_version }}"
+- name: Download and unpack Insomnia Core {{ insomnia_version }}
   ansible.builtin.unarchive:
-    src: "https://github.com/Kong/insomnia/releases/download/core@{{ insomnia_version }}/Insomnia.Core-{{ insomnia_version }}.tar.gz"
+    src: https://github.com/Kong/insomnia/releases/download/core@{{ insomnia_version }}/Insomnia.Core-{{ insomnia_version }}.tar.gz
     dest: "{{ ansible_user_dir }}/opt"
     remote_src: true
   tags:
@@ -26,7 +26,7 @@
 
 - name: Download and unpack insomnia-cli version {{ insomnia_cli_version }}
   ansible.builtin.unarchive:
-    src: "https://github.com/Kong/insomnia/releases/download/lib@{{ insomnia_cli_version }}/inso-linux-{{ insomnia_cli_version }}.tar.xz"
+    src: https://github.com/Kong/insomnia/releases/download/lib@{{ insomnia_cli_version }}/inso-linux-{{ insomnia_cli_version }}.tar.xz
     dest: "{{ ansible_user_dir }}/.local/bin"
     remote_src: true
   tags:
@@ -37,7 +37,7 @@
 # Problem with libcups version
 - name: Fetch older cups-lib-2.4.1.7
   ansible.builtin.get_url:
-    url: "https://kojipkgs.fedoraproject.org//packages/cups/2.4.1/7.fc36/x86_64/cups-libs-2.4.1-7.fc36.x86_64.rpm"
+    url: https://kojipkgs.fedoraproject.org//packages/cups/2.4.1/7.fc36/x86_64/cups-libs-2.4.1-7.fc36.x86_64.rpm
     dest: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/"
     mode: "0644"
   tags:
@@ -82,7 +82,7 @@
 
 - name: Install insomnia Icon
   ansible.builtin.get_url:
-    url: "https://raw.githubusercontent.com/flathub/rest.insomnia.Insomnia/master/insomnia.png"
+    url: https://raw.githubusercontent.com/flathub/rest.insomnia.Insomnia/master/insomnia.png
     dest: "{{ ansible_user_dir }}/.local/share/icons/hicolor/insomnia.png"
     mode: "0755"
   tags:

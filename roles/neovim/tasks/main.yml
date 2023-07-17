@@ -1,5 +1,4 @@
 ---
-
 - name: Neovim build from source
   when: neovim_build_from_source
   block:
@@ -174,7 +173,7 @@
     - neovim
     - neovim-plugins
 
-- name: "MasonInstall {{ mason_dependencies | join(' ') }}"
+- name: MasonInstall {{ mason_dependencies | join(' ') }}
   ansible.builtin.shell: |
     nvim --headless -c "MasonInstall {{ mason_dependencies | join(' ') }}" -c "qall"
   tags:

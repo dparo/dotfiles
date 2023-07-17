@@ -1,5 +1,4 @@
 ---
-
 # https://github.com/Slackadays/Clipboard
 
 - name: Create install dir
@@ -9,7 +8,6 @@
     mode: "0755"
   tags:
     - clipboard
-
 
 - name: Check latest Clipboard
   ansible.builtin.uri:
@@ -21,17 +19,16 @@
 
 - name: Download and unpack clipboard {{ clipboard_latest['json']['tag_name'] }}
   ansible.builtin.unarchive:
-    src: "https://github.com/Slackadays/Clipboard/releases/download/{{ clipboard_latest['json']['tag_name'] }}/clipboard-linux-amd64.zip"
+    src: https://github.com/Slackadays/Clipboard/releases/download/{{ clipboard_latest['json']['tag_name'] }}/clipboard-linux-amd64.zip
     dest: "{{ ansible_user_dir }}/opt/clipboard"
     remote_src: true
   tags:
     - clipboard
 
-
 - name: Mark as executable
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/opt/clipboard/bin/cb"
-    mode: '0755'
+    mode: "0755"
   tags:
     - clipboard
 

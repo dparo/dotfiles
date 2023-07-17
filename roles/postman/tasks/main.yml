@@ -1,5 +1,5 @@
 ---
-- name: "Download and unpack Postman"
+- name: Download and unpack Postman
   ansible.builtin.unarchive:
     src: https://dl.pstmn.io/download/latest/linux64
     dest: "{{ ansible_user_dir }}/opt"
@@ -9,14 +9,13 @@
 
 - name: Download and install latest postman-cli
   ansible.builtin.unarchive:
-    src: "https://dl-cli.pstmn.io/download/latest/linux64"
-    dest: "/usr/local/bin"
+    src: https://dl-cli.pstmn.io/download/latest/linux64
+    dest: /usr/local/bin
     remote_src: true
   become: true
   tags:
     - postman
     - postman-cli
-
 
 - name: Install desktop file integration
   ansible.builtin.copy:
@@ -37,10 +36,9 @@
   tags:
     - postman
 
-
 - name: Install Postman Icon
   ansible.builtin.get_url:
-    url: "https://raw.githubusercontent.com/flathub/com.getpostman.Postman/master/logo-mark.svg"
+    url: https://raw.githubusercontent.com/flathub/com.getpostman.Postman/master/logo-mark.svg
     dest: "{{ ansible_user_dir }}/.local/share/icons/hicolor/Postman.svg"
     mode: "0755"
   tags:

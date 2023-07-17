@@ -40,7 +40,7 @@
 - name: Install python LSP
   ansible.builtin.pip:
     name:
-      - "python-lsp-server[all]"
+      - python-lsp-server[all]
       - pyls-isort
       - pyls-black
       - python-lsp-black
@@ -132,7 +132,6 @@
   tags:
     - devel
 
-
 # - name: Install additional Rust tools (CARGO)
 #   community.general.cargo:
 #     name:
@@ -142,10 +141,9 @@
 #     - devel
 #     - jless
 
-
 - name: Install cht.sh (https://github.com/chubin/cheat.sh)
   ansible.builtin.get_url:
-    url: "https://cht.sh/:cht.sh"
+    url: https://cht.sh/:cht.sh
     dest: "{{ ansible_user_dir }}/.local/bin/cht.sh"
     mode: "0755"
   tags:

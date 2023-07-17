@@ -1,10 +1,9 @@
 ---
-
 - name: Clone dragon
   ansible.builtin.git:
     clone: true
     depth: 1
-    dest: "/tmp/com.github.mwh.dragon"
+    dest: /tmp/com.github.mwh.dragon
     force: true
     repo: https://github.com/mwh/dragon
     single_branch: true

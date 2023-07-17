@@ -1,5 +1,4 @@
 ---
-
 - name: Install build deps
   ansible.builtin.dnf:
     name:
@@ -9,7 +8,6 @@
   tags:
     - never
     - sniffnet
-
 
 - name: Install sniffnet (CARGO)
   community.general.cargo:

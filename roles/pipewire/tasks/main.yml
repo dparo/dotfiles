@@ -14,7 +14,7 @@
 # https://github.com/werman/noise-suppression-for-voice
 - name: Download and unpack latest noise-suppression-for-voice
   ansible.builtin.unarchive:
-    src: "https://github.com/werman/noise-suppression-for-voice/releases/latest/download/linux-rnnoise.zip"
+    src: https://github.com/werman/noise-suppression-for-voice/releases/latest/download/linux-rnnoise.zip
     dest: /opt
     remote_src: true
   become: true

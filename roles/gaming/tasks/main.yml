@@ -1,5 +1,4 @@
 ---
-
 - name: Install gaming platforms / launchers (DNF)
   ansible.builtin.dnf:
     name:
@@ -13,7 +12,6 @@
     - steam
     - lutris
 
-
 - name: Create proton-ge installation directory
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/.steam/root/compatibilitytools.d/"
@@ -25,7 +23,6 @@
     - steam
     - proton
     - proton-ge
-
 
 - name: Check latest proton-ge
   ansible.builtin.uri:
@@ -41,7 +38,7 @@
 
 - name: Download and unpack latest proton-ge
   ansible.builtin.unarchive:
-    src: "https://github.com/GloriousEggroll/proton-ge-custom/releases/latest/download/{{ proton_ge_latest['json']['tag_name'] }}.tar.gz"
+    src: https://github.com/GloriousEggroll/proton-ge-custom/releases/latest/download/{{ proton_ge_latest['json']['tag_name'] }}.tar.gz
     dest: "{{ ansible_user_dir }}/.steam/root/compatibilitytools.d/"
     remote_src: true
   become: true
@@ -51,7 +48,6 @@
     - steam
     - proton
     - proton-ge
-
 
 - name: Install gaming utilities
   ansible.builtin.dnf:
@@ -65,11 +61,10 @@
     - gaming
     - steam
 
-
 - name: Install steamtinkerlaunch script
   ansible.builtin.get_url:
-    url: "https://raw.githubusercontent.com/sonic2kk/steamtinkerlaunch/master/steamtinkerlaunch"
-    dest: "/usr/local/bin/steamtinkerlaunch"
+    url: https://raw.githubusercontent.com/sonic2kk/steamtinkerlaunch/master/steamtinkerlaunch
+    dest: /usr/local/bin/steamtinkerlaunch
     mode: "0755"
   become: true
   tags:

@@ -11,7 +11,7 @@
     - nodejs
     - npm
 
-- name: "Download and unpack Node {{ node_versions }}"
+- name: Download and unpack Node {{ node_versions }}
   ansible.builtin.unarchive:
     src: https://nodejs.org/dist/v{{ item }}/node-v{{ item }}-linux-x64.tar.xz
     dest: "{{ node_install_dir }}"

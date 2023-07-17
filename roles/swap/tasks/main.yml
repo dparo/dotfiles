@@ -21,12 +21,11 @@
       become: true
       when: not swap_stat.stat.exists
 
-
     - name: Update /etc/fstab
       ansible.builtin.lineinfile:
         path: /etc/fstab
         line: /swapfile none swap defaults 0 0
-        regexp: '^/swapfile'
+        regexp: ^/swapfile
         create: false
       become: true
       when: not swap_stat.stat.exists

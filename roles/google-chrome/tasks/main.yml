@@ -26,7 +26,6 @@
     - google-chrome
     - google-chrome-stable
 
-
 - name: Delete GPU Cache. Fixes issues caused by upgrading to some mesa-libGL versions
   ansible.builtin.file:
     path: "{{ item }}"

@@ -1,5 +1,4 @@
 ---
-
 - name: Install bitwarden desktop
   community.general.flatpak:
     name: com.bitwarden.desktop

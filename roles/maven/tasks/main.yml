@@ -7,10 +7,9 @@
   tags:
     - maven
 
-
 - name: Download and unpack
   ansible.builtin.unarchive:
-    src: "https://dlcdn.apache.org/maven/maven-3/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.tar.gz"
+    src: https://dlcdn.apache.org/maven/maven-3/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.tar.gz
     dest: "{{ maven_install_dir }}"
     remote_src: true
   tags:
@@ -28,7 +27,6 @@
   tags:
     - maven
 
-
 - name: Symlink config
   ansible.builtin.file:
     src: "{{ role_path }}/files"
@@ -36,7 +34,6 @@
     state: link
   tags:
     - maven
-
 
 - name: Create items
   ansible.builtin.file:

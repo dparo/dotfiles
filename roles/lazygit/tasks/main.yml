@@ -10,7 +10,7 @@
 
 - name: Create install dir
   ansible.builtin.file:
-    path: "/opt/lazygit"
+    path: /opt/lazygit
     state: directory
     mode: "0755"
   become: true

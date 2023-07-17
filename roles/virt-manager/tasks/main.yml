@@ -25,7 +25,7 @@
     - qemu
     - virt-manager
 
-- name: "Sets additional groups for user {{ ansible_env.USER }}"
+- name: Sets additional groups for user {{ ansible_env.USER }}
   ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     append: true

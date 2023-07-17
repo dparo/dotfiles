@@ -1,7 +1,7 @@
 ---
 - name: Get download link
   ansible.builtin.uri:
-    url: "https://www.blackmagicdesign.com/api/register/us/download/{{ davinci_resolve_download_id }}"
+    url: https://www.blackmagicdesign.com/api/register/us/download/{{ davinci_resolve_download_id }}
     method: POST
     body_format: json
     body:

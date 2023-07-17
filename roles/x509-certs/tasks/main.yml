@@ -1,3 +1,4 @@
+---
 # https://docs.fedoraproject.org/en-US/quick-docs/using-shared-system-certificates/
 - name: Install
   ansible.builtin.dnf:
@@ -12,7 +13,7 @@
 
 - name: Install certificates
   ansible.builtin.copy:
-    dest: "/etc/pki/ca-trust/source/anchors/{{ cert_item.key }}"
+    dest: /etc/pki/ca-trust/source/anchors/{{ cert_item.key }}
     content: "{{ cert_item.value }}"
     mode: "0444"
   no_log: true

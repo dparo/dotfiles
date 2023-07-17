@@ -14,13 +14,13 @@
   ansible.builtin.lineinfile:
     path: /etc/zshenv
     line: export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
-    regexp: "^export ZDOTDIR="
+    regexp: ^export ZDOTDIR=
     create: true
   become: true
   tags:
     - zsh
 
-- name: "Sets the user shell to zsh for user {{ ansible_env.USER }}"
+- name: Sets the user shell to zsh for user {{ ansible_env.USER }}
   ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     shell: /bin/zsh

@@ -1,5 +1,4 @@
 ---
-
 - name: Install if cargo is installed
   ansible.builtin.stat:
     path: "{{ ansible_user_dir }}/.local/bin/cargo"

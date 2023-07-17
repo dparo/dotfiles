@@ -1,3 +1,4 @@
+---
 CompileFlags:
   Add:
     - -Wall
@@ -10,8 +11,8 @@ Diagnostics:
     CheckOptions:
       readability-identifier-naming.VariableCase: lower_case
     Add:
-      - "-*"
-      - "clang-diagnostic-*"
-      - "clang-analyzer-*"
-      - "clang-analyzer-cplusplus-*"
-      - "cppcoreguidelines-*"
+      - -*
+      - clang-diagnostic-*
+      - clang-analyzer-*
+      - clang-analyzer-cplusplus-*
+      - cppcoreguidelines-*

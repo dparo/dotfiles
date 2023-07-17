@@ -1,6 +1,4 @@
 ---
-
-
 - name: Symlink config
   ansible.builtin.file:
     src: "{{ item }}"

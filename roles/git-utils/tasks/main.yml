@@ -1,8 +1,7 @@
 ---
-
 - name: Install husky (Git hooks made easy, https://github.com/typicode/husky)
   community.general.npm:
-    name: "husky"
+    name: husky
     global: true
     state: latest
   tags:

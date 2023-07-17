@@ -1,11 +1,8 @@
 ---
-
 # https://snapshots.mitmproxy.org/9.0.1/mitmproxy-9.0.1-linux.tar.gz
-
-
-- name: "Install mitmproxy {{ mitmproxy_version }}"
+- name: Install mitmproxy {{ mitmproxy_version }}
   ansible.builtin.unarchive:
-    src: "https://snapshots.mitmproxy.org/{{ mitmproxy_version }}/mitmproxy-{{ mitmproxy_version }}-linux.tar.gz"
+    src: https://snapshots.mitmproxy.org/{{ mitmproxy_version }}/mitmproxy-{{ mitmproxy_version }}-linux.tar.gz
     dest: "{{ ansible_user_dir }}/.local/bin"
     remote_src: true
   tags:

@@ -8,9 +8,9 @@
     - mimes
     - handlr
 
-- name: "Fetch latest handlr {{ handlr_latest['json']['tag_name'] }}"
+- name: Fetch latest handlr {{ handlr_latest['json']['tag_name'] }}
   ansible.builtin.get_url:
-    url: "https://github.com/chmln/handlr/releases/download/{{ handlr_latest['json']['tag_name'] }}/handlr"
+    url: https://github.com/chmln/handlr/releases/download/{{ handlr_latest['json']['tag_name'] }}/handlr
     dest: "{{ ansible_user_dir }}/.local/bin/handlr"
     mode: "0755"
   tags:

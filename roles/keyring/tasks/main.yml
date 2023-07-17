@@ -37,9 +37,9 @@
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   become: true
   loop:
-    - regexp: '^auth\s+optional\s+pam_gnome_keyring.so$'
-      line: "auth optional pam_gnome_keyring.so"
-    - regexp: '^session\s+optional\s+pam_gnome_keyring.so auto_start$'
-      line: "session optional pam_gnome_keyring.so auto_start"
+    - regexp: ^auth\s+optional\s+pam_gnome_keyring.so$
+      line: auth optional pam_gnome_keyring.so
+    - regexp: ^session\s+optional\s+pam_gnome_keyring.so auto_start$
+      line: session optional pam_gnome_keyring.so auto_start
   tags:
     - keyring

@@ -1,8 +1,7 @@
 ---
-
-- name: "Download and unpack pycharm {{ pycharm_version }}"
+- name: Download and unpack pycharm {{ pycharm_version }}
   ansible.builtin.unarchive:
-    src: "https://download.jetbrains.com/python/pycharm-community-{{ pycharm_version }}.tar.gz"
+    src: https://download.jetbrains.com/python/pycharm-community-{{ pycharm_version }}.tar.gz
     dest: "{{ ansible_user_dir }}/opt"
     remote_src: true
   tags:

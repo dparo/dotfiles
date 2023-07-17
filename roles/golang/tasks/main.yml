@@ -1,5 +1,4 @@
 ---
-
 - name: Install (DNF)
   ansible.builtin.dnf:
     name:
@@ -9,7 +8,6 @@
   when: golang_install_from_package_manager
   tags:
     - golang
-
 
 - name: Create target dir for installation
   ansible.builtin.file:
@@ -24,7 +22,7 @@
 
 - name: Download golang {{ golang_version }}
   ansible.builtin.unarchive:
-    src: "https://go.dev/dl/go{{ golang_version }}.linux-amd64.tar.gz"
+    src: https://go.dev/dl/go{{ golang_version }}.linux-amd64.tar.gz
     dest: "{{ golang_install_dir }}/v{{ golang_version }}"
     remote_src: true
   become: true
@@ -32,10 +30,10 @@
   tags:
     - golang
 
-- name: "Symlink GO binaries {{ golang_version }}"
+- name: Symlink GO binaries {{ golang_version }}
   ansible.builtin.file:
     src: "{{ item }}"
-    dest: "/usr/local/bin/{{ item | basename }}"
+    dest: /usr/local/bin/{{ item | basename }}
     state: link
   with_fileglob: "{{ golang_install_dir }}/v{{ golang_version }}/go/bin/*"
   become: true

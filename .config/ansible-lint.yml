@@ -1,14 +1,20 @@
 ---
-
 # .ansible-lint
 
 profile: basic
 use_default_rules: true
-loop_var_prefix: "^(__|{role}_)"
-
+loop_var_prefix: ^(__|{role}_)
 
 warn_list:
   - role-name
+
+kinds:
+  - playbook: "site.{yml,yaml}"
+  - galaxy: "**/folder/galaxy.yml"
+  - tasks: "**/tasks/*.yml"
+  - vars: "**/vars/*.yml"
+  - meta: "**/meta/main.yml"
+  - yaml: ""
 
 exclude_paths:
   - .cache

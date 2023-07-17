@@ -38,7 +38,7 @@
 
 - name: Create desktop entry to allow display managers to execute the user's XINITRC
   ansible.builtin.copy:
-    dest: "/usr/share/xsessions/xinitrc-{{ item }}.desktop"
+    dest: /usr/share/xsessions/xinitrc-{{ item }}.desktop
     content: |
       [Desktop Entry]
       Encoding=UTF-8
@@ -65,7 +65,7 @@
   loop:
     - { key: WaylandEnable, value: true }
     - { key: AutomaticLoginEnable, value: true }
-    - { key: AutomaticLogin, value: 'dparo' }
+    - { key: AutomaticLogin, value: dparo }
   become: true
   tags:
     - display-manager
@@ -73,7 +73,7 @@
 
 - name: GDM config - Automatic Login default session
   ansible.builtin.copy:
-    dest: "/var/lib/AccountsService/users/{{ ansible_user_id }}"
+    dest: /var/lib/AccountsService/users/{{ ansible_user_id }}
     content: |
       [User]
       Languages=en_US.UTF-8;

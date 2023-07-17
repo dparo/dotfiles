@@ -87,8 +87,8 @@
 - name: Update x-cursor-theme alternatives
   ansible.builtin.lineinfile:
     path: /etc/alternatives/x-cursor-theme
-    line: "Inherits=Adwaita"
-    regexp: "^Inherits"
+    line: Inherits=Adwaita
+    regexp: ^Inherits
     create: true
   become: true
   tags:

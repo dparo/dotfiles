@@ -1,5 +1,4 @@
 ---
-
 # https://download.redisinsight.redis.com/latest/RedisInsight-v2-linux-x86_64.AppImage
 # - name: Install redisinsight
 #   ansible.builtin.get_url:
@@ -8,8 +7,6 @@
 #     mode: 0755
 #   tags:
 #     - redisinsight
-
-
 - name: Install redisinsight
   community.general.flatpak:
     name: com.redis.RedisInsight

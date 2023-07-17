@@ -1,7 +1,7 @@
 ---
-- name: "Download and unpack ZIG {{ zig_version }}"
+- name: Download and unpack ZIG {{ zig_version }}
   ansible.builtin.unarchive:
-    src: "https://ziglang.org/download/0.10.1/zig-linux-x86_64-{{ zig_version }}.tar.xz"
+    src: https://ziglang.org/download/0.10.1/zig-linux-x86_64-{{ zig_version }}.tar.xz
     dest: "{{ ansible_user_dir }}/opt"
     remote_src: true
   tags:
