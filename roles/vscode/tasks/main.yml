@@ -3,7 +3,7 @@
   ansible.builtin.rpm_key:
     state: present
     key: https://packages.microsoft.com/keys/microsoft.asc
-  become: True
+  become: true
   tags:
     - vscode
 
@@ -47,10 +47,8 @@
     dest: "{{ item.dest }}"
     state: link
   loop:
-    - {
-        src: "{{ ansible_user_dir }}/.local/share/vscode",
-        dest: "{{ ansible_user_dir }}/.vscode",
-      }
+    - src: "{{ ansible_user_dir }}/.local/share/vscode"
+      dest: "{{ ansible_user_dir }}/.vscode"
   tags:
     - xdg
     - vscode

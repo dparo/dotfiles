@@ -12,8 +12,8 @@
 
 - name: Download and unpack latest trunkrs
   ansible.builtin.unarchive:
-    src: https://github.com/thedodd/trunk/releases/download/{{ trunkrs_latest['json']['tag_name'] }}/trunk-x86_64-unknown-linux-gnu.tar.gz
+    src: "https://github.com/thedodd/trunk/releases/download/{{ trunkrs_latest['json']['tag_name'] }}/trunk-x86_64-unknown-linux-gnu.tar.gz"
     dest: ~/.local/bin
-    remote_src: yes
+    remote_src: true
   tags:
     - trunkrs

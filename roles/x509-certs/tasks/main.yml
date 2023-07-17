@@ -14,9 +14,9 @@
   ansible.builtin.copy:
     dest: "/etc/pki/ca-trust/source/anchors/{{ cert_item.key }}"
     content: "{{ cert_item.value }}"
-    mode: 0444
+    mode: "0444"
   no_log: true
-  become: True
+  become: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and ansible_distribution == 'Fedora'
   loop_control:
     loop_var: cert_item
@@ -29,8 +29,8 @@
 - name: Update ca-trust
   ansible.builtin.command: update-ca-trust
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and ansible_distribution == 'Fedora'
-  no_log: True
-  become: True
+  no_log: true
+  become: true
   tags:
     - x509
     - certs

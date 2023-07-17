@@ -44,7 +44,7 @@
 
 - name: Delete items
   ansible.builtin.file:
-    path: "{{item}}"
+    path: "{{ item }}"
     state: absent
   loop:
     - "{{ ansible_user_dir }}/.bash_history"
@@ -67,10 +67,8 @@
     dest: "{{ item.dest }}"
     state: link
   loop:
-    - {
-        src: "{{ ansible_user_dir }}/.local/share/pki",
-        dest: "{{ ansible_user_dir }}/.pki",
-      }
+    - src: "{{ ansible_user_dir }}/.local/share/pki"
+      dest: "{{ ansible_user_dir }}/.pki"
   tags:
     - xdg
 
@@ -142,13 +140,13 @@
 
 - name: Clone xdg-ninja
   ansible.builtin.git:
-    clone: yes
+    clone: true
     depth: 1
     dest: "{{ ansible_user_dir }}/opt/github.com/xdg-ninja"
-    force: yes
+    force: true
     repo: https://github.com/b3nj5m1n/xdg-ninja
-    single_branch: yes
-    update: yes
+    single_branch: true
+    update: true
     version: main
   register: clone
   tags:
@@ -165,15 +163,3 @@
   tags:
     - xdg
     - xdg-ninja
-
-# - name: Download background
-#   ansible.builtin.get_url:
-#     # https://www.reddit.com/r/wallpaper/comments/12yenwu/night_landscape_3840x2160/?utm_source=share&utm_medium=android_app&utm_name=androidcss&utm_term=14&utm_content=share_button
-#     url: "https://www.dropbox.com/s/092y4nkywd2pj1m/blue_ai_background.webp?dl=1"
-#     dest: "{{ ansible_user_dir }}/.local/share/backgrounds"
-#     mode: "0644"
-#     force: True
-#   tags:
-#     - never
-#     - xdg
-#     - background

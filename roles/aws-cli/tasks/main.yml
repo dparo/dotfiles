@@ -4,9 +4,9 @@
   ansible.builtin.unarchive:
     src: "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
     dest: "/opt"
-    remote_src: yes
+    remote_src: true
     include:
-     - 'aws/dist/*'
+      - 'aws/dist/*'
   become: true
   tags:
     - never

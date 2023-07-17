@@ -1,5 +1,5 @@
 ---
-- name: Enable VirtIO drivers repository for speeding up Windows VMs (https://docs.fedoraproject.org/en-US/quick-docs/creating-windows-virtual-machines-using-virtio-drivers)
+- name: Enable VirtIO drivers repository for speeding up Windows VMs
   ansible.builtin.get_url:
     dest: /etc/yum.repos.d/virtio-win.repo
     url: https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
@@ -25,7 +25,7 @@
     - qemu
     - virt-manager
 
-- name: "Sets the user {{ ansible_env.USER }} additional groups"
+- name: "Sets additional groups for user {{ ansible_env.USER }}"
   ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     append: true

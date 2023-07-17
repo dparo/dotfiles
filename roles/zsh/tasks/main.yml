@@ -20,7 +20,7 @@
   tags:
     - zsh
 
-- name: "Sets the user {{ ansible_env.USER }} shell to zsh"
+- name: "Sets the user shell to zsh for user {{ ansible_env.USER }}"
   ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     shell: /bin/zsh

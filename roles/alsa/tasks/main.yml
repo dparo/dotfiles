@@ -25,10 +25,8 @@
     dest: "{{ item.dest }}"
     state: link
   loop:
-    - {
-        src: "{{ role_path }}/files/asoundrc",
-        dest: "{{ ansible_user_dir }}/.config/alsa/asoundrc",
-      }
+    - src: "{{ role_path }}/files/asoundrc"
+      dest: "{{ ansible_user_dir }}/.config/alsa/asoundrc"
   tags:
     - xdg
     - alsa
