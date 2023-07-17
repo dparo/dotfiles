@@ -26,14 +26,10 @@
     dest: "{{ item.dest }}"
     state: link
   loop:
-    - {
-        src: "{{ role_path }}/files/i3",
-        dest: "{{ ansible_user_dir }}/.config/i3",
-      }
-    - {
-        src: "{{ role_path }}/files/i3status",
-        dest: "{{ ansible_user_dir }}/.config/i3status",
-      }
+    - src: "{{ role_path }}/files/i3"
+      dest: "{{ ansible_user_dir }}/.config/i3"
+    - src: "{{ role_path }}/files/i3status"
+      dest: "{{ ansible_user_dir }}/.config/i3status"
   tags:
     - i3
     - i3wm

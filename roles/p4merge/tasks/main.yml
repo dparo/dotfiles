@@ -14,7 +14,7 @@
   ansible.builtin.unarchive:
     src: "https://www.perforce.com/downloads/perforce/r{{ p4merge_release_version }}/bin.linux26x86_64/p4v.tgz"
     dest: "{{ ansible_user_dir }}/opt/p4merge-r{{ p4merge_release_version }}"
-    remote_src: yes
+    remote_src: true
     extra_opts: [--strip-components=1]
   tags:
     - p4merge

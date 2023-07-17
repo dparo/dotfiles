@@ -96,7 +96,7 @@
     - gtk-theme
 
 - name: Gnome set default cursor
-  ansible.builtin.shell: gsettings set org.gnome.desktop.interface cursor-theme default
+  ansible.builtin.command: gsettings set org.gnome.desktop.interface cursor-theme default
   ignore_errors: true
   tags:
     - gtk

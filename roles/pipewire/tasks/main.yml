@@ -16,7 +16,7 @@
   ansible.builtin.unarchive:
     src: "https://github.com/werman/noise-suppression-for-voice/releases/latest/download/linux-rnnoise.zip"
     dest: /opt
-    remote_src: yes
+    remote_src: true
   become: true
   tags:
     - pipewire
@@ -53,7 +53,7 @@
 - name: Restart pipewire service
   ansible.builtin.systemd:
     state: restarted
-    daemon_reload: yes
+    daemon_reload: true
     name: pipewire
     scope: user
   tags:
@@ -63,7 +63,7 @@
 - name: Restart wireplumber service
   ansible.builtin.systemd:
     state: restarted
-    daemon_reload: yes
+    daemon_reload: true
     name: wireplumber
     scope: user
   tags:

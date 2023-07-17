@@ -28,7 +28,7 @@
     - cargo
 
 - name: Update
-  shell: rustup update
+  ansible.builtin.command: "{{ ansible_user_dir }}/.local/share/cargo/bin/rustup update"
   when: cargo_stat.stat.exists
   tags:
     - rust

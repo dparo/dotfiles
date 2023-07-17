@@ -3,13 +3,13 @@
   ansible.builtin.uri:
     url: https://api.github.com/repos/PaulJuliusMartinez/jless/releases/latest
     return_content: true
-  register: jless_latest
+  register: jless
   tags:
     - jless
 
 - name: Download and unpack latest jless
   ansible.builtin.unarchive:
-    src: "https://github.com/PaulJuliusMartinez/jless/releases/download/{{ jless_latest['json']['tag_name'] }}/jless-{{ jless_latest['json']['tag_name'] }}-x86_64-unknown-linux-gnu.zip"
+    src: "{{ gh_repo }}/releases/download/{{ jless['json']['tag_name'] }}/jless-{{ jless['json']['tag_name'] }}-x86_64-unknown-linux-gnu.zip"
     dest: "{{ ansible_user_dir }}/.local/bin"
     remote_src: true
   tags:

@@ -15,7 +15,7 @@
   ansible.builtin.unarchive:
     src: https://nodejs.org/dist/v{{ item }}/node-v{{ item }}-linux-x64.tar.xz
     dest: "{{ node_install_dir }}"
-    remote_src: yes
+    remote_src: true
   when: node_target_dir.changed
   loop: "{{ node_versions }}"
   tags:

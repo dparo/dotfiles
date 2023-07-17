@@ -12,7 +12,7 @@
   ansible.builtin.unarchive:
     src: "https://dlcdn.apache.org/maven/maven-3/{{ maven_version }}/binaries/apache-maven-{{ maven_version }}-bin.tar.gz"
     dest: "{{ maven_install_dir }}"
-    remote_src: yes
+    remote_src: true
   tags:
     - maven
 
@@ -56,17 +56,11 @@
     state: link
     force: true
   loop:
-    - {
-        src: "{{ ansible_user_dir }}/.config/maven/settings_global.xml",
-        dest: "{{ maven_install_dir }}/apache-maven-{{ maven_version }}/conf/settings.xml",
-      }
-    - {
-        src: "{{ ansible_user_dir }}/.cache/maven/repository",
-        dest: "{{ ansible_user_dir }}/.local/share/java/.m2/repository",
-      }
-    - {
-        src: "{{ ansible_user_dir }}/.config/maven/settings_local.xml",
-        dest: "{{ ansible_user_dir }}/.local/share/java/.m2/settings.xml",
-      }
+    - src: "{{ ansible_user_dir }}/.config/maven/settings_global.xml"
+      dest: "{{ maven_install_dir }}/apache-maven-{{ maven_version }}/conf/settings.xml"
+    - src: "{{ ansible_user_dir }}/.cache/maven/repository"
+      dest: "{{ ansible_user_dir }}/.local/share/java/.m2/repository"
+    - src: "{{ ansible_user_dir }}/.config/maven/settings_local.xml"
+      dest: "{{ ansible_user_dir }}/.local/share/java/.m2/settings.xml"
   tags:
     - maven

@@ -12,7 +12,7 @@
   ansible.builtin.unarchive:
     src: "https://github.com/Kong/insomnia/releases/download/core@{{ insomnia_version }}/Insomnia.Core-{{ insomnia_version }}.tar.gz"
     dest: "{{ ansible_user_dir }}/opt"
-    remote_src: yes
+    remote_src: true
   tags:
     - insomnia
 
@@ -55,7 +55,7 @@
     src: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/usr/lib64/{{ item }}"
     dest: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/{{ item }}"
     state: link
-    force: True
+    force: true
   loop:
     - libcups.so.2
     - libcupsimage.so.2
@@ -84,6 +84,6 @@
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/flathub/rest.insomnia.Insomnia/master/insomnia.png"
     dest: "{{ ansible_user_dir }}/.local/share/icons/hicolor/insomnia.png"
-    mode: 0755
+    mode: "0755"
   tags:
     - insomnia

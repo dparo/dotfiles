@@ -15,7 +15,7 @@
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/jamielinux/bashmount/master/bashmount"
     dest: "{{ ansible_user_dir }}/.local/bin/bashmount"
-    mode: 0755
+    mode: "0755"
   tags:
     - misc
     - bashmount
@@ -25,7 +25,7 @@
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/PhrozenByte/rmtrash/master/{{ item }}"
     dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
-    mode: 0755
+    mode: "0755"
   loop:
     - rmtrash
     - rmdirtrash
@@ -37,7 +37,7 @@
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/pystardust/ani-cli/master/ani-cli"
     dest: "{{ ansible_user_dir }}/.local/bin/ani-cli"
-    mode: 0755
+    mode: "0755"
   tags:
     - misc
     - ani-cli
@@ -47,7 +47,7 @@
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/adi1090x/canvas/master/canvas"
     dest: "{{ ansible_user_dir }}/.local/bin/canvas"
-    mode: 0755
+    mode: "0755"
   tags:
     - misc
     - canvas

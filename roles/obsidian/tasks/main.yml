@@ -9,7 +9,7 @@
 #
 # - name: Install latest obsidian
 #   ansible.builtin.apt:
-#     deb: "https://github.com/obsidianmd/obsidian-releases/releases/download/{{ obsidian_latest['json']['tag_name'] }}/obsidian_{{ obsidian_latest['json']['name'] }}_amd64.deb"
+#     deb: "{{ gh_repo }}/releases/download/{{ obsidian_latest['json']['tag_name'] }}/obsidian_{{ obsidian_latest['json']['name'] }}_amd64.deb"
 #   become: true
 #   tags:
 #     - obsidian

@@ -22,18 +22,14 @@
     url: "{{ item.url }}"
     dest: "{{ item.dest }}"
     mode: "{{ item.mode }}"
-  become: True
+  become: true
   loop:
-    - {
-        url: "https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved",
-        dest: "/etc/openvpn/update-systemd-resolved",
-        mode: "755",
-      }
-    - {
-        url: "https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved.conf",
-        dest: "/etc/openvpn/update-systemd-resolved.conf",
-        mode: "644",
-      }
+    - url: "https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved"
+      dest: "/etc/openvpn/update-systemd-resolved"
+      mode: "0755"
+    - url: "https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved.conf"
+      dest: "/etc/openvpn/update-systemd-resolved.conf"
+      mode: "0644"
   tags:
     - openvpn
     - openvpn-systemd-resolved
@@ -102,7 +98,7 @@
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/firecat53/networkmanager-dmenu/main/networkmanager_dmenu"
     dest: "{{ ansible_user_dir }}/.local/bin/networkmanager_dmenu"
-    mode: 0755
+    mode: "0755"
   tags:
     - network-manager
     - networkmanager-dmenu
@@ -111,7 +107,7 @@
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/zbaylin/rofi-wifi-menu/master/rofi-wifi-menu.sh"
     dest: "{{ ansible_user_dir }}/.local/bin/rofi-wifi-menu.sh"
-    mode: 0755
+    mode: "0755"
   tags:
     - network-manager
     - rofi-wifi-menu

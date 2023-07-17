@@ -1,6 +1,6 @@
 ---
 
-- name: 'Allow user {{ ansible_user_id }} to run specific SUID programs without password'
+- name: 'Allow specific SUID programs without password for user {{ ansible_user_id }}'
   ansible.builtin.lineinfile:
     path: '/etc/sudoers.d/01-user-{{ ansible_user_id }}'
     line: '{{ ansible_user_id }} ALL=(ALL) NOPASSWD: {{ item }}'

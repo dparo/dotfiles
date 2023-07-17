@@ -42,7 +42,7 @@
   ansible.builtin.unarchive:
     src: "https://github.com/pmd/pmd/releases/download/pmd_releases%2F7.0.0-rc3/pmd-dist-7.0.0-rc3-bin.zip"
     dest: "{{ ansible_user_dir }}/opt/"
-    remote_src: yes
+    remote_src: true
   tags:
     - java
     - pmd
@@ -65,23 +65,23 @@
   ansible.builtin.uri:
     url: https://api.github.com/repos/spotbugs/spotbugs/releases/latest
     return_content: true
-  register: spotbugs_latest
+  register: spotbugs
   tags:
     - java
     - spotbugs
 
 - name: Unpack latest spotbugs
   ansible.builtin.unarchive:
-    src: "https://github.com/spotbugs/spotbugs/releases/download/{{ spotbugs_latest['json']['tag_name'] }}/spotbugs-{{ spotbugs_latest['json']['tag_name'] }}.tgz"
+    src: "https://github.com/spotbugs/spotbugs/releases/download/{{ spotbugs['json']['tag_name'] }}/spotbugs-{{ spotbugs['json']['tag_name'] }}.tgz"
     dest: "{{ ansible_user_dir }}/opt"
-    remote_src: yes
+    remote_src: true
   tags:
     - java
     - spotbugs
 
-- name: chmod +x spotbugs
+- name: Make spotbugs executable
   ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs_latest['json']['tag_name'] }}/bin/{{ item }}"
+    path: "{{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs['json']['tag_name'] }}/bin/{{ item }}"
     mode: "0755"
   loop:
     - spotbugs
@@ -91,7 +91,7 @@
 
 - name: Symlink binary
   ansible.builtin.file:
-    src: "{{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs_latest['json']['tag_name'] }}/bin/{{ item }}"
+    src: "{{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs['json']['tag_name'] }}/bin/{{ item }}"
     dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
     state: link
   loop:
@@ -109,7 +109,7 @@
       Exec=spotbugs %U
       Terminal=false
       Type=Application
-      Icon={{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs_latest['json']['tag_name'] }}/bin/spotbugs.ico
+      Icon={{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs['json']['tag_name'] }}/bin/spotbugs.ico
       Categories=Development;
       StartupNotify=true
       StartupWMClass=spotbugs
@@ -123,7 +123,7 @@
   ansible.builtin.uri:
     url: https://api.github.com/repos/checkstyle/checkstyle/releases/latest
     return_content: true
-  register: checkstyle_latest
+  register: checkstyle
   tags:
     - java
     - checkstyle
@@ -131,10 +131,10 @@
 
 - name: Fetch latest checkstyle
   ansible.builtin.get_url:
-    url: "https://github.com/checkstyle/checkstyle/releases/download/{{ checkstyle_latest['json']['tag_name'] }}/{{ checkstyle_latest['json']['tag_name'] }}-all.jar"
-    dest: "{{ ansible_user_dir }}/opt/{{ checkstyle_latest['json']['tag_name'] }}-all.jar"
+    url: "https://github.com/checkstyle/checkstyle/releases/download/{{ checkstyle['json']['tag_name'] }}/{{ checkstyle['json']['tag_name'] }}-all.jar"
+    dest: "{{ ansible_user_dir }}/opt/{{ checkstyle['json']['tag_name'] }}-all.jar"
     mode: "0644"
-    force: True
+    force: true
   tags:
     - java
     - checkstyle
@@ -148,7 +148,7 @@
 
       # export CHECKSTYLE_JAVA_OPTS="$_JAVA_OPTIONS"
       # unset _JAVA_OPTIONS
-      exec java -jar "{{ ansible_user_dir }}/opt/{{ checkstyle_latest['json']['tag_name'] }}-all.jar" "$@"
+      exec java -jar "{{ ansible_user_dir }}/opt/{{ checkstyle['json']['tag_name'] }}-all.jar" "$@"
     mode: "0755"
   tags:
     - java

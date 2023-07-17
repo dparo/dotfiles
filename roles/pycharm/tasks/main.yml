@@ -4,7 +4,7 @@
   ansible.builtin.unarchive:
     src: "https://download.jetbrains.com/python/pycharm-community-{{ pycharm_version }}.tar.gz"
     dest: "{{ ansible_user_dir }}/opt"
-    remote_src: yes
+    remote_src: true
   tags:
     - never
     - pycharm

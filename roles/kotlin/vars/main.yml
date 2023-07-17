@@ -1,2 +1,3 @@
+gh_repo: https://github.com/JetBrains/kotlin
 kotlin_version: 1.8.21
 kotlin_install_dir: /opt/kotlin

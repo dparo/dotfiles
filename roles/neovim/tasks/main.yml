@@ -24,13 +24,13 @@
 
     - name: Clone NEOVIM {{ neovim_version }}
       ansible.builtin.git:
-        clone: yes
+        clone: true
         depth: 1
         dest: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim"
-        force: yes
+        force: true
         repo: https://github.com/neovim/neovim.git
-        single_branch: yes
-        update: yes
+        single_branch: true
+        update: true
         version: "{{ neovim_version | default('master') }}"
       register: clone
       tags:
@@ -61,7 +61,7 @@
       become: true
       tags:
         - neovim
-  when: neovim_build_from_source == True
+  when: neovim_build_from_source
 
 - name: Install (Package Manager)
   ansible.builtin.dnf:
@@ -69,7 +69,7 @@
       - neovim
     state: present
   become: true
-  when: neovim_build_from_source == False
+  when: not neovim_build_from_source
   tags:
     - neovim
 
@@ -147,14 +147,14 @@
 
 - name: Clone lazy.nvim
   ansible.builtin.git:
-    clone: yes
+    clone: true
     depth: 1
     dest: "{{ ansible_user_dir }}/.local/share/nvim/lazy/lazy.nvim"
-    force: yes
+    force: true
     repo: https://github.com/folke/lazy.nvim.git
-    single_branch: yes
+    single_branch: true
     version: stable
-    update: yes
+    update: true
   tags:
     - neovim
 

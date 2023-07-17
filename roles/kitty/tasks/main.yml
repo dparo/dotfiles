@@ -12,7 +12,7 @@
   ansible.builtin.uri:
     url: https://api.github.com/repos/kovidgoyal/kitty/releases/latest
     return_content: true
-  register: kitty_latest
+  register: kitty
   tags:
     - kitty
 
@@ -24,10 +24,10 @@
   tags:
     - kitty
 
-- name: "Download and unpack kitty {{ kitty_latest['json']['tag_name'] }}"
+- name: "Download and unpack kitty {{ kitty['json']['tag_name'] }}"
 
   ansible.builtin.unarchive:
-    src: "https://github.com/kovidgoyal/kitty/releases/download/{{ kitty_latest['json']['tag_name'] }}/kitty-{{ kitty_latest['json']['tag_name'][1:] }}-x86_64.txz"
+    src: "{{ gh_repo }}/releases/download/{{ kitty['json']['tag_name'] }}/kitty-{{ kitty['json']['tag_name'][1:] }}-x86_64.txz"
     dest: "{{ ansible_user_dir }}/opt/kitty"
     remote_src: true
   tags:

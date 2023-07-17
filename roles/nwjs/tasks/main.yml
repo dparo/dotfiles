@@ -3,7 +3,7 @@
   ansible.builtin.unarchive:
     src: "https://dl.nwjs.io/v{{ nwjs_version }}/nwjs-sdk-v{{ nwjs_version }}-linux-x64.tar.gz"
     dest: "{{ ansible_user_dir }}/opt"
-    remote_src: yes
+    remote_src: true
   tags:
     - nwjs
 

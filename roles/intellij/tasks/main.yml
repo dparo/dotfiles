@@ -3,7 +3,7 @@
   ansible.builtin.unarchive:
     src: "https://download.jetbrains.com/idea/ideaIC-{{ intellij_version }}.tar.gz"
     dest: "{{ ansible_user_dir }}/opt"
-    remote_src: yes
+    remote_src: true
   tags:
     - intellij
 

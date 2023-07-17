@@ -9,17 +9,17 @@
   tags:
     - kotlin
 
-- name: Download kotlin compiler {{ kotlin_version }}
+- name: "Download kotlin compiler {{ kotlin_version }}"
   ansible.builtin.unarchive:
-    src: "https://github.com/JetBrains/kotlin/releases/download/v{{ kotlin_version }}/kotlin-compiler-{{ kotlin_version }}.zip"
+    src: "{{ gh_repo }}/releases/download/v{{ kotlin_version }}/kotlin-compiler-{{ kotlin_version }}.zip"
     dest: "{{ kotlin_install_dir }}/v{{ kotlin_version }}"
-    remote_src: yes
+    remote_src: true
   become: true
   when: kotlin_dir.changed
   tags:
     - kotlin
 
-- name: Symlink kotlin compiler {{ kotlin_version }} binaries
+- name: "Symlink kotlin compiler binaries {{ kotlin_version }}"
   ansible.builtin.file:
     src: "{{ kotlin_install_dir }}/v{{ kotlin_version }}/kotlinc/bin/{{ item }}"
     dest: "/usr/local/bin/{{ item | basename }}"
