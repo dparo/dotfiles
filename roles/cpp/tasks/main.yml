@@ -38,7 +38,8 @@
     - gdb
     - clang
 
-- name: "pip install cmake-init (https://github.com/friendlyanon/cmake-init): The missing CMake project initializer"
+# The missing CMake project initializer (https://github.com/friendlyanon/cmake-init)
+- name: "Install cmake-init"
   ansible.builtin.pip:
     name:
       - cmake-init

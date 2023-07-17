@@ -55,9 +55,9 @@
   ansible.builtin.unarchive:
     src: "https://github.com/ryanoasis/nerd-fonts/releases/latest/download/{{ item.item }}.zip"
     dest: "/usr/local/share/fonts/NerdFonts/{{ item.item }}"
-    remote_src: yes
+    remote_src: true
   become: true
-  when: 'item.stat.exists == False'
+  when: 'not item.stat.exists'
   loop: "{{ fonts_dir.results }}"
   tags:
     - fonts
@@ -66,8 +66,8 @@
   ansible.builtin.find:
     paths: /usr/local/share/fonts/NerdFonts
     patterns: "^.*Windows Compatible.*.ttf$"
-    use_regex: yes
-    recurse: True
+    use_regex: true
+    recurse: true
   register: windows_compatible_fonts
   tags:
     - fonts
@@ -87,8 +87,8 @@
   ansible.builtin.find:
     paths: /usr/local/share/fonts/NerdFonts/JetBrainsMono/
     patterns: "^.*JetBrainsMonoNLNerdFont.*.ttf$"
-    use_regex: yes
-    recurse: True
+    use_regex: true
+    recurse: true
   register: jetbrains_mono_nl_fonts
   tags:
     - fonts
@@ -107,13 +107,13 @@
 - name: Reload font cache
   ansible.builtin.command: fc-cache -fvr
   when: "fonts_dir.results | length > 0"
-  ignore_errors: True
+  ignore_errors: true
   tags:
     - fonts
 
 - name: Refresh X11 font cache
   ansible.builtin.command: xset fp rehash
-  ignore_errors: True
+  ignore_errors: true
   when: "fonts_dir.results | length > 0"
   tags:
     - fonts

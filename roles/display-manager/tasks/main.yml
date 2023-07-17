@@ -61,12 +61,12 @@
     section: daemon
     option: "{{ item.key }}"
     value: "{{ item.value }}"
-    no_extra_spaces: True
+    no_extra_spaces: true
   loop:
-    - {key: WaylandEnable, value: True }
-    - {key: AutomaticLoginEnable, value: True }
-    - {key: AutomaticLogin, value: 'dparo' }
-  become: True
+    - { key: WaylandEnable, value: true }
+    - { key: AutomaticLoginEnable, value: true }
+    - { key: AutomaticLogin, value: 'dparo' }
+  become: true
   tags:
     - display-manager
     - gdm
@@ -80,9 +80,9 @@
       Session=xinitrc-i3
       PasswordHint=
       SystemAccount=false
-      Icon={%- if ansible_user_id == 'dparo' -%} /usr/share/pixmaps/faces/calculator.jpg {%- else -%} /usr/share/pixmaps/faces/gamepad.jpg {%- endif -%}
+      Icon={%- if ansible_user_id == 'dparo' -%}/usr/share/pixmaps/faces/calculator.jpg{%- else -%}/usr/share/pixmaps/faces/gamepad.jpg{%- endif -%}
     mode: "0600"
-  become: True
+  become: true
   tags:
     - display-manager
     - gdm

@@ -32,7 +32,7 @@
     section: General
     option: "{{ item.key }}"
     value: "{{ item.value }}"
-    no_extra_spaces: True
+    no_extra_spaces: true
   loop:
     - { key: autoCloseIdleDaemon, value: "true" }
     - { key: disabledTrayIcon, value: "true" }

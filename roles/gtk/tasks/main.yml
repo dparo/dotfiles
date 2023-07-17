@@ -30,24 +30,18 @@
     state: link
     force: true
   loop:
-    - {
-        src: "{{ role_path }}/files/gtk-2.0",
-        dest: "{{ ansible_user_dir }}/.config/gtk-2.0",
-      }
-    - {
-        src: "{{ role_path }}/files/gtk-3.0",
-        dest: "{{ ansible_user_dir }}/.config/gtk-3.0",
-      }
-    - {
-        src: "{{ role_path }}/files/gtk-4.0",
-        dest: "{{ ansible_user_dir }}/.config/gtk-4.0",
-      }
+    - src: "{{ role_path }}/files/gtk-2.0"
+      dest: "{{ ansible_user_dir }}/.config/gtk-2.0"
+    - src: "{{ role_path }}/files/gtk-3.0"
+      dest: "{{ ansible_user_dir }}/.config/gtk-3.0"
+    - src: "{{ role_path }}/files/gtk-4.0"
+      dest: "{{ ansible_user_dir }}/.config/gtk-4.0"
   tags:
     - gtk
     - gtk-theme
 
-- name: gtk-4.0 Prefer dark mode
-  ansible.builtin.shell: gsettings set org.gnome.desktop.interface color-scheme prefer-dark
+- name: Gtk-4.0 Prefer dark mode
+  ansible.builtin.command: gsettings set org.gnome.desktop.interface color-scheme prefer-dark
   ignore_errors: true
   tags:
     - gtk
@@ -57,8 +51,8 @@
   ansible.builtin.unarchive:
     src: https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2
     dest: /usr/share/icons/
-    remote_src: True
-  become: True
+    remote_src: true
+  become: true
   tags:
     - gtk
     - gtk-theme
@@ -70,7 +64,7 @@
     path: /usr/share/icons/default
     state: directory
     mode: "0755"
-  become: True
+  become: true
   tags:
     - gtk
     - gtk-theme
@@ -85,7 +79,7 @@
       Inherits=Adwaita
     mode: "0644"
     force: true
-  become: True
+  become: true
   tags:
     - gtk
     - gtk-theme

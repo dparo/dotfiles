@@ -24,7 +24,7 @@
 - name: Setup freshclam (clamav-update)
   ansible.builtin.copy:
     dest: /etc/freshclam.conf
-    mode: 0600
+    mode: "0600"
     content: |
       UpdateLogFile /var/log/freshclam.log
       LogFileMaxSize 10M
@@ -35,7 +35,7 @@
       Checks 1
       DatabaseOwner clamupdate
       DatabaseMirror database.clamav.net
-  become: True
+  become: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
     - never
@@ -44,7 +44,7 @@
 - name: Setup clamav daemon config
   ansible.builtin.copy:
     dest: /etc/clamd.d/scan.conf
-    mode: 0644
+    mode: "0644"
     content: |
       User clamscan
       LocalSocket /run/clamd.scan/clamd.sock
@@ -82,7 +82,7 @@
       OnAccessExcludePath /swapfile
       OnAccessExcludePath /var/log/audit
       OnAccessExcludePath /etc
-  become: True
+  become: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
     - never
@@ -91,7 +91,7 @@
 - name: Setup Virus Event Script
   ansible.builtin.copy:
     dest: /etc/clamd.d/virus-event.bash
-    mode: 0755
+    mode: "0755"
     content: |
       #!/bin/bash
 
@@ -103,7 +103,7 @@
         /usr/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" PATH="$PATH" \
             /usr/bin/notify-send -u critical -i dialog-warning "Virus found!" "$ALERT"
       done
-  become: True
+  become: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
     - never
@@ -113,10 +113,10 @@
   ansible.builtin.file:
     owner: root
     group: root
-    mode: 0755
+    mode: "0755"
     path: /etc/systemd/system/clamav-clamonacc.service.d
     state: directory
-  become: True
+  become: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
     - never
@@ -126,10 +126,10 @@
   ansible.builtin.file:
     owner: clamscan
     group: clamscan
-    mode: 0755
+    mode: "0755"
     path: /var/log/clamav
     state: directory
-  become: True
+  become: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
     - never
@@ -142,8 +142,8 @@
       ExecStart=
       ExecStart=/usr/sbin/clamonacc -F --config-file=/etc/clamd.d/scan.conf --fdpass --log=/var/log/clamav/clamonacc.log
     dest: /etc/systemd/system/clamav-clamonacc.service.d/override.conf
-    mode: 0644
-  become: True
+    mode: "0644"
+  become: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
     - never
@@ -153,7 +153,7 @@
   ansible.builtin.systemd:
     daemon_reload: true
     scope: system
-  become: True
+  become: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   ignore_errors: true
   tags:
@@ -165,7 +165,7 @@
   ansible.builtin.shell: |
     setsebool -P antivirus_can_scan_system 1
     setsebool -P clamd_use_jit 1
-  become: True
+  become: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   tags:
     - never
@@ -175,7 +175,7 @@
   ansible.builtin.systemd:
     name: "{{ item }}"
     enabled: true
-  become: True
+  become: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   loop:
     - clamav-freshclam.service # Refresh Virus Database at boot

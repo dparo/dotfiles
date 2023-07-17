@@ -3,6 +3,6 @@
   ansible.builtin.shell: |
     dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
     dnf groupupdate -y sound-and-video
-  become: True
+  become: true
   tags:
     - codecs

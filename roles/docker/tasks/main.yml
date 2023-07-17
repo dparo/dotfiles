@@ -2,8 +2,8 @@
 - name: Adding docker repo
   ansible.builtin.shell: |
     dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-  become: True
-  when: podman_docker_emulation == False
+  become: true
+  when: not podman_docker_emulation
   tags:
     - docker
 
@@ -18,7 +18,7 @@
       - podman-tui
     state: present
   become: true
-  when: podman_docker_emulation == False
+  when: not podman_docker_emulation
   tags:
     - docker
     - podman
@@ -26,14 +26,14 @@
 - name: Enable docker service
   ansible.builtin.systemd:
     name: docker
-    enabled: "{{ podman_docker_emulation == False }}"
+    enabled: "{{ not podman_docker_emulation }}"
   become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and podman_docker_emulation == False
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and podman_docker_emulation
   tags:
     - docker
     - podman
 
-- name: "Add the user {{ ansible_env.USER }} to the docker group"
+- name: "Append docker group to user {{ ansible_env.USER }}"
   ansible.builtin.user:
     name: "{{ ansible_env.USER }}"
     append: true
@@ -74,7 +74,7 @@
       - podman-compose
     state: present
   become: true
-  when: podman_docker_emulation == True
+  when: podman_docker_emulation
   tags:
     - docker
     - podman
@@ -82,9 +82,9 @@
 - name: Enable podman service
   ansible.builtin.systemd:
     name: podman
-    enabled: "{{ podman_docker_emulation == True }}"
+    enabled: "{{ podman_docker_emulation }}"
   become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and podman_docker_emulation == True
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and podman_docker_emulation
   tags:
     - podman
     - docker

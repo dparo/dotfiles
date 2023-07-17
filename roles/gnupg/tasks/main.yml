@@ -12,7 +12,7 @@
   ansible.builtin.file:
     path: "{{ item }}"
     state: directory
-    mode: 0700
+    mode: "0700"
   loop:
     - "{{ ansible_user_dir }}/.gnupg"
   tags:
@@ -27,7 +27,7 @@
     - gnupg
 
 - name: Import gpg private key
-  ansible.builtin.shell:
+  ansible.builtin.command:
     cmd: gpg --batch --passphrase {{ gpg_passphrase }} --pinentry-mode loopback --import
     stdin: "{{ gpg_private_key }}"
   no_log: true

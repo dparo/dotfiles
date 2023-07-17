@@ -43,7 +43,7 @@
   ansible.builtin.unarchive:
     src: "https://github.com/GloriousEggroll/proton-ge-custom/releases/latest/download/{{ proton_ge_latest['json']['tag_name'] }}.tar.gz"
     dest: "{{ ansible_user_dir }}/.steam/root/compatibilitytools.d/"
-    remote_src: yes
+    remote_src: true
   become: true
   tags:
     - never
@@ -70,8 +70,8 @@
   ansible.builtin.get_url:
     url: "https://raw.githubusercontent.com/sonic2kk/steamtinkerlaunch/master/steamtinkerlaunch"
     dest: "/usr/local/bin/steamtinkerlaunch"
-    mode: 0755
-  become: True
+    mode: "0755"
+  become: true
   tags:
     - never
     - gaming

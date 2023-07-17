@@ -2,13 +2,13 @@
 
 - name: Clone dragon
   ansible.builtin.git:
-    clone: yes
+    clone: true
     depth: 1
     dest: "/tmp/com.github.mwh.dragon"
-    force: yes
+    force: true
     repo: https://github.com/mwh/dragon
-    single_branch: yes
-    update: yes
+    single_branch: true
+    update: true
     version: master
   register: clone
   tags:
@@ -23,14 +23,14 @@
   tags:
     - com.github.mwh.dragon
 
-- name: make all
+- name: Make all
   ansible.builtin.command:
     cmd: make all
     chdir: /tmp/com.github.mwh.dragon
   tags:
     - com.github.mwh.dragon
 
-- name: make install
+- name: Make install
   ansible.builtin.command:
     cmd: make install
     chdir: /tmp/com.github.mwh.dragon

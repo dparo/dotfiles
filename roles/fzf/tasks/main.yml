@@ -9,25 +9,25 @@
 
 - name: Clone fzf {{ fzf_latest['json']['tag_name'] | default('master') }}
   ansible.builtin.git:
-    clone: yes
+    clone: true
     depth: 1
     dest: "{{ ansible_user_dir }}/opt/fzf"
-    force: yes
+    force: true
     repo: https://github.com/junegunn/fzf
-    single_branch: yes
-    update: yes
+    single_branch: true
+    update: true
     version: "{{ fzf_latest['json']['tag_name'] | default('master') }}"
   register: fzf_clone
   tags:
     - fzf
 
 - name: Install fzf {{ fzf_latest['json']['tag_name'] | default('master') }}
-  ansible.builtin.shell: "{{ ansible_user_dir }}/opt/fzf/install  --xdg --key-bindings --completion --no-update-rc"
+  ansible.builtin.command: "{{ ansible_user_dir }}/opt/fzf/install --xdg --key-bindings --completion --no-update-rc"
   when: fzf_clone.changed
   tags:
     - fzf
 
-- name: Symlink fzf {{ fzf_latest['json']['tag_name'] | default('master') }} binary
+- name: Symlink fzf {{ fzf_latest['json']['tag_name'] | default('master') }}
   ansible.builtin.file:
     src: "{{ item }}"
     dest: "{{ ansible_user_dir }}/.local/bin/{{ item | basename }}"
@@ -36,4 +36,4 @@
     - "{{ ansible_user_dir }}/opt/fzf/bin/fzf"
     - "{{ ansible_user_dir }}/opt/fzf/bin/fzf-tmux"
   tags:
-    - maven
+    - fzf

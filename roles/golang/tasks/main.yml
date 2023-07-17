@@ -1,51 +1,50 @@
 ---
 
 - block:
-  - name: Install (DNF)
-    ansible.builtin.dnf:
-      name:
+    - name: Install (DNF)
+      ansible.builtin.dnf:
+        name:
+          - golang
+        state: present
+      become: true
+      tags:
         - golang
-      state: present
-    become: true
-    tags:
-      - golang
 
-  when: golang_install_from_package_manager == True
-
+  when: golang_install_from_package_manager
 
 - block:
-  - name: Create target dir for installation
-    ansible.builtin.file:
-      path: "{{ golang_install_dir }}/v{{ golang_version }}"
-      state: directory
-      mode: "0755"
-    become: true
-    register: go_target_dir
-    tags:
-      - golang
+    - name: Create target dir for installation
+      ansible.builtin.file:
+        path: "{{ golang_install_dir }}/v{{ golang_version }}"
+        state: directory
+        mode: "0755"
+      become: true
+      register: go_target_dir
+      tags:
+        - golang
 
-  - name: Download golang {{ golang_version }}
-    ansible.builtin.unarchive:
-      src: "https://go.dev/dl/go{{ golang_version }}.linux-amd64.tar.gz"
-      dest: "{{ golang_install_dir }}/v{{ golang_version }}"
-      remote_src: yes
-    become: true
-    when: go_target_dir.changed
-    tags:
-      - golang
+    - name: Download golang {{ golang_version }}
+      ansible.builtin.unarchive:
+        src: "https://go.dev/dl/go{{ golang_version }}.linux-amd64.tar.gz"
+        dest: "{{ golang_install_dir }}/v{{ golang_version }}"
+        remote_src: true
+      become: true
+      when: go_target_dir.changed
+      tags:
+        - golang
 
-  - name: Symlink GO {{ golang_version }} binaries
-    ansible.builtin.file:
-      src: "{{ item }}"
-      dest: "/usr/local/bin/{{ item | basename }}"
-      state: link
-    with_fileglob: "{{ golang_install_dir }}/v{{ golang_version }}/go/bin/*"
-    when: go_target_dir.changed
-    become: true
-    tags:
-      - golang
+    - name: "Symlink GO binaries {{ golang_version }}"
+      ansible.builtin.file:
+        src: "{{ item }}"
+        dest: "/usr/local/bin/{{ item | basename }}"
+        state: link
+      with_fileglob: "{{ golang_install_dir }}/v{{ golang_version }}/go/bin/*"
+      when: go_target_dir.changed
+      become: true
+      tags:
+        - golang
 
-  when: golang_install_from_package_manager == False
+  when: not golang_install_from_package_manager
 
 
 - name: Symlink config

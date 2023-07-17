@@ -99,7 +99,7 @@
     state: latest
   loop:
     - gramma # Command line grammar checker: Checks markdown files against the `https://languagetool.org/` api, or by hosting languagetool locally
-    - "@marp-team/marp-cli" # Presentation mode for markdown files. Support conversions to HTML interactive presentations (through electron) or native static PDF presentations.
+    - "@marp-team/marp-cli" # Presentation mode for markdown files.
   tags: devel
 
 - name: Install additional GO tools
@@ -147,7 +147,7 @@
   ansible.builtin.get_url:
     url: "https://cht.sh/:cht.sh"
     dest: "{{ ansible_user_dir }}/.local/bin/cht.sh"
-    mode: 0755
+    mode: "0755"
   tags:
     - devel
     - cheat.sh

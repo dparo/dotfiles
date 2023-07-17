@@ -3,5 +3,5 @@
   ansible.builtin.debug:
     msg: '{{ ansible_hostname }}'
   tags:
-  - never
-  - debug
+    - never
+    - debug

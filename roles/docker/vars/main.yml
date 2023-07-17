@@ -1,2 +1,2 @@
 ---
-podman_docker_emulation: False
+podman_docker_emulation: false

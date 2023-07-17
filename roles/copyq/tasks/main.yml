@@ -25,7 +25,7 @@
     section: Options
     option: "{{ item.key }}"
     value: "{{ item.value }}"
-    no_extra_spaces: True
+    no_extra_spaces: true
   loop:
     - { key: maxitems, value: 200 }
     - { key: activate_closes, value: 'true' }

@@ -28,7 +28,7 @@
     - clipboard
 
 
-- name: chmod +x
+- name: Mark as executable
   ansible.builtin.file:
     path: "{{ ansible_user_dir }}/opt/clipboard/bin/cb"
     mode: '0755'

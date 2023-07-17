@@ -18,7 +18,7 @@
       product: DaVinci Resolve
     headers:
       Referer: https://www.blackmagicdesign.com/products/davinciresolve
-    return_content: True
+    return_content: true
     status_code: 200
   register: download_url
   tags:
@@ -29,7 +29,7 @@
   ansible.builtin.unarchive:
     src: "{{ download_url['content'] }}"
     dest: "{{ ansible_user_dir }}/Downloads"
-    remote_src: yes
+    remote_src: true
   tags:
     - never
     - davinci-resolve
