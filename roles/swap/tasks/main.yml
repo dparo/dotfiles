@@ -2,12 +2,12 @@
 - name: Check swapfile existence
   ansible.builtin.stat:
     path: /swapfile
-  register: swapfile_existence_result
+  register: swap_stat
   tags:
     - swapfile
     - filesystem
 
-- name: Create swap file of {{ swapfile_size }} MiB
+- name: Create swap file of {{ swapfile_size ~ ' MiB'}}
   ansible.builtin.shell: |
     set -e
     dd if=/dev/zero of=/swapfile bs=1M count={{ swapfile_size }} status=progress
@@ -15,18 +15,18 @@
     mkswap -U clear /swapfile
     swapon /swapfile
   become: true
-  when: not swapfile_existence_result.stat.exists and ansible_env.RUNNING_INSIDE_DOCKER is undefined and ansible_env.RUNNING_INSIDE_VM is undefined and modify_filesystem
+  when: not swap_stat.stat.exists and ansible_env.RUNNING_INSIDE_DOCKER is undefined and ansible_env.RUNNING_INSIDE_VM is undefined and modify_filesystem
   tags:
     - swapfile
     - filesystem
 
-- name: swapfile - update /etc/fstab
+- name: Update /etc/fstab
   ansible.builtin.lineinfile:
     path: /etc/fstab
     line: /swapfile none swap defaults 0 0
     regexp: '^/swapfile'
     create: false
-  when: swapfile_existence_result.stat.exists and ansible_env.RUNNING_INSIDE_DOCKER is undefined and ansible_env.RUNNING_INSIDE_VM is undefined and modify_filesystem
+  when: swap_stat.stat.exists and ansible_env.RUNNING_INSIDE_DOCKER is undefined and ansible_env.RUNNING_INSIDE_VM is undefined and modify_filesystem
   become: true
   tags:
     - swapfile
