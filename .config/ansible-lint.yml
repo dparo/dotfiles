@@ -6,6 +6,10 @@ profile: basic
 use_default_rules: true
 loop_var_prefix: "^(__|{role}_)"
 
+
+warn_list:
+  - role-name
+
 exclude_paths:
   - .cache
   - .github
