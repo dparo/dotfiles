@@ -2,7 +2,7 @@
 # vi: ft=yaml
 # .ansible-lint
 
-profile: basic
+profile: moderate
 use_default_rules: true
 loop_var_prefix: ^(__|{role}_)
 
