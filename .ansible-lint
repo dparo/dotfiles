@@ -6,8 +6,8 @@ profile: basic
 use_default_rules: true
 loop_var_prefix: ^(__|{role}_)
 
-warn_list:
-  - role-name
+#warn_list:
+  # - role-name
 
 kinds:
   - playbook: "site.{yml,yaml}"
@@ -20,5 +20,7 @@ kinds:
 exclude_paths:
   - .cache
   - .github
+  - .ansible-lint
+  - .config
   - .pre-commit-config.yaml
   - roles/*/files/
