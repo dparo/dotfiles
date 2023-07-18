@@ -156,6 +156,10 @@ return {
                     null_ls.builtins.diagnostics.terraform_validate,
                     null_ls.builtins.diagnostics.tfsec,
                     null_ls.builtins.formatting.terraform_fmt,
+                    null_ls.builtins.formatting.stylelint.with {
+                        command = 'npx',
+                        args = { '--fix', '--stdin', '--stdin-filename', '$FILENAME' }
+                    },
 
                     null_ls.builtins.formatting.prettier.with {
                         filetypes = {
