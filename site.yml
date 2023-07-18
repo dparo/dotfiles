@@ -6,7 +6,7 @@
     - debug
     - sysctl
     - dnf
-    - x509-certs
+    - x509
     - ssh
     - gnupg
     - git
@@ -15,7 +15,7 @@
     - locale
     - wget
     - sudo
-    - core-pkgs
+    - core_pkgs
     - bash
     - zsh
     - user
@@ -24,10 +24,10 @@
     - snap
     - keyring
     - nvidia
-    - bluetooth-manager
-    - display-manager
-    - network-manager
-    - virt-manager
+    - bluetooth_manager
+    - display_manager
+    - network_manager
+    - virt_manager
     - cockpit
     - dns
     - python
@@ -51,18 +51,18 @@
     - alacritty
     - starship
     - powershell
-    - aws-cli
+    - awscli
     - tmux
     - fzf
     - neovim
     - emacs
-    - git-utils
+    - git_utils
     - lazygit
     - gitui
     - ranger
     - jless
     - dunst
-    - wm-basics
+    - wm_basics
     - feh
     - redshift
     - newsboat
@@ -94,8 +94,8 @@
     - keepassxc
     - bitwarden
     - firefox
-    - brave-browser
-    - google-chrome
+    - brave_browser
+    - google_chrome
     - masterpdfeditor5
     - p4merge
     - vscode
@@ -103,7 +103,7 @@
     - pycharm
     - telegram
     - devel
-    - diagram-tools
+    - diagram_tools
     - nwjs
     - postman
     - insomnia
@@ -121,10 +121,10 @@
     - drawio
     - onlyoffice
     - dbeaver
-    - beekeeper-studio
+    - beekeeper_studio
     - dbgate
     - redisinsight
-    - apache-ldap-studio
-    - davinci-resolve
+    - apache_ldap_studio
+    - davinci_resolve
     - audacity
-    - com.github.mwh.dragon
+    - dragon
