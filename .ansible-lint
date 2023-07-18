@@ -11,13 +11,14 @@ warn_list:
 
 kinds:
   - playbook: "site.{yml,yaml}"
+  - tasks: "roles/*/tasks/*.yml"
+  - vars: "roles/*/vars/*.yml"
+  - meta: "roles/*/meta/main.yml"
   - galaxy: "**/folder/galaxy.yml"
-  - tasks: "**/tasks/*.yml"
-  - vars: "**/vars/*.yml"
-  - meta: "**/meta/main.yml"
   - yaml: ""
 
 exclude_paths:
   - .cache
   - .github
   - .pre-commit-config.yaml
+  - roles/*/files/
