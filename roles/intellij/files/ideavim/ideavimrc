@@ -45,6 +45,8 @@ vnoremap <C-c> y
 vnoremap <C-v> y _dgP
 inoremap <C-v> <C-R><C-P>+
 
+cnoremap <C-v> <C-R>+
+cnoremap <C-S-v> <C-R>+
 
 inoremap <C-e> <End>
 inoremap <C-a> <Home>
