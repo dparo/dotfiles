@@ -42,7 +42,8 @@ vim.o.ruler = true
 vim.o.autoindent = true
 vim.o.backspace = "indent,eol,start"
 vim.o.incsearch = true
-vim.o.gdefault = true -- When on, the :substitute flag 'g' is default on. This means that all matches in a line are substituted instead of one
+-- Append g flag by default to substitution commands %s/foo/bar/g
+vim.o.gdefault = true
 vim.o.showcmd = true
 vim.o.cmdheight = 1 -- Number of screen lines to use for the command-line.  Helps avoiding |hit-enter| prompts if raised.
 vim.o.tabstop = 4

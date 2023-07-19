@@ -10,6 +10,10 @@ set clipboard+=unnamedplus
 
 set selection=exclusive
 
+" Append g flag by default to substitution commands %s/foo/bar/g
+set gdefault
+
+
 let mapleader = " "
 
 
