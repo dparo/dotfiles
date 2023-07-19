@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
 
 import sys
-print (sys.argv[0:])
+import json
+print(json.dumps(sys.argv[0:]))
