@@ -98,6 +98,7 @@
     dest: "{{ ansible_user_dir }}/.local/share/applications/{{ item | basename }}"
     state: link
   with_fileglob: "{{ role_path }}/files/applications/*"
+  ignore_errors: true
   tags:
     - xdg
 
