@@ -44,6 +44,7 @@
       Name=kitty
       GenericName=Terminal emulator
       Comment=Fast, feature-rich, GPU based terminal
+      Roles=Terminal;
       TryExec={{ansible_user_dir }}/opt/kitty/bin/kitty
       Exec={{ ansible_user_dir }}/opt/bin/kitty
       Icon={{ ansible_user_dir }}/opt/kitty/share/icons/hicolor/256x256/apps/kitty.png
