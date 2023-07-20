@@ -33,12 +33,33 @@
   tags:
     - kitty
 
-- name: Desktop integration
-  ansible.builtin.shell: |
-    cp -f ~/opt/kitty/share/applications/kitty.desktop ~/.local/share/applications/
-    cp -f ~/opt/kitty/share/applications/kitty-open.desktop ~/.local/share/applications/
-    sed -i "s|Icon=kitty|Icon=/home/$USER/opt/kitty/share/icons/hicolor/256x256/apps/kitty.png|g" ~/.local/share/applications/kitty*.desktop
-    sed -i "s|Exec=kitty|Exec=/home/$USER/opt/kitty/bin/kitty|g" ~/.local/share/applications/kitty*.desktop
+
+- name: Install desktop file integration
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.local/share/applications/kitty.desktop"
+    content: |
+      [Desktop Entry]
+      Version=1.0
+      Type=Application
+      Name=kitty
+      GenericName=Terminal emulator
+      Comment=Fast, feature-rich, GPU based terminal
+      TryExec={{ansible_user_dir }}/opt/kitty/bin/kitty
+      Exec={{ ansible_user_dir }}/opt/bin/kitty
+      Icon={{ ansible_user_dir }}/opt/kitty/share/icons/hicolor/256x256/apps/kitty.png
+      Keywords=shell;prompt;command;commandline;cmd;
+      Categories=System;TerminalEmulator;
+      StartupWMClass=kitty
+      SingleMainWindow=true
+      X-ExecArg=--
+
+      [Desktop Action open-url]
+      Name=kitty URL Launcher=
+      Comment=Open URLs with kitty
+      Exec={{ ansible_user_dir }}/opt/bin/kitty +open %U
+      NoDisplay=true
+      MimeType=image/*;application/x-sh;application/x-shellscript;inode/directory;text/*;x-scheme-handler/kitty;x-scheme-handler/ssh;
+    mode: "0644"
   tags:
     - kitty
 
@@ -72,13 +93,13 @@
 # Setup xdg-terminal-exec (Overrides default terminal used by `glib/gio/gdesktopappinfo.c` which affects programs such as `gtk-launch` and `nautilus`)
 # See: https://gitlab.gnome.org/GNOME/glib/-/blob/main/gio/gdesktopappinfo.c, known_terminals[] array. Glib uses a predefined set of terminals with precedence.
 # See: https://gitlab.freedesktop.org/xdg/xdg-specs/-/issues/54
-- name: Setup xdg-terminal-exec
-  ansible.builtin.file:
-    src: "{{ ansible_user_dir }}/.local/bin/kitty"
-    dest: "{{ ansible_user_dir }}/.local/bin/xdg-terminal-exec"
-    state: link
-  tags:
-    - kitty
+# - name: Setup xdg-terminal-exec
+#   ansible.builtin.file:
+#     src: "{{ ansible_user_dir }}/.local/bin/kitty"
+#     dest: "{{ ansible_user_dir }}/.local/bin/xdg-terminal-exec"
+#     state: link
+#   tags:
+#     - kitty
 
 - name: Setup GNOME preferred terminal to kitty
   ansible.builtin.shell: |

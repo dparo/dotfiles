@@ -24,6 +24,7 @@
     - "{{ ansible_user_dir }}/.local/share/Templates"
     - "{{ ansible_user_dir }}/opt"
     - "{{ ansible_user_dir }}/.local/bin"
+    - "{{ ansible_user_dir }}/.local/share/terminals"
     - "{{ ansible_user_dir }}/.local/share/bin"
     - "{{ ansible_user_dir }}/.local/share/fonts"
     - "{{ ansible_user_dir }}/.local/share/sounds"

@@ -48,6 +48,7 @@
     - xorg
     - wayland
     - kitty
+    - xdg_terminal_exec
     - alacritty
     - starship
     - powershell
