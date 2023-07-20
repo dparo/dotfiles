@@ -13,6 +13,9 @@ set selection=exclusive
 " Append g flag by default to substitution commands %s/foo/bar/g
 set gdefault
 
+" Highlight searches
+set hlsearch
+
 
 let mapleader = " "
 
