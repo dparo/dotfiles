@@ -11,8 +11,10 @@ audit=false
 fund=false
 update-notifier=false
 
-# Turn off logging
-logs-max=0
+progress=false
+
+logs-max=5
+loglevel=info
 
 prefix=${NPM_DIR}
 cache=${XDG_CACHE_HOME}/npm
