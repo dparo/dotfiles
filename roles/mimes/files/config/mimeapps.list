@@ -57,7 +57,6 @@ text/csv=libreoffice-calc.desktop;
 application/postscript=org.gnome.Evince.desktop;
 application/x-iso9660-appimage=appimagelauncher.desktop;
 application/vnd.appimage=appimagelauncher.desktop;
-inode/directory=org.gnome.Nautilus.desktop;ranger.desktop;
 application/x-tar=org.gnome.FileRoller.desktop;
 x-scheme-handler/http=firefox.desktop;
 x-scheme-handler/https=firefox.desktop;
