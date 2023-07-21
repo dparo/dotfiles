@@ -59,6 +59,7 @@
     - git_utils
     - lazygit
     - gitui
+    - pcmanfm
     - ranger
     - jless
     - dunst
