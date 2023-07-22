@@ -1,4 +1,3 @@
-
 return {
 
 
@@ -242,15 +241,15 @@ return {
 
                 -- IMPORTANT: The order of the sources is important. It establishes priority between source candidates
                 sources = cmp.config.sources({
-                    { name = "nvim_lsp", keyword_length = 2 },
+                    { name = "nvim_lsp", keyword_length = 3 },
                     -- { name = "nvim_lsp_signature_help" },
-                    { name = "nvim_lua" },
-                    { name = "luasnip" },
-                    { name = "vim-dadbod-completion" },
+                    { name = "nvim_lua", keyword_length = 3 },
+                    { name = "luasnip", keyword_length = 3 },
+                    { name = "vim-dadbod-completion", keyword_length = 3 },
                 }, {
-                    { name = "buffer", keyword_length = 4 },
-                    { name = "path" },
-                    { name = "luasnip" },
+                    { name = "buffer", keyword_length = 3 },
+                    { name = "path", keyword_length = 3 },
+                    { name = "luasnip", keyword_length = 3 },
                 }),
             }
 
@@ -258,9 +257,9 @@ return {
             if vim.env.GITHUB_API_TOKEN ~= nil then
                 cmp.setup.filetype("gitcommit", {
                     sources = cmp.config.sources({
-                        { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
+                        { name = "cmp_git", keyword_length = 3 }, -- You can specify the `cmp_git` source if you were installed it.
                     }, {
-                        { name = "buffer" },
+                        { name = "buffer", keyword_length = 3 },
                     }),
                 })
             end
@@ -272,7 +271,7 @@ return {
                         entries = { name = "wildmenu", separator = "|" },
                     },
                     sources = {
-                        { name = "buffer" },
+                        { name = "buffer", keyword_length = 3 },
                     },
                 })
             end
@@ -280,7 +279,7 @@ return {
             -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
             cmp.setup.cmdline(":", {
                 sources = cmp.config.sources({
-                    { name = "path" },
+                    { name = "path", keyword_length = 3 },
                 }, {
                     { name = "cmdline", keyword_length = 3 },
                 }),

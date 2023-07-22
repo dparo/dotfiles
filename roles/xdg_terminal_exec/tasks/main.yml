@@ -1,0 +1,26 @@
+- name: XDG Terminal Exec
+  tags:
+    - xdg
+    - xdg-terminal-exec
+  block:
+    - name: Create items
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - "{{ ansible_user_dir }}/.local/share/terminals"
+
+    - name: Install xdg-terminal-exec (https://github.com/Vladimir-csp/xdg-terminal-exec)
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/Vladimir-csp/xdg-terminal-exec/master/xdg-terminal-exec
+        dest: "{{ ansible_user_dir }}/.local/bin/xdg-terminal-exec"
+        mode: "0755"
+
+    - name: Set terminal priority
+      ansible.builtin.copy:
+        dest: "{{ ansible_user_dir }}/.config/xdg-terminals.list"
+        content: |
+          kitty.desktop
+          org.gnome.Terminal.desktop
+        mode: "0644"
