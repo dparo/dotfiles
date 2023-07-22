@@ -1,0 +1,36 @@
+---
+- name: Enable microsoft-edge repo
+  ansible.builtin.copy:
+    dest: /etc/yum.repos.d/google-chrome.repo
+    content: |
+      [microsoft-edge]
+      name=microsoft-edge
+      baseurl=https://packages.microsoft.com/yumrepos/edge/
+      enabled=1
+      gpgcheck=1
+      gpgkey=https://packages.microsoft.com/keys/microsoft.asc
+    mode: "0644"
+  become: true
+  tags:
+    - never
+    - microsoft-edge
+
+
+- name: Install microsoft-edge
+  ansible.builtin.dnf:
+    name:
+      - microsoft-edge
+    state: latest
+  become: true
+  tags:
+    - never
+    - microsoft-edge
+
+- name: Delete GPU Cache. Fixes issues caused by upgrading to some mesa-libGL versions
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+    - "{{ ansible_user_dir }}/.config/microsoft-edge/Default/GPUCache"
+  tags:
+    - microsoft-edge
