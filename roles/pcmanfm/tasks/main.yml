@@ -1,0 +1,35 @@
+- name: PcManFm
+  tags:
+    - pcmanfm
+    - file-manager
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name: pcmanfm
+        state: present
+      become: true
+
+    - name: Create config dirs
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0700"
+      loop:
+        - "{{ ansible_user_dir }}/.config/libfm"
+        - "{{ ansible_user_dir }}/.config/pcmanfm"
+
+    - name: Setup libfm config
+      community.general.ini_file:
+        path: "{{ ansible_user_dir }}/.config/libfm/libfm.conf"
+        section: config
+        option: "{{ item.key }}"
+        value: "{{ item.value }}"
+        no_extra_spaces: true
+      loop:
+        - { key: usetrash, value: 1 }
+        - { key: confirm_del, value: 1 }
+        - { key: confirm_trash, value: 1 }
+        - { key: terminal, value: kitty }
+        - { key: archiver, value: file-roller }
+        - { key: smart_desktop_autodrop, value: 1 }
+        - { key: force_startup_notify, value: 1 }
