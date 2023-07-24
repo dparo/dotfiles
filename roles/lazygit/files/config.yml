@@ -45,8 +45,8 @@ keybinding:
     pushFiles: "P"
     pullFiles: "p"
   files:
-    commitChanges: "c"
-    commitChangesWithEditor: "C"
+    commitChanges: "C"
+    commitChangesWithEditor: "c"
     commitChangesWithoutHook: "w"
     amendLastCommit: "A"
 
