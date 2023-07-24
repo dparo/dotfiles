@@ -39,6 +39,7 @@
     - golang
     - nodejs
     - java
+    - graalvm
     - kotlin
     - maven
     - latex

@@ -1,0 +1,11 @@
+- name: GraalVM
+  tags:
+    - graalvm
+    - graal
+  block:
+    - name: Download graalvm {{ version }}
+      ansible.builtin.unarchive:
+        src: "https://download.oracle.com/graalvm/{{ version }}/latest/graalvm-jdk-{{ version }}_linux-x64_bin.tar.gz"
+        dest: /opt
+        remote_src: true
+      become: true
