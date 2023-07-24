@@ -44,3 +44,20 @@
   tags:
     - never
     - mattermost
+
+- name: Create autostart desktop file
+  ansible.builtin.copy:
+    dest: "{{ ansible_user_dir }}/.config/autostart/mattermost-desktop.desktop"
+    content: |
+      [Desktop Entry]
+      Type=Application
+      Version=1.0
+      Name=mattermost-desktop
+      Comment=mattermost-desktopstartup script
+      Exec="{{ ansible_user_dir }}/opt/mattermost-desktop-{{ mattermost['json']['tag_name'][1:] }}-linux-x64/mattermost-desktop"=
+      StartupNotify=false
+      Terminal=false
+    mode: "0644"
+  tags:
+    - never
+    - mattermost
