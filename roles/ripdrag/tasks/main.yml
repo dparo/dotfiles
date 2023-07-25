@@ -1,0 +1,19 @@
+---
+
+- name: RipDrag
+  tags:
+  - ripdrag
+  - com.github.nik012003.ripdrag
+  block:
+    - name: Install devel dependencies
+      ansible.builtin.dnf:
+        name:
+          - gtk4-devel
+        state: present
+      become: true
+
+    - name: Install
+      community.general.cargo:
+        name:
+          - ripdrag
+        state: latest

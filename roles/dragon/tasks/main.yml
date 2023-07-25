@@ -1,37 +1,33 @@
 ---
-- name: Clone dragon
-  ansible.builtin.git:
-    clone: true
-    depth: 1
-    dest: /tmp/com.github.mwh.dragon
-    force: true
-    repo: https://github.com/mwh/dragon
-    single_branch: true
-    update: true
-    version: master
-  register: clone
+- name: Dragon
   tags:
-    - com.github.mwh.dragon
+  - com.github.mwh.dragon
+  block:
+    - name: Clone dragon
+      ansible.builtin.git:
+        clone: true
+        depth: 1
+        dest: /tmp/com.github.mwh.dragon
+        force: true
+        repo: https://github.com/mwh/dragon
+        single_branch: true
+        update: true
+        version: master
+      register: clone
 
-- name: Install devel dependencies
-  ansible.builtin.dnf:
-    name:
-      - gtk3-devel
-    state: present
-  become: true
-  tags:
-    - com.github.mwh.dragon
+    - name: Install devel dependencies
+      ansible.builtin.dnf:
+        name:
+          - gtk3-devel
+        state: present
+      become: true
 
-- name: Make all
-  ansible.builtin.command:
-    cmd: make all
-    chdir: /tmp/com.github.mwh.dragon
-  tags:
-    - com.github.mwh.dragon
+    - name: Make all
+      ansible.builtin.command:
+        cmd: make all
+        chdir: /tmp/com.github.mwh.dragon
 
-- name: Make install
-  ansible.builtin.command:
-    cmd: make install
-    chdir: /tmp/com.github.mwh.dragon
-  tags:
-    - com.github.mwh.dragon
+    - name: Make install
+      ansible.builtin.command:
+        cmd: make install
+        chdir: /tmp/com.github.mwh.dragon
