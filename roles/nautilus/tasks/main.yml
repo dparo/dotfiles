@@ -1,0 +1,38 @@
+---
+- name: Nautilus
+  tags:
+    - nautilus
+  block:
+    - name: Create config dir
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/.config/nautilus"
+        state: directory
+        mode: "0755"
+    - name: Create script dir
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/.local/share/nautilus/scripts"
+        state: directory
+        mode: "0755"
+
+    - name: Create scripts-accels config
+      ansible.builtin.copy:
+        dest: "{{ ansible_user_dir }}/.config/nautilus/scripts-accels"
+        content: |
+          ; Modifiers: <Control> <Alt> <Shift>
+          F4 open-terminal-here
+        mode: "0644"
+
+    # NOTE:
+    # Scripts have access to the following environment variables
+    #   NAUTILUS_SCRIPT_SELECTED_FILE_PATHS
+    #   NAUTILUS_SCRIPT_SELECTED_URIS
+    #   NAUTILUS_SCRIPT_CURRENT_URI
+    #   NAUTILUS_SCRIPT_WINDOW_GEOMETRY
+    - name: Create open-terminal-here script
+      ansible.builtin.copy:
+        dest: "{{ ansible_user_dir }}/.local/share/nautilus/scripts/open-terminal-here"
+        content: |
+          #/bin/sh
+
+          exec kitty
+        mode: "0755"

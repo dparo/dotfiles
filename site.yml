@@ -61,6 +61,7 @@
     - git_utils
     - lazygit
     - gitui
+    - nautilus
     - pcmanfm
     - ranger
     - jless
