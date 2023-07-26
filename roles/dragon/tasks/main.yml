@@ -1,7 +1,7 @@
 ---
 - name: Dragon
   tags:
-  - com.github.mwh.dragon
+    - com.github.mwh.dragon
   block:
     - name: Clone dragon
       ansible.builtin.git:

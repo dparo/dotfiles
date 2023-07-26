@@ -42,6 +42,7 @@
     - graalvm
     - kotlin
     - maven
+    - jdgui
     - latex
     - alsa
     - pulseaudio

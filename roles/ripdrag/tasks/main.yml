@@ -2,8 +2,8 @@
 
 - name: RipDrag
   tags:
-  - ripdrag
-  - com.github.nik012003.ripdrag
+    - ripdrag
+    - com.github.nik012003.ripdrag
   block:
     - name: Install devel dependencies
       ansible.builtin.dnf:
