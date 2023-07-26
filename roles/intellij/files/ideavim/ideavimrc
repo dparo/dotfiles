@@ -24,6 +24,10 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
 
+sethandler <C-+> n:ide i:ide
+sethandler <C--> n:ide i:ide
+
+
 sethandler <M-CR> n-v:ide i:ide
 
 sethandler <M-Left> n:vim i:ide
