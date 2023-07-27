@@ -18,7 +18,7 @@ main() {
     mvn_config_location="${XDG_CONFIG_HOME:-$HOME/.config}/maven"
 
     pushd "$mvn_config_location" || exit 1
-    ln --force -s "$(find ./ -type f | grep -E --invert-match '^(\./)?settings_local.xml$' | grep -E --invert-match '^(\./)?settings_global.xml$' | grep -E '.*.xml$' | fzf)" "settings_local.xml"
+    ln --force -s "$(find ./ | grep -E --invert-match '^(\./)?settings_local.xml$' | grep -E --invert-match '^(\./)?settings_global.xml$' | grep -E '.*.xml$' | fzf)" "settings_local.xml"
     popd
 }
 
