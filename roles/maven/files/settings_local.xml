@@ -13,14 +13,19 @@
     </pluginGroups>
 
     <profiles>
+        <!-- Activate by using `mvn -P local ...` -->
         <profile>
-            <id>common-maven-profile</id>
+            <id>local</id>
             <activation>
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
+
                 <downloadSources>true</downloadSources>
                 <downloadJavadocs>false</downloadJavadocs>
+
+                <!-- Equivalent to `java -jar ... -Dspring.profiles.active=local ...` command line argument` -->
+                <spring.profiles.active>local</spring.profiles.active>
 
                 <!-- Equivalent to -DtrimStackTrace=false
                      Makes `mvn test` (surefire:test plugin) display the full stacktrace on error.
@@ -30,19 +35,7 @@
                     - https://stackoverflow.com/questions/2928548/make-mavens-surefire-show-stacktrace-in-console
                 -->
                 <trimStackTrace>false</trimStackTrace>
-            </properties>
-        </profile>
 
-
-        <!-- Activate by using `mvn -P local ...` -->
-        <profile>
-            <id>local</id>
-            <activation>
-                <activeByDefault>false</activeByDefault>
-            </activation>
-            <properties>
-                <!-- Equivalent to `java -jar ... -Dspring.profiles.active=local ...` command line argument` -->
-                <spring.profiles.active>local</spring.profiles.active>
             </properties>
         </profile>
 
