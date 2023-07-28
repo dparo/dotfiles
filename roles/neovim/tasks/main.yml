@@ -84,6 +84,7 @@
       - the_silver_searcher
       - editorconfig
       - jq
+      - xq # Similar to jq for xml files
       - highlight
       - python3-pygments
       - python3-virtualenv
