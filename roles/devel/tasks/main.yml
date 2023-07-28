@@ -2,7 +2,7 @@
 - name: Install generic devel deps
   ansible.builtin.dnf:
     name:
-      - tidy
+      - tidy # https://github.com/htacg/tidy-html5
       - just # https://github.com/casey/just: A command runner: just is a handy way to save and run project-specific commands.
       - lnav # Log file navigator: https://github.com/tstack/lnav
       - xxd
