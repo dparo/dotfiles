@@ -133,9 +133,9 @@ return {
                     },
 
                     null_ls.builtins.formatting.google_java_format,
-                    null_ls.builtins.diagnostics.checkstyle.with({
+                    null_ls.builtins.diagnostics.checkstyle.with {
                         extra_args = { "-c", "checkstyle.xml" },
-                    }),
+                    },
 
                     null_ls.builtins.diagnostics.semgrep.with {
                         args = { "--config", "auto", "-q", "--json", "$FILENAME" },
@@ -157,8 +157,8 @@ return {
                     null_ls.builtins.diagnostics.tfsec,
                     null_ls.builtins.formatting.terraform_fmt,
                     null_ls.builtins.formatting.stylelint.with {
-                        command = 'npx',
-                        args = { '--fix', '--stdin', '--stdin-filename', '$FILENAME' }
+                        command = "npx",
+                        args = { "--fix", "--stdin", "--stdin-filename", "$FILENAME" },
                     },
 
                     null_ls.builtins.formatting.prettier.with {
@@ -178,6 +178,7 @@ return {
                     -- XML, HTML
                     null_ls.builtins.formatting.tidy,
                     null_ls.builtins.diagnostics.tidy,
+                    null_ls.builtins.diagnostics.xmllint,
 
                     null_ls.builtins.formatting.shfmt.with {
                         args = { "--indent", "4", "-filename", "$FILENAME" }, -- Default to use 4 spaces for indentation
