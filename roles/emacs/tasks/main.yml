@@ -1,19 +1,19 @@
 ---
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - emacs
-    state: present
-  become: true
-  tags:
-    - never
-    - emacs
 
-- name: Symlink config
-  ansible.builtin.file:
-    src: "{{ role_path }}/files"
-    dest: "{{ ansible_user_dir }}/.config/emacs"
-    state: link
+- name: Emacs
   tags:
-    - never
     - emacs
+    - never
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - emacs
+        state: present
+      become: true
+
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files"
+        dest: "{{ ansible_user_dir }}/.config/emacs"
+        state: link
