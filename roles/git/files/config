@@ -101,11 +101,12 @@
     diffFilter = delta --color-only --features=interactive
 [delta]
     navigate=true
-    features = line-numbers decorations
+    features = decorations
     whitespace-error-style = 22 reverse
     syntax-theme = ansi
-    diff-so-fancy=true
+    diff-so-fancy=false
     side-by-side=false
+    hyperlinks = true
     # plus-style = syntax bold auto
     # minus-style = syntax bold auto
 [delta "interactive"]
@@ -114,7 +115,7 @@
     commit-decoration-style = blue ol
     commit-style = raw
     file-style = omit
-    hunk-header-decoration-style = blue box
+    hunk-header-decoration-style =
     hunk-header-file-style = red
     hunk-header-line-number-style = "#067a00"
     hunk-header-style = file line-number syntax
