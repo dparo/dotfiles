@@ -16,8 +16,8 @@ if ! test -x "$(command -v ansible)"; then
         sudo pacman -S --noconfirm git ansible pre-commit
         ;;
     fedora)
-        sudo dnf updgrade -y
-        sudo dnf install -y git ansible pre-commit
+        sudo dnf upgrade -y
+        sudo dnf install -y git ansible pre-commit python3-molecule python3-molecule-docker
         ;;
     esac
 fi
