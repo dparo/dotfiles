@@ -1,36 +1,33 @@
 ---
-- name: Enable brave-browser repo (https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo)
-  ansible.builtin.get_url:
-    dest: /etc/yum.repos.d/brave-browser.repo
-    url: https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
-    mode: "0644"
-  become: true
-  tags:
-    - brave-browser
 
-- name: Import brave-browser RPM key
-  ansible.builtin.rpm_key:
-    state: present
-    key: https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
-  become: true
+- name: BraveBrowser
   tags:
     - brave-browser
+  block:
+    - name: Enable brave-browser repo (https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo)
+      ansible.builtin.get_url:
+        dest: /etc/yum.repos.d/brave-browser.repo
+        url: https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo
+        mode: "0644"
+      become: true
 
-- name: Install brave-browser
-  ansible.builtin.dnf:
-    name:
-      - brave-browser
-      - brave-keyring
-    state: latest
-  become: true
-  tags:
-    - brave-browser
+    - name: Import brave-browser RPM key
+      ansible.builtin.rpm_key:
+        state: present
+        key: https://brave-browser-rpm-release.s3.brave.com/brave-core.asc
+      become: true
 
-- name: Delete GPU Cache. Fixes issues caused by upgrading to some mesa-libGL versions
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: absent
-  loop:
-    - "{{ ansible_user_dir }}/.config/BraveSoftware/Brave-Browser/Default/GPUCache"
-  tags:
-    - brave-browser
+    - name: Install brave-browser
+      ansible.builtin.dnf:
+        name:
+          - brave-browser
+          - brave-keyring
+        state: latest
+      become: true
+
+    - name: Delete GPU Cache. Fixes issues caused by upgrading to some mesa-libGL versions
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - "{{ ansible_user_dir }}/.config/BraveSoftware/Brave-Browser/Default/GPUCache"
