@@ -30,7 +30,7 @@
 
     - name: Install desktop integration
       ansible.builtin.copy:
-        dest: "{{ ansible_user_dir }}/.local/share/applications/jetbrains-idea-ce.desktop"
+        dest: "{{ ansible_user_dir }}/.local/share/applications/jetbrains-pycharm-ce.desktop"
         content: |
 
           [Desktop Entry]
