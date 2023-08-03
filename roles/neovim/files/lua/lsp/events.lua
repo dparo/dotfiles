@@ -202,18 +202,6 @@ function M.on_attach(client, bufnr)
         end
     end
 
-    if client.server_capabilities.documentRangeFormattingProvider then
-        if vim.fn.has "nvim-0.8" == 1 then
-            vim.keymap.set("v", "<leader>lf", function()
-                vim.lsp.buf.format()
-            end, keymap_opts)
-        else
-            vim.keymap.set("v", "<leader>lf", function()
-                vim.lsp.buf.range_formatting()
-            end, keymap_opts)
-        end
-    end
-
     -- Setup highlight references of word under cursor using lsp
     if client.name ~= "null-ls" and client.server_capabilities.documentHighlightProvider then
         vim.api.nvim_create_autocmd({ "CursorHold" }, {
@@ -268,7 +256,7 @@ function M.on_attach(client, bufnr)
 
     -- Enable formatting on save
     if
-        client.supports_method "textDocument/formatting" and (vim.env.NVIM_LSP_FORMAT_ON_SAVE == nil or vim.env.NVIM_LSP_FORMAT_ON_SAVE ~= "0")
+        client.server_capabilities.documentFormattingProvider and (vim.env.NVIM_LSP_FORMAT_ON_SAVE == nil or vim.env.NVIM_LSP_FORMAT_ON_SAVE ~= "0")
     then
         vim.api.nvim_create_autocmd({ "BufWritePre" }, {
             group = augroup,
