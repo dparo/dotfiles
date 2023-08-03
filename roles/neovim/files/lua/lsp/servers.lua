@@ -107,7 +107,16 @@ M.list = {
         },
     },
     { name = "ltex", config = {} }, --- LateX language server: LSP language server for LanguageTool (requires ltex-ls binary in path)
-    { name = "lemminx", config = {} },
+    { name = "lemminx", config = {
+        settings = {
+            xml = {
+                server = {
+                    workDir = path.concat { home, '.cache', 'lemminx' }
+                }
+            }
+        }
+    }
+    },
     {
         name = "jsonls",
         config = {

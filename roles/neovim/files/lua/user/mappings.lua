@@ -199,8 +199,8 @@ local function setup_basic_functionalities()
     cmap({ "<C-v>", "<S-Insert>" }, "<C-R>+", { silent = false })
     vmap({ "<C-v>", "<S-Insert>", "p" }, '"_dgP') -- When pasting over selected region, do not yank replaced region
 
-    imap('<C-BS>', '<C-w>', {silent = true, noremap = false})
-    imap('<C-h>', '<C-w>', {silent = true, noremap = false})
+    imap('<C-BS>', '<C-w>', { silent = true, noremap = false })
+    imap('<C-h>', '<C-w>', { silent = true, noremap = false })
 
     cmap({ "<C-BS>", "<C-h>" }, "<C-w>")
 
@@ -336,7 +336,7 @@ local function setup_plugins()
 
     nmap("<C-r>", exec_cmd "Telescope command_history")
     nmap("<M-x>", exec_cmd "Telescope commands")
-    nmap({ "<C-\\>", "<leader><leader>" }, exec_cmd "NvimTreeToggle")
+    nmap({ "<C-\\>", "<leader><leader>" }, exec_cmd "NvimTreeFindFileToggle")
     nmap("<M-q>", exec_cmd "TroubleToggle document_diagnostics")
 
     -- Toggle between C source file and H header files
