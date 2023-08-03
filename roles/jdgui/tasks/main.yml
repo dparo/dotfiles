@@ -18,3 +18,13 @@
         state: present
         disable_gpg_check: true
       become: true
+
+    - name: Create binary wrapper
+      ansible.builtin.copy:
+        dest: "/usr/local/bin/jdgui"
+        content: |
+          #!/usr/bin/env bash
+
+          exec java -jar /opt/jd-gui/jd-gui.jar "$@"
+        mode: "0755"
+      become: True
