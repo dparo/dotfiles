@@ -354,12 +354,12 @@ M.list = {
             root_dir = deno_root_dir,
         },
     },
-    { name = "vuels", config = {} },
-    { name = "gopls", config = {} },
-    { name = "vimls", config = {} },
-    { name = "html", config = {} },
-    { name = "zls", config = {} },
-    { name = "nimls", config = {} },
+    { name = "vuels",                    config = {} },
+    { name = "gopls",                    config = {} },
+    { name = "vimls",                    config = {} },
+    { name = "html",                     config = {} },
+    { name = "zls",                      config = {} },
+    { name = "nim_langserver",           config = {} },
     { name = "cucumber_language_server", config = {} },
 
     -- NOTE: We use null-ls now, which is more richer in terms of features
