@@ -59,6 +59,7 @@
     - "{{ ansible_user_dir }}/.xsession-errors"
     - "{{ ansible_user_dir }}/.gnome"
     - "{{ ansible_user_dir }}/Templates"
+    - "{{ ansible_user_dir }}/.gnome"
   tags:
     - xdg
 

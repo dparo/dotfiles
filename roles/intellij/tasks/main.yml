@@ -1,16 +1,53 @@
 ---
-- name: Download and unpack intellij {{ intellij_version }}
-  ansible.builtin.unarchive:
-    src: https://download.jetbrains.com/idea/ideaIC-{{ intellij_version }}.tar.gz
-    dest: "{{ ansible_user_dir }}/opt"
-    remote_src: true
+- name: IntelliJ
   tags:
     - intellij
+    - idea-ce
+    - jetbrains-idea-ce
+  block:
 
-- name: Symlink ideavim config
-  ansible.builtin.file:
-    src: "{{ role_path }}/files/ideavim"
-    dest: "{{ ansible_user_dir }}/.config/ideavim"
-    state: link
-  tags:
-    - intellij
+    - name: Create target dir
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/opt/jetbrains-idea-ce"
+        state: directory
+        mode: "0755"
+
+
+    - name: Download and unpack intellij-idea-ce {{ intellij_version }}
+      ansible.builtin.unarchive:
+        src: https://download.jetbrains.com/idea/ideaIC-{{ intellij_version }}.tar.gz
+        dest: "{{ ansible_user_dir }}/opt/jetbrains-idea-ce"
+        remote_src: true
+        extra_opts: [--strip-components=1]
+
+    - name: Symlink ideavim config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/ideavim"
+        dest: "{{ ansible_user_dir }}/.config/ideavim"
+        state: link
+
+    - name: Symlink binaries
+      ansible.builtin.file:
+        src: "{{ ansible_user_dir }}/opt/jetbrains-idea-ce/bin/idea.sh"
+        dest: "{{ ansible_user_dir }}/.local/bin/idea"
+        state: link
+      become: true
+
+
+    - name: Install desktop integration
+      ansible.builtin.copy:
+        dest: "{{ ansible_user_dir }}/.local/share/applications/jetbrains-idea-ce.desktop"
+        content: |
+          [Desktop Entry]
+          Version=1.0
+          Type=Application
+          Name=IntelliJ IDEA Community Edition
+          Icon={{ ansible_user_dir }}/opt/jetbrains-idea-ce/bin/idea.svg
+          TryExec={{ ansible_user_dir }}/opt/jetbrains-idea-ce/bin/idea.sh
+          Exec="{{ ansible_user_dir }}/opt/jetbrains-idea-ce/bin/idea.sh" %f
+          Comment=Capable and Ergonomic IDE for JVM
+          Categories=Development;IDE;
+          Terminal=false
+          StartupWMClass=jetbrains-idea-ce
+          StartupNotify=true
+        mode: "0644"
