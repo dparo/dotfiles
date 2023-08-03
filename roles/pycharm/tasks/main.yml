@@ -4,17 +4,45 @@
   tags:
     - never
     - pycharm
+    - pycharm-ce
+    - jetbrains-pycharm-ce
   block:
+    - name: Create target dir
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/opt/jetbrains-pycharm-ce"
+        state: directory
+        mode: "0755"
+
+
     - name: Download and unpack pycharm {{ pycharm_version }}
       ansible.builtin.unarchive:
         src: https://download.jetbrains.com/python/pycharm-community-{{ pycharm_version }}.tar.gz
-        dest: "{{ ansible_user_dir }}/opt"
+        dest: "{{ ansible_user_dir }}/opt/jetbrains-pycharm-ce"
         remote_src: true
+        extra_opts: [--strip-components=1]
+
 
     - name: Symlink binaries
       ansible.builtin.file:
-        src: "{{ ansible_user_dir }}/opt/pycharm-community-{{ pycharm_version }}/bin/{{ item }}"
-        dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+        src: "{{ ansible_user_dir }}/opt/jetbrains-pycharm-ce/bin/pycharm.sh"
+        dest: "{{ ansible_user_dir }}/.local/bin/pycharm"
         state: link
-      loop:
-        - pycharm.sh
+
+    - name: Install desktop integration
+      ansible.builtin.copy:
+        dest: "{{ ansible_user_dir }}/.local/share/applications/jetbrains-idea-ce.desktop"
+        content: |
+
+          [Desktop Entry]
+          Version=1.0
+          Type=Application
+          Name=PyCharm Community Edition
+          Icon={{ ansible_user_dir }}/opt/jetbrains-pycharm-ce/bin/pycharm.svg
+          TryExec={{ ansible_user_dir }}/opt/jetbrains-pycharm-ce/bin/pycharm.sh
+          Exec="{{ ansible_user_dir }}/opt/jetbrains-pycharm-ce/bin/pycharm.sh" %f
+          Comment=Python IDE for Professional Developers
+          Categories=Development;IDE;
+          Terminal=false
+          StartupWMClass=jetbrains-pycharm-ce
+          StartupNotify=true
+        mode: "0644"

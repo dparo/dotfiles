@@ -5,13 +5,11 @@
     - idea-ce
     - jetbrains-idea-ce
   block:
-
     - name: Create target dir
       ansible.builtin.file:
         path: "{{ ansible_user_dir }}/opt/jetbrains-idea-ce"
         state: directory
         mode: "0755"
-
 
     - name: Download and unpack intellij-idea-ce {{ intellij_version }}
       ansible.builtin.unarchive:
@@ -31,8 +29,6 @@
         src: "{{ ansible_user_dir }}/opt/jetbrains-idea-ce/bin/idea.sh"
         dest: "{{ ansible_user_dir }}/.local/bin/idea"
         state: link
-      become: true
-
 
     - name: Install desktop integration
       ansible.builtin.copy:
