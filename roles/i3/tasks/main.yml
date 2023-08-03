@@ -1,42 +1,35 @@
 ---
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - i3
-      - i3status
-      - i3lock
-    state: present
-  become: true
+- name: I3
   tags:
     - i3
     - i3wm
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - i3
+          - i3status
+          - i3lock
+        state: present
+      become: true
 
-- name: Install i3ipc
-  ansible.builtin.pip:
-    name:
-      - i3ipc
-    state: latest
-  tags:
-    - i3
-    - i3wm
+    - name: Install i3ipc
+      ansible.builtin.pip:
+        name:
+          - i3ipc
+        state: latest
 
-- name: Symlink config
-  ansible.builtin.file:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    state: link
-  loop:
-    - src: "{{ role_path }}/files/i3"
-      dest: "{{ ansible_user_dir }}/.config/i3"
-    - src: "{{ role_path }}/files/i3status"
-      dest: "{{ ansible_user_dir }}/.config/i3status"
-  tags:
-    - i3
-    - i3wm
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ item.src }}"
+        dest: "{{ item.dest }}"
+        state: link
+      loop:
+        - src: "{{ role_path }}/files/i3"
+          dest: "{{ ansible_user_dir }}/.config/i3"
+        - src: "{{ role_path }}/files/i3status"
+          dest: "{{ ansible_user_dir }}/.config/i3status"
 
-- name: Reload i3
-  ansible.builtin.command: i3-msg reload
-  ignore_errors: true
-  tags:
-    - i3
-    - i3wm
+    - name: Reload i3
+      ansible.builtin.command: i3-msg reload
+      ignore_errors: true
