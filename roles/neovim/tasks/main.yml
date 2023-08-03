@@ -1,185 +1,163 @@
 ---
-- name: Neovim build from source
-  when: neovim_build_from_source
+
+- name: Neovim
+  tags:
+    - neovim
   block:
-    - name: "Install build dependencies (See: https://github.com/neovim/neovim/wiki/Building-Neovim#centos--rhel--fedora)"
+    - name: Neovim build from source
+      when: neovim_build_from_source
+      block:
+        - name: "Install build dependencies (See: https://github.com/neovim/neovim/wiki/Building-Neovim#centos--rhel--fedora)"
+          ansible.builtin.dnf:
+            name:
+              - ninja-build
+              - libtool
+              - autoconf
+              - automake
+              - cmake
+              - strace
+              - gcc
+              - gcc-c++
+              - make
+              - pkgconfig
+              - unzip
+              - patch
+              - gettext
+              - curl
+            state: present
+          become: true
+
+        - name: Clone NEOVIM {{ neovim_version }}
+          ansible.builtin.git:
+            clone: true
+            depth: 1
+            dest: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim"
+            force: true
+            repo: https://github.com/neovim/neovim.git
+            single_branch: true
+            update: true
+            version: "{{ neovim_version | default('master') }}"
+          register: clone
+
+        - name: Build
+          community.general.make:
+            chdir: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim"
+            params:
+              CMAKE_BUILD_TYPE: Release
+          when: clone.changed
+          tags:
+            - neovim
+
+        - name: Install
+          community.general.make:
+            chdir: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim"
+            target: install
+          become: true
+          when: clone.changed
+          tags:
+            - neovim
+
+        - name: Remove build folder
+          ansible.builtin.file:
+            path: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim/build"
+            state: absent
+          become: true
+
+    - name: Install (Package Manager)
       ansible.builtin.dnf:
         name:
-          - ninja-build
-          - libtool
-          - autoconf
-          - automake
-          - cmake
-          - strace
-          - gcc
-          - gcc-c++
-          - make
-          - pkgconfig
-          - unzip
-          - patch
-          - gettext
-          - curl
+          - neovim
         state: present
       become: true
-      tags:
-        - neovim
+      when: not neovim_build_from_source
 
-    - name: Clone NEOVIM {{ neovim_version }}
+    - name: Install runtime deps (package manager)
+      ansible.builtin.dnf:
+        name:
+          - xsel
+          - xclip
+          - fd-find
+          - ripgrep
+          - the_silver_searcher
+          - editorconfig
+          - jq
+          - xq # Similar to jq for xml files
+          - highlight
+          - python3-pygments
+          - python3-virtualenv
+          - tidy # XML, HTML formatter / diagnostic tool
+          - tree-sitter-cli
+          - tokei
+        state: present
+      become: true
+
+    - name: Install runtime deps (CARGO)
+      community.general.cargo:
+        name:
+          - tokei
+          - tree-sitter-cli
+        state: latest
+
+    - name: Install runtime deps (PIP)
+      ansible.builtin.pip:
+        name:
+          - httpie
+          - cpplint
+        state: latest
+
+    - name: Install required providers - npm neovim
+      community.general.npm:
+        name: neovim
+        state: latest
+        global: true
+
+    - name: Install required providers - pip3 pynvim
+      ansible.builtin.pip:
+        name: pynvim
+        state: latest
+
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files"
+        dest: "{{ ansible_user_dir }}/.config/nvim"
+        state: link
+
+    - name: Clean packer.nvim cache
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}.config/nvim/plugin/packer_compiled.lua"
+        state: absent
+
+    - name: Clone lazy.nvim
       ansible.builtin.git:
         clone: true
         depth: 1
-        dest: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim"
+        dest: "{{ ansible_user_dir }}/.local/share/nvim/lazy/lazy.nvim"
         force: true
-        repo: https://github.com/neovim/neovim.git
+        repo: https://github.com/folke/lazy.nvim.git
         single_branch: true
+        version: stable
         update: true
-        version: "{{ neovim_version | default('master') }}"
-      register: clone
+
+    - name: Lazy.nvim install plugins
+      ansible.builtin.shell: |
+        nvim --headless -c "Lazy! restore" -c qall
       tags:
         - neovim
+        - neovim-plugins
 
-    - name: Build
-      community.general.make:
-        chdir: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim"
-        params:
-          CMAKE_BUILD_TYPE: Release
-      when: clone.changed
+    - name: Update remote plugins
+      ansible.builtin.shell: |
+        nvim --headless -c 'UpdateRemotePlugins' -c qall
       tags:
         - neovim
+        - neovim-plugins
 
-    - name: Install
-      community.general.make:
-        chdir: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim"
-        target: install
-      become: true
-      when: clone.changed
+    - name: MasonInstall {{ mason_dependencies | join(' ') }}
+      ansible.builtin.shell: |
+        nvim --headless -c "MasonInstall {{ mason_dependencies | join(' ') }}" -c "qall"
       tags:
         - neovim
-
-    - name: Remove build folder
-      ansible.builtin.file:
-        path: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim/build"
-        state: absent
-      become: true
-      tags:
-        - neovim
-
-- name: Install (Package Manager)
-  ansible.builtin.dnf:
-    name:
-      - neovim
-    state: present
-  become: true
-  when: not neovim_build_from_source
-  tags:
-    - neovim
-
-- name: Install runtime deps (package manager)
-  ansible.builtin.dnf:
-    name:
-      - xsel
-      - xclip
-      - fd-find
-      - ripgrep
-      - the_silver_searcher
-      - editorconfig
-      - jq
-      - xq # Similar to jq for xml files
-      - highlight
-      - python3-pygments
-      - python3-virtualenv
-      - tidy # XML, HTML formatter / diagnostic tool
-      - tree-sitter-cli
-      - tokei
-    state: present
-  become: true
-  tags:
-    - neovim
-    - neovim-runtime
-
-- name: Install runtime deps (CARGO)
-  community.general.cargo:
-    name:
-      - tokei
-      - tree-sitter-cli
-    state: latest
-  tags:
-    - neovim
-    - neovim-runtime
-
-- name: Install runtime deps (PIP)
-  ansible.builtin.pip:
-    name:
-      - httpie
-      - cpplint
-    state: latest
-  tags:
-    - neovim
-    - neovim-runtime
-
-- name: Install required providers - npm neovim
-  community.general.npm:
-    name: neovim
-    state: latest
-    global: true
-  tags:
-    - neovim
-
-- name: Install required providers - pip3 pynvim
-  ansible.builtin.pip:
-    name: pynvim
-    state: latest
-  tags:
-    - neovim
-
-- name: Symlink config
-  ansible.builtin.file:
-    src: "{{ role_path }}/files"
-    dest: "{{ ansible_user_dir }}/.config/nvim"
-    state: link
-  tags:
-    - neovim
-
-- name: Clean packer.nvim cache
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}.config/nvim/plugin/packer_compiled.lua"
-    state: absent
-  tags:
-    - neovim
-
-- name: Clone lazy.nvim
-  ansible.builtin.git:
-    clone: true
-    depth: 1
-    dest: "{{ ansible_user_dir }}/.local/share/nvim/lazy/lazy.nvim"
-    force: true
-    repo: https://github.com/folke/lazy.nvim.git
-    single_branch: true
-    version: stable
-    update: true
-  tags:
-    - neovim
-
-- name: Lazy.nvim install plugins
-  ansible.builtin.shell: |
-    nvim --headless -c "Lazy! restore" -c qall
-  tags:
-    - neovim
-    - neovim-plugins
-
-- name: Update remote plugins
-  ansible.builtin.shell: |
-    nvim --headless -c 'UpdateRemotePlugins' -c qall
-  tags:
-    - neovim
-    - neovim-plugins
-
-- name: MasonInstall {{ mason_dependencies | join(' ') }}
-  ansible.builtin.shell: |
-    nvim --headless -c "MasonInstall {{ mason_dependencies | join(' ') }}" -c "qall"
-  tags:
-    - neovim
-    - neovim-lsp
-    - mason
-    - mason.nvim
-    - nvim-mason
+        - neovim-lsp
+        - mason
+        - mason.nvim
+        - nvim-mason
