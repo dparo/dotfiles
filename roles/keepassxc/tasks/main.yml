@@ -1,97 +1,87 @@
 ---
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - keepassxc
-    state: present
-  become: true
+- name: KeePassXC
   tags:
     - keepassxc
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - keepassxc
+        state: present
+      become: true
 
-- name: Create config dir
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/keepassxc"
-    state: directory
-    mode: "0755"
-  tags:
-    - keepassxc
+    - name: Create config dir
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/.config/keepassxc"
+        state: directory
+        mode: "0755"
 
-- name: Setup keepassxc config - General
-  community.general.ini_file:
-    path: "{{ ansible_user_dir }}/.config/keepassxc/keepassxc.ini"
-    section: General
-    option: "{{ item.key }}"
-    value: "{{ item.value }}"
-    no_extra_spaces: true
-  loop:
-    - { key: ConfigVersion, value: 2 }
-    - { key: MinimizeAfterUnlock, value: "true" }
-  tags:
-    - keepassxc
+    - name: Setup keepassxc config - General
+      community.general.ini_file:
+        path: "{{ ansible_user_dir }}/.config/keepassxc/keepassxc.ini"
+        section: General
+        option: "{{ item.key }}"
+        value: "{{ item.value }}"
+        no_extra_spaces: true
+      loop:
+        - { key: ConfigVersion, value: 2 }
+        - { key: MinimizeAfterUnlock, value: "true" }
 
-- name: Setup keepassxc config - Browser
-  community.general.ini_file:
-    path: "{{ ansible_user_dir }}/.config/keepassxc/keepassxc.ini"
-    section: Browser
-    option: "{{ item.key }}"
-    value: "{{ item.value }}"
-    no_extra_spaces: true
-  loop:
-    - { key: Enabled, value: "true" }
-  tags:
-    - keepassxc
+    - name: Setup keepassxc config - Browser
+      community.general.ini_file:
+        path: "{{ ansible_user_dir }}/.config/keepassxc/keepassxc.ini"
+        section: Browser
+        option: "{{ item.key }}"
+        value: "{{ item.value }}"
+        no_extra_spaces: true
+      loop:
+        - { key: Enabled, value: "true" }
 
-- name: Setup keepassxc config - GUI
-  community.general.ini_file:
-    path: "{{ ansible_user_dir }}/.config/keepassxc/keepassxc.ini"
-    section: GUI
-    option: "{{ item.key }}"
-    value: "{{ item.value }}"
-    no_extra_spaces: true
-  loop:
-    - { key: ApplicationTheme, value: dark }
-    - { key: MinimizeOnClose, value: "true" }
-    - { key: MinimizeOnStartup, value: "false" }
-    - { key: MonospaceNotes, value: "true" }
-    - { key: ShowTrayIcon, value: "true" }
-    - { key: TrayIconAppearance, value: monochrome-light }
-  tags:
-    - keepassxc
+    - name: Setup keepassxc config - GUI
+      community.general.ini_file:
+        path: "{{ ansible_user_dir }}/.config/keepassxc/keepassxc.ini"
+        section: GUI
+        option: "{{ item.key }}"
+        value: "{{ item.value }}"
+        no_extra_spaces: true
+      loop:
+        - { key: ApplicationTheme, value: dark }
+        - { key: MinimizeOnClose, value: "true" }
+        - { key: MinimizeOnStartup, value: "false" }
+        - { key: MonospaceNotes, value: "true" }
+        - { key: ShowTrayIcon, value: "true" }
+        - { key: TrayIconAppearance, value: monochrome-light }
 
-- name: Create wrapper script
-  ansible.builtin.copy:
-    dest: "{{ ansible_user_dir }}/.config/keepassxc/xdg-autostart-wrapper-script.sh"
-    content: |
-      #!/usr/bin/env bash
-      DB="$(find ~/.local/share/ -maxdepth 1 -type f -regex ".*/keepass.*\.kdbx$" | head -n 1)"
-      if test -f "$DB"; then
-        sleep 3 && exec keepassxc "$DB"
-      fi
-    mode: "0755"
-  tags:
-    - keepassxc
+    - name: Create wrapper script
+      ansible.builtin.copy:
+        dest: "{{ ansible_user_dir }}/.config/keepassxc/xdg-autostart-wrapper-script.sh"
+        content: |
+          #!/usr/bin/env bash
+          DB="$(find ~/.local/share/ -maxdepth 1 -type f -regex ".*/keepass.*\.kdbx$" | head -n 1)"
+          if test -f "$DB"; then
+            sleep 3 && exec keepassxc "$DB"
+          fi
+        mode: "0755"
 
-- name: Create autostart desktop file
-  ansible.builtin.copy:
-    dest: "{{ ansible_user_dir }}/.config/autostart/org.keepassxc.KeePassXC.desktop"
-    content: |
-      [Desktop Entry]
-      Name=KeePassXC
-      GenericName=Password Manager
-      Exec={{ ansible_user_dir }}/.config/keepassxc/xdg-autostart-wrapper-script.sh
-      TryExec=keepassxc
-      Icon=keepassxc
-      StartupWMClass=keepassxc
-      StartupNotify=true
-      Terminal=false
-      Type=Application
-      Version=1.0
-      Categories=Utility;Security;Qt;
-      MimeType=application/x-keepass2;
-      X-GNOME-Autostart-enabled=true
-      X-GNOME-Autostart-Delay=2
-      X-KDE-autostart-after=panel
-      X-LXQt-Need-Tray=true
-    mode: "0644"
-  tags:
-    - keepassxc
+    - name: Create autostart desktop file
+      ansible.builtin.copy:
+        dest: "{{ ansible_user_dir }}/.config/autostart/org.keepassxc.KeePassXC.desktop"
+        content: |
+          [Desktop Entry]
+          Name=KeePassXC
+          GenericName=Password Manager
+          Exec={{ ansible_user_dir }}/.config/keepassxc/xdg-autostart-wrapper-script.sh
+          TryExec=keepassxc
+          Icon=keepassxc
+          StartupWMClass=keepassxc
+          StartupNotify=true
+          Terminal=false
+          Type=Application
+          Version=1.0
+          Categories=Utility;Security;Qt;
+          MimeType=application/x-keepass2;
+          X-GNOME-Autostart-enabled=true
+          X-GNOME-Autostart-Delay=2
+          X-KDE-autostart-after=panel
+          X-LXQt-Need-Tray=true
+        mode: "0644"
