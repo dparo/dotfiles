@@ -360,6 +360,7 @@ M.list = {
     { name = "html",                     config = {} },
     { name = "zls",                      config = {} },
     { name = "nim_langserver",           config = {} },
+    { name = "ocamllsp",                 config = {} },
     { name = "cucumber_language_server", config = {} },
 
     -- NOTE: We use null-ls now, which is more richer in terms of features
