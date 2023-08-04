@@ -187,3 +187,7 @@ if command -v krabby 1> /dev/null 2> /dev/null; then
 elif command -v pokemon-colorscripts 1> /dev/null 2> /dev/null; then
     pokemon-colorscripts -r 1-3 # https://gitlab.com/phoneybadger/pokemon-colorscripts#similar-projects
 fi
+
+
+[[ ! -r "${OPAMROOT:-$HOME/.opam}/opam-init/init.zsh" ]] \
+    || source "${OPAMROOT:-$HOME/.opam}/opam-init/init.zsh"  > /dev/null 2> /dev/null

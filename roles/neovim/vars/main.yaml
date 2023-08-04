@@ -24,6 +24,8 @@ mason_dependencies:
   - rust-analyzer
   - zls # Zig language server
   - nimlangserver
+  - ocaml-lsp
+  - ocamlformat
   - gopls
   - delve
   - shellcheck

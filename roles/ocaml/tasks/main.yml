@@ -1,0 +1,25 @@
+---
+- name: OCaml
+  tags:
+    - ocaml
+  block:
+    - name: Check latest opam
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/ocaml/opam/releases/latest
+        return_content: true
+      register: opam
+
+      # https://github.com/ocaml/opam/releases/download/2.1.5/opam-2.1.5-x86_64-linux
+    - name: Download and unpack latest opam {{ opam['json']['tag_name'] }}
+      ansible.builtin.get_url:
+        url: "https://github.com/ocaml/opam/releases/download/{{ opam['json']['tag_name'] }}/opam-{{ opam['json']['tag_name'] }}-x86_64-linux"
+        dest: /usr/local/bin/opam
+        mode: "0755"
+        force: "yes"
+      become: True
+
+    - name: opam init
+      ansible.builtin.command: /usr/local/bin/opam init -n --enable-completion --root {{ ansible_user_dir }}/.local/share/opam
+
+    - name: opam setup ocaml dev env
+      ansible.builtin.command: /usr/local/bin/opam install dune merlin ocaml-lsp-server odoc ocamlformat utop dune-release
