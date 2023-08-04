@@ -75,7 +75,7 @@ run() {
 }
 
 if valid_shell_command handlr; then
-    alias open='handlr'
+    alias open='handlr open'
 elif valid_shell_command mimeopen; then
     alias open='mimeopen'
 else
