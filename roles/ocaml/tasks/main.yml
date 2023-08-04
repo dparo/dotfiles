@@ -18,8 +18,8 @@
         force: "yes"
       become: True
 
-    - name: opam init
+    - name: Opam init
       ansible.builtin.command: /usr/local/bin/opam init -n --enable-completion --root {{ ansible_user_dir }}/.local/share/opam
 
-    - name: opam setup ocaml dev env
-      ansible.builtin.command: /usr/local/bin/opam install dune merlin ocaml-lsp-server odoc ocamlformat utop dune-release
+    - name: Opam setup ocaml dev env
+      ansible.builtin.command: /usr/local/bin/opam install -y dune merlin ocaml-lsp-server odoc ocamlformat utop dune-release
