@@ -32,7 +32,8 @@ mason_dependencies:
   - shellharden
   - shfmt
   - typescript-language-server
-  - vetur-vls
+  - vetur-vls # OLD, For Vue 2 only
+  - vue-language-server # NEW: Supports Vue 3
   - eslint-lsp
   - stylelint
   - stylelint-lsp

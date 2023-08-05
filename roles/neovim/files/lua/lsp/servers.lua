@@ -129,7 +129,8 @@ M.list = {
         },
     },
     { name = "yamlls", config = { settings = { yaml = { keyOrdering = false } } } },
-    { name = "vuels", config = {} },      -- npm install -g vls or MasonInstall vetur-vls
+    -- { name = "vuels", config = {} },      -- npm install -g vls or MasonInstall vetur-vls [[OLD]], only for Vue 2
+    { name = "volar", config = {} }, -- npm install -g @vue/language-server or MasonInstall vue-language-servee, supports Vue 2 and Vue 3r
     {
         name = "tsserver",
         config = {
