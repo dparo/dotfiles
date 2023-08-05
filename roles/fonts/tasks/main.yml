@@ -1,112 +1,91 @@
 ---
-- name: Install minimal fonts (DNF)
-  ansible.builtin.dnf:
-    name:
-      - ibm-plex-mono-fonts
-      - ibm-plex-sans-fonts
-      - ibm-plex-serif-fonts
-    state: present
-  become: true
+- name: Fonts
   tags:
     - fonts
+  block:
+    - name: Install minimal fonts (DNF)
+      ansible.builtin.dnf:
+        name:
+          - ibm-plex-mono-fonts
+          - ibm-plex-sans-fonts
+          - ibm-plex-serif-fonts
+        state: present
+      become: true
 
-- name: Symlink fontconfig
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
-    state: link
-  loop:
-    - "{{ role_path }}/files/fontconfig"
-  tags:
-    - fonts
-    - fontconfig
+    - name: Symlink fontconfig
+      ansible.builtin.file:
+        src: "{{ item }}"
+        dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+        state: link
+      loop:
+        - "{{ role_path }}/files/fontconfig"
 
-- name: Create NerdFonts subdir
-  ansible.builtin.file:
-    path: /usr/local/share/fonts/NerdFonts
-    state: directory
-    mode: "0755"
-  become: true
-  tags:
-    - fonts
+    - name: Create NerdFonts subdir
+      ansible.builtin.file:
+        path: /usr/local/share/fonts/NerdFonts
+        state: directory
+        mode: "0755"
+      become: true
 
-- name: Check if Nerd fonts are already installed
-  ansible.builtin.stat:
-    path: /usr/local/share/fonts/NerdFonts/{{ item }}
-  loop: "{{ nerd_fonts }}"
-  register: fonts_dir
-  tags:
-    - fonts
+    - name: Check if Nerd fonts are already installed
+      ansible.builtin.stat:
+        path: /usr/local/share/fonts/NerdFonts/{{ item }}
+      loop: "{{ nerd_fonts }}"
+      register: fonts_dir
 
-- name: Create necessary NerdFonts subdir
-  ansible.builtin.file:
-    path: /usr/local/share/fonts/NerdFonts/{{ item }}
-    state: directory
-    mode: "0755"
-  loop: "{{ nerd_fonts }}"
-  become: true
-  tags:
-    - fonts
+    - name: Create necessary NerdFonts subdir
+      ansible.builtin.file:
+        path: /usr/local/share/fonts/NerdFonts/{{ item }}
+        state: directory
+        mode: "0755"
+      loop: "{{ nerd_fonts }}"
+      become: true
 
-- name: Download Nerd Fonts
-  ansible.builtin.unarchive:
-    src: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/{{ item.item }}.zip
-    dest: /usr/local/share/fonts/NerdFonts/{{ item.item }}
-    remote_src: true
-  become: true
-  when: not item.stat.exists
-  loop: "{{ fonts_dir.results }}"
-  tags:
-    - fonts
+    - name: Download Nerd Fonts
+      ansible.builtin.unarchive:
+        src: https://github.com/ryanoasis/nerd-fonts/releases/latest/download/{{ item.item }}.zip
+        dest: /usr/local/share/fonts/NerdFonts/{{ item.item }}
+        remote_src: true
+      become: true
+      when: not item.stat.exists
+      loop: "{{ fonts_dir.results }}"
 
-- name: Find Windows compatible Nerd fonts
-  ansible.builtin.find:
-    paths: /usr/local/share/fonts/NerdFonts
-    patterns: ^.*Windows Compatible.*.ttf$
-    use_regex: true
-    recurse: true
-  register: windows_compatible_fonts
-  tags:
-    - fonts
+    - name: Find Windows compatible Nerd fonts
+      ansible.builtin.find:
+        paths: /usr/local/share/fonts/NerdFonts
+        patterns: ^.*Windows Compatible.*.ttf$
+        use_regex: true
+        recurse: true
+      register: windows_compatible_fonts
 
-- name: Remove Windows compatible Nerd fonts
-  ansible.builtin.file:
-    path: "{{ item.path }}"
-    state: absent
-  become: true
-  loop: "{{ windows_compatible_fonts.files | flatten(levels=1) }}"
-  tags:
-    - fonts
+    - name: Remove Windows compatible Nerd fonts
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: absent
+      become: true
+      loop: "{{ windows_compatible_fonts.files | flatten(levels=1) }}"
 
-- name: Find Jetbrains Mono No Ligatures (NL) fonts
-  ansible.builtin.find:
-    paths: /usr/local/share/fonts/NerdFonts/JetBrainsMono/
-    patterns: ^.*JetBrainsMonoNLNerdFont.*.ttf$
-    use_regex: true
-    recurse: true
-  register: jetbrains_mono_nl_fonts
-  tags:
-    - fonts
+    - name: Find Jetbrains Mono No Ligatures (NL) fonts
+      ansible.builtin.find:
+        paths: /usr/local/share/fonts/NerdFonts/JetBrainsMono/
+        patterns: ^.*JetBrainsMonoNLNerdFont.*.ttf$
+        use_regex: true
+        recurse: true
+      register: jetbrains_mono_nl_fonts
 
-- name: Remove Jetbrains Mono No Ligatures (NL) fonts
-  ansible.builtin.file:
-    path: "{{ item.path }}"
-    state: absent
-  become: true
-  loop: "{{ jetbrains_mono_nl_fonts.files | flatten(levels=1) }}"
-  tags:
-    - fonts
+    - name: Remove Jetbrains Mono No Ligatures (NL) fonts
+      ansible.builtin.file:
+        path: "{{ item.path }}"
+        state: absent
+      become: true
+      loop: "{{ jetbrains_mono_nl_fonts.files | flatten(levels=1) }}"
 
-- name: Reload font cache
-  ansible.builtin.command: fc-cache -fvr
-  when: fonts_dir.results | length > 0
-  ignore_errors: true
-  tags:
-    - fonts
+    - name: Reload font cache
+      ansible.builtin.command: fc-cache -fvr
+      when: fonts_dir.results | length > 0
+      ignore_errors: true
 
-- name: Refresh X11 font cache
-  ansible.builtin.command: xset fp rehash
-  ignore_errors: true
-  when: fonts_dir.results | length > 0
-  tags:
-    - fonts
+    - name: Refresh X11 font cache
+      ansible.builtin.command: xset fp rehash
+      ignore_errors: true
+      when: fonts_dir.results | length > 0
