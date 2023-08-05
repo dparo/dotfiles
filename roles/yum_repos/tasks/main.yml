@@ -6,7 +6,6 @@
     - rpmfucsion
   when: ansible_distribution == 'Fedora'
   block:
-
     # See https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/#_included_software
     - name: Manage third party repositories
       ansible.builtin.dnf:
@@ -20,7 +19,7 @@
     - name: Enable the RPM Fusion repository for {{ ansible_distribution ~ ' ' ~ ansible_distribution_major_version }}
       ansible.builtin.dnf:
         name:
-          - https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm
+          - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm
           - https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm
         state: latest
       become: true
