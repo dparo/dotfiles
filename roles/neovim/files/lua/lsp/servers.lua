@@ -129,6 +129,7 @@ M.list = {
         },
     },
     { name = "yamlls", config = { settings = { yaml = { keyOrdering = false } } } },
+    { name = "vuels", config = {} },      -- npm install -g vls or MasonInstall vetur-vls
     {
         name = "tsserver",
         config = {
@@ -354,7 +355,6 @@ M.list = {
             root_dir = deno_root_dir,
         },
     },
-    { name = "vuels",                    config = {} },
     { name = "gopls",                    config = {} },
     { name = "vimls",                    config = {} },
     { name = "html",                     config = {} },

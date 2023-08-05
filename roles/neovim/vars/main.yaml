@@ -32,6 +32,7 @@ mason_dependencies:
   - shellharden
   - shfmt
   - typescript-language-server
+  - vetur-vls
   - eslint-lsp
   - stylelint
   - stylelint-lsp
