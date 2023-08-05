@@ -6,6 +6,7 @@
     - debug
     - sysctl
     - dnf
+    - yum_repos
     - x509
     - ssh
     - gnupg
