@@ -1,21 +1,23 @@
 ---
-- name: Create items
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    mode: "0700"
-  loop:
-    - "{{ ansible_user_dir }}/.ssh"
+- name: Ssh
   tags:
     - ssh
+  block:
+    - name: Create items
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0700"
+      loop:
+        - "{{ ansible_user_dir }}/.ssh"
 
-- name: Copy SSH keys
-  ansible.builtin.copy:
-    dest: "{{ ansible_user_dir }}/.ssh/{{ ssh_key_item.key }}"
-    content: "{{ ssh_key_item.value }}"
-    mode: "0400"
-  no_log: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  loop_control:
-    loop_var: ssh_key_item
-  with_items: "{{ ssh_key | default({}) | dict2items }}"
+    - name: Copy SSH keys
+      ansible.builtin.copy:
+        dest: "{{ ansible_user_dir }}/.ssh/{{ ssh_key_item.key }}"
+        content: "{{ ssh_key_item.value }}"
+        mode: "0400"
+      no_log: true
+      when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+      loop_control:
+        loop_var: ssh_key_item
+      with_items: "{{ ssh_key | default({}) | dict2items }}"

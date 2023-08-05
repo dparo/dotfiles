@@ -1,37 +1,33 @@
 ---
 # https://docs.fedoraproject.org/en-US/quick-docs/using-shared-system-certificates/
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - p11-kit
-      - ca-certificates
-    state: present
-  become: true
-  tags:
-    - x509
-    - certs
 
-- name: Install certificates
-  ansible.builtin.copy:
-    dest: /etc/pki/ca-trust/source/anchors/{{ cert_item.key }}
-    content: "{{ cert_item.value }}"
-    mode: "0444"
-  no_log: true
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and ansible_distribution == 'Fedora'
-  loop_control:
-    loop_var: cert_item
-  with_items: "{{ x509_certs | default({}) | dict2items }}"
-  register: install_certificates_status
+- name: X509
   tags:
     - x509
     - certs
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and ansible_distribution == 'Fedora'
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - p11-kit
+          - ca-certificates
+        state: present
+      become: true
 
-- name: Update ca-trust
-  ansible.builtin.command: update-ca-trust
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and ansible_distribution == 'Fedora'
-  no_log: true
-  become: true
-  tags:
-    - x509
-    - certs
+    - name: Install certificates
+      ansible.builtin.copy:
+        dest: /etc/pki/ca-trust/source/anchors/{{ cert_item.key }}
+        content: "{{ cert_item.value }}"
+        mode: "0444"
+      no_log: true
+      become: true
+      loop_control:
+        loop_var: cert_item
+      with_items: "{{ x509_certs | default({}) | dict2items }}"
+      register: install_certificates_status
+
+    - name: Update ca-trust
+      ansible.builtin.command: update-ca-trust
+      no_log: true
+      become: true
