@@ -30,8 +30,7 @@ function M.on_attach(client, bufnr)
         require("telescope.builtin").lsp_definitions(require("telescope.themes").get_ivy {})
     end, keymap_opts)
     vim.keymap.set("n", "<leader>ld", function()
-        require "telescope.builtin"
-        lsp_definitions(require("telescope.themes").get_ivy {})
+        require "telescope.builtin".lsp_definitions(require("telescope.themes").get_ivy {})
     end, keymap_opts)
     vim.keymap.set("n", "gt", function()
         require("telescope.builtin").lsp_type_definitions(require("telescope.themes").get_ivy {})
@@ -118,18 +117,18 @@ function M.on_attach(client, bufnr)
             require("jdtls").extract_variable()
         end, keymap_opts)
         vim.keymap.set("v", "<leader>ljev", function()
-            require("jdtls").extract_variable(true)
+            require("jdtls").extract_variable({ visual = true })
         end, keymap_opts)
 
         vim.keymap.set("n", "<leader>ljec", function()
             require("jdtls").extract_constant()
         end, keymap_opts)
         vim.keymap.set("v", "<leader>ljec", function()
-            require("jdtls").extract_constant(true)
+            require("jdtls").extract_constant({ visual = true })
         end, keymap_opts)
 
         vim.keymap.set("v", "<leader>ljem", function()
-            require("jdtls").extract_method(true)
+            require("jdtls").extract_method({ visual = true })
         end, keymap_opts)
 
         -- DAP
@@ -291,7 +290,7 @@ function M.on_attach(client, bufnr)
         -- With `hotcodereplace = 'auto' the debug adapter will try to apply code changes
         -- you make during a debug session immediately.
         -- Remove the option if you do not want that.
-        require("jdtls").setup_dap { hotcodereplace = "auto" }
+        require("jdtls").setup_dap { config_overrides = {}, hotcodereplace = "auto" }
     end
 
     if client.server_capabilities.documentSymbolProvider then
