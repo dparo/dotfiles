@@ -35,6 +35,7 @@
         name:
           # https://docs.fedoraproject.org/en-US/quick-docs/dnf-system-upgrade/
           - dnf-plugins-core
+          - rpm
           - rpmconf
           - symlinks
           - remove-retired-packages
