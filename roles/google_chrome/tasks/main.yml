@@ -1,37 +1,33 @@
 ---
-- name: Enable google-chrome repo
-  ansible.builtin.copy:
-    dest: /etc/yum.repos.d/google-chrome.repo
-    content: |
-      [google-chrome]
-      name=google-chrome
-      baseurl=https://dl.google.com/linux/chrome/rpm/stable/x86_64
-      skip_if_unavailable=True
-      gpgcheck=1
-      gpgkey=https://dl.google.com/linux/linux_signing_key.pub
-      enabled=1
-    mode: "0644"
-  become: true
+- name: Google Chrome
   tags:
     - google-chrome
     - google-chrome-stable
+  block:
+    - name: Enable google-chrome repo
+      ansible.builtin.copy:
+        dest: /etc/yum.repos.d/google-chrome.repo
+        content: |
+          [google-chrome]
+          name=google-chrome
+          baseurl=https://dl.google.com/linux/chrome/rpm/stable/x86_64
+          skip_if_unavailable=True
+          gpgcheck=1
+          gpgkey=https://dl.google.com/linux/linux_signing_key.pub
+          enabled=1
+        mode: "0644"
+      become: true
 
-- name: Install google-chrome-stable
-  ansible.builtin.dnf:
-    name:
-      - google-chrome-stable
-    state: present
-  become: true
-  tags:
-    - google-chrome
-    - google-chrome-stable
+    - name: Install google-chrome-stable
+      ansible.builtin.dnf:
+        name:
+          - google-chrome-stable
+        state: present
+      become: true
 
-- name: Delete GPU Cache. Fixes issues caused by upgrading to some mesa-libGL versions
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: absent
-  loop:
-    - "{{ ansible_user_dir }}/.config/google-chrome/Default/GPUCache"
-  tags:
-    - google-chrome
-    - google-chrome-stable
+    - name: Delete GPU Cache. Fixes issues caused by upgrading to some mesa-libGL versions
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: absent
+      loop:
+        - "{{ ansible_user_dir }}/.config/google-chrome/Default/GPUCache"

@@ -6,10 +6,16 @@
     - rpmfucsion
   when: ansible_distribution == 'Fedora'
   block:
-    - name: Install third party repositories
+
+    # See https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/#_included_software
+    - name: Manage third party repositories
       ansible.builtin.dnf:
         name:
           - fedora-workstation-repositories
+          - fedora-flathub-remote
+          - fedora-workstation-repositories
+        state: absent
+      become: True
 
     - name: Enable the RPM Fusion repository for {{ ansible_distribution ~ ' ' ~ ansible_distribution_major_version }}
       ansible.builtin.dnf:

@@ -1,25 +1,23 @@
 ---
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - flatpak
-  become: true
+- name: Flatpak
   tags:
     - flatpak
+    - flathub
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - flatpak
+      become: true
 
-- name: Add the flathub flatpak repository remote to the user installation
-  community.general.flatpak_remote:
-    name: flathub
-    state: present
-    flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
-  tags:
-    - flatpak
+    - name: Add the flathub flatpak repository remote to the user installation
+      community.general.flatpak_remote:
+        name: flathub
+        state: present
+        flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
 
-- name: Install flatseal (flatpak)
-  community.general.flatpak:
-    name: com.github.tchx84.Flatseal
-    state: present
-    remote: flathub
-  tags:
-    - flatpak
-    - flatseal
+    - name: Install flatseal (flatpak)
+      community.general.flatpak:
+        name: com.github.tchx84.Flatseal
+        state: present
+        remote: flathub

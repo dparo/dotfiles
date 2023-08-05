@@ -38,3 +38,5 @@
           - rpmconf
           - symlinks
           - remove-retired-packages
+        state: latest
+      become: True
