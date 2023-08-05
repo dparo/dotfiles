@@ -12,7 +12,6 @@
         name:
           - fedora-workstation-repositories
           - fedora-flathub-remote
-          - fedora-workstation-repositories
         state: absent
       become: True
 
