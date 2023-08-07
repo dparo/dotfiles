@@ -17,6 +17,10 @@ export VISUAL=nvim
 export MANROFFOPT="-c"
 export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"
 
+
+# https://git-scm.com/docs/merge-options?ref=blog.mergify.com#Documentation/merge-options.txt---no-edit
+export GIT_MERGE_AUTOEDIT=no
+
 export GPG_TTY="$(tty)"
 
 
