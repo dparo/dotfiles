@@ -1,4 +1,4 @@
 ---
 golang_install_from_package_manager: true
-golang_version: 1.20.5
+golang_version: 1.21.0
 golang_install_dir: /opt/golang
