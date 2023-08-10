@@ -17,7 +17,7 @@ set pagination off
 set logging file ~/.cache/gdb/log.txt
 set logging enabled on
 
-set history filename ~/.cache/gdb/history.txt
+set history filename ~/.cache/gdb/history
 set history save on
 set history size 10240
 set history remove-duplicates unlimited

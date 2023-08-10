@@ -1,0 +1,5 @@
+# When 'on', this causes GDB to act as if "-silent" were passed on the
+# command line.  This command needs to be added to an early
+# initialization file (e.g. ~/.config/gdb/gdbearlyinit) in order to
+# affect GDB.
+set startup-quietly on
