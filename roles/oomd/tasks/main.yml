@@ -5,6 +5,13 @@
     - oomd
   block:
     # systemd-analyze cat-config systemd/oomd.conf
+    - name: Create config dir
+      ansible.builtin.file:
+        path: "/etc/systemd/oomd.conf.d"
+        state: directory
+        mode: "0755"
+      become: true
+
     - name: Setup systemd-oomd config
       ansible.builtin.copy:
         content: |
