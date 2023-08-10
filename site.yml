@@ -5,6 +5,7 @@
   roles:
     - debug
     - sysctl
+    - oomd
     - zswap
     - swapfile
     - dnf

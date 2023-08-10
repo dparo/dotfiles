@@ -1,0 +1,15 @@
+---
+- name: Systemd-oomd
+  tags:
+    - systemd-oomd
+    - oomd
+  block:
+    # systemd-analyze cat-config systemd/oomd.conf
+    - name: Setup systemd-oomd config
+      ansible.builtin.copy:
+        content: |
+          [OOM]
+          SwapUsedLimit=90%
+        dest: "/etc/systemd/oomd.conf.d/99-user-custom.conf"
+        mode: '0644'
+      become: true
