@@ -1,0 +1,4 @@
+---
+swapfile_size: 8192
+swapfile_priority: 1
+modify_filesystem: true

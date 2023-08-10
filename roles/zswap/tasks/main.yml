@@ -3,11 +3,10 @@
   tags:
     - zswap
   block:
-
-  # grep -r . /sys/module/zswap/parameters/
-  - name: Enable zswap by kernel boot parameter (Modifies /etc/default/grub)
-    ansible.builtin.command: grubby --update-kernel=ALL --args="{{ item }}"
-    when: ansible_distribution == 'Fedora'
-    become: true
-    loop:
-      - zswap.enabled=1
+    # grep -r . /sys/module/zswap/parameters/
+    - name: Enable zswap by kernel boot parameter (Modifies /etc/default/grub)
+      ansible.builtin.command: grubby --update-kernel=ALL --args="{{ item }}"
+      when: ansible_distribution == 'Fedora'
+      become: true
+      loop:
+        - zswap.enabled=1

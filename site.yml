@@ -6,6 +6,7 @@
     - debug
     - sysctl
     - zswap
+    - swapfile
     - dnf
     - yum_repos
     - flatpak
@@ -23,7 +24,6 @@
     - zsh
     - user
     - systemd
-    # - swap
     - snap
     - keyring
     - nvidia
