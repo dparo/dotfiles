@@ -8,6 +8,7 @@
       - gcc-c++
       - kernel-devel
       - gdb
+      - lldb
       - ninja-build
       - cmake
       - cmake-gui
