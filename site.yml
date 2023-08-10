@@ -5,6 +5,7 @@
   roles:
     - debug
     - sysctl
+    - zswap
     - dnf
     - yum_repos
     - flatpak
