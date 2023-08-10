@@ -7,6 +7,7 @@
       - lnav # Log file navigator: https://github.com/tstack/lnav
       - xxd
       - python3-pywatchman # https://facebook.github.io/watchman/docs/watchman-make
+      - entr # https://github.com/eradman/entr
     state: present
   become: true
   tags:
