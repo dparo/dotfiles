@@ -255,7 +255,7 @@ function M.on_attach(client, bufnr)
 
     -- Enable formatting on save
     if
-        client.server_capabilities.documentFormattingProvider and (vim.env.NVIM_LSP_FORMAT_ON_SAVE == nil or vim.env.NVIM_LSP_FORMAT_ON_SAVE ~= "0")
+        (client.server_capabilities.documentFormattingProvider or client.supports_method "textDocument/formatting") and (vim.env.NVIM_LSP_FORMAT_ON_SAVE == nil or vim.env.NVIM_LSP_FORMAT_ON_SAVE ~= "0")
     then
         vim.api.nvim_create_autocmd({ "BufWritePre" }, {
             group = augroup,
