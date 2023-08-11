@@ -192,6 +192,7 @@ return {
                     null_ls.builtins.diagnostics.chktex,
 
                     null_ls.builtins.formatting.cmake_format,
+                    null_ls.builtins.diagnostics.cmake_lint,
                     null_ls.builtins.diagnostics.cppcheck,
                     null_ls.builtins.formatting.zigfmt,
                     null_ls.builtins.formatting.sqlfluff.with {
