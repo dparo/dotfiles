@@ -6,13 +6,31 @@ CompileFlags:
     - -Wunreachable-code
     - -Wunreachable-code-aggressive
 
+
+InlayHints:
+  Designators: true
+  Enabled: true
+  ParameterNames: true
+  DeducedTypes: true
+
+FullyQualifiedNamespaces:
+    - std
+
+
 Diagnostics:
+  UnusedIncludes: Strict
   ClangTidy:
     CheckOptions:
       readability-identifier-naming.VariableCase: lower_case
+    Remove:
+      - "*"
     Add:
-      - -*
       - clang-diagnostic-*
       - clang-analyzer-*
       - clang-analyzer-cplusplus-*
       - cppcoreguidelines-*
+      - bugprone-*
+      - concurrency-*
+      - performance-*
+      - portability-*
+      - readability-*
