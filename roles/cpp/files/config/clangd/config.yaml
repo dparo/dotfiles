@@ -13,8 +13,9 @@ InlayHints:
   ParameterNames: true
   DeducedTypes: true
 
-FullyQualifiedNamespaces:
-    - std
+Style:
+  FullyQualifiedNamespaces:
+      - std
 
 
 Diagnostics:
