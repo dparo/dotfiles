@@ -7,7 +7,6 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_altv = 1
 vim.g.netrw_liststyle = 3
 
-
 vim.o.background = "dark"
 vim.o.guifont = "JetBrainsMono Nerd Font:h10.0"
 
@@ -25,8 +24,7 @@ vim.o.background = "dark"
 vim.o.guifont = "JetBrainsMono Nerd Font Mono:h10.5"
 
 vim.o.list = true
--- vim.o.listchars = "tab:› ,eol:¬,trail:⋅
-vim.o.listchars = "tab:› ,trail:⋅"
+vim.o.listchars = "tab:→ ,trail:·,extends:↷,precedes:↶" -- eol:↵,
 
 vim.o.statusline = "%f %h%w%m%r%=%y %{&fileformat} %{&fileencoding?&fileencoding:&encoding}    %-14.(%l,%c%V%) %P"
 
@@ -46,6 +44,7 @@ vim.o.signcolumn = "auto:3"
 vim.o.showmode = false
 vim.o.cursorline = true
 vim.o.scrolloff = 4
+vim.o.sidescroll = 1
 vim.o.sidescrolloff = 8
 vim.o.hlsearch = true
 vim.o.ruler = true
@@ -95,7 +94,7 @@ vim.o.splitright = true
 -- Automatically updates the file on external changes
 vim.o.autoread = true
 
--- Remove the `c` from formatoptions to avoid continuining
+-- Remove the `c` from formatoptions to avoid continuing
 -- comments when creating a newline
 vim.o.formatoptions = "tcqj"
 
