@@ -199,8 +199,8 @@ local function setup_basic_functionalities()
     cmap({ "<C-v>", "<S-Insert>" }, "<C-R>+", { silent = false })
     vmap({ "<C-v>", "<S-Insert>", "p" }, '"_dgP') -- When pasting over selected region, do not yank replaced region
 
-    imap('<C-BS>', '<C-w>', { silent = true, noremap = false })
-    imap('<C-h>', '<C-w>', { silent = true, noremap = false })
+    imap("<C-BS>", "<C-w>", { silent = true, noremap = false })
+    imap("<C-h>", "<C-w>", { silent = true, noremap = false })
 
     cmap({ "<C-BS>", "<C-h>" }, "<C-w>")
 
@@ -384,11 +384,13 @@ local function setup_plugins()
     -- Git
     nmap("<leader>gG", exec_cmd "Git")
     nmap("<leader>gg", exec_cmd "LazyGit")
-    nmap("<leader>gb", exec_cmd "GBranches")
     nmap("<leader>g?", exec_cmd "Git blame")
     nmap("<leader>gs", exec_cmd "Git status")
     nmap("<leader>gp", exec_cmd "Git push")
     nmap("<leader>gP", exec_cmd "Git pull")
+    nmap("<leader>gc", exec_cmd "Git commit")
+    nmap("<leader>gw", exec_cmd "Git commit -n")
+    nmap("<leader>ga", exec_cmd "Git add %")
 
     vim.keymap.set("n", "<leader>rr", function()
         vim.fn.execute "source ~/.config/nvim/init.lua"
