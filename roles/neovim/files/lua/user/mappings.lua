@@ -382,7 +382,7 @@ local function setup_plugins()
     end)
 
     -- Git
-    nmap("<leader>gG", exec_cmd "Git")
+    nmap("<leader>gG", exec_cmd "Neogit")
     nmap("<leader>gg", exec_cmd "LazyGit")
     nmap("<leader>g?", exec_cmd "Git blame")
     nmap("<leader>gb", exec_cmd "Git blame")
