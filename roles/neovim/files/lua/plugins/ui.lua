@@ -83,15 +83,12 @@ return {
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
             require("nvim-tree").setup {
-                hijack_netrw = true,
-                disable_netrw = false,
-                hijack_directories = {
-                    enable = true,
-                    auto_open = true,
+                sort = {
+                    sorter = "case_sensitive",
                 },
                 view = {
                     adaptive_size = true,
-                    width = "40%",
+                    width = "33%",
                 },
                 actions = {
                     open_file = {

@@ -1,12 +1,12 @@
 return {
     {
-        "TimUntersberger/neogit",
-        dependencies = "nvim-lua/plenary.nvim",
-        config = function()
-            local neogit = require "neogit"
-
-            neogit.setup {}
-        end,
+        "NeogitOrg/neogit",
+        dependencies = {
+            "nvim-lua/plenary.nvim", -- required
+            "nvim-telescope/telescope.nvim", -- optional
+            "sindrets/diffview.nvim", -- optional
+        },
+        config = true,
     },
 
     { "tpope/vim-fugitive" },
