@@ -1,0 +1,18 @@
+---
+- name: TailwindCSS
+  tags:
+    - gomplate
+  block:
+    - name: Check latest gomplate
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/hairyhenderson/gomplate/releases/latest
+        return_content: true
+      register: rel
+
+    - name: Fetch latest gomplate {{ rel['json']['tag_name'] }}
+      ansible.builtin.get_url:
+        url: "https://github.com/hairyhenderson/gomplate/releases/download/{{ rel['json']['tag_name'] }}/gomplate_linux-amd64"
+        dest: "/usr/local/bin/gomplate"
+        mode: "0755"
+        force: "yes"
+      become: true

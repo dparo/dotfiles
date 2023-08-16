@@ -114,6 +114,7 @@
     - telegram
     - devel
     - tailwindcss
+    - gomplate
     - diagram_tools
     - nwjs
     - postman
