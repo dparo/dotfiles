@@ -36,6 +36,7 @@
                 -->
                 <trimStackTrace>false</trimStackTrace>
 
+                <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
             </properties>
         </profile>
 
