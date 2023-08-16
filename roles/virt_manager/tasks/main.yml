@@ -1,65 +1,60 @@
 ---
-- name: Enable VirtIO drivers repository for speeding up Windows VMs
-  ansible.builtin.get_url:
-    dest: /etc/yum.repos.d/virtio-win.repo
-    url: https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
-    mode: "0644"
-  become: true
+# Download also one of:
+# - stable: https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/stable-virtio/virtio-win-guest-tools.exe
+# - latest: https://fedorapeople.org/groups/virt/virtio-win/direct-downloads/latest-virtio/virtio-win-guest-tools.exe
+# On the WIN gues and install it
+- name: VirtManager
   tags:
     - qemu
     - virt-manager
-
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - qemu-system-x86
-      - edk2-ovmf # ovmf provides virtualized UEFI capable bios
-      - libvirt-daemon
-      - virt-manager
-      - virt-viewer
-      - virtio-win # https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md
-    state: present
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  become: true
-  tags:
-    - qemu
-    - virt-manager
+  block:
+    - name: Fedora
+      when: ansible_distribution == 'Fedora'
+      block:
+        - name: Enable VirtIO drivers repository for speeding up Windows VMs
+          ansible.builtin.get_url:
+            dest: /etc/yum.repos.d/virtio-win.repo
+            url: https://fedorapeople.org/groups/virt/virtio-win/virtio-win.repo
+            mode: "0644"
+          become: true
 
-- name: Sets additional groups for user {{ ansible_env.USER }}
-  ansible.builtin.user:
-    name: "{{ ansible_env.USER }}"
-    append: true
-    groups:
-      - kvm
-      - libvirt
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  become: true
-  tags:
-    - qemu
-    - virt-manager
-####
-#### Required only for ARCH linux
-####
-# - name: Enable virtd service
-#   ansible.builtin.systemd:
-#     name: libvirt.service
-#     enabled: true
-#   become: true
-#   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-#   tags:
-#     - qemu
-#     - virt-manager
+        - name: Install
+          ansible.builtin.dnf:
+            name:
+              - qemu-system-x86
+              - edk2-ovmf # ovmf provides virtualized UEFI capable bios
+              - libvirt-daemon
+              - virt-manager
+              - virt-viewer
+              - virtio-win # https://github.com/virtio-win/virtio-win-pkg-scripts/blob/master/README.md
+            state: present
+          become: true
 
-####
-#### Required only for Ubuntu
-####
-# - name: Disable libvirt-guests service (causing problems on shutdown on certain PC)
-#   ansible.builtin.systemd:
-#     name: libvirt-guests
-#     enabled: false
-#     state: stopped
-#   become: true
-#   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-#   tags:
-#     - qemu
-#     - virt-manager
+        - name: Sets additional groups for user {{ ansible_env.USER }}
+          ansible.builtin.user:
+            name: "{{ ansible_env.USER }}"
+            append: true
+            groups:
+              - kvm
+              - libvirt
+          become: true
+
+    - name: ArchLinux
+      when: ansible_distribution == 'Archlinux'
+      block:
+        - name: Enable virtd service
+          ansible.builtin.systemd:
+            name: libvirt.service
+            enabled: true
+          become: true
+
+    - name: Ubuntu
+      when: ansible_distribution == 'Ubuntu'
+      block:
+        - name: Disable libvirt-guests service (causing problems on shutdown on certain PC)
+          ansible.builtin.systemd:
+            name: libvirt-guests
+            enabled: false
+            state: stopped
+          become: true
