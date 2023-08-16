@@ -6,6 +6,7 @@
       - python3-pip
       - python3-virtualenv
       - python3-yaml
+      - python3-jinja2
       - python3-requests
       - poetry # Python dependency management and packaging made easy
     state: present
