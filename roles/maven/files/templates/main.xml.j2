@@ -9,6 +9,14 @@
     {% block pluginGroups %}{% endblock %}
 </pluginGroups>
 
+<mirrors>
+    {% block mirrors %}{% endblock %}
+</mirrors>
+
+<servers>
+    {% block servers %}{% endblock %}
+</servers>
+
 <profiles>
     <!-- Activate by using `mvn -P local ...` -->
     <profile>
@@ -35,9 +43,4 @@
     </profile>
     {% block profiles %}{% endblock %}
 </profiles>
-
-<mirrors>
-{% block mirrors %}{% endblock %}
-</mirrors>
-
 {% endblock %}
