@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 
+set -eou pipefail
 
 if builtin type readlink 1>/dev/null 2>/dev/null; then
     # shellcheck disable=SC2034
@@ -20,5 +21,4 @@ main() {
 }
 
 set -x
-set -e
 main "$@"
