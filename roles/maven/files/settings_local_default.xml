@@ -1,44 +1,35 @@
-<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0"
-  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0
-  https://maven.apache.org/xsd/settings-1.0.0.xsd">
-
-    <localRepository>${env.XDG_CACHE_HOME}/maven/repository</localRepository>
-    <offline>false</offline>
-
-    <pluginGroups>
-        <!-- https://docs.sonarqube.org/9.6/analyzing-source-code/scanners/sonarscanner-for-maven/ -->
-        <pluginGroup>org.sonatype.plugins</pluginGroup>
-        <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
-    </pluginGroups>
-
-    <profiles>
-        <!-- Activate by using `mvn -P local ...` -->
-        <profile>
-            <id>local</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-
-                <downloadSources>true</downloadSources>
-                <downloadJavadocs>false</downloadJavadocs>
-
-                <!-- Equivalent to `java -jar ... -Dspring.profiles.active=local ...` command line argument` -->
-                <spring.profiles.active>local</spring.profiles.active>
-
-                <!-- Equivalent to -DtrimStackTrace=false
+<?xml version="1.0"?>
+<settings xmlns="http://maven.apache.org/SETTINGS/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/SETTINGS/1.0.0 https://maven.apache.org/xsd/settings-1.0.0.xsd">
+  <localRepository>${env.XDG_CACHE_HOME}/maven/repository</localRepository>
+  <offline>false</offline>
+  <pluginGroups>
+    <!-- https://docs.sonarqube.org/9.6/analyzing-source-code/scanners/sonarscanner-for-maven/ -->
+    <pluginGroup>org.sonatype.plugins</pluginGroup>
+    <pluginGroup>org.sonarsource.scanner.maven</pluginGroup>
+  </pluginGroups>
+  <profiles>
+    <!-- Activate by using `mvn -P local ...` -->
+    <profile>
+      <id>local</id>
+      <activation>
+        <activeByDefault>true</activeByDefault>
+      </activation>
+      <properties>
+        <downloadSources>true</downloadSources>
+        <downloadJavadocs>false</downloadJavadocs>
+        <!-- Equivalent to `java -jar ... -Dspring.profiles.active=local ...` command line
+                argument` -->
+        <spring.profiles.active>local</spring.profiles.active>
+        <!-- Equivalent to -DtrimStackTrace=false
                      Makes `mvn test` (surefire:test plugin) display the full stacktrace on error.
                      Useful to trace the real cause of the error
                     See:
                     - https://maven.apache.org/surefire/maven-surefire-plugin/test-mojo.html#trimStackTrace
                     - https://stackoverflow.com/questions/2928548/make-mavens-surefire-show-stacktrace-in-console
                 -->
-                <trimStackTrace>false</trimStackTrace>
-
-                <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
-            </properties>
-        </profile>
-
-    </profiles>
+        <trimStackTrace>false</trimStackTrace>
+        <sonar.jacoco.reportPath>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPath>
+      </properties>
+    </profile>
+  </profiles>
 </settings>
