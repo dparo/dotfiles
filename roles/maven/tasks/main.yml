@@ -32,17 +32,28 @@
         state: directory
         mode: "0755"
 
-    - name: Symlink config
+    - name: Symlink global config
       ansible.builtin.file:
         src: "{{ role_path }}/files/{{ item }}"
         dest: "{{ ansible_user_dir }}/.config/maven/{{ item }}"
         state: link
       loop:
         - settings_global.xml
-        - settings_local_default.xml
-        - templates
 
-    - name: Symlink default config
+    - name: Symlink templates
+      ansible.builtin.file:
+        src: "{{ role_path }}/templates"
+        dest: "{{ ansible_user_dir }}/.config/maven/templates"
+        state: link
+
+    - name: Render current config
+      ansible.builtin.template:
+        src: "{{ role_path }}/templates/default.xml.j2"
+        dest: "{{ ansible_user_dir }}/.config/maven/settings_local_default.xml"
+        mode: "0644"
+        force: true
+
+    - name: Symlink current config
       ansible.builtin.file:
         src: "{{ ansible_user_dir }}/.config/maven/settings_local_default.xml"
         dest: "{{ ansible_user_dir }}/.config/maven/settings_local.xml"
