@@ -412,12 +412,17 @@ M.list = {
     },
 }
 
+if vim.env.NVIM_LSP_DISABLED then
+    M.list = {}
+end
+
 function M.get_config(name)
     for _, server in ipairs(M.list) do
         if server.name == name then
             return server.config
         end
     end
+    return nil
 end
 
 return M
