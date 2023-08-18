@@ -45,6 +45,7 @@ mason_dependencies:
   - yaml-language-server
   - texlab
   - write-good
+  - vale
   - proselint
   - codespell
   - misspell
