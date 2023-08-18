@@ -187,14 +187,21 @@ return {
 
                     null_ls.builtins.diagnostics.hadolint,
                     null_ls.builtins.diagnostics.chktex,
+                    null_ls.builtins.diagnostics.sqlfluff.with {
+                        extra_args = { "--dialect", "oracle" },
+                    },
+
 
                     null_ls.builtins.formatting.cmake_format,
                     null_ls.builtins.diagnostics.cmake_lint,
                     null_ls.builtins.diagnostics.cppcheck,
                     null_ls.builtins.formatting.zigfmt,
+
+                    -- null_ls.builtin.formattin.sql_formatter,
                     null_ls.builtins.formatting.sqlfluff.with {
                         extra_args = { "--dialect", "oracle" },
                     },
+
 
                     -- null_ls.builtins.formatting.autopep8,
                     -- null_ls.builtins.diagnostics.pydocstyle,

@@ -53,6 +53,7 @@ mason_dependencies:
   - terraform-ls
   - tfsec
   - sqlfluff
+  - sql-formatter
   - jdtls
   - java-test
   - java-debug-adapter
