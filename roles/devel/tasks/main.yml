@@ -25,6 +25,7 @@
       - black
       - yapf
       - rope
+      - sqlfluff
     state: latest
   tags:
     - devel
