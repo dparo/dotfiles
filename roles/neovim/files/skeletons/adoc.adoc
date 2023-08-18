@@ -1,0 +1,60 @@
+= The Foobar
+:doctype:   article
+:Author:    Davide Paro
+:Email:     d.paro@reply.it
+:Date:      2023-08-18
+:Revision:  1.0.0
+:sectnums:
+:toc:       left
+:toc-title: Table of Contents
+:toclevels: 4
+:imagesdir: assets/img
+:data-uri:
+:hide-uri-scheme:
+:source-highlighter: rouge
+:icons: font
+:icontype: svg
+:iconsdir: assets/icons
+:allow-uri-read:
+:cache-uri:
+
+
+== Header 1
+
+
+[.text-center]
+This text is centered. +
+link:https://dparo.github.io[Link example with placeholder text]
+
+
+NOTE: NOTE
+
+ERROR: ERROR
+
+[IMPORTANT]
+FOOBAR
+
+=== Header 2
+
+* Code listings:
++
+[source,c]
+-----
+int main(int argc, char **argv) {
+    return 0;
+}
+-----
+* Image embedding:
++
+image:2023-08-18-21-07-34-image.png[]
+* Image from the internet:
++
+image::https://i.imgur.com/AEkqoRn.jpg[alt="not bad.",width=128,height=128]
+* Tables:
++
+[cols=",",options="header",]
+|===
+|Foo |Bar
+|1 |2
+|3 |4
+|===

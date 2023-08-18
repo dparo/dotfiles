@@ -10,6 +10,7 @@
       - entr # https://github.com/eradman/entr
       - rubygem-asciidoctor
       - rubygem-asciidoctor-pdf
+      - rubygem-rouge
     state: present
   become: true
   tags:

@@ -42,6 +42,8 @@ core.utils.augroup("USER_SKELETONS", {
     { "BufNewFile", { pattern = "*.desktop", command = [[0r ~/.config/nvim/skeletons/desktop.desktop]] } },
     { "BufNewFile", { pattern = "*.vue", command = [[0r ~/.config/nvim/skeletons/vue.vue]] } },
     { "BufNewFile", { pattern = "*.svelte", command = [[0r ~/.config/nvim/skeletons/svelte.svelte]] } },
+    { "BufNewFile", { pattern = "*.{adoc,asciidoc}", command = [[0r ~/.config/nvim/skeletons/adoc.adoc]] } },
+
     {
         "BufNewFile",
         { pattern = ".pre-commit-config.yaml", command = [[0r ~/.config/nvim/skeletons/.pre-commit-config.yaml]] },

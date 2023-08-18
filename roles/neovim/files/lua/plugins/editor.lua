@@ -20,6 +20,26 @@ return {
             require("ssr").setup {}
         end,
     },
+    {
+        -- "ekickx/clipboard-image.nvim",
+        "postfen/clipboard-image.nvim", -- This fork contains fixes to vim.health support provided in nvim 0.9
+        config = function()
+            require("clipboard-image").setup {
+                -- Default configuration for all filetype
+                default = {
+                    img_dir = "assets/img",
+                    img_dir_txt = "assets/img",
+                    img_name = function()
+                        return os.date "%Y-%m-%d-%H-%M-%S"
+                    end, -- Example result: "2021-04-13-10-04-18"
+                },
+                asciidoc = {
+                    img_dir = "assets/img",
+                    img_dir_txt = "",
+                },
+            }
+        end,
+    },
 
     --- Trim trailing whitespaces
     {
