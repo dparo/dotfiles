@@ -8,6 +8,8 @@
       - xxd
       - python3-pywatchman # https://facebook.github.io/watchman/docs/watchman-make
       - entr # https://github.com/eradman/entr
+      - rubygem-asciidoctor
+      - rubygem-asciidoctor-pdf
     state: present
   become: true
   tags:
