@@ -105,9 +105,6 @@ return {
                     null_ls.builtins.diagnostics.gitlint,
                     null_ls.builtins.diagnostics.write_good,
                     null_ls.builtins.diagnostics.proselint,
-                    null_ls.builtins.diagnostics.sqlfluff.with {
-                        extra_args = { "--dialect", "oracle" },
-                    },
 
                     null_ls.builtins.code_actions.proselint,
 
