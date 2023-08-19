@@ -1,13 +1,44 @@
 #!/usr/bin/env bash
 
+
 set -x
+
+DOWNLOAD=1
 
 watch_link="$(curl -s --url-query "search_query=$*" https://www.youtube.com/results | grep -Eo '/watch\?v=.{11}' | head -n1)"
 yt_link="https://music.youtube.com$watch_link"
 
-(notify-send -i emblem-music-symbolic "Playing: $(yt-dlp --get-title "$yt_link")") &
+id="$(yt-dlp --get-id "$yt_link")"
+title="$(yt-dlp --get-title "$yt_link")"
 
-mpc add "$(yt-dlp -f bestaudio --get-url "$yt_link")"
 
-# Play last added song to the queue
-mpc play "$(mpc -f "%position%" playlist | tail -n 1)"
+if [ "$DOWNLOAD" -eq 1 ]; then
+    notify-send  -i emblem-music-symbolic "Fetching song. Please wait..."
+    mkdir -p "/tmp/$USER/mpd/yt-dlp"
+    pushd "/tmp/$USER/mpd/yt-dlp" || exit 1
+    if [ ! -f "$id.mp3" ]; then
+        yt-dlp --embed-metadata --embed-thumbnail -f bestaudio -x --audio-format mp3 --audio-quality 320k "$yt_link" -o '%(id)s.%(ext)s'
+    fi
+
+    ln --force -s "/tmp/$USER/mpd/yt-dlp" "$HOME/Music/yt-dlp"
+    mpc update
+    sleep 1
+
+    # TODO: Technically it should be possible to use file:///tmp/$USER/mpd/yt-dlp/{}.mp3 ,
+    #       and avoid the symlink. However mpc generates access denied.
+    mpc insert "yt-dlp/$id.mp3"
+    popd || exit 1
+else
+    raw_link="$(yt-dlp -f bestaudio --get-url "$yt_link")"
+    mpc insert "$raw_link"
+fi
+
+notify-send -i emblem-music-symbolic "Playing: $title"
+
+# `mpc insert` inserts the song after the currently playing song
+mpc play
+mpc next
+
+
+# Play last added song to the queue after a `mpc add` (mpc add adds the song at the end of the queue)
+# mpc play "$(mpc -f "%position%" playlist | tail -n 1)"
