@@ -30,7 +30,7 @@ return {
                     img_dir = "assets/img",
                     img_dir_txt = "assets/img",
                     img_name = function()
-                        return os.date "%Y-%m-%d-%H-%M-%S"
+                        return os.date "%Y-%m-%dT%H-%M-%SZ"
                     end, -- Example result: "2021-04-13-10-04-18"
                 },
                 asciidoc = {
@@ -48,9 +48,9 @@ return {
             require("trim").setup {
                 ft_blocklist = {},
                 patterns = {
-                    [[%s/\s\+$//e]],          -- remove unwanted spaces
+                    [[%s/\s\+$//e]], -- remove unwanted spaces
                     [[%s/\($\n\s*\)\+\%$//]], -- trim last line
-                    [[%s/\%^\n\+//]],         -- trim first line
+                    [[%s/\%^\n\+//]], -- trim first line
                 },
             }
         end,

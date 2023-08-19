@@ -5,7 +5,7 @@
 #
 
 {Print, super shift + s}
-    flameshot gui -p "$HOME/Pictures/Screenshots" -c
+    screenshot.sh
 
 super + Print
     arandr
@@ -212,6 +212,3 @@ XF86AudioPause
 
 {super + ctrl + Prior,super + ctrl + Next}
     mpc {volume +5,volume -5}
-
-Print
-    flameshot gui

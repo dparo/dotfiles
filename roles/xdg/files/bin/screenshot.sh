@@ -5,7 +5,9 @@ set -e
 mkdir -p "$HOME/Pictures/Screenshots/"
 
 if builtin type flameshot 1>/dev/null 2>/dev/null; then
-    flameshot gui -c
+    # flameshot gui -c
+    # flemeshot gui -c -p "$HOME/Pictures/Screenshots"
+    flameshot gui
     # mpv --keep-open=no /usr/share/sounds/freedesktop/stereo/screen-capture.oga 1> /dev/null 2> /dev/null
 else
     location="$HOME/Pictures/Screenshots/Screenshot_$(date +%Y-%m-%d_%H:%M:%S).png"
