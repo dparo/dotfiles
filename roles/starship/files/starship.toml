@@ -4,6 +4,19 @@
 # Inserts a blank line between shell prompts
 add_newline = true
 
+
+[status]
+disabled = false
+recognize_signal_code = true
+pipestatus = true
+map_symbol = true
+symbol = ' '
+signal_symbol = ' '
+sigint_symbol = " "
+not_found_symbol = "󱈍 "
+not_executable_symbol = " "
+
+
 [directory]
 read_only = " "
 truncation_length = 3
