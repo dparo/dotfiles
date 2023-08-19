@@ -37,9 +37,12 @@
     - { key: autoCloseIdleDaemon, value: "true" }
     - { key: disabledTrayIcon, value: "true" }
     - { key: contrastOpacity, value: 188 }
+    - { key: showMagnifier, value: "true" }
+    - { key: squareMagnifier, value: "true" }
     - { key: copyPathAfterSave, value: "true" }
     - { key: saveAfterCopy, value: "true" }
-    - { key: savePath, value: "{{ ansible_user_dir }}/Pictures/Screenshots" }
     - { key: filenamePattern, value: "%FT%H:%M:%SZ" }
+    - { key: savePath, value: "{{ ansible_user_dir }}/Pictures/Screenshots" }
+    - { key: savePathFixed, value: "false" }
   tags:
     - flameshot
