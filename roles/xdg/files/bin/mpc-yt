@@ -3,7 +3,7 @@
 
 set -x
 
-DOWNLOAD=1
+DOWNLOAD=0
 
 watch_link="$(curl -s --url-query "search_query=$*" https://www.youtube.com/results | grep -Eo '/watch\?v=.{11}' | head -n1)"
 yt_link="https://music.youtube.com$watch_link"
