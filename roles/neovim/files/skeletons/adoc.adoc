@@ -1,4 +1,6 @@
 :doctype:   article
+:url-home: https://asciidoctor.org
+:link-docs: https://asciidoctor.org/docs[documentation]
 :sectnums:
 :toc:       left
 :toc-title: Table of Contents
@@ -17,12 +19,15 @@
 Davide Paro <d.paro@outlook.it>
 1.0, {docdate}: Draft revision
 
+// Refer to this nice quick reference to use AsciiDoctor:
+//      https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
 == Header 1
 
-
 [.text-center]
-This text is centered. +
-link:https://dparo.github.io[Link example with placeholder text]
+For more information about asciidoctor syntax please refer to the +
+https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/[Quick reference].
+
 
 
 NOTE: NOTE
@@ -62,3 +67,28 @@ image::https://i.imgur.com/AEkqoRn.jpg[alt="not bad.",width=128,height=128]
 |1 |2
 |3 |4
 |===
+
+* YT Video embedding:
++
+video::RvRhUHTV_8k[youtube]
+
+* Collapsible:
++
+[%collapsible]
+====
+This content is only revealed when the user clicks the block title.
+====
+
+== References example
+
+In this example I'm referencing a bibliography item <<label1>>.
+
+For more advanced features, eg supporting bibtex files, see https://github.com/asciidoctor/asciidoctor-bibtex[asciidoctor-bibtex extension]
+
+
+[bibliography]
+== References
+* [[[label1,1]]] Andy Hunt & Dave Thomas. The Pragmatic Programmer:
+From Journeyman to Master. Addison-Wesley. 1999.
+* [[[label2, 2]]] Erich Gamma, Richard Helm, Ralph Johnson & John Vlissides.
+Design Patterns: Elements of Reusable Object-Oriented Software. Addison-Wesley. 1994.
