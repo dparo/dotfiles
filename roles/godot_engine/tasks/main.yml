@@ -1,0 +1,61 @@
+---
+- name: Godot Engine
+  tags:
+    - never
+    - godot
+    - godot-engine
+  block:
+    - name: Check latest godot
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/godotengine/godot/releases/latest
+        return_content: true
+      register: rel
+
+    - name: Download and unpack latest godot {{ rel['json']['tag_name'] }}
+      ansible.builtin.unarchive:
+        src: https://github.com/godotengine/godot/releases/download/{{ rel['json']['tag_name'] }}/Godot_v{{ rel['json']['tag_name'] }}_linux.x86_64.zip
+        dest: "{{ ansible_user_dir }}/opt"
+        remote_src: true
+
+    - name: Mark as executable
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/opt/Godot_v{{ rel['json']['tag_name'] }}_linux.x86_64"
+        mode: "0755"
+
+    - name: Symlink binary
+      ansible.builtin.file:
+        src: "{{ ansible_user_dir }}/opt/Godot_v{{ rel['json']['tag_name'] }}_linux.x86_64"
+        dest: "{{ ansible_user_dir }}/.local/bin/godot"
+        state: link
+
+    - name: Fetch icon
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/godotengine/godot/master/icon.svg
+        dest: "{{ ansible_user_dir }}/.local/share/icons/hicolor/godot.svg"
+        mode: "0755"
+        force: "yes"
+
+
+    - name: Install desktop file integration
+      ansible.builtin.copy:
+        dest: "{{ ansible_user_dir }}/.local/share/applications/org.godotengine.Godot.desktop"
+        content: |
+          [Desktop Entry]
+          Name=Godot Engine
+          GenericName=Libre game engine
+          GenericName[el]=Ελεύθερη μηχανή παιχνιδιού
+          GenericName[fr]=Moteur de jeu libre
+          GenericName[zh_CN]=自由的游戏引擎
+          Comment=Multi-platform 2D and 3D game engine with a feature-rich editor
+          Comment[el]=2D και 3D μηχανή παιχνιδιού πολλαπλών πλατφορμών με επεξεργαστή πλούσιο σε χαρακτηριστικά
+          Comment[fr]=Moteur de jeu 2D et 3D multiplateforme avec un éditeur riche en fonctionnalités
+          Comment[zh_CN]=多平台 2D 和 3D 游戏引擎，带有功能丰富的编辑器
+          Exec=godot %f
+          Icon={{ ansible_user_dir }}/.local/share/icons/hicolor/godot.svg
+          Terminal=false
+          PrefersNonDefaultGPU=true
+          Type=Application
+          MimeType=application/x-godot-project;
+          Categories=Development;IDE;
+          StartupWMClass=Godot
+        mode: "0644"
