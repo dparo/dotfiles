@@ -10,7 +10,7 @@ return {
             }
         end,
     },
-    { "nvim-lua/popup.nvim",  dependencies = { "nvim-lua/plenary.nvim" } },
+    { "nvim-lua/popup.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 
     --  With the release of Neovim 0.6 we were given the start of extensible core UI hooks
     -- (vim.ui.select and vim.ui.input). They exist to allow plugin authors
@@ -64,7 +64,7 @@ return {
                 },
                 popup_mappings = {
                     scroll_down = "<c-d>", -- binding to scroll down inside the popup
-                    scroll_up = "<c-u>",   -- binding to scroll up inside the popup
+                    scroll_up = "<c-u>", -- binding to scroll up inside the popup
                 },
 
                 window = {
@@ -120,7 +120,7 @@ return {
 
     -- Dashboard startup page
     {
-        "glepnir/dashboard-nvim",
+        "nvimdev/dashboard-nvim",
         event = "VimEnter",
         enabled = false,
         config = function()
@@ -189,7 +189,7 @@ return {
                 persist_size = true,
                 direction = "horizontal",
                 close_on_exit = true, -- close the terminal window when the process exits
-                shell = vim.o.shell,  -- change the default shell
+                shell = vim.o.shell, -- change the default shell
                 -- This field is only relevant if direction is set to 'float'
                 float_opts = {
                     winblend = 3,
@@ -249,11 +249,11 @@ return {
                 },
                 -- you can enable a preset for easier configuration
                 presets = {
-                    bottom_search = true,         -- use a classic bottom cmdline for search
-                    command_palette = true,       -- position the cmdline and popupmenu together
+                    bottom_search = true, -- use a classic bottom cmdline for search
+                    command_palette = true, -- position the cmdline and popupmenu together
                     long_message_to_split = true, -- long messages will be sent to a split
-                    inc_rename = false,           -- enables an input dialog for inc-rename.nvim
-                    lsp_doc_border = false,       -- add a border to hover docs and signature help
+                    inc_rename = false, -- enables an input dialog for inc-rename.nvim
+                    lsp_doc_border = false, -- add a border to hover docs and signature help
                 },
             }
         end,
