@@ -90,7 +90,7 @@ return {
                 end
             end
 
-            if not vim.env.NVIM_LSP_DISABLED then
+            if not (vim.env.NVIM_LSP_DISABLED ~= nil and vim.env.NVIM_LSP_DISABLED ~= "0") then
                 -- Null-ls is meant to fill the gaps for languages where either no language server exists,
                 -- or where standalone linters,formatters,diagnostics provide better results
                 -- than the available language server do.
