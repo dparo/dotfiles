@@ -43,6 +43,7 @@ core.utils.augroup("USER_SKELETONS", {
     { "BufNewFile", { pattern = "*.vue", command = [[0r ~/.config/nvim/skeletons/vue.vue]] } },
     { "BufNewFile", { pattern = "*.svelte", command = [[0r ~/.config/nvim/skeletons/svelte.svelte]] } },
     { "BufNewFile", { pattern = "*.{adoc,asciidoc}", command = [[0r ~/.config/nvim/skeletons/adoc.adoc]] } },
+    { "BufNewFile", { pattern = "pom.xml", command = [[0r ~/.config/nvim/skeletons/pom.xml]] } },
 
     {
         "BufNewFile",
@@ -87,19 +88,21 @@ core.utils.augroup("USER_FILETYPES", {
 core.utils.augroup("USER_GENERIC", {
     -- Reload the buffer if it was changed externally
     {
-        { "FocusGained", "BufEnter",                                        "CursorHold", "CursorHoldI" },
+        { "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" },
         { pattern = "*", command = [[if mode() != 'c' | checktime | endif]] },
     },
 
     -- Notification after file change
     {
         { "FileChangedShellPost" },
-        { pattern = "*",         command =
-        [[ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None ]] },
+        {
+            pattern = "*",
+            command = [[ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None ]],
+        },
     },
 
     -- Readjusts window dimension when vim changes size
-    { { "VimResized" },  { pattern = "*", command = [[tabdo wincmd =]] } },
+    { { "VimResized" }, { pattern = "*", command = [[tabdo wincmd =]] } },
 
     -- Cursorline enable/disable
     { { "WinEnter" }, {
@@ -139,8 +142,7 @@ core.utils.augroup("USER_GENERIC", {
         { "BufReadPre" },
         {
             pattern = "*",
-            command =
-            [[if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' | exe "normal! g`\"" | endif ]],
+            command = [[if line("'\"") >= 1 && line("'\"") <= line("$") && &ft !~# 'commit' | exe "normal! g`\"" | endif ]],
         },
     },
 
