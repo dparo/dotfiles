@@ -12,6 +12,7 @@ alias v=nvim
 alias vim=nvim
 alias vi=nvim
 alias ec="emacsclient --create-frame"
+alias parallel='parallel --will-cite'
 
 function valid_shell_command {
     builtin type "$1" 1>/dev/null 2>/dev/null
