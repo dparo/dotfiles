@@ -37,7 +37,8 @@
       - lm_sensors
       - ffmpeg
       - speedtest-cli
-      - parallel # GNU Parallel is a shell tool for executing jobs in parallel
+      # - parallel # GNU Parallel is a shell tool for executing jobs in parallel
+      - moreutils-parallel      # More minimal and simpler alternative to GNU parallel that doesn't polluate the namespace with stupid programs such as /usr/bin/sql
       - zbar # QR Code reader
       - qrencode # QR Code encoder
       - oathtool # A command line tool for generating and validating OTPs
