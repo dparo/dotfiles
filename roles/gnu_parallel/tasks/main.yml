@@ -1,0 +1,24 @@
+---
+- name: GNU Parallel
+  tags:
+    - parallel
+    - gnu-parallel
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - parallel
+        state: present
+      become: true
+
+    - name: Create config dir
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/.config/parallel"
+        state: directory
+        mode: "0755"
+
+    - name: Create will-cite file
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/.config/parallel/will-cite"
+        state: touch
+        mode: "0644"

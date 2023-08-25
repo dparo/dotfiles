@@ -71,6 +71,7 @@
     - nautilus
     - pcmanfm
     - ranger
+    - gnu_parallel
     - jless
     - dunst
     - wm_basics
