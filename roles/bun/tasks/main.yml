@@ -1,0 +1,27 @@
+- name: Bun JS
+  tags:
+    - bun
+    - bunjs
+    - bun-js
+  block:
+    # https://github.com/oven-sh/bun/releases/download/bun-v0.8.0/bun-linux-x64.zip
+
+    - name: Check latest bun
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/oven-sh/bun/releases/latest
+        return_content: true
+      register: rel
+
+    - name: Download and unpack {{ rel['json']['tag_name'] }}
+      ansible.builtin.unarchive:
+        src: "https://github.com/oven-sh/bun/releases/download/{{ rel['json']['tag_name'] }}/bun-linux-x64.zip"
+        dest: "/opt"
+        remote_src: true
+      become: True
+
+    - name: Symlink binaries
+      ansible.builtin.file:
+        src: /opt/bun-linux-x64/bun
+        dest: /usr/local/bun
+        state: link
+      become: true

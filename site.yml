@@ -43,6 +43,7 @@
     - ocaml
     - golang
     - nodejs
+    - bun
     - java
     - graalvm
     - kotlin
