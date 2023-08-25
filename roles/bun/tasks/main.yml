@@ -1,5 +1,6 @@
 - name: Bun JS
   tags:
+    - never
     - bun
     - bunjs
     - bun-js
@@ -23,4 +24,5 @@
       ansible.builtin.copy:
         src: /tmp/bun-linux-x64/bun
         dest: /usr/local/bin/bun
+        mode: "0755"
       become: true
