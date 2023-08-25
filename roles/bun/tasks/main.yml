@@ -15,13 +15,12 @@
     - name: Download and unpack {{ rel['json']['tag_name'] }}
       ansible.builtin.unarchive:
         src: "https://github.com/oven-sh/bun/releases/download/{{ rel['json']['tag_name'] }}/bun-linux-x64.zip"
-        dest: "/opt"
+        dest: "/tmp"
         remote_src: true
       become: True
 
-    - name: Symlink binaries
-      ansible.builtin.file:
-        src: /opt/bun-linux-x64/bun
-        dest: /usr/local/bun
-        state: link
+    - name: Copy binary
+      ansible.builtin.copy:
+        src: /tmp/bun-linux-x64/bun
+        dest: /usr/local/bin/bun
       become: true
