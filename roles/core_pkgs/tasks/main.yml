@@ -1,5 +1,4 @@
 ---
-
 - name: Install
   ansible.builtin.dnf:
     name:
@@ -37,7 +36,6 @@
       - lm_sensors
       - ffmpeg
       - speedtest-cli
-      - parallel # GNU Parallel is a shell tool for executing jobs in parallel
       - zbar # QR Code reader
       - qrencode # QR Code encoder
       - oathtool # A command line tool for generating and validating OTPs
