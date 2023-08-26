@@ -249,6 +249,13 @@ if t ~= nil then
     t.colorscheme = t.colorscheme or t.name
 
     return {
+
+        --
+        -- Run `TermcolorsShow` to dump neovim theme to a kitty.conf compatible theme file
+        --
+        {
+            "psliwka/termcolors.nvim",
+        },
         {
             t.repo,
             lazy = false,

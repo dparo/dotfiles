@@ -6,6 +6,7 @@ return {
             require("colorizer").setup {}
         end,
     },
+    { "echasnovski/mini.nvim", version = false },
 
     -- Better quickfix window in Neovim, polish old quickfix window.
     { "kevinhwang91/nvim-bqf" },
