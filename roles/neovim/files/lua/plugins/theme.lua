@@ -111,7 +111,10 @@ for _, sign in ipairs(signs) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
 
-local theme = "onedark"
+---
+local theme = vim.env.NVIM_THEME or "onedark"
+---
+
 local theme_list = {
     catppuccin = {
         repo = "catppuccin/nvim",
@@ -160,13 +163,16 @@ local theme_list = {
             }
         end,
     },
-}
-
--- TODO: Old stuff, please remove
-local unused = {
-    { "metalelf0/jellybeans-nvim", dependencies = { "rktjmp/lush.nvim" } },
-    {
-        "marko-cerovac/material.nvim",
+    jellybeans = {
+        repo = "metalelf0/jellybeans-nvim",
+        dependencies = {},
+        colorscheme = "jellybeans",
+        config = function() end,
+    },
+    material = {
+        repo = "marko-cerovac/material.nvim",
+        dependencies = {},
+        colorscheme = "material",
         config = function()
             vim.g.material_style = "darker"
             require("material").setup {
@@ -180,24 +186,10 @@ local unused = {
             }
         end,
     },
-
-    { "arcticicestudio/nord-vim" },
-    {
-        "sainnhe/everforest",
-        config = function()
-            vim.g.everforest_background = "hard"
-        end,
-    },
-
-    { "sainnhe/sonokai" },
-    {
-        "sainnhe/gruvbox-material",
-        config = function()
-            vim.g.gruvbox_material_background = "hard"
-        end,
-    },
-    {
-        "EdenEast/nightfox.nvim",
+    nightfox = {
+        repo = "EdenEast/nightfox.nvim",
+        dependencies = {},
+        colorscheme = "nightfox",
         config = function()
             require("nightfox").setup {
                 options = {
@@ -206,10 +198,10 @@ local unused = {
             }
         end,
     },
-
-    {
-        "rebelot/kanagawa.nvim",
-
+    kanagawa = {
+        repo = "rebelot/kanagawa.nvim",
+        dependencies = {},
+        colorscheme = "kanagawa",
         config = function()
             require("kanagawa").setup {
                 undercurl = true, -- enable undercurls
@@ -229,7 +221,27 @@ local unused = {
             }
         end,
     },
+    everforest = {
+        repo = "sainnhe/everforest",
+        dependencies = {},
+        colorscheme = "everforest",
+        config = function()
+            vim.g.everforest_background = "hard"
+        end,
+    },
+    gruvbox_material = {
+        repo = "sainnhe/gruvbox-material",
+        dependencies = {},
+        colorscheme = "gruvbox-material",
+        config = function()
+            vim.g.gruvbox_material_background = "hard"
+        end,
+    },
 }
+
+---
+---
+---
 
 local t = theme_list[theme]
 if t ~= nil then
