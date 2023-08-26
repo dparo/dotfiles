@@ -45,7 +45,7 @@ return {
     --- Trim trailing whitespaces
     {
         "cappyzawa/trim.nvim",
-        cond = function()
+        enabled = function()
             -- From neovim 0.9, editor-config support is built-in.
             --     From nvim-0.9 trailing whitespaces are automatically removed on save if configured in .editorconfig file,
             --     making this plugin redundant
@@ -198,7 +198,7 @@ return {
     -- { "tpope/vim-sleuth" },
     {
         "editorconfig/editorconfig-vim",
-        cond = function()
+        enabled = function()
             -- From neovim 0.9, editor-config support is built-in (no plugin required)
             return vim.fn.has "nvim-0.9" == 0
         end,

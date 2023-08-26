@@ -85,17 +85,14 @@ core.utils.augroup("USER_FILETYPES", {
 })
 
 core.utils.augroup("USER_GENERIC", {
-    -- Reload the buffer if it was changed externally
-    {
-        { "FocusGained", "BufEnter",                                        "CursorHold", "CursorHoldI" },
-        { pattern = "*", command = [[if mode() != 'c' | checktime | endif]] },
-    },
-
     -- Notification after file change
     {
         { "FileChangedShellPost" },
-        { pattern = "*",         command =
-        [[ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None ]] },
+        {
+            pattern = "*",
+            command =
+            [[ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None ]]
+        },
     },
 
     -- Readjusts window dimension when vim changes size
