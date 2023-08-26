@@ -31,7 +31,34 @@ M.init = function()
     end
 
     vim.opt.rtp:prepend(lazypath)
-    require("lazy").setup("plugins")
+
+    require("lazy").setup("plugins", {
+
+        checker = {
+            -- automatically check for plugin updates
+            enabled = false,
+        },
+        change_detection = {
+            enabled = true,
+            notify = false,
+        },
+        ui = {
+            icons = {
+                cmd = "⌘",
+                config = "🛠",
+                event = "📅",
+                ft = "📂",
+                init = "⚙",
+                keys = "🗝",
+                plugin = "🔌",
+                runtime = "💻",
+                source = "📄",
+                start = "🚀",
+                task = "📌",
+                lazy = "💤 ",
+            },
+        },
+    })
 
     return true
 end
