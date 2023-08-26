@@ -55,9 +55,9 @@ return {
             require("trim").setup {
                 ft_blocklist = {},
                 patterns = {
-                    [[%s/\s\+$//e]], -- remove unwanted spaces
-                    [[%s/\($\n\s*\)\+\%$//]], -- trim last line
-                    [[%s/\%^\n\+//]], -- trim first line
+                    [[%s/\s\+$//e]], -- Trim trailing
+                    [[%s/\%^\n\+//]], -- Trim first line
+                    [[%s/\($\n\s*\)\+\%$//]], -- Trim last line
                 },
             }
         end,

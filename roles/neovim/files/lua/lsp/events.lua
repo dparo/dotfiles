@@ -2,6 +2,12 @@ local M = {}
 
 local navic = require "nvim-navic"
 
+local augroup = vim.api.nvim_create_augroup("USER_LSP", { clear = true })
+
+-- NOTE(d.paro): on_attach gets called N times, where N is the number of
+--               lsp client that will be attached to this buffer.
+--               To share resources between clients (such as augroup),
+--               declare such resources outside
 function M.on_attach(client, bufnr)
     local buf_set_option = vim.api.nvim_buf_set_option
 
@@ -30,7 +36,7 @@ function M.on_attach(client, bufnr)
         require("telescope.builtin").lsp_definitions(require("telescope.themes").get_ivy {})
     end, keymap_opts)
     vim.keymap.set("n", "<leader>ld", function()
-        require "telescope.builtin".lsp_definitions(require("telescope.themes").get_ivy {})
+        require("telescope.builtin").lsp_definitions(require("telescope.themes").get_ivy {})
     end, keymap_opts)
     vim.keymap.set("n", "gt", function()
         require("telescope.builtin").lsp_type_definitions(require("telescope.themes").get_ivy {})
@@ -117,18 +123,18 @@ function M.on_attach(client, bufnr)
             require("jdtls").extract_variable()
         end, keymap_opts)
         vim.keymap.set("v", "<leader>ljev", function()
-            require("jdtls").extract_variable({ visual = true })
+            require("jdtls").extract_variable { visual = true }
         end, keymap_opts)
 
         vim.keymap.set("n", "<leader>ljec", function()
             require("jdtls").extract_constant()
         end, keymap_opts)
         vim.keymap.set("v", "<leader>ljec", function()
-            require("jdtls").extract_constant({ visual = true })
+            require("jdtls").extract_constant { visual = true }
         end, keymap_opts)
 
         vim.keymap.set("v", "<leader>ljem", function()
-            require("jdtls").extract_method({ visual = true })
+            require("jdtls").extract_method { visual = true }
         end, keymap_opts)
 
         -- DAP
@@ -154,8 +160,6 @@ function M.on_attach(client, bufnr)
         vim.lsp.codelens.run()
     end, keymap_opts)
 
-    local augroup = vim.api.nvim_create_augroup("USER_LSP", { clear = true })
-
     vim.api.nvim_create_autocmd({ "CursorHold" }, {
         group = augroup,
         buffer = bufnr,
@@ -165,7 +169,10 @@ function M.on_attach(client, bufnr)
     })
 
     if client.server_capabilities.codeLensProvider then
-        vim.api.nvim_create_autocmd({ "BufEnter", "InsertLeave", --[[ "CursorHold"  ]] }, {
+        vim.api.nvim_create_autocmd({
+            "BufEnter",
+            "InsertLeave", --[[ "CursorHold"  ]]
+        }, {
             group = augroup,
             buffer = bufnr,
             callback = function()
@@ -178,13 +185,17 @@ function M.on_attach(client, bufnr)
         vim.api.nvim_create_autocmd({ "InsertEnter" }, {
             group = augroup,
             buffer = bufnr,
-            callback = function() vim.lsp.buf.inlay_hint(bufnr, true) end,
+            callback = function()
+                vim.lsp.buf.inlay_hint(bufnr, true)
+            end,
         })
 
         vim.api.nvim_create_autocmd({ "InsertLeave" }, {
             group = augroup,
             buffer = bufnr,
-            callback = function() vim.lsp.buf.inlay_hint(bufnr, false) end,
+            callback = function()
+                vim.lsp.buf.inlay_hint(bufnr, false)
+            end,
         })
     end
 
@@ -192,7 +203,7 @@ function M.on_attach(client, bufnr)
     if client.server_capabilities.documentFormattingProvider then
         if vim.fn.has "nvim-0.8" == 1 then
             vim.keymap.set("n", "<leader>lf", function()
-                vim.lsp.buf.format()
+                vim.lsp.buf.format { timeout_ms = 4000, bufnr = bufnr }
             end, keymap_opts)
         else
             vim.keymap.set("n", "<leader>lf", function()
@@ -255,13 +266,15 @@ function M.on_attach(client, bufnr)
 
     -- Enable formatting on save
     if
-        (client.server_capabilities.documentFormattingProvider or client.supports_method "textDocument/formatting") and (vim.env.NVIM_LSP_FORMAT_ON_SAVE == nil or vim.env.NVIM_LSP_FORMAT_ON_SAVE ~= "0")
+        (client.server_capabilities.documentFormattingProvider or client.supports_method "textDocument/formatting")
+        and (vim.env.NVIM_LSP_FORMAT_ON_SAVE == nil or vim.env.NVIM_LSP_FORMAT_ON_SAVE ~= "0")
     then
         vim.api.nvim_create_autocmd({ "BufWritePre" }, {
             group = augroup,
             buffer = bufnr,
+            desc = "LSP Format on save autocommand",
             callback = function()
-                vim.lsp.buf.format()
+                vim.lsp.buf.format { timeout_ms = 4000, bufnr = bufnr, id = client.id }
             end,
         })
 
