@@ -299,9 +299,8 @@ function M.on_attach(client, bufnr)
 
     -- Setup DAP for java code
     -- See: https://github.com/mfussenegger/nvim-jdtls#nvim-dap-setup
-    --       NOTE(d.paro): Since some time jdtls already setups nvim-dap
-    --                     if it is found on path. So there is no more a need
-    --                     to call setup_dap
+    --       NOTE(d.paro): Since commit 0261cf5a76cf2ef807c4ae0ede18fc9d791ebf02, jdtls automatically setups nvim-dap configurations if it's installed
+    --                     So the below code is not anymore required and therefore it has been disabled
     if false and client.name == "jdtls" then
         -- With `hotcodereplace = 'auto' the debug adapter will try to apply code changes
         -- you make during a debug session immediately.
