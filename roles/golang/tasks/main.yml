@@ -20,6 +20,13 @@
 
     - when: not golang_install_from_package_manager
       block:
+        - name: Remove GOLANG (DNF)
+          ansible.builtin.dnf:
+            name:
+              - golang
+            state: absent
+          become: true
+
         - name: Check latest release
           ansible.builtin.uri:
             url: https://go.dev/dl/?mode=json
