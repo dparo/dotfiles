@@ -1,6 +1,7 @@
 ---
 - name: SQLPlus (Oracle SQL)
   tags:
+    - never
     - sqlplus
     - oracle-sql
 
