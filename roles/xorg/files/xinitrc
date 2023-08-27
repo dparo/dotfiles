@@ -133,7 +133,7 @@ main() {
 
     systemctl --user daemon-reload
 
-    if test -n "$1"; then
+    if test "$1" != ""; then
         if type "$1" 1>/dev/null 2>/dev/null; then
             exec_wm "$1"
         fi
@@ -150,7 +150,7 @@ main() {
 POSITIONAL_ARGS=()
 while [[ $# -gt 0 ]]; do
     case $1 in
-    -* | --*)
+    --* | -*)
         echo "Unknown option $1"
         exit 1
         ;;

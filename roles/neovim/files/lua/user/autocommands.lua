@@ -86,12 +86,6 @@ core.utils.augroup("USER_FILETYPES", {
 })
 
 core.utils.augroup("USER_GENERIC", {
-    -- Reload the buffer if it was changed externally
-    {
-        { "FocusGained", "BufEnter", "CursorHold", "CursorHoldI" },
-        { pattern = "*", command = [[if mode() != 'c' | checktime | endif]] },
-    },
-
     -- Notification after file change
     {
         { "FileChangedShellPost" },

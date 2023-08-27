@@ -6,7 +6,7 @@ local function theme_overrides()
     vim.api.nvim_set_hl(0, "Fixme", { bg = "none" })
     vim.api.nvim_set_hl(0, "XXX", { bg = "none" })
 
-    if false then
+    if true then
         vim.api.nvim_set_hl(0, "Visual", { fg = "#ffffff", bg = "#0000ff", ctermbg = "blue", ctermfg = "white" })
     end
 
@@ -94,11 +94,11 @@ core.utils.augroup("USER_THEME_OVERRIDES", {
 
 local signs = {
     { name = "DiagnosticSignError", text = "", numhl = "" },
-    { name = "DiagnosticSignWarn",  text = "", numhl = "" },
-    { name = "DiagnosticSignHint",  text = "", numhl = "" },
-    { name = "DiagnosticSignInfo",  text = "", numhl = "" },
-    { name = "DapBreakpoint",       text = "", numhl = "DapBreakpoint" },
-    { name = "DapStopped",          text = "", numhl = "DapStopped" },
+    { name = "DiagnosticSignWarn", text = "", numhl = "" },
+    { name = "DiagnosticSignHint", text = "", numhl = "" },
+    { name = "DiagnosticSignInfo", text = "", numhl = "" },
+    { name = "DapBreakpoint", text = "", numhl = "DapBreakpoint" },
+    { name = "DapStopped", text = "", numhl = "DapStopped" },
 }
 
 vim.diagnostic.config {
@@ -112,17 +112,76 @@ for _, sign in ipairs(signs) do
     vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
 end
 
-local unused = {
-    -- Theme configurations/generators
-    { "rktjmp/lush.nvim" },
-    { "tjdevries/colorbuddy.nvim" },
+---
+local theme = vim.env.NVIM_THEME or "onedark"
+---
 
-    { "dracula/vim",               name = "dracula" },
-    { "metalelf0/jellybeans-nvim", dependencies = { "rktjmp/lush.nvim" } },
-    { "tjdevries/gruvbuddy.nvim",  dependencies = { "tjdevries/colorbuddy.nvim" } },
-    { "Th3Whit3Wolf/spacebuddy",   dependencies = { "tjdevries/colorbuddy.nvim" } },
-    {
-        "marko-cerovac/material.nvim",
+local theme_list = {
+    catppuccin = {
+        repo = "catppuccin/nvim",
+        dependencies = {},
+        colorscheme = "catppuccin-mocha",
+        config = function() end,
+    },
+    onedark = {
+        repo = "navarasu/onedark.nvim",
+        dependencies = {},
+        colorscheme = "onedark",
+        config = function()
+            require("onedark").setup {
+                style = "darker",
+            }
+        end,
+    },
+    onedarkpro = {
+        repo = "olimorris/onedarkpro.nvim",
+        dependencies = {},
+        colorscheme = "onedark",
+        config = function()
+            require("onedarkpro").setup {}
+        end,
+    },
+    gruvbuddy = {
+        repo = "tjdevries/gruvbuddy.nvim",
+        dependencies = { "tjdevries/colorbuddy.nvim" },
+        load = function()
+            require("colorbuddy").colorscheme "gruvbuddy"
+        end,
+        config = function() end,
+    },
+    tokyonight = {
+        repo = "folke/tokyonight.nvim",
+        dependencies = {},
+        colorscheme = "tokyonight",
+        config = function()
+            require("tokyonight").setup {
+                style = "storm",
+                light_style = "day",
+            }
+        end,
+    },
+    gruvbox = {
+        repo = "ellisonleao/gruvbox.nvim",
+        dependencies = {},
+        colorscheme = "gruvbox",
+        config = function()
+            vim.g.gruvbox_inverse = 0
+            require("gruvbox").setup {
+                inverse = false,
+                contrast = "hard",
+            }
+        end,
+    },
+    jellybeans = {
+        repo = "metalelf0/jellybeans-nvim",
+        dependencies = {},
+        colorscheme = "jellybeans",
+        config = function() end,
+    },
+    material = {
+        repo = "marko-cerovac/material.nvim",
+        dependencies = {},
+        colorscheme = "material",
         config = function()
             vim.g.material_style = "darker"
             require("material").setup {
@@ -136,25 +195,10 @@ local unused = {
             }
         end,
     },
-    { "navarasu/onedark.nvim" },
-
-    { "arcticicestudio/nord-vim" },
-    {
-        "sainnhe/everforest",
-        config = function()
-            vim.g.everforest_background = "hard"
-        end,
-    },
-
-    { "sainnhe/sonokai" },
-    {
-        "sainnhe/gruvbox-material",
-        config = function()
-            vim.g.gruvbox_material_background = "hard"
-        end,
-    },
-    {
-        "EdenEast/nightfox.nvim",
+    nightfox = {
+        repo = "EdenEast/nightfox.nvim",
+        dependencies = {},
+        colorscheme = "nightfox",
         config = function()
             require("nightfox").setup {
                 options = {
@@ -163,37 +207,10 @@ local unused = {
             }
         end,
     },
-
-    { "tomasiser/vim-code-dark" },
-
-    { "tomasr/molokai" },
-    {
-        "ellisonleao/gruvbox.nvim",
-        config = function()
-            vim.g.gruvbox_inverse = 0
-            vim.g.gruvbox_contrast_dark = "hard"
-            vim.g.gruvbox_contrast_light = "hard"
-        end,
-    },
-    {
-        "ayu-theme/ayu-vim",
-        config = function()
-            vim.g.ayucolor = "dark"
-        end,
-    },
-    { "mhartington/oceanic-next" },
-    {
-        "folke/tokyonight.nvim",
-        config = function()
-            vim.g.tokyonight_style = "storm"
-        end,
-    },
-
-    { "Everblush/everblush.nvim" },
-
-    {
-        "rebelot/kanagawa.nvim",
-
+    kanagawa = {
+        repo = "rebelot/kanagawa.nvim",
+        dependencies = {},
+        colorscheme = "kanagawa",
         config = function()
             require("kanagawa").setup {
                 undercurl = true, -- enable undercurls
@@ -213,18 +230,60 @@ local unused = {
             }
         end,
     },
-}
-
-return {
-    {
-        "catppuccin/nvim",
-        lazy = false,
-        priority = 1000,
-        name = "catppuccin",
+    everforest = {
+        repo = "sainnhe/everforest",
+        dependencies = {},
+        colorscheme = "everforest",
         config = function()
-            if vim.o.termguicolors == true then
-                vim.cmd [[colorscheme catppuccin-mocha]]
-            end
+            vim.g.everforest_background = "hard"
+        end,
+    },
+    gruvbox_material = {
+        repo = "sainnhe/gruvbox-material",
+        dependencies = {},
+        colorscheme = "gruvbox-material",
+        config = function()
+            vim.g.gruvbox_material_background = "hard"
         end,
     },
 }
+
+---
+---
+---
+
+local t = theme_list[theme]
+if t ~= nil then
+    t.name = theme
+    t.colorscheme = t.colorscheme or t.name
+
+    return {
+
+        --
+        -- Run `TermcolorsShow` to dump neovim theme to a kitty.conf compatible theme file
+        --
+        {
+            "psliwka/termcolors.nvim",
+        },
+        {
+            t.repo,
+            lazy = false,
+            priority = 1000,
+            name = theme,
+            dependencies = t.dependencies,
+            config = function()
+                if t.config ~= nil and type(t.config) == "function" then
+                    t.config()
+                end
+
+                if vim.o.termguicolors == true then
+                    if t.load ~= nil and type(t.load) == "function" then
+                        t.load()
+                    elseif t.colorscheme ~= nil and t.colorscheme ~= "" then
+                        vim.cmd([[colorscheme ]] .. t.colorscheme)
+                    end
+                end
+            end,
+        },
+    }
+end

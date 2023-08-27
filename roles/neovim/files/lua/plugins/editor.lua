@@ -6,6 +6,7 @@ return {
             require("colorizer").setup {}
         end,
     },
+    { "echasnovski/mini.nvim", version = false },
 
     -- Better quickfix window in Neovim, polish old quickfix window.
     { "kevinhwang91/nvim-bqf" },
@@ -44,13 +45,19 @@ return {
     --- Trim trailing whitespaces
     {
         "cappyzawa/trim.nvim",
+        enabled = function()
+            -- From neovim 0.9, editor-config support is built-in.
+            --     From nvim-0.9 trailing whitespaces are automatically removed on save if configured in .editorconfig file,
+            --     making this plugin redundant
+            return vim.fn.has "nvim-0.9" == 0
+        end,
         config = function()
             require("trim").setup {
                 ft_blocklist = {},
                 patterns = {
-                    [[%s/\s\+$//e]], -- remove unwanted spaces
-                    [[%s/\($\n\s*\)\+\%$//]], -- trim last line
-                    [[%s/\%^\n\+//]], -- trim first line
+                    [[%s/\s\+$//e]], -- Trim trailing
+                    [[%s/\%^\n\+//]], -- Trim first line
+                    [[%s/\($\n\s*\)\+\%$//]], -- Trim last line
                 },
             }
         end,
@@ -191,7 +198,7 @@ return {
     -- { "tpope/vim-sleuth" },
     {
         "editorconfig/editorconfig-vim",
-        cond = function()
+        enabled = function()
             -- From neovim 0.9, editor-config support is built-in (no plugin required)
             return vim.fn.has "nvim-0.9" == 0
         end,

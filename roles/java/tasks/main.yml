@@ -143,9 +143,9 @@
     content: |
       #!/usr/bin/env bash
 
-      # export CHECKSTYLE_JAVA_OPTS="$_JAVA_OPTIONS"
-      # unset _JAVA_OPTIONS
-      exec java -jar "{{ ansible_user_dir }}/opt/{{ checkstyle['json']['tag_name'] }}-all.jar" "$@"
+      export CHECKSTYLE_JAVA_OPTS="$_JAVA_OPTIONS"
+      unset _JAVA_OPTIONS
+      exec java $CHECKSTYLE_JAVA_OPTS -jar "{{ ansible_user_dir }}/opt/{{ checkstyle['json']['tag_name'] }}-all.jar" "$@"
     mode: "0755"
   tags:
     - java
