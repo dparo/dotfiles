@@ -141,17 +141,21 @@ return {
                         null_ls.builtins.diagnostics.semgrep.with {
                             args = { "--config", "auto", "-q", "--json", "$FILENAME" },
                         },
-                        null_ls.builtins.diagnostics.pmd.with {
-                            args = {
-                                "check",
-                                "--format",
-                                "json",
-                                "--dir",
-                                "$ROOT",
-                                "--rulesets",
-                                "category/java/bestpractices.xml,category/java/errorprone.xml,category/java/multithreading.xml,category/java/performance.xml,category/java/codestyle.xml,category/jsp/bestpractices.xml",
-                            },
-                        },
+
+                        
+                        -- NOTE(d.paro): Disabled since it makes neovim generate the following diagnostic error: `pmd: failed to decode json: Expected comma or array end but found T_END at character 69420`
+                        --               T_END is the null-terminator. Probabily, since PMD generates a HUGE JSON it gets truncated during parsing from the LUA engine
+                        -- null_ls.builtins.diagnostics.pmd.with {
+                        --     args = {
+                        --         "check",
+                        --         "--format",
+                        --         "json",
+                        --         "--dir",
+                        --         "$ROOT",
+                        --         "--rulesets",
+                        --         "category/java/bestpractices.xml,category/java/errorprone.xml,category/java/multithreading.xml,category/java/performance.xml,category/java/codestyle.xml,category/jsp/bestpractices.xml",
+                        --     },
+                        -- },
 
                         null_ls.builtins.diagnostics.ansiblelint,
                         null_ls.builtins.diagnostics.terraform_validate,
