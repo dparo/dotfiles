@@ -1,0 +1,14 @@
+---
+- name: SQLPlus (Oracle SQL)
+  tags:
+    - sqlplus
+    - oracle-sql
+
+  block:
+    - name: Install SQLPlus (DNF)
+      ansible.builtin.dnf:
+        name:
+          - https://download.oracle.com/otn_software/linux/instantclient/oracle-instantclient-basic-linuxx64.rpm
+          - https://download.oracle.com/otn_software/linux/instantclient/oracle-instantclient-sqlplus-linuxx64.rpm
+        state: latest
+      become: true
