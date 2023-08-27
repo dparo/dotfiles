@@ -2,6 +2,11 @@ local function theme_overrides()
     vim.o.guicursor =
     [[n:block-Cursor,v:hor10-vCursor,i:ver100-iCursor,n-c-ci-cr-sm-v:blinkon0,i:blinkon10,i:blinkwait10,c-ci-cr:block-cCursor,c:block-cCursor]]
 
+    -- Default to the background color configured for the terminal
+    if false then
+        vim.api.nvim_set_hl(0, "Normal", { ctermbg = "none", bg = "none" })
+    end
+
     vim.api.nvim_set_hl(0, "Todo", { bg = "none" })
     vim.api.nvim_set_hl(0, "Fixme", { bg = "none" })
     vim.api.nvim_set_hl(0, "XXX", { bg = "none" })
