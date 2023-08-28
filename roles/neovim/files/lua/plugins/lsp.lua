@@ -134,9 +134,12 @@ return {
                         },
 
                         null_ls.builtins.formatting.google_java_format,
-                        null_ls.builtins.diagnostics.checkstyle.with {
-                            extra_args = { "-c", "/google_checks.xml" },
-                        },
+
+
+                        -- NOTE(d.paro): Too annoying
+                        -- null_ls.builtins.diagnostics.checkstyle.with {
+                        --     extra_args = { "-c", "/google_checks.xml" },
+                        -- },
 
                         null_ls.builtins.diagnostics.semgrep.with {
                             args = { "--config", "auto", "-q", "--json", "$FILENAME" },
