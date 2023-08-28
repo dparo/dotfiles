@@ -1,0 +1,9 @@
+- name: RNote
+  tags:
+    - rnote
+  block:
+    - name: Install rnote (flatpak)
+      community.general.flatpak:
+        name: com.github.flxzt.rnote
+        state: present
+        remote: flathub

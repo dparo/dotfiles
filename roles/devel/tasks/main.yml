@@ -96,6 +96,7 @@
     - create-docusaurus@latest # https://docusaurus.io
     - husky
     - npm-check-updates
+    - svgo # https://github.com/svg/svgo: Node.js tool for optimizing SVG files
   tags: devel
 
 - name: Install additional NPM tools

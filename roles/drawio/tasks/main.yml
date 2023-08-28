@@ -1,9 +1,11 @@
 ---
-- name: Install drawio (flatpak)
-  community.general.flatpak:
-    name: com.jgraph.drawio.desktop
-    state: present
-    remote: flathub
+- name: DrawIO
   tags:
     - drawio
     - diagrams.net
+  block:
+    - name: Install drawio (flatpak)
+      community.general.flatpak:
+        name: com.jgraph.drawio.desktop
+        state: present
+        remote: flathub
