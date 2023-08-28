@@ -47,3 +47,12 @@
           StartupWMClass=jetbrains-idea-ce
           StartupNotify=true
         mode: "0644"
+
+    - name: Update max memory usage
+      ansible.builtin.lineinfile:
+        path: "{{ ansible_user_dir }}/opt/jetbrains-idea-ce/bin/idea64.vmoptions"
+        line: "-Xmx4096m"
+        regexp: "^-Xmx"
+        create: true
+      become: true
+
