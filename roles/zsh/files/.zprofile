@@ -117,6 +117,26 @@ export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djava.util.prefs.userRoot=\"$XDG_CONFIG_HO
 #   The openjdk implementation hardcodes the location of the fontcache file regardless if the user specified java.util.prefs.userRoot to a different location
 export _JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=\"$JAVA_USER_HOME\""
 
+# Setup JAVAFX
+export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djavafx.cachedir=\"$XDG_CACHE_HOME/openjfx\""
+
+
+##
+## Better font rendering for Java applications, useful if not running xsettings daemon
+##   NOTE(dparo): IntelliJ complains if this variable is set. It may cause performance degradations.
+##
+# export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
+
+
+# https://www.oracle.com/java/technologies/javase/9-enhancements.html
+# NOTE(d.paro): From JDK 9, _JAVA_OPTIONS is deprecated in favour of JDK_JAVA_OPTIONS,
+#               which it evens support more features.
+export JDK_JAVA_OPTIONS="$_JAVA_OPTIONS"
+
+
+
+
+
 
 export MAVEN_HOME="$HOME/opt/apache-maven-3.8.6/"
 # M2_HOME is used from mvnw (Maven wrapper script)
@@ -169,12 +189,6 @@ if [ -f "$ZDOTDIR/.localprofile" ]; then
     source "$ZDOTDIR/.localprofile"
 fi
 
-
-##
-## Better font rendering for Java applications, useful if not running xsettings daemon
-##   NOTE(dparo): IntelliJ complains if this variable is set. It may cause performance degradations.
-##
-# export JDK_JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=on -Dswing.aatext=true -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'
 
 # See: https://wiki.archlinux.org/title/java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
 # Virtually all modern window managers are re-parenting, although earlier window managers, such as the uwm window manager, were not.

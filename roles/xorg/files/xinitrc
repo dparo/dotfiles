@@ -85,8 +85,9 @@ main() {
 
         case "$WM" in
         bspwm | dwm | xmonad)
-            export _JAVA_AWT_WM_NONREPARENTING=1
-            export AWT_TOOLKIT=MToolkit
+            # https://wiki.archlinux.org/title/java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
+            export _JAVA_AWT_WM_NONREPARENTING=1 # For JAVA <= 1.8
+            export AWT_TOOLKIT=MToolkit          # For JAVA > 1.8
             ;;
         *) ;;
         esac
