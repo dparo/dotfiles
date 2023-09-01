@@ -17,7 +17,7 @@ return {
     },
 
     {
-        "alaviss/nim.nvim"
+        "alaviss/nim.nvim",
     },
     {
         "ray-x/go.nvim",
@@ -66,6 +66,7 @@ return {
                     "go",
                     "regex",
                     "markdown_inline",
+                    "sql",
                 }, -- "all" or a list of languages
                 sync_install = true,
                 auto_install = true,
