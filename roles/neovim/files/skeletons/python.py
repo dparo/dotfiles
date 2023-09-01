@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import argparse
+import sys
 
 
 def parse_cmdline_args() -> argparse.Namespace:
@@ -21,7 +22,7 @@ def parse_cmdline_args() -> argparse.Namespace:
         help="The output file",
         required=True,
     )
-    return parser.parse_args()
+    return parser.parse_args(sys.argv[1:])
 
 
 def main(args_namespace: argparse.Namespace):
