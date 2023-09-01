@@ -88,3 +88,19 @@
   tags:
     - podman
     - docker
+#
+- name: Add host entry for host.docker.internal
+  ansible.builtin.lineinfile:
+    dest: /etc/hosts
+    regexp: '^{{ item.ip }}\s+{{ item.hostname }}'
+    line: "{{ item.ip }} {{ item.hostname }}"
+    state: present
+  become: True
+  loop:
+    - ip: 172.17.0.1
+      hostname: host.docker.internal
+    - ip: 127.0.0.1
+      hostname: kubernetes.docker.internal
+  tags:
+    - podman
+    - docker
