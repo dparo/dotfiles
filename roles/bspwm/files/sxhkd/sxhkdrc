@@ -19,9 +19,8 @@ super + d
     rofi -show drun || dmenu_run
 
 
-# Dropdown kitty terminal
-super + shift + Return
-    bspc rule -a \* -o state=floating sticky=on layer=above rectangle=720x360+600+26 && kitty
+super + p:
+    rofi -show window
 
 #
 # bspwm hotkeys
@@ -97,8 +96,6 @@ super + {comma, period}
 # focus the next/previous node in the current desktop
 super + {_,shift + }n
     bspc node -f {next,prev}.local
-super + p
-    bspc node -f prev.local
 
 #
 # focus/swap
@@ -167,7 +164,9 @@ super + shift + Escape
 
 # focus the node in the given direction
 super + {_,shift + }{Left,Down,Up,Right}
-	bspc node -{f,s} {west,south,north,east}
+    LAYOUT=$(bspc query -T -d | jq -r .layout); \
+    [[ "$LAYOUT" == "tiled" ]] && bspc node -{f,s} {west,south,north,east}; \
+    [[ "$LAYOUT" == "monocle" ]] && bspc node -{f,s} {prev,next,prev,next}.local
 
 
 # I3 like resize, enters resize mode, autodetects wheter to shrink or expand
