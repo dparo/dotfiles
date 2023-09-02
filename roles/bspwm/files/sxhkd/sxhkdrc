@@ -19,6 +19,10 @@ super + d
     rofi -show drun || dmenu_run
 
 
+# Dropdown kitty terminal
+super + shift + Return
+    bspc rule -a \* -o state=floating sticky=on layer=above rectangle=720x360+600+26 && kitty
+
 #
 # bspwm hotkeys
 #
