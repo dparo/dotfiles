@@ -84,6 +84,9 @@ config() {
     bspc rule -a Zathura state=tiled
     bspc rule -a TelegramDesktop state=floating
     bspc rule -a Emacs state=tiled
+
+    bspc rule -a Docky layer=above manage=on border=off focus=off locked=on
+
     #bspc rule -a Gimp desktop='^8' state=floating follow=on
     #bspc rule -a Chromium desktop='^2'
     #bspc config focused_border_color \#ff0000
@@ -96,7 +99,6 @@ config() {
 
     setup_monitors
 }
-
 
 event_subscription() {
     bspc subscribe monitor | while read -r line; do
