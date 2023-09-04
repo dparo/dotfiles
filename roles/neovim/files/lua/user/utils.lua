@@ -99,6 +99,7 @@ local function get_makeprg(p)
     local make = M.file_exists(p .. "/Makefile")
     local zig = M.file_exists(p .. "/build.zig")
     local package_json = M.file_exists(p .. "/package.json")
+    local mvnw = M.file_exists(p .. '/mvnw')
     local maven = M.file_exists(p .. "/pom.xml")
     local gradle = M.file_exists(p .. "/build.gradle")
     local gradle_w = M.file_exists(p .. "/gradlew")
@@ -124,6 +125,10 @@ local function get_makeprg(p)
         command = "zig build"
     elseif latexmkrc then
         command = "latexmk -pdf"
+    elseif mvnw then
+        vim.cmd [[ compiler! maven ]]
+        command =
+            p .. "/mvnw" .. "--offline --no-snapshot-updates -T1C -Dparallel=all -DperCoreThreadCount=false -DthreadCount=4 -Dmaven.compiler.debug=true -Dmaven.compiler.debuglevel=lines,vars,source -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -DskipTests=true --also-make-dependents compile"
     elseif maven then
         vim.cmd [[ compiler! maven ]]
         command =
