@@ -6,9 +6,9 @@ set NERDTree
 set smartcase
 set ignorecase
 
-set clipboard+=unnamedplus
+set clipboard=unnamed,unnamedplus
 
-set selection=exclusive
+" set selection=exclusive
 
 " Append g flag by default to substitution commands %s/foo/bar/g
 set gdefault
