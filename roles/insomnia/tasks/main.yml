@@ -1,89 +1,78 @@
 ---
-# - name: Install insomnia (flatpak)
-#   community.general.flatpak:
-#     name: rest.insomnia.Insomnia
-#     state: present
-#     remote: flathub
-#   tags:
-#     - insomnia
-#     - flatpak
-
-- name: Download and unpack Insomnia Core {{ insomnia_version }}
-  ansible.builtin.unarchive:
-    src: https://github.com/Kong/insomnia/releases/download/core@{{ insomnia_version }}/Insomnia.Core-{{ insomnia_version }}.tar.gz
-    dest: "{{ ansible_user_dir }}/opt"
-    remote_src: true
+- name: Insomnia
   tags:
     - insomnia
+  block:
+    # - name: Install insomnia (flatpak)
+    #   community.general.flatpak:
+    #     name: rest.insomnia.Insomnia
+    #     state: present
+    #     remote: flathub
+    #   tags:
+    #     - insomnia
+    #     - flatpak
 
-- name: Symlink binary
-  ansible.builtin.file:
-    src: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/insomnia"
-    dest: "{{ ansible_user_dir }}/.local/bin/insomnia"
-    state: link
-  tags:
-    - insomnia
+    - name: Download and unpack Insomnia Core {{ insomnia_version }}
+      ansible.builtin.unarchive:
+        src: https://github.com/Kong/insomnia/releases/download/core@{{ insomnia_version }}/Insomnia.Core-{{ insomnia_version }}.tar.gz
+        dest: "{{ ansible_user_dir }}/opt"
+        remote_src: true
 
-- name: Download and unpack insomnia-cli version {{ insomnia_cli_version }}
-  ansible.builtin.unarchive:
-    src: https://github.com/Kong/insomnia/releases/download/lib@{{ insomnia_cli_version }}/inso-linux-{{ insomnia_cli_version }}.tar.xz
-    dest: "{{ ansible_user_dir }}/.local/bin"
-    remote_src: true
-  tags:
-    - insomnia
-    - insomnia-cli
+    - name: Symlink binary
+      ansible.builtin.file:
+        src: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/insomnia"
+        dest: "{{ ansible_user_dir }}/.local/bin/insomnia"
+        state: link
 
-## Fixes issue https://github.com/Kong/insomnia/issues/5088
-# Problem with libcups version
-- name: Fetch older cups-lib-2.4.1.7
-  ansible.builtin.get_url:
-    url: https://kojipkgs.fedoraproject.org//packages/cups/2.4.1/7.fc36/x86_64/cups-libs-2.4.1-7.fc36.x86_64.rpm
-    dest: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/"
-    mode: "0644"
-  tags:
-    - insomnia
+    - name: Download and unpack insomnia-cli version {{ insomnia_cli_version }}
+      ansible.builtin.unarchive:
+        src: https://github.com/Kong/insomnia/releases/download/lib@{{ insomnia_cli_version }}/inso-linux-{{ insomnia_cli_version }}.tar.xz
+        dest: "{{ ansible_user_dir }}/.local/bin"
+        remote_src: true
 
-- name: Unpack older cups-lib-2.4.1.7
-  ansible.builtin.shell: rpm2cpio cups-libs-2.4.1-7.fc36.x86_64.rpm | cpio -idmv
-  args:
-    chdir: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}"
-  tags:
-    - insomnia
+      # Fixes issue https://github.com/Kong/insomnia/issues/5088
+      # Problem with libcups version
+    - when: False
+      block:
+        - name: Fetch older cups-lib-2.4.1.7
+          ansible.builtin.get_url:
+            url: https://kojipkgs.fedoraproject.org//packages/cups/2.4.1/7.fc36/x86_64/cups-libs-2.4.1-7.fc36.x86_64.rpm
+            dest: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/"
+            mode: "0644"
 
-- name: Symlink libcups.so.2 libcupsimage.so.2 from older cups-lib-2.4.1.7
-  ansible.builtin.file:
-    src: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/usr/lib64/{{ item }}"
-    dest: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/{{ item }}"
-    state: link
-    force: true
-  loop:
-    - libcups.so.2
-    - libcupsimage.so.2
-  tags:
-    - insomnia
+        - name: Unpack older cups-lib-2.4.1.7
+          ansible.builtin.shell: rpm2cpio cups-libs-2.4.1-7.fc36.x86_64.rpm | cpio -idmv
+          args:
+            chdir: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}"
 
-- name: Install desktop file integration
-  ansible.builtin.copy:
-    dest: "{{ ansible_user_dir }}/.local/share/applications/insomnia.desktop"
-    content: |
-      [Desktop Entry]
-      Name=Insomnia
-      Exec="{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/insomnia" %U
-      TryExec="{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/insomnia"
-      Terminal=false
-      Type=Application
-      Icon={{ ansible_user_dir }}/.local/share/icons/hicolor/insomnia.png
-      Categories=Development;WebDevelopment;
-      StartupNotify=true
-      StartupWMClass=insomnia
-    mode: "0644"
-  tags:
-    - insomnia
+        - name: Symlink libcups.so.2 libcupsimage.so.2 from older cups-lib-2.4.1.7
+          ansible.builtin.file:
+            src: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/usr/lib64/{{ item }}"
+            dest: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/{{ item }}"
+            state: link
+            force: true
+          loop:
+            - libcups.so.2
+            - libcupsimage.so.2
 
-- name: Install insomnia Icon
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/flathub/rest.insomnia.Insomnia/master/insomnia.png
-    dest: "{{ ansible_user_dir }}/.local/share/icons/hicolor/insomnia.png"
-    mode: "0755"
-  tags:
-    - insomnia
+    - name: Install desktop file integration
+      ansible.builtin.copy:
+        dest: "{{ ansible_user_dir }}/.local/share/applications/insomnia.desktop"
+        content: |
+          [Desktop Entry]
+          Name=Insomnia
+          Exec={{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/insomnia %U
+          TryExec={{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/insomnia
+          Terminal=false
+          Type=Application
+          Icon={{ ansible_user_dir }}/.local/share/icons/hicolor/insomnia.png
+          Categories=Development;WebDevelopment;
+          StartupNotify=true
+          StartupWMClass=insomnia
+        mode: "0644"
+
+    - name: Install insomnia Icon
+      ansible.builtin.get_url:
+        url: https://raw.githubusercontent.com/flathub/rest.insomnia.Insomnia/master/insomnia.png
+        dest: "{{ ansible_user_dir }}/.local/share/icons/hicolor/insomnia.png"
+        mode: "0755"
