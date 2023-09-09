@@ -13,6 +13,7 @@
     "allowJs": true,
     "outDir": "dist",
     "declarationDir": "dist/types",
+    "noEmit": false,
     "emitDeclarationOnly": true,
     "declaration": true,
     "declarationMap": true,
