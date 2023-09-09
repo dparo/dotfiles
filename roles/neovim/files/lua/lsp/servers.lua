@@ -14,7 +14,7 @@ local jdtls_root_path = path.concat { nvim_data_path, "mason", "packages", "jdtl
 
 local function deno_root_dir(fname)
     -- If the top level directory __DOES__ contain a file named `deno.proj` determine that this is a Deno project.
-    if (vim.env.DENO_VERSION ~= nil) or (lspconfig.util.root_pattern "deno.proj"(fname) ~= nil) then
+    if (vim.env.DENO_VERSION ~= nil) or (lspconfig.util.root_pattern "deno.proj" (fname) ~= nil) then
         return lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git")(fname)
     end
     return nil
@@ -23,7 +23,7 @@ end
 local function nodejs_root_dir(fname)
     -- If the top level directory __DOES NOT__ contain a file named `deno.proj` determine that this is a Nodejs project
     if deno_root_dir(fname) == nil then
-        return (lspconfig.util.root_pattern "tsconfig.json"(fname) or lspconfig.util.root_pattern("package.json", "jsconfig.json", ".git")(fname))
+        return (lspconfig.util.root_pattern "tsconfig.json" (fname) or lspconfig.util.root_pattern("package.json", "jsconfig.json", ".git")(fname))
     end
     return nil
 end
@@ -32,7 +32,23 @@ M.list = {
     ----- Python: Pyright seems the best performant and modern solution
     -- { name = 'pylsp', config = {} },
     -- { name = 'jedi_language_server', config = {} },
-    { name = "pyright", config = {} },
+    {
+        name = "pyright",
+        config = {
+            pyright = {
+                autoImportCompletion = true,
+                disableOrganizeImports = false,
+            },
+            python = {
+                analysis = {
+                    autoSearchPaths = true,
+                    diagnosticMode = "workspace",
+                    useLibraryCodeForTypes = true,
+                    typeCheckingMode = "strict",
+                },
+            },
+        },
+    },
 
     {
         name = "clangd",
@@ -106,16 +122,18 @@ M.list = {
             },
         },
     },
-    { name = "ltex", config = {} }, --- LateX language server: LSP language server for LanguageTool (requires ltex-ls binary in path)
-    { name = "lemminx", config = {
-        settings = {
-            xml = {
-                server = {
-                    workDir = path.concat { home, '.cache', 'lemminx' }
-                }
-            }
-        }
-    }
+    { name = "ltex",  config = {} }, --- LateX language server: LSP language server for LanguageTool (requires ltex-ls binary in path)
+    {
+        name = "lemminx",
+        config = {
+            settings = {
+                xml = {
+                    server = {
+                        workDir = path.concat { home, ".cache", "lemminx" },
+                    },
+                },
+            },
+        },
     },
     {
         name = "jsonls",
@@ -164,11 +182,11 @@ M.list = {
             },
         },
     },
-    { name = "eslint", config = {} },
+    { name = "eslint",      config = {} },
     -- { name = "rome", config = {} },
     -- { name = "relay_lsp", config = {} }, -- https://github.com/facebook/relay
-    { name = "angularls", config = {} },
-    { name = "ansiblels", config = {} },
+    { name = "angularls",   config = {} },
+    { name = "ansiblels",   config = {} },
     { name = "terraformls", config = {} },
     {
         name = "jdtls",
@@ -261,7 +279,8 @@ M.list = {
                             onType = false,
                             settings = {
                                 profile = "GoogleStyle",
-                                url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+                                url =
+                                "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
                             },
                         },
                     },
@@ -372,8 +391,8 @@ M.list = {
     --     init_options = {documentFormatting = true},
     --     filetypes = { "lua", "sh", "bash", "make"}
     -- }},
-    { name = "marksman", config = {} },
-    { name = "julials", config = {} },
+    { name = "marksman",                 config = {} },
+    { name = "julials",                  config = {} },
     {
         name = "lua_ls",
         config = function()
@@ -412,14 +431,12 @@ M.list = {
     },
 }
 
-
-
-if (vim.env.NVIM_LSP_DISABLED ~= nil and vim.env.NVIM_LSP_DISABLED ~= "0") then
+if vim.env.NVIM_LSP_DISABLED ~= nil and vim.env.NVIM_LSP_DISABLED ~= "0" then
     M.list = {}
 end
 
 function M.get_config(name)
-    if (vim.env.NVIM_LSP_DISABLED ~= nil and vim.env.NVIM_LSP_DISABLED ~= "0") then
+    if vim.env.NVIM_LSP_DISABLED ~= nil and vim.env.NVIM_LSP_DISABLED ~= "0" then
         return nil
     end
     for _, server in ipairs(M.list) do
