@@ -2,9 +2,19 @@
   "compilerOptions": {
     "module": "es6",
     "target": "es2020",
+    "strict": true,
+    "alwaysStrict": true,
     "strictNullChecks": true,
+    "strictBindCallApply": true,
+    "strictFunctionTypes": true,
+    "strictPropertyInitialization": true,
     "resolveJsonModule": true,
-    "checkJs": true
+    "checkJs": true,
+    "allowJs": true,
+    "outDir": "dist",
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationMap": true
   },
   "exclude": [
     "node_modules"
