@@ -1,0 +1,17 @@
+{
+  "name": "package-name",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "run": "node src/index.js",
+    "test": "node --test test/",
+    "test-watch": "node --test --watch test/"
+  },
+  "author": "Davide Paro <d.paro@outlook.it>",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}

@@ -11,13 +11,14 @@
     "resolveJsonModule": true,
     "checkJs": true,
     "allowJs": true,
-    "outDir": "dist",
-    "declarationDir": "dist/types",
+    "outDir": "build/dist",
+    "declarationDir": "build/dist/types",
     "noEmit": false,
     "emitDeclarationOnly": true,
     "declaration": true,
     "declarationMap": true,
     "moduleResolution": "node16",
+    "allowSyntheticDefaultImports": true
   },
   "exclude": [
     "node_modules",
@@ -26,6 +27,7 @@
     "out"
   ],
   "include": [
-    "src/**/*"
-  ],
+    "src/**/*",
+    "test/**/*"
+  ]
 }

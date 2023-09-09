@@ -14,7 +14,7 @@ update-notifier=false
 progress=false
 
 logs-max=5
-loglevel=info
+# loglevel=info
 
 prefix=${NPM_DIR}
 cache=${XDG_CACHE_HOME}/npm
