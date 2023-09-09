@@ -9,18 +9,22 @@
     "strictFunctionTypes": true,
     "strictPropertyInitialization": true,
     "resolveJsonModule": true,
-    "moduleResolution": "node16",
     "checkJs": true,
     "allowJs": true,
     "outDir": "dist",
+    "declarationDir": "dist/types",
     "emitDeclarationOnly": true,
     "declaration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "moduleResolution": "node16",
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "dist",
+    "build",
+    "out"
   ],
   "include": [
     "src/**/*"
-  ]
+  ],
 }
