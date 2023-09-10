@@ -1,37 +1,33 @@
 ---
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - zsh
-      - zsh-syntax-highlighting
-      - zsh-autosuggestions
-    state: present
-  become: true
+- name: Zsh
   tags:
     - zsh
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - zsh
+          - zsh-syntax-highlighting
+          - zsh-autosuggestions
+        state: present
+      become: true
 
-- name: Setup ZDOTDIR to point to the user XDG config location
-  ansible.builtin.lineinfile:
-    path: /etc/zshenv
-    line: export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
-    regexp: ^export ZDOTDIR=
-    create: true
-  become: true
-  tags:
-    - zsh
+    - name: Setup ZDOTDIR to point to the user XDG config location
+      ansible.builtin.lineinfile:
+        path: /etc/zshenv
+        line: export ZDOTDIR="${XDG_CONFIG_HOME:-$HOME/.config}/zsh"
+        regexp: ^export ZDOTDIR=
+        create: true
+      become: true
 
-- name: Sets the user shell to zsh for user {{ ansible_env.USER }}
-  ansible.builtin.user:
-    name: "{{ ansible_env.USER }}"
-    shell: /bin/zsh
-  become: true
-  tags:
-    - zsh
+    - name: Sets the user shell to zsh for user {{ ansible_env.USER }}
+      ansible.builtin.user:
+        name: "{{ ansible_env.USER }}"
+        shell: /bin/zsh
+      become: true
 
-- name: Symlink config
-  ansible.builtin.file:
-    src: "{{ role_path }}/files"
-    dest: "{{ ansible_user_dir }}/.config/zsh"
-    state: link
-  tags:
-    - zsh
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files"
+        dest: "{{ ansible_user_dir }}/.config/zsh"
+        state: link
