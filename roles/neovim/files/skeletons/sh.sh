@@ -21,4 +21,4 @@ main() {
 }
 
 set -x
-exec main "$@"
+main "$@"
