@@ -13,6 +13,8 @@ alias vim=nvim
 alias vi=nvim
 alias ec="emacsclient --create-frame"
 alias parallel='parallel --will-cite'
+alias docker-clean='docker system prune --volumes -a'
+alias docker-prune='docker system prune --volumes -a'
 
 function valid_shell_command {
     builtin type "$1" 1>/dev/null 2>/dev/null
