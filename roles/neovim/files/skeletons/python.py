@@ -22,8 +22,8 @@ def parse_cmdline_args() -> argparse.Namespace:
     ## Positional args
     ##
     parser.add_argument(
-        "input_file",
         type=argparse.FileType(mode="r", encoding="utf-8"),
+        dest="input_file",
         nargs="?",
         help="The input file",
         default=sys.stdin,
