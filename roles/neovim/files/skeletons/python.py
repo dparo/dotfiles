@@ -12,10 +12,15 @@ def parse_cmdline_args() -> argparse.Namespace:
         description="My description",
         epilog="",
     )
-
     parser.add_argument(
-        "input_file", type=argparse.FileType("r"), help="The input file"
+        "-i",
+        "--input_file",
+          type=argparse.FileType("r"),
+        help="The input file",
+        required = False,
+        default=sys.stdin,
     )
+
     parser.add_argument(
         "-o",
         "--output",
