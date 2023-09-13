@@ -25,9 +25,10 @@ def parse_cmdline_args() -> argparse.Namespace:
     return parser.parse_args(sys.argv[1:])
 
 
-def main(args_namespace: argparse.Namespace):
-    args = args_namespace.vars()
+def main(args: argparse.Namespace) -> None:
+    input_file = args.input_file
     print(args)
+    print(input_file)
 
 
 if __name__ == "__main__":
