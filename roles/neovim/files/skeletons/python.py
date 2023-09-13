@@ -3,6 +3,7 @@
 
 import argparse
 import sys
+import io
 
 
 def parse_cmdline_args() -> argparse.Namespace:
@@ -26,9 +27,12 @@ def parse_cmdline_args() -> argparse.Namespace:
 
 
 def main(args: argparse.Namespace) -> None:
-    input_file = args.input_file
+    input_file: io.TextIOWrapper = args.input_file
+    output_file: io.TextIOWrapper = args.output
+
     print(args)
-    print(input_file)
+    print(input_file.name)
+    print(output_file.name)
 
 
 if __name__ == "__main__":
