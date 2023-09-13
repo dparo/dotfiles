@@ -30,7 +30,7 @@ def parse_cmdline_args() -> argparse.Namespace:
     )
 
     ##
-    ## Special arguments
+    ## Option arguments
     ##
     parser.add_argument(
         "--log",
