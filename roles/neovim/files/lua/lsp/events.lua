@@ -264,6 +264,23 @@ function M.on_attach(client, bufnr)
         })
     end
 
+    if client.supports_method "textDocument/inlayHint" and vim.lsp.inlay_hint ~= nil then
+        vim.api.nvim_create_autocmd("InsertEnter", {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.inlay_hint(bufnr, true)
+            end,
+        })
+        vim.api.nvim_create_autocmd("InsertLeave", {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+                vim.lsp.buf.inlay_hint(bufnr, false)
+            end,
+        })
+    end
+
     -- Enable formatting on save
     if
         (client.server_capabilities.documentFormattingProvider or client.supports_method "textDocument/formatting")
