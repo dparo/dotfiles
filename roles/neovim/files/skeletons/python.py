@@ -21,7 +21,7 @@ def parse_cmdline_args() -> argparse.Namespace:
         "--output",
         type=argparse.FileType("w"),
         help="The output file",
-        required=True,
+        default=sys.stdout
     )
     return parser.parse_args(sys.argv[1:])
 
