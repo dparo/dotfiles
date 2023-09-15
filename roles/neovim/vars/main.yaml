@@ -13,6 +13,8 @@ mason_dependencies:
   - pyright
   - mypy
   - debugpy
+  # - yapf
+  - black
   - ruff
   - clangd
   - clang-format
