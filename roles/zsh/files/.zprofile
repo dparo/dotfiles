@@ -153,8 +153,6 @@ export MAVEN_CONFIG="-gs $XDG_CONFIG_HOME/maven/settings_global.xml"
 
 export MAVEN_DEBUG_ADDRESS=5005
 
-export SPRING_PROFILES_ACTIVE="local"
-
 export SPLUNK_HOME="$HOME/opt/splunk"
 
 # Default CMAKE_GENERATOR
