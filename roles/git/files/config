@@ -37,7 +37,7 @@
 	historybrowser = git-dag
     editor = nvim
 [alias]
-	lola = log --graph --decorate --oneline --abbrev-commit --all
+	lola = log --graph --decorate --oneline --abbrev-commit --all --full-history 
 [diff]
     tool = p4merge
     keepBackup = false

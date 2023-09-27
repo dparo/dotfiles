@@ -8,6 +8,7 @@
       - pre-commit
       - tig
       - gh # GitHub’s official command line tool: https://github.com/cli/cli
+      - gitk
     state: present
   become: true
   tags:
