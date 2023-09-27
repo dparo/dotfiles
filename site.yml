@@ -48,6 +48,7 @@
     - graalvm
     - kotlin
     - maven
+    - tomcat
     - jdgui
     - latex
     - alsa
