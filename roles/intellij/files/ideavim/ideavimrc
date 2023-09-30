@@ -6,7 +6,7 @@ set NERDTree
 set smartcase
 set ignorecase
 
-set clipboard=unnamed,unnamedplus
+set clipboard=unnamedplus
 
 " set selection=exclusive
 
@@ -16,6 +16,7 @@ set gdefault
 " Highlight searches
 set hlsearch
 
+set whichwrap = b,s,<,>,[,]
 
 let mapleader = " "
 
@@ -24,8 +25,19 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'preservim/nerdtree'
 
+set clipboard+=unnamedplus
+
+
 sethandler <C-+> n:ide i:ide
 sethandler <C--> n:ide i:ide
+
+" sethandler <C-c> i-c:ide
+" sethandler <C-v> i-c:ide
+
+sethandler <C-c> i-c-n-a:ide
+sethandler <C-v> i-c-n-a:ide
+
+sethandler <C-v> i-n-c-a:vim
 
 
 sethandler <M-CR> n-v:ide i:ide
@@ -54,7 +66,7 @@ nnoremap <F4> :action Terminal<CR>
 nnoremap <C-c> yy
 vnoremap <C-c> y
 vnoremap <C-v> y _dgP
-inoremap <C-v> <C-R><C-P>+
+inoremap <C-v> <C-r>+
 
 cnoremap <C-v> <C-R>+
 cnoremap <C-S-v> <C-R>+
