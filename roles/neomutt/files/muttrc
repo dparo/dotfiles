@@ -58,4 +58,4 @@ set sleep_time = 0
 
 
 color status black white
-set new_mail_command="notify-send --icon=mail-unread.png 'New Email' '%n new messages, %u unread' &"
+set new_mail_command="notify-send --icon=mail-unread 'New Email' '%n new messages, %u unread' &"
