@@ -1,0 +1,14 @@
+---
+- name: Systemd-journald
+  tags:
+    - systemd-journald
+    - journald
+  block:
+    - name: Setup Journal Max disk space usage (100M)
+      ansible.builtin.lineinfile:
+        path: /etc/systemd/journald.conf
+        line: 'SystemMaxUse=100M'
+        regexp: '^#?SystemMaxUse='
+        create: true
+      become: true
+

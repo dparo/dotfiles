@@ -6,6 +6,7 @@
     - debug
     - sysctl
     - oomd
+    - journald
     - zswap
     - swapfile
     - dnf
