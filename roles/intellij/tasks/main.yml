@@ -56,3 +56,10 @@
         create: true
       become: true
 
+    - name: Disable core dumps
+      ansible.builtin.lineinfile:
+        path: "{{ ansible_user_dir }}/opt/jetbrains-idea-ce/bin/idea64.vmoptions"
+        line: "-Dperformance.watcher.interval=0"
+        regexp: "^-Dperformance.watcher.interval"
+        create: true
+      become: true
