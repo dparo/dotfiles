@@ -54,12 +54,15 @@
         line: "-Xmx4096m"
         regexp: "^-Xmx"
         create: true
-      become: true
 
     - name: Disable core dumps
       ansible.builtin.lineinfile:
         path: "{{ ansible_user_dir }}/opt/jetbrains-idea-ce/bin/idea64.vmoptions"
-        line: "-Dperformance.watcher.interval=0"
-        regexp: "^-Dperformance.watcher.interval"
+        line: "-D{{ item.key }}={{ item.val }}"
+        regexp: "^-D{{ item.key }}"
         create: true
-      become: true
+      loop:
+        - key: "performance.watcher.interval"
+          val: "0"
+        - key: "performance.watcher.unresponsive.interval.ms"
+          val: "0"
