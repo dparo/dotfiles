@@ -3,7 +3,7 @@
 ## About
 
 This repository contains my personal dotfiles.
-This repository uses [ansible](https://www.ansible.com/) to bootstrap and provision a fresh install of a [Fedora](https://getfedora.org/) >37 distribution.
+This repository uses [Ansible](https://www.ansible.com/) to bootstrap and provision a fresh install of a [Fedora](https://getfedora.org/) >37 distribution.
 
 Ansible is an IT automation platform that serves as a good base for deploying dotfiles on a target machine: from installing required dependencies to managing and linking configuration files.
 
