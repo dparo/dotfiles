@@ -118,7 +118,7 @@ for _, sign in ipairs(signs) do
 end
 
 ---
-local theme = vim.env.NVIM_THEME or "onedark"
+local theme = vim.env.NVIM_THEME or "rosepine"
 ---
 
 local theme_list = {
@@ -127,6 +127,12 @@ local theme_list = {
         dependencies = {},
         colorscheme = "catppuccin-mocha",
         config = function() end,
+    },
+    rosepine = {
+        repo = "rose-pine/neovim",
+        dependencies = {},
+        name = "rosepine",
+        colorscheme = "rose-pine",
     },
     onedark = {
         repo = "navarasu/onedark.nvim",
