@@ -5,4 +5,5 @@
     state: present
     remote: flathub
   tags:
+    - never
     - beekeeper-studio
