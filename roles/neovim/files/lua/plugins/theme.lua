@@ -7,6 +7,7 @@ local function theme_overrides()
         vim.api.nvim_set_hl(0, "Normal", { ctermbg = "none", bg = "none" })
     end
 
+    vim.api.nvim_set_hl(0, "Cursor", { bg = "#00ff7f", fg = "#000002" })
     vim.api.nvim_set_hl(0, "Todo", { bg = "none" })
     vim.api.nvim_set_hl(0, "Fixme", { bg = "none" })
     vim.api.nvim_set_hl(0, "XXX", { bg = "none" })
