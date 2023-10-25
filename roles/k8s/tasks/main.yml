@@ -1,0 +1,25 @@
+---
+- name: k8s
+  tags:
+    - k8s
+    - kubernetes
+  block:
+  - name: Enable k8s repo
+    ansible.builtin.copy:
+      dest: /etc/yum.repos.d/kubernetes.repo
+      content: |
+        [kubernetes]
+        name=Kubernetes
+        baseurl=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/
+        enabled=1
+        gpgcheck=1
+        gpgkey=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
+      mode: "0644"
+    become: true
+
+  - name: Install kubectl
+    ansible.builtin.dnf:
+      name:
+        - kubectl
+    become: true
+

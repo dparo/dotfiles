@@ -98,6 +98,7 @@
     - misc
     - fonts
     - docker
+    - k8s
     - terraform
     - vagrant
     - vault
