@@ -73,6 +73,9 @@ disabled = false
 symbol = " "
 only_with_files = false
 
+[kubernetes]
+disabled = false
+
 [elixir]
 symbol = " "
 
