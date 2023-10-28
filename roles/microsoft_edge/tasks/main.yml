@@ -1,5 +1,4 @@
 ---
-
 - name: Microsoft Edge
   tags:
     - never
@@ -17,7 +16,6 @@
           gpgkey=https://packages.microsoft.com/keys/microsoft.asc
         mode: "0644"
       become: true
-
 
     - name: Install microsoft-edge
       ansible.builtin.dnf:

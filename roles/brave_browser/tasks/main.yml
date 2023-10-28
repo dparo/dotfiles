@@ -1,7 +1,7 @@
 ---
-
 - name: BraveBrowser
   tags:
+    - never
     - brave-browser
   block:
     - name: Enable brave-browser repo (https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo)

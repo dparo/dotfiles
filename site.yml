@@ -108,6 +108,7 @@
     - keepassxc
     - bitwarden
     - firefox
+    - chromium
     - brave_browser
     - google_chrome
     - microsoft_edge

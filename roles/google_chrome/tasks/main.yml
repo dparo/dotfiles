@@ -1,6 +1,7 @@
 ---
 - name: Google Chrome
   tags:
+    - never
     - google-chrome
     - google-chrome-stable
   block:
