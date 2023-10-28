@@ -1,5 +1,6 @@
 - name: Tomcat
   tags:
+    - never
     - tomcat
   block:
     - name: Download and unpack
