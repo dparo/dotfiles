@@ -25,13 +25,13 @@
 
 - name: Change docker daemon config (data-root)
   ansible.builtin.copy:
-    dest: /etc/docker/daemon.json 
+    dest: /etc/docker/daemon.json
     content: |
       {
         "data-root": "/var/lib/docker"
       }
     mode: "0644"
-    become: true
+  become: true
   tags:
     - docker
     - podman
