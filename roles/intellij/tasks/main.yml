@@ -1,6 +1,7 @@
 ---
 - name: IntelliJ
   tags:
+    - never
     - intellij
     - idea-ce
     - jetbrains-idea-ce
