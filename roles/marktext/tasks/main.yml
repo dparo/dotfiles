@@ -1,8 +1,11 @@
 ---
-- name: Install marktext (flatpak)
-  community.general.flatpak:
-    name: com.github.marktext.marktext
-    state: present
-    remote: flathub
+- name: Marktext
   tags:
+    - never
     - marktext
+  block:
+    - name: Install marktext (flatpak)
+      community.general.flatpak:
+        name: com.github.marktext.marktext
+        state: present
+        remote: flathub
