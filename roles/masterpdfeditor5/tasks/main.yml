@@ -1,6 +1,7 @@
 ---
 - name: MasterPdfEditor5
   tags:
+    - never
     - masterpdfeditor5
   block:
     - name: Download and unpack masterpdfeditor5 {{ version }}
