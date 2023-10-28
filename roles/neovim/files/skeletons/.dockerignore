@@ -1,0 +1,14 @@
+/.git
+node_modules
+/node_modules
+/cache
+
+.gdb_history
+.log
+.cache
+*.swp
+
+__pycache__
+/.venv
+/venv
+/pyvenv.cfg

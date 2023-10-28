@@ -47,6 +47,7 @@ core.utils.augroup("USER_SKELETONS", {
     { "BufNewFile", { pattern = "pom.xml", command = [[0r ~/.config/nvim/skeletons/pom.xml]] } },
     { "BufNewFile", { pattern = "jsconfig.json", command = [[0r ~/.config/nvim/skeletons/jsconfig.json]] } },
     { "BufNewFile", { pattern = "package.json", command = [[0r ~/.config/nvim/skeletons/package.json]] } },
+    { "BufNewFile", { pattern = ".dockerignore", command = [[0r ~/.config/nvim/skeletons/.dockerignore]] } },
 
     {
         "BufNewFile",
