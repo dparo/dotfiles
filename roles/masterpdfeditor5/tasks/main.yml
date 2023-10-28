@@ -1,27 +1,25 @@
 ---
-- name: Download and unpack masterpdfeditor5 {{ version }}
-  ansible.builtin.unarchive:
-    src: https://code-industry.net/public/master-pdf-editor-{{ version }}-1-qt5.x86_64.tar.gz
-    dest: /opt
-    remote_src: true
-  become: true
+- name: MasterPdfEditor5
   tags:
     - masterpdfeditor5
+  block:
+    - name: Download and unpack masterpdfeditor5 {{ version }}
+      ansible.builtin.unarchive:
+        src: https://code-industry.net/public/master-pdf-editor-{{ version }}-1-qt5.x86_64.tar.gz
+        dest: /opt
+        remote_src: true
+      become: true
 
-- name: Symlink desktop file
-  ansible.builtin.file:
-    src: /opt/master-pdf-editor-5/masterpdfeditor5.desktop
-    dest: /usr/share/applications/masterpdfeditor5.desktop
-    state: link
-  become: true
-  tags:
-    - masterpdfeditor5
+    - name: Symlink desktop file
+      ansible.builtin.file:
+        src: /opt/master-pdf-editor-5/masterpdfeditor5.desktop
+        dest: /usr/share/applications/masterpdfeditor5.desktop
+        state: link
+      become: true
 
-- name: Symlink binary
-  ansible.builtin.file:
-    src: /opt/master-pdf-editor-5/masterpdfeditor5
-    dest: /usr/local/bin/masterpdfeditor5
-    state: link
-  become: true
-  tags:
-    - masterpdfeditor5
+    - name: Symlink binary
+      ansible.builtin.file:
+        src: /opt/master-pdf-editor-5/masterpdfeditor5
+        dest: /usr/local/bin/masterpdfeditor5
+        state: link
+      become: true
