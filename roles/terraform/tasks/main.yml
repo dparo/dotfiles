@@ -1,18 +1,37 @@
 ---
-- name: Enable hashicorp.repo (https://rpm.releases.hashicorp.com/fedora/hashicorp.repo)
-  ansible.builtin.get_url:
-    dest: /etc/yum.repos.d/hashicorp.repo
-    url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
-    mode: "0644"
-  become: true
+- name: Terraform
   tags:
     - terraform
+    - terragrunt
+  block:
+    - name: Enable hashicorp.repo (https://rpm.releases.hashicorp.com/fedora/hashicorp.repo)
+      ansible.builtin.get_url:
+        dest: /etc/yum.repos.d/hashicorp.repo
+        url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+        mode: "0644"
+      become: true
 
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - terraform
-    state: present
-  become: true
-  tags:
-    - terraform
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - terraform
+        state: present
+      become: true
+
+    - name: Check latest terragrunt
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest
+        return_content: true
+      register: terragrunt_latest
+
+
+    # https://github.com/gruntwork-io/terragrunt/releases/download/v0.53.0/terragrunt_linux_amd64
+    - name: Download and unpack latest terragrunt
+      ansible.builtin.get_url:
+        url: "https://github.com/gruntwork-io/terragrunt/releases/download/{{ terragrunt_latest['json']['tag_name'] }}/terragrunt_linux_amd64"
+        dest: "{{ ansible_user_dir }}/.local/bin/terragrunt"
+        mode: "0755"
+        force: true
+
+
+
