@@ -1,0 +1,49 @@
+\documentclass[italian]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+
+% Better font encoding, i.e. for the actual output
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+
+\usepackage[dvipsnames]{xcolor}  % To use colors for specific texts, provides the \color{<COLOR>} to color text
+
+\usepackage[htt]{hyphenat}       % To enable hyphenation and provides hyphenatable monospaced fonts, i.e. \texttt{} reflows on new lines correctly
+\usepackage[pdfa,pdfusetitle,hidelinks]{hyperref}      % To allow for interactive links (click with the mouse). PDFA option to annotate links in conformance with PDF-A spec
+\usepackage{graphicx}            % Allows you to insert figures
+\usepackage{amsmath}             % Allows you to do equations
+\usepackage{amssymb}
+\usepackage{mathtools}           % mathtools builds on top of asmmath
+\usepackage{accents}
+\usepackage{csquotes}
+\usepackage{titling}
+\usepackage{url}       % For typesetting urls
+\usepackage{subcaption}    % For handling subfigures, i.e. nesting figures, list of figures, array of figures, etc
+\usepackage{booktabs}     % The package enhances the quality of tables in LaTeX, providing extra commands as well as behind-the-scenes optimisation.
+\usepackage{multirow}
+
+\usepackage{cleveref}            % To allow multiple cross-references to equations inside the same cref{} command
+
+\usepackage{lipsum}
+
+\title{My Title}
+\author{Davide Paro}
+\date{\today}
+
+
+\begin{document}
+\maketitle
+\begin{abstract}
+    \lipsum[1]
+\end{abstract}
+\tableofcontents
+
+
+\section{First section}
+\lipsum[2]
+
+
+\end{document}
+
+

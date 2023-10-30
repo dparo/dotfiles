@@ -10,6 +10,8 @@
       - texlive-collection-genericextra
       - texlive-collection-science
       - texlive-collection-bibtexextra
+      - texlive-babel-italian
+      - texlive-babel-english
       - texlive-fontawesome
       - texlive-fontawesome5
       - texlive-lm # lmodern
