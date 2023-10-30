@@ -23,3 +23,16 @@
         - kubectl
     become: true
 
+  - name: Check latest kustomize
+    ansible.builtin.uri:
+      url: https://api.github.com/repos/kubernetes-sigs/kustomize/releases/latest
+      return_content: true
+    register: kustomize_latest
+
+  - name: Download and unpack latest kustomize
+    ansible.builtin.unarchive:
+      src: https://github.com/kubernetes-sigs/kustomize/releases/download/{{ kustomize_latest['json']['tag_name'] }}/kustomize_{{ kustomize_latest['json']['tag_name'][('kustomize/' | length):] }}_linux_amd64.tar.gz
+      dest: "{{ ansible_user_dir }}/.local/bin"
+      remote_src: true
+
+
