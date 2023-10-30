@@ -15,6 +15,7 @@ alias ec="emacsclient --create-frame"
 alias parallel='parallel --will-cite'
 alias docker-clean='docker system prune --volumes -a'
 alias docker-prune='docker system prune --volumes -a'
+alias onlyoffice='flatpak run --branch=stable --arch=x86_64 --command=desktopeditors --file-forwarding org.onlyoffice.desktopeditors'
 
 function valid_shell_command {
     builtin type "$1" 1>/dev/null 2>/dev/null
@@ -41,8 +42,6 @@ function yml2json {
 }
 
 alias yaml2json=yml2json
-
-
 
 if valid_shell_command fdfind; then
     alias fd=fdfind
