@@ -1,39 +1,37 @@
 ---
-- name: Install texlive fundamental packages
-  ansible.builtin.dnf:
-    name:
-      - texlive-base
-      - texlive-collection-fontsrecommended
-      - texlive-collection-latexrecommended
-      - texlive-collection-latexextra
-      - texlive-collection-mathextra
-      - texlive-collection-genericextra
-      - texlive-collection-science
-      - texlive-collection-bibtexextra
-      - texlive-babel-italian
-      - texlive-babel-english
-      - texlive-fontawesome
-      - texlive-fontawesome5
-      - texlive-lm # lmodern
-      - texlive-chktex # latex semantic linter: https://www.nongnu.org/chktex/
-      - biber
-      - latexmk
-      - ghostscript
-    state: present
-  become: true
+- name: Latex
   tags:
     - tex
     - texlive
     - latexmk
+  block:
+    - name: Install texlive fundamental packages
+      ansible.builtin.dnf:
+        name:
+          - texlive-base
+          - texlive-collection-fontsrecommended
+          - texlive-collection-latexrecommended
+          - texlive-collection-latexextra
+          - texlive-collection-mathextra
+          - texlive-collection-genericextra
+          - texlive-collection-science
+          - texlive-collection-bibtexextra
+          - texlive-babel-italian
+          - texlive-babel-english
+          - texlive-fontawesome
+          - texlive-fontawesome5
+          - texlive-lm # lmodern
+          - texlive-chktex # latex semantic linter: https://www.nongnu.org/chktex/
+          - biber
+          - latexmk
+          - ghostscript
+        state: present
+      become: true
 
-- name: Symlink latexmk config
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
-    state: link
-  loop:
-    - "{{ role_path }}/files/latexmk"
-  tags:
-    - tex
-    - texlive
-    - latexmk
+    - name: Symlink latexmk config
+      ansible.builtin.file:
+        src: "{{ item }}"
+        dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+        state: link
+      loop:
+        - "{{ role_path }}/files/latexmk"
