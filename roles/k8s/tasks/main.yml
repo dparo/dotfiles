@@ -35,7 +35,7 @@
         dest: "{{ ansible_user_dir }}/.local/bin"
         remote_src: true
 
-    - name: Install minikube
+    - name: Install minikube (A simple local Kubernetes cluster)
       ansible.builtin.dnf:
         name: https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
         state: present
