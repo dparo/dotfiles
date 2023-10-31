@@ -4,35 +4,40 @@
     - k8s
     - kubernetes
   block:
-  - name: Enable k8s repo
-    ansible.builtin.copy:
-      dest: /etc/yum.repos.d/kubernetes.repo
-      content: |
-        [kubernetes]
-        name=Kubernetes
-        baseurl=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/
-        enabled=1
-        gpgcheck=1
-        gpgkey=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
-      mode: "0644"
-    become: true
+    - name: Enable k8s repo
+      ansible.builtin.copy:
+        dest: /etc/yum.repos.d/kubernetes.repo
+        content: |
+          [kubernetes]
+          name=Kubernetes
+          baseurl=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://pkgs.k8s.io/core:/stable:/v1.28/rpm/repodata/repomd.xml.key
+        mode: "0644"
+      become: true
 
-  - name: Install kubectl
-    ansible.builtin.dnf:
-      name:
-        - kubectl
-    become: true
+    - name: Install kubectl
+      ansible.builtin.dnf:
+        name:
+          - kubectl
+      become: true
 
-  - name: Check latest kustomize
-    ansible.builtin.uri:
-      url: https://api.github.com/repos/kubernetes-sigs/kustomize/releases/latest
-      return_content: true
-    register: kustomize_latest
+    - name: Check latest kustomize
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/kubernetes-sigs/kustomize/releases/latest
+        return_content: true
+      register: kustomize_latest
 
-  - name: Download and unpack latest kustomize
-    ansible.builtin.unarchive:
-      src: https://github.com/kubernetes-sigs/kustomize/releases/download/{{ kustomize_latest['json']['tag_name'] }}/kustomize_{{ kustomize_latest['json']['tag_name'][('kustomize/' | length):] }}_linux_amd64.tar.gz
-      dest: "{{ ansible_user_dir }}/.local/bin"
-      remote_src: true
+    - name: Download and unpack latest kustomize
+      ansible.builtin.unarchive:
+        src: https://github.com/kubernetes-sigs/kustomize/releases/download/{{ kustomize_latest['json']['tag_name'] }}/kustomize_{{ kustomize_latest['json']['tag_name'][('kustomize/' | length):] }}_linux_amd64.tar.gz
+        dest: "{{ ansible_user_dir }}/.local/bin"
+        remote_src: true
 
-
+    - name: Install minikube
+      ansible.builtin.dnf:
+        name: https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
+        state: present
+        disable_gpg_check: true
+      become: true
