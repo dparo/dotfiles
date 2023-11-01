@@ -6,7 +6,7 @@
   block:
     - name: Enable microsoft-edge repo
       ansible.builtin.copy:
-        dest: /etc/yum.repos.d/google-chrome.repo
+        dest: /etc/yum.repos.d/microsoft-edge.repo
         content: |
           [microsoft-edge]
           name=microsoft-edge
