@@ -44,7 +44,7 @@
 
     - name: Install OpenPolicyAgent (OPA)
       ansible.builtin.get_url:
-        url: https://github.com/open-policy-agent/opa/releases/download/v0.11.0/opa_linux_amd64
+        url: https://openpolicyagent.org/downloads/v0.58.0/opa_linux_amd64_static
         dest: /usr/local/bin/opa
         mode: "0755"
       become: True
