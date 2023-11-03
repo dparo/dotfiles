@@ -41,3 +41,11 @@
         state: present
         disable_gpg_check: true
       become: true
+
+    - name: Install OpenPolicyAgent (OPA)
+      ansible.builtin.get_url:
+        url: https://github.com/open-policy-agent/opa/releases/download/v0.11.0/opa_linux_amd64
+        dest: /usr/local/bin/opa
+        mode: "0755"
+      become: True
+
