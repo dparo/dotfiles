@@ -67,6 +67,7 @@
     - fzf
     - neovim
     - emacs
+    - textadept
     - git_utils
     - lazygit
     - gitui

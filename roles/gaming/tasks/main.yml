@@ -41,7 +41,6 @@
     src: https://github.com/GloriousEggroll/proton-ge-custom/releases/latest/download/{{ proton_ge_latest['json']['tag_name'] }}.tar.gz
     dest: "{{ ansible_user_dir }}/.steam/root/compatibilitytools.d/"
     remote_src: true
-  become: true
   tags:
     - never
     - gaming

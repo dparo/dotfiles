@@ -1,0 +1,38 @@
+---
+- name: Textadept
+  tags:
+    - textadept
+  block:
+    - name: Check latest textadept
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/orbitalquark/textadept/releases/latest
+        return_content: true
+      register: rel
+
+    - name: Download and unpack {{ rel['json']['tag_name'] }}
+      ansible.builtin.unarchive:
+        src: "https://github.com/orbitalquark/textadept/releases/download/{{ rel['json']['tag_name'] }}/{{ rel['json']['tag_name'] }}.linux.tgz"
+        dest: "{{ ansible_user_dir }}/opt"
+        remote_src: true
+
+    - name: Symlink binaries
+      ansible.builtin.file:
+        src: "{{ ansible_user_dir }}/opt/textadept/{{ item }}"
+        dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+        state: link
+      loop:
+        - textadept
+        - textadept-curses
+        - textadept-gtk
+
+    - name: Symlink desktop icon
+      ansible.builtin.file:
+        src: "{{ ansible_user_dir }}/opt/textadept/core/images/textadept.svg"
+        dest: "{{ ansible_user_dir }}/.local/share/icons/textadept.svg"
+        state: link
+
+    - name: Symlink desktop integration
+      ansible.builtin.file:
+        src: "{{ ansible_user_dir }}/opt/textadept/textadept.desktop"
+        dest: "{{ ansible_user_dir }}/.local/share/applications/textadept.desktop"
+        state: link
