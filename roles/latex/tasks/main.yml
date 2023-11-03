@@ -3,6 +3,7 @@
   tags:
     - tex
     - texlive
+    - latex
     - latexmk
   block:
     - name: Install texlive fundamental packages
