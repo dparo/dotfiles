@@ -1,0 +1,48 @@
+- name: Joplin
+  tags:
+    - joplin
+  block:
+    - name: Check latest joplin
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/laurent22/joplin/releases/latest
+        return_content: true
+      register: rel
+
+    # https://github.com/laurent22/joplin/releases/download/v2.12.19/Joplin-2.12.19.AppImage
+    - name: Download Joplin {{ rel['json']['tag_name'] }}
+      ansible.builtin.get_url:
+        url: "https://github.com/laurent22/joplin/releases/download/{{ rel['json']['tag_name'] }}/Joplin-{{ rel['json']['tag_name'][1:] }}.AppImage"
+        dest: "{{ ansible_user_dir }}/opt/Joplin.AppImage"
+        mode: "0755"
+
+    - name: Make icon dir
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/.local/share/icons/512x512/apps/"
+        state: directory
+        mode: "0755"
+        recurse: true
+
+    # Desktop integration
+    - name: Download desktop icon
+      ansible.builtin.get_url:
+        url: "https://joplinapp.org/images/Icon512.png"
+        dest: "{{ ansible_user_dir }}/.local/share/icons/512x512/apps/joplin.png"
+        mode: "0644"
+
+    - name: Install desktop file integration
+      ansible.builtin.copy:
+        dest: "{{ ansible_user_dir }}/.local/share/applications/joplin.desktop"
+        content: |
+          [Desktop Entry]
+          Encoding=UTF-8
+          Name=Joplin
+          Comment=Joplin for Desktop
+          Exec={{ ansible_user_dir }}/opt/Joplin.AppImage %u
+          Icon=joplin
+          StartupWMClass=Joplin
+          Type=Application
+          Categories=Office;
+          MimeType=x-scheme-handler/joplin;
+          X-GNOME-SingleWindow=true // should be removed eventually as it was upstream to be an XDG specification
+          SingleMainWindow=true
+        mode: "0644"
