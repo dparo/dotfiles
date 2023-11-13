@@ -11,6 +11,7 @@ main() {
 
     # This two ENV vars are required if running `gnome-session` from this .xinitrc script
     export XDG_SESSION_TYPE=x11
+    export XDG_CURRENT_DESKTOP=GNOME
     export GDK_BACKEND=x11
 
     # For fixing libreoffice styling under non gnome desktop environments
