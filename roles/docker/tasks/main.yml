@@ -36,9 +36,9 @@
     - docker
     - podman
 
-- name: Enable docker service
+- name: Enable docker socket (starts dockerd service lazily when invoked)
   ansible.builtin.systemd:
-    name: docker
+    name: docker.socket
     enabled: "{{ not podman_docker_emulation }}"
   become: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and podman_docker_emulation
