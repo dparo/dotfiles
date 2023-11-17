@@ -1,0 +1,16 @@
+- name: SeLinux
+  tags:
+    - selinux
+  when: ansible_distribution == 'Fedora'
+  block:
+    - name: Disable SeLinux kernel model at boot time
+      ansible.builtin.command: grubby --update-kernel ALL --args selinux=0
+      become: True
+
+    - name: Set SeLinux to permissive mode
+      ansible.builtin.lineinfile:
+        path: /etc/selinux/config
+        line: "SELINUX=permissive"
+        regexp: "^SELINUX="
+        create: false
+      become: True
