@@ -13,6 +13,7 @@
     - dnf
     - yum_repos
     - flatpak
+    - abrt
     - x509
     - ssh
     - gnupg

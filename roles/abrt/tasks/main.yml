@@ -1,0 +1,24 @@
+- name: Abrt
+  tags:
+    - abrt
+  when: ansible_distribution == 'Fedora'
+  block:
+    - name: Uninstall abrt
+      ansible.builtin.dnf:
+        name:
+          - abrt-addon-ccpp
+          - abrt-addon-kerneloops
+          - abrt-addon-pstoreoops
+          - abrt-addon-vmcore
+          - abrt-addon-xorg
+          - abrt-cli
+          - abrt-dbus
+          - abrt-desktop
+          - abrt-gui
+          - abrt-gui-libs
+          - abrt-java-connector
+          - abrt-libs
+          - abrt-plugin-bodhi
+          - abrt-tui
+        state: absent
+        autoremove: true
