@@ -97,6 +97,7 @@
     - husky
     - npm-check-updates
     - svgo # https://github.com/svg/svgo: Node.js tool for optimizing SVG files
+    - "@redocly/cli@latest"
   tags: devel
 
 - name: Install additional NPM tools
