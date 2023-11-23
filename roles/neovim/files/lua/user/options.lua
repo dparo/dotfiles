@@ -34,7 +34,7 @@ vim.o.undofile = true
 vim.o.writebackup = false
 
 vim.o.number = true
-vim.o.relativenumber = true
+vim.o.relativenumber = false -- Relative line numbers
 
 vim.o.wrap = false
 vim.o.showbreak = "↳"
