@@ -41,6 +41,8 @@
         state: present
         disable_gpg_check: true
       become: true
+      tags:
+        - minikube
 
     - name: Install latest OpenPolicyAgent (OPA)
       ansible.builtin.get_url:
@@ -48,6 +50,10 @@
         dest: /usr/local/bin/opa
         mode: "0755"
       become: True
+      tags:
+        - openpolicyagent
+        - open-policy-agent
+        - opa
 
 
       # TODO: Install helm: https://get.helm.sh/helm-v3.13.1-linux-amd64.tar.gz
