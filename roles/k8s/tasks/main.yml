@@ -65,6 +65,7 @@
 
         - name: Enable minikube addons
           ansible.builtin.command: "minikube addons enable {{ item }}"
+          ignore_errors: true
           loop:
             - ingress
             - ingress-dns
