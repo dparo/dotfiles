@@ -35,36 +35,41 @@
         dest: "{{ ansible_user_dir }}/.local/bin"
         remote_src: true
 
-    - name: Install minikube (A simple local Kubernetes cluster)
-      ansible.builtin.dnf:
-        name: https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
-        state: present
-        disable_gpg_check: true
-      become: true
+    - name: Minikube
       tags:
         - minikube
+      block:
+        - name: Install minikube (A simple local Kubernetes cluster)
+          ansible.builtin.dnf:
+            name: https://storage.googleapis.com/minikube/releases/latest/minikube-latest.x86_64.rpm
+            state: present
+            disable_gpg_check: true
+          become: true
 
-    - name: Minikube - Create additional dirs
-      ansible.builtin.file:
-        path: "{{ item }}"
-        state: directory
-        mode: "0755"
-      loop:
-        - "{{ ansible_user_dir }}/.local/share/minikube"
-      tags:
-        - minikube
+        - name: Minikube - Create additional dirs
+          ansible.builtin.file:
+            path: "{{ item }}"
+            state: directory
+            mode: "0755"
+          loop:
+            - "{{ ansible_user_dir }}/.local/share/minikube"
 
-    - name: Minikube - Symlink additional items
-      ansible.builtin.file:
-        src: "{{ item.src }}"
-        dest: "{{ item.dest }}"
-        state: link
-      loop:
-        - src: "{{ ansible_user_dir }}/.local/share/minikube"
-          dest: "{{ ansible_user_dir }}/.minikube"
-      tags:
-        - minikube
+        - name: Minikube - Symlink additional items
+          ansible.builtin.file:
+            src: "{{ item.src }}"
+            dest: "{{ item.dest }}"
+            state: link
+          loop:
+            - src: "{{ ansible_user_dir }}/.local/share/minikube"
+              dest: "{{ ansible_user_dir }}/.minikube"
 
+        - name: Enable minikube addons
+          ansible.builtin.command: "minikube addons enable {{ item }}"
+          loop:
+            - ingress
+            - ingress-dns
+
+        # TODO: Handle ingress DNS lookup: https://minikube.sigs.k8s.io/docs/handbook/addons/ingress-dns/
 
     - name: Install latest OpenPolicyAgent (OPA)
       ansible.builtin.get_url:
@@ -76,6 +81,5 @@
         - openpolicyagent
         - open-policy-agent
         - opa
-
 
       # TODO: Install helm: https://get.helm.sh/helm-v3.13.1-linux-amd64.tar.gz
