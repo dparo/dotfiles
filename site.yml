@@ -102,6 +102,7 @@
     - fonts
     - docker
     - k8s
+    - k9s
     - terraform
     - vagrant
     - vault
