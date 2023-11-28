@@ -1,0 +1,30 @@
+- name: Popeye
+  tags:
+    - popeye
+  block:
+    - name: Create install dir
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/opt/popeye"
+        state: directory
+        mode: "0755"
+
+    - name: Check latest popeye release
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/derailed/popeye/releases/latest
+        return_content: true
+      register: rel
+
+    # https://github.com/derailed/popeye/releases/download/v0.11.1/popeye_Linux_x86_64.tar.gz
+    - name: Download and unpack popeye {{ rel['json']['tag_name'] }}
+      ansible.builtin.unarchive:
+        src: "https://github.com/derailed/popeye/releases/download/{{ rel['json']['tag_name'] }}/popeye_Linux_x86_64.tar.gz"
+        dest: "{{ ansible_user_dir }}/opt/popeye"
+        remote_src: true
+
+    - name: Symlink binaries
+      ansible.builtin.file:
+        src: "{{ ansible_user_dir }}/opt/popeye/{{ item }}"
+        dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+        state: link
+      loop:
+        - popeye

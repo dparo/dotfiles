@@ -103,6 +103,7 @@
     - docker
     - k8s
     - k9s
+    - popeye
     - terraform
     - vagrant
     - vault
