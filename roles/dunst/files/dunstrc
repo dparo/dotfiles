@@ -165,13 +165,13 @@
     background = "#a6e3a1"
     foreground = "#11111b"
     frame_color = "#1e1e2e"
-    timeout = 8
+    timeout = 16
 
 [urgency_normal]
     background = "#a6e3a1"
     foreground = "#11111b"
     frame_color = "#1e1e2e"
-    timeout = 10
+    timeout = 16
 
 [urgency_critical]
     background = "#eba0ac"
