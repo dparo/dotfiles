@@ -1,0 +1,19 @@
+- name: Thunderbird
+  tags:
+    - never
+    - thunderbird
+    - mozilla-thunderbird
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - thunderbird
+        state: present
+      become: true
+
+    - name: Symlink autostart desktop file
+      ansible.builtin.file:
+        src: "/usr/share/applications/mozilla-thunderbird.desktop"
+        dest: "{{ ansible_user_dir }}/.config/autostart/mozilla-thunderbird.desktop"
+        state: link
+
