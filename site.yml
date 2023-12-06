@@ -138,6 +138,7 @@
     - infer # https://github.com/facebook/infer
     - gaming
     - clamav
+    - teams-for-linux
     - obsidian
     - joplin
     - marktext

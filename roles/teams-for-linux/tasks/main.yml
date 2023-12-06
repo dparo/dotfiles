@@ -1,0 +1,37 @@
+---
+- name: Teams For Linux
+  tags:
+    - never
+    - teams-for-linux
+  block:
+  - name: Import key
+    ansible.builtin.rpm_key:
+      state: present
+      key: https://repo.teamsforlinux.de/teams-for-linux.asc
+    become: true
+
+  - name: Enable repo
+    ansible.builtin.copy:
+      dest: /etc/yum.repos.d/teams-for-linux.repo
+      content: |
+        [teams-for-linux]
+        name=Repo for the unofficial Teams for Linux package
+        baseurl=https://repo.teamsforlinux.de/rpm/
+        enabled=1
+        gpgcheck=1
+      mode: "0644"
+    become: true
+
+  - name: Install
+    ansible.builtin.dnf:
+      name:
+        - teams-for-linux
+    become: true
+
+  - name: Symlink config
+    ansible.builtin.file:
+      src: "{{ role_path }}/files"
+      dest: "{{ ansible_user_dir }}/.config/teams-for-linux"
+      state: link
+
+
