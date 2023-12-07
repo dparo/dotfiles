@@ -23,8 +23,8 @@
           [Desktop Entry]
           Name=Telegram Desktop
           Comment=Official desktop version of Telegram messaging app
-          TryExec=/home/dparo/opt/Telegram/Telegram
-          Exec=/home/dparo/opt/Telegram/Telegram -- %u
+          TryExec={{ ansible_user_dir }}/opt/Telegram/Telegram
+          Exec={{ ansible_user_dir }}/Telegram/Telegram -- %u
           Icon=telegram
           Terminal=false
           StartupWMClass=TelegramDesktop
@@ -50,8 +50,8 @@
           [Desktop Entry]
           Name=Telegram Desktop
           Comment=Official desktop version of Telegram messaging app
-          TryExec=/home/dparo/opt/Telegram/Telegram
-          Exec=/home/dparo/opt/Telegram/Telegram -autostart
+          TryExec={{ ansible_user_dir }}/opt/Telegram/Telegram
+          Exec={{ ansible_user_dir }}/opt/Telegram/Telegram -autostart
           Icon=telegram
           Terminal=false
           StartupWMClass=TelegramDesktop
