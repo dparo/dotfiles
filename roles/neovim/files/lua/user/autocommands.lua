@@ -36,6 +36,7 @@ core.utils.augroup("USER_SKELETONS", {
     { "BufNewFile", { pattern = "*.{py}", command = [[0r ~/.config/nvim/skeletons/python.py]] } },
     { "BufNewFile", { pattern = "*.{html}", command = [[0r ~/.config/nvim/skeletons/html.html]] } },
     { "BufNewFile", { pattern = "*.{xhtml}", command = [[0r ~/.config/nvim/skeletons/xhtml.xhtml]] } },
+    { "BufNewFile", { pattern = "*.{php}", command = [[0r ~/.config/nvim/skeletons/php.php]] } },
     { "BufNewFile", { pattern = ".envrc,.direnvrc,direnvrc", command = [[0r ~/.config/nvim/skeletons/.envrc]] } },
     { "BufNewFile", { pattern = "Makefile", command = [[0r ~/.config/nvim/skeletons/Makefile]] } },
     { "BufNewFile", { pattern = ".editorconfig", command = [[0r ~/.config/nvim/skeletons/.editorconfig]] } },
