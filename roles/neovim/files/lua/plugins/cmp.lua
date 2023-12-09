@@ -1,6 +1,5 @@
 return {
 
-
     -- Install LuaSnip and load friendly-snippets (a set of already pre-packaged set of snippets)
     {
         "L3MON4D3/LuaSnip",
@@ -26,14 +25,12 @@ return {
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
             "nvim-tree/nvim-web-devicons",
-            "jose-elias-alvarez/null-ls.nvim",
             "hrsh7th/cmp-nvim-lsp-signature-help",
             "petertriho/cmp-git",
             "kristijanhusak/vim-dadbod-completion",
         },
         config = function()
             local snippets_enabled = false
-
 
             require("nvim-autopairs").setup()
             local cmp_autopairs = require "nvim-autopairs.completion.cmp"
@@ -43,7 +40,8 @@ return {
 
             local has_words_before = function()
                 local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-                return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
+                return col ~= 0 and
+                vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
             end
 
             local feedkey = function(key, mode)
@@ -241,14 +239,14 @@ return {
 
                 -- IMPORTANT: The order of the sources is important. It establishes priority between source candidates
                 sources = cmp.config.sources({
-                    { name = "nvim_lsp", keyword_length = 3 },
+                    { name = "nvim_lsp",              keyword_length = 3 },
                     -- { name = "nvim_lsp_signature_help" },
-                    { name = "nvim_lua", keyword_length = 3 },
-                    { name = "luasnip", keyword_length = 3 },
+                    { name = "nvim_lua",              keyword_length = 3 },
+                    { name = "luasnip",               keyword_length = 3 },
                     { name = "vim-dadbod-completion", keyword_length = 3 },
                 }, {
-                    { name = "buffer", keyword_length = 3 },
-                    { name = "path", keyword_length = 3 },
+                    { name = "buffer",  keyword_length = 3 },
+                    { name = "path",    keyword_length = 3 },
                     { name = "luasnip", keyword_length = 3 },
                 }),
             }
@@ -287,7 +285,6 @@ return {
 
             -- Fix for nvim-autopair
             cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
-
         end,
     },
 }

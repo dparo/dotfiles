@@ -5,7 +5,7 @@ return {
             "hrsh7th/nvim-cmp",
             "hrsh7th/cmp-nvim-lsp",
             "nvim-lua/lsp_extensions.nvim",
-            "jose-elias-alvarez/null-ls.nvim",
+            "stevearc/conform.nvim",
             "nvim-lua/plenary.nvim",
             "williamboman/mason.nvim",
             -- "williamboman/mason-lspconfig.nvim",
@@ -98,149 +98,179 @@ return {
                 --       clients request, but instead of being in a separate process, lives inside neovim.
                 --       Null-ls then delegates LSP request to external processes interpreting
                 --       their outputs and providing diagnostics, ormatting and completion candidates.
-                local null_ls = require "null-ls"
+                local null_ls_require_status_ok, null_ls = pcall(require, "null-ls")
+                if null_ls_require_status_ok then
+                    null_ls.setup {
+                        on_attach = require("lsp.events").on_attach,
+                        sources = {
+                            null_ls.builtins.diagnostics.codespell,
+                            null_ls.builtins.diagnostics.misspell,
+                            null_ls.builtins.diagnostics.gitlint,
+                            null_ls.builtins.diagnostics.write_good,
+                            null_ls.builtins.diagnostics.proselint,
+                            null_ls.builtins.diagnostics.vale,
 
-                null_ls.setup {
-                    on_attach = require("lsp.events").on_attach,
-                    sources = {
-                        null_ls.builtins.diagnostics.codespell,
-                        null_ls.builtins.diagnostics.misspell,
-                        null_ls.builtins.diagnostics.gitlint,
-                        null_ls.builtins.diagnostics.write_good,
-                        null_ls.builtins.diagnostics.proselint,
-                        null_ls.builtins.diagnostics.vale,
+                            null_ls.builtins.code_actions.proselint,
 
-                        null_ls.builtins.code_actions.proselint,
-
-                        null_ls.builtins.completion.spell.with {
-                            filetypes = {
-                                "text",
-                                "markdown",
+                            null_ls.builtins.completion.spell.with {
+                                filetypes = {
+                                    "text",
+                                    "markdown",
+                                },
                             },
-                        },
 
-                        -- NOTE(dparo): We use eslint-lsp server now (https://github.com/hrsh7th/vscode-langservers-extracted).
-                        -- The server is hooked directly from nvim-lspconfig
-                        -- null_ls.builtins.diagnostics.eslint,
+                            -- NOTE(dparo): We use eslint-lsp server now (https://github.com/hrsh7th/vscode-langservers-extracted).
+                            -- The server is hooked directly from nvim-lspconfig
+                            -- null_ls.builtins.diagnostics.eslint,
 
-                        -- A flexible JSON/YAML linter for creating automated style guides, with baked in support for OpenAPI v3.1, v3.0, and v2.0 as well as AsyncAPI v2.x.
-                        -- null_ls.builtins.diagnostics.spectral,
-                        --
-                        --
+                            -- A flexible JSON/YAML linter for creating automated style guides, with baked in support for OpenAPI v3.1, v3.0, and v2.0 as well as AsyncAPI v2.x.
+                            -- null_ls.builtins.diagnostics.spectral,
+                            --
+                            --
 
-                        -- Linting for css, scss, less, sass
-                        null_ls.builtins.diagnostics.stylelint.with {
-                            method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-                        },
-
-                        null_ls.builtins.formatting.google_java_format,
-
-
-                        -- NOTE(d.paro): Too annoying
-                        -- null_ls.builtins.diagnostics.checkstyle.with {
-                        --     extra_args = { "-c", "/google_checks.xml" },
-                        -- },
-
-                        null_ls.builtins.diagnostics.semgrep.with {
-                            args = { "--config", "auto", "-q", "--json", "$FILENAME" },
-                        },
-
-                        
-                        -- NOTE(d.paro): Disabled since it makes neovim generate the following diagnostic error: `pmd: failed to decode json: Expected comma or array end but found T_END at character 69420`
-                        --               T_END is the null-terminator. Probabily, since PMD generates a HUGE JSON it gets truncated during parsing from the LUA engine
-                        -- null_ls.builtins.diagnostics.pmd.with {
-                        --     args = {
-                        --         "check",
-                        --         "--format",
-                        --         "json",
-                        --         "--dir",
-                        --         "$ROOT",
-                        --         "--rulesets",
-                        --         "category/java/bestpractices.xml,category/java/errorprone.xml,category/java/multithreading.xml,category/java/performance.xml,category/java/codestyle.xml,category/jsp/bestpractices.xml",
-                        --     },
-                        -- },
-
-                        null_ls.builtins.diagnostics.ansiblelint,
-                        null_ls.builtins.diagnostics.terraform_validate,
-                        null_ls.builtins.diagnostics.tfsec,
-                        null_ls.builtins.formatting.terraform_fmt,
-                        null_ls.builtins.formatting.stylelint.with {
-                            command = "npx",
-                            args = { "--fix", "--stdin", "--stdin-filename", "$FILENAME" },
-                        },
-
-                        null_ls.builtins.formatting.prettier.with {
-                            filetypes = {
-                                "html",
-                                "json",
-                                "yaml",
-                                "markdown",
-                                "vue",
-                                "javascript",
-                                "typescript",
-                                "typescriptreact",
-                                "css",
+                            -- Linting for css, scss, less, sass
+                            null_ls.builtins.diagnostics.stylelint.with {
+                                method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
                             },
+
+                            null_ls.builtins.formatting.google_java_format,
+
+                            -- NOTE(d.paro): Too annoying
+                            -- null_ls.builtins.diagnostics.checkstyle.with {
+                            --     extra_args = { "-c", "/google_checks.xml" },
+                            -- },
+
+                            null_ls.builtins.diagnostics.semgrep.with {
+                                args = { "--config", "auto", "-q", "--json", "$FILENAME" },
+                            },
+
+                            -- NOTE(d.paro): Disabled since it makes neovim generate the following diagnostic error: `pmd: failed to decode json: Expected comma or array end but found T_END at character 69420`
+                            --               T_END is the null-terminator. Probabily, since PMD generates a HUGE JSON it gets truncated during parsing from the LUA engine
+                            -- null_ls.builtins.diagnostics.pmd.with {
+                            --     args = {
+                            --         "check",
+                            --         "--format",
+                            --         "json",
+                            --         "--dir",
+                            --         "$ROOT",
+                            --         "--rulesets",
+                            --         "category/java/bestpractices.xml,category/java/errorprone.xml,category/java/multithreading.xml,category/java/performance.xml,category/java/codestyle.xml,category/jsp/bestpractices.xml",
+                            --     },
+                            -- },
+
+                            null_ls.builtins.diagnostics.ansiblelint,
+                            null_ls.builtins.diagnostics.terraform_validate,
+                            null_ls.builtins.diagnostics.tfsec,
+                            null_ls.builtins.formatting.terraform_fmt,
+                            null_ls.builtins.formatting.stylelint.with {
+                                command = "npx",
+                                args = { "--fix", "--stdin", "--stdin-filename", "$FILENAME" },
+                            },
+
+                            null_ls.builtins.formatting.prettier.with {
+                                filetypes = {
+                                    "html",
+                                    "json",
+                                    "yaml",
+                                    "markdown",
+                                    "vue",
+                                    "javascript",
+                                    "typescript",
+                                    "typescriptreact",
+                                    "css",
+                                },
+                            },
+
+                            -- XML, HTML
+                            null_ls.builtins.formatting.tidy,
+                            null_ls.builtins.diagnostics.tidy,
+                            null_ls.builtins.formatting.xmllint,
+
+                            null_ls.builtins.formatting.shfmt.with {
+                                args = { "--indent", "4", "-filename", "$FILENAME" }, -- Default to use 4 spaces for indentation
+                            },
+                            null_ls.builtins.diagnostics.shellcheck,
+                            null_ls.builtins.formatting.shellharden,
+
+                            null_ls.builtins.formatting.stylua,
+
+                            null_ls.builtins.diagnostics.hadolint,
+                            null_ls.builtins.diagnostics.chktex,
+                            null_ls.builtins.diagnostics.sqlfluff.with {
+                                extra_args = { "--dialect", "oracle" },
+                            },
+
+                            null_ls.builtins.formatting.cmake_format,
+                            null_ls.builtins.diagnostics.cmake_lint,
+                            null_ls.builtins.diagnostics.cppcheck,
+                            null_ls.builtins.formatting.zigfmt,
+
+                            -- null_ls.builtin.formattin.sql_formatter,
+                            null_ls.builtins.formatting.sqlfluff.with {
+                                extra_args = { "--dialect", "oracle" },
+                            },
+
+                            -- null_ls.builtins.formatting.autopep8,
+                            -- null_ls.builtins.diagnostics.pydocstyle,
+                            -- Uncompromising Python code formatter.
+                            -- null_ls.builtins.formatting.yapf,
+                            null_ls.builtins.formatting.black, -- Black8 is too aggressive for my liking
+
+                            -- python utility / library to sort imports alphabetically and automatically separate them into sections and by type.
+                            null_ls.builtins.formatting.isort,
+                            -- Mypy is an optional static type checker for Python that aims to combine the benefits of dynamic (or "duck") typing and static typing.
+                            -- null_ls.builtins.diagnostics.mypy,
+                            -- flake8 is a python tool that glues together pycodestyle, pyflakes, mccabe, and third-party plugins to check the style and quality of some python code
+                            -- null_ls.builtins.diagnostics.flake8,
+
+                            -- https://github.com/charliermarsh/ruff
+                            null_ls.builtins.diagnostics.ruff,
+                            null_ls.builtins.formatting.ruff,
+
+                            null_ls.builtins.diagnostics.mypy.with {
+                                method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+                            },
+
+                            -- Pylint is a Python static code analysis tool which looks for programming errors, helps enforcing a coding standard, sniffs for code smells and offers simple refactoring suggestions.
+                            -- NOTE(dparo): Run pylint only on save due to its shitty performance
+                            -- null_ls.builtins.diagnostics.pylint.with {
+                            --     method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
+                            -- },
                         },
-
-                        -- XML, HTML
-                        null_ls.builtins.formatting.tidy,
-                        null_ls.builtins.diagnostics.tidy,
-                        null_ls.builtins.formatting.xmllint,
-
-                        null_ls.builtins.formatting.shfmt.with {
-                            args = { "--indent", "4", "-filename", "$FILENAME" }, -- Default to use 4 spaces for indentation
-                        },
-                        null_ls.builtins.diagnostics.shellcheck,
-                        null_ls.builtins.formatting.shellharden,
-
-                        null_ls.builtins.formatting.stylua,
-
-                        null_ls.builtins.diagnostics.hadolint,
-                        null_ls.builtins.diagnostics.chktex,
-                        null_ls.builtins.diagnostics.sqlfluff.with {
-                            extra_args = { "--dialect", "oracle" },
-                        },
-
-                        null_ls.builtins.formatting.cmake_format,
-                        null_ls.builtins.diagnostics.cmake_lint,
-                        null_ls.builtins.diagnostics.cppcheck,
-                        null_ls.builtins.formatting.zigfmt,
-
-                        -- null_ls.builtin.formattin.sql_formatter,
-                        null_ls.builtins.formatting.sqlfluff.with {
-                            extra_args = { "--dialect", "oracle" },
-                        },
-
-                        -- null_ls.builtins.formatting.autopep8,
-                        -- null_ls.builtins.diagnostics.pydocstyle,
-                        -- Uncompromising Python code formatter.
-                        -- null_ls.builtins.formatting.yapf,
-                        null_ls.builtins.formatting.black, -- Black8 is too aggressive for my liking
-
-                        -- python utility / library to sort imports alphabetically and automatically separate them into sections and by type.
-                        null_ls.builtins.formatting.isort,
-                        -- Mypy is an optional static type checker for Python that aims to combine the benefits of dynamic (or "duck") typing and static typing.
-                        -- null_ls.builtins.diagnostics.mypy,
-                        -- flake8 is a python tool that glues together pycodestyle, pyflakes, mccabe, and third-party plugins to check the style and quality of some python code
-                        -- null_ls.builtins.diagnostics.flake8,
-
-                        -- https://github.com/charliermarsh/ruff
-                        null_ls.builtins.diagnostics.ruff,
-                        null_ls.builtins.formatting.ruff,
-
-                        null_ls.builtins.diagnostics.mypy.with {
-                            method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-                        },
-
-                        -- Pylint is a Python static code analysis tool which looks for programming errors, helps enforcing a coding standard, sniffs for code smells and offers simple refactoring suggestions.
-                        -- NOTE(dparo): Run pylint only on save due to its shitty performance
-                        -- null_ls.builtins.diagnostics.pylint.with {
-                        --     method = null_ls.methods.DIAGNOSTICS_ON_SAVE,
-                        -- },
-                    },
-                }
+                    }
+                end
             end
+
+            require("conform").setup({
+                formatters_by_ft = {
+                    -- Conform will run multiple formatters sequentially
+                    go = { "goimports", "gofmt" },
+                    lua = { "stylua" },
+                    -- Conform will run multiple formatters sequentially
+                    python = function(bufnr)
+                        if require("conform").get_formatter_info("ruff_format", bufnr).available then
+                            return { "ruff_format" }
+                        else
+                            return { "isort", "black" }
+                        end
+                    end,
+                    -- Use a sub-list to run only the first available formatter
+                    javascript = { { "prettierd", "prettier" } },
+                    typescript = { { "prettierd", "prettier" } },
+                    sh = { "shellharden" },
+                    sql = { "sqlfluff" },
+                    xml = { "xmllint" },
+                    -- Use the "_" filetype to run formatters on filetypes that don't
+                    -- have other formatters configured.
+                    ["_"] = { "trim_whitespace" },
+                },
+                format_on_save = {
+                    -- These options will be passed to conform.format()
+                    timeout_ms = 500,
+                    lsp_fallback = true,
+                },
+            })
+
 
             require("lsp_extensions").inlay_hints {
                 highlight = "Comment",

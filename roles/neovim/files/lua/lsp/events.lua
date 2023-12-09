@@ -2,6 +2,10 @@ local M = {}
 
 local navic = require "nvim-navic"
 
+
+local conform_require_ok, conform = pcall(require, "conform")
+local LSP_FORMATTING_ENABLED = not conform_require_ok
+
 local augroup = vim.api.nvim_create_augroup("USER_LSP", { clear = true })
 
 -- NOTE(d.paro): on_attach gets called N times, where N is the number of
@@ -11,7 +15,11 @@ local augroup = vim.api.nvim_create_augroup("USER_LSP", { clear = true })
 function M.on_attach(client, bufnr)
     local buf_set_option = vim.api.nvim_buf_set_option
 
-    buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+    if LSP_FORMATTING_ENABLED then
+        buf_set_option(bufnr, "formatexpr", "v:lua.vim.lsp.formatexpr()")
+    else
+        buf_set_option(bufnr, "formatexpr", "v:lua.require'conform'.formatexpr()")
+    end
     buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
     buf_set_option(bufnr, "tagfunc", "v:lua.vim.lsp.tagfunc")
 
@@ -200,7 +208,7 @@ function M.on_attach(client, bufnr)
     end
 
     -- Set some keybinds conditional on server capabilities
-    if client.server_capabilities.documentFormattingProvider then
+    if LSP_FORMATTING_ENABLED and client.server_capabilities.documentFormattingProvider then
         if vim.fn.has "nvim-0.8" == 1 then
             vim.keymap.set("n", "<leader>lf", function()
                 vim.lsp.buf.format { timeout_ms = 4000, bufnr = bufnr }
@@ -283,7 +291,8 @@ function M.on_attach(client, bufnr)
 
     -- Enable formatting on save
     if
-        (client.server_capabilities.documentFormattingProvider or client.supports_method "textDocument/formatting")
+        LSP_FORMATTING_ENABLED
+        and (client.server_capabilities.documentFormattingProvider or client.supports_method "textDocument/formatting")
         and (vim.env.NVIM_LSP_FORMAT_ON_SAVE == nil or vim.env.NVIM_LSP_FORMAT_ON_SAVE ~= "0")
     then
         vim.api.nvim_create_autocmd({ "BufWritePre" }, {

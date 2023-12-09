@@ -334,6 +334,12 @@ local function setup_plugins()
         }
     end, { desc = "[F]ind [F]iles" })
 
+    vim.keymap.set({ "n" }, "<leader>lf", function()
+        require("conform").format {
+            lsp_fallback = true,
+        }
+    end)
+
     nmap("<C-r>", exec_cmd "Telescope command_history")
     nmap("<M-x>", exec_cmd "Telescope commands")
     nmap({ "<C-\\>", "<leader><leader>" }, exec_cmd "NvimTreeFindFileToggle")
