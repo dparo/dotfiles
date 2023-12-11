@@ -111,6 +111,7 @@
   with_fileglob: "{{ role_path }}/files/bin/*"
   tags:
     - xdg
+    - xdg-scripts
 
 - name: Symlink backgrounds
   ansible.builtin.file:
