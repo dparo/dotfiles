@@ -20,7 +20,7 @@
     - name: Install microsoft-edge
       ansible.builtin.dnf:
         name:
-          - microsoft-edge
+          - microsoft-edge-stable
         state: latest
       become: true
 
