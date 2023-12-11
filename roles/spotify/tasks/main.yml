@@ -1,0 +1,40 @@
+---
+- name: Spotify
+  tags:
+    - spotify
+  block:
+  - name: Install spotify
+    community.general.flatpak:
+      name: com.spotify.Client
+      state: present
+      remote: flathub
+
+  - name: Install playerctl
+    ansible.builtin.dnf:
+      name:
+        - playerctl
+    become: true
+
+  - name: Create autostart desktop file
+    ansible.builtin.copy:
+      dest: "{{ ansible_user_dir }}/.config/autostart/copyq.desktop"
+      content: |
+        [Desktop Entry]
+        Type=Application
+        Name=Spotify
+        GenericName=Online music streaming service
+        Comment=Access all of your favorite music
+        Icon=com.spotify.Client
+        Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=spotify --file-forwarding com.spotify.Client @@u %U @@
+        Terminal=false
+        MimeType=x-scheme-handler/spotify;
+        Categories=Audio;Music;AudioVideo;
+        Keywords=Music;Player;Streaming;Online;
+        StartupWMClass=Spotify
+        X-GNOME-UsesNotifications=true
+        X-Flatpak-Tags=proprietary;
+        X-Flatpak=com.spotify.Client
+      mode: "0644"
+
+
+

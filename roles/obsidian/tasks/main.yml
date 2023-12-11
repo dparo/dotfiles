@@ -1,4 +1,8 @@
 ---
+- name: Obsidian
+  tags:
+    - obsidian
+  block:
 # - name: Check latest obsidian
 #   ansible.builtin.uri:
 #     url: https://api.github.com/repos/obsidianmd/obsidian-releases/releases/latest
@@ -15,10 +19,8 @@
 #     - obsidian
 #
 
-- name: Install obsidian (flatpak)
-  community.general.flatpak:
-    name: md.obsidian.Obsidian
-    state: present
-    remote: flathub
-  tags:
-    - obsidian
+  - name: Install obsidian (flatpak)
+    community.general.flatpak:
+      name: md.obsidian.Obsidian
+      state: present
+      remote: flathub
