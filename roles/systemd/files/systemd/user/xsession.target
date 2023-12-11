@@ -14,9 +14,6 @@ Wants=pipewire-pulse.service
 
 Wants=dunst.service
 Wants=policykit-agent.service
-Wants=mpd.service
-Wants=mpd-notification.service
-Wants=mpc-update.service
 Wants=xsettingsd.service
 Wants=xss-lock.service
 Wants=background-setter.service
@@ -25,6 +22,14 @@ Wants=i3-battery-notifier.service
 
 Wants=picom.service
 # Wants=redshift.service
+
+##
+## MPD
+##
+# Wants=mpd.service
+# Wants=mpd-notification.service
+# Wants=mpc-update.service
+
 
 ## Not needed: covered by gnome-keyring-daemon enabled by default at login
 # Wants=ssh-agent.service
