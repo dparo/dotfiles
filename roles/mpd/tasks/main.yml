@@ -1,48 +1,42 @@
 ---
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - mpd
-      - mpc
-      - ncmpcpp
-    state: present
-  become: true
-  tags:
-    - mpd
-    - ncmpcpp
-
-- name: Install spotdl
-  ansible.builtin.pip:
-    name:
-      - spotdl
-    state: latest
-  tags:
-    - mpd
-    - spotdl
-
 # TODO: https://github.com/eworm-de/mpd-notification
 
-- name: Create items
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    mode: "0755"
-  loop:
-    - "{{ ansible_user_dir }}/.cache/mpd"
-    - "{{ ansible_user_dir }}/.local/share/mpd/playlists"
+- name: Mpd
   tags:
     - mpd
-    - xdg
-
-- name: Symlink config
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
-    state: link
-  loop:
-    - "{{ role_path }}/files/mpd"
-    - "{{ role_path }}/files/ncmpcpp"
-  tags:
-    - mpv
-    - mpd
+    - mpc
     - ncmpcpp
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - mpd
+          - mpc
+          - ncmpcpp
+        state: present
+      become: true
+
+    - name: Install spotdl
+      ansible.builtin.pip:
+        name:
+          - spotdl
+        state: latest
+
+
+    - name: Create items
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - "{{ ansible_user_dir }}/.cache/mpd"
+        - "{{ ansible_user_dir }}/.local/share/mpd/playlists"
+
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ item }}"
+        dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+        state: link
+      loop:
+        - "{{ role_path }}/files/mpd"
+        - "{{ role_path }}/files/ncmpcpp"
