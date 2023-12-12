@@ -1,0 +1,11 @@
+---
+- name: EasyEffects
+  tags:
+    - easy-effects
+  block:
+  - name: Install flatpak
+    community.general.flatpak:
+      name: com.github.wwmm.easyeffects
+      state: present
+      remote: flathub
+
