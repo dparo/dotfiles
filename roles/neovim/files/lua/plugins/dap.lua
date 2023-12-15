@@ -263,14 +263,16 @@ return {
                 require("dap.ui.widgets").preview()
             end)
 
-            vim.api.nvim_create_autocmd({ "CursorHold" }, {
-                group = augroup,
-                callback = function()
-                    if dap.status() ~= "" then
-                        pcall(require("dap.ui.widgets").preview, nil)
-                    end
-                end,
-            })
+            if false then
+                vim.api.nvim_create_autocmd({ "CursorHold" }, {
+                    group = augroup,
+                    callback = function()
+                        if dap.status() ~= "" then
+                            pcall(require("dap.ui.widgets").preview, nil)
+                        end
+                    end,
+                })
+            end
 
             vim.keymap.set("n", "<F34>", dap.run_to_cursor) -- C-F10
             vim.keymap.set("n", "<leader>dc", dap.continue)
