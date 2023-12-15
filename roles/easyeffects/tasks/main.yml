@@ -1,6 +1,7 @@
 ---
 - name: EasyEffects
   tags:
+    - easyeffects
     - easy-effects
   block:
   - name: Install flatpak
@@ -8,4 +9,23 @@
       name: com.github.wwmm.easyeffects
       state: present
       remote: flathub
+
+  - name: Create autostart desktop file
+    ansible.builtin.copy:
+      dest: "{{ ansible_user_dir }}/.config/autostart/easy-effects-service.desktop"
+      content: |
+        [Desktop Entry]
+        Name=Easy Effects
+        Keywords=limiter;compressor;reverberation;equalizer;autovolume;
+        Categories=GTK;AudioVideo;Audio;
+        Exec=/usr/bin/flatpak run --branch=stable --arch=x86_64 --command=easyeffects com.github.wwmm.easyeffects --gapplication-service
+        Icon=com.github.wwmm.easyeffects
+        StartupNotify=true
+        DBusActivatable=true
+        X-GNOME-UsesNotifications=true
+        Terminal=false
+        Type=Application
+        X-Flatpak=com.github.wwmm.easyeffects
+      mode: "0644"
+
 
