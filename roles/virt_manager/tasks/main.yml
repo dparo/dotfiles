@@ -5,6 +5,7 @@
 # On the WIN gues and install it
 - name: VirtManager
   tags:
+    - never
     - qemu
     - virt-manager
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
