@@ -17,7 +17,7 @@
 
   - name: Create autostart desktop file
     ansible.builtin.copy:
-      dest: "{{ ansible_user_dir }}/.config/autostart/copyq.desktop"
+      dest: "{{ ansible_user_dir }}/.config/autostart/spotify.desktop"
       content: |
         [Desktop Entry]
         Type=Application
