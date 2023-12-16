@@ -3,7 +3,7 @@
     - selinux
   when: ansible_distribution == 'Fedora'
   block:
-    - name: Disable SeLinux kernel model at boot time
+    - name: Disable SeLinux kernel boot option
       ansible.builtin.command: grubby --update-kernel ALL --args selinux=0
       become: True
 
