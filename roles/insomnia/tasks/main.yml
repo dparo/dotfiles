@@ -1,6 +1,7 @@
 ---
 - name: Insomnia
   tags:
+    - never
     - insomnia
   block:
     # - name: Install insomnia (flatpak)
