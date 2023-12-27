@@ -119,7 +119,7 @@ for _, sign in ipairs(signs) do
 end
 
 ---
-local theme = vim.env.NVIM_THEME or "rosepine"
+local theme = vim.env.NVIM_THEME or "tokyonight"
 ---
 
 local theme_list = {
@@ -167,7 +167,7 @@ local theme_list = {
         colorscheme = "tokyonight",
         config = function()
             require("tokyonight").setup {
-                style = "storm",
+                style = "night",
                 light_style = "day",
             }
         end,
