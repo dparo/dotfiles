@@ -1,187 +1,148 @@
 ---
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - clamav
-      - clamav-update
-      - clamd
-    state: present
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+- name: ClamAV
   tags:
     - never
     - clamav
-
-- name: Refresh clamav database
-  ansible.builtin.command: freshclam
-  become: true
-  ignore_errors: true
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  tags:
-    - never
-    - clamav
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - clamav
+          - clamav-update
+          - clamd
+        state: present
+      become: true
 
-- name: Setup freshclam (clamav-update)
-  ansible.builtin.copy:
-    dest: /etc/freshclam.conf
-    mode: "0600"
-    content: |
-      UpdateLogFile /var/log/freshclam.log
-      LogFileMaxSize 10M
-      LogTime yes
+    - name: Refresh clamav database
+      ansible.builtin.command: freshclam
+      become: true
+      ignore_errors: true
 
-      NotifyClamd /etc/clamd.d/scan.conf
+    - name: Setup freshclam (clamav-update)
+      ansible.builtin.copy:
+        dest: /etc/freshclam.conf
+        mode: "0600"
+        content: |
+          UpdateLogFile /var/log/freshclam.log
+          LogFileMaxSize 10M
+          LogTime yes
 
-      Checks 1
-      DatabaseOwner clamupdate
-      DatabaseMirror database.clamav.net
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  tags:
-    - never
-    - clamav
+          NotifyClamd /etc/clamd.d/scan.conf
 
-- name: Setup clamav daemon config
-  ansible.builtin.copy:
-    dest: /etc/clamd.d/scan.conf
-    mode: "0644"
-    content: |
-      User clamscan
-      LocalSocket /run/clamd.scan/clamd.sock
+          Checks 1
+          DatabaseOwner clamupdate
+          DatabaseMirror database.clamav.net
+      become: true
 
-      VirusEvent /etc/clamd.d/virus-event.bash
+    - name: Setup clamav daemon config
+      ansible.builtin.copy:
+        dest: /etc/clamd.d/scan.conf
+        mode: "0644"
+        content: |
+          User clamscan
+          LocalSocket /run/clamd.scan/clamd.sock
 
-      LogFile /var/log/clamd.scan
-      LogSyslog yes
+          VirusEvent /etc/clamd.d/virus-event.bash
 
-      MaxThreads 2
-      MaxScanSize 1024M
-      MaxFileSize 512M
+          LogFile /var/log/clamd.scan
+          LogSyslog yes
 
-      ExcludePath ^/proc/
-      ExcludePath ^/sys/
-      ExcludePath ^/run/
-      ExcludePath ^/dev/
-      ExcludePath ^/swapfile
-      ExcludePath ^/var/log/audit/
-      ExcludePath ^/etc/
+          MaxThreads 2
+          MaxScanSize 1024M
+          MaxFileSize 512M
 
-      ###
-      ### On Access Scanning
-      ###
-      OnAccessExcludeUname clamscan
-      OnAccessExcludeRootUID true
-      # Scan even when files are created or moved
-      OnAccessExtraScanning true
-      OnAccessMountPath /
-      OnAccessIncludePath /home
-      OnAccessExcludePath /proc
-      OnAccessExcludePath /sys
-      OnAccessExcludePath /run
-      OnAccessExcludePath /dev
-      OnAccessExcludePath /swapfile
-      OnAccessExcludePath /var/log/audit
-      OnAccessExcludePath /etc
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  tags:
-    - never
-    - clamav
+          ExcludePath ^/proc/
+          ExcludePath ^/sys/
+          ExcludePath ^/run/
+          ExcludePath ^/dev/
+          ExcludePath ^/swapfile
+          ExcludePath ^/var/log/audit/
+          ExcludePath ^/etc/
 
-- name: Setup Virus Event Script
-  ansible.builtin.copy:
-    dest: /etc/clamd.d/virus-event.bash
-    mode: "0755"
-    content: |
-      #!/bin/bash
+          ###
+          ### On Access Scanning
+          ###
+          OnAccessExcludeUname clamscan
+          OnAccessExcludeRootUID true
+          # Scan even when files are created or moved
+          OnAccessExtraScanning true
+          OnAccessMountPath /
+          OnAccessIncludePath /home
+          OnAccessExcludePath /proc
+          OnAccessExcludePath /sys
+          OnAccessExcludePath /run
+          OnAccessExcludePath /dev
+          OnAccessExcludePath /swapfile
+          OnAccessExcludePath /var/log/audit
+          OnAccessExcludePath /etc
+      become: true
 
-      PATH=/usr/bin
-      ALERT="Signature detected by clamav: $CLAM_VIRUSEVENT_VIRUSNAME in $CLAM_VIRUSEVENT_FILENAME"
+    - name: Setup Virus Event Script
+      ansible.builtin.copy:
+        dest: /etc/clamd.d/virus-event.bash
+        mode: "0755"
+        content: |
+          #!/bin/bash
 
-      for ADDRESS in /run/user/*; do
-        USERID=${ADDRESS#/run/user/}
-        /usr/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" PATH="$PATH" \
-            /usr/bin/notify-send -u critical -i dialog-warning "Virus found!" "$ALERT"
-      done
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  tags:
-    - never
-    - clamav
+          PATH=/usr/bin
+          ALERT="Signature detected by clamav: $CLAM_VIRUSEVENT_VIRUSNAME in $CLAM_VIRUSEVENT_FILENAME"
 
-- name: Create a clamav-clamonacc.service override directory
-  ansible.builtin.file:
-    owner: root
-    group: root
-    mode: "0755"
-    path: /etc/systemd/system/clamav-clamonacc.service.d
-    state: directory
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  tags:
-    - never
-    - clamav
+          for ADDRESS in /run/user/*; do
+            USERID=${ADDRESS#/run/user/}
+            /usr/bin/sudo -u "#$USERID" DBUS_SESSION_BUS_ADDRESS="unix:path=$ADDRESS/bus" PATH="$PATH" \
+                /usr/bin/notify-send -u critical -i dialog-warning "Virus found!" "$ALERT"
+          done
+      become: true
 
-- name: Create log dir
-  ansible.builtin.file:
-    owner: clamscan
-    group: clamscan
-    mode: "0755"
-    path: /var/log/clamav
-    state: directory
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  tags:
-    - never
-    - clamav
+    - name: Create a clamav-clamonacc.service override directory
+      ansible.builtin.file:
+        owner: root
+        group: root
+        mode: "0755"
+        path: /etc/systemd/system/clamav-clamonacc.service.d
+        state: directory
+      become: true
 
-- name: Override clamav-clamonacc.service (On Access Scanning) to use --fdpass
-  ansible.builtin.copy:
-    content: |
-      [Service]
-      ExecStart=
-      ExecStart=/usr/sbin/clamonacc -F --config-file=/etc/clamd.d/scan.conf --fdpass --log=/var/log/clamav/clamonacc.log
-    dest: /etc/systemd/system/clamav-clamonacc.service.d/override.conf
-    mode: "0644"
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  tags:
-    - never
-    - clamav
+    - name: Create log dir
+      ansible.builtin.file:
+        owner: clamscan
+        group: clamscan
+        mode: "0755"
+        path: /var/log/clamav
+        state: directory
+      become: true
 
-- name: Reload system services
-  ansible.builtin.systemd:
-    daemon_reload: true
-    scope: system
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  ignore_errors: true
-  tags:
-    - never
-    - clamav
-    - systemd
+    - name: Override clamav-clamonacc.service (On Access Scanning) to use --fdpass
+      ansible.builtin.copy:
+        content: |
+          [Service]
+          ExecStart=
+          ExecStart=/usr/sbin/clamonacc -F --config-file=/etc/clamd.d/scan.conf --fdpass --log=/var/log/clamav/clamonacc.log
+        dest: /etc/systemd/system/clamav-clamonacc.service.d/override.conf
+        mode: "0644"
+      become: true
 
-- name: Setup SELinux to allow clamav to scan the system
-  ansible.builtin.shell: |
-    setsebool -P antivirus_can_scan_system 1
-    setsebool -P clamd_use_jit 1
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  tags:
-    - never
-    - clamav
+    - name: Reload system services
+      ansible.builtin.systemd:
+        daemon_reload: true
+        scope: system
+      become: true
+      ignore_errors: true
 
-- name: Enable services
-  ansible.builtin.systemd:
-    name: "{{ item }}"
-    enabled: true
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  loop:
-    - clamav-freshclam.service # Refresh Virus Database at boot
-    - clamav-clamonacc.service # On Access Scanning
-    - clamd@scan.service # Enable daemon autostarting with /etc/clamd.d/{scan}.service
-  tags:
-    - never
-    - clamav
+    - name: Setup SELinux to allow clamav to scan the system
+      ansible.builtin.shell: |
+        setsebool -P antivirus_can_scan_system 1
+        setsebool -P clamd_use_jit 1
+      become: true
+
+    - name: Enable services
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        enabled: true
+      become: true
+      loop:
+        - clamav-freshclam.service # Refresh Virus Database at boot
+        - clamav-clamonacc.service # On Access Scanning
+        - clamd@scan.service # Enable daemon autostarting with /etc/clamd.d/{scan}.service
 ## TODO: Use `clamdscan --recursive --multiscan --fdpass /` and a custom service / timer to perform scheduled full scans at specific times
