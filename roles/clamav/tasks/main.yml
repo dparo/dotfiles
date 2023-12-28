@@ -10,6 +10,7 @@
         name:
           - clamav
           - clamav-update
+          - clamav-freshclam
           - clamd
         state: present
       become: true
