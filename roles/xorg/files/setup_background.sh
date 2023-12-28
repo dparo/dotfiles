@@ -11,12 +11,8 @@ set_wallpaper() {
     return 1
 }
 
+
 set_wallpaper \
     /usr/share/backgrounds/gnome/adwaita-l.* \
-    /usr/share/backgrounds/f39/default/f39-01-day.png \
-    /usr/share/backgrounds/default* \
-    /usr/share/backgrounds/f38/default/f38-01-day.png  \
-    /usr/share/backgrounds/f37/default/f37.webp  \
-    /usr/share/backgrounds/gnome/adwaita-d.webp \
-    /usr/share/backgrounds/fedora-workstation/glasscurtains_dark.webp \
+    /usr/share/backgrounds/f*/default/f*-01-night.png \
     || xsetroot -solid darkgray
