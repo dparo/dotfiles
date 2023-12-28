@@ -27,7 +27,7 @@
       - kernel-devel
       - python3-pip
       - bat
-      - exa
+      - eza
       - tree
       - fd-find
       - htop
