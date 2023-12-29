@@ -1,0 +1,12 @@
+---
+- name: LogSeq
+  tags:
+    - logseq
+  block:
+
+  - name: Install LogSeq (flatpak)
+    community.general.flatpak:
+      name: com.logseq.Logseq
+      state: present
+      remote: flathub
+

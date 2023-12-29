@@ -1,5 +1,6 @@
 - name: Joplin
   tags:
+    - never
     - joplin
   block:
     - name: Check latest joplin
