@@ -43,7 +43,7 @@
       [Desktop Entry]
       Encoding=UTF-8
       Type=Application
-      Name=xinitrc {{ item }}
+      Name=xinitrc-{{ item }}
       Comment=Executes the .xinitrc script in your home directory with {{ item }}
       Exec=xinitrcsession-helper {{ item }}
     mode: "0644"
