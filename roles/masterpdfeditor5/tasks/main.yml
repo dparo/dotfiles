@@ -2,11 +2,12 @@
 - name: MasterPdfEditor5
   tags:
     - never
+    - masterpdfeditor
     - masterpdfeditor5
   block:
     - name: Download and unpack masterpdfeditor5 {{ version }}
       ansible.builtin.unarchive:
-        src: https://code-industry.net/public/master-pdf-editor-{{ version }}-1-qt5.x86_64.tar.gz
+        src: https://code-industry.net/public/master-pdf-editor-{{ version }}-qt5.x86_64.tar.gz
         dest: /opt
         remote_src: true
       become: true
