@@ -5,27 +5,73 @@
     - swapfile
     - swap
   block:
-    # swapon --show
-    - name: Check swapfile existence
-      ansible.builtin.stat:
-        path: /swapfile
-      register: swap_stat
+    - name: Check if running btrfs 
+      ansible.builtin.command: btrfs subvolume show /
+      register: btrfs_subvolume_result
+      ignore_errors: true
 
-    - name: Create swap file of {{ swapfile_size ~ ' MiB'}}
-      ansible.builtin.shell: |
-        set -e
-        dd if=/dev/zero of=/swapfile bs=1M count={{ swapfile_size }} status=progress
-        chmod 0600 /swapfile
-        mkswap -U clear /swapfile
-        swapon --priority {{ swapfile_priority }} /swapfile
-      become: true
-      when: not swap_stat.stat.exists
+    - name: Running on btrfs
+      when: btrfs_subvolume_result.rc == 0
+      block:
+        - name: Create separate btrfs subvolume to allow snapshot of root
+          ansible.builtin.command: btrfs subvolume create /swap
+          become: true
+          ignore_errors: true
 
-    - name: Update /etc/fstab
-      ansible.builtin.lineinfile:
-        path: /etc/fstab
-        line: /swapfile none swap defaults,pri={{swapfile_priority}} 0 0
-        regexp: ^/swapfile
-        create: false
-      become: true
-      when: not swap_stat.stat.exists
+        # swapon --show
+        - name: Check swapfile existence
+          ansible.builtin.stat:
+            path: /swap/swapfile
+          register: swap_stat
+
+        - when: not swap_stat.stat.exists
+          block:
+          - name: btrfs filesystem mkswapfile
+            ansible.builtin.command: btrfs filesystem mkswapfile --size {{swapfile_size}}m --uuid clear /swap/swapfile
+            become: true
+
+          - name: swapon
+            ansible.builtin.command: swapon --priority {{ swapfile_priority }} /swap/swapfile
+            become: true
+
+          - name: Update /etc/fstab
+            ansible.builtin.lineinfile:
+              path: /etc/fstab
+              line: /swap/swapfile none swap defaults,pri={{swapfile_priority}} 0 0
+              regexp: ^/swap/swapfile
+              create: false
+            become: true
+
+
+    - name: Running on ext4
+      when: btrfs_subvolume_result.rc != 0  
+      block:
+
+        - name: Check swapfile existence
+          ansible.builtin.stat:
+            path: /swapfile
+          register: swap_stat
+
+        - when: not swap_stat.stat.exists
+          block:
+
+          - name: Create swap file of {{ swapfile_size ~ ' MiB'}}
+            ansible.builtin.shell: |
+              set -e
+              dd if=/dev/zero of=/swapfile bs=1M count={{ swapfile_size }} status=progress
+              chmod 0600 /swapfile
+              mkswap -U clear /swapfile
+            become: true
+
+          - name: swapon
+            ansible.builtin.command: swapon --priority {{ swapfile_priority }} /swapfile
+            become: true
+
+          - name: Update /etc/fstab
+            ansible.builtin.lineinfile:
+              path: /etc/fstab
+              line: /swapfile none swap defaults,pri={{swapfile_priority}} 0 0
+              regexp: ^/swapfile
+              create: false
+            become: true
+

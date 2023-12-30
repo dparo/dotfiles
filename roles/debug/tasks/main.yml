@@ -1,7 +1,9 @@
 ---
-- name: Debug msg
-  ansible.builtin.debug:
-    msg: "{{ ansible_hostname }}"
+- name: debug
   tags:
     - never
     - debug
+  block:
+    - name: Debug msg
+      ansible.builtin.debug:
+        msg: "{{ ansible_hostname }}"
