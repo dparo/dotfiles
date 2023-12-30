@@ -1,8 +1,11 @@
 ---
-- name: Install codecs
-  ansible.builtin.shell: |
-    dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
-    dnf groupupdate -y sound-and-video
-  become: true
+- name: Codecs
   tags:
     - codecs
+    - rpmfusion
+  block:
+    - name: Install codecs
+      ansible.builtin.shell: |
+        dnf groupupdate -y multimedia --setop="install_weak_deps=False" --exclude=PackageKit-gstreamer-plugin
+        dnf groupupdate -y sound-and-video
+      become: true
