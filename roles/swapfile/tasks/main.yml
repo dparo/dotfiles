@@ -5,8 +5,11 @@
     - swapfile
     - swap
   block:
+    # swapon --show
+
     - name: Check if running btrfs 
       ansible.builtin.command: btrfs subvolume show /
+      become: true
       register: btrfs_subvolume_result
       ignore_errors: true
 
@@ -18,7 +21,6 @@
           become: true
           ignore_errors: true
 
-        # swapon --show
         - name: Check swapfile existence
           ansible.builtin.stat:
             path: /swap/swapfile
