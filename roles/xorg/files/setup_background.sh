@@ -13,6 +13,7 @@ set_wallpaper() {
 
 
 set_wallpaper \
+    /usr/share/backgrounds/fedora-workstation/montclair_dark.webp \
     /usr/share/backgrounds/gnome/adwaita-l.* \
     /usr/share/backgrounds/f*/default/f*-01-night.png \
     || xsetroot -solid darkgray
