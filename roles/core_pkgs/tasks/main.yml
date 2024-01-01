@@ -50,6 +50,7 @@
   ansible.builtin.dnf:
     name:
       - libreoffice-core
+      - orca
     state: absent
     autoremove: true
   become: true

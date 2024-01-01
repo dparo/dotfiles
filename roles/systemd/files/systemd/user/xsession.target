@@ -5,6 +5,8 @@ Wants=graphical-session-pre.target
 After=graphical-session-pre.target
 
 Wants=systemd-inhibit-power-key.service
+
+# NOTE(d.paro): Runs ~/.config/autostart/*.desktop and /etc/xdg/autostart/*.desktop
 Wants=xdg-desktop-autostart.target
 
 Wants=dbus.session
