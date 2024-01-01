@@ -11,6 +11,6 @@ Environment="XSECURELOCK_SHOW_USERNAME=1"
 #Environment="XSECURELOCK_XSCREENSAVER_PATH=/usr/bin/xscreensaver"
 #Environment="XSECURELOCK_SAVER=saver_mpv"
 #Environment="XSECURELOCK_IMAGE_DURATION_SECONDS=60"
-#Environment="XSECURELOCK_LIST_VIDEOS_COMMAND=find /home/dparo/.local/share/backgrounds/ -type f"
+#Environment="XSECURELOCK_LIST_VIDEOS_COMMAND=find /usr/share/backgrounds/ -type f"
 ExecStart=xss-lock -n /usr/libexec/xsecurelock/dimmer -l -- xsecurelock
 Restart=on-failure
