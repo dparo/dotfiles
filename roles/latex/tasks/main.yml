@@ -21,6 +21,7 @@
           - texlive-babel-english
           - texlive-fontawesome
           - texlive-fontawesome5
+          - texlive-bytefield
           - texlive-lm # lmodern
           - texlive-chktex # latex semantic linter: https://www.nongnu.org/chktex/
           - biber

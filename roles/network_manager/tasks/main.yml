@@ -1,113 +1,114 @@
 ---
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - NetworkManager
-      - NetworkManager-tui
-      - openvpn
-      - wireguard-tools # Wireguard: fast, modern and secure VPN general-purpose tunnel
-      - openssl
-      - openfortivpn
-      - openconnect
-      - openresolv # http://roy.marples.name/projects/openresolv/
-      - systemd-resolved # Modern alternative of handling /etc/resolv.conf through centralized systemd
-    state: present
-  become: true
+- name: Network Manager
   tags:
     - network-manager
     - vpn
+  block:
 
-- name: Install openvpn-systemd-resolved script and config
-  ansible.builtin.get_url:
-    url: "{{ item.url }}"
-    dest: "{{ item.dest }}"
-    mode: "{{ item.mode }}"
-  become: true
-  loop:
-    - url: https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved
-      dest: /etc/openvpn/update-systemd-resolved
-      mode: "0755"
-    - url: https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved.conf
-      dest: /etc/openvpn/update-systemd-resolved.conf
-      mode: "0644"
-  tags:
-    - openvpn
-    - openvpn-systemd-resolved
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - NetworkManager
+          - NetworkManager-tui
+          - openvpn
+          - wireguard-tools # Wireguard: fast, modern and secure VPN general-purpose tunnel
+          - openssl
+          - openfortivpn
+          - openconnect
+          - openresolv # http://roy.marples.name/projects/openresolv/
+          - systemd-resolved # Modern alternative of handling /etc/resolv.conf through centralized systemd
+        state: present
+      become: true
+      tags:
+        - network-manager
+        - vpn
 
-- name: Enable service
-  ansible.builtin.systemd:
-    name: NetworkManager
-    enabled: true
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
-  tags:
-    - network-manager
+    - name: Install openvpn-systemd-resolved script and config
+      ansible.builtin.get_url:
+        url: "{{ item.url }}"
+        dest: "{{ item.dest }}"
+        mode: "{{ item.mode }}"
+      become: true
+      loop:
+        - url: https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved
+          dest: /etc/openvpn/update-systemd-resolved
+          mode: "0755"
+        - url: https://raw.githubusercontent.com/jonathanio/update-systemd-resolved/master/update-systemd-resolved.conf
+          dest: /etc/openvpn/update-systemd-resolved.conf
+          mode: "0644"
+      tags:
+        - openvpn
+        - openvpn-systemd-resolved
 
-- name: Ensure NetworkManager config dirs exists
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    mode: "0755"
-  loop:
-    - /etc/NetworkManager/conf.d/
-    - /etc/NetworkManager/dispatcher.d/
-  become: true
-  tags:
-    - network-manager
+    - name: Enable systemd-resolved.service
+      ansible.builtin.systemd:
+        name: "{{ item }}"
+        enabled: true
+      become: true
+      when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+      loop:
+        - systemd-resolved
 
-- name: Setup mutually exclusive wifi / ethernet script dns servers
-  ansible.builtin.copy:
-    dest: /etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive.sh
-    content: |
-      #!/bin/bash
-      export LC_ALL=C
+    - name: Enable NetworkManager.service
+      ansible.builtin.systemd:
+        name: NetworkManager
+        enabled: true
+      become: true
+      when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
 
-      toggle_wifi ()
-      {
-        result=$(nmcli dev | grep "ethernet" | grep -w "connected")
-        if [ -n "$result" ]; then
-           nmcli radio wifi off
-        else
-           nmcli radio wifi on
-        fi
-      }
+    - name: Ensure NetworkManager config dirs exists
+      ansible.builtin.file:
+        path: "{{ item }}"
+        state: directory
+        mode: "0755"
+      loop:
+        - /etc/NetworkManager/conf.d/
+        - /etc/NetworkManager/dispatcher.d/
+      become: true
 
-      if [ "$2" = "up" ]; then
-        toggle_wifi
-      fi
+    - name: Setup mutually exclusive wifi / ethernet script dns servers
+      ansible.builtin.copy:
+        dest: /etc/NetworkManager/dispatcher.d/70-wifi-wired-exclusive.sh
+        content: |
+          #!/bin/bash
+          export LC_ALL=C
 
-      if [ "$2" = "down" ]; then
-        toggle_wifi
-      fi
-    mode: u=rwx,g=rwx,o=rx
-  become: true
-  tags:
-    - network-manager
+          toggle_wifi ()
+          {
+            result=$(nmcli dev | grep "ethernet" | grep -w "connected")
+            if [ -n "$result" ]; then
+               nmcli radio wifi off
+            else
+               nmcli radio wifi on
+            fi
+          }
 
-- name: Symlink config
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
-    state: link
-  loop:
-    - "{{ role_path }}/files/config/networkmanager-dmenu"
-  tags:
-    - network-manager
+          if [ "$2" = "up" ]; then
+            toggle_wifi
+          fi
 
-- name: Install networkmanager-dmenu (https://github.com/firecat53/networkmanager-dmenu)
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/firecat53/networkmanager-dmenu/main/networkmanager_dmenu
-    dest: "{{ ansible_user_dir }}/.local/bin/networkmanager_dmenu"
-    mode: "0755"
-  tags:
-    - network-manager
-    - networkmanager-dmenu
+          if [ "$2" = "down" ]; then
+            toggle_wifi
+          fi
+        mode: u=rwx,g=rwx,o=rx
+      become: true
 
-- name: Install rofi-wifi-menu (https://github.com/zbaylin/rofi-wifi-menu)
-  ansible.builtin.get_url:
-    url: https://raw.githubusercontent.com/zbaylin/rofi-wifi-menu/master/rofi-wifi-menu.sh
-    dest: "{{ ansible_user_dir }}/.local/bin/rofi-wifi-menu.sh"
-    mode: "0755"
-  tags:
-    - network-manager
-    - rofi-wifi-menu
+    # - name: Symlink config
+    #   ansible.builtin.file:
+    #     src: "{{ item }}"
+    #     dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+    #     state: link
+    #   loop:
+    #     - "{{ role_path }}/files/config/networkmanager-dmenu"
+
+    # - name: Install networkmanager-dmenu (https://github.com/firecat53/networkmanager-dmenu)
+    #   ansible.builtin.get_url:
+    #     url: https://raw.githubusercontent.com/firecat53/networkmanager-dmenu/main/networkmanager_dmenu
+    #     dest: "{{ ansible_user_dir }}/.local/bin/networkmanager_dmenu"
+    #     mode: "0755"
+    #
+    # - name: Install rofi-wifi-menu (https://github.com/zbaylin/rofi-wifi-menu)
+    #   ansible.builtin.get_url:
+    #     url: https://raw.githubusercontent.com/zbaylin/rofi-wifi-menu/master/rofi-wifi-menu.sh
+    #     dest: "{{ ansible_user_dir }}/.local/bin/rofi-wifi-menu.sh"
+    #     mode: "0755"

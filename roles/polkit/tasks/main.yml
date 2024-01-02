@@ -1,12 +1,11 @@
 ---
-- name: Wget
+- name: Polkit
   tags:
-    - wget
+    - polkit
   block:
     - name: Install
       ansible.builtin.dnf:
         name:
-          - wget
+          - polkit-gnome
         state: present
       become: true
-

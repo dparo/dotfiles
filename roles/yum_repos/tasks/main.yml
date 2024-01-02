@@ -3,7 +3,7 @@
   tags:
     - fedora
     - yum.repos.d
-    - rpmfucsion
+    - rpmfusion
   when: ansible_distribution == 'Fedora'
   block:
     # See https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/#_included_software

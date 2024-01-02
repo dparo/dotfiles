@@ -1,4 +1,10 @@
 ---
+
+- name: Display Manager
+  tags:
+    - display-manager
+    - gdm
+  block:
 # - name: Disable services
 #   ansible.builtin.systemd:
 #     name: "{{item}}"
@@ -7,82 +13,67 @@
 #   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
 #   loop:
 #     - gdm
-#   tags:
-#     - systemd
-#     - display-manager
 
-- name: Create a script to execute the user's XINITRC
-  ansible.builtin.copy:
-    dest: /usr/bin/xinitrcsession-helper
-    content: |
-      #!/usr/bin/env bash
+    - name: Create a script to execute the user's XINITRC
+      ansible.builtin.copy:
+        dest: /usr/bin/xinitrcsession-helper
+        content: |
+          #!/usr/bin/env bash
 
-      entry=""
-      if [ -n "$XINITRC" ]; then
-          entry="$XINITRC"
-      elif [ -f "$XDG_CONFIG_HOME/xorg/xinitrc" ]; then
-          entry="$XDG_CONFIG_HOME/xorg/xinitrc"
-      elif [ -f "$HOME/.config/xorg/xinitrc" ]; then
-          entry="$HOME/.config/xorg/xinitrc"
-      elif [ -f "$HOME/.xinitrc" ]; then
-          entry="$HOME/.xinitrc"
-      fi
-      if [ -n "$entry" ]; then
-        exec "$entry" "$@"
-      fi
-    mode: "0775"
-  become: true
-  tags:
-    - display-manager
-    - gdm
+          entry=""
+          if [ -n "$XINITRC" ]; then
+              entry="$XINITRC"
+          elif [ -f "$XDG_CONFIG_HOME/xorg/xinitrc" ]; then
+              entry="$XDG_CONFIG_HOME/xorg/xinitrc"
+          elif [ -f "$HOME/.config/xorg/xinitrc" ]; then
+              entry="$HOME/.config/xorg/xinitrc"
+          elif [ -f "$HOME/.xinitrc" ]; then
+              entry="$HOME/.xinitrc"
+          fi
+          if [ -n "$entry" ]; then
+            exec "$entry" "$@"
+          fi
+        mode: "0775"
+      become: true
 
-- name: Create desktop entry to allow display managers to execute the user's XINITRC
-  ansible.builtin.copy:
-    dest: /usr/share/xsessions/xinitrc-{{ item }}.desktop
-    content: |
-      [Desktop Entry]
-      Encoding=UTF-8
-      Type=Application
-      Name=xinitrc-{{ item }}
-      Comment=Executes the .xinitrc script in your home directory with {{ item }}
-      Exec=xinitrcsession-helper {{ item }}
-    mode: "0644"
-  become: true
-  loop:
-    - i3
-    - bspwm
-  tags:
-    - display-manager
-    - gdm
+    - name: Create desktop entry to allow display managers to execute the user's XINITRC
+      ansible.builtin.copy:
+        dest: /usr/share/xsessions/xinitrc-{{ item }}.desktop
+        content: |
+          [Desktop Entry]
+          Encoding=UTF-8
+          Type=Application
+          Name=xinitrc-{{ item }}
+          Comment=Executes the .xinitrc script in your home directory with {{ item }}
+          Exec=xinitrcsession-helper {{ item }}
+        mode: "0644"
+      become: true
+      loop:
+        - i3
+        - bspwm
 
-- name: GDM config
-  community.general.ini_file:
-    path: /etc/gdm/custom.conf
-    section: daemon
-    option: "{{ item.key }}"
-    value: "{{ item.value }}"
-    no_extra_spaces: true
-  loop:
-    - { key: WaylandEnable, value: true }
-    - { key: AutomaticLoginEnable, value: true }
-    - { key: AutomaticLogin, value: dparo }
-  become: true
-  tags:
-    - display-manager
-    - gdm
+    - name: GDM config
+      community.general.ini_file:
+        path: /etc/gdm/custom.conf
+        section: daemon
+        option: "{{ item.key }}"
+        value: "{{ item.value }}"
+        no_extra_spaces: true
+      loop:
+        - { key: WaylandEnable, value: true }
+        - { key: AutomaticLoginEnable, value: true }
+        - { key: AutomaticLogin, value: dparo }
+      become: true
 
-- name: GDM config - Automatic Login default session
-  ansible.builtin.copy:
-    dest: /var/lib/AccountsService/users/{{ ansible_user_id }}
-    content: |
-      [User]
-      Languages=en_US.UTF-8;
-      Session=xinitrc-i3
-      PasswordHint=
-      SystemAccount=false
-      Icon={%- if ansible_user_id == 'dparo' -%}/usr/share/pixmaps/faces/calculator.jpg{%- else -%}/usr/share/pixmaps/faces/gamepad.jpg{%- endif -%}
-    mode: "0600"
-  become: true
-  tags:
-    - display-manager
-    - gdm
+    - name: GDM config - Automatic Login default session
+      ansible.builtin.copy:
+        dest: /var/lib/AccountsService/users/{{ ansible_user_id }}
+        content: |
+          [User]
+          Languages=en_US.UTF-8;
+          Session=xinitrc-i3
+          PasswordHint=
+          SystemAccount=false
+          Icon={%- if ansible_user_id == 'dparo' -%}/usr/share/pixmaps/faces/calculator.jpg{%- else -%}/usr/share/pixmaps/faces/gamepad.jpg{%- endif -%}
+        mode: "0600"
+      become: true

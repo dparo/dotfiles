@@ -2,8 +2,8 @@
 
 - name: Emacs
   tags:
-    - emacs
     - never
+    - emacs
   block:
     - name: Install
       ansible.builtin.dnf:

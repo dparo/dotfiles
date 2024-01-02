@@ -4,6 +4,8 @@
   connection: local
   roles:
     - debug
+
+    # OS System configuration
     - sysctl
     - systemd-oomd
     - systemd-journald
@@ -13,32 +15,62 @@
     - swapfile
     - dnf
     - yum_repos
+    - nvidia
+
+    # Base dependencies to keep bootstrapping the dotfiles
+    - base_os_deps
+
+    # System configuration
+    - sudo
+    - dns
     - packagekit
     - abrt
     - firewalld
     - x509
-    - ssh
-    - gnupg
-    - git
-    - xdg
-    - mimes
-    - locale
-    - wget
-    - sudo
-    - core_pkgs
-    - bash
-    - zsh
-    - user
-    - systemd
     - snap
-    - keyring
-    - nvidia
+    - codecs
+
+
+    # User core configuration
+    - user
+    - xdg
+    - locale
+    - polkit
+    - systemd-user
+    - mimes
+
+    #
+    # Setup core programs
+    #
     - bluetooth_manager
     - display_manager
     - network_manager
     - virt_manager
     - cockpit
-    - dns
+
+
+    ##
+    ##  Applications
+    ##
+
+    ## Core applications
+    - core_pkgs
+
+    # Shells
+    - bash
+    - zsh
+    - powershell
+
+
+    # Basic user core programs
+    - ssh
+    - gnupg
+    - git
+    - wget
+    - keyring
+
+
+    # Development toolchains
     - python
     - anaconda3
     - cpp
@@ -54,48 +86,64 @@
     - kotlin
     - maven
     - tomcat
-    - jdgui
     - latex
+
+
+    ## Command line programs
+    - tmux
+    - fzf
+    - starship
+    - lazygit
+    - git_utils
+    - gitui
+    - gnu_parallel
+    - jless
+    - ranger
+
+    ## Devel command line programs
+    - awscli
+
+
+    # Desktop base dependencies
     - alsa
     - pulseaudio
     - pipewire
     - xorg
     - wayland
-    - kitty
-    - xdg_terminal_exec
-    - alacritty
-    - starship
-    - powershell
-    - awscli
-    - tmux
-    - fzf
-    - neovim
-    - emacs
-    - textadept
-    - git_utils
-    - lazygit
-    - gitui
-    - nautilus
-    - pcmanfm
-    - ranger
-    - gnu_parallel
-    - jless
-    - dunst
-    - wm_basics
-    - feh
-    - redshift
-    - newsboat
+    - base_desktop
+
     - i3
     - bspwm
     - polybar
     - picom
-    - gtk
-    - gnome
     - xsettingsd
-    - codecs
+    - redshift
+    - dunst
+    - gnome
+
+    ## Text editors
+    - neovim
+    - emacs
+    - textadept
+
+    ## Basic GUI programs
+    - kitty
+    - alacritty
+    - rofi
+    - xdg_terminal_exec
+    - nautilus
+    - pcmanfm
+    - dragon
+    - ripdrag
+    - feh
+
+
+
+    # TODO(d.paro): Sort out these roles
+    - newsboat
+    - gtk
     - mpd
     - mpv
-    - rofi
     - clipboard
     - copyq
     - flameshot
@@ -127,6 +175,7 @@
     - pycharm
     - telegram
     - devel
+    - jdgui
     - tailwindcss
     - gomplate
     - diagram_tools
@@ -151,8 +200,6 @@
     - davinci_resolve
     - godot_engine
     - audacity
-    - dragon
-    - ripdrag
 
 
     # Flatpaks

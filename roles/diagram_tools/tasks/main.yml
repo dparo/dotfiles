@@ -1,26 +1,27 @@
 ---
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - graphviz
-      - plantuml
-      - blockdiag # block diagram
-      - seqdiag # sequence diagram
-      - actdiag # activity diagram
-      - nwdiag # logical network diagram
-      - texlive-bytefield
-      # - kroki (online)     # Creates diagrams from textual descriptions
-      #   - erd # entity relation graph (https://github.com/BurntSushi/erd)
-    state: present
-  become: true
+- name: Diagram Tools
   tags:
+    - never
     - diagram-tools
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - graphviz
+          - plantuml
+          - blockdiag # block diagram
+          - seqdiag # sequence diagram
+          - actdiag # activity diagram
+          - nwdiag # logical network diagram
+          # - kroki (online)     # Creates diagrams from textual descriptions
+          #   - erd # entity relation graph (https://github.com/BurntSushi/erd)
+        state: present
+      become: true
 
-- name: Install vega-cli (A Visualization Grammar, interactive visualization designs)
-  community.general.npm:
-    name: "{{ item }}"
-    global: true
-    state: latest
-  loop:
-    - vega-cli
-  tags: diagram-tools
+    - name: Install vega-cli (A Visualization Grammar, interactive visualization designs)
+      community.general.npm:
+        name: "{{ item }}"
+        global: true
+        state: latest
+      loop:
+        - vega-cli

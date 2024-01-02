@@ -1,0 +1,32 @@
+---
+- name: Systemd User configuration
+  tags:
+    - systemd-user
+  block:
+      - name: Symlink config
+        ansible.builtin.file:
+          src: "{{ item.src }}"
+          dest: "{{ item.dest }}"
+          state: link
+        loop:
+          - src: "{{ role_path }}/files/systemd"
+            dest: "{{ ansible_user_dir }}/.config/systemd"
+          - src: "{{ role_path }}/files/environment.d"
+            dest: "{{ ansible_user_dir }}/.config/environment.d"
+
+      - name: Reload user services
+        ansible.builtin.systemd:
+          daemon_reload: true
+          scope: user
+        when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+        ignore_errors: true
+
+      - name: Enable user services
+        ansible.builtin.systemd:
+          name: "{{ item }}"
+          enabled: true
+          scope: user
+        when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+        loop:
+          - systemd-dump-env-at-login.service
+

@@ -1,50 +1,44 @@
 ---
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - python3
-      - python3-pip
-      - python3-virtualenv
-      - python3-yaml
-      - python3-jinja2
-      - python3-requests
-      - poetry # Python dependency management and packaging made easy
-    state: present
-  become: true
+- name: Python
   tags:
     - python
+    - python3
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - python3
+          - python3-pip
+          - python3-virtualenv
+          - python3-yaml
+          - python3-jinja2
+          - python3-requests
+          - poetry # Python dependency management and packaging made easy
+        state: present
+      become: true
 
-- name: Install ipython
-  ansible.builtin.pip:
-    name:
-      - ipython
-    state: latest
-  tags:
-    - python
-    - ipython
+    # - name: Install ipython
+    #   ansible.builtin.pip:
+    #     name:
+    #       - ipython
+    #     state: latest
 
-- name: Clean PIP cache
-  ansible.builtin.shell: |
-    pip3 cache purge 2> /dev/null || true
-  ignore_errors: true
-  tags:
-    - python
-    - pip
+    - name: Clean PIP cache
+      ansible.builtin.shell: |
+        pip3 cache purge 2> /dev/null || true
+      ignore_errors: true
 
-- name: Symlink config
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
-    state: link
-    force: true
-  loop:
-    - "{{ role_path }}/files/config/flake8"
-    - "{{ role_path }}/files/config/ipython"
-    - "{{ role_path }}/files/config/pycodestyle"
-    - "{{ role_path }}/files/config/pylintrc"
-    - "{{ role_path }}/files/config/python"
-    - "{{ role_path }}/files/config/python_keyring"
-    - "{{ role_path }}/files/config/pip"
-  tags:
-    - python
-    - pip
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ item }}"
+        dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+        state: link
+        force: true
+      loop:
+        - "{{ role_path }}/files/config/flake8"
+        - "{{ role_path }}/files/config/ipython"
+        - "{{ role_path }}/files/config/pycodestyle"
+        - "{{ role_path }}/files/config/pylintrc"
+        - "{{ role_path }}/files/config/python"
+        - "{{ role_path }}/files/config/python_keyring"
+        - "{{ role_path }}/files/config/pip"
