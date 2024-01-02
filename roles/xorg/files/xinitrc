@@ -54,7 +54,7 @@ exec_wm() {
     #     Up to to Ubuntu 21.10 and before, `dbus-launch --sh-syntax --exit-with-session "$WM"`
     #     was necessary but nowadays it is not anymore
 
-    if test -f "$HOME/.config/systemd/user/$WM.service"; then
+    if [ "$#" -eq 1 ] && [ -f "$HOME/.config/systemd/user/$WM.service" ]; then
         exec systemctl --user start --wait "${WM}.service"
     elif builtin type -P "$WM" 1> /dev/null 2> /dev/null; then
         exec "$@"
@@ -132,13 +132,13 @@ main() {
 
     systemctl --user daemon-reload
 
-    if test "$1" != ""; then
+    if type -P "$1" 1> /dev/null 2> /dev/null ; then
         exec_wm "$@"
     fi
 
     ## Try out different WMs using precedence and resolve the first installed
     for WM in i3 bspwm dwm icewm; do
-        if type "$WM" 1>/dev/null 2>/dev/null; then
+        if type -P "$WM" 1>/dev/null 2>/dev/null; then
             exec_wm "$WM"
         fi
     done
