@@ -1,9 +1,11 @@
 ---
-- name: Install beekeeper-studio
-  community.general.flatpak:
-    name: io.beekeeperstudio.Studio
-    state: present
-    remote: flathub
+- name: Beekeper Studio
   tags:
     - never
     - beekeeper-studio
+  block:
+    - name: Install beekeeper-studio
+      community.general.flatpak:
+        name: io.beekeeperstudio.Studio
+        state: present
+        remote: flathub
