@@ -18,7 +18,7 @@ alias docker-prune='docker system prune --volumes -a'
 alias onlyoffice='flatpak run --branch=stable --arch=x86_64 --command=desktopeditors --file-forwarding org.onlyoffice.desktopeditors'
 
 function valid_shell_command {
-    builtin type "$1" 1>/dev/null 2>/dev/null
+    builtin type -P "$1" 1>/dev/null 2>/dev/null
 }
 
 function load-env {

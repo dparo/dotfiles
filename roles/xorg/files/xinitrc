@@ -2,6 +2,68 @@
 
 set -x
 
+# Source system-wide xinitrc dependencies
+# NOTE(dparo): Unrecommended. Some linux distros (eg Fedora) contains scripts to autostart dbus.
+#              We don't want to start dbus manually from startx. Instead we rely on systemd
+#              to automatically start dbus when it is necessary.
+source_distro_xinit_scripts() {
+    if [ -d /etc/X11/xinit/xinitrc.d ]; then
+        for f in /etc/X11/xinit/xinitrc.d/?*.sh; do
+            [ -f "$f" ] && source "$f"
+        done
+        unset f
+    fi
+}
+
+exec_wm() {
+    WM="$1"
+
+    case "$WM" in
+    bspwm | dwm | xmonad)
+        # https://wiki.archlinux.org/title/java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
+        export _JAVA_AWT_WM_NONREPARENTING=1 # For JAVA <= 1.8
+        export AWT_TOOLKIT=MToolkit          # For JAVA > 1.8
+        ;;
+    *) ;;
+    esac
+
+    dbus-update-activation-environment --systemd DISPLAY XAUTHORITY
+
+    # Import all environment variables exported from xinitrc script
+    # and, most importantly, the variables exported from the .zprofile
+    # This env variables will be available to systemd services, including the service
+    # which will start the window manager.
+    # NOTE(d.paro): `systemctl --user import-environment` is deprecated when importing the ENTIRE environment,
+    #               and therefore might be removed in later versions (who knows).
+    #               Just for a fail safe case, revert to using `dbus-update-activation-environment  --systemd --all`,
+    #               which will also update the DBUS environment on top of the systemd one
+    systemctl --user import-environment || dbus-update-activation-environment --systemd --all
+
+    # NOTE(dparo): 27 Jan 2022
+    #     dbus-launch is now deprecated, since it is now part of systemd
+    #     and it is started automatically.
+    #     Using dbus-launch would export DBUS_SESSION_BUS_ADDRESS to an invalid
+    #     path, thus breaking normal keychain operations
+    #
+    #     ArchLinux: Do not use dbus-launch nor dbus-run-session !!!!!!!!!!!!
+    #
+    # NOTE(dparo): 29 April 2022
+    #     From Ubuntu 22.04, running `dbus-launch --sh-syntax --exit-with-session "$WM"` is not anymore
+    #     necessary. Running dbus-launch in this way would brake snap packages since they wouldn't
+    #     be able to connect to the dbus socket
+    #     Up to to Ubuntu 21.10 and before, `dbus-launch --sh-syntax --exit-with-session "$WM"`
+    #     was necessary but nowadays it is not anymore
+
+    if test -f "$HOME/.config/systemd/user/$WM.service"; then
+        exec systemctl --user start --wait "${WM}.service"
+    elif builtin type -P "$WM" 1> /dev/null 2> /dev/null; then
+        exec "$@"
+    else
+        exit 1
+    fi
+}
+
+
 main() {
 
     USERXSESSION="$XDG_CACHE_HOME/xorg/xsession"
@@ -68,77 +130,10 @@ main() {
     # gnome-keyring-daemon, instead, does the ssh-add autonomously at startup
     # ssh-add
 
-    # Source system-wide xinitrc dependencies
-    # NOTE(dparo): Unrecommended. Some linux distros (eg Fedora) contains scripts to autostart dbus.
-    #              We don't want to start dbus manually from startx. Instead we rely on systemd
-    #              to automatically start dbus when it is necessary.
-    source_distro_xinit_scripts() {
-        if [ -d /etc/X11/xinit/xinitrc.d ]; then
-            for f in /etc/X11/xinit/xinitrc.d/?*.sh; do
-                [ -f "$f" ] && source "$f"
-            done
-            unset f
-        fi
-    }
-
-    exec_wm() {
-        WM="$1"
-
-        case "$WM" in
-        bspwm | dwm | xmonad)
-            # https://wiki.archlinux.org/title/java#Gray_window,_applications_not_resizing_with_WM,_menus_immediately_closing
-            export _JAVA_AWT_WM_NONREPARENTING=1 # For JAVA <= 1.8
-            export AWT_TOOLKIT=MToolkit          # For JAVA > 1.8
-            ;;
-        *) ;;
-        esac
-
-        dbus-update-activation-environment --systemd DISPLAY XAUTHORITY
-
-        # Import all environment variables exported from xinitrc script
-        # and, most importantly, the variables exported from the .zprofile
-        # This env variables will be available to systemd services, including the service
-        # which will start the window manager.
-        # NOTE(d.paro): `systemctl --user import-environment` is deprecated when importing the ENTIRE environment,
-        #               and therefore might be removed in later versions (who knows).
-        #               Just for a fail safe case, revert to using `dbus-update-activation-environment  --systemd --all`,
-        #               which will also update the DBUS environment on top of the systemd one
-        systemctl --user import-environment || dbus-update-activation-environment --systemd --all
-
-        # NOTE(dparo): 27 Jan 2022
-        #     dbus-launch is now deprecated, since it is now part of systemd
-        #     and it is started automatically.
-        #     Using dbus-launch would export DBUS_SESSION_BUS_ADDRESS to an invalid
-        #     path, thus breaking normal keychain operations
-        #
-        #     ArchLinux: Do not use dbus-launch nor dbus-run-session !!!!!!!!!!!!
-        #
-        # NOTE(dparo): 29 April 2022
-        #     From Ubuntu 22.04, running `dbus-launch --sh-syntax --exit-with-session "$WM"` is not anymore
-        #     necessary. Running dbus-launch in this way would brake snap packages since they wouldn't
-        #     be able to connect to the dbus socket
-        #     Up to to Ubuntu 21.10 and before, `dbus-launch --sh-syntax --exit-with-session "$WM"`
-        #     was necessary but nowadays it is not anymore
-
-        if test -f "$HOME/.config/systemd/user/$WM.service"; then
-            exec systemctl --user start --wait "${WM}.service"
-        else
-            echo >&2 "Did not find a systemd user service file for ${WM}.service"
-            if which "$WM"; then
-                exec "$WM"
-            else
-                echo >&2 "$WM: Was not found"
-                exit 1
-            fi
-        fi
-    }
-
     systemctl --user daemon-reload
 
     if test "$1" != ""; then
-        if type "$1" 1>/dev/null 2>/dev/null; then
-            exec_wm "$1"
-        fi
+        exec_wm "$@"
     fi
 
     ## Try out different WMs using precedence and resolve the first installed
