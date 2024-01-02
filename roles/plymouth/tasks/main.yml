@@ -1,0 +1,20 @@
+---
+- name: Plymouth
+  tags:
+    - plymouth
+  block:
+    - name: Uninstall plymouth
+      ansible.builtin.dnf:
+        name:
+          - plymouth
+          - plymouth-core-libs
+          - plymouth-graphics-libs
+          - plymouth-plugin-label
+          - plymouth-plugin-two-step
+          - plymouth-scripts
+          - plymouth-system-theme
+          - plymouth-theme-spinner
+        state: absent
+        autoremove: true
+      become: true
+

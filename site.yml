@@ -11,6 +11,7 @@
     - systemd-journald
     - systemd-coredump
     - selinux
+    - plymouth
     - zswap
     - swapfile
     - dnf
