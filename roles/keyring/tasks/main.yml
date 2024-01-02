@@ -2,6 +2,7 @@
 - name: Keyring
   tags:
     - keyring
+    - gnome-keyring
   block:
     - name: Install
       ansible.builtin.dnf:
