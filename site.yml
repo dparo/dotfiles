@@ -12,7 +12,7 @@
     - swapfile
     - dnf
     - yum_repos
-    - flatpak
+    - packagekit
     - abrt
     - x509
     - ssh
@@ -101,6 +101,7 @@
     - misc
     - fonts
     - docker
+    - flatpak
     - k8s
     - k9s
     - popeye
@@ -148,6 +149,7 @@
     - marktext
     - drawio
     - rnote
+    - libreoffice
     - onlyoffice
     - sqlplus
     - dbeaver

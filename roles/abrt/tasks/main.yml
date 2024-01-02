@@ -6,6 +6,7 @@
     - name: Uninstall abrt
       ansible.builtin.dnf:
         name:
+          - abrt
           - abrt-addon-ccpp
           - abrt-addon-kerneloops
           - abrt-addon-pstoreoops
@@ -22,4 +23,4 @@
           - abrt-tui
         state: absent
         autoremove: true
-      become: True
+      become: true

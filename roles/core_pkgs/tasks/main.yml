@@ -47,42 +47,6 @@
   tags:
     - core-pkgs
 
-- name: Remove unwanted packages
-  ansible.builtin.dnf:
-    name:
-      - libreoffice-core
-      - orca
-      - epiphany-runtime
-    state: absent
-    autoremove: true
-  become: true
-  tags:
-    - core-pkgs
-
-- name: Remove unwanted packages (--noautoremove)
-  ansible.builtin.dnf:
-    name:
-      - gnome-software
-    state: absent
-    autoremove: false
-  become: true
-  tags:
-    - core-pkgs
-
-- name: Remove unwanted packages
-  ansible.builtin.dnf:
-    name:
-      - PackageKit
-      - PackageKit-command-not-found
-      - PackageKit-glib
-      - PackageKit-gstreamer-plugin
-      - PackageKit-gtk3-module
-    state: absent
-    autoremove: true
-  become: true
-  tags:
-    - core-pkgs
-
 
 - name: Install sad (https://github.com/ms-jpq/sad)
   ansible.builtin.unarchive:

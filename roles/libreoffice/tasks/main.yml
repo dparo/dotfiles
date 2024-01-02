@@ -1,0 +1,12 @@
+- name: Libreoffice
+  tags:
+    - libreoffice
+  block:
+    - name: Remove libreoffice
+      ansible.builtin.dnf:
+        name:
+          - libreoffice-core
+        state: absent
+        autoremove: true
+      become: true
+

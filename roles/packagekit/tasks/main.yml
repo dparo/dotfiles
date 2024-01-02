@@ -1,0 +1,17 @@
+- name: PackageKit
+  tags:
+    - packagekit
+    - PackageKit
+  block:
+    - name: Remove PackageKit
+      ansible.builtin.dnf:
+        name:
+          - PackageKit
+          - PackageKit-command-not-found
+          - PackageKit-glib
+          - PackageKit-gstreamer-plugin
+          - PackageKit-gtk3-module
+        state: absent
+        autoremove: true
+      become: true
+

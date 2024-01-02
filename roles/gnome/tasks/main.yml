@@ -9,3 +9,22 @@
         gsettings set org.gnome.desktop.peripherals.keyboard delay 300
         true
       ignore_errors: true
+
+    - name: Remove unwanted packages
+      ansible.builtin.dnf:
+        name:
+          - orca
+          - epiphany-runtime
+        state: absent
+        autoremove: true
+      become: true
+
+    - name: Remove gnome-software (--noautoremove)
+      ansible.builtin.dnf:
+        name:
+          - gnome-software
+        state: absent
+        autoremove: true
+      become: true
+
+
