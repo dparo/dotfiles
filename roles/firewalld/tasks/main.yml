@@ -1,4 +1,5 @@
 # https://wiki.archlinux.org/title/Firewalld
+# https://docs.fedoraproject.org/en-US/quick-docs/firewalld/
 ---
 - name: Firewalld
   tags:
