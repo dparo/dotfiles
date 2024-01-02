@@ -7,7 +7,6 @@
       ansible.builtin.shell: |
         gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 33
         gsettings set org.gnome.desktop.peripherals.keyboard delay 300
-        true
       ignore_errors: true
 
     - name: Remove unwanted packages
