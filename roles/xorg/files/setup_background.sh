@@ -12,6 +12,7 @@ set_wallpaper() {
 }
 
 
+xsetroot -cursor_name left_ptr
 set_wallpaper \
     /usr/share/backgrounds/fedora-workstation/montclair_dark.webp \
     /usr/share/backgrounds/gnome/adwaita-l.* \
