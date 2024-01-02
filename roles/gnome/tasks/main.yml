@@ -28,3 +28,10 @@
       become: true
 
 
+    - name: Reinstall flatpak if it was removed
+      ansible.builtin.dnf:
+        name:
+          - flatpak
+        state: present
+      become: true
+

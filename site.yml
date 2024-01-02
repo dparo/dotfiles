@@ -130,7 +130,6 @@
     - diagram_tools
     - nwjs
     - postman
-    - insomnia
     - mattermost
     - splunk
     - wireshark
@@ -141,24 +140,30 @@
     - clamav
     - thunderbird
     - teams-for-linux
-    - spotify
-    - easyeffects
-    - obsidian
-    - logseq
     - joplin
-    - marktext
-    - drawio
-    - rnote
     - libreoffice
-    - onlyoffice
     - sqlplus
     - dbeaver
-    - beekeeper_studio
     - dbgate
-    - redisinsight
     - apache_ldap_studio
     - davinci_resolve
     - godot_engine
     - audacity
     - dragon
     - ripdrag
+
+
+    # Flatpaks
+    - flatpak
+    - rnote
+    - drawio
+    - onlyoffice
+    - obsidian
+    - logseq
+    - beekeeper_studio
+    - easyeffects
+    - podman-desktop
+    - redisinsight
+    - insomnia
+    - spotify
+    - marktext
