@@ -1,0 +1,23 @@
+---
+- name: Systemd-coredump
+  tags:
+    - systemd-coredump
+    - coredump
+  block:
+    - name: Create config dir
+      ansible.builtin.file:
+        path: "/etc/systemd/coredump.conf.d"
+        state: directory
+        mode: "0755"
+      become: true
+
+    - name: Disable generation of coredumps
+      ansible.builtin.copy:
+        content: |
+          [Coredump]
+          Storage=none
+          ProcessSizeMax=0
+        dest: "/etc/systemd/coredump.conf.d/custom.conf"
+        mode: '0644'
+      become: true
+

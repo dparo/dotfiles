@@ -5,8 +5,9 @@
   roles:
     - debug
     - sysctl
-    - oomd
-    - journald
+    - systemd-oomd
+    - systemd-journald
+    - systemd-coredump
     - selinux
     - zswap
     - swapfile
