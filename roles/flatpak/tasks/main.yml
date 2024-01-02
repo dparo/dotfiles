@@ -8,7 +8,7 @@
       ansible.builtin.dnf:
         name:
           - flatpak
-      state: present
+        state: present
       become: true
 
     - name: Add the flathub flatpak repository remote to the user installation

@@ -1,0 +1,22 @@
+# https://wiki.archlinux.org/title/Firewalld
+---
+- name: Firewalld
+  tags:
+    - firewalld
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - firewalld
+          # - firewall-applet
+          - firewall-config
+        state: present
+      become: true
+
+    - name: Enable firewalld service
+      ansible.builtin.systemd:
+        name: firewalld.service
+        enabled: true
+      become: true
+
+
