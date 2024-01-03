@@ -21,8 +21,16 @@
         gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 33
         gsettings set org.gnome.desktop.peripherals.keyboard delay 300
 
+        gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
+        dconf write /org/gnome/desktop/interface/cursor-theme Adwaita
+
         gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
         gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true
+
+        # Move/ Resize windows by holding ALT
+        gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
+        gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Alt>'
+
 
         # Disable alert sound
         dconf write /org/gnome/desktop/sound/event-sound false
