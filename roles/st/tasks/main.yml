@@ -1,0 +1,11 @@
+---
+- name: st-term
+  tags:
+    - st-term
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - st
+        state: present
+      become: true
