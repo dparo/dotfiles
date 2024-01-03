@@ -16,8 +16,12 @@
 
     - name: Setup GNOME settings
       ansible.builtin.shell: |
+        gsettings set org.gnome.shell disable-user-extensions false
         gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 33
         gsettings set org.gnome.desktop.peripherals.keyboard delay 300
+
+        gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
+        gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true
       ignore_errors: true
 
     - name: Remove unwanted packages
