@@ -18,3 +18,7 @@
         autoremove: true
       become: true
 
+    - name: Disable PlyMouth kernel boot option
+      ansible.builtin.command: grubby --update-kernel ALL --args plymouth.enable=0 disablehooks=plymouth
+      become: True
+
