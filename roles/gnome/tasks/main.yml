@@ -3,7 +3,7 @@
   tags:
     - gnome
   block:
-    - name: Install extensions
+    - name: Install Install extensions
       ansible.builtin.dnf:
         name:
           - gnome-tweaks
@@ -13,11 +13,6 @@
           - gnome-shell-extension-dash-to-dock
         state: present
       become: true
-
-      ansible.builtin.shell: |
-        gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 33
-        gsettings set org.gnome.desktop.peripherals.keyboard delay 300
-      ignore_errors: true
 
     - name: Setup GNOME settings
       ansible.builtin.shell: |
