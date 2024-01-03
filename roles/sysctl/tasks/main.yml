@@ -23,3 +23,12 @@
     become: true
     tags:
       - vscode
+
+  - name: Disable coredumps
+    ansible.builtin.lineinfile:
+      path: /etc/sysctl.conf
+      line: kernel.core_pattern=/dev/null
+      regexp: ^kernel.core_pattern\s*=
+      create: true
+    become: true
+
