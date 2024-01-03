@@ -32,8 +32,8 @@ URxvt.letterSpace: -1
 
 URxvt.scrollBar: false
 !! Font prefferenes
-URxvt.font: xft:Cascadia Code:size=10
-URxvt.boldFont: xft:Cascadia Code:bold::size=10:style=Bold
+URxvt.font: xft:Monospace:size=10
+URxvt.boldFont: xft:Monospace:bold::size=10:style=Bold
 
 !! Fucking disable fucking CTRL + SHIFT keycap fucking useless fucking mode
 URxvt.iso14755: false
@@ -160,6 +160,10 @@ XTerm.vt100.font: 7x13
 
 *background: #1a1b26
 *foreground: #c0caf5
+
+*Background: #1a1b26
+*Foreground: #c0caf5
+
 
 *color0: #15161e
 *color1: #f7768e
