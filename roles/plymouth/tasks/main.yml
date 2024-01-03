@@ -1,9 +1,10 @@
 ---
 - name: Plymouth
   tags:
+    - never
     - plymouth
   block:
-    - name: Uninstall plymouth
+    - name: Install plymouth
       ansible.builtin.dnf:
         name:
           - plymouth
@@ -14,11 +15,13 @@
           - plymouth-scripts
           - plymouth-system-theme
           - plymouth-theme-spinner
-        state: absent
-        autoremove: true
+        state: present
+        # state: absent
+        # autoremove: true
       become: true
 
-    - name: Disable PlyMouth kernel boot option
-      ansible.builtin.command: grubby --update-kernel ALL --args plymouth.enable=0 disablehooks=plymouth
+    - name: Enable PlyMouth kernel boot option
+      # ansible.builtin.command: grubby --update-kernel ALL --args plymouth.enable=0 disablehooks=plymouth     # (Disable)
+      ansible.builtin.command: grubby --update-kernel ALL --args plymouth.enable=1                             # (Enable)
       become: True
 
