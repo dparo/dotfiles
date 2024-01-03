@@ -1,0 +1,24 @@
+---
+- name: Plymouth
+  tags:
+    - plymouth
+  block:
+    - name: Uninstall plymouth
+      ansible.builtin.dnf:
+        name:
+          - plymouth
+          - plymouth-core-libs
+          - plymouth-graphics-libs
+          - plymouth-plugin-label
+          - plymouth-plugin-two-step
+          - plymouth-scripts
+          - plymouth-system-theme
+          - plymouth-theme-spinner
+        state: absent
+        autoremove: true
+      become: true
+
+    - name: Disable PlyMouth kernel boot option
+      ansible.builtin.command: grubby --update-kernel ALL --args plymouth.enable=0 disablehooks=plymouth
+      become: True
+
