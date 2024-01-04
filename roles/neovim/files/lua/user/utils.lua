@@ -99,7 +99,7 @@ local function get_makeprg(p)
     local make = M.file_exists(p .. "/Makefile")
     local zig = M.file_exists(p .. "/build.zig")
     local package_json = M.file_exists(p .. "/package.json")
-    local mvnw = M.file_exists(p .. '/mvnw')
+    local mvnw = M.file_exists(p .. "/mvnw")
     local maven = M.file_exists(p .. "/pom.xml")
     local gradle = M.file_exists(p .. "/build.gradle")
     local gradle_w = M.file_exists(p .. "/gradlew")
@@ -127,8 +127,9 @@ local function get_makeprg(p)
         command = "latexmk -pdf"
     elseif mvnw then
         vim.cmd [[ compiler! maven ]]
-        command =
-            p .. "/mvnw" .. "--offline --no-snapshot-updates -T1C -Dparallel=all -DperCoreThreadCount=false -DthreadCount=4 -Dmaven.compiler.debug=true -Dmaven.compiler.debuglevel=lines,vars,source -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -DskipTests=true --also-make-dependents compile"
+        command = p
+            .. "/mvnw"
+            .. "--offline --no-snapshot-updates -T1C -Dparallel=all -DperCoreThreadCount=false -DthreadCount=4 -Dmaven.compiler.debug=true -Dmaven.compiler.debuglevel=lines,vars,source -Dmaven.test.skip=true -Dmaven.javadoc.skip=true -DskipTests=true --also-make-dependents compile"
     elseif maven then
         vim.cmd [[ compiler! maven ]]
         command =
@@ -179,18 +180,33 @@ M.set_makeprg = function(p)
     M.input(opts, callback)
 end
 
+M.get_word_under_cursor = function()
+    return vim.fn.expand "<cword>"
+end
+
+M.get_visual_text = function()
+    local _, ls, cs = unpack(vim.fn.getpos "v")
+    local _, le, ce = unpack(vim.fn.getcurpos())
+    local t = vim.api.nvim_buf_get_text(0, ls - 1, cs - 1, le - 1, ce, {})
+    return table.concat(t, '\n')
+end
+
 M.project_wide_search = function(p)
-    local opts = {
-        prompt = "Search term: ",
-        default = p,
-    }
-    local callback = function(param)
+    local search = function(param)
         if param ~= nil then
-            local command = [[:Rg ]] .. param
+            local command = [[:Rg ]] .. "\\b" .. param .. "\\b"
             vim.fn.execute(command)
         end
     end
-    M.input(opts, callback)
+
+    if p == nil or p == "" then
+        M.input({
+            prompt = "Search term: ",
+            default = p,
+        }, search)
+    else
+        search(p)
+    end
 end
 
 M.lsp.show_line_diagnostics = function()

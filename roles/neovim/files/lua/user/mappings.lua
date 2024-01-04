@@ -221,7 +221,6 @@ local function setup_basic_functionalities()
     nmap("<BS>", '"_Xi')
     nmap("<Del>", '"_xi')
 
-    vmap("<Space>", "c")
     -- Pressing leader 2 times enters insert mode
     nmap("<leader><leader>", "i")
 
@@ -288,6 +287,7 @@ local function setup_saner_defaults()
     end
 end
 
+
 local function setup_commands()
     ----
     ---- Commands
@@ -295,7 +295,21 @@ local function setup_commands()
     nimap(fn_key(1), exec_cmd "noh")
     nmap({ "<leader>cc", fn_key(7) }, exec_lua "user.utils.build()")
     nmap({ "<leader>c<F2>", "<leader>ce", "<leader>cr", unpack(shift_fn_key(7)) }, exec_lua "user.utils.set_makeprg()")
-    nmap("<leader>/", exec_lua "user.utils.project_wide_search()")
+
+
+    for _, lhs in ipairs({"<leader>*", "<leader>/"}) do
+        vim.keymap.set("n", lhs, function()
+            user.utils.project_wide_search(user.utils.get_word_under_cursor())
+        end)
+    end
+
+    for _, lhs in ipairs({"<leader>*", "<leader>/"}) do
+        vim.keymap.set("v", lhs, function()
+            user.utils.project_wide_search(user.utils.get_visual_text())
+        end)
+    end
+
+
 
     -- Jump to errors
     nimap(fn_key(6), exec_cmd "cfirst")
