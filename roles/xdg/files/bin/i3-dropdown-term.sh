@@ -6,7 +6,7 @@ FILTER='instance="st-256color|kitty|dropdown-term" class="^dropdown-term$"'
 
 term() {
     local cmd
-    cmd='exec tmux new-session -A -s dropdown-term -c "$HOME/.local/share/dotfiles"'
+    cmd='exec tmux new-session -A -s dropdown-term -c "${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles"'
 
     if test "$1" = kitty; then
         exec kitty --name "kitty" --class "dropdown-term" --override 'initial_window_width=150c' --override 'initial_window_height=40c' -e bash -c "$cmd"
