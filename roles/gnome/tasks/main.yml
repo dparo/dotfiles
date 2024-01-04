@@ -3,7 +3,7 @@
   tags:
     - gnome
   block:
-    - name: Install Install extensions
+    - name: Install extensions
       ansible.builtin.dnf:
         name:
           - gnome-tweaks
