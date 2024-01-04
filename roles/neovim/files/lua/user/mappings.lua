@@ -299,16 +299,21 @@ local function setup_commands()
 
     for _, lhs in ipairs({"<leader>*", "<leader>/"}) do
         vim.keymap.set("n", lhs, function()
-            user.utils.project_wide_search(user.utils.get_word_under_cursor())
+            require("telescope.builtin").grep_string()
+           -- user.utils.project_wide_search(user.utils.get_word_under_cursor())
         end)
     end
 
     for _, lhs in ipairs({"<leader>*", "<leader>/"}) do
         vim.keymap.set("v", lhs, function()
-            user.utils.project_wide_search(user.utils.get_visual_text())
+            require("telescope.builtin").grep_string()
+            -- user.utils.project_wide_search(user.utils.get_visual_text())
         end)
     end
 
+    vim.keymap.set("n", "<leader>?", function()
+        require("telescope.builtin").live_grep()
+    end)
 
 
     -- Jump to errors
