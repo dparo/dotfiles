@@ -19,15 +19,14 @@
       ansible.builtin.copy:
         dest: /etc/pki/ca-trust/source/anchors/{{ cert_item.key }}
         content: "{{ cert_item.value }}"
-        mode: "0444"
+        mode: "0644"
       no_log: true
       become: true
       loop_control:
         loop_var: cert_item
       with_items: "{{ x509_certs | default({}) | dict2items }}"
-      register: install_certificates_status
 
-    - name: Update ca-trust
+    - name: Run update-ca-trust
       ansible.builtin.command: update-ca-trust
       no_log: true
       become: true
