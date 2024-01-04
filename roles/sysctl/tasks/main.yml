@@ -2,6 +2,7 @@
 - name: SysCtl
   tags:
     - sysctl
+    - systemctl
   block:
   # See https://fedoraproject.org/wiki/Changes/IncreaseVmMaxMapCount
   - name: Setup vm.max_map_count
