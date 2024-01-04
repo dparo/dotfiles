@@ -206,7 +206,6 @@
 
     # Flatpaks
     - flatpak
-    - gnome-extensions
     - rnote
     - drawio
     - onlyoffice
