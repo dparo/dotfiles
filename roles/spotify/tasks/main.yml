@@ -37,4 +37,141 @@
       mode: "0644"
 
 
+  - name: spotifyd
+    tags:
+      - never
+      - spotifyd
+    block:
+      - name: Prepare build dependencies for spotifyd
+        ansible.builtin.dnf:
+          name:
+            - pkg-config
+            - alsa-lib-devel
+            - openssl-devel
+            # - portaudio-devel
+            - pulseaudio-libs-devel
+          state: present
+        become: true
+
+      - name: Clone spotifyd
+        ansible.builtin.git:
+          clone: true
+          depth: 1
+          dest: "/tmp/spotifyd"
+          force: true
+          repo: https://github.com/Spotifyd/spotifyd.git
+          update: true
+
+      - name: Build spotifyd
+        ansible.builtin.command:
+          cmd: cargo build --release --no-default-features --features alsa_backend,pulseaudio_backend,dbus_keyring,dbus_mpris
+          chdir: /tmp/spotifyd
+
+      - name: Install binary
+        ansible.builtin.copy:
+          src: /tmp/spotifyd/target/release/spotifyd
+          dest: /usr/local/bin/spotifyd
+          mode: '0755'
+        become: true
+
+      - name: Install user service
+        ansible.builtin.copy:
+          dest: /etc/systemd/user/spotifyd.service
+          content: |
+            [Unit]
+            Description=A spotify playing daemon
+            Documentation=https://github.com/Spotifyd/spotifyd
+            Wants=sound.target
+            After=sound.target
+            Wants=network-online.target
+            After=network-online.target
+
+            [Service]
+            ExecStart=/usr/local/bin/spotifyd --no-daemon
+            Restart=always
+            RestartSec=12
+
+            [Install]
+            WantedBy=default.target
+          mode: '0644'
+        become: true
+
+      - name: Removed checkout dir
+        ansible.builtin.file:
+          path: /tmp/spotifyd
+          state: absent
+
+
+      - name: Create spotifyd config dir
+        ansible.builtin.file:
+          path: "{{ ansible_user_dir }}/.config/spotifyd/"
+          state: directory
+          mode: "0755"
+
+      - name: Setup spotifyd configuration
+        ansible.builtin.copy:
+          dest: '{{ ansible_user_dir }}/.config/spotifyd/spotifyd.conf'
+          content: |
+            # vi: ft=toml
+
+            [global]
+
+            ##
+            ## Device identity
+            ##
+            device_name = "spotifyd@{{ ansible_hostname }}"
+            device_type = "computer"
+
+            ##
+            ## Auth
+            ##
+            username = "{{ spotify_username }}"
+            password = "{{ spotify_password }}"
+            # password_cmd = "keepassxc ...."
+            use_keyring = true                 # Use keyring if password is not specified
+
+            ##
+            ## MPRIS controls and interface
+            ##
+            use_mpris = true
+            dbus_type = "session"
+
+            ##
+            ## Audio backend
+            ##
+            backend = "pulseaudio"
+            volume_controller = "softvol"      # none = No volume controls, softval = Software Volume Controller, alsa = Alsa Volume Controller
+            device = "default"                 # Alsa audio device: `aplay -L`
+
+            ##
+            ## Sound configuration
+            ##
+            bitrate = 320
+            initial_volume = "100"
+            volume_normalisation = true
+            normalisation_pregain = -6
+
+            ##
+            ## Misc
+            ##
+            no_audio_cache = false
+            cache_path = "{{ ansible_user_dir }}/.cache/spotifyd"
+            max_cache_size = 134217728          # 128 MegaBytes (property specified in bytes)
+
+            ##
+            ## Scripting
+            ##
+            # on_song_change_hook = ""
+          mode: '0644'
+        no_log: true
+
+      # - name: Setup spotifyd configuration
+      #   anbile.builtin.copy:
+      #     dest: '{{ ansible_user_dir }}/.config/spotifyd/spoti
+
+
+      - name: Install spotify-tui
+        community.general.cargo:
+          name:
+            - spotify-tui
 
