@@ -96,7 +96,7 @@
           mode: '0644'
         become: true
 
-      - name: Removed checkout dir
+      - name: Remove checkout dir
         ansible.builtin.file:
           path: /tmp/spotifyd
           state: absent
@@ -164,11 +164,6 @@
             # on_song_change_hook = ""
           mode: '0644'
         no_log: true
-
-      # - name: Setup spotifyd configuration
-      #   anbile.builtin.copy:
-      #     dest: '{{ ansible_user_dir }}/.config/spotifyd/spoti
-
 
       - name: Install spotify-tui
         community.general.cargo:
