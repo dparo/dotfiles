@@ -149,7 +149,7 @@
             bitrate = 320
             initial_volume = "100"
             volume_normalisation = true
-            normalisation_pregain = -6
+            normalisation_pregain = 0
 
             ##
             ## Misc
