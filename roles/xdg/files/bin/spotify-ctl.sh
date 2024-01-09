@@ -48,7 +48,7 @@ case "$arg1" in
         dbus_send Stop "$@";;
     next)
         dbus_send Next "$@";;
-    prev|previous)
+    prev|previous|prior)
         dbus_send Previous "$@";;
     volume-up)
         dbus_send VolumeUp ;;
