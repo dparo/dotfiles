@@ -68,7 +68,6 @@
 - name: Install additional language tools
   ansible.builtin.pip:
     name:
-      - httpie
       - codespell
       - cmakelang
       - cmake-language-server

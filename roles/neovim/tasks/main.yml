@@ -101,7 +101,6 @@
     - name: Install runtime deps (PIP)
       ansible.builtin.pip:
         name:
-          - httpie
           - cpplint
         state: latest
 
