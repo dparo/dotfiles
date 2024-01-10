@@ -119,7 +119,7 @@
             ##
             ## Device identity
             ##
-            device_name = "spotifyd@{{ ansible_hostname }}"
+            device_name = "spotifyd@{{ ansible_hostname | replace(' ', '-') }}"
             device_type = "computer"
 
             ##
