@@ -17,20 +17,25 @@
 
     - name: Setup GNOME settings
       ansible.builtin.shell: |
-        gsettings set org.gnome.shell disable-user-extensions false
+        # Keyboard repeat rate
         gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 33
         gsettings set org.gnome.desktop.peripherals.keyboard delay 300
 
+        # Cursor
         gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
         dconf write /org/gnome/desktop/interface/cursor-theme Adwaita
 
-        gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
+        # Extensions
+        gsettings set org.gnome.shell disable-user-extensions false
         gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true
 
-        # Move/ Resize windows by holding ALT
+        # Fonts
+        gsettings set org.gnome.desktop.interface font-name "Noto 9"
+
+        # Window controls
         gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
         gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Alt>'
-
+        gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
 
         # Disable alert sound
         dconf write /org/gnome/desktop/sound/event-sound false
