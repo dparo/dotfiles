@@ -34,10 +34,8 @@ sethandler <C--> n:ide i:ide
 " sethandler <C-c> i-c:ide
 " sethandler <C-v> i-c:ide
 
-sethandler <C-c> i-c-n-a:ide
-sethandler <C-v> i-c-n-a:ide
-
-sethandler <C-v> i-n-c-a:vim
+sethandler <C-c> i-c-n-a-v:ide
+sethandler <C-v> i-c-n-a-v:ide
 
 
 sethandler <M-CR> n-v:ide i:ide
@@ -85,6 +83,9 @@ nnoremap <C-Left> b
 vnoremap <C-Left> b
 nnoremap <C-Right> w
 vnoremap <C-Right> w
+
+vnoremap p "_dgP
+vnoremap <C-v> "_dgP
 
 nnoremap <C-Down> }zz
 vnoremap <C-Down> }zz
