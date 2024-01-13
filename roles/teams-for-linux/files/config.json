@@ -1,3 +1,4 @@
 {
-    "disableAutogain": true
+  "disableAutogain": true,
+  "disableGpu": true
 }
