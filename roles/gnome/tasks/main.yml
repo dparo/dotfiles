@@ -45,6 +45,17 @@
 
 
 
+        # Power settings: Do not suspend/hibernate when on AC power
+        gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 900
+        gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'          # nothing | suspend | hibernate
+        gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout 900
+        gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'suspend'
+
+        # Lock screen: Automatic lock screen after 10 minutes, do not show notifications on lock screen
+        gsettings set org.gnome.desktop.lockdown disable-lock-screen false
+        gsettings set org.gnome.desktop.session idle-delay uint32 600
+        gsettings set org.gnome.desktop.notifications show-in-lock-screen false
+
 
         # Window controls
         gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
