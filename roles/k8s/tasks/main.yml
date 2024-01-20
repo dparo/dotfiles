@@ -84,3 +84,20 @@
         - opa
 
       # TODO: Install helm: https://get.helm.sh/helm-v3.13.1-linux-amd64.tar.gz
+      #
+
+    - name: Check latest kind (https://github.com/kubernetes-sigs/kind)
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/kubernetes-sigs/kind/releases/latest
+        return_content: true
+      register: kind_latest
+
+    - name: Download and unpack latest kind
+      ansible.builtin.get_url:
+        url: "https://github.com/kubernetes-sigs/kind/releases/download/{{ kind_latest['json']['tag_name'] }}/kind-linux-amd64"
+        dest: /usr/local/bin/kind
+        mode: "0755"
+      become: True
+
+
+
