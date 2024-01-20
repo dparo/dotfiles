@@ -53,3 +53,5 @@ break __assert_fail
 break UnityFail
 break __asan_on_error@plt
 break __asan_report_error
+break cmocka.c:_fail
+break cmocka.c:exit_test
