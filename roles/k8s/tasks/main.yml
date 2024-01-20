@@ -100,4 +100,21 @@
       become: True
 
 
+    - name: Check latest lima (https://github.com/lima-vm/lima/)
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/lima-vm/lima/releases/latest
+        return_content: true
+      register: lima_latest
+      tags:
+        - lima
+
+    # TODO(d.paro): Unpack LIMA in /usr/local
+    - name: Download and unpack latest lima
+      ansible.builtin.unarchive:
+        src: "https://github.com/lima-vm/lima/releases/download/{{ lima_latest['json']['tag_name'] }}/lima-{{ lima_latest['json']['tag_name'][1:] }}-Linux-x86_64.tar.gz"
+        dest: "/usr/local"
+        remote_src: true
+      become: True
+      tags:
+        - lima
 
