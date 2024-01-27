@@ -21,9 +21,14 @@ set -x
 
 mediaplayer="spotify"
 
-spotifyd_pid="$(pidof spotifyd)"
-if test "$?" -eq 0; then
-    mediaplayer="spotifyd.instance${spotifyd_pid}"
+playerctl -l | grep -Ei '^spotify$'
+spotify_app_running=$?
+
+if test "$spotify_app_running" -ne 0; then
+    spotifyd_pid="$(pidof spotifyd)"
+    if test "$?" -eq 0; then
+        mediaplayer="spotifyd.instance${spotifyd_pid}"
+    fi
 fi
 
 
