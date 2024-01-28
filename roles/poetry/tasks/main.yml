@@ -1,0 +1,19 @@
+---
+- name: poetry
+  tags:
+    - poetry
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - poetry # Python dependency management and packaging made easy
+        state: present
+      become: true
+
+
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/config"
+        dest: "{{ ansible_user_dir }}/.config/poetry"
+        state: link
+        force: true
