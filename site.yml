@@ -73,7 +73,7 @@
 
     # Development toolchains
     - python
-    - poetry
+    - pypoetry
     - anaconda3
     - cpp
     - rust
