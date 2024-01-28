@@ -7,6 +7,7 @@
       ansible.builtin.dnf:
         name:
           - poetry # Python dependency management and packaging made easy
+          - python3-devel
         state: present
       become: true
 
