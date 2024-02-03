@@ -27,6 +27,7 @@
   "lazygit.nvim": { "branch": "main", "commit": "1e08e3f5ac1152339690140e61a4a32b3bdc7de5" },
   "leap.nvim": { "branch": "main", "commit": "47262a9beadd6945f51b0a4fc2d005aaa2095f04" },
   "lsp_extensions.nvim": { "branch": "master", "commit": "92c08d4914d5d272fae13c499aafc9f14eb05ada" },
+  "markdown-preview.nvim": { "branch": "master", "commit": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee" },
   "mason.nvim": { "branch": "main", "commit": "41e75af1f578e55ba050c863587cffde3556ffa6" },
   "mini.nvim": { "branch": "main", "commit": "ea1af8c7d5e72148cae8a04e9887322a53fe66cf" },
   "neogit": { "branch": "master", "commit": "13af9db37bb4255c40459352d0c535a47118042e" },
