@@ -126,6 +126,7 @@ bindkey -M menuselect '^[[Z' reverse-menu-complete         # Shift tab in menu-l
 autoload -Uz compinit
 compinit -d "$XDG_CACHE_HOME/zsh/zcompdump-$ZSH_VERSION"
 
+autoload bashcompinit && bashcompinit
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -191,3 +192,8 @@ fi
 
 [[ ! -r "${OPAMROOT:-$HOME/.opam}/opam-init/init.zsh" ]] \
     || source "${OPAMROOT:-$HOME/.opam}/opam-init/init.zsh"  > /dev/null 2> /dev/null
+
+
+# AWS Cli completion
+complete -C '/usr/local/bin/aws_completer' aws
+
