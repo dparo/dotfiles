@@ -197,3 +197,6 @@ fi
 # AWS Cli completion
 complete -C '/usr/local/bin/aws_completer' aws
 
+if builtin type kubectl 1>/dev/null 2>/dev/null; then
+    source <(kubectl completion zsh)
+fi
