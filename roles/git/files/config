@@ -35,11 +35,12 @@
 	ui = auto
 [gui]
 	historybrowser = git-dag
-    editor = nvim
+	editor = nvim
 [alias]
-	lola = log --graph --decorate --oneline --abbrev-commit --all --full-history 
+    lola = log --graph --decorate --oneline --abbrev-commit --all --full-history
+    dirdiff = difftool --tool=meld --dir-diff
 [diff]
-    tool = p4merge
+	tool = p4merge
     keepBackup = false
 	keepTemporaries = false
 	trustExitCode = false
@@ -122,4 +123,4 @@
 	verbose = false
 [diff "lockb"]
 	textconv = bun
-	binary = true
+    binary = true
