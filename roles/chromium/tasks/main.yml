@@ -1,6 +1,7 @@
 ---
 - name: Chromium
   tags:
+    - never
     - chromium
   block:
     - name: Install google-chrome-stable
