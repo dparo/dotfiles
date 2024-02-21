@@ -122,6 +122,7 @@
     - redshift
     - dunst
     - gnome
+    - hyprland
 
     ## Text editors
     - neovim

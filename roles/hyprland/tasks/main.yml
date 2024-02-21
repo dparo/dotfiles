@@ -1,0 +1,14 @@
+---
+- name: hyprland
+  tags:
+    - hyprland
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - hyprland
+          - waybar
+          - wl-clipboard
+        state: present
+      become: true
+
