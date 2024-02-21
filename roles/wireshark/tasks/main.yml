@@ -9,7 +9,6 @@
         name:
           - wireshark
           - tcpdump
-          - httpdump
         state: present
       become: true
 
