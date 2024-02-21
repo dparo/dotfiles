@@ -1,10 +1,21 @@
 ---
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - wireshark
-    state: present
-  become: true
+- name: Wireshark
   tags:
     - never
     - wireshark
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - wireshark
+        state: present
+      become: true
+
+    - name: Add user to wireshark group
+      ansible.builtin.user:
+        name: "{{ ansible_env.USER }}"
+        append: true
+        groups:
+          - wireshark
+      become: true
+
