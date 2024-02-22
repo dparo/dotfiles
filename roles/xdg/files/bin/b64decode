@@ -19,5 +19,5 @@ for i in range(1, len(sys.argv)):
         print("As bytes:")
         print(b)
         print()
-        print("As int[]:")
+        print(f"As int[{len(list(b))}]:")
         print('[{}]'.format(', '.join(hex(x) for x in list(b))))
