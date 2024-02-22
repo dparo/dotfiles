@@ -9,4 +9,15 @@ import urllib.parse
 for i in range(1, len(sys.argv)):
     b = str(sys.argv[i])
     b = urllib.parse.unquote(b, encoding = 'utf-8')
-    print(base64.b64decode(b.encode("utf-8")).decode("utf-8"))
+
+    b = base64.b64decode(b.encode("utf-8"))
+    try:
+        print(b.decode("utf-8"))
+    except UnicodeDecodeError:
+        print("The decoded bytes cannot be interpreted as a UTF-8 string")
+        print()
+        print("As bytes:")
+        print(b)
+        print()
+        print("As int[]:")
+        print('[{}]'.format(', '.join(hex(x) for x in list(b))))
