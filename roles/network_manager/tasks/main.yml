@@ -17,6 +17,9 @@
           - openconnect
           - openresolv # http://roy.marples.name/projects/openresolv/
           - systemd-resolved # Modern alternative of handling /etc/resolv.conf through centralized systemd
+          - NetworkManager-openvpn
+          - NetworkManager-openconnect
+          - NetworkManager-fortisslvpn
         state: present
       become: true
       tags:
