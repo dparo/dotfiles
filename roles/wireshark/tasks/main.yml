@@ -8,6 +8,7 @@
       ansible.builtin.dnf:
         name:
           - wireshark
+          - tcpdump
         state: present
       become: true
 
