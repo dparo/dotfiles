@@ -5,6 +5,7 @@
 add_newline = true
 command_timeout = 2000   # Measured in milliseconds
 
+# format="$os $all"
 
 [status]
 disabled = false
@@ -133,8 +134,8 @@ symbol = " "
 symbol = " "
 
 [os]
-format = "[$saymbol $version]($style)"
-disabled = true
+format = "[$symbol]($style)"
+disabled = false
 
 [os.symbols]
 Alpaquita = " "
