@@ -9,7 +9,7 @@
           - gnome-tweaks
           - gnome-extensions-app
           - gnome-shell-extension-appindicator
-          - gnome-shell-extension-pop-shell
+          # - gnome-shell-extension-pop-shell
           - gnome-shell-extension-blur-my-shell
           - gnome-shell-extension-dash-to-dock
         state: present
