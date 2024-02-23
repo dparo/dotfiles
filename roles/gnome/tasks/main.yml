@@ -64,6 +64,18 @@
 
         # Disable alert sound
         dconf write /org/gnome/desktop/sound/event-sound false
+
+
+        # Keyboard binds
+        gsettings set org.gnome.desktop.wm.keybindings maximize "[ ]"
+        gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "[ '<Super>Up' ]"
+        gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Super>Down' ]"
+        gsettings set org.gnome.desktop.wm.keybindings begin-resize "[ '<Super>r' ]"
+        gsettings set org.gnome.desktop.wm.keybindings begin-resize "[ '<Super>r' ]"
+        gsettings set org.gnome.desktop.wm.keybindings activate-window-menu "[ '<Super>space' ]"
+        gsettings set org.gnome.desktop.wm.keybindings show-desktop "[ '<Super>d' ]"
+        gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "[ '<Super>f' ]"
+
       ignore_errors: true
 
     - name: Remove unwanted packages
