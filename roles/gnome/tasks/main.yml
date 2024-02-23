@@ -75,6 +75,7 @@
         gsettings set org.gnome.desktop.wm.keybindings activate-window-menu "[ '<Super>space' ]"
         gsettings set org.gnome.desktop.wm.keybindings show-desktop "[ '<Super>d' ]"
         gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "[ '<Super>f' ]"
+        gsettings set org.gnome.desktop.wm.keybindings close "[ '<Alt>F4', '<Super>q' ]"
 
       ignore_errors: true
 
