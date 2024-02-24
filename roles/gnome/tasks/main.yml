@@ -92,6 +92,13 @@
           gsettings set org.gnome.desktop.wm.keybindings "switch-to-workspace-${i}" "[ '<Super>$((i % 10))' ]"
         done
 
+        # Window raising and cursor follow
+        gsettings set org.gnome.desktop.wm.preferences raise-on-click true
+        gsettings set org.gnome.desktop.wm.preferences auto-raise auto-raise false
+        gsettings set org.gnome.desktop.wm.preferences auto-raise auto-raise-delay 500
+        gsettings set org.gnome.desktop.wm.keybindings raise "[ ]"
+        gsettings set org.gnome.desktop.wm.keybindings raise-or-lower "[ '<Super>w' ]"
+
       ignore_errors: true
 
     - name: Remove unwanted packages
