@@ -27,10 +27,10 @@
         key: "/org/gnome/shell/enabled-extensions"
         value: "['appindicatorsupport@rgcjonas.gmail.com', 'window-list@gnome-shell-extensions.gcampax.github.com']"
 
-    # - name: Disabled extensions
-    #   dconf:
-    #     key: "/org/gnome/shell/disabled-extensions"
-    #     value: "[background-logo@fedorahosted.org', 'pop-shell@system76.com']"
+    - name: Disabled extensions
+      dconf:
+        key: "/org/gnome/shell/disabled-extensions"
+        value: "['pop-shell@system76.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'background-logo@fedorahosted.org', 'blur-my-shell@aunetx', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'gamemode@christian.kellner.me']"
 
     - name: Favorite apps
       dconf:
@@ -38,6 +38,11 @@
         value: ['kitty.desktop', 'org.gnome.Nautilus.desktop', 'firefox.desktop']
 
     # gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true
+    # for i in $(seq 1 10); do
+    #   gsettings set org.gnome.shell.extensions.dash-to-dock "app-ctrl-hotkey-${i}" "[ ]"
+    #   gsettings set org.gnome.shell.extensions.dash-to-dock "app-hotkey-${i}" "[ ]"
+    #   gsettings set org.gnome.shell.extensions.dash-to-dock "app-shift-hotkey-${i}" "[ ]"
+    # end
     - name: Dash-to-Dock extension
       dconf:
         key: "/org/gnome/shell/extensions/dash-to-dock/{{ item.key }}"
@@ -46,8 +51,55 @@
       vars:
         data:
           disable-overview-on-startup: true
+          app-hotkey-1: "@as []"
+          app-shift-hotkey-1: "@as []"
+          app-ctrl-hotkey-1: "@as []"
+          app-hotkey-2: "@as []"
+          app-shift-hotkey-2: "@as []"
+          app-ctrl-hotkey-2: "@as []"
+          app-hotkey-3: "@as []"
+          app-shift-hotkey-3: "@as []"
+          app-ctrl-hotkey-3: "@as []"
+          app-hotkey-4: "@as []"
+          app-shift-hotkey-4: "@as []"
+          app-ctrl-hotkey-4: "@as []"
+          app-hotkey-5: "@as []"
+          app-shift-hotkey-5: "@as []"
+          app-ctrl-hotkey-5: "@as []"
+          app-hotkey-6: "@as []"
+          app-shift-hotkey-6: "@as []"
+          app-ctrl-hotkey-6: "@as []"
+          app-hotkey-7: "@as []"
+          app-shift-hotkey-7: "@as []"
+          app-ctrl-hotkey-7: "@as []"
+          app-hotkey-8: "@as []"
+          app-shift-hotkey-8: "@as []"
+          app-ctrl-hotkey-8: "@as []"
+          app-hotkey-9: "@as []"
+          app-shift-hotkey-9: "@as []"
+          app-ctrl-hotkey-9: "@as []"
+          app-hotkey-10: "@as []"
+          app-shift-hotkey-10: "@as []"
+          app-ctrl-hotkey-10: "@as []"
 
-    # gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us')]"
+
+    # gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 900
+    # gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'          # nothing | suspend | hibernate
+    # gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout 900
+    # gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'suspend'
+    - name: settings-daemon - Power
+      dconf:
+        key: "/org/gnome/settings-daemon/plugins/power/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          sleep-inactive-ac-timeout: 900
+          sleep-inactive-ac-type: "'nothing'"
+          sleep-inactive-battery-timeout: 900
+          sleep-inactive-battery-type: "'suspend'"
+
+
     # gsettings set org.gnome.desktop.input-sources xkb-options "['compose:ralt', 'lv3:ralt_switch']"
     - name: Input sources
       dconf:
@@ -56,7 +108,6 @@
       loop: "{{ data | dict2items }}"
       vars:
         data:
-          sources: "[('xkb', 'us')]"
           compose: "['compose:ralt', 'lv3:ralt_switch']"
 
 
@@ -140,7 +191,30 @@
           show-in-lock-screen: false
 
 
+    # gsettings set org.gnome.TextEditor use-system-font true
+    # gsettings set org.gnome.TextEditor custom-font 'JetBrainsMono Nerd Font 10'
+    - name: TextEditor
+      dconf:
+        key: "/org/gnome/TextEditor/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          use-system-font: true
+          custom-font: "'JetBrainsMono Nerd Font 10'"
 
+
+    # gsettings set org.gnome.mutter edge-tiling true
+    # gsettings set org.gnome.mutter workspaces-only-on-primary false
+    - name: Mutter
+      dconf:
+        key: "/org/gnome/wmutter/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          edge-tiling: true
+          workspaces-only-on-primary: false
 
 
     # gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Noto Sans Bold 10'
@@ -169,11 +243,12 @@
 
 
 
+
     # gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
     # gsettings set org.gnome.desktop.interface font-rgba-order 'rgb'
     # gsettings set org.gnome.desktop.interface font-hinting 'slight'
     # gsettings set org.gnome.desktop.interface font-antialiasing 'grayscale'
-    # gsettings set org.gnome.desktop.interface font-name "Noto Sans 9"
+    # gsettings set org.gnome.desktop.interface font-name "Noto Sans 10"
     # gsettings set org.gnome.desktop.interface document-font-name 'Cantarell 11'
     # gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font 10'
     - name: Interface and fonts
@@ -188,75 +263,108 @@
           font-rgba-order: "'rgb'"
           font-hinting: "'slight'"
           font-antialiasing: "'grayscale'"
-          font-name: "'Noto Sans 9'"
+          font-name: "'Noto Sans 10'"
           document-font-name: "'Cantarell 11'"
           monospace-font-name: "'JetBrainsMono Nerd Font 10'"
 
 
 
-    - name: Setup GNOME settings
-      ansible.builtin.shell: |
-        # Extensions
+    # for i in $(seq 1 9); do
+    #   gsettings set org.gnome.shell.keybindings  "switch-to-application-${i}" "[ ]"
+    # end
+    - name: Shell keybinds
+      dconf:
+        key: "/org/gnome/shell/keybindings/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          show-screenshot-ui: "@as []"
+          switch-to-application-1: "@as []"
+          switch-to-application-2: "@as []"
+          switch-to-application-3: "@as []"
+          switch-to-application-4: "@as []"
+          switch-to-application-5: "@as []"
+          switch-to-application-6: "@as []"
+          switch-to-application-7: "@as []"
+          switch-to-application-8: "@as []"
+          switch-to-application-9: "@as []"
 
-        gsettings set org.gnome.TextEditor use-system-font true
-        gsettings set org.gnome.TextEditor custom-font 'JetBrainsMono Nerd Font 10'
+    # gsettings set org.gnome.desktop.wm.keybindings maximize "[ ]"
+    # gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "[ '<Super>Up' ]"
+    # gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Super>Down' ]"
+    # gsettings set org.gnome.desktop.wm.keybindings begin-resize "[ '<Super>r' ]"
+    # gsettings set org.gnome.desktop.wm.keybindings activate-window-menu "[ '<Super>space' ]"
+    # gsettings set org.gnome.desktop.wm.keybindings show-desktop "[ '<Super>d' ]"
+    # gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "[ '<Super>f' ]"
+    # gsettings set org.gnome.desktop.wm.keybindings close "[ '<Alt>F4', '<Super>q' ]"
+    # gsettings set org.gnome.desktop.wm.keybindings raise "[ '<Super>w' ]"
+    # gsettings set org.gnome.desktop.wm.keybindings raise-or-lower "[ ]"
+    # for i in $(seq 1 10); do
+    #   gsettings set org.gnome.desktop.wm.keybindings "switch-to-workspace-${i}" "[ '<Super>$((i % 10))' ]"
+    # end
+    - name: WM keybinds
+      dconf:
+        key: "/org/gnome/desktop/wm/keybindings/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          maximize: "@as []"
+          toggle-maximized: "[ '<Super>Up' ]"
+          unmaximize: "['<Super>Down' ]"
+          begin-resize: "[ '<Super>r' ]"
+          activate-window-menu: "[ '<Super>space' ]"
+          show-desktop: "[ '<Super>d' ]"
+          toggle-fullscreen: "[ '<Super>f' ]"
+          close: "[ '<Alt>F4', '<Super>q' ]"
+          raise: "[ '<Super>w' ]"
+          raise-or-lower: "@as []"
 
-        # Tiling
-        gsettings set org.gnome.mutter edge-tiling true
-        gsettings set org.gnome.mutter workspaces-only-on-primary false
-
-        # Input sources
-
-
-        # Power settings: Do not suspend/hibernate when on AC power
-        gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-timeout 900
-        gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'          # nothing | suspend | hibernate
-        gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout 900
-        gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'suspend'
-
-
-        # Keyboard binds
-        gsettings set org.gnome.desktop.wm.keybindings maximize "[ ]"
-        gsettings set org.gnome.desktop.wm.keybindings toggle-maximized "[ '<Super>Up' ]"
-        gsettings set org.gnome.desktop.wm.keybindings unmaximize "['<Super>Down' ]"
-        gsettings set org.gnome.desktop.wm.keybindings begin-resize "[ '<Super>r' ]"
-        gsettings set org.gnome.desktop.wm.keybindings begin-resize "[ '<Super>r' ]"
-        gsettings set org.gnome.desktop.wm.keybindings activate-window-menu "[ '<Super>space' ]"
-        gsettings set org.gnome.desktop.wm.keybindings show-desktop "[ '<Super>d' ]"
-        gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "[ '<Super>f' ]"
-        gsettings set org.gnome.desktop.wm.keybindings close "[ '<Alt>F4', '<Super>q' ]"
-
-        gsettings set org.gnome.settings-daemon.plugins.media-keys help "[ ]"
-
-        # Setup bindings for swithing to workspaces and clear binds asociated to switching to applications
-        # from the dash dock
-        for i in $(seq 1 10); do
-          # Clear the following binds
-          gsettings set org.gnome.shell.extensions.dash-to-dock "app-ctrl-hotkey-${i}" "[ ]"
-          gsettings set org.gnome.shell.extensions.dash-to-dock "app-hotkey-${i}" "[ ]"
-          gsettings set org.gnome.shell.extensions.dash-to-dock "app-shift-hotkey-${i}" "[ ]"
-          test "$i" -ne 10 && \
-            gsettings set org.gnome.shell.keybindings "switch-to-application-${i}" "[ ]"
-
-          gsettings set org.gnome.desktop.wm.keybindings "switch-to-workspace-${i}" "[ '<Super>$((i % 10))' ]"
-        done
-
-        # Window raising and cursor follow
-        gsettings set org.gnome.desktop.wm.keybindings raise "[ '<Super>w' ]"
-        gsettings set org.gnome.desktop.wm.keybindings raise-or-lower "[ ]"
-
-      ignore_errors: true
+          switch-to-workspace-1: "[ '<Super>1' ]"
+          switch-to-workspace-2: "[ '<Super>2' ]"
+          switch-to-workspace-3: "[ '<Super>3' ]"
+          switch-to-workspace-4: "[ '<Super>4' ]"
+          switch-to-workspace-5: "[ '<Super>5' ]"
+          switch-to-workspace-6: "[ '<Super>6' ]"
+          switch-to-workspace-7: "[ '<Super>7' ]"
+          switch-to-workspace-8: "[ '<Super>8' ]"
+          switch-to-workspace-9: "[ '<Super>9' ]"
+          switch-to-workspace-10: "[ '<Super>0' ]"
 
     - name: Setup kitty custom terminal
       dconf:
         key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/{{ item.key }}"
-        value: "'{{ item.value }}'"
+        value: "{{ item.value }}"
       loop: "{{ data | dict2items }}"
       vars:
         data:
-          name: "kitty from ansible"
-          command: "kitty"
-          binding: "<Super>F1"
+          name: "'kitty'"
+          command: "'kitty'"
+          binding: "'<Super>Return'"
+
+    - name: Screenshot - <Print>
+      dconf:
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          name: "'screenshot - <Print>'"
+          command: "'screenshot.sh'"
+          binding: "'Print'"
+
+    - name: Screenshot - <Shift><Super>s
+      dconf:
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          name: "'screenshot - <Shift><Super>s'"
+          command: "'screenshot.sh'"
+          binding: "'<Shift><Super>s'"
+
 
 
     - name: Remove unwanted packages
