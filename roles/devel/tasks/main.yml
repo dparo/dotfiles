@@ -36,8 +36,6 @@
 - name: Install python diagnostics tools
   ansible.builtin.pip:
     name:
-      - pylint
-      - mypy
       - pyre-check
     state: latest
   tags:
