@@ -15,30 +15,188 @@
         state: present
       become: true
 
+
+    # gsettings set org.gnome.shell disable-user-extensions false
+    - name: Enable user extensions
+      dconf:
+        key: "/org/gnome/shell/disable-user-extensions"
+        value: false
+
+    - name: Enable extensions
+      dconf:
+        key: "/org/gnome/shell/enabled-extensions"
+        value: "['appindicatorsupport@rgcjonas.gmail.com', 'window-list@gnome-shell-extensions.gcampax.github.com']"
+
+    # - name: Disabled extensions
+    #   dconf:
+    #     key: "/org/gnome/shell/disabled-extensions"
+    #     value: "[background-logo@fedorahosted.org', 'pop-shell@system76.com']"
+
+    - name: Favorite apps
+      dconf:
+        key: "/org/gnome/shell/favorite-apps"
+        value: ['kitty.desktop', 'org.gnome.Nautilus.desktop', 'firefox.desktop']
+
+    # gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true
+    - name: Dash-to-Dock extension
+      dconf:
+        key: "/org/gnome/shell/extensions/dash-to-dock/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          disable-overview-on-startup: true
+
+    # gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us')]"
+    # gsettings set org.gnome.desktop.input-sources xkb-options "['compose:ralt', 'lv3:ralt_switch']"
+    - name: Input sources
+      dconf:
+        key: "/org/gnome/desktop/input-sources/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          sources: "[('xkb', 'us')]"
+          compose: "['compose:ralt', 'lv3:ralt_switch']"
+
+
+    # gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 33
+    # gsettings set org.gnome.desktop.peripherals.keyboard delay 300
+    # gsettings set org.gnome.desktop.peripherals.keyboard numlock-state true
+    # gsettings set org.gnome.desktop.peripherals.keyboard remember-numlock-state false
+    - name: Keyboard
+      dconf:
+        key: "/org/gnome/desktop/peripherals/keyboard/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          delay: 300
+          repeat-interval: 33
+          numlock-state: true
+          remember-numlock-state: false
+
+    # gsettings set org.gnome.desktop.peripherals.mouse natural-scroll false
+    - name: Mouse
+      dconf:
+        key: "/org/gnome/desktop/peripherals/mouse/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          natural-scroll: false
+
+
+    # gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
+    # gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
+    - name: Touchpad
+      dconf:
+        key: "/org/gnome/desktop/peripherals/touchpad/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          two-finger-scrolling-enabled: true
+          natural-scroll: true
+
+    # gsettings set org.gnome.desktop.sound event-sounds false
+    - name: Sound
+      dconf:
+        key: "/org/gnome/desktop/sound/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          event-sounds: false        # Disable alert sound
+
+    # gsettings set org.gnome.desktop.session idle-delay uint32 600
+    - name: Session
+      dconf:
+        key: "/org/gnome/desktop/session/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          idle-delay: 600
+
+    # gsettings set org.gnome.desktop.lockdown disable-lock-screen false
+    - name: Lockdown
+      dconf:
+        key: "/org/gnome/desktop/lockdown/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          disable-lock-screen: false
+
+    # gsettings set org.gnome.desktop.notifications show-in-lock-screen false
+    - name: Notifications
+      dconf:
+        key: "/org/gnome/desktop/notifications/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          show-in-lock-screen: false
+
+
+
+
+
+    # gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Noto Sans Bold 10'
+    # gsettings set org.gnome.desktop.wm.preferences titlebar-uses-system-font true
+    # gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
+    # gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Alt>'
+    # gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
+    # gsettings set org.gnome.desktop.wm.preferences raise-on-click true
+    # gsettings set org.gnome.desktop.wm.preferences auto-raise false
+    # gsettings set org.gnome.desktop.wm.preferences auto-raise-delay 500
+    - name: WM preferences
+      dconf:
+        key: "/org/gnome/desktop/wm/preferences/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          titlebar-font: "'Noto Sans Bold 10'"
+          titlebar-uses-system-font: true
+          resize-with-right-button: true
+          mouse-button-modifier: "'<Alt>'"
+          button-layout: "':minimize,maximize,close'"
+          raise-on-click: true
+          auto-raise: false
+          auto-raise-delay: 500
+
+
+
+    # gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
+    # gsettings set org.gnome.desktop.interface font-rgba-order 'rgb'
+    # gsettings set org.gnome.desktop.interface font-hinting 'slight'
+    # gsettings set org.gnome.desktop.interface font-antialiasing 'grayscale'
+    # gsettings set org.gnome.desktop.interface font-name "Noto Sans 9"
+    # gsettings set org.gnome.desktop.interface document-font-name 'Cantarell 11'
+    # gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font 10'
+    - name: Interface and fonts
+      dconf:
+        key:  "/org/gnome/desktop/interface/{{ item.key }}"
+        value: "{{ item.value }}"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          color-scheme: "'prefer-dark'"
+          cursor-theme: "'Adwaita'"
+          font-rgba-order: "'rgb'"
+          font-hinting: "'slight'"
+          font-antialiasing: "'grayscale'"
+          font-name: "'Noto Sans 9'"
+          document-font-name: "'Cantarell 11'"
+          monospace-font-name: "'JetBrainsMono Nerd Font 10'"
+
+
+
     - name: Setup GNOME settings
       ansible.builtin.shell: |
-        # Keyboard repeat rate
-        gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 33
-        gsettings set org.gnome.desktop.peripherals.keyboard delay 300
-
-        # Cursor
-        gsettings set org.gnome.desktop.interface cursor-theme 'Adwaita'
-        dconf write /org/gnome/desktop/interface/cursor-theme Adwaita
-
         # Extensions
-        gsettings set org.gnome.shell disable-user-extensions false
-        gsettings set org.gnome.shell.extensions.dash-to-dock disable-overview-on-startup true
-
-        # Fonts
-        gsettings set org.gnome.desktop.interface font-rgba-order 'rgb'
-        gsettings set org.gnome.desktop.interface font-hinting 'slight'
-        gsettings set org.gnome.desktop.interface font-antialiasing 'grayscale'
-        gsettings set org.gnome.desktop.interface font-name "Noto Sans 9"
-        gsettings set org.gnome.desktop.interface document-font-name 'Cantarell 11'
-        gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrainsMono Nerd Font 10'
-
-        gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Noto Sans Bold 10'
-        gsettings set org.gnome.desktop.wm.preferences titlebar-uses-system-font true
 
         gsettings set org.gnome.TextEditor use-system-font true
         gsettings set org.gnome.TextEditor custom-font 'JetBrainsMono Nerd Font 10'
@@ -48,15 +206,6 @@
         gsettings set org.gnome.mutter workspaces-only-on-primary false
 
         # Input sources
-        gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us')]"
-        gsettings set org.gnome.desktop.input-sources xkb-options "['compose:ralt', 'lv3:ralt_switch']"
-        gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
-        gsettings set org.gnome.desktop.peripherals.mouse natural-scroll false
-        gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
-
-        # Numlock
-        gsettings set org.gnome.desktop.peripherals.keyboard numlock-state true
-        gsettings set org.gnome.desktop.peripherals.keyboard remember-numlock-state false
 
 
         # Power settings: Do not suspend/hibernate when on AC power
@@ -64,20 +213,6 @@
         gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type 'nothing'          # nothing | suspend | hibernate
         gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-timeout 900
         gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-battery-type 'suspend'
-
-        # Lock screen: Automatic lock screen after 10 minutes, do not show notifications on lock screen
-        gsettings set org.gnome.desktop.lockdown disable-lock-screen false
-        gsettings set org.gnome.desktop.session idle-delay uint32 600
-        gsettings set org.gnome.desktop.notifications show-in-lock-screen false
-
-
-        # Window controls
-        gsettings set org.gnome.desktop.wm.preferences resize-with-right-button true
-        gsettings set org.gnome.desktop.wm.preferences mouse-button-modifier '<Alt>'
-        gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
-
-        # Disable alert sound
-        dconf write /org/gnome/desktop/sound/event-sound false
 
 
         # Keyboard binds
@@ -107,25 +242,21 @@
         done
 
         # Window raising and cursor follow
-        gsettings set org.gnome.desktop.wm.preferences raise-on-click true
-        gsettings set org.gnome.desktop.wm.preferences auto-raise auto-raise false
-        gsettings set org.gnome.desktop.wm.preferences auto-raise auto-raise-delay 500
         gsettings set org.gnome.desktop.wm.keybindings raise "[ '<Super>w' ]"
         gsettings set org.gnome.desktop.wm.keybindings raise-or-lower "[ ]"
 
       ignore_errors: true
 
-    - name: Kitty terminal shortcut
+    - name: Setup kitty custom terminal
       dconf:
         key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/{{ item.key }}"
         value: "'{{ item.value }}'"
-      loop:
-        - key: name
-          value: "kitty from ansible"
-        - key: command
-          value: "kitty"
-        - key: binding
-          value: "<Super>F1"
+      loop: "{{ data | dict2items }}"
+      vars:
+        data:
+          name: "kitty from ansible"
+          command: "kitty"
+          binding: "<Super>F1"
 
 
     - name: Remove unwanted packages
