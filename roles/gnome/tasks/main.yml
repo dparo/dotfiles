@@ -43,6 +43,20 @@
         gsettings set org.gnome.TextEditor use-system-font true
         gsettings set org.gnome.TextEditor custom-font 'JetBrainsMono Nerd Font 10'
 
+        # Tiling
+        gsettings set org.gnome.mutter edge-tiling true
+        gsettings set org.gnome.mutter workspaces-only-on-primary false
+
+        # Input sources
+        gsettings set org.gnome.desktop.input-sources sources "[('xkb', 'us')]"
+        gsettings set org.gnome.desktop.input-sources xkb-options "['compose:ralt', 'lv3:ralt_switch']"
+        gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
+        gsettings set org.gnome.desktop.peripherals.mouse natural-scroll false
+        gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
+
+        # Numlock
+        gsettings set org.gnome.desktop.peripherals.keyboard numlock-state true
+        gsettings set org.gnome.desktop.peripherals.keyboard remember-numlock-state false
 
 
         # Power settings: Do not suspend/hibernate when on AC power
@@ -100,6 +114,19 @@
         gsettings set org.gnome.desktop.wm.keybindings raise-or-lower "[ ]"
 
       ignore_errors: true
+
+    - name: Kitty terminal shortcut
+      dconf:
+        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/{{ item.key }}"
+        value: "'{{ item.value }}'"
+      loop:
+        - key: name
+          value: "kitty from ansible"
+        - key: command
+          value: "kitty"
+        - key: binding
+          value: "<Super>F1"
+
 
     - name: Remove unwanted packages
       ansible.builtin.dnf:
