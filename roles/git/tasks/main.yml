@@ -9,6 +9,7 @@
       - tig
       - gh # GitHub’s official command line tool: https://github.com/cli/cli
       - gitk
+      - meld
     state: present
   become: true
   tags:
