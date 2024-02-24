@@ -32,12 +32,12 @@
     - name: Enable extensions
       dconf:
         key: "/org/gnome/shell/enabled-extensions"
-        value: "['appindicatorsupport@rgcjonas.gmail.com', 'window-list@gnome-shell-extensions.gcampax.github.com']"
+        value: "['appindicatorsupport@rgcjonas.gmail.com']"
 
     - name: Disabled extensions
       dconf:
         key: "/org/gnome/shell/disabled-extensions"
-        value: "['pop-shell@system76.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'background-logo@fedorahosted.org', 'blur-my-shell@aunetx', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'gamemode@christian.kellner.me']"
+        value: "['pop-shell@system76.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'background-logo@fedorahosted.org', 'blur-my-shell@aunetx', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'gamemode@christian.kellner.me', 'window-list@gnome-shell-extensions.gcampax.github.com']"
 
     - name: Favorite apps
       dconf:
