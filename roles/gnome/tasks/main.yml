@@ -86,7 +86,8 @@
           gsettings set org.gnome.shell.extensions.dash-to-dock "app-ctrl-hotkey-${i}" "[ ]"
           gsettings set org.gnome.shell.extensions.dash-to-dock "app-hotkey-${i}" "[ ]"
           gsettings set org.gnome.shell.extensions.dash-to-dock "app-shift-hotkey-${i}" "[ ]"
-          gsettings set org.gnome.shell.keybindings "switch-to-application-${i}" "[ ]"
+          test "$i" -ne 10 && \
+            gsettings set org.gnome.shell.keybindings "switch-to-application-${i}" "[ ]"
 
           gsettings set org.gnome.desktop.wm.keybindings "switch-to-workspace-${i}" "[ '<Super>$((i % 10))' ]"
         done
