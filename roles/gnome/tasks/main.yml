@@ -223,7 +223,7 @@
       vars:
         data:
           edge-tiling: true
-          workspaces-only-on-primary: false
+          workspaces-only-on-primary: true
 
 
     # gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Noto Sans Bold 10'
