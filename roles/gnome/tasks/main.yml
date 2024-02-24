@@ -77,6 +77,20 @@
         gsettings set org.gnome.desktop.wm.keybindings toggle-fullscreen "[ '<Super>f' ]"
         gsettings set org.gnome.desktop.wm.keybindings close "[ '<Alt>F4', '<Super>q' ]"
 
+        gsettings set org.gnome.settings-daemon.plugins.media-keys help "[ ]"
+
+        # Setup bindings for swithing to workspaces and clear binds asociated to switching to applications
+        # from the dash dock
+        for i in $(seq 1 10); do
+          # Clear the following binds
+          gsettings set org.gnome.shell.extensions.dash-to-dock "app-ctrl-hotkey-${i}" "[ ]"
+          gsettings set org.gnome.shell.extensions.dash-to-dock "app-hotkey-${i}" "[ ]"
+          gsettings set org.gnome.shell.extensions.dash-to-dock "app-shift-hotkey-${i}" "[ ]"
+          gsettings set org.gnome.shell.keybindings "switch-to-application-${i}" "[ ]"
+
+          gsettings set org.gnome.desktop.wm.keybindings "switch-to-workspace-${i}" "[ '<Super>$((i % 10))' ]"
+        done
+
       ignore_errors: true
 
     - name: Remove unwanted packages
