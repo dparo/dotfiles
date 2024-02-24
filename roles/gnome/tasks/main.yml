@@ -96,8 +96,8 @@
         gsettings set org.gnome.desktop.wm.preferences raise-on-click true
         gsettings set org.gnome.desktop.wm.preferences auto-raise auto-raise false
         gsettings set org.gnome.desktop.wm.preferences auto-raise auto-raise-delay 500
-        gsettings set org.gnome.desktop.wm.keybindings raise "[ ]"
-        gsettings set org.gnome.desktop.wm.keybindings raise-or-lower "[ '<Super>w' ]"
+        gsettings set org.gnome.desktop.wm.keybindings raise "[ '<Super>w' ]"
+        gsettings set org.gnome.desktop.wm.keybindings raise-or-lower "[ ]"
 
       ignore_errors: true
 
