@@ -147,6 +147,7 @@
 
     # gsettings set org.gnome.desktop.peripherals.touchpad two-finger-scrolling-enabled true
     # gsettings set org.gnome.desktop.peripherals.touchpad natural-scroll true
+    # gsettings set org.gnome.desktop.peripherals.touchpad click-method areas
     - name: Touchpad
       dconf:
         key: "/org/gnome/desktop/peripherals/touchpad/{{ item.key }}"
@@ -156,6 +157,7 @@
         data:
           two-finger-scrolling-enabled: true
           natural-scroll: true
+          click-method: "'areas'"
 
     # gsettings set org.gnome.desktop.sound event-sounds false
     - name: Sound
