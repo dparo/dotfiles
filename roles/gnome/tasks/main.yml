@@ -115,7 +115,7 @@
       loop: "{{ data | dict2items }}"
       vars:
         data:
-          xkb-options: "['compose:ralt', 'terminate:ctrl_alt_bksp', 'caps:nocaps']"
+          xkb-options: "['compose:ralt', 'terminate:ctrl_alt_bksp', 'caps:none']"
 
 
     # gsettings set org.gnome.desktop.peripherals.keyboard repeat-interval 33
