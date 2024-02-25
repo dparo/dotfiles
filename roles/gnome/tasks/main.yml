@@ -213,15 +213,17 @@
           custom-font: "'JetBrainsMono Nerd Font 10'"
 
 
+    # gsettings set org.gnome.mutter dynamic-workspaces true
     # gsettings set org.gnome.mutter edge-tiling true
     # gsettings set org.gnome.mutter workspaces-only-on-primary false
     - name: Mutter
       dconf:
-        key: "/org/gnome/wmutter/{{ item.key }}"
+        key: "/org/gnome/mutter/{{ item.key }}"
         value: "{{ item.value }}"
       loop: "{{ data | dict2items }}"
       vars:
         data:
+          dynamic-workspaces: false
           edge-tiling: true
           workspaces-only-on-primary: true
 
