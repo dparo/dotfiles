@@ -243,6 +243,7 @@
       loop: "{{ data | dict2items }}"
       vars:
         data:
+          num-workspaces: 10
           titlebar-font: "'Noto Sans Bold 10'"
           titlebar-uses-system-font: true
           resize-with-right-button: true
