@@ -33,6 +33,7 @@
       - fd-find
       - htop
       - btop
+      - nvtop
       - net-tools
       - lm_sensors
       - ffmpeg
