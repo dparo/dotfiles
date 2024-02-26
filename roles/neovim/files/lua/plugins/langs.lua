@@ -67,6 +67,7 @@ return {
                     "regex",
                     "markdown_inline",
                     "sql",
+                    "http",
                 }, -- "all" or a list of languages
                 sync_install = true,
                 auto_install = true,
