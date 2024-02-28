@@ -283,6 +283,9 @@ return {
 
             vim.keymap.set("n", "<F9>", dap.toggle_breakpoint)
             vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint)
+            vim.keymap.set("n", "<leader>dd", function()
+                require('dapui').toggle()
+            end)
             vim.keymap.set("n", "<leader>dB", function()
                 dap.set_breakpoint(vim.fn.input "Breakpoint condition: ")
             end)
