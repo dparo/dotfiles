@@ -391,7 +391,9 @@ M.list = {
     --     init_options = {documentFormatting = true},
     --     filetypes = { "lua", "sh", "bash", "make"}
     -- }},
-    { name = "marksman",                 config = {} },
+    --
+    -- NOTE(d.paro): Disable marksman by defaylt
+    -- { name = "marksman",                 config = {} },
     { name = "julials",                  config = {} },
     {
         name = "lua_ls",
