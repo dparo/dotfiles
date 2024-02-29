@@ -1,0 +1,13 @@
+- name: OBS Studio
+  tags:
+    - obs-studio
+    - obs
+    - obs_studio
+
+  block:
+    - name: Install OBS Studio (flatpak)
+      community.general.flatpak:
+        name: com.obsproject.Studio
+        state: present
+        remote: flathub
+
