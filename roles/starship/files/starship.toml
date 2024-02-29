@@ -19,6 +19,11 @@ not_found_symbol = "󱈍 "
 not_executable_symbol = " "
 
 
+[git_status]
+stashed = ' 󰜦 '
+# modified = '  '
+# staged = '  '
+
 [directory]
 read_only = " "
 truncation_length = 3
