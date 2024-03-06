@@ -238,6 +238,7 @@
     # gsettings set org.gnome.desktop.wm.preferences raise-on-click true
     # gsettings set org.gnome.desktop.wm.preferences auto-raise false
     # gsettings set org.gnome.desktop.wm.preferences auto-raise-delay 500
+    # gsettings set org.gnome.desktop.wm.preferences focus-mode 'sloppy'
     - name: WM preferences
       dconf:
         key: "/org/gnome/desktop/wm/preferences/{{ item.key }}"
@@ -254,7 +255,7 @@
           raise-on-click: true
           auto-raise: false
           auto-raise-delay: 500
-
+          focus-mode: "'sloppy'"
 
 
 
