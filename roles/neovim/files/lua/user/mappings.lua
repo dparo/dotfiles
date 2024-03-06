@@ -156,6 +156,12 @@ local function setup_cursor_movements()
     nvimap("<C-e>", "<End>")
     cmap("<C-e>", "<End>")
 
+    -- Jump between soft-wrapped screen lines (:set wrap)
+    nvmap("<Up>", "gk")
+    nvmap("<Down>", "gj")
+    nvmap("k", "gk")
+    nvmap("j", "gj")
+
     -- Ctrl+Arrow keys to jump paragraphs and by words.
     nvmap("<C-Up>", exec_keepjumps "{zz")
     nvmap("<C-Down>", exec_keepjumps "}zz")
