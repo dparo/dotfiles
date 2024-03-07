@@ -43,7 +43,6 @@ export ANSIBLE_LOCAL_TEMP="${XDG_CACHE_DIR:-$HOME/.cache}/ansible/tmp"
 # Setup programs default config location to avoid cluttering the HOME directory
 export XINITRC="$XDG_CONFIG_HOME/xorg/xinitrc"
 export XSERVERRC="$XDG_CONFIG_HOME/xorg/xserverrc"
-export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
 export XCURSOR_PATH="/usr/share/icons:$XDG_DATA_HOME/icons"
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"

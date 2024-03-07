@@ -2,6 +2,8 @@
 
 set -x
 
+export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+
 # Source system-wide xinitrc dependencies
 # NOTE(dparo): Unrecommended. Some linux distros (eg Fedora) contains scripts to autostart dbus.
 #              We don't want to start dbus manually from startx. Instead we rely on systemd
