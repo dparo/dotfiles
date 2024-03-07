@@ -19,6 +19,12 @@ if [ -z "$DBUS_SESSION_BUS_ADDRESS" ]; then
     export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$UID/bus"
 fi
 
+if test -z "$XAUTHORITY" -a ! -f "$XAUTHORITY"; then
+    export XAUTHORITY="$XDG_RUNTIME_DIR/Xauthority"
+fi
+export XCURSOR_PATH="/usr/share/icons:$XDG_DATA_HOME/icons:$XCURSOR_PATH"
+
+
 # From gnoome-keyring-daemon which is automatically started (enabled) freom systemd at login
 export GNOME_KEYRING_CONTROL="/run/user/$UID/keyring"
 export SSH_AUTH_SOCK="$GNOME_KEYRING_CONTROL/ssh"
@@ -43,7 +49,6 @@ export ANSIBLE_LOCAL_TEMP="${XDG_CACHE_DIR:-$HOME/.cache}/ansible/tmp"
 # Setup programs default config location to avoid cluttering the HOME directory
 export XINITRC="$XDG_CONFIG_HOME/xorg/xinitrc"
 export XSERVERRC="$XDG_CONFIG_HOME/xorg/xserverrc"
-export XCURSOR_PATH="/usr/share/icons:$XDG_DATA_HOME/icons"
 export INPUTRC="$XDG_CONFIG_HOME/readline/inputrc"
 export LESSHISTFILE="$XDG_CACHE_HOME/lesshst"
 export ASPELL_CONF="per-conf $XDG_CACHE_HOME/aspell/aspell.conf; personal $XDG_CACHE_HOME/aspell/en.pws; repl $XDG_CACHE_HOME/aspell/en.prepl"
