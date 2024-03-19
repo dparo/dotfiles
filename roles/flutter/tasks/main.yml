@@ -16,6 +16,7 @@
         src: "/opt/flutter/bin/{{ item }}"
         dest: "/usr/local/bin/{{ item }}"
         state: link
+      become: true
       loop:
         - flutter
         - dart
