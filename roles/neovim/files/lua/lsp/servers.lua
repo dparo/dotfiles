@@ -14,7 +14,7 @@ local jdtls_root_path = path.concat { nvim_data_path, "mason", "packages", "jdtl
 
 local function deno_root_dir(fname)
     -- If the top level directory __DOES__ contain a file named `deno.proj` determine that this is a Deno project.
-    if (vim.env.DENO_VERSION ~= nil) or (lspconfig.util.root_pattern "deno.proj" (fname) ~= nil) then
+    if (vim.env.DENO_VERSION ~= nil) or (lspconfig.util.root_pattern "deno.proj"(fname) ~= nil) then
         return lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git")(fname)
     end
     return nil
@@ -23,7 +23,7 @@ end
 local function nodejs_root_dir(fname)
     -- If the top level directory __DOES NOT__ contain a file named `deno.proj` determine that this is a Nodejs project
     if deno_root_dir(fname) == nil then
-        return (lspconfig.util.root_pattern "tsconfig.json" (fname) or lspconfig.util.root_pattern("package.json", "jsconfig.json", ".git")(fname))
+        return (lspconfig.util.root_pattern "tsconfig.json"(fname) or lspconfig.util.root_pattern("package.json", "jsconfig.json", ".git")(fname))
     end
     return nil
 end
@@ -148,9 +148,25 @@ M.list = {
             },
         },
     },
-    { name = "yamlls", config = { settings = { yaml = { keyOrdering = false } } } },
+    {
+        name = "yamlls",
+        config = {
+            settings = {
+                yaml = {
+                    -- Use b0o/SchemaStore.nvim
+                    schemaStore = {
+                        enable = false,
+                        -- Avoid TypeError: Cannot read properties of undefined (reading 'length')
+                        url = "",
+                    },
+                    schemas = require("schemastore").yaml.schemas(),
+                    keyOrdering = false,
+                },
+            },
+        },
+    },
     -- { name = "vuels", config = {} },      -- npm install -g vls or MasonInstall vetur-vls [[OLD]], only for Vue 2
-    { name = "volar",  config = {} }, -- npm install -g @vue/language-server or MasonInstall vue-language-server, supports Vue 2 and Vue 3r
+    { name = "volar", config = {} }, -- npm install -g @vue/language-server or MasonInstall vue-language-server, supports Vue 2 and Vue 3r
     { name = "svelte", config = {} }, -- npm install -g svelte-language-server or MasonInstall svelte-language-server
     {
         name = "tsserver",
@@ -184,11 +200,11 @@ M.list = {
             },
         },
     },
-    { name = "eslint",      config = {} },
+    { name = "eslint", config = {} },
     -- { name = "rome", config = {} },
     -- { name = "relay_lsp", config = {} }, -- https://github.com/facebook/relay
-    { name = "angularls",   config = {} },
-    { name = "ansiblels",   config = {} },
+    { name = "angularls", config = {} },
+    { name = "ansiblels", config = {} },
     { name = "terraformls", config = {} },
     {
         name = "jdtls",
@@ -281,8 +297,7 @@ M.list = {
                             onType = false,
                             settings = {
                                 profile = "GoogleStyle",
-                                url =
-                                "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
+                                url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
                             },
                         },
                     },
@@ -378,12 +393,12 @@ M.list = {
             root_dir = deno_root_dir,
         },
     },
-    { name = "gopls",                    config = {} },
-    { name = "vimls",                    config = {} },
-    { name = "html",                     config = {} },
-    { name = "zls",                      config = {} },
-    { name = "nim_langserver",           config = {} },
-    { name = "ocamllsp",                 config = {} },
+    { name = "gopls", config = {} },
+    { name = "vimls", config = {} },
+    { name = "html", config = {} },
+    { name = "zls", config = {} },
+    { name = "nim_langserver", config = {} },
+    { name = "ocamllsp", config = {} },
     { name = "cucumber_language_server", config = {} },
 
     -- NOTE: We use null-ls now, which is more richer in terms of features
@@ -396,7 +411,7 @@ M.list = {
     --
     -- NOTE(d.paro): Disable marksman by defaylt
     -- { name = "marksman",                 config = {} },
-    { name = "julials",                  config = {} },
+    { name = "julials", config = {} },
     {
         name = "lua_ls",
         config = function()
