@@ -83,6 +83,7 @@
     - golang
     - nodejs
     - bun
+    - flutter
     - java
     - graalvm
     - kotlin

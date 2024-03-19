@@ -1,0 +1,22 @@
+- name: Flutter
+  tags:
+    - flutter
+    - never
+  block:
+    - name: Download and unpack flutter
+      ansible.builtin.unarchive:
+        src: "https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_{{ flutter_version }}-stable.tar.xz"
+        dest: "/opt"
+        remote_src: true
+      become: true
+
+
+    - name: Symlink binaries
+      ansible.builtin.file:
+        src: "/opt/flutter/bin/{{ item }}"
+        dest: "/usr/local/bin/{{ item }}"
+        state: link
+      loop:
+        - flutter
+        - dart
+
