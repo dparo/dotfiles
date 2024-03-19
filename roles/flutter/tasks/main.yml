@@ -21,3 +21,10 @@
         - flutter
         - dart
 
+
+    - name: Disable flutter analytics
+      ansible.builtin.command: flutter config --no-analytics
+
+    - name: Disable dart sdk analytics
+      ansible.builtin.command: dart --disable-analytics
+
