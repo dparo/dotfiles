@@ -205,3 +205,8 @@ if builtin type docker 1>/dev/null 2>/dev/null; then
     source <(docker completion zsh)
 fi
 
+
+if builtin type flutter 1>/dev/null 2>/dev/null; then
+    source <(flutter zsh-completion)
+fi
+
