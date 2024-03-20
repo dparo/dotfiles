@@ -47,8 +47,6 @@ padding_config() {
 
 config() {
 
-    padding_config
-
     bspc config automatic_scheme longest_side
 
     bspc config remove_disabled_monitors true

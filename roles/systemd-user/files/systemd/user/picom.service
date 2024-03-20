@@ -5,3 +5,5 @@ PartOf=graphical-session.target
 [Service]
 ExecStart=/usr/bin/picom
 Slice=session.slice
+
+Restart=always
