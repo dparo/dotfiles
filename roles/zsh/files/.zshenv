@@ -24,6 +24,13 @@ export GIT_MERGE_AUTOEDIT=no
 export GPG_TTY="$(tty)"
 
 
+# Run flutter and dart through brave-browser
+#
+if builtin type brave-browser 1>/dev/null 2>/dev/null; then
+    export CHROME_EXECUTABLE="$(which brave-browser)"
+fi
+
+
 # @NOTE: Path prepends WIN over standard /usr/bin and /usr/local/bin paths
 # @NOTE: Path adds have LOWER precedence compared to standard /usr/bin and /usr/local/bin paths
 
