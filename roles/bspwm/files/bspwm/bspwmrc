@@ -130,6 +130,7 @@ main() {
         config
     else
         config
+        setup_monitors
         event_subscription &
 
         # autorandr --change --default default
