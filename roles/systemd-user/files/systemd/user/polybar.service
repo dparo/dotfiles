@@ -3,7 +3,8 @@ Description=Polybar Panel
 PartOf=graphical-session.target
 
 [Service]
-ExecStart=%h/.config/polybar/launch.sh
-ExecReload=bash -c 'polybar-msg cmd restart || $HOME/.config/polybar/launch.sh'
+ExecStart=%h/.config/polybar/launch.sh\
+ExecReload=bash -c 'killall --quiet --user "$USER" polybar || $HOME/.config/polybar/launch.sh'
+; ExecReload=bash -c 'polybar-msg cmd restart || $HOME/.config/polybar/launch.sh'
 ExecStop=killall --quiet --user %u polybar
 Restart=on-failure

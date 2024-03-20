@@ -109,13 +109,13 @@ event_subscription() {
         monitor_geometry*)
             :
             padding_config
-            systemctl --user reload polybar
+            systemctl --user restar polybar
             ;;
         monitor_add* | monitor_remove*)
             :
             padding_config
             setup_monitors
-            systemctl --user reload polybar
+            systemctl --user restart polybar
             ;;
 
         esac

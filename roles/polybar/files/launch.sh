@@ -10,8 +10,18 @@ else
 fi
 
 main() {
-    killall --quiet --user "$USER" polybar | true
-    while pgrep -u "$UID" -x polybar >/dev/null; do sleep 1; done
+    killall --quiet --user "$USER" polybar
+
+    for i in {1..10}; do
+        if ! pgrep -u "$UID" -x polybar >/dev/null; then
+            break
+        fi
+        if test "$i" -eq 10; then
+            exit 1
+        fi
+
+        sleep 1
+    done
 
     MONITORS="$(polybar --list-monitors | cut -d":" -f1)"
     PRIMARY=$(xrandr --query | grep " connected" | grep "primary" | cut -d" " -f1)
@@ -26,7 +36,7 @@ main() {
     THERMAL_ZONE_TYPE="TCPU"
     THERMAL_ZONE="$(for i in /sys/class/thermal/thermal_zone*; do echo "$i $(<$i/type)"; done | grep "$THERMAL_ZONE_TYPE" | awk {'print $1'} | sed 's@/sys/class/thermal/thermal_zone@@g')"
 
-    env MONITOR="$PRIMARY" PRIMARY="$PRIMARY" BAT="$BAT" THERMAL_ZONE="$THERMAL_ZONE" polybar --quiet --reload main
+    exec env MONITOR="$PRIMARY" PRIMARY="$PRIMARY" BAT="$BAT" THERMAL_ZONE="$THERMAL_ZONE" polybar --quiet --reload main
 }
 
 set -x
