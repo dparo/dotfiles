@@ -40,11 +40,6 @@ setup_monitors() {
     systemctl --user restart background-setter.service
 }
 
-padding_config() {
-    bspc config top_padding 0
-    bspc config bottom_padding 0
-}
-
 config() {
 
     bspc config automatic_scheme longest_side
@@ -99,8 +94,6 @@ config() {
 
     bspc config focused_border_color "#9ccfd8"
     bspc config normal_border_color "#6e6a86"
-
-    setup_monitors
 }
 
 event_subscription() {
@@ -118,7 +111,11 @@ event_subscription() {
         monitor_add* | monitor_remove*)
             :
             systemctl --user stop polybar
-            padding_config
+
+            # Clear padding
+            bspc config top_padding 0
+            bspc config bottom_padding 0
+
             setup_monitors
             systemctl --user restart polybar
             ;;
