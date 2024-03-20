@@ -47,6 +47,8 @@ padding_config() {
 
 config() {
 
+    padding_config
+
     bspc config automatic_scheme longest_side
 
     bspc config remove_disabled_monitors true
@@ -114,8 +116,8 @@ event_subscription() {
         monitor_add* | monitor_remove*)
             :
             padding_config
+            setup_monitors
             systemctl --user reload polybar
-            run_polybar_async
             ;;
 
         esac
