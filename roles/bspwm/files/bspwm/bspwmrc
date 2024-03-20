@@ -108,9 +108,12 @@ event_subscription() {
         case "$line" in
         monitor_geometry*)
             :
-            systemctl --user stop polybar
-            padding_config
-            systemctl --user restart polybar
+            # NOTE(d.paro): Monitor geometry events occur often and are multiplied by the number of monitors in use.
+            #               Therefore asking systemd services to restart here, can cause load on the CPU
+            #               and block the service from further executing due to too much restarts request in a small time window.
+            # systemctl --user stop polybar
+            # padding_config
+            # systemctl --user restart polybar
             ;;
         monitor_add* | monitor_remove*)
             :
