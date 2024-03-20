@@ -34,7 +34,7 @@ super + shift + e
 super + shift + r
     "$HOME/.config/bspwm/bspwmrc" --config; \
     systemctl --user reload sxhkd.service; \
-    systemctl --user reload polybar
+    systemctl --user reload polybar.service
 
 # close and kill window
 super + {_,shift + }q
