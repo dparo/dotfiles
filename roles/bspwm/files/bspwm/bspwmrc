@@ -108,11 +108,13 @@ event_subscription() {
         case "$line" in
         monitor_geometry*)
             :
+            systemctl --user stop polybar
             padding_config
             systemctl --user restart polybar
             ;;
         monitor_add* | monitor_remove*)
             :
+            systemctl --user stop polybar
             padding_config
             setup_monitors
             systemctl --user restart polybar

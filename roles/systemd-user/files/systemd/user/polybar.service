@@ -2,9 +2,6 @@
 Description=Polybar Panel
 PartOf=graphical-session.target
 
-StartLimitInterval=30
-StartLimitBurst=5
-
 [Service]
 ExecStart=%h/.config/polybar/launch.sh\
 ExecReload=bash -c 'killall --quiet --user "$USER" polybar || $HOME/.config/polybar/launch.sh'
@@ -12,4 +9,3 @@ ExecReload=bash -c 'killall --quiet --user "$USER" polybar || $HOME/.config/poly
 ExecStop=killall --quiet --user %u polybar
 
 Restart=always
-RestartSec=2
