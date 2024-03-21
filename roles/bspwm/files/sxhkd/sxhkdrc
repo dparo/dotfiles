@@ -208,12 +208,22 @@ super + shift + m
     kitty -- zsh -c '/home/dparo/bin/fzf-mpc'
 
 
+# XF86AudioPause
+#     mpc pause
+
+# {XF86AudioPlay,super + ctrl + space,XF86AudioStop,super + ctrl + Delete,XF86AudioNext,super + ctrl + n,XF86AudioPrev,super + ctrl + p}
+#     mpc {toggle,toggle,stop,stop,next,next,prev,prev}
+#
+# {super + ctrl + Prior,super + ctrl + Next}
+#     mpc {volume +5,volume -5}
+
 XF86AudioPause
-    mpc pause
+    spotify-ctl.sh pause
 
 
 {XF86AudioPlay,super + ctrl + space,XF86AudioStop,super + ctrl + Delete,XF86AudioNext,super + ctrl + n,XF86AudioPrev,super + ctrl + p}
-    mpc {toggle,toggle,stop,stop,next,next,prev,prev}
+    spotify-ctl.sh {play-pause,play-pause,stop,stop,next,next,previous,previous}
 
 {super + ctrl + Prior,super + ctrl + Next}
-    mpc {volume +5,volume -5}
+    spotify-ctl {volume-up,volume-down}
+
