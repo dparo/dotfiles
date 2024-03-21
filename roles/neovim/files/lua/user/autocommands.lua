@@ -50,6 +50,7 @@ core.utils.augroup("USER_SKELETONS", {
     { "BufNewFile", { pattern = "package.json", command = [[0r ~/.config/nvim/skeletons/package.json]] } },
     { "BufNewFile", { pattern = ".dockerignore", command = [[0r ~/.config/nvim/skeletons/.dockerignore]] } },
     { "BufNewFile", { pattern = "main.tex", command = [[0r ~/.config/nvim/skeletons/main.tex]] } },
+    { "BufNewFile", { pattern = "lombok.config", command = [[0r ~/.config/nvim/skeletons/lombok.config]] } },
 
     {
         "BufNewFile",
