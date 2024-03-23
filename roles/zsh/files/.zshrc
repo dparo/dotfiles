@@ -1,3 +1,8 @@
+# Add completions directory
+
+# NOTE(d.paro): /usr/share/zsh/vendor-completions contains docker completions
+fpath=(/usr/share/zsh/vendor-completions $fpath)
+
 KEYTIMEOUT=20
 HISTFILE="$XDG_CACHE_HOME/zsh/history"
 SAVEHIST=16384
@@ -199,10 +204,6 @@ complete -C '/usr/local/bin/aws_completer' aws
 
 if builtin type kubectl 1>/dev/null 2>/dev/null; then
     source <(kubectl completion zsh)
-fi
-
-if builtin type docker 1>/dev/null 2>/dev/null; then
-    source <(docker completion zsh)
 fi
 
 

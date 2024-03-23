@@ -160,6 +160,7 @@
     - k8s
     - k9s
     - popeye
+    - pulumi
     - terraform
     - vagrant
     - vault

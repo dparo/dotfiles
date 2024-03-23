@@ -1,0 +1,41 @@
+---
+- name: Pulumi
+  tags:
+    - pulumi
+  block:
+  - name: Check latest pulumi
+    ansible.builtin.uri:
+      url: https://api.github.com/repos/pulumi/pulumi/releases/latest
+      return_content: true
+    register: pulumi_latest
+
+
+  # https://github.com/pulumi/pulumi/releases/download/v3.111.1/pulumi-v3.111.1-linux-x64.tar.gz
+  - name: Download and unpack latest pulumi
+    ansible.builtin.unarchive:
+      src: "https://github.com/pulumi/pulumi/releases/download/{{ pulumi_latest['json']['tag_name'] }}/pulumi-{{ pulumi_latest['json']['tag_name'] }}-linux-x64.tar.gz"
+      dest: "/opt/"
+      remote_src: true
+    become: true
+
+
+  # See `echo $fpath` from zsh
+  - name: Create dir /usr/local/share/zsh/site-functions
+    ansible.builtin.file:
+      path: "/usr/local/share/zsh/site-functions"
+      state: directory
+      mode: "0755"
+    become: true
+
+
+  - name: Generate pulumi zsh completion
+    command: /opt/pulumi/pulumi gen-completion zsh
+    register: pulumi_zsh_completion_output
+
+  - name: Save completion to file
+    ansible.builtin.copy:
+      content: "{{pulumi_zsh_completion_output.stdout}}"
+      dest: /usr/local/share/zsh/site-functions/_pulumi
+      mode: "0644"
+    become: true
+

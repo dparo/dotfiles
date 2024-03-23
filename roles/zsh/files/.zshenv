@@ -61,6 +61,7 @@ pathprepend \
     "$XDG_DATA_HOME/bin" \
     "$HOME/.local/bin" \
     "${PYTHONUSERBASE:-$XDG_DATA_HOME/python}/bin" \
+    "/opt/pulumi/" \
     "${GOPATH:-$XDG_DATA_HOME/go}/bin" \
     "${XDG_DATA_HOME:-$HOME/.local/share}/coursier/bin" \
     "${CARGO_HOME:-$XDG_DATA_HOME/cargo}/bin" \
