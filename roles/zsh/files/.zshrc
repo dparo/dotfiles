@@ -210,3 +210,7 @@ if builtin type flutter 1>/dev/null 2>/dev/null; then
     source <(flutter zsh-completion)
 fi
 
+if builtin type terraform 1> /dev/null 2> /dev/null; then
+    complete -o nospace -C /usr/bin/terraform terraform
+fi
+
