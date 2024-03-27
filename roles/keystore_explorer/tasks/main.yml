@@ -1,0 +1,9 @@
+---
+- name: Java Keystore Explorer
+  tags:
+    - keystore-explorer
+    - keystore_explorer
+    - kse
+  block:
+    # TODO(d.paro): https://github.com/kaikramer/keystore-explorer/releases/tag/v5.5.3
+
