@@ -207,6 +207,7 @@
     - davinci_resolve
     - godot_engine
     - audacity
+    - openapi-generator-cli
 
 
     # Flatpaks
