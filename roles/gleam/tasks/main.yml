@@ -1,0 +1,30 @@
+---
+- name: Gleam
+  tags:
+    - never
+    - gleam
+    - erlang
+    - elixir
+    - beam
+  block:
+    - name: Install elixir and erlang
+      ansible.builtin.dnf:
+        name:
+          - elixir
+          - erlang
+        state: present
+      become: true
+
+    - name: Check latest gleam
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/gleam-lang/gleam/releases/latest
+        return_content: true
+      register: gleam_latest
+
+    - name: Download and unpack latest gleam
+      ansible.builtin.unarchive:
+        src: "https://github.com/gleam-lang/gleam/releases/download/{{ gleam_latest['json']['tag_name'] }}/gleam-{{  gleam_latest['json']['tag_name'] }}-x86_64-unknown-linux-musl.tar.gz"
+        dest: "{{ ansible_user_dir }}/.local/bin"
+        remote_src: true
+
+

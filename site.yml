@@ -80,6 +80,7 @@
     - zig
     - nim
     - ocaml
+    - gleam
     - golang
     - nodejs
     - bun
