@@ -1,4 +1,5 @@
 {
   "disableAutogain": true,
-  "disableGpu": true
+  "disableGpu": true,
+  "optInTeamsV2": true
 }
