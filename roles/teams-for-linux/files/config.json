@@ -1,4 +1,5 @@
 {
+  "url": "https://teams.microsoft.com/v2",
   "disableAutogain": true,
   "disableGpu": true,
   "optInTeamsV2": true
