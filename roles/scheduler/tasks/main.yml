@@ -1,0 +1,22 @@
+---
+- name: Scheduler
+  tags:
+    - scheduler
+    - linux-scheduler
+
+  block:
+    # Improves gaming performance:
+    # - https://pagure.io/fedora-workstation/issue/228
+    # - https://github.com/pop-os/system76-scheduler/releases/tag/1.1.0
+    # - https://www.reddit.com/r/linux_gaming/comments/usz600/ysk_a_fully_preemptible_kernel_might_make_your/
+    # - https://www.reddit.com/r/Fedora/comments/158fy6x/ive_turned_preemptfull_on_and_it_solved_most_of/
+
+    # For viewing the value of preempt:
+    #       cat tee /sys/kernel/debug/sched/preempt
+    # For setting it at runtime:
+    #       echo full | sudo tee /sys/kernel/debug/sched/preempt
+
+    - name: Enable full preemptiveness
+      # ansible.builtin.command: grubby --update-kernel ALL --args plymouth.enable=0 disablehooks=plymouth     # (Disable)
+      ansible.builtin.command: grubby --update-kernel ALL --args preempt=full
+      become: true

@@ -10,6 +10,7 @@
     - systemd-oomd
     - systemd-journald
     - systemd-coredump
+    - scheduler
     - selinux
     - plymouth
     - zswap
