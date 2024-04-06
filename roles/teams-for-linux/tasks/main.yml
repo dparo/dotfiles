@@ -28,10 +28,19 @@
         - teams-for-linux
     become: true
 
+
+  - name: Create config directory
+    ansible.builtin.file:
+      path: "{{ ansible_user_dir }}/.config/teams-for-linux"
+      state: directory
+      mode: "0755"
+
   - name: Symlink config
     ansible.builtin.file:
-      src: "{{ role_path }}/files"
-      dest: "{{ ansible_user_dir }}/.config/teams-for-linux"
+      src: "{{ role_path }}/files/{{ item }}"
+      dest: "{{ ansible_user_dir }}/.config/teams-for-linux/{{ item }}"
       state: link
+    loop:
+      - config.json
 
 
