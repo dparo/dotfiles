@@ -61,7 +61,7 @@ mason_dependencies:
   - java-test
   - java-debug-adapter
   - semgrep
-  - sonarlint-language-server
+  # - sonarlint-language-server
   - hadolint
   - angular-language-server
   - cucumber-language-server
