@@ -77,7 +77,15 @@ fi
 rm -rf "$HOME/.ansible"
 rm -rf "$HOME/.bash_history"
 
+if test -n "$ANSIBLE_LOCAL_TEMP" && test -d "$ANSIBLE_LOCAL_TEMP"; then
+    rm -rf "$ANSIBLE_LOCAL_TEMP"
+fi
+
+if test -n "$ANSIBLE_HOME/tmp" && test -d "$ANSIBLE_HOME/tmp"; then
+    rm -rf "$ANSIBLE_HOME/tmp"
+fi
 
 if command -v pre-commit 1> /dev/null 2> /dev/null; then
     pre-commit install
 fi
+
