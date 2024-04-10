@@ -96,7 +96,7 @@ vim.o.autoread = true
 
 -- Remove the `c` from formatoptions to avoid continuing
 -- comments when creating a newline
-vim.o.formatoptions = "tcqj"
+vim.o.formatoptions = "tqj"
 
 -- Timeout used to resolve ambiguity about key sequence presses
 -- That is if `<C-x><C-s>` and `<C-x>` alone are both mapped to

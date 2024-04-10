@@ -81,8 +81,9 @@ core.utils.augroup("USER_FILETYPES", {
             vim.w.spell = true
         end,
     } },
+
     -- Stop comment continuation when entering a new line inside a comment
-    { { "BufWritePost" }, { pattern = "*", command = [[ setlocal formatoptions-=cro ]] } },
+    { { "BufReadPost" }, { pattern = "*", command = [[ setlocal formatoptions-=cro ]] } },
 
     -- Resource specific configuration files for external programs
     {
