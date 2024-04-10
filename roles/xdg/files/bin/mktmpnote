@@ -7,7 +7,7 @@ run() {
 
 mkdir -p "/tmp/$USER/notes"
 
-file="$(mktemp -p "/tmp/$USER/notes/")"-"$(date)".md
+file="$(mktemp -p "/tmp/$USER/notes/" --suffix="-$(date).md")"
 
 if builtin type marktext 1>/dev/null 2>/dev/null; then
     touch "$file"
