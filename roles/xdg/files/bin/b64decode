@@ -5,28 +5,124 @@ import sys
 import base64
 import urllib.parse
 
+import argparse
+import io
+import logging
+import sys
+
+
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
-exit_code = 0
-for i in range(1, len(sys.argv)):
-    b = str(sys.argv[i])
-    b = urllib.parse.unquote(b, encoding = 'utf-8')
 
-    b = base64.b64decode(b.encode("utf-8"))
+def parse_cmdline_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(
+        prog="b64decode",
+        description="Decode base64decoded data",
+        epilog="",
+    )
 
-    invalid_utf8 = False
-    b_str = ''
-    try:
-        b_str = b.decode('utf-8')
-    except UnicodeDecodeError:
-        invalid_utf8 = True
-        pass
+    ##
+    ## Positional args
+    ##
+    parser.add_argument(
+        type=str,
+        dest="argv",
+        nargs="+",
+        help="The data to convert",
+    )
 
-    print("UTF-8:", repr(b_str) if not invalid_utf8 else '---')
-    print("bytes:", b)
-    print(f"int[{len(list(b))}]:", '[{}]'.format(', '.join(hex(x) for x in list(b))))
-    if i < len(sys.argv) - 1:
-        print()
+    ##
+    ## Option arguments
+    ##
+    parser.add_argument(
+        "--log",
+        type=str.upper,
+        dest="log_level",
+        nargs="?",
+        choices=[
+            "DEBUG",
+            "INFO",
+            "WARN",
+            "WARNING",
+            "ERROR",
+            "CRITICAL",
+        ],
+        help="Logging level",
+        default="WARNING",
+    )
 
-sys.exit(exit_code)
+    parser.add_argument(
+        "--log-file",
+        type=str,
+        dest="log_file",
+        nargs="?",
+        help="Log file",
+        default=None,
+    )
+
+    parser.add_argument(
+        "-a",
+        "--all",
+        action='store_true',
+        dest="all",
+        help="To output all representations",
+        default=False
+    )
+
+    return parser.parse_args(sys.argv[1:])
+
+
+def main(args: argparse.Namespace) -> None:
+    exit_code = 0
+    argv = args.argv
+    print_all = args.all
+    for i in range(len(argv)):
+        b = str(argv[i])
+        b = urllib.parse.unquote(b, encoding = 'utf-8')
+
+        b = base64.b64decode(b.encode("utf-8"))
+
+        invalid_utf8 = False
+        b_str = ''
+        try:
+            b_str = b.decode('utf-8')
+        except UnicodeDecodeError:
+            invalid_utf8 = True
+            pass
+
+        if print_all:
+            print("UTF-8:", repr(b_str) if not invalid_utf8 else '---')
+            print("bytes:", b)
+            print(f"int[{len(list(b))}]:", '[{}]'.format(', '.join(hex(x) for x in list(b))))
+            if i < len(argv) - 1:
+                print()
+        else:
+            if invalid_utf8:
+                sys.exit(1)
+            print(b_str)
+
+    sys.exit(exit_code)
+
+
+def setup_logging(args: argparse.Namespace):
+    logging_handlers: list[logging.Handler] = [logging.StreamHandler()]
+    if args.log_file:
+        logging_handlers.append(
+            logging.FileHandler(args.log_file, mode="w", encoding="utf-8")
+        )
+    logging.basicConfig(
+        handlers=logging_handlers,
+        format="%(asctime)s - %(filename)s:%(lineno)s - %(levelname)s - %(message)s",
+        datefmt="%Y-%m-%dT%H:%M:%S%z",
+        level=getattr(logging, args.log_level.upper()),
+    )
+    logging.info(f"Command line args namespace: {args}")
+
+
+if __name__ == "__main__":
+    args = parse_cmdline_args()
+    setup_logging(args=args)
+    main(args=args)
+
+
