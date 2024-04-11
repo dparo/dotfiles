@@ -11,8 +11,9 @@ file="$(mktemp -p "/tmp/$USER/notes/" --suffix="-$(date).md")"
 
 if builtin type marktext 1>/dev/null 2>/dev/null; then
     touch "$file"
-    run marktext "$file"
+    cd "$(dirnamee "$file")" || exit 1
+    run marktext "$(dirname "$file")" "$file"
 else
-    run kitty -- nvim "$file"
+    run kitty -d "$(dirname "$file")" -- nvim  "$file"
 fi
 
