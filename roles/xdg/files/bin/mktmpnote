@@ -5,9 +5,10 @@ run() {
     disown
 }
 
-mkdir -p "/tmp/$USER/notes"
+basedir="/tmp/$USER/notes/$(date --iso-8601)"
+mkdir -p "$basedir"
 
-file="$(mktemp -p "/tmp/$USER/notes/" --suffix="-$(date).md")"
+file="$(mktemp -p "$basedir" --suffix="-$(date).md")"
 
 if builtin type marktext 1>/dev/null 2>/dev/null; then
     touch "$file"
