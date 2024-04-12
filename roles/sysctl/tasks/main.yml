@@ -8,7 +8,7 @@
   - name: Setup vm.max_map_count
     ansible.builtin.lineinfile:
       path: /etc/sysctl.conf
-      line: vm.max_map_count = 2147483642
+      line: vm.max_map_count = 1048576
       regexp: ^vm.max_map_count\s*=
       create: true
     become: true
