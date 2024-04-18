@@ -12,7 +12,7 @@ file="$(mktemp -p "$basedir" --suffix="-$(date).md")"
 
 if builtin type marktext 1>/dev/null 2>/dev/null; then
     touch "$file"
-    cd "$(dirnamee "$file")" || exit 1
+    cd "$(dirname "$file")" || exit 1
     run marktext "$(dirname "$file")" "$file"
 else
     run kitty -d "$(dirname "$file")" -- nvim  "$file"

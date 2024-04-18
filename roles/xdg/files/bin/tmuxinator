@@ -11,8 +11,12 @@ selection="$(dirname "$selection")"
 d="$(dirname "$selection")"
 project="$(basename "$selection")"
 portale="$(basename "$d")"
+d="$(dirname "$d")"
+root="$(basename "$d")"
+d="$(dirname "$d")"
+rootroot="$(basename "$d")"
 
-session="$portale/$project"
+session="$rootroot/$root/$portale/$project"
 
 session="$(echo "$session" | sed 's@\.@_@g')"
 
