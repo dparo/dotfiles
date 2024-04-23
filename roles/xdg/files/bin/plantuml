@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+unset _JAVA_OPTIONS
+exec /usr/bin/plantuml "$@"
