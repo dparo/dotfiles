@@ -6,7 +6,7 @@ run() {
 }
 
 d="/tmp/dparo/notes/$(date --iso-8601)"
-mkdir -p "$(basename "$d")"
+mkdir -p "$d"
 file="$(mktemp -p "$d" --suffix="-$(date).md")"
 
 
