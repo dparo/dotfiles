@@ -112,6 +112,8 @@ export JAVA_USER_HOME="$XDG_DATA_HOME/java"
 export MINIKUBE_HOME="$XDG_DATA_HOME/minikube"
 export PULUMI_HOME="$XDG_DATA_HOME/pulumi"
 
+export COMPOSER_HOME="$XDG_DATA_HOME/composer"
+
 # _JAVA_OPTIONS is picked up from the JVM, thus it applies to all JAVA programs. See: https://sourcegraph.com/github.com/openjdk/jdk@91292d5/-/blob/src/hotspot/share/runtime/arguments.cpp?L3233:17&popover=pinned
 # JAVA_OPTS: Is used by many shell launcher scripts to pass JVM options to the wrapped programs.
 #        Not all java programs use this environment variable, but it is preferred over _JAVA_OPTIONS whenever possible
