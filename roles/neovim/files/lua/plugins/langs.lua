@@ -162,4 +162,5 @@ return {
             require("hlargs").setup()
         end,
     },
+    {"aklt/plantuml-syntax"}
 }
