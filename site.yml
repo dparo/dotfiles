@@ -81,6 +81,7 @@
     - zig
     - nim
     - ocaml
+    - php
     - gleam
     - golang
     - nodejs

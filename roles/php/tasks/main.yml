@@ -1,0 +1,14 @@
+---
+- name: PHP
+  tags:
+    - never
+    - php
+  block:
+    - name: Install PHP and Composer
+      ansible.builtin.dnf:
+        name:
+          - php
+          - composer     # Dependency Manager for PHP
+        state: present
+      become: true
+
