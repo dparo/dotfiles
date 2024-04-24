@@ -1,5 +1,5 @@
 ---
-- name: Caddy
+- name: Caddy       # https://caddyserver.com/
   tags:
     - caddy
   block:
