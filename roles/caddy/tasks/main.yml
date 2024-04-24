@@ -1,0 +1,12 @@
+---
+- name: Caddy
+  tags:
+    - caddy
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - caddy
+        state: latest
+      become: true
+

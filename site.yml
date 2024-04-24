@@ -193,6 +193,7 @@
     - postman
     - mattermost
     - splunk
+    - caddy
     - wireshark
     - mitmproxy
     - trunkrs
