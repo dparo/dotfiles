@@ -6,6 +6,7 @@ return {
             "leoluz/nvim-dap-go",
             "theHamsta/nvim-dap-virtual-text",
             "mxsdev/nvim-dap-vscode-js",
+            "nvim-neotest/nvim-nio",
             -- "folke/neodev.nvim",
         },
         config = function()
