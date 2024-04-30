@@ -9,7 +9,7 @@
     grey: #6c7086;
 
     width: 800;
-    font: "JetBrainsMono Nerd Font 10";
+    font: "Noto Sans 10";
 }
 
 element-text, element-icon , mode-switcher {

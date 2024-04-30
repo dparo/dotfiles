@@ -7,9 +7,6 @@ vim.g.netrw_browse_split = 0
 vim.g.netrw_altv = 1
 -- vim.g.netrw_liststyle = 3
 
-vim.o.background = "dark"
-vim.o.guifont = "JetBrainsMono Nerd Font:h10.0"
-
 -- Spell checking
 vim.o.encoding = "utf-8"
 vim.o.spelllang = "en"
@@ -21,7 +18,7 @@ vim.o.history = 4096
 vim.o.selection = "exclusive"
 
 vim.o.background = "dark"
-vim.o.guifont = "JetBrainsMono Nerd Font Mono:h10.5"
+vim.o.guifont = "Blex Mono Nerd Font Mono:h10.5"
 
 vim.o.list = true
 vim.o.listchars = "tab:→ ,trail:·,extends:↷,precedes:↶" -- eol:↵,
