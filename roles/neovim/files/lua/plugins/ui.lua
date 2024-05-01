@@ -130,7 +130,7 @@ return {
     {
         "nvimdev/dashboard-nvim",
         event = "VimEnter",
-        enabled = false,
+        enabled = true,
         config = function()
             require("dashboard").setup {
                 change_to_vcs_roo = true,

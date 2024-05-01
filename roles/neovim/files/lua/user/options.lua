@@ -72,6 +72,7 @@ vim.o.wildignore = ".git,.hg,.svn,*~,*.png,*.jpg,*.gif,*.settings,Thumbs.db,*.mi
 vim.o.completeopt = "menuone,noinsert,noselect"
 -- Avoid showing message extra message when using completion
 vim.o.shortmess = vim.o.shortmess .. "c"
+vim.o.shortmess = vim.o.shortmess .. "I"       -- Avoid intro message (splash message)
 vim.o.pumheight = 16
 
 vim.o.mouse = "a"
