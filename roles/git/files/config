@@ -48,7 +48,7 @@
 	prompt = false
     colorMoved = default
 [difftool "meld"]
-	cmd = meld "$LOCAL" "$REMOTE"
+	; cmd = meld "$LOCAL" "$REMOTE"
     prompt = false
 [difftool "p4merge"]
 	cmd = p4merge "$LOCAL" "$REMOTE"
@@ -79,7 +79,7 @@
     writeToTemp = true
 	prompt = false
 [mergetool "meld"]
-    cmd = meld --output "$MERGED" "$REMOTE" "$BASE" "$LOCAL"
+    ; cmd = meld --output "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
     keepBackup = false
 	keepTemporaries = false
     writeToTemp = true
@@ -87,7 +87,7 @@
 	prompt = false
 [mergetool "p4merge"]
 # See https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
-    cmd = p4merge "$BASE" "$REMOTE" "$LOCAL" "$MERGED"
+    cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
     keepBackup = false
 	keepTemporaries = false
     writeToTemp = true
