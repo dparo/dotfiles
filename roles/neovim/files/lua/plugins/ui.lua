@@ -133,7 +133,7 @@ return {
         enabled = true,
         config = function()
             require("dashboard").setup {
-                change_to_vcs_roo = true,
+                change_to_vcs_root = true,
                 config = {
                     shortcut = {
 
