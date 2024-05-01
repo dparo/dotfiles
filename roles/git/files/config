@@ -40,7 +40,8 @@
     lola = log --graph --decorate --oneline --abbrev-commit --all --full-history
     dirdiff = difftool --tool=meld --dir-diff
 [diff]
-	tool = p4merge
+	; tool = p4merge
+	tool = meld
     keepBackup = false
 	keepTemporaries = false
 	trustExitCode = false
@@ -64,11 +65,12 @@
 [rebase]
 	autosquash = true
 [merge]
+    ; tool = p4merge
+    tool = meld
     conflictstyle = diff3
     summary = true
 	keepbackup = false
     writeToTemp = true
-	tool = p4merge
 [mergetool]
 	keepBackup = false
     keepBackup = false
