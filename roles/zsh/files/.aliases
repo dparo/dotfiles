@@ -44,6 +44,11 @@ function yml2json {
 
 alias yaml2json=yml2json
 
+if valid_shell_command fastfetch; then
+    alias neofetch=fastfetch
+fi
+
+
 if valid_shell_command fdfind; then
     alias fd=fdfind
 fi
