@@ -9,14 +9,19 @@
     - name: Install texlive fundamental packages
       ansible.builtin.dnf:
         name:
-          - texlive-base
-          - texlive-collection-fontsrecommended
-          - texlive-collection-latexrecommended
-          - texlive-collection-latexextra
-          - texlive-collection-mathextra
-          - texlive-collection-genericextra
-          - texlive-collection-science
-          - texlive-collection-bibtexextra
+          # NOTE(d.paro): Schemes and collections are metapackages
+          #    https://fedoraproject.org/wiki/Features/TeXLive
+          #      Schemes are used for users which don't understand much of TeX but wants a particular type of deployment
+          #      The collections are more fine-grained schemes for people who understand TeX a bit and demands some of its feature
+          - texlive-scheme-minimal
+          # - texlive-base
+          # - texlive-collection-fontsrecommended
+          # - texlive-collection-latexrecommended
+          # - texlive-collection-latexextra
+          # - texlive-collection-mathextra
+          # - texlive-collection-genericextra
+          # - texlive-collection-science
+          # - texlive-collection-bibtexextra
           - texlive-babel-italian
           - texlive-babel-english
           - texlive-fontawesome
