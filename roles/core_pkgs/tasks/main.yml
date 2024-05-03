@@ -44,6 +44,7 @@
       - openldap-clients
       - calc # Arbitrary precision C-like calculator
       - p11-kit
+      - inotify-tools
     state: present
   become: true
   tags:
