@@ -49,9 +49,19 @@ int main(int argc, char **argv) {
 }
 -----
 +
+[source,console]
+$ curl "localhost:8080" | python3
++
 [source,shell]
 -----
-curl localhost:8080 | python3
+#!/bin/sh
+
+fail () {
+    echo
+    echo "$*"
+    echo
+    exit 1
+} >&2
 -----
 
 * Image embedding:
