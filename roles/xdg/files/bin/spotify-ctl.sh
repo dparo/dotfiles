@@ -36,7 +36,7 @@ dbus_send() {
     arg1="$1"
     shift 1
     # https://specifications.freedesktop.org/mpris-spec/2.2/Player_Interface.html
-    exec dbus-send --print-reply --dest="org.mpris.MediaPlayer2.${mediaplayer}" /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player."$arg1" "$@"
+    dbus-send --print-reply --dest="org.mpris.MediaPlayer2.${mediaplayer}" /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Player."$arg1" "$@"
 }
 
 
@@ -44,19 +44,19 @@ arg1="$1"
 shift 1
 case "$arg1" in
     play)
-        dbus_send Play "$@";;
+        dbus_send Play "$@" || playerctl -p "$mediaplayer" play;;
     pause)
-        dbus_send Pause "$@";;
+        dbus_send Pause "$@" ||playerctl -p "$mediaplayer" pause;;
     play-pause|toggle)
-        dbus_send PlayPause "$@";;
+        dbus_send PlayPause "$@" || playerctl -p "$mediaplayer" play-pause;;
     stop)
-        dbus_send Stop "$@";;
+        dbus_send Stop "$@" || playerctl -p "$mediaplayer" stop;;
     next)
-        dbus_send Next "$@";;
+        dbus_send Next "$@" || playerctl -p "$mediaplayer" next;;
     prev|previous|prior)
-        dbus_send Previous "$@";;
+        dbus_send Previous "$@" || playerctl -p "$mediaplayer" previous;;
     volume-up)
-        dbus_send VolumeUp ;;
+        dbus_send VolumeUp || playerctl -p "$mediaplayer" volume 0.05+;;
     volume-down)
-        dbus_send VolumeDown ;;
+        dbus_send VolumeDown || playerctl -p "$mediaplayer" volume 0.05-;;
 esac
