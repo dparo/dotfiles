@@ -67,6 +67,7 @@
     # Basic user core programs
     - ssh
     - gnupg
+    - gnome-keyring
     - git
     - wget
     - keyring

@@ -1,0 +1,12 @@
+---
+- name: Gnome Keyring
+  tags:
+    - gnome-keyring
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - gnome-keyring
+        state: present
+      become: true
+
