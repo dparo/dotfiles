@@ -18,7 +18,7 @@ vim.o.history = 4096
 vim.o.selection = "exclusive"
 
 vim.o.background = "dark"
-vim.o.guifont = "Blex Mono Nerd Font Mono:h10.5"
+vim.o.guifont = "GeistMono Nerd Font Mono:h10.5"
 
 vim.o.list = true
 vim.o.listchars = "tab:→ ,trail:·,extends:↷,precedes:↶" -- eol:↵,

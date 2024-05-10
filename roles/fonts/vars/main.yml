@@ -2,14 +2,13 @@
 nerd_fonts:
   - NerdFontsSymbolsOnly
   - Hack
-  - SourceCodePro
-  - JetBrainsMono
+  # - SourceCodePro
+  # - JetBrainsMono
   - Ubuntu
   - UbuntuMono
-  - IntelOneMono
-  - IBMPlexMono
-
-  # - GeistMono
+  # - IntelOneMono
+  # - IBMPlexMono
+  - GeistMono
   # - CascadiaCode
   # - LiberationMono
   # - Meslo

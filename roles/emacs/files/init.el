@@ -930,11 +930,11 @@
 
 (load-theme 'gruvbox t)
 
-(set-face-attribute 'mode-line nil :family "Blex Mono Nerd Font" :height 90)
-(set-face-attribute 'mode-line-inactive nil :family "Blex Mono Nerd Font" :height 90)
+(set-face-attribute 'mode-line nil :family "GeistMono Nerd Font" :height 90)
+(set-face-attribute 'mode-line-inactive nil :family "GeistMono Nerd Font" :height 90)
 (setq doom-modeline-height 0)
 (set-face-attribute 'default nil
-                    :family "Blex Mono Nerd Font"
+                    :family "GeistMono Nerd Font"
                     :height 105
                     :weight 'normal
                     :width 'normal)
