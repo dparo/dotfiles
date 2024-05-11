@@ -121,6 +121,7 @@
   with_fileglob: "{{ role_path }}/files/backgrounds/*"
   tags:
     - xdg
+    - xdg-backgrounds
 
 - name: Symlink sounds
   ansible.builtin.file:
