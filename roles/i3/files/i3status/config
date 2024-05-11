@@ -128,7 +128,7 @@ memory {
 }
 
 volume master {
-    format = " %volume"
+    format = "  %volume"
     format_muted = " "
     device = "pulse"
     mixer = "Master"
