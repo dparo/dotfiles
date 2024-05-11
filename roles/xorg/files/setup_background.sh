@@ -15,7 +15,6 @@ set_wallpaper() {
 xsetroot -cursor_name left_ptr
 
 set_wallpaper \
-    /usr/share/wallpapers/Next/contents/images_dark/1920x1080.png \
     /usr/share/backgrounds/gnome/adwaita-d.* \
     /usr/share/backgrounds/gnome/adwaita-l.* \
     /usr/share/backgrounds/fedora-workstation/montclair_dark.webp \
