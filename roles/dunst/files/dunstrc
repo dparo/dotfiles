@@ -1,7 +1,7 @@
 # vi: ft=cfg
 
 [global]
-    font = IBM Plex Sans 10.5
+    font = Sans 10.5
 
     icon_position = left
 
