@@ -1,7 +1,7 @@
 # vi: ft=cfg
 
 [global]
-    font = Sans 10.5
+    font = SansSerif 10.5
 
     icon_position = left
 
