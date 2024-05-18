@@ -28,9 +28,10 @@ return {
         "iamcco/markdown-preview.nvim",
         cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
         ft = { "markdown" },
-        build = function() vim.fn["mkdp#util#install"]() end,
+        build = function()
+            vim.fn["mkdp#util#install"]()
+        end,
     },
-
 
     {
         "folke/trouble.nvim",
@@ -89,8 +90,21 @@ return {
     {
         "stevearc/oil.nvim",
         config = function()
-            require("oil").setup()
-        end
+            require("oil").setup {
+                columns = {
+                    "icon",
+                    "permissions",
+                    "size",
+                    "mtime",
+                },
+                view_options = {
+                    -- Show files and directories that start with "."
+                    show_hidden = true,
+                },
+            }
+            vim.keymap.set("n", "-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+            vim.keymap.set("n", "<leader>-", "<CMD>Oil<CR>", { desc = "Open parent directory" })
+        end,
     },
     {
         "nvim-tree/nvim-tree.lua",
