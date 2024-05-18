@@ -87,6 +87,12 @@ return {
     },
 
     {
+        "stevearc/oil.nvim",
+        config = function()
+            require("oil").setup()
+        end
+    },
+    {
         "nvim-tree/nvim-tree.lua",
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
