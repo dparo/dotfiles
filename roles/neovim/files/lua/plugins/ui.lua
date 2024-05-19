@@ -92,10 +92,10 @@ return {
         config = function()
             require("oil").setup {
                 columns = {
-                    "icon",
                     "permissions",
                     "size",
                     "mtime",
+                    "icon",
                 },
                 view_options = {
                     -- Show files and directories that start with "."
