@@ -29,7 +29,7 @@ fi
 declare -A commands
 
 commands['EXIT']=''
-commands['Lock screen']="xset s activate"
+commands['Lock screen']="$HOME/.config/i3/lock.sh"
 commands['Audio']='pavucontrol'
 commands['Display']='arandr'
 commands['Manage SSH & GPG']=seahorse
