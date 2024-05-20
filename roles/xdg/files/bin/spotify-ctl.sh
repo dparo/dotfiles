@@ -55,6 +55,8 @@ case "$arg1" in
         dbus_send Next "$@" || playerctl -p "$mediaplayer" next;;
     prev|previous|prior)
         dbus_send Previous "$@" || playerctl -p "$mediaplayer" previous;;
+    mute)
+        dbus_send Volume 0.0 "$@" || playerctl -p "$mediaplayer" volume 0.0;;
     volume-up)
         dbus_send VolumeUp || playerctl -p "$mediaplayer" volume 0.05+;;
     volume-down)
