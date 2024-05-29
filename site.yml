@@ -203,6 +203,7 @@
     - clamav
     - thunderbird
     - teams-for-linux
+    - burp_suite
     - joplin
     - libreoffice
     - sqlplus
