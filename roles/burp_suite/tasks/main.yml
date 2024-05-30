@@ -1,0 +1,9 @@
+---
+- name: Burp Suite
+  tags:
+    - burp
+    - burp-suite
+    - burp_suite
+    - burp-suite-community-edition
+
+  # TODO(d.paro): https://portswigger-cdn.net/burp/releases/download?product=community&type=Linux
