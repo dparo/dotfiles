@@ -20,6 +20,12 @@
             state: present
           become: true
 
+    - name: Create config dir
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/.config/maven"
+        state: directory
+        mode: "0755"
+
     - name: FromTgz
       when: false
       block:
@@ -45,12 +51,6 @@
             - "{{ maven_install_dir }}/apache-maven-{{ maven_version }}/bin/mvnDebug"
             - "{{ maven_install_dir }}/apache-maven-{{ maven_version }}/bin/mvnyjp"
 
-
-        - name: Create config dir
-          ansible.builtin.file:
-            path: "{{ ansible_user_dir }}/.config/maven"
-            state: directory
-            mode: "0755"
 
         - name: Symlink global config
           ansible.builtin.file:
