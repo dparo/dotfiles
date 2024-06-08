@@ -61,6 +61,7 @@
     # Shells
     - bash
     - zsh
+    - fish
     - powershell
 
 

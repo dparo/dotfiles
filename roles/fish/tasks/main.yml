@@ -1,0 +1,17 @@
+---
+- name: Fish
+  tags:
+    - fish
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - fish
+        state: present
+      become: true
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files"
+        dest: "{{ ansible_user_dir }}/.config/fish"
+        state: link
+
