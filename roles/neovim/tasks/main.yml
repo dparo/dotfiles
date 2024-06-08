@@ -40,6 +40,8 @@
             version: "{{ neovim_version | default('master') }}"
           register: clone
 
+        # make CMAKE_BUILD_TYPE=Release
+        # sudo make install
         - name: Build
           community.general.make:
             chdir: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim"
