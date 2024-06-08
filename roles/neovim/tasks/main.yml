@@ -7,7 +7,7 @@
     - name: Neovim build from source
       when: neovim_build_from_source
       block:
-        - name: "Install build dependencies (See: https://github.com/neovim/neovim/wiki/Building-Neovim#centos--rhel--fedora)"
+        - name: "Install build dependencies (See: https://github.com/neovim/neovim/blob/master/BUILD.md#rhel--fedora)"
           ansible.builtin.dnf:
             name:
               - ninja-build
@@ -24,6 +24,7 @@
               - patch
               - gettext
               - curl
+              - glibc-gconv-extra
             state: present
           become: true
 
@@ -31,7 +32,7 @@
           ansible.builtin.git:
             clone: true
             depth: 1
-            dest: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim"
+            dest: "/tmp/neovim"
             force: true
             repo: https://github.com/neovim/neovim.git
             single_branch: true
@@ -45,8 +46,6 @@
             params:
               CMAKE_BUILD_TYPE: Release
           when: clone.changed
-          tags:
-            - neovim
 
         - name: Install
           community.general.make:
@@ -54,8 +53,6 @@
             target: install
           become: true
           when: clone.changed
-          tags:
-            - neovim
 
         - name: Remove build folder
           ansible.builtin.file:
@@ -140,22 +137,16 @@
     - name: Lazy.nvim install plugins
       ansible.builtin.shell: |
         nvim --headless -c "Lazy! restore" -c qall
-      tags:
-        - neovim
         - neovim-plugins
 
     - name: Update remote plugins
       ansible.builtin.shell: |
         nvim --headless -c 'UpdateRemotePlugins' -c qall
-      tags:
-        - neovim
         - neovim-plugins
 
     - name: MasonInstall {{ mason_dependencies | join(' ') }}
       ansible.builtin.shell: |
         nvim --headless -c "MasonInstall {{ mason_dependencies | join(' ') }}" -c "qall"
-      tags:
-        - neovim
         - neovim-lsp
         - mason
         - mason.nvim
