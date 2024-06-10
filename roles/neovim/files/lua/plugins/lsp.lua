@@ -54,6 +54,7 @@ return {
             require("fidget").setup {}
 
             local lspconfig = require "lspconfig"
+            lspconfig.opts.inlay_hints = true;
 
             for _, server in ipairs(require("lsp.servers").list) do
                 local name = server.name

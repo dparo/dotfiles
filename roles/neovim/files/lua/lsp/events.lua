@@ -189,24 +189,6 @@ function M.on_attach(client, bufnr)
         })
     end
 
-    if client.server_capabilities.inlayHintProvider and vim.lsp.buf.inlay_hint ~= nil then
-        vim.api.nvim_create_autocmd({ "InsertEnter" }, {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.buf.inlay_hint(bufnr, true)
-            end,
-        })
-
-        vim.api.nvim_create_autocmd({ "InsertLeave" }, {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.buf.inlay_hint(bufnr, false)
-            end,
-        })
-    end
-
     -- Set some keybinds conditional on server capabilities
     if LSP_FORMATTING_ENABLED and client.server_capabilities.documentFormattingProvider then
         if vim.fn.has "nvim-0.8" == 1 then
@@ -272,25 +254,23 @@ function M.on_attach(client, bufnr)
         })
     end
 
-    if (client.server_capabilities.inlayHintProvider or client.supports_method "textDocument/inlayHint") and vim.lsp.inlay_hint ~= nil then
-        vim.api.nvim_create_autocmd("InsertEnter", {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-                if vim.lsp.inlay_hint ~= nil then
-                    vim.lsp.inlay_hint(bufnr, true)
-                end
-            end,
-        })
-        vim.api.nvim_create_autocmd("InsertLeave", {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-                if vim.lsp.inlay_hint ~= nil then
-                    vim.lsp.inlay_hint(bufnr, false)
-                end
-            end,
-        })
+    if false then
+        if (client.server_capabilities.inlayHintProvider or client.supports_method "textDocument/inlayHint") and vim.lsp.inlay_hint ~= nil then
+            vim.api.nvim_create_autocmd("InsertEnter", {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                    vim.lsp.buf.inlay_hint(bufnr, true)
+                end,
+            })
+            vim.api.nvim_create_autocmd("InsertLeave", {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                    vim.lsp.buf.inlay_hint(bufnr, false)
+                end,
+            })
+        end
     end
 
     -- Enable formatting on save
