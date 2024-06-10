@@ -287,7 +287,7 @@ function M.on_attach(client, bufnr)
             buffer = bufnr,
             callback = function()
                 if vim.lsp.inlay_hint ~= nil then
-                    vim.lsp.buf.inlay_hint(bufnr, false)
+                    vim.lsp.inlay_hint(bufnr, false)
                 end
             end,
         })
