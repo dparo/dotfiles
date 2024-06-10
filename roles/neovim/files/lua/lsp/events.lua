@@ -272,19 +272,23 @@ function M.on_attach(client, bufnr)
         })
     end
 
-    if client.supports_method "textDocument/inlayHint" and vim.lsp.inlay_hint ~= nil then
+    if (client.server_capabilities.inlayHintProvider or client.supports_method "textDocument/inlayHint") and vim.lsp.inlay_hint ~= nil then
         vim.api.nvim_create_autocmd("InsertEnter", {
             group = augroup,
             buffer = bufnr,
             callback = function()
-                vim.lsp.inlay_hint(bufnr, true)
+                if vim.lsp.inlay_hint ~= nil then
+                    vim.lsp.inlay_hint(bufnr, true)
+                end
             end,
         })
         vim.api.nvim_create_autocmd("InsertLeave", {
             group = augroup,
             buffer = bufnr,
             callback = function()
-                vim.lsp.buf.inlay_hint(bufnr, false)
+                if vim.lsp.inlay_hint ~= nil then
+                    vim.lsp.buf.inlay_hint(bufnr, false)
+                end
             end,
         })
     end
