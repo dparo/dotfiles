@@ -176,17 +176,19 @@ function M.on_attach(client, bufnr)
         end,
     })
 
-    if client.server_capabilities.codeLensProvider then
-        vim.api.nvim_create_autocmd({
-            "BufEnter",
-            "InsertLeave", --[[ "CursorHold"  ]]
-        }, {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.codelens.refresh()
-            end,
-        })
+    if false then
+        if client.supports_method "textDocument/codeLens" --[[ client.server_capabilities.codeLensProvider  ]] then
+            vim.api.nvim_create_autocmd({
+                "BufEnter",
+                "InsertLeave", --[[ "CursorHold"  ]]
+            }, {
+                group = augroup,
+                buffer = bufnr,
+                callback = function()
+                    vim.lsp.codelens.refresh()
+                end,
+            })
+        end
     end
 
     -- Set some keybinds conditional on server capabilities
