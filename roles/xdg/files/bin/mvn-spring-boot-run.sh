@@ -4,7 +4,7 @@
 
 set -x
 
-JDWP_PORT=0         # USE 0 for dynamically determining a free port
+JDWP_PORT="${JDWP_PORT:-5005}"         # USE 0 for dynamically determining a free port
 
 mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip \
     clean spring-boot:run \
