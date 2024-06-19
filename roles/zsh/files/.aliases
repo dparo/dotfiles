@@ -17,7 +17,15 @@ alias docker-clean='docker system prune --volumes -a'
 alias docker-prune='docker system prune --volumes -a'
 alias onlyoffice='flatpak run --branch=stable --arch=x86_64 --command=desktopeditors --file-forwarding org.onlyoffice.desktopeditors'
 alias dotfiles="tmux new-session -c \"\$USER_DOTFILES_LOCATION\" -A -s dotfiles"
-alias dotenv="set -a; set -x; source .env; { set +x; } 2>/dev/null; set +a;"
+
+
+function dotenv {
+    set -a
+    set -x
+    source "${@:-.env}"
+    { set +x; } 2>/dev/null
+    set +a
+}
 
 function valid_shell_command {
     builtin type "$1" 1>/dev/null 2>/dev/null
