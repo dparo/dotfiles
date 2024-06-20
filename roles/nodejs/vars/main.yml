@@ -1,6 +1,7 @@
 ---
 # defaults file for nodejs
 
+nvm_version: v0.39.7
 node_versions:
   - 16.13.0
   - 18.17.1

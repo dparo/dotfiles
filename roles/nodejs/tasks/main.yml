@@ -5,47 +5,75 @@
     - nodejs
     - npm
   block:
+    - when: True
+      block:
+       - name: Install
+         ansible.builtin.dnf:
+           name:
+             - nodejs
+           state: present
+         become: true
+       - name: Clone NVM
+         ansible.builtin.git:
+           clone: true
+           depth: 1
+           dest: "{{ ansible_user_dir}}/.config/nvm"
+           force: true
+           repo: https://github.com/nvm-sh/nvm
+           single_branch: true
+           update: true
+           version: "{{ nvm_version | default('master') }}"
+         register: clone
+       - name: Setup NVM
+         ansible.builtin.shell: |
+          source "$HOME/.config/nvm/nvm.sh"
+          nvm install --lts          # Install latest LTS
+          nvm alias default 'lts/*'  # Alias the default node to point to the latest LTS
 
-    - name: Create dir {{ node_versions }}
-      ansible.builtin.file:
-        path: "{{ node_install_dir }}/node-v{{ item }}-linux-x64"
-        state: directory
-        mode: "0755"
-      register: node_target_dir
-      loop: "{{ node_versions }}"
 
-    - name: Download and unpack Node {{ node_versions }}
-      ansible.builtin.unarchive:
-        src: https://nodejs.org/dist/v{{ item }}/node-v{{ item }}-linux-x64.tar.xz
-        dest: "{{ node_install_dir }}"
-        remote_src: true
-      when: node_target_dir.changed
-      loop: "{{ node_versions }}"
+    - when: False
+      block:
 
-    - name: Symlink binaries {{ default_node_version }}
-      ansible.builtin.file:
-        src: "{{ node_install_dir }}/node-v{{ default_node_version }}-linux-x64/bin/{{ item }}"
-        dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
-        state: link
-      loop:
-        - node
-        - npm
-        - npx
-      tags:
-        - nodejs-symlink
+        - name: Create dir {{ node_versions }}
+          ansible.builtin.file:
+            path: "{{ node_install_dir }}/node-v{{ item }}-linux-x64"
+            state: directory
+            mode: "0755"
+          register: node_target_dir
+          loop: "{{ node_versions }}"
 
-    - name: Symlink config
-      ansible.builtin.file:
-        src: "{{ item }}"
-        dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
-        state: link
-      loop:
-        - "{{ role_path }}/files/npm"
+        - name: Download and unpack Node {{ node_versions }}
+          ansible.builtin.unarchive:
+            src: https://nodejs.org/dist/v{{ item }}/node-v{{ item }}-linux-x64.tar.xz
+            dest: "{{ node_install_dir }}"
+            remote_src: true
+          when: node_target_dir.changed
+          loop: "{{ node_versions }}"
 
-    - name: Symlink Angular config
-      ansible.builtin.file:
-        src: "{{ role_path }}/files/angular"
-        dest: "{{ ansible_user_dir }}/.config/angular"
-        state: link
-      tags:
-        - angular
+        - name: Symlink binaries {{ default_node_version }}
+          ansible.builtin.file:
+            src: "{{ node_install_dir }}/node-v{{ default_node_version }}-linux-x64/bin/{{ item }}"
+            dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+            state: link
+          loop:
+            - node
+            - npm
+            - npx
+          tags:
+            - nodejs-symlink
+
+        - name: Symlink config
+          ansible.builtin.file:
+            src: "{{ item }}"
+            dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+            state: link
+          loop:
+            - "{{ role_path }}/files/npm"
+
+        - name: Symlink Angular config
+          ansible.builtin.file:
+            src: "{{ role_path }}/files/angular"
+            dest: "{{ ansible_user_dir }}/.config/angular"
+            state: link
+          tags:
+            - angular

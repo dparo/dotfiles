@@ -187,6 +187,10 @@ if [ -d "$XDG_DATA_HOME/anaconda3/bin" ]; then
     # <<< conda initialize <<<
 fi
 
+## NVM
+[ -s "${NVM_DIR:-"$HOME/.mvn"}/nvm.sh" ] && source "${NVM_DIR:-"$HOME/.mvn"}/nvm.sh"
+[ -s "${NVM_DIR:-"$HOME/.mvn"}/nvm.sh" ] && source "${NVM_DIR:-"$HOME/.mvn"}/bash_completion"
+
 
 ## TERMINATE: Setup the aliases that we need
 source "$ZDOTDIR/.aliases"

@@ -1,0 +1,2 @@
+NODE_VERSIONS="$HOME/.config/nvm/versions/node"
+NODE_VERSION_PREFIX=v
