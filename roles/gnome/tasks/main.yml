@@ -203,7 +203,7 @@
 
 
     # gsettings set org.gnome.TextEditor use-system-font true
-    # gsettings set org.gnome.TextEditor custom-font 'GeistMono Nerd Font 10'
+    # gsettings set org.gnome.TextEditor custom-font 'Hack Nerd Font 10'
     - name: TextEditor
       dconf:
         key: "/org/gnome/TextEditor/{{ item.key }}"
@@ -212,7 +212,7 @@
       vars:
         data:
           use-system-font: true
-          custom-font: "'GeistMono Nerd Font 10'"
+          custom-font: "'Hack Nerd Font 10'"
 
 
     # gsettings set org.gnome.mutter dynamic-workspaces true
@@ -265,7 +265,7 @@
     # gsettings set org.gnome.desktop.interface font-antialiasing 'grayscale'
     # gsettings set org.gnome.desktop.interface font-name "Noto Sans 10"
     # gsettings set org.gnome.desktop.interface document-font-name 'Cantarell 11'
-    # gsettings set org.gnome.desktop.interface monospace-font-name 'GeistMono Nerd Font 10'
+    # gsettings set org.gnome.desktop.interface monospace-font-name 'Hack Nerd Font 10'
     # gsettings set org.gnome.desktop.interface clock-show-weekday true
     - name: Interface and fonts
       dconf:
@@ -281,7 +281,7 @@
           font-antialiasing: "'grayscale'"
           font-name: "'Noto Sans 10'"
           document-font-name: "'Cantarell 11'"
-          monospace-font-name: "'GeistMono Nerd Font 10'"
+          monospace-font-name: "'Hack Nerd Font 10'"
           clock-show-weekday: true
 
 
