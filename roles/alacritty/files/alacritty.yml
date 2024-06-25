@@ -10,7 +10,7 @@ scrolling:
 
 font:
   normal:
-    family: Hack Nerd Font
+    family: JetbrainsMono Nerd Font
     style: Regular
   size: 10.0
 

@@ -10,7 +10,7 @@ set $mod Mod4
 set $alt Mod1
 set $move_amt 32
 set $font Noto Sans 8
-set $bar_font Hack Nerd Font 8
+set $bar_font JetbrainsMono Nerd Font 8
 
 
 ##########################################################
