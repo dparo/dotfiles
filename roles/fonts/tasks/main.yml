@@ -9,6 +9,7 @@
           - ibm-plex-mono-fonts
           - ibm-plex-sans-fonts
           - ibm-plex-serif-fonts
+          - source-foundry-hack-fonts
         state: present
       become: true
 
