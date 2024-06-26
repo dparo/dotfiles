@@ -81,6 +81,55 @@
       become: true
       loop: "{{ jetbrains_mono_nl_fonts.files | flatten(levels=1) }}"
 
+    - name: Remove Monaspace
+      ansible.builtin.file:
+        path: "/usr/local/share/fonts/Monaspace"
+        state: absent
+      become: true
+
+    - name: Check latest Monaspace
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/githubnext/monaspace/releases/latest
+        return_content: true
+      register: rel
+
+    - name: Create dir /tmp/monaspace-font
+      ansible.builtin.file:
+        path: "/tmp/monaspace-font"
+        state: directory
+        mode: "0755"
+
+    - name: Create /usr/local/share/fonts/Monaspace
+      ansible.builtin.file:
+        path: "/usr/local/share/fonts/Monaspace"
+        state: directory
+        mode: "0755"
+      become: true
+
+    # https://github.com/githubnext/monaspace/releases/download/v1.101/monaspace-v1.101.zip
+    - name: Download Monaspace
+      ansible.builtin.unarchive:
+        src: "https://github.com/githubnext/monaspace/releases/download/v1.101/monaspace-{{ rel['json']['tag_name'] }}.zip"
+        dest: "/tmp/monaspace-font"
+        remote_src: true
+
+    - name: Install Monaspace
+      ansible.builtin.command: |
+        mv /tmp/monaspace-font/monaspace-{{ rel['json']['tag_name'] }}/fonts/{{ item }} /usr/local/share/fonts/Monaspace/
+      become: true
+      loop:
+        - "otf"
+        - "variable"
+
+    - name: Chown Monaspace installation
+      ansible.builtin.file:
+        path: /usr/local/share/fonts/Monaspace/
+        state: directory
+        recurse: true
+        owner: root
+        group: root
+      become: true
+
     - name: Reload font cache
       ansible.builtin.command: fc-cache -fvr
       when: fonts_dir.results | length > 0
