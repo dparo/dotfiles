@@ -15,8 +15,8 @@ set_wallpaper() {
 xsetroot -cursor_name left_ptr
 
 set_wallpaper \
-    /usr/share/backgrounds/gnome/adwaita-l.* \
-    /usr/share/backgrounds/f40/default/f*-01-night.png \
+    /usr/share/backgrounds/gnome/adwaita-d.* \
+    /usr/share/backgrounds/f40/default/f*-01-day.png \
     "${XDG_DATA_HGOME:-"$HOME/.local/share"}/backgrounds/fedora.jpeg" \
     /usr/share/backgrounds/gnome/adwaita-d.* \
     /usr/share/backgrounds/gnome/adwaita-l.* \
