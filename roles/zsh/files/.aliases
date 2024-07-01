@@ -126,7 +126,7 @@ alias count='wc -l'
 alias ag='rg --hidden --follow --glob=!.git/'
 alias rg='rg --hidden --follow --glob=!.git/'
 alias cls='printf "\033c"'
-alias wanip='dig +short myip.opendns.com @resolver1.opendns.com'
+alias wanip='curl ifconfig.me'
 alias svn="svn --config-dir \"\$XDG_CONFIG_HOME/subversion\""
 alias dragon="dragon -x -a"
 alias fm="run spacefm"
