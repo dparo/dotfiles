@@ -7,28 +7,34 @@
   block:
     - when: True
       block:
-       - name: Install
-         ansible.builtin.dnf:
-           name:
-             - nodejs
-           state: present
-         become: true
-       - name: Clone NVM
-         ansible.builtin.git:
-           clone: true
-           depth: 1
-           dest: "{{ ansible_user_dir}}/.config/nvm"
-           force: true
-           repo: https://github.com/nvm-sh/nvm
-           single_branch: true
-           update: true
-           version: "{{ nvm_version | default('master') }}"
-         register: clone
-       - name: Setup NVM
-         ansible.builtin.shell: |
-          source "$HOME/.config/nvm/nvm.sh"
-          nvm install --lts          # Install latest LTS
-          nvm alias default 'lts/*'  # Alias the default node to point to the latest LTS
+        - name: Install
+          ansible.builtin.dnf:
+            name:
+              - nodejs
+            state: present
+          become: true
+        - name: Clone NVM
+          ansible.builtin.git:
+            clone: true
+            depth: 1
+            dest: "{{ ansible_user_dir}}/.config/nvm"
+            force: true
+            repo: https://github.com/nvm-sh/nvm
+            single_branch: true
+            update: true
+            version: "{{ nvm_version | default('master') }}"
+          register: clone
+        - name: Setup NVM
+          ansible.builtin.shell: |
+           source "$HOME/.config/nvm/nvm.sh"
+           nvm install --lts          # Install latest LTS
+           nvm alias default 'lts/*'  # Alias the default node to point to the latest LTS
+        - name: Install yarn
+          community.general.npm:
+           name: "yarn"
+           global: true
+           state: latest
+
 
 
     - when: False
