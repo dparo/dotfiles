@@ -1,0 +1,14 @@
+---
+- name: DBVisualizer
+  tags:
+    - dbvis
+    - dbvisualizer
+  block:
+    # https://www.dbvis.com/product_download/dbvis-24.2.1/media/dbvis_linux_24_2_1.rpm
+    - name: "Install dbvis {{ version }}"
+      ansible.builtin.dnf:
+        name: "https://www.dbvis.com/product_download/dbvis-{{ version }}/media/dbvis_linux_{{ version | replace('.', '_') }}.rpm"
+        state: present
+        disable_gpg_check: true
+      become: true
+
