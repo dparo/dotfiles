@@ -48,7 +48,7 @@ function json2yml {
 alias json2yaml=json2yml
 
 function yml2json {
-    python -c 'import sys, yaml, json; print(json.dumps(yaml.safe_load(sys.stdin.read())))'
+    python -c 'import sys, yaml, json; print(json.dumps(yaml.safe_load(sys.stdin.read()), indent=2))'
 }
 
 alias yaml2json=yml2json
