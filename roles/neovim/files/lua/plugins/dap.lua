@@ -38,7 +38,13 @@ return {
             }
 
             -- Automatically open/close the UI when starting/finishing debugging
-            dap.listeners.after.event_initialized["dapui_config"] = function()
+            -- dap.listeners.after.event_initialized["dapui_config"] = function()
+            --     dapui.open()
+            -- end
+            dap.listeners.before.attach["dapui_config"] = function()
+                dapui.open()
+            end
+            dap.listeners.before.launch["dapui_config"] = function()
                 dapui.open()
             end
             dap.listeners.before.event_terminated["dapui_config"] = function()
@@ -50,10 +56,6 @@ return {
                 dapui.close()
                 require("nvim-dap-virtual-text/virtual_text").clear_virtual_text()
                 vim.fn.execute [[bd dap-preview]]
-            end
-
-            dap.listeners.after.event_exited["nvim-dap-virtual-text"] = function()
-                require("nvim-dap-virtual-text/virtual_text").clear_virtual_text()
             end
 
             --- Extension for GO/delve
