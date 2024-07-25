@@ -302,6 +302,10 @@ return {
                 dap.goto_()
             end)
 
+            vim.keymap.set("n", "<leader>?", function()
+                require("dapui").eval(nil, { enter = true })
+            end)
+
             vim.keymap.set("n", "<leader>dk", dap.up)
             vim.keymap.set("n", "<leader>d<Up>", dap.up)
             vim.keymap.set("n", "<leader>dj", dap.down)
