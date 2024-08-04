@@ -75,12 +75,12 @@ return {
                 spelling = {
                     enabled = true,
                 },
-                popup_mappings = {
+                keys = {
                     scroll_down = "<c-d>", -- binding to scroll down inside the popup
                     scroll_up = "<c-u>", -- binding to scroll up inside the popup
                 },
 
-                window = {
+                win = {
                     border = "none", -- none/single/double/shadow
                 },
 
