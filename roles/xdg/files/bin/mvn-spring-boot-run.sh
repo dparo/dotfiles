@@ -7,7 +7,7 @@ OTHER_ARGS=()
 
 
 port="${JDWP_PORT:-5005}"
-suspend="n"
+suspend="${JDWP_SUSPEND:-n}"
 
 while [[ $# -gt 0 ]]; do
   case $1 in
@@ -18,6 +18,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --suspend)
       suspend="s"
+      shift
+      ;;
+    --no-suspend)
+      suspend="n"
       shift
       ;;
     -*|--*)
