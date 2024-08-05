@@ -17,7 +17,7 @@ while [[ $# -gt 0 ]]; do
       shift
       ;;
     --suspend)
-      suspend="s"
+      suspend="y"
       shift
       ;;
     --no-suspend)
