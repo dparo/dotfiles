@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
 
 unset _JAVA_OPTIONS
+export PLANTUML_LIMIT_SIZE=16382
 exec /usr/bin/plantuml "$@"
