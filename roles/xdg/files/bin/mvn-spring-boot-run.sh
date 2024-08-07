@@ -6,6 +6,7 @@ set -eou pipefail
 OTHER_ARGS=()
 
 
+goals=()
 port="${JDWP_PORT:-5005}"
 suspend="${JDWP_SUSPEND:-n}"
 
@@ -24,6 +25,10 @@ while [[ $# -gt 0 ]]; do
       suspend="n"
       shift
       ;;
+    --clean)
+      goals+=("clean")
+      shift
+      ;;
     -*|--*)
       OTHER_ARGS+=("$1") # save positional arg
       shift # past argument
@@ -35,9 +40,10 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+goals+=("spring-boot:run")
 set -x
 mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip \
-    clean spring-boot:run \
+    "${goals[@]}" \
     -Dspring-boot.run.arguments='--debug -Dspring.profiles.active=local' \
     -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=$suspend,address=$port" \
     "${OTHER_ARGS[@]}"
