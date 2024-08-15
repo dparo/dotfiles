@@ -1,0 +1,13 @@
+---
+# https://github.com/WerWolv/ImHex
+# https://github.com/WerWolv/ImHex/releases/latest
+- name: ImHex
+  tags:
+    - imhex
+  block:
+  - name: Install ImHex (flatpak)
+    community.general.flatpak:
+      name: net.werwolv.ImHex
+      state: present
+      remote: flathub
+
