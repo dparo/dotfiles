@@ -1,0 +1,21 @@
+# k6: Load tesing tool:
+# - https://k6.io/
+# - https://github.com/grafana/k6?tab=readme-ov-file
+
+- name: k6
+  tags:
+    - k6
+  block:
+    - name: Enable k6-io repo
+      ansible.builtin.dnf:
+        name:
+          - https://dl.k6.io/rpm/repo.rpm
+        state: present
+      become: true
+    - name: Install k6
+      ansible.builtin.dnf:
+        name:
+          - k6
+        state: present
+      become: true
+

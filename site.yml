@@ -163,6 +163,7 @@
     - fonts
     - docker
     - flatpak
+    - k6
     - k8s
     - k9s
     - popeye
