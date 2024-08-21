@@ -40,10 +40,13 @@ while [[ $# -gt 0 ]]; do
   esac
 done
 
+
+mkdir -p logs
+
 goals+=("spring-boot:run")
 set -x
 mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip \
     "${goals[@]}" \
     -Dspring-boot.run.arguments='--debug -Dspring.profiles.active=local' \
     -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=$suspend,address=$port" \
-    "${OTHER_ARGS[@]}"
+    "${OTHER_ARGS[@]}" | tee logs/"$(date --iso-8601=seconds).log"

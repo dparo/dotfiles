@@ -69,6 +69,7 @@ pathprepend \
     "${DENO_DIR:-$XDG_DATA_HOME/deno}/bin" \
     "${BUN_INSTALL:-$XDG_DATA_HOME/bun}/bin" \
     "${COMPOSER_HOME:-$XDG_DATA_HOME/composer}/vendor/bin" \
+    "$HOME/opt/groovy-4.0.12/bin" \
     "$XDG_DATA_HOME/zig" \
     "${NIMBLE_DIR:-$XDG_DATA_HOME/nimble}/bin" \
     "/usr/local/bin"
