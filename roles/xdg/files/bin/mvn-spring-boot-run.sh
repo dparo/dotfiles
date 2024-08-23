@@ -42,6 +42,7 @@ done
 
 
 mkdir -p logs
+out_log_file=logs/"$(date --iso-8601=seconds).log"
 
 goals+=("spring-boot:run")
 set -x
@@ -49,4 +50,4 @@ mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip \
     "${goals[@]}" \
     -Dspring-boot.run.arguments='--debug -Dspring.profiles.active=local' \
     -Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=$suspend,address=$port" \
-    "${OTHER_ARGS[@]}" | tee logs/"$(date --iso-8601=seconds).log"
+    "${OTHER_ARGS[@]}" | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
