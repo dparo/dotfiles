@@ -21,9 +21,9 @@
 ;; See 'C-h v doom-font' for documentation and more examples of what they
 ;; accept. For example:
 ;;
-(setq doom-font (font-spec :family "Monaspace Neon" :size 12 :weight 'regular)
+(setq doom-font (font-spec :family "Monaspace Neon" :size 13)
      doom-variable-pitch-font (font-spec :family "sans" :size 13)
-     doom-symbol-font (font-spec :family "Symbols Nerd Font" :size 12 :weigh 'regular))
+     doom-symbol-font (font-spec :family "Symbols Nerd Font" :size 13))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
@@ -75,3 +75,7 @@
 ;;
 ;; You can also try 'gd' (or 'C-c c d') to jump to their definition and see how
 ;; they are implemented.
+
+(setq lsp-java-vmargs '("-XX:+UseParallelGC" "-XX:GCTimeRatio=4" "-XX:AdaptiveSizePolicyWeight=90" "-Dsun.zip.disableMemoryMapping=true" "-Xmx2G" "-Xms100m" "-javaagent:/home/dparo/.config/emacs/.local/etc/lombok.jar"))
+
+(map! :nv "C-e" #'evil-end-of-line)

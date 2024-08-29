@@ -23,3 +23,11 @@
         src: "{{ role_path }}/files/config/doom"
         dest: "{{ ansible_user_dir }}/.config/doom"
         state: link
+
+
+    - name: Download lombok
+      ansible.builtin.get_url:
+        url: https://projectlombok.org/downloads/lombok.jar
+        dest: "{{ ansible_user_dir }}/.config/emacs/.local/etc/lombok.jar"
+        mode: "0755"
+
