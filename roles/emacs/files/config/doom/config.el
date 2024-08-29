@@ -23,7 +23,7 @@
 ;;
 (setq doom-font (font-spec :family "Monaspace Neon" :size 12 :weight 'regular)
      doom-variable-pitch-font (font-spec :family "sans" :size 13)
-     doom-symbol-font (font-spec :family "Symbols Nerd Font" :size 12 :weigh 'regular)
+     doom-symbol-font (font-spec :family "Symbols Nerd Font" :size 12 :weigh 'regular))
 ;;
 ;; If you or Emacs can't find your font, use 'M-x describe-font' to look them
 ;; up, `M-x eval-region' to execute elisp code, and 'M-x doom/reload-font' to
