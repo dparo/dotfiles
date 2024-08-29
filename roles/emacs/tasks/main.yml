@@ -20,6 +20,6 @@
 
     - name: Symlink doom emacs config
       ansible.builtin.file:
-        src: "{{ role_path }}/files/config"
+        src: "{{ role_path }}/files/config/doom"
         dest: "{{ ansible_user_dir }}/.config/doom"
         state: link
