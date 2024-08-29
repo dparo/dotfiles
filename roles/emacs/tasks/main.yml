@@ -12,8 +12,14 @@
         state: present
       become: true
 
-    - name: Symlink config
+    # - name: Symlink config
+    #   ansible.builtin.file:
+    #     src: "{{ role_path }}/files/config/emacs"
+    #     dest: "{{ ansible_user_dir }}/.config/emacs"
+    #     state: link
+
+    - name: Symlink doom emacs config
       ansible.builtin.file:
-        src: "{{ role_path }}/files"
-        dest: "{{ ansible_user_dir }}/.config/emacs"
+        src: "{{ role_path }}/files/config"
+        dest: "{{ ansible_user_dir }}/.config/doom"
         state: link
