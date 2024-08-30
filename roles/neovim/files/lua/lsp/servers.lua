@@ -312,7 +312,12 @@ M.list = {
                             enabled = true,
                             tabSize = 4,
                             insertSpaces = true,
-                            onType = false,
+                            onType = {
+                                enabled = false
+                            },
+                            comments = {
+                                enabled = true
+                            },
                             settings = {
                                 profile = "GoogleStyle",
                                 url = "https://raw.githubusercontent.com/google/styleguide/gh-pages/eclipse-java-google-style.xml",
