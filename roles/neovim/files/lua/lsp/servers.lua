@@ -214,16 +214,19 @@ M.list = {
                     -- NOTE(d.paro): At the time of writing, Wed 23 2022, eclipse.jdt.ls requires Java 17 or higher
                     --         See https://github.com/mfussenegger/nvim-jdtls#configuration-quickstart
                     --         If this ever changes in the future
+                    --  https://github.com/eclipse-jdtls/eclipse.jdt.ls#running-from-the-command-line
                     "/usr/lib/jvm/java-17-openjdk/bin/java",
                     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
                     "-Dosgi.bundles.defaultStartLevel=4",
                     "-Declipse.product=org.eclipse.jdt.ls.core.product",
                     "-Djava.maven.downloadSources=true",
-                    "-Dlog.protocol=true",
-                    "-Dlog.level=ALL",
+                    "-Djava.eclipse.downloadSources=true",
+                    "-Dlog.protocol=false",
+                    "-Dlog.level=WARNING",      -- -Dlog.level=ALL
                     -- https://projectlombok.org/
                     "-javaagent:" .. path.concat { nvim_data_path, "mason", "packages", "jdtls", "lombok.jar" },
-                    "-Xms1g",
+                    "-Xms256m",
+                    "-Xmx4G",
                     "--add-modules=ALL-SYSTEM",
                     "--add-opens",
                     "java.base/java.util=ALL-UNNAMED",
@@ -253,6 +256,7 @@ M.list = {
                 settings = {
                     jdt_uri_timeout_ms = 20000,
                     java = {
+                        autobuild = true,
                         maven = {
                             downloadSources = true,
                         },
@@ -262,6 +266,20 @@ M.list = {
                                 starThreshold = 9999,
                                 staticStarThreshold = 9999,
                             },
+                        },
+                        cleanup = {
+                            actionsOnSave = {
+                                "qualifyMembers",
+                                "qualifyStaticMembers",
+                                "addOverride",
+                                "addDeprecated",
+                                "stringConcatToTextBlock",
+                                "invertEquals",
+                                "addFinalModifier",
+                                "instanceofPatternMatch",
+                                "lambdaExpression",
+                                "switchExpression"
+                            }
                         },
                         codeGeneration = {
                             toString = {
