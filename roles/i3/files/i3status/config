@@ -66,6 +66,7 @@ battery all {
     status_bat = "󰁾"
     status_unk = "󱃍"
     status_full = "󰂅 "
+    status_idle = "IDLE"
 }
 
 run_watch DHCP {
