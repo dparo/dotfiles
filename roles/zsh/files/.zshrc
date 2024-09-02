@@ -243,3 +243,8 @@ if builtin type terraform 1> /dev/null 2> /dev/null; then
     complete -o nospace -C /usr/bin/terraform terraform
 fi
 
+
+if builtin type atlas 1>/dev/null 2>/dev/null; then
+    source <(atlas completion zsh)
+fi
+
