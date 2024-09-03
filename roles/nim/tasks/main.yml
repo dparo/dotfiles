@@ -1,6 +1,7 @@
 ---
 - name: Nim
   tags:
+    - never
     - nim
   block:
     - name: Download and unpack NIM {{ nim_version }}
