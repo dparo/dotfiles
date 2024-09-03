@@ -61,6 +61,12 @@
     keepBackup = false
 	keepTemporaries = false
 	trustExitCode = false
+    prompt = false
+[difftool "idea"]
+    cmd = idea diff $LOCAL $REMOTE
+    keepBackup = false
+	keepTemporaries = false
+	trustExitCode = false
 	prompt = false
 [rebase]
 	autosquash = true
@@ -95,6 +101,13 @@
 	prompt = false
 [mergetool "vscode"]
     cmd = code --wait --merge "$REMOTE" "$LOCAL" "$BASE" "$MERGED"
+    keepBackup = false
+	keepTemporaries = false
+    writeToTemp = true
+	trustExitCode = true
+    prompt = false
+[mergetool "idea"]
+    cmd = idea merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
     keepBackup = false
 	keepTemporaries = false
     writeToTemp = true
