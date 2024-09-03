@@ -10,18 +10,18 @@
         dest: "{{ ansible_user_dir }}/opt"
         remote_src: true
 
-    - name: Symlink NIM binaries {{ nim_version }}
-      ansible.builtin.file:
-        src: "{{ ansible_user_dir }}/opt/nim-{{ nim_version }}/bin/{{ item }}"
-        dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
-        state: link
-      loop:
-        - atlas
-        - nim
-        - nimble
-        - nim_dbg
-        - nim-gdb
-        - nimgrep
-        - nimpretty
-        - nimsuggest
-        - testament
+    # - name: Symlink NIM binaries {{ nim_version }}
+    #   ansible.builtin.file:
+    #     src: "{{ ansible_user_dir }}/opt/nim-{{ nim_version }}/bin/{{ item }}"
+    #     dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+    #     state: link
+    #   loop:
+    #     - atlas
+    #     - nim
+    #     - nimble
+    #     - nim_dbg
+    #     - nim-gdb
+    #     - nimgrep
+    #     - nimpretty
+    #     - nimsuggest
+    #     - testament
