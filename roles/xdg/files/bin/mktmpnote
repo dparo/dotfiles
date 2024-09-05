@@ -5,7 +5,7 @@ run() {
     disown
 }
 
-d="/tmp/dparo/notes/$(date --iso-8601)"
+d="/$XDG_RUNTIME_DIR/dparo/notes/$(date --iso-8601)"
 mkdir -p "$d"
 file="$(mktemp -p "$d" --suffix="-$(date).md")"
 
