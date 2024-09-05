@@ -59,7 +59,8 @@ return {
         config = function()
             require("lualine").setup {
                 options = {
-                    theme = "tokyonight-night",
+                    -- theme = "tokyonight",
+                    theme = "auto",
                 },
                 sections = {
                     lualine_a = {'mode'},
