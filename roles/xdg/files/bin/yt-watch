@@ -6,6 +6,6 @@
 
 
 set -x
-tmp="/tmp/ytaudio"
+tmp="$(mktemp -d --tmpdir="$XDG_RUNTIME_DIR")/ytaudio"
 yt-dlp -N 8 --no-part -f "bestaudio" "$1" -o "$tmp" | yt-dlp -f "bestvideo[height<=?1080]" "$1" -o - | mpv --audio-file="$tmp" -
 rm -rf "$tmp"
