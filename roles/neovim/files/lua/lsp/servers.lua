@@ -169,7 +169,7 @@ M.list = {
     { name = "volar", config = {} }, -- npm install -g @vue/language-server or MasonInstall vue-language-server, supports Vue 2 and Vue 3r
     { name = "svelte", config = {} }, -- npm install -g svelte-language-server or MasonInstall svelte-language-server
     {
-        name = "tsserver",
+        name = "ts_ls",
         config = {
             root_dir = nodejs_root_dir,
             settings = {
