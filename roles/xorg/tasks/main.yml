@@ -5,6 +5,7 @@
       - xset
       - xprop
       - xsetroot
+      - hsetroot
       - xinput
       - xdotool
       - wmctrl
