@@ -123,6 +123,9 @@ local theme = vim.env.NVIM_THEME or "tokyonight"
 ---
 
 local theme_list = {
+    default = {
+        name = "default"
+    },
     catppuccin = {
         repo = "catppuccin/nvim",
         dependencies = {},
@@ -265,7 +268,7 @@ local theme_list = {
 ---
 
 local t = theme_list[theme]
-if t ~= nil then
+if t ~= nil and t.name ~= "default" then
     t.name = theme
     t.colorscheme = t.colorscheme or t.name
 
