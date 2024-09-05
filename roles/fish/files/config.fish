@@ -13,6 +13,8 @@ if status is-interactive
     # fzf_key_bindings
     fzf --fish | source
 
+    direnv hook fish | source
+
     abbr --add v "nvim"
     abbr --add gp "git pull"
     abbr --add gP "git push"
