@@ -43,7 +43,9 @@ return {
         build = function()
             vim.cmd [[:TSUpdateSync ]]
         end,
-        dependencies = { "nvim-treesitter/playground", "p00f/nvim-ts-rainbow", "nvim-treesitter/nvim-treesitter-context" },
+        dependencies = { "nvim-treesitter/playground", "p00f/nvim-ts-rainbow",
+            -- "nvim-treesitter/nvim-treesitter-context"
+        },
         config = function()
             require("nvim-treesitter.configs").setup {
                 ensure_installed = {
@@ -147,11 +149,11 @@ return {
                     },
                 },
             }
-            require("treesitter-context").setup {
-                enabled = true,
-                max_lines = 8,
-                trim_scope = "outer",
-            }
+            -- require("treesitter-context").setup {
+            --     enabled = false,
+            --     max_lines = 8,
+            --     trim_scope = "outer",
+            -- }
         end,
     },
 

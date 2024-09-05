@@ -54,12 +54,34 @@ return {
     -- Better status line
     {
         "hoob3rt/lualine.nvim",
-        enabled = false,
+        enabled = true,
         dependencies = { "nvim-tree/nvim-web-devicons" },
         config = function()
-            require("lualine").setup { options = {
-                theme = "catppuccin-mocha",
-            } }
+            require("lualine").setup {
+                options = {
+                    theme = "tokyonight-night",
+                },
+                sections = {
+                    lualine_a = {'mode'},
+                    lualine_b = {'branch', 'diff', 'diagnostics'},
+                    lualine_c = { { 'filename', path = 1} },
+                    lualine_x = {'encoding', 'fileformat', 'filetype'},
+                    lualine_y = {'progress'},
+                    lualine_z = {'location'}
+                },
+                winbar = {
+                    lualine_c = {
+                        {
+                            function()
+                                return require("nvim-navic").get_location()
+                            end,
+                            cond = function()
+                                return require("nvim-navic").is_available()
+                            end
+                        },
+                    }
+                }
+            }
         end,
     },
 
