@@ -11,8 +11,9 @@ if status is-interactive
     abbr --add v "nvim"
     abbr --add gp "git pull"
     abbr --add gP "git push"
-    abbr --add gc "git commit"
+    abbr --add gc "git commit --interactive --patch"
     abbr --add gcm --set-cursor "git commit -m \"%\""
     abbr --add ga "git add -ip"
+
     abbr --add gg "lazygit"
 end
