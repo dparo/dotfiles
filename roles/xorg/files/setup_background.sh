@@ -14,14 +14,18 @@ set_wallpaper() {
 
 xsetroot -cursor_name left_ptr
 
-xsetroot -solid darkgray
 
-# set_wallpaper \
-#     /usr/share/backgrounds/f40/default/f*-01-day.png \
-#     /usr/share/backgrounds/gnome/adwaita-d.* \
-#     "${XDG_DATA_HGOME:-"$HOME/.local/share"}/backgrounds/fedora.jpeg" \
-#     /usr/share/backgrounds/gnome/adwaita-d.* \
-#     /usr/share/backgrounds/gnome/adwaita-l.* \
-#     /usr/share/backgrounds/fedora-workstation/montclair_dark.webp \
-#     /usr/share/backgrounds/gnome/adwaita-l.* \
-#     || xsetroot -solid darkgray
+if true; then
+    hsetroot -solid '#7f7f7f' || xsetroot -solid '#7f7f7f'
+else
+    set_wallpaper \
+        /usr/share/backgrounds/f40/default/f*-01-day.png \
+        /usr/share/backgrounds/gnome/adwaita-d.* \
+        "${XDG_DATA_HGOME:-"$HOME/.local/share"}/backgrounds/fedora.jpeg" \
+        /usr/share/backgrounds/gnome/adwaita-d.* \
+        /usr/share/backgrounds/gnome/adwaita-l.* \
+        /usr/share/backgrounds/fedora-workstation/montclair_dark.webp \
+        /usr/share/backgrounds/gnome/adwaita-l.* \
+        || hsetroot -solid '#7f7f7f' \
+        || xsetroot -solid '#7f7f7f'
+fi
