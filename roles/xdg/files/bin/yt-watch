@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+# readarray -t data <<<"$(yt-dlp --get-title --get-url "$1")"
+# set -x
+# mpv --force-media-title="${data[0]}" --audio-file=<(yt-dlp --http-chunk-size 10M -o - "${data[2]}") <(yt-dlp --http-chunk-size 10M -o - "${data[1]}")
+
+
+set -x
+tmp="/tmp/ytaudio"
+yt-dlp -N 8 --no-part -f "bestaudio" "$1" -o "$tmp" | yt-dlp -f "bestvideo[height<=?1080]" "$1" -o - | mpv --audio-file="$tmp" -
+rm -rf "$tmp"
