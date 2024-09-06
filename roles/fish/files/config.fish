@@ -23,4 +23,8 @@ if status is-interactive
     abbr --add ga "git add -ip"
 
     abbr --add gg "lazygit"
+
+
+
+    bind \cH backward-kill-word
 end
