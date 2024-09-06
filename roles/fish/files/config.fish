@@ -24,7 +24,9 @@ if status is-interactive
 
     abbr --add gg "lazygit"
 
-
-
     bind \cH backward-kill-word
+
+    # if builtin type docker 1>/dev/null 2>/dev/null
+    #     docker completion fish | source
+    # end
 end
