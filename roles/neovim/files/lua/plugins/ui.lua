@@ -61,6 +61,8 @@ return {
                 options = {
                     -- theme = "tokyonight",
                     theme = "auto",
+                    -- enable global statusline (have a single statusline at bottom of neovim instead of one for  every window)
+                    globalstatus = true,
                 },
                 sections = {
                     lualine_a = {'mode'},
