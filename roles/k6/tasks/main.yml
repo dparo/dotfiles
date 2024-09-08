@@ -4,6 +4,7 @@
 
 - name: k6
   tags:
+    - never
     - k6
   block:
     - name: Enable k6-io repo
