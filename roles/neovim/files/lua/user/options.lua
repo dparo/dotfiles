@@ -81,8 +81,6 @@ vim.o.conceallevel = 0
 vim.o.whichwrap = "b,s,<,>,[,]"
 vim.o.clipboard = "unnamedplus"
 
--- Global status line
-vim.o.laststatus = 3
 
 vim.o.belloff = "all"
 
@@ -120,7 +118,9 @@ vim.o.updatetime = 250
 -- Winbar support nvim version 0.8 and above
 if vim.fn.has "nvim-0.8" == 1 then
     -- vim.o.winbar = "=%=%m %f"
-    vim.o.laststatus = 2
+
+    -- vim.o.laststatus = 2
+
     vim.o.cmdheight = 1
 
     vim.o.spell = false
