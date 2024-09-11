@@ -15,7 +15,7 @@ set_wallpaper() {
 xsetroot -cursor_name left_ptr
 
 
-if true; then
+if false; then
     hsetroot -solid '#7f7f7f' || xsetroot -solid '#7f7f7f'
 else
     set_wallpaper \
