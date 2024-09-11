@@ -11,10 +11,7 @@ alias :q!=exit
 alias v=nvim
 alias vim=nvim
 alias vi=nvim
-alias ec="emacsclient --create-frame"
 alias parallel='parallel --will-cite'
-alias docker-clean='docker system prune --volumes -a'
-alias docker-prune='docker system prune --volumes -a'
 alias onlyoffice='flatpak run --branch=stable --arch=x86_64 --command=desktopeditors --file-forwarding org.onlyoffice.desktopeditors'
 alias dotfiles="tmux new-session -c \"\$USER_DOTFILES_LOCATION\" -A -s dotfiles"
 
@@ -175,17 +172,11 @@ addlicense() {
     command addlicense -l mit -c "$(git config --get user.name)" "$@"
 }
 
-__dparo_alias_nvr_or_nvim() {
-    nvr --nostart --remote-tab-wait-silent "$@" || nvim "$@"
-}
-
 mvn_run() {
     local classpath="$1"
     shift
     mvn compile exec:java -Dexec.mainClass="$classpath" "$@"
 }
-
-alias curl_json="curl -H 'Content-Type: application/json'"
 
 if valid_shell_command nvr && [ "$NVIM_LISTEN_ADDRESS" != "" ]; then
     alias nvr=__dparo_alias_nvr_or_nvim

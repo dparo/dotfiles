@@ -1,5 +1,5 @@
 status is-interactive; or exit 0
 
 function ls --wraps=eza --description 'alias ls=eza'
-  eza $argv
+  eza --icons $argv
 end
