@@ -1,118 +1,120 @@
 # vi: ft=gitconfig
 [core]
-	editor = nvim
+    editor = nvim
     pager = delta
-	excludesFile = vault_pass.txt
-	excludesFile = keepassxc_pass.txt
-	excludesFile = keepass_pass.txt
+    excludesFile = vault_pass.txt
+    excludesFile = keepassxc_pass.txt
+    excludesFile = keepass_pass.txt
 [user]
 	name = Davide Paro
 	email = dparo@outlook.it
-	signingkey = 705FE306C8ABC4C9
+    signingkey = 705FE306C8ABC4C9
 [credential "https://git-codecommit.eu-south-1.amazonaws.com"]
     helper = !aws --profile saml codecommit credential-helper $@
     useHttpPath = true
 [credential]
     helper = cache --timeout=7200
 [gpg]
-	program = gpg
+    program = gpg
 [commit]
     gpgsign = true
 [global]
 [init]
-	defaultBranch = master
+    defaultBranch = master
 [github]
-	user = dparo
+    user = dparo
 [push]
     autoSetupRemote = true
     default = simple
 [fetch]
-	prune = true
+    prune = true
 [pull]
-	rebase = false
+    rebase = false
     default = current
 [color]
-	ui = auto
+    ui = auto
 [gui]
-	historybrowser = git-dag
-	editor = nvim
+    historybrowser = git-dag
+    editor = nvim
 [alias]
     lola = log --graph --decorate --oneline --abbrev-commit --all --full-history
     dirdiff = difftool --tool=meld --dir-diff
 [diff]
-	; tool = p4merge
-	tool = meld
+    ; tool = p4merge
+    tool = meld
+    guitool = meld
+    guiDefault = auto
     keepBackup = false
-	keepTemporaries = false
-	trustExitCode = false
-	prompt = false
+    keepTemporaries = false
+    trustExitCode = false
+    prompt = false
     colorMoved = default
 [difftool "meld"]
-	; cmd = meld "$LOCAL" "$REMOTE"
+    ; cmd = meld "$LOCAL" "$REMOTE"
     prompt = false
 [difftool "p4merge"]
-	cmd = p4merge "$LOCAL" "$REMOTE"
+    cmd = p4merge "$LOCAL" "$REMOTE"
     keepBackup = false
-	keepTemporaries = false
-	trustExitCode = false
-	prompt = false
+    keepTemporaries = false
+    trustExitCode = false
+    prompt = false
 [difftool "vscode"]
     cmd = code --wait --diff $LOCAL $REMOTE
     keepBackup = false
-	keepTemporaries = false
-	trustExitCode = false
+    keepTemporaries = false
+    trustExitCode = false
     prompt = false
 [difftool "idea"]
     cmd = idea diff $LOCAL $REMOTE
     keepBackup = false
-	keepTemporaries = false
-	trustExitCode = false
-	prompt = false
+    keepTemporaries = false
+    trustExitCode = false
+    prompt = false
 [rebase]
-	autosquash = true
+    autosquash = true
 [merge]
     ; tool = p4merge
     tool = meld
     conflictstyle = diff3
     summary = true
-	keepbackup = false
+    keepbackup = false
     writeToTemp = true
 [mergetool]
-	keepBackup = false
     keepBackup = false
-	keepTemporaries = false
-	trustExitCode = true
+    keepBackup = false
+    keepTemporaries = false
+    trustExitCode = true
     writeToTemp = true
-	prompt = false
+    prompt = false
 [mergetool "meld"]
     ; cmd = meld --output "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
     keepBackup = false
-	keepTemporaries = false
+    keepTemporaries = false
     writeToTemp = true
-	trustExitCode = true
-	prompt = false
+    trustExitCode = true
+    prompt = false
 [mergetool "p4merge"]
 # See https://git-scm.com/book/en/v2/Customizing-Git-Git-Configuration
     cmd = p4merge "$BASE" "$LOCAL" "$REMOTE" "$MERGED"
     keepBackup = false
-	keepTemporaries = false
+    keepTemporaries = false
     writeToTemp = true
-	trustExitCode = true
-	prompt = false
+    trustExitCode = true
+    prompt = false
 [mergetool "vscode"]
     cmd = code --wait --merge "$REMOTE" "$LOCAL" "$BASE" "$MERGED"
     keepBackup = false
-	keepTemporaries = false
+    keepTemporaries = false
     writeToTemp = true
-	trustExitCode = true
+    trustExitCode = true
     prompt = false
 [mergetool "idea"]
     cmd = idea merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
     keepBackup = false
-	keepTemporaries = false
+    keepTemporaries = false
     writeToTemp = true
-	trustExitCode = true
-	prompt = false
+    trustExitCode = true
+    prompt = false
 [interactive]
     diffFilter = delta --color-only --features=interactive
 [delta]
@@ -135,7 +137,7 @@
     hunk-header-file-style = red
     hunk-header-line-number-style = "#067a00"
     hunk-header-style = file line-number syntax
-	verbose = false
+    verbose = false
 [diff "lockb"]
-	textconv = bun
+    textconv = bun
     binary = true
