@@ -54,20 +54,14 @@
     prompt = false
 [difftool "p4merge"]
     cmd = p4merge "$LOCAL" "$REMOTE"
-    keepBackup = false
-    keepTemporaries = false
     trustExitCode = false
     prompt = false
 [difftool "vscode"]
     cmd = code --wait --diff $LOCAL $REMOTE
-    keepBackup = false
-    keepTemporaries = false
     trustExitCode = false
     prompt = false
 [difftool "idea"]
     cmd = idea diff $LOCAL $REMOTE
-    keepBackup = false
-    keepTemporaries = false
     trustExitCode = false
     prompt = false
 [rebase]
@@ -80,7 +74,6 @@
     keepbackup = false
     writeToTemp = true
 [mergetool]
-    keepBackup = false
     keepBackup = false
     keepTemporaries = false
     trustExitCode = true
@@ -106,14 +99,14 @@
     keepBackup = false
     keepTemporaries = false
     writeToTemp = true
-    trustExitCode = true
+    trustExitCode = false
     prompt = false
 [mergetool "idea"]
     cmd = idea merge "$LOCAL" "$REMOTE" "$BASE" "$MERGED"
     keepBackup = false
     keepTemporaries = false
     writeToTemp = true
-    trustExitCode = true
+    trustExitCode = false
     prompt = false
 [interactive]
     diffFilter = delta --color-only --features=interactive
