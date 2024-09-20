@@ -3,22 +3,32 @@
   tags:
     - zig
   block:
-    - name: Check latest release
-      ansible.builtin.uri:
-        url: https://api.github.com/repos/ziglang/zig/releases/latest
-        return_content: true
-      register: rel
+    - when: True
+      block:
+        - name: Install
+          ansible.builtin.dnf:
+            name:
+              - zig
+            state: present
+          become: true
+    - when: False
+      block:
+        - name: Check latest release
+          ansible.builtin.uri:
+            url: https://api.github.com/repos/ziglang/zig/releases/latest
+            return_content: true
+          register: rel
 
-    - name: Download and unpack ZIG {{ rel['json']['tag_name'] }}
-      ansible.builtin.unarchive:
-        src: https://ziglang.org/download/{{ rel['json']['tag_name'] }}/zig-linux-x86_64-{{ rel['json']['tag_name'] }}.tar.xz
-        dest: "{{ ansible_user_dir }}/opt"
-        remote_src: true
+        - name: Download and unpack ZIG {{ rel['json']['tag_name'] }}
+          ansible.builtin.unarchive:
+            src: https://ziglang.org/download/{{ rel['json']['tag_name'] }}/zig-linux-x86_64-{{ rel['json']['tag_name'] }}.tar.xz
+            dest: "{{ ansible_user_dir }}/opt"
+            remote_src: true
 
-    - name: Symlink binaries
-      ansible.builtin.file:
-        src: "{{ ansible_user_dir }}/opt/zig-linux-x86_64-{{ rel['json']['tag_name'] }}/{{ item }}"
-        dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
-        state: link
-      loop:
-        - zig
+        - name: Symlink binaries
+          ansible.builtin.file:
+            src: "{{ ansible_user_dir }}/opt/zig-linux-x86_64-{{ rel['json']['tag_name'] }}/{{ item }}"
+            dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+            state: link
+          loop:
+            - zig
