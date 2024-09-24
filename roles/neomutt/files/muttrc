@@ -1,6 +1,88 @@
 # Allow Mutt to open a new IMAP connection automatically.
 unset imap_passive
-set editor=nvim
+set editor = "nvim +':set textwidth=0'"
+
+# Mailcap file is used to tell mutt how to open different types of file
+set mailcap_path = "~/.config/neomutt/mailcap"
+
+
+# Store messages locally to speed things up, like searching message bodies.
+# Can be the same folder as header_cache.
+# This will cost important disk usage according to your e-mail amount.
+set header_cache        = ~/.cache/.mutt/headers
+set message_cachedir    = ~/.cache/.mutt/bodies
+set certificate_file    = ~/.cache/.mutt/certificates
+
+# Keep the IMAP connection alive by polling intermittently (time in seconds).
+set imap_keepalive = 300
+
+# How often to check for new mail (time in seconds).
+set mail_check = 120
+
+set imap_check_subscribed
+
+
+set beep = no
+set sort = threads
+set sort_aux = reverse-last-date-received
+# Show date in year/month/day hour:minute format
+set date_format="%y/%m/%d %H:%M"
+# Index page format. Default "%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s"
+set index_format="%4C %Z %{%b %d %R} %-15.15L (%?l?%4l&%4c?) %s"
+set sidebar_visible
+set sidebar_format="%B%?F? [%F]?%* %?N?%N/?%S"
+set mail_check_stats
+
+
+set edit_headers=yes
+set sleep_time = 0
+
+color status black white
+set new_mail_command="notify-send -u critical --icon=mail-unread 'New Email' '%n new messages, %u unread' &"
+
+
+######################################################
+##################      THEME       ##################
+######################################################
+
+color normal        default default         # Text is "Text"
+color index          color2 default ~N       # New Messages are Green
+color index          color1 default ~F       # Flagged messages are Red
+color index          color13 default ~T      # Tagged Messages are Red
+color index          color1 default ~D       # Messages to delete are Red
+color attachment   color5 default          # Attachments are Pink
+color signature     color8 default          # Signatures are Surface 2
+color search        color4 default          # Highlighted results are Blue
+
+color indicator      default color8          # currently highlighted message Surface 2=Background Text=Foreground
+color error          color1 default          # error messages are Red
+color status        color15 default         # status line "Subtext 0"
+color tree        color15 default         # thread tree arrows Subtext 0
+color tilde       color15 default         # blank line padding Subtext 0
+
+color hdrdefault  color13 default         # default headers Pink
+color header        color13 default "^From:"
+color header         color13 default "^Subject:"
+
+color quoted        color15 default         # Subtext 0
+color quoted1        color7 default          # Subtext 1
+color quoted2        color8 default          # Surface 2
+color quoted3        color0 default          # Surface 1
+color quoted4        color0 default
+color quoted5        color0 default
+
+color body      color2 default      [\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+               # email addresses Green
+color body     color2 default      (https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+        # URLs Green
+color body      color4 default      (^|[[:space:]])\\*[^[:space:]]+\\*([[:space:]]|$) # *bold* text Blue
+color body      color4 default      (^|[[:space:]])_[^[:space:]]+_([[:space:]]|$)     # _underlined_ text Blue
+color body      color4 default      (^|[[:space:]])/[^[:space:]]+/([[:space:]]|$)     # /italic/ text Blue
+
+color sidebar_flagged   color1 default    # Mailboxes with flagged mails are Red
+color sidebar_new       color10 default   # Mailboxes with new mail are Green
+
+######################################################
+##################      EMAIL       ##################
+######################################################
 
 source "gpg -dq ~/.config/mutt/passwd.gpg |"
 
@@ -27,80 +109,12 @@ set postponed = "+[Gmail]/Drafts"
 set record = "+[Gmail]/Sent Mail"
 set trash = "+[Gmail]/Trash"
 
-set imap_check_subscribed
-
-# Store messages locally to speed things up, like searching message bodies.
-# Can be the same folder as header_cache.
-# This will cost important disk usage according to your e-mail amount.
-set header_cache        = ~/.cache/.mutt/headers
-set message_cachedir    = ~/.cache/.mutt/bodies
-set certificate_file    = ~/.cache/.mutt/certificates
-
-# Keep the IMAP connection alive by polling intermittently (time in seconds).
-set imap_keepalive = 300
-
-# How often to check for new mail (time in seconds).
-set mail_check = 120
-
-
-set beep=no
-set sort=reverse-date
-set sort_aux=last-date-received
-# Index page format. Default "%4C %Z %{%b %d} %-15.15L (%?l?%4l&%4c?) %s"
-set index_format="%4C %Z %{%b %d %R} %-15.15L (%?l?%4l&%4c?) %s"
-set sidebar_visible
-set sidebar_format="%B%?F? [%F]?%* %?N?%N/?%S"
-set mail_check_stats
-
-
-set edit_headers=yes
-set sleep_time = 0
-
-
-
-color status black white
-set new_mail_command="notify-send -u critical --icon=mail-unread 'New Email' '%n new messages, %u unread' &"
 
 
 
 
 
 
-######################################################
-##################      THEME       ##################
-######################################################
 
-color normal		  default default         # Text is "Text"
-color index		    color2 default ~N       # New Messages are Green
-color index		    color1 default ~F       # Flagged messages are Red
-color index		    color13 default ~T      # Tagged Messages are Red
-color index		    color1 default ~D       # Messages to delete are Red
-color attachment	color5 default          # Attachments are Pink
-color signature	  color8 default          # Signatures are Surface 2
-color search		  color4 default          # Highlighted results are Blue
 
-color indicator		default color8          # currently highlighted message Surface 2=Background Text=Foreground
-color error		    color1 default          # error messages are Red
-color status		  color15 default         # status line "Subtext 0"
-color tree        color15 default         # thread tree arrows Subtext 0
-color tilde       color15 default         # blank line padding Subtext 0
 
-color hdrdefault  color13 default         # default headers Pink
-color header		  color13 default "^From:"
-color header	 	  color13 default "^Subject:"
-
-color quoted		  color15 default         # Subtext 0
-color quoted1		  color7 default          # Subtext 1
-color quoted2		  color8 default          # Surface 2
-color quoted3		  color0 default          # Surface 1
-color quoted4		  color0 default
-color quoted5		  color0 default
-
-color body		color2 default		[\-\.+_a-zA-Z0-9]+@[\-\.a-zA-Z0-9]+               # email addresses Green
-color body	  color2 default		(https?|ftp)://[\-\.,/%~_:?&=\#a-zA-Z0-9]+        # URLs Green
-color body		color4 default		(^|[[:space:]])\\*[^[:space:]]+\\*([[:space:]]|$) # *bold* text Blue
-color body		color4 default		(^|[[:space:]])_[^[:space:]]+_([[:space:]]|$)     # _underlined_ text Blue
-color body		color4 default		(^|[[:space:]])/[^[:space:]]+/([[:space:]]|$)     # /italic/ text Blue
-
-color sidebar_flagged   color1 default    # Mailboxes with flagged mails are Red
-color sidebar_new       color10 default   # Mailboxes with new mail are Green

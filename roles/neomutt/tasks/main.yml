@@ -9,6 +9,11 @@
           - neomutt
           - isync
           - msmtp
+          - w3m
+          - lynx
+          - notmuch
+          - imapfilter
+          # - davmail
         state: present
       become: true
 
