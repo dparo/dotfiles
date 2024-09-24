@@ -17,6 +17,13 @@
         state: present
       become: true
 
+    # https://github.com/dmedvinsky/mutt-ics
+    - name: Install mutt_ics (Calendar and ICS support for mutt)
+      ansible.builtin.pip:
+        name:
+          - mutt_ics
+        state: latest
+
     - name: Symlink config
       ansible.builtin.file:
         src: "{{ role_path }}/files"
