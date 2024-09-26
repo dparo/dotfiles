@@ -100,6 +100,8 @@ export SQLITE_HISTORY="$XDG_CACHE_HOME/sqlite_history"
 export REDISCLI_HISTFILE="$XDG_STATE_HOME/rediscli_history"
 export REDISCLI_RCFILE="$XDG_CONFIG_HOME/redis/redisclirc"
 
+export VCPKG_DISABLE_METRICS=1
+
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_DATA_HOME/aws/credentials"
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
 
