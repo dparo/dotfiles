@@ -81,7 +81,8 @@ def main(args: argparse.Namespace) -> None:
         b = str(argv[i])
         b = urllib.parse.unquote(b, encoding = 'utf-8')
 
-        b = base64.b64decode(b.encode("utf-8"))
+        s = b.encode("utf-8")
+        b = base64.b64decode(s + b'=' * (-len(s) % 4)) # Add `=` padding if missing
 
         invalid_utf8 = False
         b_str = ''
