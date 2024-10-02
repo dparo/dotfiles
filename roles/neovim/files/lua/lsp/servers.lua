@@ -200,7 +200,7 @@ M.list = {
             },
         },
     },
-    { name = "eslint", config = {} },
+    -- { name = "eslint", config = {} },
     -- { name = "rome", config = {} },
     -- { name = "relay_lsp", config = {} }, -- https://github.com/facebook/relay
     { name = "angularls", config = {} },
