@@ -1,0 +1,10 @@
+---
+- name: Helix
+  tags:
+    - helix
+  block:
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/config"
+        dest: "{{ ansible_user_dir }}/.config/helix"
+        state: link

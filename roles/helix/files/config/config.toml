@@ -1,0 +1,18 @@
+theme = "modus_vivendi"
+# theme = "onedark"
+# theme = "night_owl"
+# theme = "everforest_dark"
+# theme = "jellybeans"
+# theme = "kanagawa"
+
+[editor]
+line-number = "absolute" # relative
+mouse = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
