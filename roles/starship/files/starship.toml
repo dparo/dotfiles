@@ -30,6 +30,9 @@ stashed = ' 󰜦 '
 [aws]
 symbol = "  "
 
+[gcloud]
+disabled = true
+
 [buf]
 symbol = " "
 
