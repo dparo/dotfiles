@@ -21,5 +21,6 @@
           - ffmpeg
           - file-roller
           - gvfs
+          - emoji-picker
         state: present
       become: true
