@@ -10,6 +10,9 @@
           - ibm-plex-sans-fonts
           - ibm-plex-serif-fonts
           - source-foundry-hack-fonts
+          - adobe-source-code-pro-fonts
+          - adobe-source-sans-pro-fonts
+          - adobe-source-serif-pro-fonts
         state: present
       become: true
 
