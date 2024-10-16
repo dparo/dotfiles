@@ -1,0 +1,18 @@
+{
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false
+  },
+  "ui_font_size": 16,
+  "buffer_font_size": 12,
+  "buffer_font_family": "Monaspace Neon",
+  "buffer_font_features": {
+    "calt": true,
+    "liga": false
+  },
+  "theme": {
+    "mode": "dark",
+    "light": "One Light",
+    "dark": "One Dark"
+  }
+}
