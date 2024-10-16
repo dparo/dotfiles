@@ -1,42 +1,115 @@
 {
-  "vim_mode": true,
-  "telemetry": {
-    "diagnostics": false,
-    "metrics": false
-  },
-  "ui_font_size": 16,
-  "buffer_font_size": 13,
-  "buffer_font_family": "Monaspace Neon",
-  "ui_font_family": "Noto Sans",
-  "buffer_font_features": {
-    "calt": true,
-    "liga": false
-  },
-  "theme": {
-    "mode": "dark",
-    "light": "One Light",
-    "dark": "One Dark"
-  },
-  "lsp": {
-    "yaml-language-server": {
-      "settings": {
-        "yaml": {
-          "schemaStore": {
-            "enable": true
-          }
-        }
-      }
+    // BASIC
+    "telemetry": {
+        "diagnostics": false,
+        "metrics": false
     },
-    "pyright": {
-      "settings": {
-        "python.analysis": {
-          "diagnosticMode": "workspace",
-          "typeCheckingMode": "strict"
-        },
-        "python": {
-          "pythonPath": ".venv/bin/python"
+    "file_scan_exclusions": [
+        "**/.git",
+        "**/.svn",
+        "**/.hg",
+        "**/CVS",
+        "**/.DS_Store",
+        "**/Thumbs.db",
+        "**/.classpath",
+        "**/.settings",
+        "**/__pycache__"
+    ],
+
+    // Backup and save
+    "autosave": "on_focus_change",
+
+    // Font & Theme
+    "ui_font_size": 16,
+    "buffer_font_size": 13,
+    "buffer_font_family": "Monaspace Neon",
+    "ui_font_family": "Noto Sans",
+    "buffer_font_features": {
+        "calt": true,
+        "liga": false
+    },
+    "file_icons": true,
+    "toolbar": {
+        "breadcrumbs": true,
+        "quick_actions": true
+    },
+    "theme": {
+        "mode": "dark",
+        "light": "One Light",
+        "dark": "One Dark"
+    },
+
+    // Editor
+    "vim_mode": true,
+    "hard_tabs": false,
+    "tab_size": 4,
+    "preferred_line_length": 80,
+    "soft_wrap": "none",
+    "use_autoclose": true,
+    "ensure_final_newline_on_save": true,
+    "format_on_save": "on",
+    "formatter": "auto",
+    "indent_guides": {
+        "enabled": true,
+        "line_width": 1,
+        "active_line_width": 1,
+        "coloring": "fixed",
+        "background_coloring": "disabled"
+    },
+    "inlay_hints": {
+        "enabled": true,
+        "show_type_hints": true,
+        "show_parameter_hints": true,
+        "show_other_hints": true,
+        "show_background": false,
+        "edit_debounce_ms": 700,
+        "scroll_debounce_ms": 50
+    },
+
+    // Git
+    "git": {
+        "inline_blame": {
+            "enabled": true
         }
-      }
+    },
+
+    // Terminal
+    "terminal": {
+        "dock": "right"
+    },
+
+    // Journal
+    "hour_format": "hour24",
+
+    // Languages
+    "languages": {
+        "JSON": {
+            "tab_size": 4
+        }
+    },
+
+    // LSP
+    "enable_language_server": true,
+    "lsp": {
+        "yaml-language-server": {
+            "settings": {
+                "yaml": {
+                    "schemaStore": {
+                        "enable": true
+                    }
+                }
+            }
+        },
+        "pyright": {
+            "settings": {
+                "python.analysis": {
+                    "diagnosticMode": "workspace",
+                    "typeCheckingMode": "strict"
+                },
+                "python": {
+                    "pythonPath": ".venv/bin/python"
+                }
+            }
+        }
     }
-  }
 }

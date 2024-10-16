@@ -32,7 +32,6 @@
     - snap
     - codecs
 
-
     # User core configuration
     - user
     - xdg
@@ -50,7 +49,6 @@
     - virt_manager
     - cockpit
 
-
     ##
     ##  Applications
     ##
@@ -64,7 +62,6 @@
     - fish
     - powershell
 
-
     # Basic user core programs
     - ssh
     - gnupg
@@ -72,7 +69,6 @@
     - git
     - wget
     - keyring
-
 
     # Development toolchains
     - python
@@ -96,7 +92,6 @@
     - tomcat
     - latex
 
-
     ## Command line programs
     - tmux
     - fzf
@@ -110,7 +105,6 @@
 
     ## Devel command line programs
     - awscli
-
 
     # Desktop base dependencies
     - alsa
@@ -149,8 +143,6 @@
     - dragon
     - ripdrag
     - feh
-
-
 
     # TODO(d.paro): Sort out these roles
     - newsboat
@@ -220,7 +212,6 @@
     - godot_engine
     - audacity
     - openapi-generator-cli
-
 
     # Flatpaks
     - flatpak
