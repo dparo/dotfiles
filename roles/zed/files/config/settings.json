@@ -75,7 +75,10 @@
 
     // Terminal
     "terminal": {
-        "dock": "right"
+        "dock": "right",
+        "shell": {
+            "program": "/usr/bin/fish"
+        }
     },
 
     // Journal
