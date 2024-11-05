@@ -215,7 +215,8 @@ M.list = {
                     --         See https://github.com/mfussenegger/nvim-jdtls#configuration-quickstart
                     --         If this ever changes in the future
                     --  https://github.com/eclipse-jdtls/eclipse.jdt.ls#running-from-the-command-line
-                    "/usr/lib/jvm/java-17-openjdk/bin/java",
+                    -- "/usr/lib/jvm/java-17-openjdk/bin/java",
+                    "/usr/lib/jvm/java-21-openjdk/bin/java",
                     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
                     "-Dosgi.bundles.defaultStartLevel=4",
                     "-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -226,7 +227,7 @@ M.list = {
                     -- https://projectlombok.org/
                     "-javaagent:" .. path.concat { nvim_data_path, "mason", "packages", "jdtls", "lombok.jar" },
                     "-Xms256m",
-                    "-Xmx4G",
+                    "-Xmx2G",
                     "--add-modules=ALL-SYSTEM",
                     "--add-opens",
                     "java.base/java.util=ALL-UNNAMED",
