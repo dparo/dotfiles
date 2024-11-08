@@ -164,5 +164,6 @@ return {
             require("hlargs").setup()
         end,
     },
-    {"aklt/plantuml-syntax"}
+    {"aklt/plantuml-syntax" },
+    { "isobit/vim-caddyfile" },
 }
