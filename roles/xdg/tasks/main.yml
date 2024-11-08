@@ -179,3 +179,13 @@
     - xdg
     - xdg-backgrounds
 
+- name: Fetch retro_exoplanet.png background
+  ansible.builtin.get_url:
+    dest: "{{ ansible_user_dir }}/.local/share/backgrounds/retro_exoplanet.png"
+    url: '{{ retro_exoplanet_png_background_url }}'
+    mode: "0644"
+  ignore_errors: true
+  tags:
+    - xdg
+    - xdg-backgrounds
+
