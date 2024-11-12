@@ -1,0 +1,6 @@
+---
+
+- name: Github CLI
+  tags:
+    - gh-cli
+    - gh
