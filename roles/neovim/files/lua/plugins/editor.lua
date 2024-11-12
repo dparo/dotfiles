@@ -41,14 +41,14 @@ return {
             }
         end,
     },
-    {
-        "supermaven-inc/supermaven-nvim",
-        config = function()
-            require("supermaven-nvim").setup {
-                disable_keymaps = true
-            }
-        end,
-    },
+    -- {
+    --     "supermaven-inc/supermaven-nvim",
+    --     config = function()
+    --         require("supermaven-nvim").setup {
+    --             disable_keymaps = true
+    --         }
+    --     end,
+    -- },
 
     --- Trim trailing whitespaces
     {

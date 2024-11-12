@@ -28,7 +28,7 @@ return {
             "hrsh7th/cmp-nvim-lsp-signature-help",
             "petertriho/cmp-git",
             "kristijanhusak/vim-dadbod-completion",
-            "supermaven-inc/supermaven-nvim"
+            -- "supermaven-inc/supermaven-nvim"
         },
         config = function()
             local snippets_enabled = false
@@ -143,7 +143,7 @@ return {
                 -- IMPORTANT: The order of the sources is important. It establishes priority between source candidates
                 sources = cmp.config.sources({
                     { name = "nvim_lsp", keyword_length = 3 },
-                    { name = "supermaven" },
+                    -- { name = "supermaven" },
                     -- { name = "nvim_lsp_signature_help" },
                     { name = "nvim_lua", keyword_length = 3 },
                     { name = "luasnip", keyword_length = 3 },
