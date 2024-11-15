@@ -10,7 +10,7 @@ mkdir -p "$d"
 file="$(mktemp -p "$d" --suffix="-$(date).md")"
 
 
-if builtin type marktext 1>/dev/null 2>/dev/null; then
+if false && builtin type marktext 1>/dev/null 2>/dev/null; then
     touch "$file"
     cd "$(dirname "$file")" || exit 1
     run marktext "$(dirname "$file")" "$file"
