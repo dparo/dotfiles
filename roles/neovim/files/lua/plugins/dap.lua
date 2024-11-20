@@ -233,13 +233,26 @@ return {
                         webRoot = "${workspaceFolder}",
                     },
                     {
-                        name = "[firefox-debug-adapter] Firefox Debug Launch",
+                        name = "[chrome-debug-adapter] Launch Chrome",
+                        type = "chrome",
+                        request = "launch",
+                        sourceMaps = true,
+                        trace = true,
+                        url = function()
+                            return "http://127.0.0.1" .. vim.fn.input("Port: ", "4200")
+                        end,
+                        hostName = "127.0.0.1",
+                        webRoot = "${workspaceFolder}",
+                    },
+                    {
+                        name = "[firefox-debug-adapter] Launch Firefox",
                         type = "firefox",
                         request = "launch",
                         reAttach = true,
                         url = function()
                             return "http://127.0.0.1" .. vim.fn.input("Port: ", "4200")
                         end,
+                        hostName = "127.0.0.1",
                         webRoot = "${workspaceFolder}",
                     },
                 })
