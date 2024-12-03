@@ -10,7 +10,7 @@
         dest: /etc/yum.repos.d/google-chrome.repo
         content: |
           [google-chrome]
-          name=google-chrome
+          name=Google Chrome
           baseurl=https://dl.google.com/linux/chrome/rpm/stable/x86_64
           skip_if_unavailable=True
           gpgcheck=1
