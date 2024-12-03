@@ -417,6 +417,9 @@ M.list = {
             root_dir = deno_root_dir,
         },
     },
+    { name = "elixirls", config = {
+        cmd = { path.concat { nvim_data_path, "mason", "packages", "elixir-ls", "language_server.sh" } },
+    }},
     { name = "gopls", config = {} },
     { name = "vimls", config = {} },
     { name = "html", config = {} },
