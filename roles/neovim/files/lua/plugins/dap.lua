@@ -50,12 +50,10 @@ return {
             dap.listeners.before.event_terminated["dapui_config"] = function()
                 dapui.close()
                 require("nvim-dap-virtual-text/virtual_text").clear_virtual_text()
-                vim.fn.execute [[bd dap-preview]]
             end
             dap.listeners.before.event_exited["dapui_config"] = function()
                 dapui.close()
                 require("nvim-dap-virtual-text/virtual_text").clear_virtual_text()
-                vim.fn.execute [[bd dap-preview]]
             end
 
             --- Extension for GO/delve
