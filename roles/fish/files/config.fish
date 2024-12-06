@@ -10,8 +10,6 @@ if status is-interactive
     starship init fish | source
 
     # source "$HOME/opt/fzf/shell/key-bindings.fish"
-    # fzf_key_bindings
-    fzf --fish | source
 
     direnv hook fish | source
 
