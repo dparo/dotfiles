@@ -137,8 +137,24 @@ return {
                     ["<C-b>"] = cmp.mapping.scroll_docs(-4),
                     ["<C-f>"] = cmp.mapping.scroll_docs(4),
                     ["<C-Space>"] = cmp.mapping.complete(),
-                    ["<C-e>"] = cmp.mapping.abort(),
                     ["<CR>"] = cmp.mapping.confirm { select = false }, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+
+                    ["<C-a>"] = cmp.mapping(function(fallback)
+                        cmp.close()
+                        fallback()
+                        end, { "i" }),
+                    ["<C-e>"] = cmp.mapping(function(fallback)
+                        cmp.close()
+                        fallback()
+                        end, { "i" }),
+                    ['<Down>'] = cmp.mapping(function(fallback)
+                        cmp.close()
+                        fallback()
+                        end, { "i" }),
+                    ['<Up>'] = cmp.mapping(function(fallback)
+                        cmp.close()
+                        fallback()
+                        end, { "i" }),
                 },
                 -- IMPORTANT: The order of the sources is important. It establishes priority between source candidates
                 sources = cmp.config.sources({
