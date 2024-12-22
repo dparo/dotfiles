@@ -19,6 +19,7 @@ if false; then
     hsetroot -solid '#7f7f7f' || xsetroot -solid '#7f7f7f'
 else
     set_wallpaper \
+        /usr/share/backgrounds/f41/default/f*-01-day.png \
         "${XDG_DATA_HGOME:-"$HOME/.local/share"}/backgrounds/retro_exoplanet.png" \
         "${XDG_DATA_HGOME:-"$HOME/.local/share"}/backgrounds/BirdNord.png" \
         /usr/share/backgrounds/gnome/adwaita-l.* \
