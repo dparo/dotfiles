@@ -135,6 +135,7 @@
     ## Basic GUI programs
     - kitty
     - alacritty
+    - ghostty
     - st
     - rofi
     - xdg_terminal_exec

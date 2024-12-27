@@ -1,0 +1,66 @@
+command = /usr/bin/fish
+
+# gtk-adwaita = false
+window-theme = dark
+gtk-titlebar = false
+window-decoration = false
+
+shell-integration = none
+cursor-style=block
+
+adjust-cell-height = +2
+font-family = ""
+font-family = "Monaspace Neon"
+font-feature = +calt
+font-feature = -liga
+font-size = 9.0
+
+font-codepoint-map =
+
+# Seti-UI + Custom
+font-codepoint-map = U+E5FA-U+E6AC=Symbols Nerd Font
+
+# Devicons
+font-codepoint-map = U+E700-U+E7C5=Symbols Nerd Font
+
+# Font Awesome
+font-codepoint-map = U+F000-U+F2E0=Symbols Nerd Font
+
+# Font Awesome Extension
+font-codepoint-map = U+E200-U+E2A9=Symbols Nerd Font
+
+# Material Design Icons
+font-codepoint-map = U+F0001-U+F1AF0=Symbols Nerd Font
+
+# Weather
+font-codepoint-map = U+E300-U+E3E3=Symbols Nerd Font
+
+# Octicons
+font-codepoint-map = U+F400-U+F532,U+2665,U+26A1=Symbols Nerd Font
+
+# Powerline Symbols
+font-codepoint-map = U+E0A0-U+E0A2,U+E0B0-U+E0B3=Symbols Nerd Font
+
+# Powerline Extra Symbols
+font-codepoint-map = U+E0A3,U+E0B4-U+E0C8,U+E0CA,U+E0CC-U+E0D4=Symbols Nerd Font
+
+# IEC Power Symbols
+font-codepoint-map = U+23FB-U+23FE,U+2B58=Symbols Nerd Font
+
+# Font Logos
+font-codepoint-map = U+F300-U+F32F=Symbols Nerd Font
+
+# Pomicons
+font-codepoint-map = U+E000-U+E00A=Symbols Nerd Font
+
+# Codicons
+font-codepoint-map = U+EA60-U+EBEB=Symbols Nerd Font
+
+# Additional sets
+font-codepoint-map = U+E276C-U+E2771=Symbols Nerd Font # Heavy Angle Brackets
+font-codepoint-map = U+2500-U+259F=Symbols Nerd Font # Box Drawing
+
+# Some symbols not covered by Symbols Nerd Font
+# nonicons contains icons in the range: U+F101-U+F27D
+# U+F167 is HTML logo, but YouTube logo in Symbols Nerd Font
+font-codepoint-map = U+F102,U+F116-U+F118,U+F12F,U+F13E,U+F1AF,U+F1BF,U+F1CF,U+F1FF,U+F20F,U+F21F-U+F220,U+F22E-U+F22F,U+F23F,U+F24F,U+F25F=nonicons

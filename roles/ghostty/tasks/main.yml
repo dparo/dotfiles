@@ -1,0 +1,11 @@
+- name: Ghostty
+  tags:
+    - ghostty
+  block:
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/config/ghostty"
+        dest: "{{ ansible_user_dir }}/.config/ghostty"
+        state: link
+
+
