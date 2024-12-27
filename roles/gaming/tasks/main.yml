@@ -36,7 +36,7 @@
     - proton
     - proton-ge
 
-- name: Download and unpack latest proton-ge
+- name: "Download and unpack latest proton-ge {{ proton_ge_latest['json']['tag_name'] }}'"
   ansible.builtin.unarchive:
     src: https://github.com/GloriousEggroll/proton-ge-custom/releases/latest/download/{{ proton_ge_latest['json']['tag_name'] }}.tar.gz
     dest: "{{ ansible_user_dir }}/.steam/root/compatibilitytools.d/"
