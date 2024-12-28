@@ -1,6 +1,7 @@
 ---
 - name: Zig
   tags:
+    - never
     - zig
   block:
     - when: True
