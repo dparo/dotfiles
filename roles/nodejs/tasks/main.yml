@@ -11,6 +11,7 @@
           ansible.builtin.dnf:
             name:
               - nodejs
+              - pnpm
             state: present
           become: true
         - name: Clone NVM
@@ -65,7 +66,6 @@
             - node
             - npm
             - npx
-            - pnpm
           tags:
             - nodejs-symlink
 
