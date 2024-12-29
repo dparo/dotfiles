@@ -65,6 +65,7 @@
             - node
             - npm
             - npx
+            - pnpm
           tags:
             - nodejs-symlink
 
