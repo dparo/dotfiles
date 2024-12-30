@@ -110,7 +110,7 @@ export REBEL_BASE="$XDG_CONFIG_HOME/jrebel"
 
 export DOTNET_CLI_HOME="$XDG_DATA_HOME/dotnet"
 export NUGET_PACKAGES="$XDG_CACHE_HOME/nuget"
-export JAVA_USER_HOME="$XDG_DATA_HOME/java"
+# export JAVA_USER_HOME="$XDG_DATA_HOME/java"
 
 export MINIKUBE_HOME="$XDG_DATA_HOME/minikube"
 export PULUMI_HOME="$XDG_DATA_HOME/pulumi"
@@ -121,15 +121,15 @@ export COMPOSER_HOME="$XDG_DATA_HOME/composer"
 # JAVA_OPTS: Is used by many shell launcher scripts to pass JVM options to the wrapped programs.
 #        Not all java programs use this environment variable, but it is preferred over _JAVA_OPTIONS whenever possible
 # java.util.prefs.userRoot --- See: https://sourcegraph.com/github.com/openjdk/jdk@91292d5/-/blob/src/java.prefs/unix/classes/java/util/prefs/FileSystemPreferences.java?L124:17&subtree=true&popover=pinned#tab=def
-export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djava.util.prefs.userRoot=\"$XDG_CONFIG_HOME\" -Drebel.base=\"$REBEL_BASE\""
+# export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djava.util.prefs.userRoot=\"$XDG_CONFIG_HOME\" -Drebel.base=\"$REBEL_BASE\""
 
 # Hack for fixing the OpenJDK implementation from creating fontcache files in ~/.java/fonts.
 # See: https://sourcegraph.com/github.com/openjdk/jdk@91292d56a9c2b8010466d105520e6e898ae53679/-/blob/src/java.desktop/unix/classes/sun/font/FcFontConfiguration.java?L358:18&popover=pinned#tab=references
 #   The openjdk implementation hardcodes the location of the fontcache file regardless if the user specified java.util.prefs.userRoot to a different location
-export _JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=\"$JAVA_USER_HOME\""
+# export _JAVA_OPTIONS="$_JAVA_OPTIONS -Duser.home=\"$JAVA_USER_HOME\""
 
 # Setup JAVAFX
-export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djavafx.cachedir=\"$XDG_CACHE_HOME/openjfx\""
+# export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djavafx.cachedir=\"$XDG_CACHE_HOME/openjfx\""
 
 
 ##
@@ -142,7 +142,7 @@ export _JAVA_OPTIONS="$_JAVA_OPTIONS -Djavafx.cachedir=\"$XDG_CACHE_HOME/openjfx
 # https://www.oracle.com/java/technologies/javase/9-enhancements.html
 # NOTE(d.paro): From JDK 9, _JAVA_OPTIONS is deprecated in favour of JDK_JAVA_OPTIONS,
 #               which it evens support more features.
-export JDK_JAVA_OPTIONS="$_JAVA_OPTIONS"
+# export JDK_JAVA_OPTIONS="$_JAVA_OPTIONS"
 
 
 

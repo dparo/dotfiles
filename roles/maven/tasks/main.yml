@@ -86,8 +86,8 @@
         mode: "0755"
       loop:
         - "{{ ansible_user_dir }}/.cache/maven/repository"
-        - "{{ ansible_user_dir }}/.local/share/java"
-        - "{{ ansible_user_dir }}/.local/share/java/.m2"
+        # - "{{ ansible_user_dir }}/.local/share/java"
+        # - "{{ ansible_user_dir }}/.local/share/java/.m2"
 
     - name: Symlink items
       ansible.builtin.file:
@@ -97,6 +97,6 @@
         force: true
       loop:
         - src: "{{ ansible_user_dir }}/.cache/maven/repository"
-          dest: "{{ ansible_user_dir }}/.local/share/java/.m2/repository"
+          dest: "{{ ansible_user_dir }}/.m2/repository"
         - src: "{{ ansible_user_dir }}/.config/maven/settings_local.xml"
-          dest: "{{ ansible_user_dir }}/.local/share/java/.m2/settings.xml"
+          dest: "{{ ansible_user_dir }}/.m2/settings.xml"

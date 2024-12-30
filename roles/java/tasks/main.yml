@@ -31,17 +31,17 @@
         - never
         - scala
 
-    - name: Create items
-      ansible.builtin.file:
-        path: "{{ item }}"
-        state: directory
-        mode: "0755"
-      loop:
-        - "{{ ansible_user_dir }}/.local/share/java"
-      tags:
-        - java
-        - jdk
-        - openjdk
+    # - name: Create items
+    #   ansible.builtin.file:
+    #     path: "{{ item }}"
+    #     state: directory
+    #     mode: "0755"
+    #   loop:
+    #     - "{{ ansible_user_dir }}/.local/share/java"
+    #   tags:
+    #     - java
+    #     - jdk
+    #     - openjdk
 
     - name: Fetch PMD binary (https://github.com/pmd/pmd)
       ansible.builtin.unarchive:
