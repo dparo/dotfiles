@@ -1,5 +1,8 @@
 - name: K9S
   tags:
+    - never
+    - k8s
+    - kubernetes
     - k9s
   block:
     - name: Create install dir

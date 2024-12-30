@@ -1,6 +1,7 @@
 ---
 - name: k8s
   tags:
+    - never
     - k8s
     - kubernetes
   block:
