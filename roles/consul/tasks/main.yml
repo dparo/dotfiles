@@ -1,6 +1,7 @@
 ---
 - name: Consul
   tags:
+    - never
     - consul
   block:
     - name: Enable hashicorp.repo (https://rpm.releases.hashicorp.com/fedora/hashicorp.repo)

@@ -1,6 +1,7 @@
 ---
 - name: Terraform
   tags:
+    - never
     - terraform
     - terragrunt
   block:
@@ -32,6 +33,3 @@
         dest: "{{ ansible_user_dir }}/.local/bin/terragrunt"
         mode: "0755"
         force: true
-
-
-
