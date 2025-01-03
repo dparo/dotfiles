@@ -1,61 +1,62 @@
 ---
-- name: Adding docker repo
-  ansible.builtin.shell: |
-    dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
-  become: true
-  when: not podman_docker_emulation
+- name: Docker
   tags:
-    - docker
-
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - docker-ce
-      - docker-ce-cli
-      - containerd.io
-      - docker-compose-plugin
-      - podman
-      - podman-tui
-    state: present
-  become: true
-  when: not podman_docker_emulation
-  tags:
+    - never
     - docker
     - podman
+  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  block:
+    - name: Adding docker repo
+      ansible.builtin.shell: |
+        dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+      become: true
+      when: not podman_docker_emulation
 
-- name: Change docker daemon config (data-root)
-  ansible.builtin.copy:
-    dest: /etc/docker/daemon.json
-    content: |
-      {
-        "data-root": "/var/lib/docker"
-      }
-    mode: "0644"
-  become: true
-  tags:
-    - docker
-    - podman
+    - name: Install Docker
+      ansible.builtin.dnf:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-compose-plugin
+        state: present
+      become: true
+      when: not podman_docker_emulation
 
-- name: Enable docker socket (starts dockerd service lazily when invoked)
-  ansible.builtin.systemd:
-    name: docker.socket
-    enabled: "{{ not podman_docker_emulation }}"
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and podman_docker_emulation
-  tags:
-    - docker
-    - podman
+    - name: Install Podman
+      ansible.builtin.dnf:
+        name:
+          - podman
+          - podman-tui
+        state: present
+      become: true
+      when: podman_docker_emulation
 
-- name: Append docker group to user {{ ansible_env.USER }}
-  ansible.builtin.user:
-    name: "{{ ansible_env.USER }}"
-    append: true
-    groups:
-      - docker
-  become: true
-  tags:
-    - docker
-    - podman
+    - name: Change docker daemon config (data-root)
+      ansible.builtin.copy:
+        dest: /etc/docker/daemon.json
+        content: |
+          {
+            "data-root": "/var/lib/docker"
+          }
+        mode: "0644"
+      become: true
+
+    - name: Enable docker socket (starts dockerd service lazily when invoked)
+      ansible.builtin.systemd:
+        name: docker.socket
+        enabled: "{{ not podman_docker_emulation }}"
+      become: true
+      when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and podman_docker_emulation
+
+    - name: Append docker group to user {{ ansible_env.USER }}
+      ansible.builtin.user:
+        name: "{{ ansible_env.USER }}"
+        append: true
+        groups:
+          - docker
+      become: true
+      when: not podman_docker_emulation
 
 # - name: Symlink docker config
 #   ansible.builtin.file:
@@ -69,40 +70,33 @@
 #     - podman-desktop
 #     - docker
 
-- name: Install podman-docker
-  ansible.builtin.dnf:
-    name:
-      - podman-docker
-      - podman-compose
-    state: present
-  become: true
-  when: podman_docker_emulation
-  tags:
-    - docker
-    - podman
+    - name: Install podman-docker
+      ansible.builtin.dnf:
+        name:
+          - podman
+          - podman-tui
+          - podman-docker
+          - podman-compose
+        state: present
+      become: true
+      when: podman_docker_emulation
 
-- name: Enable podman service
-  ansible.builtin.systemd:
-    name: podman
-    enabled: "{{ podman_docker_emulation }}"
-  become: true
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and podman_docker_emulation
-  tags:
-    - podman
-    - docker
+    - name: Enable podman service
+      ansible.builtin.systemd:
+        name: podman
+        enabled: "{{ podman_docker_emulation }}"
+      become: true
+      when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and podman_docker_emulation
 #
-- name: Add host entry for host.docker.internal
-  ansible.builtin.lineinfile:
-    dest: /etc/hosts
-    regexp: '^{{ item.ip }}\s+{{ item.hostname }}'
-    line: "{{ item.ip }} {{ item.hostname }}"
-    state: present
-  become: True
-  loop:
-    - ip: 172.17.0.1
-      hostname: host.docker.internal
-    - ip: 127.0.0.1
-      hostname: kubernetes.docker.internal
-  tags:
-    - podman
-    - docker
+    - name: Add host entry for host.docker.internal
+      ansible.builtin.lineinfile:
+        dest: /etc/hosts
+        regexp: '^{{ item.ip }}\s+{{ item.hostname }}'
+        line: "{{ item.ip }} {{ item.hostname }}"
+        state: present
+      become: True
+      loop:
+        - ip: 172.17.0.1
+          hostname: host.docker.internal
+        - ip: 127.0.0.1
+          hostname: kubernetes.docker.internal
