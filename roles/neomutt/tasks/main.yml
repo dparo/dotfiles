@@ -13,6 +13,7 @@
           - lynx
           - notmuch
           - imapfilter
+          - pass
           # - davmail
         state: present
       become: true
