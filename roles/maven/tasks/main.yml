@@ -1,6 +1,7 @@
 ---
 - name: Maven
   tags:
+    - never
     - maven
   block:
 

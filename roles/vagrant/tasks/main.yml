@@ -1,18 +1,19 @@
 ---
-- name: Enable hashicorp.repo (https://rpm.releases.hashicorp.com/fedora/hashicorp.repo)
-  ansible.builtin.get_url:
-    dest: /etc/yum.repos.d/hashicorp.repo
-    url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
-    mode: "0644"
-  become: true
+- name: Vagrant
   tags:
+    - never
     - vagrant
+  block:
+    - name: Enable hashicorp.repo (https://rpm.releases.hashicorp.com/fedora/hashicorp.repo)
+      ansible.builtin.get_url:
+        dest: /etc/yum.repos.d/hashicorp.repo
+        url: https://rpm.releases.hashicorp.com/fedora/hashicorp.repo
+        mode: "0644"
+      become: true
 
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - vagrant
-    state: present
-  become: true
-  tags:
-    - vagrant
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - vagrant
+        state: present
+      become: true

@@ -1,6 +1,7 @@
 ---
 - name: HashiCorp Vault
   tags:
+    - never
     - vault
     - hashicorp-vault
   block:

@@ -1,5 +1,6 @@
 - name: GraalVM
   tags:
+    - never
     - graalvm
     - graal
   block:
