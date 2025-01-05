@@ -9,11 +9,12 @@
           - neomutt
           - isync
           - msmtp
-          - w3m
+          # - w3m
           - lynx
           - notmuch
           - imapfilter
           - abook
+          - urlview
           - pass
           # - davmail
         state: present
