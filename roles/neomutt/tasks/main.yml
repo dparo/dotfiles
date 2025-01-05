@@ -13,6 +13,7 @@
           - lynx
           - notmuch
           - imapfilter
+          - abook
           - pass
           # - davmail
         state: present
