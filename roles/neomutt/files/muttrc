@@ -38,7 +38,7 @@ set edit_headers=yes
 set sleep_time = 0
 
 color status black white
-set new_mail_command="notify-send -u critical --icon=mail-unread 'New Email' '%n new messages, %u unread' &"
+set new_mail_command="notify-send -u critical --icon=mail-message-new-symbolic 'New Email' '%n new messages, %u unread' &"
 
 ## ICS and Calendar support
 auto_view text/calendar application/ics
