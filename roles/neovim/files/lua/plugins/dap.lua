@@ -74,6 +74,13 @@ return {
                 },
             }
 
+            -- See the [GDB Debug adapter configuration](https://sourceware.org/gdb/current/onlinedocs/gdb#Debugger-Adapter-Protocol) docs for the configuration options
+            dap.adapters.gdb = {
+                type = "executable",
+                command = "gdb",
+                args = { "--interpreter=dap", "--eval-command", "set print pretty on" }
+            }
+
             dap.adapters.chrome = {
                 type = "executable",
                 command = "node",
@@ -88,7 +95,20 @@ return {
 
             dap.configurations.cpp = {
                 {
-                    name = "(gdb) Run file",
+                    name = "(gdb-native-dap) Run file",
+                    type = "gdb",
+                    request = "launch",
+                    cwd = "${workspaceFolder}",
+                    stopAtBeginningOfMainSubprogram = true,
+                    stopOnEntry = false,
+                    program = function()
+                        return require("dap.utils").pick_file({ executables = true, path = "./build" })
+                        -- return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
+                },
+
+                {
+                    name = "(vscode-cpptools) Run file",
                     type = "cppdbg",
                     request = "launch",
                     cwd = "${workspaceFolder}",
@@ -111,18 +131,29 @@ return {
                     },
                 },
                 {
-                    name = "(gdb) Attach to gdbserver :1234",
+                    name = '(gdb-native-dap) Attach to gdbserver :10000',
+                    type = 'gdb',
+                    request = 'attach',
+                    target = 'localhost:10000',
+                    cwd = '${workspaceFolder}',
+                    -- program = function()
+                    --     return require("dap.utils").pick_file({ executables = true, path = "./build" })
+                    --     -- return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    -- end,
+                },
+                {
+                    name = "(vscode-cpptools) Attach to gdbserver :10000",
                     type = "cppdbg",
                     request = "launch",
                     MIMode = "gdb",
-                    miDebuggerServerAddress = "localhost:1234",
+                    miDebuggerServerAddress = "localhost:10000",
                     miDebuggerPath = "/usr/bin/gdb",
                     cwd = "${workspaceFolder}",
                     stopOnEntry = false,
-                    program = function()
-                        return require("dap.utils").pick_file({ executables = true, path = "./build" })
-                        -- return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                    end,
+                    -- program = function()
+                    --     return require("dap.utils").pick_file({ executables = true, path = "./build" })
+                    --     -- return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    -- end,
                     setupCommands = {
                         {
                             description = "Enable pretty-printing for gdb",
@@ -137,8 +168,8 @@ return {
                     },
                 },
                 {
-                    name = "(gdb) Attach to process",
-                    type = "cpp",
+                    name = "(gdb-native-dap) Attach to process",
+                    type = "gdb",
                     request = "attach",
                     pid = require("dap.utils").pick_process,
                     args = {},
