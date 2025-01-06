@@ -41,17 +41,17 @@ return {
             -- dap.listeners.after.event_initialized["dapui_config"] = function()
             --     dapui.open()
             -- end
-            dap.listeners.before.attach["dapui_config"] = function()
+            dap.listeners.before.attach.dapui_config = function()
                 dapui.open()
             end
-            dap.listeners.before.launch["dapui_config"] = function()
+            dap.listeners.before.launch.dapui_config = function()
                 dapui.open()
             end
-            dap.listeners.before.event_terminated["dapui_config"] = function()
+            dap.listeners.before.event_terminated.dapui_config = function()
                 dapui.close()
                 require("nvim-dap-virtual-text/virtual_text").clear_virtual_text()
             end
-            dap.listeners.before.event_exited["dapui_config"] = function()
+            dap.listeners.before.event_exited.dapui_config = function()
                 dapui.close()
                 require("nvim-dap-virtual-text/virtual_text").clear_virtual_text()
             end
@@ -272,11 +272,15 @@ return {
             vim.keymap.set("n", "<F5>", dap.continue)
             vim.keymap.set("n", "<S-F5>", function()
                 dap.terminate()
+                dapui.close()
+                require("nvim-dap-virtual-text/virtual_text").clear_virtual_text()
             end)
 
             -- <S-F5>
             vim.keymap.set("n", "<F17>", function()
                 dap.terminate()
+                dapui.close()
+                require("nvim-dap-virtual-text/virtual_text").clear_virtual_text()
             end)
 
             -- <M-F5>
