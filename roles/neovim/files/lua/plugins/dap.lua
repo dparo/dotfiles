@@ -88,43 +88,56 @@ return {
 
             dap.configurations.cpp = {
                 {
-                    name = "Launch file",
+                    name = "(gdb) Run file",
                     type = "cppdbg",
                     request = "launch",
-                    program = function()
-                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
-                    end,
                     cwd = "${workspaceFolder}",
-                    stopOnEntry = true,
+                    stopOnEntry = false,
+                    program = function()
+                        return require("dap.utils").pick_file({ executables = true, path = "./build" })
+                        -- return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                    end,
                     setupCommands = {
                         {
+                            description = "Enable pretty-printing for gdb",
                             text = "-enable-pretty-printing",
-                            description = "enable pretty printing",
                             ignoreFailures = false,
                         },
+                        {
+                          description = "Set Disassembly Flavor to Intel",
+                          text = "-gdb-set disassembly-flavor intel",
+                          ignoreFailures = true,
+                        }
                     },
                 },
                 {
-                    name = "Attach to gdbserver :1234",
+                    name = "(gdb) Attach to gdbserver :1234",
                     type = "cppdbg",
                     request = "launch",
                     MIMode = "gdb",
                     miDebuggerServerAddress = "localhost:1234",
                     miDebuggerPath = "/usr/bin/gdb",
                     cwd = "${workspaceFolder}",
+                    stopOnEntry = false,
                     program = function()
-                        return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
+                        return require("dap.utils").pick_file({ executables = true, path = "./build" })
+                        -- return vim.fn.input("Path to executable: ", vim.fn.getcwd() .. "/", "file")
                     end,
                     setupCommands = {
                         {
+                            description = "Enable pretty-printing for gdb",
                             text = "-enable-pretty-printing",
-                            description = "enable pretty printing",
                             ignoreFailures = false,
                         },
+                        {
+                          description = "Set Disassembly Flavor to Intel",
+                          text = "-gdb-set disassembly-flavor intel",
+                          ignoreFailures = true,
+                        }
                     },
                 },
                 {
-                    name = "Attach to process",
+                    name = "(gdb) Attach to process",
                     type = "cpp",
                     request = "attach",
                     pid = require("dap.utils").pick_process,
