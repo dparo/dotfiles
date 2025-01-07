@@ -1,0 +1,13 @@
+- name: OpenLDAP
+  tags:
+    - openldap
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          # Provides `ldapsearch`, `ldapadd`, etc binaries
+          - openldap-clients
+        state: present
+      become: true
+
+

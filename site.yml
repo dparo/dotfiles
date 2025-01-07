@@ -105,6 +105,7 @@
 
     ## Devel command line programs
     - awscli
+    - openldap
 
     # Desktop base dependencies
     - alsa
