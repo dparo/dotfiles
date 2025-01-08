@@ -74,6 +74,8 @@
     summary = true
     keepbackup = false
     writeToTemp = true
+    ; https://git-scm.com/docs/git-merge#Documentation/git-merge.txt---autostash
+    autoStash = false
 [mergetool]
     keepBackup = false
     keepTemporaries = false
