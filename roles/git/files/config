@@ -37,6 +37,7 @@
     historybrowser = git-dag
     editor = nvim
 [alias]
+    pushf = push --force-with-lease --force-if-includes
     lola = log --graph --decorate --oneline --abbrev-commit --all --full-history
     dirdiff = difftool --tool=meld --dir-diff
 [diff]
