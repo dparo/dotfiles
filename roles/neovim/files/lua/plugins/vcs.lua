@@ -10,9 +10,10 @@ return {
         config = true,
     },
 
-    { "tpope/vim-fugitive" },
+    { "tpope/vim-fugitive", enabled = false},
     {
         "kdheepak/lazygit.nvim",
+        enabled = false,
         lazy = true,
         cmd = { "LazyGit" },
         dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" },
