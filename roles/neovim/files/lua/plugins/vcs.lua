@@ -10,7 +10,7 @@ return {
         config = true,
     },
 
-    { "tpope/vim-fugitive", enabled = false},
+    { "tpope/vim-fugitive", enabled = true},
     {
         "kdheepak/lazygit.nvim",
         enabled = false,
