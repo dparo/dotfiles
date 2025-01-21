@@ -1,26 +1,27 @@
 ---
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - tmux
-    state: present
-  become: true
+- name: Tmux
   tags:
     - tmux
 
-- name: Install tmuxp
-  ansible.builtin.pip:
-    name:
-      - tmuxp
-    state: latest
-  tags:
-    - tmux
-    - tmuxp
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - tmux
+          - python3-tmux
+        state: present
+      become: true
 
-- name: Symlink config
-  ansible.builtin.file:
-    src: "{{ role_path }}/files"
-    dest: "{{ ansible_user_dir }}/.config/tmux"
-    state: link
-  tags:
-    - tmux
+    - when: False
+      block:
+      - name: Install tmuxp trough pip
+        ansible.builtin.pip:
+          name:
+            - tmuxp
+          state: latest
+
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files"
+        dest: "{{ ansible_user_dir }}/.config/tmux"
+        state: link
