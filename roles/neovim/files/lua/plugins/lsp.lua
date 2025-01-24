@@ -257,7 +257,7 @@ return {
                     -- Use a sub-list to run only the first available formatter
                     javascript = { "prettierd", "prettier", stop_after_first = true },
                     typescript = { "prettierd", "prettier", stop_after_first = true },
-                    markdown = { "mdformat", "prettierd", "prettier", stop_after_first = true },
+                    markdown = { "mdformat", --[[ "prettierd",  ]] "prettier", stop_after_first = true },
                     sh = { "shellharden" },
                     sql = { "sqlfluff" },
                     xml = { "xmllint" },
@@ -271,6 +271,10 @@ return {
                 --     timeout_ms = 500,
                 --     lsp_fallback = true,
                 -- },
+            }
+            -- TODO: d.paro: Update onlt for markdown
+            require("conform").formatters.prettier = {
+                append_args = { "--print-width", "100", "--prose-wrap", "always" },
             }
 
             require("lsp_extensions").inlay_hints {
