@@ -255,8 +255,9 @@ return {
                         end
                     end,
                     -- Use a sub-list to run only the first available formatter
-                    javascript = { { "prettierd", "prettier" } },
-                    typescript = { { "prettierd", "prettier" } },
+                    javascript = { "prettierd", "prettier", stop_after_first = true },
+                    typescript = { "prettierd", "prettier", stop_after_first = true },
+                    markdown = { "prettierd", "prettier", stop_after_first = true },
                     sh = { "shellharden" },
                     sql = { "sqlfluff" },
                     xml = { "xmllint" },
