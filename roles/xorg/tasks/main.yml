@@ -15,6 +15,7 @@
       - wmctrl
       - arandr
       - autorandr
+      - xkill
     state: present
   become: true
   tags:
