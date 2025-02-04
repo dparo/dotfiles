@@ -3,6 +3,12 @@
   tags:
     - ssh
   block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - openssh-askpass
+      become: True
+
     - name: Create items
       ansible.builtin.file:
         path: "{{ item }}"
