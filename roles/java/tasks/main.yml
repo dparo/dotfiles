@@ -8,12 +8,60 @@
     - name: Install
       ansible.builtin.dnf:
         name:
+          - adoptium-temurin-java-repository
+        state: present
+      become: true
+      tags:
+        - java
+        - jdk
+        - openjdk
+
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - adoptium-temurin-java-repository
+        state: present
+      become: true
+      tags:
+        - java
+        - jdk
+        - openjdk
+
+
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - temurin-8-jdk
+          - temurin-11-jdk
+          - temurin-17-jdk
+        state: present
+      become: true
+      tags:
+        - java
+        - jdk
+        - openjdk
+
+    # - name: Install
+    #   ansible.builtin.dnf:
+    #     name:
+    #       - ant
+    #       - java-1.8.0-openjdk-devel
+    #       - java-11-openjdk-devel
+    #       - java-11-openjdk-src
+    #       - java-17-openjdk-devel
+    #       - java-17-openjdk-src
+    #       - jacoco # JaCoCo is a free code coverage library for Java
+    #     state: present
+    #   become: true
+    #   tags:
+    #     - java
+    #     - jdk
+    #     - openjdk
+
+    - name: Install
+      ansible.builtin.dnf:
+        name:
           - ant
-          - java-1.8.0-openjdk-devel
-          - java-11-openjdk-devel
-          - java-11-openjdk-src
-          - java-17-openjdk-devel
-          - java-17-openjdk-src
           - jacoco # JaCoCo is a free code coverage library for Java
         state: present
       become: true
@@ -21,6 +69,7 @@
         - java
         - jdk
         - openjdk
+
 
     - name: Install scala
       ansible.builtin.dnf:
