@@ -296,21 +296,21 @@ M.list = {
                             --    Can switch Java Runtime from neovim after starting with :JdtSetRuntime
                             runtimes = {
                                 {
-                                    name = "Temurin 1.8",
+                                    name = "JavaSE-1.8",
                                     path = "/usr/lib/jvm/temurin-8-jdk/",
                                 },
                                 {
-                                    name = "Temurin 11",
+                                    name = "JavaSE-11",
                                     path = "/usr/lib/jvm/temurin-11-jdk/",
                                 },
                                 {
-                                    name = "Temurin 17",
+                                    name = "JavaSE-17",
                                     path = "/usr/lib/jvm/temurin-17-jdk/",
                                 },
-                                {
-                                    name = "Temurin 21",
-                                    path = "/usr/lib/jvm/temurin-21-jdk/",
-                                },
+                                -- {
+                                --     name = "JavaSE-21",
+                                --     path = "/usr/lib/jvm/temurin-21-jdk/",
+                                -- },
                             },
                         },
                         format = {
