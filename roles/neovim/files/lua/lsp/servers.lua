@@ -215,8 +215,8 @@ M.list = {
                     --         See https://github.com/mfussenegger/nvim-jdtls#configuration-quickstart
                     --         If this ever changes in the future
                     --  https://github.com/eclipse-jdtls/eclipse.jdt.ls#running-from-the-command-line
-                    -- "/usr/lib/jvm/java-17-openjdk/bin/java",
-                    "/usr/lib/jvm/java-21-openjdk/bin/java",
+                    -- "/usr/lib/jvm/jre-17/bin/java",
+                    "/usr/lib/jvm/jre-21/bin/java",
                     "-Declipse.application=org.eclipse.jdt.ls.core.id1",
                     "-Dosgi.bundles.defaultStartLevel=4",
                     "-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -296,16 +296,20 @@ M.list = {
                             --    Can switch Java Runtime from neovim after starting with :JdtSetRuntime
                             runtimes = {
                                 {
-                                    name = "JavaSE-1.8",
-                                    path = "/usr/lib/jvm/java-1.8.0-openjdk/",
+                                    name = "Temurin 1.8",
+                                    path = "/usr/lib/jvm/temurin-8-jdk/",
                                 },
                                 {
-                                    name = "JavaSE-11",
-                                    path = "/usr/lib/jvm/java-11-openjdk/",
+                                    name = "Temurin 11",
+                                    path = "/usr/lib/jvm/temurin-11-jdk/",
                                 },
                                 {
-                                    name = "JavaSE-17",
-                                    path = "/usr/lib/jvm/java-17-openjdk/",
+                                    name = "Temurin 17",
+                                    path = "/usr/lib/jvm/temurin-17-jdk/",
+                                },
+                                {
+                                    name = "Temurin 21",
+                                    path = "/usr/lib/jvm/temurin-21-jdk/",
                                 },
                             },
                         },
