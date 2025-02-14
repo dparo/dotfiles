@@ -11,11 +11,17 @@
         state: present
       become: true
 
+    - name: Remove Fedora Flatpak Repo in favour of flathub
+      community.general.flatpak_remote:
+        name: fedora
+        state: absent
+
     - name: Add the flathub flatpak repository remote to the user installation
       community.general.flatpak_remote:
         name: flathub
         state: present
         flatpakrepo_url: https://flathub.org/repo/flathub.flatpakrepo
+
 
     - name: Install flatseal (flatpak)
       community.general.flatpak:
