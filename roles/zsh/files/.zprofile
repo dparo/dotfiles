@@ -155,7 +155,7 @@ export MAVEN_HOME="$HOME/opt/apache-maven-3.8.6/"
 export M2_HOME="$MAVEN_HOME"
 
 # This variable contains parameters used to start up the JVM running Maven.
-export MAVEN_OPTS="$JAVA_OPTS -Xmx512m -Xverify:none -XX:TieredStopAtLevel=1 -XX:-TieredCompilation"
+# export MAVEN_OPTS="$JAVA_OPTS -Xmx512m -Xverify:none -XX:TieredStopAtLevel=1 -XX:-TieredCompilation"
 
 # Supported only from Maven 4
 export MAVEN_ARGS="-gs $XDG_CONFIG_HOME/maven/settings_global.xml"
