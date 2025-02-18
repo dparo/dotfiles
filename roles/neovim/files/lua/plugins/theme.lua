@@ -129,7 +129,7 @@ local theme_list = {
     catppuccin = {
         repo = "catppuccin/nvim",
         dependencies = {},
-        colorscheme = "catppuccin-mocha",
+        colorscheme = "catppuccin-macchiato",
         config = function() end,
     },
     rosepine = {
