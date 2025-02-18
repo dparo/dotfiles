@@ -119,7 +119,7 @@ for _, sign in ipairs(signs) do
 end
 
 ---
-local theme = vim.env.NVIM_THEME or "tokyonight"
+local theme = vim.env.NVIM_THEME or "catppuccin"
 ---
 
 local theme_list = {
