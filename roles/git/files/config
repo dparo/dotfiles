@@ -50,6 +50,9 @@
     trustExitCode = false
     prompt = false
     colorMoved = default
+[diff "hex"]
+    textconv = hexdump -v -C
+    binary = true
 [difftool "meld"]
     ; cmd = meld "$LOCAL" "$REMOTE"
     prompt = false
@@ -68,8 +71,8 @@
 [rebase]
     autosquash = true
 [merge]
-    ; tool = p4merge
-    tool = meld
+    tool = p4merge
+    ; tool = meld
     conflictstyle = diff3
     summary = true
     keepbackup = false
