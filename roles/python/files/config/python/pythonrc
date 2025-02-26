@@ -2,33 +2,33 @@
 # -*- coding: utf-8 -*-
 
 
-import atexit
-import os
-import readline
-from pathlib import Path
-
-
-# histfile = os.path.join(str(Path.home() / ".python_history"))
-
-base_dir = Path(os.environ.get("XDG_STATE_HOME", str(Path.home() / ".local" / "state")))
-if not base_dir.is_dir():
-    os.makedirs(str(base_dir))
-
-histfile = str(base_dir / "python_history")
-
-try:
-    readline.read_history_file(histfile)
-    h_len = readline.get_current_history_length()
-except FileNotFoundError:
-    open(histfile, "wb").close()
-    h_len = 0
-
-
-def save_history_callback(prev_h_len, histfile):
-    import readline
-    new_h_len = readline.get_current_history_length()
-    readline.set_history_length(1000)
-    readline.append_history_file(new_h_len - prev_h_len, histfile)
-
-
-atexit.register(save_history_callback, h_len, histfile)
+# import atexit
+# import os
+# import readline
+# from pathlib import Path
+#
+#
+# # histfile = os.path.join(str(Path.home() / ".python_history"))
+#
+# base_dir = Path(os.environ.get("XDG_STATE_HOME", str(Path.home() / ".local" / "state")))
+# if not base_dir.is_dir():
+#     os.makedirs(str(base_dir))
+#
+# histfile = str(base_dir / "python_history")
+#
+# try:
+#     readline.read_history_file(histfile)
+#     h_len = readline.get_current_history_length()
+# except FileNotFoundError:
+#     open(histfile, "wb").close()
+#     h_len = 0
+#
+#
+# def save_history_callback(prev_h_len, histfile):
+#     import readline
+#     new_h_len = readline.get_current_history_length()
+#     readline.set_history_length(1000)
+#     readline.append_history_file(new_h_len - prev_h_len, histfile)
+#
+#
+# atexit.register(save_history_callback, h_len, histfile)
