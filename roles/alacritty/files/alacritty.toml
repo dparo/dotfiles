@@ -1,3 +1,4 @@
+[general]
 live_config_reload = false
 working_directory = "None"
 
@@ -70,7 +71,7 @@ style = "Regular"
 history = 10000
 multiplier = 3
 
-[shell]
+[terminal.shell]
 program = "zsh"
 
 [window]
