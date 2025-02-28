@@ -130,7 +130,12 @@ local theme_list = {
         repo = "catppuccin/nvim",
         dependencies = {},
         colorscheme = "catppuccin-macchiato",
-        config = function() end,
+        config = function()
+            require("catppuccin").setup({
+                flavour = "macchiato",
+                transparent_background = true,
+            })
+        end,
     },
     rosepine = {
         repo = "rose-pine/neovim",
@@ -277,9 +282,6 @@ if t ~= nil and t.name ~= "default" then
         --
         -- Run `TermcolorsShow` to dump neovim theme to a kitty.conf compatible theme file
         --
-        {
-            "psliwka/termcolors.nvim",
-        },
         {
             t.repo,
             lazy = false,
