@@ -179,6 +179,16 @@
     - xdg
     - xdg-backgrounds
 
+- name: Fetch flatppuccin_4k_macchiato background
+  ansible.builtin.get_url:
+    dest: "{{ ansible_user_dir }}/.local/share/backgrounds/flatppuccin_4k_macchiato.png"
+    url: https://raw.githubusercontent.com/zhichaoh/catppuccin-wallpapers/refs/heads/main/flatppuccin/flatppuccin_4k_macchiato.png
+    mode: "0644"
+  ignore_errors: true
+  tags:
+    - xdg
+    - xdg-backgrounds
+
 - name: Fetch retro_exoplanet.png background
   ansible.builtin.get_url:
     dest: "{{ ansible_user_dir }}/.local/share/backgrounds/retro_exoplanet.png"
