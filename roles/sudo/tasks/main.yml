@@ -7,6 +7,7 @@
     create: true
   loop:
     - /usr/sbin/openconnect
+    - /usr/bin/openfortivpn
     - /usr/sbin/openvpn
   become: true
   tags:
