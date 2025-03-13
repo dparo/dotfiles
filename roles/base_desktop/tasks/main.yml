@@ -22,5 +22,6 @@
           - file-roller
           - gvfs
           - emoji-picker
+          - rofimoji # https://github.com/fdw/rofimoji: Emoji, unicode and general character picker for rofi and rofi-likes
         state: present
       become: true
