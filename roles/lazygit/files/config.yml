@@ -3,6 +3,10 @@ notARepository: "skip"
 quitOnTopLevelReturn: false
 disableStartupPopups: true
 promptToReturnFromSubprocess: false # display confirmation when subprocess terminates
+
+go:
+  parseEmoji: true
+
 gui:
     mouseEvents: true
     expandFocusedSidePanel: true
