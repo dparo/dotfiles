@@ -114,7 +114,7 @@
     # https://github.com/githubnext/monaspace/releases/download/v1.101/monaspace-v1.101.zip
     - name: Download Monaspace
       ansible.builtin.unarchive:
-        src: "https://github.com/githubnext/monaspace/releases/download/v1.101/monaspace-{{ rel['json']['tag_name'] }}.zip"
+        src: "https://github.com/githubnext/monaspace/releases/download/v1.200/monaspace-{{ rel['json']['tag_name'] }}.zip"
         dest: "/tmp/monaspace-font"
         remote_src: true
 
