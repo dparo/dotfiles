@@ -10,6 +10,8 @@
           - ibm-plex-sans-fonts
           - ibm-plex-serif-fonts
           - source-foundry-hack-fonts
+          - cascadia-mono-fonts    # Cascadia Mono is identical to Cascadia Code when ligatures are disabled
+          - cascadia-mono-nf-fonts # Same as Cascadia but with Nerd fonts embedded
           - adobe-source-code-pro-fonts
           - adobe-source-sans-pro-fonts
           - adobe-source-serif-pro-fonts
