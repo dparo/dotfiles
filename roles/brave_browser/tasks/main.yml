@@ -31,3 +31,5 @@
         state: absent
       loop:
         - "{{ ansible_user_dir }}/.config/BraveSoftware/Brave-Browser/Default/GPUCache"
+
+    # TODO: Debloat brave-browser.
