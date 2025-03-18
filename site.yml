@@ -69,7 +69,6 @@
     - git
     - wget
     - keyring
-    - geany
 
     # Development toolchains
     - python
@@ -131,7 +130,8 @@
     - neovim
     - helix
     - emacs
-    - textadept
+    # - textadept
+    - geany
     - zed
 
     ## Basic GUI programs
