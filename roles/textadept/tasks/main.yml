@@ -1,6 +1,7 @@
 ---
 - name: Textadept
   tags:
+    - never
     - textadept
   block:
     - name: Check latest textadept
