@@ -69,6 +69,7 @@
     - git
     - wget
     - keyring
+    - geany
 
     # Development toolchains
     - python

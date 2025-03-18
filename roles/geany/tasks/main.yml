@@ -1,0 +1,14 @@
+- name: Geany
+  tags:
+    - geany
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - geany
+          - geany-plugins-vimode
+          - geany-plugins-webhelper
+          - geany-plugins-markdown
+        state: present
+      become: true
+
