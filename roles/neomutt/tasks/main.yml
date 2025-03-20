@@ -16,6 +16,7 @@
           - abook
           - urlview
           - pass
+          - sasl-xoauth2
           # - davmail
         state: present
       become: true
