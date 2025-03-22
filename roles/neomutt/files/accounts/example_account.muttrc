@@ -4,20 +4,18 @@ source ~/.config/neomutt/muttrc
 
 # Example
 
-## Receive options.
-set imap_user=user@gmail.com
-set imap_pass=****
-set folder = imaps://user@imap.gmail.com/
-set spoolfile = +INBOX
-set postponed = +Drafts
-set record = +Sent
+# muttrc file for account fabrette@example.com
+set real_name = "fabrette"
+set from = "fabrette@example.com"
+set sendmail = "msmtp -a fabrette@example.com"
+alias me fabrette <fabrette@example.com>
+set folder = "/home/dparo/.local/share/mail/fabrette@example.com"
+set header_cache = "/home/dparo/.cache/mutt-wizard/fabrette_example.com/headers"
+set message_cachedir = "/home/dparo/.cache/mutt-wizard/fabrette_example.com/bodies"
+set mbox_type = Maildir
+set hostname = "example.com"
+set spool_file = "+INBOX"
+set postponed = "+Drafts"
+set trash = "+Trash"
+set record = "+Sent"
 
-## Send options.
-set smtp_url=smtps://user:****@smtp.gmail.com
-set realname='User X'
-set from=user@gmail.com
-set hostname="gmail.com"
-set signature="John Doe"
-# Connection options
-set ssl_force_tls = yes
-unset ssl_starttls
