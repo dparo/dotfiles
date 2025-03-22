@@ -1,0 +1,23 @@
+# vi: ft=muttrc
+
+source ~/.config/neomutt/muttrc
+
+# Example
+
+## Receive options.
+set imap_user=user@gmail.com
+set imap_pass=****
+set folder = imaps://user@imap.gmail.com/
+set spoolfile = +INBOX
+set postponed = +Drafts
+set record = +Sent
+
+## Send options.
+set smtp_url=smtps://user:****@smtp.gmail.com
+set realname='User X'
+set from=user@gmail.com
+set hostname="gmail.com"
+set signature="John Doe"
+# Connection options
+set ssl_force_tls = yes
+unset ssl_starttls
