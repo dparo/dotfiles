@@ -18,6 +18,9 @@
           - pass
           - sasl-xoauth2
           # - davmail
+          - python3-oauth2
+          - python3-oauth2client
+          - python3-notify2
         state: present
       become: true
 
