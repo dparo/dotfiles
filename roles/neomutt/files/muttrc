@@ -4,6 +4,8 @@ set certificate_file    = ~/.cache/.mutt/certificates
 
 set mail_check=30    # Check for new mail every 30 seconds
 set timeout=30       # Redraw screen if idle for 30 seconds
+set imap_check_interval=30  # Check IMAP mail every 30 seconds
+set check_new=yes
 
 set editor = "nvim +':set textwidth=0'"
 set query_command = "abook --mutt-query '%s'"
