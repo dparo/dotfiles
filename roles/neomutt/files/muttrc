@@ -21,26 +21,28 @@ set forward_quote		# include message in forwards
 set reverse_name		# reply as whomever it was to
 set include			# include message in replies
 
+
 # set send_charset="us-ascii:utf-8"
 set send_charset="us-ascii:iso-8859-1:utf-8"
 set mailcap_path = $HOME/.config/neomutt/mailcap:/usr/local/share/mutt-wizard/mailcap:$mailcap_path
 # set mime_type_query_command = "file --mime-type -b %s"
 set mime_type_query_command = "xdg-mime query filetype %s"
-set date_format="%y/%m/%d %H:%M"
+# set date_format="%Y-%m-%d %H:%M"
+set date_format="%a %b %d %H:%M:%S"
 set sort = threads
 set sort_aux = reverse-last-date-received
+set index_format="%4C %Z %[%a %b %d %H:%M:%S] %-48.48f (%<l?%4l&%4c>) %s"
+set sidebar_format = '%D%?F? [%F]?%* %?N?%N/? %?S?%S?'
 
 set sleep_time = 0
 set mail_check = 60
 
 set beep = yes
-set index_format="%2C %Z %?X?A& ? %D %-15.15F %s (%-4.4c)"
 set mail_check_stats
 set sidebar_visible = yes
 set sidebar_width = 20
 set sidebar_short_path = yes
 set sidebar_next_new_wrap = yes
-set sidebar_format = '%D%?F? [%F]?%* %?N?%N/? %?S?%S?'
 
 set new_mail_command="notify-send -u critical --icon=mail-message-new-symbolic 'New Email' '%n new messages, %u unread' &"
 
