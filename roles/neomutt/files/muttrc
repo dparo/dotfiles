@@ -2,6 +2,9 @@ set header_cache        = ~/.cache/.mutt/headers
 set message_cachedir    = ~/.cache/.mutt/bodies
 set certificate_file    = ~/.cache/.mutt/certificates
 
+set mail_check=30    # Check for new mail every 30 seconds
+set timeout=30       # Redraw screen if idle for 30 seconds
+
 set editor = "nvim +':set textwidth=0'"
 set query_command = "abook --mutt-query '%s'"
 set edit_headers=no
