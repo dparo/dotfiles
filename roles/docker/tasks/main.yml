@@ -20,6 +20,7 @@
           - containerd.io
           - docker-buildx-plugin
           - docker-compose-plugin
+          - golang-github-docker-credential-helpers-devel # Integration with credentials helpers to store `docker login` credentials safely (not in plain text)
         state: present
       become: true
       when: not podman_docker_emulation
