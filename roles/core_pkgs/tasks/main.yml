@@ -44,6 +44,7 @@
       - calc # Arbitrary precision C-like calculator
       - p11-kit
       - inotify-tools
+      - miller # Miller is a command-line tool for querying, shaping, and reformatting data files in various formats including CSV, TSV, JSON, and JSON Lines.
     state: present
   become: true
   tags:
