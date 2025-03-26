@@ -181,6 +181,7 @@ return {
 
     {
         "windwp/nvim-autopairs",
+        enabled = false,
         config = function()
             require("nvim-autopairs").setup {
                 disable_filetype = { "TelescopePrompt", "lua" },
@@ -232,7 +233,6 @@ return {
         end,
     },
 
-    { "nathom/filetype.nvim" },
     {
         "epwalsh/obsidian.nvim",
         version = "*",  -- recommended, use latest release instead of latest commit

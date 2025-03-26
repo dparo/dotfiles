@@ -140,4 +140,4 @@ vim.g.termdebug_wide = 1
 vim.g.tex_flavor = "latex" -- Sometimes .tex files are opened in vim as ft=plaintex. This defaults to open all .tex files with ft=tex
 
 -- Load native gdb plugin bundled with neovim, use TermdebugCommand to start debugging with GDB
-vim.cmd [[ packadd termdebug ]]
+-- vim.cmd [[ packadd termdebug ]]
