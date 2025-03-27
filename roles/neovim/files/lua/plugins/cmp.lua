@@ -24,6 +24,7 @@ return {
             "hrsh7th/cmp-buffer",
             "hrsh7th/cmp-path",
             "hrsh7th/cmp-cmdline",
+            "hrsh7th/cmp-emoji",
             "nvim-tree/nvim-web-devicons",
             "hrsh7th/cmp-nvim-lsp-signature-help",
             "petertriho/cmp-git",
@@ -165,6 +166,7 @@ return {
                     { name = "buffer", keyword_length = 3 },
                     { name = "path", keyword_length = 3 },
                     { name = "luasnip", keyword_length = 3 },
+                    { name = 'emoji' }
                 }),
             }
 
