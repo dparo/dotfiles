@@ -16,7 +16,7 @@ return {
         "hrsh7th/nvim-cmp",
         dependencies = {
             "nvim-lua/plenary.nvim",
-            "windwp/nvim-autopairs",
+            -- "windwp/nvim-autopairs",
             "L3MON4D3/LuaSnip",
             "saadparwaiz1/cmp_luasnip",
             "hrsh7th/cmp-nvim-lsp",
@@ -32,9 +32,6 @@ return {
         },
         config = function()
             local snippets_enabled = false
-
-            require("nvim-autopairs").setup()
-            local cmp_autopairs = require "nvim-autopairs.completion.cmp"
 
             local cmp = require "cmp"
             local luasnip = require "luasnip"
@@ -203,8 +200,12 @@ return {
                 }),
             })
 
-            -- Fix for nvim-autopair
-            cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
+
+            -- -- Fix for nvim-autopair
+            local autopairs_loaded, autopairs = pcall(require, "nvim-autopairs")
+            if autopairs_loaded then
+                cmp.event:on("confirm_done", require ("nvim-autopairs.completion.cmp").on_confirm_done { map_char = { tex = "" } })
+            end
         end,
     },
 }

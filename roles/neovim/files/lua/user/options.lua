@@ -119,7 +119,7 @@ vim.o.updatetime = 250
 if vim.fn.has "nvim-0.8" == 1 then
     vim.o.winbar = "=%=%m %f"
 
-    -- vim.o.laststatus = 2
+    vim.o.laststatus = 3
 
     vim.o.cmdheight = 1
 

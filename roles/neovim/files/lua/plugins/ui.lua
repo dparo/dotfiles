@@ -51,43 +51,6 @@ return {
         end,
     },
 
-    -- Better status line
-    {
-        "hoob3rt/lualine.nvim",
-        enabled = true,
-        dependencies = { "nvim-tree/nvim-web-devicons" },
-        config = function()
-            require("lualine").setup {
-                options = {
-                    -- theme = "tokyonight",
-                    theme = "auto",
-                    -- enable global statusline (have a single statusline at bottom of neovim instead of one for  every window)
-                    globalstatus = true,
-                },
-                sections = {
-                    lualine_a = {'mode'},
-                    lualine_b = {'branch', 'diff', 'diagnostics'},
-                    lualine_c = { { 'filename', path = 1} },
-                    lualine_x = {'encoding', 'fileformat', 'filetype'},
-                    lualine_y = {'progress'},
-                    lualine_z = {'location'}
-                },
-                winbar = {
-                    lualine_c = {
-                        {
-                            function()
-                                return require("nvim-navic").get_location()
-                            end,
-                            cond = function()
-                                return require("nvim-navic").is_available()
-                            end
-                        },
-                    }
-                }
-            }
-        end,
-    },
-
     {
         "folke/which-key.nvim",
         config = function()
@@ -165,60 +128,7 @@ return {
         end,
     },
 
-    {
-        "akinsho/bufferline.nvim",
-        version = "v3.*",
-        dependencies = "nvim-tree/nvim-web-devicons",
-        enabled = false,
-        config = function()
-            require("bufferline").setup {}
-        end,
-    },
 
-    -- Dashboard startup page
-    {
-        "nvimdev/dashboard-nvim",
-        event = "VimEnter",
-        enabled = false,
-        config = function()
-            require("dashboard").setup {
-                change_to_vcs_root = true,
-                config = {
-                    shortcut = {
-
-                        {
-                            desc = "  New file ",
-                            action = "enew",
-                            group = "@string",
-                            key = "n",
-                        },
-                        {
-                            desc = " 󰚰  Update ",
-                            action = "Lazy sync",
-                            group = "@string",
-                            key = "u",
-                        },
-                        {
-                            desc = "   File/path ",
-                            action = "Telescope find_files find_command=rg,--hidden,--files",
-                            group = "@string",
-                            key = "f",
-                        },
-                        {
-                            desc = " 󰩈  Quit ",
-                            action = "q!",
-                            group = "@macro",
-                            key = "q",
-                        },
-                    },
-                    week_header = {
-                        enable = true,
-                    },
-                },
-            }
-        end,
-        dependencies = { { "nvim-tree/nvim-web-devicons" } },
-    },
     ----
     ---- Plugins to manage windows
     ----
