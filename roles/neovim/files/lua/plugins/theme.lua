@@ -109,14 +109,11 @@ local signs = {
 
 vim.diagnostic.config {
     underline = true,
-    virtual_text = true,
+    virtual_text = { current_line = true },
+    virtual_lines = { current_line = true },
     signs = signs,
     severity_sort = true,
 }
-
-for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-end
 
 ---
 local theme = vim.env.NVIM_THEME or "catppuccin"
