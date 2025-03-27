@@ -77,7 +77,7 @@ vim.o.pumheight = 16
 
 vim.o.mouse = "a"
 vim.o.errorbells = false
-vim.o.conceallevel = 1
+vim.o.conceallevel = 0 -- Set to >= 1 for obsidian.nvim
 vim.o.whichwrap = "b,s,<,>,[,]"
 vim.o.clipboard = "unnamedplus"
 
