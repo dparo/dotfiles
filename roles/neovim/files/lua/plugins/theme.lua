@@ -98,6 +98,8 @@ core.utils.augroup("USER_THEME_OVERRIDES", {
     { { "ColorScheme" }, { pattern = "*", callback = theme_overrides } },
 })
 
+
+-- TODO(d.paro): To be fixed since it does't pick up the text
 local signs = {
     { name = "DiagnosticSignError", text = "", numhl = "" },
     { name = "DiagnosticSignWarn", text = "", numhl = "" },
