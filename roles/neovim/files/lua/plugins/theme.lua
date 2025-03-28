@@ -112,7 +112,7 @@ local signs = {
 vim.diagnostic.config {
     underline = true,
     virtual_text = { current_line = true },
-    virtual_lines = { current_line = true },
+    virtual_lines = { current_line = false },
     signs = signs,
     severity_sort = true,
 }
