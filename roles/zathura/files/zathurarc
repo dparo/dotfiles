@@ -2,6 +2,7 @@ set window-title-home-tilde true
 set window-title-basename true
 set statusbar-basename false
 set statusbar-home-tilde true
+set database "sqlite"
 
 
 set selection-clipboard clipboard
