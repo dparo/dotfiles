@@ -125,29 +125,6 @@ return {
         end,
     },
 
-    {
-        "lukas-reineke/indent-blankline.nvim",
-        enabled = false,
-        config = function()
-            require("indent_blankline").setup {
-                show_current_context = true,
-                show_current_context_start = false,
-                filetype_exclude = {
-                    "lspinfo",
-                    "checkhealth",
-                    "help",
-                    "man",
-                    "startify",
-                    "dashboard",
-                    "packer",
-                    "neogitstatus",
-                    "NvimTree",
-                    "Trouble",
-                },
-            }
-        end,
-    },
-
     -- Automatically close braces but only when pressing enter (more conservative approach)
     --      NOTE: It does not work since it collides with our custom <CR> key, and there's
     --            no way to tell the plugin, to not catch the <CR> key by default and let us
