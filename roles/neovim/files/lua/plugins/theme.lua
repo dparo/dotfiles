@@ -109,13 +109,16 @@ local signs = {
     { name = "DapStopped", text = "", numhl = "DapStopped" },
 }
 
-vim.diagnostic.config {
-    underline = true,
+vim.diagnostic.config({
+    jump = {
+        float = true
+    },
     virtual_text = { current_line = true },
     virtual_lines = { current_line = false },
     signs = signs,
     severity_sort = true,
-}
+    update_in_insert = false,
+})
 
 ---
 local theme = vim.env.NVIM_THEME or "catppuccin"
