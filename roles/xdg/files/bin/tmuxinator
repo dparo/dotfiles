@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -x
+# set -x
 selection="$(find ~/src -maxdepth 6 -name .git -type d | fzf)"
 
 if test "$?" -ne 0; then
@@ -20,11 +20,10 @@ session="$rootroot/$root/$portale/$project"
 
 session="$(echo "$session" | sed 's@\.@_@g')"
 
-tmux has-session -t="$session" 2> /dev/null || tmux new-session -d -s "$session" -c "$selection"
+tmux has-session -t="$session" 2>/dev/null || tmux new-session -d -s "$session" -c "$selection"
 
 if [ -n "$TMUX" ]; then
     tmux switch-client -t "$session"
 else
     tmux a -t "$session"
 fi
-

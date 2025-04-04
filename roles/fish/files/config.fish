@@ -13,16 +13,17 @@ if status is-interactive
 
     direnv hook fish | source
 
-    abbr --add v "nvim"
+    abbr --add v nvim
     abbr --add gp "git pull"
     abbr --add gP "git push"
     abbr --add gc "git commit --verbose --interactive --patch"
     abbr --add gcm --set-cursor "git commit -m \"%\""
     abbr --add ga "git add -ip"
 
-    abbr --add gg "lazygit"
+    abbr --add gg lazygit
 
     bind \cH backward-kill-word
+
 
     # if builtin type docker 1>/dev/null 2>/dev/null
     #     docker completion fish | source
