@@ -9,6 +9,7 @@ vim.g.netrw_altv = 1
 
 -- Spell checking
 vim.o.encoding = "utf-8"
+vim.o.fileformats = "unix,dos"
 vim.o.spelllang = "en"
 vim.o.title = true
 vim.o.ignorecase = true
