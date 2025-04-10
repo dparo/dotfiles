@@ -114,7 +114,8 @@ vim.diagnostic.config({
         float = true
     },
     virtual_text = { current_line = true },
-    virtual_lines = { current_line = false },
+    -- virtual_lines = { current_line = false },
+    virtual_lines = false,
     signs = signs,
     severity_sort = true,
     update_in_insert = false,
