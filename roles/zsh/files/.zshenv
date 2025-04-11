@@ -65,6 +65,7 @@ pathprepend \
     "${GOPATH:-$XDG_DATA_HOME/go}/bin" \
     "${XDG_DATA_HOME:-$HOME/.local/share}/coursier/bin" \
     "${CARGO_HOME:-$XDG_DATA_HOME/cargo}/bin" \
+    "${PNPM_HOME:-$XDG_DATA_HOME/pnpm}" \
     "${NPM_DIR:-$XDG_DATA_HOME/npm}/bin" \
     "${DENO_DIR:-$XDG_DATA_HOME/deno}/bin" \
     "${BUN_INSTALL:-$XDG_DATA_HOME/bun}/bin" \

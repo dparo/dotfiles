@@ -46,6 +46,8 @@ export ANSIBLE_GALAXY_CACHE_DIR="${XDG_CACHE_DIR:-$HOME/.cache}/ansible/galaxy"
 export ANSIBLE_LOCAL_TEMP="${XDG_CACHE_DIR:-$HOME/.cache}/ansible/tmp"
 
 
+export PNPM_HOME="/home/dparo/.local/share/pnpm"
+
 # Setup programs default config location to avoid cluttering the HOME directory
 export XINITRC="$XDG_CONFIG_HOME/xorg/xinitrc"
 export XSERVERRC="$XDG_CONFIG_HOME/xorg/xserverrc"
