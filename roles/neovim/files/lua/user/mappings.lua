@@ -385,12 +385,11 @@ local function setup_plugins()
 
     -- Trouble plugin
 
-    nmap({ "<leader>xx", "<leader>lx" }, exec_cmd "TroubleToggle")
-    nmap("<leader>xw", exec_cmd "TroubleToggle lsp_workspace_diagnostics")
-    nmap("<leader>xd", exec_cmd "TroubleToggle lsp_document_diagnostics")
+    nmap({ "<leader>xx", "<leader>lx" }, exec_cmd "Trouble diagnostics")
     nmap("<leader>xq", exec_cmd "TroubleToggle quickfix")
     nmap("<leader>xl", exec_cmd "TroubleToggle loclist")
-    nmap("gR", exec_cmd "TroubleToggle lsp_references")
+    nmap("gR", exec_cmd "Trouble lsp_references")
+    nmap("gD", exec_cmd "Trouble lsp_definitions")
 
     -- Spectre
     vim.keymap.set("n", "<leader>S", function()
