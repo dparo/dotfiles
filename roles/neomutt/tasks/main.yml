@@ -16,6 +16,8 @@
           - abook
           - urlview
           - pass
+          - pass-otp
+          - python3-pass-import
           - sasl-xoauth2
           # - davmail
           - python3-oauth2
