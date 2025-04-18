@@ -72,7 +72,7 @@ fi
 set -x
 
 if test "$USE_MVN_SPRING_BOOT_RUN" -ne 0; then
-    mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip \
+    mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip -Dmaven.compiler.useIncrementalCompilation=false \
         "${goals[@]}" \
         "${jvm_args[@]}" \
         "${OTHER_ARGS[@]}" | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
@@ -83,7 +83,8 @@ else
     # -Xmx512m
     # -XX:MaxRAM=2g -XX:MaxRAMPercentage=50.0
 
-    mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip "${goals[@]}" && \
+    mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip -Dmaven.compiler.useIncrementalCompilation=false \
+        "${goals[@]}" && \
         java -Xms64m -XX:MaxRAM=1g -XX:MaxRAMPercentage=50.0 -XX:MaxMetaspaceSize=180m "${jvm_args[@]}" -jar "$jar" --debug --spring.profiles.active=local "${OTHER_ARGS[@]}" \
         | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
 fi
