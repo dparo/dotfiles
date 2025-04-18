@@ -50,10 +50,12 @@ done
 mkdir -p logs
 out_log_file=logs/"$(date --iso-8601=seconds).log"
 
+jvm_args=()
+
 if test "$USE_MVN_SPRING_BOOT_RUN" -ne 0; then
     goals+=("spring-boot:run")
 
-    jvm_args=(-Dspring-boot.run.arguments='--debug --spring.profiles.active=local')
+    jvm_args+=(-Dspring-boot.run.arguments='--debug --spring.profiles.active=local')
 
     if test "$debug" = "y"; then
         jvm_args+=(-Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=$suspend,address=$port")
@@ -77,6 +79,8 @@ if test "$USE_MVN_SPRING_BOOT_RUN" -ne 0; then
 else
     jars=( ./target/*.jar )
     jar="${jars[-1]}"
+
     mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip "${goals[@]}" && \
-        java -Xms512m -Xmx1024m "${jvm_args[@]}" -jar "$jar" --debug --spring.profiles.active=local
+        java -Xms512m -Xmx1024m "${jvm_args[@]}" -jar "$jar" --debug --spring.profiles.active=local "${OTHER_ARGS[@]}" \
+        | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
 fi
