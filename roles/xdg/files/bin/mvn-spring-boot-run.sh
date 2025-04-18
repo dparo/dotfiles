@@ -64,7 +64,14 @@ else
     goals+=("package")
 
     if test "$debug" = "y"; then
-        jvm_args+=(-Xdebug "-Xrunjdwp:transport=dt_socket,server=y,suspend=$suspend,address=$port")
+        # Enable JMX Monitoring: JMX is Java's way to inspect and control the JVM at runtime. It’s a powerful tool for debugging memory usage hotspots
+        #  It has dynatrace support:
+        #
+        #    https://docs.dynatrace.com/docs/ingest-from/extend-dynatrace/extend-metrics/ingestion-methods/jmx-extensions
+        #
+        jvm_args+=( -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=9010 -Dcom.sun.management.jmxremote.rmi.port=9010 -Dcom.sun.management.jmxremote.local.only=false -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Djava.rmi.server.hostname=127.0.0.1 )
+        jvm_args+=( -Dspring.jmx.enabled=true )
+        jvm_args+=( -Xdebug "-Xrunjdwp:transport=dt_socket,server=y,suspend=$suspend,address=$port" )
     fi
 fi
 
