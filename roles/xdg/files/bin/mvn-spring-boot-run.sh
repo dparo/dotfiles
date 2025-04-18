@@ -80,7 +80,10 @@ else
     jars=( ./target/*.jar )
     jar="${jars[-1]}"
 
+    # -Xmx512m
+    # -XX:MaxRAM=2g -XX:MaxRAMPercentage=50.0
+
     mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip "${goals[@]}" && \
-        java -Xms128m -Xmx512m -XX:MaxMetaspaceSize=180m "${jvm_args[@]}" -jar "$jar" --debug --spring.profiles.active=local "${OTHER_ARGS[@]}" \
+        java -Xms64m -XX:MaxRAM=1g -XX:MaxRAMPercentage=50.0 -XX:MaxMetaspaceSize=180m "${jvm_args[@]}" -jar "$jar" --debug --spring.profiles.active=local "${OTHER_ARGS[@]}" \
         | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
 fi
