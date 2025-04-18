@@ -81,6 +81,6 @@ else
     jar="${jars[-1]}"
 
     mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip "${goals[@]}" && \
-        java -Xms256m -Xmx512m -XX:MaxMetaspaceSize=130m "${jvm_args[@]}" -jar "$jar" --debug --spring.profiles.active=local "${OTHER_ARGS[@]}" \
+        java -Xms256m -Xmx512m -XX:MaxMetaspaceSize=180m "${jvm_args[@]}" -jar "$jar" --debug --spring.profiles.active=local "${OTHER_ARGS[@]}" \
         | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
 fi
