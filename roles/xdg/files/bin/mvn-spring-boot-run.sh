@@ -5,6 +5,7 @@ set -eou pipefail
 
 OTHER_ARGS=()
 
+USE_MVN_SPRING_BOOT_RUN=0
 
 goals=()
 port="${JDWP_PORT:-5005}"
@@ -49,15 +50,33 @@ done
 mkdir -p logs
 out_log_file=logs/"$(date --iso-8601=seconds).log"
 
-goals+=("spring-boot:run")
-spring_boot_args=(-Dspring-boot.run.arguments='--debug --spring.profiles.active=local')
+if test "$USE_MVN_SPRING_BOOT_RUN" -ne 0; then
+    goals+=("spring-boot:run")
 
-if test "$debug" = "y"; then
-    spring_boot_args+=(-Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=$suspend,address=$port")
+    jvm_args=(-Dspring-boot.run.arguments='--debug --spring.profiles.active=local')
+
+    if test "$debug" = "y"; then
+        jvm_args+=(-Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=$suspend,address=$port")
+    fi
+else
+    goals+=("package")
+
+    if test "$debug" = "y"; then
+        jvm_args+=(-Xdebug "-Xrunjdwp:transport=dt_socket,server=y,suspend=$suspend,address=$port")
+    fi
 fi
 
+
 set -x
-mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip \
-    "${goals[@]}" \
-    "${spring_boot_args[@]}" \
-    "${OTHER_ARGS[@]}" | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
+
+if test "$USE_MVN_SPRING_BOOT_RUN" -ne 0; then
+    mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip \
+        "${goals[@]}" \
+        "${jvm_args[@]}" \
+        "${OTHER_ARGS[@]}" | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
+else
+    jars=( ./target/*.jar )
+    jar="${jars[-1]}"
+    mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip "${goals[@]}" && \
+        java -Xms512m -Xmx1024m "${jvm_args[@]}" -jar "$jar" --debug --spring.profiles.active=local
+fi
