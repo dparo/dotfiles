@@ -137,6 +137,7 @@ local theme_list = {
             require("catppuccin").setup({
                 flavour = "macchiato",
                 transparent_background = true,
+                integrations = { blink_cmp = true },
             })
         end,
     },

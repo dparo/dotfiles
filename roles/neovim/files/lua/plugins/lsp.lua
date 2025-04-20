@@ -2,8 +2,6 @@ return {
     {
         "neovim/nvim-lspconfig",
         dependencies = {
-            "hrsh7th/nvim-cmp",
-            "hrsh7th/cmp-nvim-lsp",
             "nvim-lua/lsp_extensions.nvim",
             "stevearc/conform.nvim",
             "nvim-lua/plenary.nvim",
