@@ -11,15 +11,17 @@ return {
 
     {
         "Saghen/blink.cmp",
+
+        build = 'cargo build --release',
+        -- version = "1.*",
+
         -- optional: provides snippets for the snippet source
-        version = "1.*",
         dependencies = {
             "saghen/blink.compat", -- blink.compat is a source provider for blink.cmp that allow you to use nvim-cmp completion sources
             "rafamadriz/friendly-snippets",
             "kristijanhusak/vim-dadbod-completion",
             "allaman/emoji.nvim",
         },
-        -- build = 'cargo build --release'
 
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
