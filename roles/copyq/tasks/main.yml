@@ -1,73 +1,70 @@
 ---
-- name: Install
-  ansible.builtin.dnf:
-    name:
-      - copyq
-    state: present
-  become: true
+- name: CopyQ
   tags:
     - copyq
+  when: false
+  block:
+  - name: Install
+    ansible.builtin.dnf:
+      name:
+        - copyq
+      state: present
+    become: true
 
-- name: Create config dir
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/copyq"
-    state: directory
-    mode: "0755"
-  tags:
-    - copyq
+  - name: Create config dir
+    ansible.builtin.file:
+      path: "{{ ansible_user_dir }}/.config/copyq"
+      state: directory
+      mode: "0755"
 
-- name: Setup copyq config - Options
-  community.general.ini_file:
-    path: "{{ ansible_user_dir }}/.config/copyq/copyq.conf"
-    section: Options
-    option: "{{ item.key }}"
-    value: "{{ item.value }}"
-    no_extra_spaces: true
-  loop:
-    - { key: maxitems, value: 200 }
-    - { key: activate_closes, value: "true" }
-    - { key: activate_focuses, value: "true" }
-    - { key: activate_item_with_single_click, value: "true" }
-    - { key: activate_pastes, value: "true" }
-    - { key: always_on_top, value: "false" }
-    - { key: autostart, value: "true" }
-    - { key: autocompletion, value: "true" }
-    - { key: check_clipboard, value: "true" }
-    - { key: check_selection, value: "false" }
-    - { key: close_on_unfocus, value: "false" }
-    - { key: close_on_unfocus_delay_ms, value: 1000 }
-    - { key: confirm_exit, value: "false" }
-    - { key: copy_clipboard, value: "false" }
-    - { key: copy_selection, value: "false" }
-    - { key: disable_tray, value: "false" }
-    - { key: editor, value: kitty -- nvim %1 }
-    - { key: filter_case_insensitive, value: "true" }
-    - { key: hide_main_window, value: "false" }
-    - { key: native_menu_bar, value: "true" }
-    - { key: native_tray_menu, value: "true" }
-    - { key: restore_geometry, value: "true" }
-  tags:
-    - copyq
+  - name: Setup copyq config - Options
+    community.general.ini_file:
+      path: "{{ ansible_user_dir }}/.config/copyq/copyq.conf"
+      section: Options
+      option: "{{ item.key }}"
+      value: "{{ item.value }}"
+      no_extra_spaces: true
+    loop:
+      - { key: maxitems, value: 200 }
+      - { key: activate_closes, value: "true" }
+      - { key: activate_focuses, value: "true" }
+      - { key: activate_item_with_single_click, value: "true" }
+      - { key: activate_pastes, value: "true" }
+      - { key: always_on_top, value: "false" }
+      - { key: autostart, value: "true" }
+      - { key: autocompletion, value: "true" }
+      - { key: check_clipboard, value: "true" }
+      - { key: check_selection, value: "false" }
+      - { key: close_on_unfocus, value: "false" }
+      - { key: close_on_unfocus_delay_ms, value: 1000 }
+      - { key: confirm_exit, value: "false" }
+      - { key: copy_clipboard, value: "false" }
+      - { key: copy_selection, value: "false" }
+      - { key: disable_tray, value: "false" }
+      - { key: editor, value: kitty -- nvim %1 }
+      - { key: filter_case_insensitive, value: "true" }
+      - { key: hide_main_window, value: "false" }
+      - { key: native_menu_bar, value: "true" }
+      - { key: native_tray_menu, value: "true" }
+      - { key: restore_geometry, value: "true" }
 
-- name: Create autostart desktop file
-  ansible.builtin.copy:
-    dest: "{{ ansible_user_dir }}/.config/autostart/copyq.desktop"
-    content: |
-      [Desktop Entry]
-      Name=CopyQ
-      Icon=copyq
-      GenericName=Clipboard Manager
-      Type=Application
-      Terminal=false
-      Exec=bash -c 'sleep 3 && exec copyq'
-      TryExec=copyq
-      X-GNOME-Autostart-enabled=true
-      X-GNOME-Autostart-Delay=3
-      X-KDE-autostart-after=panel
-      X-KDE-StartupNotify=false
-      X-KDE-UniqueApplet=true
-      Categories=Qt;KDE;Utility;
-      Hidden=false
-    mode: "0644"
-  tags:
-    - copyq
+  - name: Create autostart desktop file
+    ansible.builtin.copy:
+      dest: "{{ ansible_user_dir }}/.config/autostart/copyq.desktop"
+      content: |
+        [Desktop Entry]
+        Name=CopyQ
+        Icon=copyq
+        GenericName=Clipboard Manager
+        Type=Application
+        Terminal=false
+        Exec=bash -c 'sleep 3 && exec copyq'
+        TryExec=copyq
+        X-GNOME-Autostart-enabled=true
+        X-GNOME-Autostart-Delay=3
+        X-KDE-autostart-after=panel
+        X-KDE-StartupNotify=false
+        X-KDE-UniqueApplet=true
+        Categories=Qt;KDE;Utility;
+        Hidden=false
+      mode: "0644"
