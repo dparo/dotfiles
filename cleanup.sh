@@ -4,4 +4,6 @@
 set -eou pipefail
 
 go clean -modcache
+go clean -cache
+
 npm cache clean --force
