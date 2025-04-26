@@ -24,6 +24,10 @@ return {
             vim.g.mkdp_filetypes = { "markdown", "plantuml", "dot" }
         end,
     },
+    {
+        "OXY2DEV/markview.nvim",
+        lazy = false,
+    },
 
     {
         "folke/trouble.nvim",
@@ -115,7 +119,6 @@ return {
             }
         end,
     },
-
 
     ----
     ---- Plugins to manage windows
