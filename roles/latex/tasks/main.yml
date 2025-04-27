@@ -26,6 +26,9 @@
           - texlive-babel-english
           - texlive-fontawesome
           - texlive-fontawesome5
+          - texlive-hyphenat
+          - texlive-moresize
+          - texlive-lastpage
           - texlive-bytefield
           - texlive-lm # lmodern
           - texlive-chktex # latex semantic linter: https://www.nongnu.org/chktex/
