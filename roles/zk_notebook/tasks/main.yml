@@ -1,0 +1,26 @@
+---
+- name: ZK Notebook
+  tags:
+    - zk
+    - zk-notebook
+  block:
+
+    - name: Check latest zk-org/zk
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/zk-org/zk/releases/latest
+        return_content: true
+      register: zk_latest
+
+
+    - name: Debug msg
+      ansible.builtin.debug:
+        msg: "https://github.com/zk-org/zk/releases/latest/download/zk-{{ zk_latest['json']['tag_name'][0:] }}-linux-amd64.tar.gz"
+
+    # https://github.com/zk-org/zk/releases/download/v0.15.0/zk-v0.15.0-linux-amd64.tar.gz
+    - name: Download and unpack latest zk-org/zk
+      ansible.builtin.unarchive:
+        src: "https://github.com/zk-org/zk/releases/latest/download/zk-{{ zk_latest['json']['tag_name'][0:] }}-linux-amd64.tar.gz"
+        dest: "{{ ansible_user_dir }}/.local/bin"
+        remote_src: true
+      become: true
+

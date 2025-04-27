@@ -147,6 +147,8 @@
     - ripdrag
     - feh
 
+    - zk_notebook
+
     # TODO(d.paro): Sort out these roles
     - newsboat
     - gtk
