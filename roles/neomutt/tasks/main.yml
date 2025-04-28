@@ -18,10 +18,12 @@
           - pass
           - pass-otp
           - python3-pass-import
-          - python3-jwt
+          - cyrus-sasl
           - sasl-xoauth2
           # - davmail
+          - python3-jwt
           - python3-oauth2
+          - python3-msal
           - python3-oauth2client
           - python3-notify2
         state: present
