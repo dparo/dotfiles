@@ -2,8 +2,31 @@ IMAPStore fabrette@example.com-remote
 Host 127.0.0.1
 Port 143
 User fabrette@example.com
-# PassCmd "/usr/share/neomutt/oauth2/mutt_oauth2.py /home/dparo/email.token"
+
+# https://github.com/tarickb/sasl-xoauth2/issues/86#issuecomment-2128444020
+# > XOAUTH2 module expects the filename of the token as input, not the content.
+# > With cat you send the content, with echo the filename.
+# For example, the following PassCmd does not work: `PassCmd "/usr/share/neomutt/oauth2/mutt_oauth2.py /home/dparo/email.token"`
+# Correct:
 # AuthMechs XOAUTH2
+# PassCmd "echo /tmp/dparo/.email.token"
+# where the file contents of /tmp/dparo/.email.token should have the following form (non GPG encrypted, stored plain):
+# {
+#     "token_endpoint": "https://login.microsoftonline.com/common/oauth2/v2.0/token",
+#     "client_id": "XXXX",
+#     "access_token" : "",
+#     "expiry" : "1745880313",
+#     "refresh_token" : ""
+# }
+# To obtain such file you can use:
+#
+# sasl-xoauth2-tool get-token outlook \
+# /tmp/dparo/.email.token \
+# --client-id=XXXX \
+# --use-device-flow
+#
+# and then edit manually the fields `token_endpoint` and `client_id`.
+# To verify that it is working, you can run: `sasl-xoauth2-tool test-token-refresh /tmp/dparo/.email.token`
 # TLSType IMAPS
 Pass "password"
 AuthMechs LOGIN
