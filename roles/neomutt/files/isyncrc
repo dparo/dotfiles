@@ -5,7 +5,6 @@ User fabrette@example.com
 # PassCmd "/usr/share/neomutt/oauth2/mutt_oauth2.py /home/dparo/email.token"
 # AuthMechs XOAUTH2
 # TLSType IMAPS
-
 Pass "password"
 AuthMechs LOGIN
 TLSType None
@@ -17,21 +16,18 @@ Path /home/dparo/.local/share/mail/fabrette@example.com/
 Inbox /home/dparo/.local/share/mail/fabrette@example.com/INBOX
 
 Channel fabrette@example.com
-Expunge Both
-Master :fabrette@example.com-remote:
-Slave :fabrette@example.com-local:
+Far :fabrette@example.com-remote:
+Near :fabrette@example.com-local:
 Patterns * !"[Gmail]/All Mail" !"*fts-flatcurve*" !"*virtual*"
-
+# Expunge Both
 # Create Both
 # SyncState *
-
 Expunge None               # Prevents deletions from propagating to either side
 Remove Near
 Create Near                # Only create folders locally, never on remote
 Sync Pull
 SyncState *                # Maintain synchronization state
 CopyArrivalDate yes
-
 MaxMessages 0
 ExpireUnread no
 
