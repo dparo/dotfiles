@@ -36,8 +36,10 @@
 
     - name: Symlink config
       ansible.builtin.file:
-        src: "{{ role_path }}/files"
-        dest: "{{ ansible_user_dir }}/.config/neomutt"
+        src: "{{ role_path }}/files/{{ item }}"
+        dest: "{{ ansible_user_dir }}/.config/{{ item }}"
         state: link
-
-
+      loop:
+        - neomutt
+        - isyncrc
+        - msmtp

@@ -1,0 +1,13 @@
+account fabrette@example.com
+host localhost
+port 587
+from fabrette@example.com
+user fabrette@example.com
+password "password"
+auth plain
+tls off
+tls_starttls off
+tls_trust_file	/etc/ssl/certs/ca-certificates.crt
+logfile /home/dparo/.local/state/msmtp/msmtp.log
+# tls_starttls
+
