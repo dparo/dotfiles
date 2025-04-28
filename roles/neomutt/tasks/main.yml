@@ -18,6 +18,7 @@
           - pass
           - pass-otp
           - python3-pass-import
+          - python3-jwt
           - sasl-xoauth2
           # - davmail
           - python3-oauth2
