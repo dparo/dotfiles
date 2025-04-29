@@ -3,11 +3,6 @@
 
 set -eou pipefail
 
-go clean -modcache
-go clean -cache
-
-npm cache clean --force
-
 # Load OS information
 if [ -f /etc/os-release ]; then
     . /etc/os-release
@@ -15,6 +10,14 @@ else
     echo "Cannot determine OS. /etc/os-release not found."
     exit 1
 fi
+
+
+go clean -modcache
+go clean -cache
+
+npm cache clean --force
+
+flatpak uninstall --unused
 
 # Check the distribution ID
 case "$ID" in
@@ -35,4 +38,3 @@ case "$ID" in
 esac
 
 
-flatpak uninstall --unused
