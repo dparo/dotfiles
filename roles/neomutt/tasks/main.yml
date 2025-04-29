@@ -24,6 +24,7 @@
           - python3-jwt
           - python3-oauth2
           - python3-msal
+          - python3-secretstorage # Python bindings to FreeDesktop.org Secret Service API
           - python3-oauth2client
           - python3-notify2
         state: present
