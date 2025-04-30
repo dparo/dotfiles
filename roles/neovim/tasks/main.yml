@@ -91,6 +91,7 @@
       become: true
 
     - name: Install runtime deps (CARGO)
+      when: false
       community.general.cargo:
         name:
           - tokei
