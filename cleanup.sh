@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 
 set -eou pipefail
+set -x
 
 # Load OS information
 if [ -f /etc/os-release ]; then
@@ -11,23 +12,14 @@ else
     exit 1
 fi
 
-
-go clean -modcache
-go clean -cache
-
-npm cache clean --force
-
-flatpak uninstall --unused
-
 # Check the distribution ID
 case "$ID" in
     ubuntu)
         echo "Running on Ubuntu"
         ;;
     arch)
-        if command -v yay >/dev/null 2>&1; then
-            yay -Scc --no-confirm
-        fi
+        echo "Running on Arch Linux"
+
     ;;
     fedora)
         echo "Running on Fedora"
@@ -37,4 +29,17 @@ case "$ID" in
         ;;
 esac
 
+
+
+
+go clean -modcache
+go clean -cache
+
+npm cache clean --force
+
+flatpak uninstall --unused
+
+if test "$ID" = "arch" && command -v yay >/dev/null 2>&1; then
+    yay -Scc --no-confirm
+fi
 
