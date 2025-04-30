@@ -9,6 +9,9 @@ charset = utf-8
 trim_trailing_whitespace = true
 insert_final_newline = true
 
+[*.{xml,html,xhtml,htm,xht}]
+indent_size = 4
+
 
 [*.{rst,md,yaml,yml,json}]
 indent_size = 2
