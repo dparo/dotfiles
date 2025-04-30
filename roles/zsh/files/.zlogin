@@ -18,7 +18,7 @@ eval "export $(systemctl --user show-environment | grep -E 'DISPLAY=:[0-9]+')" 1
 # password requisite pam_pwquality.so minlen=14 dcredit=-1 lcredit=-11 ocredit=-1 ucredit=-1
 # mkdir -p /run/intune/"$UID" && echo "password requisite pam_pwquality.so minlen=9 dcredit=1 lcredit=1 ocredit=1 ucredit=1" > /run/intune/"$UID"/pwquality
 if test -x /usr/local/bin/intune-fix-pwquality.sh; then
-    ## Content of the script
+    ## Content of the script (script must be whitelisted in sudo config files, in order to run it as superuser without prompting for password)
     #
     # set -x
     #
