@@ -2,7 +2,6 @@
 # -*- coding: utf-8 -*-
 
 set -eou pipefail
-set -x
 
 # Load OS information
 if [ -f /etc/os-release ]; then
