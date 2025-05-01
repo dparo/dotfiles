@@ -22,9 +22,6 @@ if ! test -x "$(command -v ansible)"; then
     esac
 fi
 
-pipx install --include-deps ansible
-# pipx inject ansible python3-molecule python3-molecule-docker
-
 main() {
     if test "$1" != ""; then
         DOTFILES_LOCATION="$1"
