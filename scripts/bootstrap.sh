@@ -17,7 +17,7 @@ if ! test -x "$(command -v ansible)"; then
         ;;
     fedora)
         sudo dnf upgrade -y
-        sudo dnf install -y git pre-commit pipx
+        sudo dnf install -y git pre-commit pipx python3-libdnf5
         ;;
     esac
 fi
