@@ -33,6 +33,7 @@ esac
 
 go clean -modcache
 go clean -cache
+pip cache purge
 
 npm cache clean --force
 
