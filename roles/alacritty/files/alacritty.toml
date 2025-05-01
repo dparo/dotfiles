@@ -64,7 +64,7 @@ style = "Block"
 size = 10.0
 
 [font.normal]
-family = "JetbrainsMono Nerd Font"
+family = "Monaspace Neon"
 style = "Regular"
 
 [scrolling]
@@ -72,7 +72,7 @@ history = 10000
 multiplier = 3
 
 [terminal.shell]
-program = "zsh"
+program = "fish"
 
 [window]
 opacity = 1.0
