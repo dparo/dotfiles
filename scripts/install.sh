@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 
+# Upgrade Ansible to latest with pipx
+pipx upgrade --include-injected ansible
+
 show_all_facts() {
     # Dumps all the ansible facts / variables available
     ansible localhost -m ansible.builtin.setup

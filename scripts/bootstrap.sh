@@ -9,18 +9,21 @@ if ! test -x "$(command -v ansible)"; then
     case $ID in
     ubuntu)
         sudo apt update
-        sudo apt install -y git ansible pre-commit
+        sudo apt install -y git pre-commit pipx
         ;;
 
     arch)
-        sudo pacman -S --noconfirm git ansible pre-commit
+        sudo pacman -S --noconfirm git pre-commit pipx
         ;;
     fedora)
         sudo dnf upgrade -y
-        sudo dnf install -y git ansible pre-commit python3-molecule python3-molecule-docker
+        sudo dnf install -y git pre-commit pipx
         ;;
     esac
 fi
+
+pipx install --include-deps ansible
+pipx inject ansible python3-molecule python3-molecule-docker
 
 main() {
     if test "$1" != ""; then

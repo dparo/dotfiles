@@ -30,10 +30,12 @@ esac
 
 
 
+rm -rf "$HOME/.cache/pre-commit/"
 
 go clean -modcache
 go clean -cache
 pip cache purge
+
 
 npm cache clean --force
 
