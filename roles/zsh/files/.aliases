@@ -2,7 +2,7 @@
 # vi: ft=sh
 
 # By aliasing sudo, we permit the shell to expand further aliases after sudo.
-#  For ezample `sudo v` where `v` is an alias to `nvim` works only if this sudo alias
+#  For example `sudo v` where `v` is an alias to `nvim` works only if this sudo alias
 #  is defined
 alias sudo='command sudo '
 
@@ -60,9 +60,9 @@ if valid_shell_command fdfind; then
 fi
 
 if valid_shell_command eza; then
-    alias ls='eza --icons'
-    alias la='eza -lah --icons'
-    alias ll='eza -laFh --icons'
+    alias ls='eza --icons -h'
+    alias la='eza --icons -lah'
+    alias ll='eza --icons -laFh'
 else
     alias ls='ls --color=auto -h'
     alias la='ls --color=auto -lah'

@@ -14,15 +14,6 @@
 eval "export $(systemctl --user show-environment | grep -E 'DISPLAY=:[0-9]+')" 1> /dev/null 2> /dev/null
 
 
-## Setup LS_COLORS environment variable
-if [ -x /usr/bin/dircolors ]; then
-    if test -r ~/.dircolors; then
-        eval "$(dircolors -b ~/.dircolors)"
-    else
-        eval "$(dircolors -b)"
-    fi
-fi
-
 
 # Default value in ubuntu
 # password requisite pam_pwquality.so minlen=14 dcredit=-1 lcredit=-11 ocredit=-1 ucredit=-1
