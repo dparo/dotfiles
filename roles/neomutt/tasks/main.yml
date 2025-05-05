@@ -27,6 +27,7 @@
           - python3-secretstorage # Python bindings to FreeDesktop.org Secret Service API
           - python3-oauth2client
           - python3-notify2
+          - python3-html2text
         state: present
       become: true
 
