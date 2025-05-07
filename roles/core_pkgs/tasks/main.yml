@@ -52,6 +52,15 @@
     - core-pkgs
 
 
+- name: Uninstall
+  ansible.builtin.dnf:
+    name:
+      - plocate # Plocate is a package that allows to use the command `locate` to quickly find files (as opposed to find). It works by employing a database built at boot-time (plocate-updatedb.service). This service usually slows down boot time by quite a lot
+    state: absent
+  become: true
+  tags:
+    - core-pkgs
+
 - name: Install sad (https://github.com/ms-jpq/sad)
   ansible.builtin.unarchive:
     src: https://github.com/ms-jpq/sad/releases/latest/download/x86_64-unknown-linux-gnu.zip
