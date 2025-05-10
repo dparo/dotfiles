@@ -5,7 +5,11 @@ set -x
 set_wallpaper() {
     for v in "$@"; do
         if [ "$v" != "" ] && [ -f "$v" ]; then
-            (feh --no-fehbg --bg-fill "$v" || nitrogen --set-zoom-fill "$v") && return 0
+            if test -n WAYLAND_DISPLAY; then
+                (swaybg --mode fill "$v" || nitrogen --set-zoom-fill "$v") && return 0
+            else
+                (feh --no-fehbg --bg-fill "$v" || nitrogen --set-zoom-fill "$v") && return 0
+            fi
         fi
     done
     return 1
