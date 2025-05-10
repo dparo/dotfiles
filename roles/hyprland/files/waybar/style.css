@@ -1,7 +1,7 @@
 @import "macchiato.css";
 
 * {
-    font-family: 'Noto Sans Mono', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', monospace;
+    font-family: 'JetbrainsMono Nerd Font 8', 'Noto Sans Mono', 'Font Awesome 6 Free', 'Font Awesome 6 Brands', monospace;
     font-size: 13px;
     color: @text;
 }

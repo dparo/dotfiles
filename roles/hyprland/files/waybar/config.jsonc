@@ -18,15 +18,14 @@
         "idle_inhibitor",
         "pulseaudio",
         "network",
-        "power-profiles-daemon",
         "cpu",
         "memory",
         "temperature",
         "backlight",
-        "hyprland/language",
         "battery",
         "clock",
-        "tray"
+        "tray",
+        "power-profiles-daemon"
     ],
     // Modules configuration
     // "hyprland/workspaces": {
@@ -103,15 +102,18 @@
     },
     "clock": {
         // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format": " {:%a %d %b %Y   %H:%M}",
+        "format-alt": "{:%Y-%m-%d}",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>"
     },
     "cpu": {
-        "format": "{usage}% ",
+        "interval": 5,
+        "format": "CPU: {usage}%",
         "tooltip": false
     },
     "memory": {
-        "format": "{}% "
+        "interval": 5,
+        "format": "MEM: {avail} GiB"
     },
     "temperature": {
         // "thermal-zone": 2,
