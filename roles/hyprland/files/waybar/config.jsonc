@@ -9,12 +9,13 @@
     "modules-left": [
         "hyprland/workspaces",
         "hyprland/mode",
-        "hyprland/scratchpad"
-    ],
-    "modules-center": [
+        "hyprland/scratchpad",
         "hyprland/window"
     ],
+    "modules-center": [
+    ],
     "modules-right": [
+        "power-profiles-daemon",
         "idle_inhibitor",
         "pulseaudio",
         "network",
@@ -24,8 +25,7 @@
         "backlight",
         "battery",
         "clock",
-        "tray",
-        "power-profiles-daemon"
+        "tray"
     ],
     // Modules configuration
     // "hyprland/workspaces": {
