@@ -1,13 +1,13 @@
 * {
-    font-family: "JetbrainsMono Nerd Font 8", "Noto Sans Mono",
+    font-family: "JetbrainsMono Nerd Font", "Noto Sans Mono",
         "Font Awesome 6 Free", "Font Awesome 6 Brands", monospace;
     /*font-family: "JetBrainsMono Nerd Font";*/
-    font-weight: bold;
-    font-size: 12px;
+    /* font-weight: bold; */
+    font-size: 10px;
 }
 
 #custom-notification {
-    font-family: "JetbrainsMono Nerd Font 8", "Noto Sans Mono",
+    font-family: "JetbrainsMono Nerd Font", "Noto Sans Mono",
         "Font Awesome 6 Free", "Font Awesome 6 Brands", monospace;
     color: #a1bdce;
     margin: 2px 0px 0px 0px;
@@ -169,7 +169,6 @@ tooltip {
 #clock {
     color: #a1bdce;
     font-weight: 900;
-    font-family: "JetBrains Mono Nerd Font";
     background: rgba(23, 23, 23, 0);
     opacity: 1;
     margin: 3px 0px 0px 0px;
@@ -245,7 +244,6 @@ tooltip {
 #custom-wbar,
 #window {
     color: #a1bdce;
-    font-family: "Martian Mono";
 }
 #custom-l_end,
 #custom-r_end,
