@@ -120,8 +120,8 @@ core.utils.augroup("USER_GENERIC", {
         end,
     } },
 
-    -- Create parent directory of file when saving if it does not exist
-    { { "BufWritePre" }, { pattern = "*", command = [[call mkdir(expand("<afile>:p:h"), "p")]] } },
+    -- Create parent directory of file when saving if it does not exist (see: https://neovim.io/doc/user/editing.html#%2B%2Bp)
+    { { "BufWritePre", "FileWritePre" }, { pattern = "*", command = [[if @% !~# '\(://\)' | call mkdir(expand('<afile>:p:h'), 'p') | endif]] } },
 
     -- Flash yanked region
     {
