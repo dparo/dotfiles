@@ -13,7 +13,7 @@
 # Refetch the DISPLAY env variable from systemd
 eval "export $(systemctl --user show-environment | grep -E 'DISPLAY=:[0-9]+')" 1> /dev/null 2> /dev/null
 
-
+USE_WAYLAND=0
 
 # Default value in ubuntu
 # password requisite pam_pwquality.so minlen=14 dcredit=-1 lcredit=-11 ocredit=-1 ucredit=-1
@@ -40,13 +40,16 @@ if systemctl -q is-active graphical.target \
     && [ -z "$SSH_CLIENT" ] \
     && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -le 4 ]; then
 
+    if test USE_WAYLAND -eq 1 && uwsm check may-start && uwsm select; then
+        exec systemd-cat -t uwsm_start uwsm start default
+    fi
+
     # Test connection to Xserver. If it's already running do not create a new one
     if test -z "$DISPLAY" || ! timeout 1s xset q 1> /dev/null 2> /dev/null; then
-    if test -x "${XDG_CONFIG_HOME-:$HOME/.config}/xorg/startx"; then
-        exec "${XDG_CONFIG_HOME-:$HOME/.config}/xorg/startx"
-    fi
+        if test -x "${XDG_CONFIG_HOME-:$HOME/.config}/xorg/startx"; then
+            exec "${XDG_CONFIG_HOME-:$HOME/.config}/xorg/startx"
+        fi
     else
         echo "Xorg is already running at DISPLAY=$DISPLAY"
     fi
 fi
-#
