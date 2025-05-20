@@ -12,7 +12,7 @@ return {
     {
         "Saghen/blink.cmp",
 
-        build = 'cargo build --release',
+        build = "cargo build --release",
         -- version = "1.*",
 
         -- optional: provides snippets for the snippet source
@@ -41,6 +41,22 @@ return {
             keymap = {
                 preset = "default",
                 ["<C-y>"] = { "select_and_accept" },
+
+                ["<Up>"] = {
+                    -- 'select_prev',
+                    "fallback",
+                },
+                ["<Down>"] = {
+                    -- "select_next",
+                    "fallback",
+                },
+
+                -- disable a keymap from the preset
+                ["<C-e>"] = {
+                    -- 'hide',
+                    "fallback",
+                },
+
             },
 
             appearance = {
