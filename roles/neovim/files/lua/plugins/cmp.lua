@@ -85,7 +85,7 @@ return {
                 },
             },
             cmdline = {
-                enabled = false,
+                enabled = true,
             },
 
             -- Default list of enabled providers defined so that you can extend it
