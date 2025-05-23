@@ -26,6 +26,12 @@
       become: true
 
 
+    # gsettings set org.gnome.shell.app-switcher current-workspace-only true
+    - name: Restrict Alt-Tab to same workspace
+      dconf:
+        key: "/org/gnome/shell/app-switcher/current-workspace-only"
+        value: true
+
     # gsettings set org.gnome.shell disable-user-extensions false
     - name: Enable user extensions
       dconf:
