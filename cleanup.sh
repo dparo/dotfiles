@@ -40,6 +40,8 @@ pip cache purge
 npm cache clean --force
 
 flatpak uninstall --unused
+flatpak repair --user
+sudo flatpak repair
 
 if test "$ID" = "arch" && command -v yay >/dev/null 2>&1; then
     yay -Scc --no-confirm

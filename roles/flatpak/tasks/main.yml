@@ -28,3 +28,4 @@
         name: com.github.tchx84.Flatseal
         state: present
         remote: flathub
+      when: False == True
