@@ -6,6 +6,7 @@
     - mpd
     - mpc
     - ncmpcpp
+    - never
   block:
     - name: Install
       ansible.builtin.dnf:
