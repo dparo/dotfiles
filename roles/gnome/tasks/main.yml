@@ -216,6 +216,7 @@
         key: "/org/gnome/TextEditor/{{ item.key }}"
         value: "{{ item.value }}"
       loop: "{{ data | dict2items }}"
+      when: True == False
       vars:
         data:
           use-system-font: true
