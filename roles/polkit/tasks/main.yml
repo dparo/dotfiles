@@ -6,6 +6,7 @@
     - name: Install
       ansible.builtin.dnf:
         name:
-          - polkit-gnome
+          - polkit
+          # - polkit-gnome
         state: present
       become: true
