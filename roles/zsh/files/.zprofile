@@ -115,6 +115,7 @@ export REBEL_BASE="$XDG_CONFIG_HOME/jrebel"
 export DOTNET_CLI_HOME="$XDG_DATA_HOME/dotnet"
 export NUGET_PACKAGES="$XDG_CACHE_HOME/nuget"
 # export JAVA_USER_HOME="$XDG_DATA_HOME/java"
+export SONARLINT_USER_HOME="$XDG_DATA_HOME/sonarlint"
 
 export MINIKUBE_HOME="$XDG_DATA_HOME/minikube"
 export PULUMI_HOME="$XDG_DATA_HOME/pulumi"
