@@ -84,14 +84,14 @@ if test "$USE_MVN_SPRING_BOOT_RUN" -ne 0; then
         "${jvm_args[@]}" \
         "${OTHER_ARGS[@]}" | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
 else
-    jars=( ./target/*.jar )
-    jar="${jars[-1]}"
 
     # -Xmx512m
     # -XX:MaxRAM=2g -XX:MaxRAMPercentage=50.0
 
     mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip -Dmaven.compiler.useIncrementalCompilation=false \
         "${goals[@]}" && \
-        java -Xms64m -XX:MaxRAM=1g -XX:MaxRAMPercentage=50.0 -XX:MaxMetaspaceSize=180m "${jvm_args[@]}" -jar "$jar" --debug --spring.profiles.active=local "${OTHER_ARGS[@]}" \
+        java -Xms64m -XX:MaxRAM=1g -XX:MaxRAMPercentage=50.0 -XX:MaxMetaspaceSize=180m "${jvm_args[@]}" \
+            -jar "$(find ./target -type f -name "*.jar" | sort | head -n 1)" \
+            --debug --spring.profiles.active=local "${OTHER_ARGS[@]}" \
         | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
 fi
