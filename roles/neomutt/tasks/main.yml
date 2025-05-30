@@ -28,6 +28,7 @@
           - python3-oauth2client
           - python3-notify2
           - python3-html2text
+          - vdirsyncer
         state: present
       become: true
 
