@@ -6,7 +6,7 @@
 
 
 # Refetch the DISPLAY env variable from systemd
-eval "export $(systemctl --user show-environment | grep -E 'DISPLAY=:[0-9]+')" 1> /dev/null 2> /dev/null
+eval "export $(systemctl --user show-environment | grep -E '^DISPLAY=:[0-9]+$')" 1> /dev/null 2> /dev/null
 
 
 # Test connection to Xserver. If it's already running do not create a new one
