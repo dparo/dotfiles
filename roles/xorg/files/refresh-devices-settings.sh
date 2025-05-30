@@ -19,6 +19,9 @@ touchpad_setup() {
 
 touchpad_setup 1>/dev/null 2>/dev/null
 
+[[ -f "/etc/X11/xinit/.Xresources" ]] && xrdb -merge "/etc/X11/xinit/.Xresources"
+[[ -f "$XDG_CONFIG_HOME/xorg/.Xresources" ]] && xrdb -merge "$XDG_CONFIG_HOME/xorg/.Xresources"
+
 xset -b # disable bell
 
 xset r rate 300 30
