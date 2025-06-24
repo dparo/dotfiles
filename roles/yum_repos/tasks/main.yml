@@ -6,6 +6,14 @@
     - rpmfusion
   when: ansible_distribution == 'Fedora'
   block:
+    # Make sure fedora.repo and fedora-cisco-openh264.repo are installed
+    - name: Enable Fedora repos
+      ansible.builtin.dnf:
+        name:
+          - fedora-repos
+        state: present
+      become: true
+
     # See https://docs.fedoraproject.org/en-US/workstation-working-group/third-party-repos/#_included_software
     - name: Manage third party repositories
       ansible.builtin.dnf:
@@ -34,3 +42,4 @@
         - _copr_phracek-PyCharm.repo.rpmsave
         - rpmfusion-nonfree-nvidia-driver.repo
         - rpmfusion-nonfree-steam.repo
+
