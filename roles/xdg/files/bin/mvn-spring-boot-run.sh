@@ -5,7 +5,7 @@ set -eou pipefail
 
 OTHER_ARGS=()
 
-USE_MVN_SPRING_BOOT_RUN=0
+USE_MVN_SPRING_BOOT_RUN=1
 
 goals=()
 port="${JDWP_PORT:-5005}"
@@ -51,17 +51,19 @@ mkdir -p logs
 out_log_file=logs/"$(date --iso-8601=seconds).log"
 
 jvm_args=()
-jvm_args+=('-Dspring.devtools.restart.enabled=true')
 
 if test "$USE_MVN_SPRING_BOOT_RUN" -ne 0; then
     goals+=("spring-boot:run")
 
-    jvm_args+=(-Dspring-boot.run.arguments='--debug')
 
     if test "$debug" = "y"; then
-        jvm_args+=(-Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=$suspend,address=$port")
+        jvm_args+=(-Dspring-boot.run.jvmArguments="-Dspring.devtools.restart.enabled=true -Xms64m -XX:MaxRAM=1g -XX:MaxRAMPercentage=50.0 -XX:MaxMetaspaceSize=180m -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=$suspend,address=$port")
+    else
+        jvm_args+=(-Dspring-boot.run.jvmArguments="-Dspring.devtools.restart.enabled=true -Xms64m -XX:MaxRAM=1g -XX:MaxRAMPercentage=50.0 -XX:MaxMetaspaceSize=180m")
     fi
 else
+    jvm_args+=('-Dspring.devtools.restart.enabled=true')
+
     goals+=("package")
 
     if test "$debug" = "y"; then
@@ -79,11 +81,14 @@ fi
 
 set -x
 
+export MAVEN_OPTS="-Xms64m -XX:MaxRAM=512m"
+
 if test "$USE_MVN_SPRING_BOOT_RUN" -ne 0; then
-    mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip -Dmaven.compiler.useIncrementalCompilation=false \
+    mvn  -DcheckStyle.skip -DskipTests -Dmaven.test.skip -Dmaven.compiler.useIncrementalCompilation=false \
         "${goals[@]}" \
         "${jvm_args[@]}" \
-        "${OTHER_ARGS[@]}" | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
+        -Dspring-boot.run.arguments="${OTHER_ARGS[*]}" \
+        | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
 else
 
     # -Xmx512m
