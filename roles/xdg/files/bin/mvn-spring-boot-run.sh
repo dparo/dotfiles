@@ -14,20 +14,20 @@ debug="n"
 
 while [[ $# -gt 0 ]]; do
   case $1 in
-    --debug)
+    --tool-debug)
       debug="y"
       shift
       ;;
-    --debug-port)
+    --tool-debug-port)
       port="$2"
       shift
       shift
       ;;
-    --suspend)
+    --tool-suspend)
       suspend="y"
       shift
       ;;
-    --no-suspend)
+    --tool-no-suspend)
       suspend="n"
       shift
       ;;
@@ -51,11 +51,12 @@ mkdir -p logs
 out_log_file=logs/"$(date --iso-8601=seconds).log"
 
 jvm_args=()
+jvm_args+=('-Dspring.devtools.restart.enabled=true')
 
 if test "$USE_MVN_SPRING_BOOT_RUN" -ne 0; then
     goals+=("spring-boot:run")
 
-    jvm_args+=(-Dspring-boot.run.arguments='--debug --spring.profiles.active=local')
+    jvm_args+=(-Dspring-boot.run.arguments='--debug')
 
     if test "$debug" = "y"; then
         jvm_args+=(-Dspring-boot.run.jvmArguments="-Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=$suspend,address=$port")
@@ -92,6 +93,6 @@ else
         "${goals[@]}" && \
         java -Xms64m -XX:MaxRAM=1g -XX:MaxRAMPercentage=50.0 -XX:MaxMetaspaceSize=180m "${jvm_args[@]}" \
             -jar "$(find ./target -type f -name "*.jar" | sort | head -n 1)" \
-            --debug --spring.profiles.active=local "${OTHER_ARGS[@]}" \
+            "${OTHER_ARGS[@]}" \
         | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
 fi
