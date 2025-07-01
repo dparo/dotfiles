@@ -24,18 +24,18 @@ return {
             vim.g.mkdp_filetypes = { "markdown", "plantuml", "dot" }
         end,
     },
-    {
-        "OXY2DEV/markview.nvim",
-        lazy = false,
-         dependencies = {
-            "saghen/blink.cmp"
-        },
-        config = {
-            preview = {
-                enable = false
-            }
-        },
-    },
+    -- {
+    --     "OXY2DEV/markview.nvim",
+    --     lazy = false,
+    --      dependencies = {
+    --         "saghen/blink.cmp"
+    --     },
+    --     config = {
+    --         preview = {
+    --             enable = false
+    --         }
+    --     },
+    -- },
 
     {
         "folke/trouble.nvim",
