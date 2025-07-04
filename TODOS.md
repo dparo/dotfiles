@@ -5,7 +5,7 @@
 - [ ] Install JJ VSC: https://github.com/jj-vcs/jj
 - [ ] AI
   - [ ] Install Gemini CLI: https://github.com/google-gemini/gemini-cli
-  - [ ] Install OpenCode, i dunno which one, i think it is the first
+  - [ ] Install OpenCode, i dunno which one, i think it is the first (yes correct, confirmed. Install the `sst/opencode` package)
     - [ ] https://github.com/sst/opencode
     - [ ] https://github.com/opencode-ai/opencode
 - [ ] Install TUI File Manager
