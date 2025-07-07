@@ -1,6 +1,13 @@
 # TODOS
 
-- Integrate: https://github.com/ast-grep/ast-grep?tab=readme-ov-file
-- Install typst: https://github.com/typst/typst
-- Install JJ VSC: https://github.com/jj-vcs/jj
-- Install Gemini CLI: https://github.com/google-gemini/gemini-cli
+- [ ] Integrate: https://github.com/ast-grep/ast-grep?tab=readme-ov-file
+- [ ] Install typst: https://github.com/typst/typst
+- [ ] Install JJ VSC: https://github.com/jj-vcs/jj
+- [ ] AI
+  - [ ] Install Gemini CLI: https://github.com/google-gemini/gemini-cli
+  - [ ] Install OpenCode, i dunno which one, i think it is the first (yes correct, confirmed. Install the `sst/opencode` package)
+    - [ ] https://github.com/sst/opencode
+    - [ ] https://github.com/opencode-ai/opencode
+- [ ] Install TUI File Manager
+  - [ ] https://github.com/sxyazi/yazi
+  - [ ] https://github.com/yorukot/superfile
