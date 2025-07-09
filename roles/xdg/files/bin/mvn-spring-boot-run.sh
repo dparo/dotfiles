@@ -57,9 +57,9 @@ if test "$USE_MVN_SPRING_BOOT_RUN" -ne 0; then
 
 
     if test "$debug" = "y"; then
-        jvm_args+=(-Dspring-boot.run.jvmArguments="-Dspring.devtools.restart.enabled=true -Xms64m -XX:MaxRAM=1g -XX:MaxRAMPercentage=50.0 -XX:MaxMetaspaceSize=180m -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=$suspend,address=$port")
+        jvm_args+=(-Dspring-boot.run.jvmArguments="-Dspring.devtools.restart.enabled=true -Xms64m -XX:MaxRAM=1g -XX:MaxRAMPercentage=50.0 -XX:MaxMetaspaceSize=256m -Xdebug -Xrunjdwp:transport=dt_socket,server=y,suspend=$suspend,address=$port")
     else
-        jvm_args+=(-Dspring-boot.run.jvmArguments="-Dspring.devtools.restart.enabled=true -Xms64m -XX:MaxRAM=1g -XX:MaxRAMPercentage=50.0 -XX:MaxMetaspaceSize=180m")
+        jvm_args+=(-Dspring-boot.run.jvmArguments="-Dspring.devtools.restart.enabled=true -Xms64m -XX:MaxRAM=1g -XX:MaxRAMPercentage=50.0 -XX:MaxMetaspaceSize=256m")
     fi
 else
     jvm_args+=('-Dspring.devtools.restart.enabled=true')
@@ -87,8 +87,7 @@ if test "$USE_MVN_SPRING_BOOT_RUN" -ne 0; then
     mvn  -DcheckStyle.skip -DskipTests -Dmaven.test.skip -Dmaven.compiler.useIncrementalCompilation=false \
         "${goals[@]}" \
         "${jvm_args[@]}" \
-        -Dspring-boot.run.arguments="${OTHER_ARGS[*]}" \
-        | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
+        -Dspring-boot.run.arguments="${OTHER_ARGS[*]}" 
 else
 
     # -Xmx512m
@@ -96,8 +95,7 @@ else
 
     mvn -DcheckStyle.skip -DskipTests -Dmaven.test.skip -Dmaven.compiler.useIncrementalCompilation=false \
         "${goals[@]}" && \
-        java -Xms64m -XX:MaxRAM=1g -XX:MaxRAMPercentage=50.0 -XX:MaxMetaspaceSize=180m "${jvm_args[@]}" \
+        java -Xms64m -XX:MaxRAM=1g -XX:MaxRAMPercentage=50.0 -XX:MaxMetaspaceSize=256m "${jvm_args[@]}" \
             -jar "$(find ./target -type f -name "*.jar" | sort | head -n 1)" \
-            "${OTHER_ARGS[@]}" \
-        | tee >(sed -e $'s/\x1b\[[0-9;]*[mGKHF]//g' > "$out_log_file")
+            "${OTHER_ARGS[@]}"
 fi
