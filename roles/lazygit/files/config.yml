@@ -3,105 +3,95 @@ notARepository: "skip"
 quitOnTopLevelReturn: false
 disableStartupPopups: true
 promptToReturnFromSubprocess: false # display confirmation when subprocess terminates
-
 go:
   parseEmoji: true
-
 gui:
-    mouseEvents: true
-    expandFocusedSidePanel: true
-    showRandomTip: true
-    showCommandLog: true
-    commandLogSize: 8
-    skipStashWarning: false
-    skipDiscardChangeWarning: false
-    showFileTree: true # for rendering changes files in a tree format
-    showIcons: true
-    theme:
-        lighttheme: false
-        selectedLineBgColor:
-            - reverse
-        selectedRangeBgColor:
-            - reverse
-        activebordercolor:
-            - cyan
-            - bold
+  mouseEvents: true
+  expandFocusedSidePanel: true
+  showRandomTip: true
+  showCommandLog: true
+  commandLogSize: 8
+  skipStashWarning: false
+  skipDiscardChangeWarning: false
+  showFileTree: true # for rendering changes files in a tree format
+  showIcons: true
+  theme:
+    lighttheme: false
+    selectedLineBgColor:
+      - reverse
+    selectedRangeBgColor:
+      - reverse
+    activebordercolor:
+      - cyan
+      - bold
 git:
-    paging:
-        colorArg: always
-        pager: delta --dark --paging=never
-    autoFetch: false
-    autoRefresh: true
-    disableForcePushing: true
+  paging:
+    colorArg: always
+    pager: delta --dark --paging=never
+  autoFetch: false
+  autoRefresh: true
+  disableForcePushing: true
 refresher:
-    refreshInterval: 5
-    fetchInterval: 300
+  refreshInterval: 5
+  fetchInterval: 300
 keybinding:
-    universal:
-        pushFiles: "P"
-        pullFiles: "p"
-    files:
-        commitChanges: "c"
-        commitChangesWithEditor: "C"
-        commitChangesWithoutHook: "w"
-        amendLastCommit: "A"
+  universal:
+    pushFiles: "P"
+    pullFiles: "p"
+  files:
+    commitChanges: "c"
+    commitChangesWithEditor: "C"
+    commitChangesWithoutHook: "w"
+    amendLastCommit: "A"
 customCommands:
-    # Comparing a file in a previous revision with the working copy
-    - key: 'f'
-      command: "git difftool -y {{.SelectedLocalCommit.Sha}} -- {{.SelectedCommitFile.Name}}"
-      context: 'commitFiles'
-      description: 'Compare (difftool) with local copy'
-    # Git mergetool
-    - key: "M"
-      command: "git mergetool {{ .SelectedFile.Name }}"
-      context: "files"
-      loadingText: "opening git mergetool"
-      subprocess: true
-    # Open Github pull request
-    - key: "<c-r>"
-      command: "gh pr create --fill --web"
-      context: "global"
-      loadingText: "Creating pull request on GitHub"
-    # Git blame using tig
-    - key: b
-      command: tig blame -- {{.SelectedFile.Name}}
-      context: files
-      description: blame file at tree
-      subprocess: yes
-    - key: b
-      command: tig blame {{.SelectedLocalCommit.Sha}} -- {{.SelectedCommitFile.Name}}
-      context: commitFiles
-      description: blame file at revision
-      subprocess: yes
-    - key: B
-      command: tig blame -- {{.SelectedCommitFile.Name}}
-      context: commitFiles
-      description: blame file at tree
-      subprocess: yes
-    # Browse files at revision via tig
-    - key: t
-      command: tig show {{.SelectedLocalCommit.Sha}}
-      context: subCommits
-      description: tig commit (`t` again to browse files at revision)
-      subprocess: yes
-    - key: t
-      command: tig show {{.SelectedLocalBranch.Name}}
-      context: localBranches
-      description: tig branch (`t` again to browse files at revision)
-      subprocess: yes
-    - key: t
-      command: tig show {{.SelectedRemoteBranch.RemoteName}}/{{.SelectedRemoteBranch.Name}}
-      context: remoteBranches
-      description: tig branch (`t` again to browse files at revision)
-      subprocess: yes
-    # File history via tig
-    - key: t
-      command: tig {{.SelectedLocalCommit.Sha}} -- {{.SelectedCommitFile.Name}}
-      context: commitFiles
-      description: tig file (history of commits affecting file)
-      subprocess: yes
-    - key: t
-      command: tig -- {{.SelectedFile.Name}}
-      context: files
-      description: tig file (history of commits affecting file)
-      subprocess: yes
+  # Comparing a file in a previous revision with the working copy
+  - key: 'f'
+    command: "git difftool -y {{.SelectedLocalCommit.Sha}} -- {{.SelectedCommitFile.Name}}"
+    context: 'commitFiles'
+    description: 'Compare (difftool) with local copy'
+  # Git mergetool
+  - key: "M"
+    command: "git mergetool {{ .SelectedFile.Name }}"
+    context: "files"
+    loadingText: "opening git mergetool"
+    output: terminal
+  # Open Github pull request
+  - key: "<c-r>"
+    command: "gh pr create --fill --web"
+    context: "global"
+    loadingText: "Creating pull request on GitHub"
+  # Git blame using tig
+  - key: b
+    command: tig blame -- {{.SelectedFile.Name}}
+    context: files
+    description: blame file at tree
+  - key: b
+    command: tig blame {{.SelectedLocalCommit.Sha}} -- {{.SelectedCommitFile.Name}}
+    context: commitFiles
+    description: blame file at revision
+  - key: B
+    command: tig blame -- {{.SelectedCommitFile.Name}}
+    context: commitFiles
+    description: blame file at tree
+  # Browse files at revision via tig
+  - key: t
+    command: tig show {{.SelectedLocalCommit.Sha}}
+    context: subCommits
+    description: tig commit (`t` again to browse files at revision)
+  - key: t
+    command: tig show {{.SelectedLocalBranch.Name}}
+    context: localBranches
+    description: tig branch (`t` again to browse files at revision)
+  - key: t
+    command: tig show {{.SelectedRemoteBranch.RemoteName}}/{{.SelectedRemoteBranch.Name}}
+    context: remoteBranches
+    description: tig branch (`t` again to browse files at revision)
+  # File history via tig
+  - key: t
+    command: tig {{.SelectedLocalCommit.Sha}} -- {{.SelectedCommitFile.Name}}
+    context: commitFiles
+    description: tig file (history of commits affecting file)
+  - key: t
+    command: tig -- {{.SelectedFile.Name}}
+    context: files
+    description: tig file (history of commits affecting file)
