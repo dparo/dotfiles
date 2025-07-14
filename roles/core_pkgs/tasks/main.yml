@@ -50,6 +50,7 @@
       - aspell-it
       - hunspell
       - hunspell-it
+      - fuse-sshfs # Mount remote ssh/sftp servers  as a filsystem in userspace (FUSE)
     state: present
   become: true
   tags:
