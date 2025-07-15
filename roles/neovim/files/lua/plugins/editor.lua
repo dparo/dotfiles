@@ -18,6 +18,10 @@ return {
       statuscolumn = { enabled = false },
       words = { enabled = true },
     },
+    keys = {
+      { "<leader>.",  function() Snacks.scratch() end, desc = "Toggle Scratch Buffer" },
+      { "<leader>h",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+    }
   },
     -- A high-performance #RRGGBB format color highlighter for Neovim which has no external dependencies! Written in performant Luajit
     {
