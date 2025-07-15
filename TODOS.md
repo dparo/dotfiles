@@ -11,3 +11,5 @@
 - [ ] Install TUI File Manager
   - [ ] https://github.com/sxyazi/yazi
   - [ ] https://github.com/yorukot/superfile
+- [ ] Integrate background image: https://wallhaven.cc/w/dpvp1j
+- [ ] https://heynote.com/
