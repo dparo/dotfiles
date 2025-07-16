@@ -13,3 +13,8 @@
   - [ ] https://github.com/yorukot/superfile
 - [ ] Integrate background image: https://wallhaven.cc/w/dpvp1j
 - [ ] https://heynote.com/
+- [ ] Diagrams as Code (DaC)
+  - [ ] https://c4model.com/
+  - [ ] https://github.com/structurizr
+  - [ ] https://github.com/mingrammer/diagrams
+  - [ ] https://d2lang.com/
