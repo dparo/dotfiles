@@ -19,3 +19,4 @@
   - [ ] https://github.com/structurizr
   - [ ] https://github.com/mingrammer/diagrams
   - [ ] https://d2lang.com/
+  - [ ] https://vega.github.io/
