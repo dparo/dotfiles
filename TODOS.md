@@ -22,3 +22,4 @@
   - [ ] https://github.com/mingrammer/diagrams
   - [ ] https://d2lang.com/
   - [ ] https://vega.github.io/
+- [ ] https://github.com/jesseduffield/lazydocker
