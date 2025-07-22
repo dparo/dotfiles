@@ -13,6 +13,8 @@
   - [ ] https://github.com/yorukot/superfile
 - [ ] Integrate background image: https://wallhaven.cc/w/dpvp1j
 - [ ] https://heynote.com/
+- [ ] https://silverbullet.md/
+- [ ] https://atuin.sh/
 - [ ] Diagrams as Code (DaC)
   - [ ] https://kroki.io/   (FEI interation)
   - [ ] https://c4model.com/
