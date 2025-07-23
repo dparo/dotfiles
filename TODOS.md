@@ -23,3 +23,4 @@
   - [ ] https://d2lang.com/
   - [ ] https://vega.github.io/
 - [ ] https://github.com/jesseduffield/lazydocker
+- [ ] https://github.com/dbgate/dbgate
