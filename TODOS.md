@@ -1,8 +1,4 @@
 # TODOS
-
-- [ ] Integrate: https://github.com/ast-grep/ast-grep?tab=readme-ov-file
-- [ ] Install typst: https://github.com/typst/typst
-- [ ] Install JJ VSC: https://github.com/jj-vcs/jj
 - [ ] AI
   - [ ] Install Gemini CLI: https://github.com/google-gemini/gemini-cli
   - [ ] Install OpenCode, i dunno which one, i think it is the first (yes correct, confirmed. Install the `sst/opencode` package)
@@ -13,10 +9,12 @@
   - [ ] https://github.com/yorukot/superfile
 - [ ] Integrate background image: https://wallhaven.cc/w/dpvp1j
 - [ ] https://heynote.com/
-- [ ] https://silverbullet.md/
 - [ ] Utils
   - [ ] https://github.com/ajeetdsouza/zoxide
   - [ ] https://atuin.sh/
+  - [ ] Integrate: https://github.com/ast-grep/ast-grep?tab=readme-ov-file
+  - [ ] Install typst: https://github.com/typst/typst
+  - [ ] Install JJ VSC: https://github.com/jj-vcs/jj
 - [ ] Diagrams as Code (DaC)
   - [ ] https://kroki.io/   (FEI interation)
   - [ ] https://c4model.com/
@@ -25,4 +23,7 @@
   - [ ] https://d2lang.com/
   - [ ] https://vega.github.io/
 - [ ] https://github.com/jesseduffield/lazydocker
-- [ ] https://github.com/dbgate/dbgate
+- Devops/Docker:
+  - [ ] https://www.bookstackapp.com/
+  - [ ] https://github.com/dbgate/dbgate
+  - [ ] https://silverbullet.md/
