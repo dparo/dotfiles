@@ -38,12 +38,12 @@ AUTO_START_GRAPHICAL_SESSION=0
 USE_WAYLAND=0
 
 
-if AUTO_START_GRAPHICAL_SESSION -eq 1 \
+if test "$AUTO_START_GRAPHICAL_SESSION" -eq 1 \
     && systemctl -q is-active graphical.target \
     && [ -z "$SSH_CLIENT" ] \
     && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -le 4 ]; then
 
-    if test USE_WAYLAND -eq 1 && uwsm check may-start && uwsm select; then
+    if test "$USE_WAYLAND" -eq 1 && uwsm check may-start && uwsm select; then
         exec systemd-cat -t uwsm_start uwsm start hyprland.conf
     fi
 
