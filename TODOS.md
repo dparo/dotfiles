@@ -15,6 +15,11 @@
   - [ ] Integrate: https://github.com/ast-grep/ast-grep?tab=readme-ov-file
   - [ ] Install typst: https://github.com/typst/typst
   - [ ] Install JJ VSC: https://github.com/jj-vcs/jj
+  - [ ] https://hurl.dev/
+  - [ ] https://github.com/jesseduffield/lazydocker
+  - [ ] https://www.mock-server.com
+  - [ ] https://mitmproxy.org
+  - [ ] https://github.com/alufers/mitmproxy2swagger
 - [ ] Diagrams as Code (DaC)
   - [ ] https://kroki.io/   (FEI interation)
   - [ ] https://c4model.com/
@@ -22,7 +27,6 @@
   - [ ] https://github.com/mingrammer/diagrams
   - [ ] https://d2lang.com/
   - [ ] https://vega.github.io/
-- [ ] https://github.com/jesseduffield/lazydocker
 - Devops/Docker:
   - [ ] https://www.bookstackapp.com/
   - [ ] https://github.com/dbgate/dbgate
