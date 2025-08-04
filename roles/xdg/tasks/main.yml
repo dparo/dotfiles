@@ -31,7 +31,6 @@
     - "{{ ansible_user_dir }}/.local/share/backgrounds"
     - "{{ ansible_user_dir }}/.local/share/applications"
     - "{{ ansible_user_dir }}/.local/share/keyrings"
-    - "{{ ansible_user_dir }}/.local/share/pki"
     - "{{ ansible_user_dir }}/.local/share/icons"
     - "{{ ansible_user_dir }}/.local/share/icons/hicolor"
     - "{{ ansible_user_dir }}/.local/share/dotnet"
@@ -63,16 +62,6 @@
   tags:
     - xdg
 
-- name: Symlink items
-  ansible.builtin.file:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    state: link
-  loop:
-    - src: "{{ ansible_user_dir }}/.local/share/pki"
-      dest: "{{ ansible_user_dir }}/.pki"
-  tags:
-    - xdg
 
 - name: Remove broken symlinks in directories
   ansible.builtin.command: find -L "{{ item }}" -maxdepth 1 -type l -delete
@@ -198,4 +187,3 @@
   tags:
     - xdg
     - xdg-backgrounds
-
