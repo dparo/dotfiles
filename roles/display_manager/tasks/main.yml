@@ -80,15 +80,17 @@
         - { key: AutomaticLogin, value: dparo }
       become: true
 
-    - name: GDM config - Automatic Login default session
-      ansible.builtin.copy:
-        dest: /var/lib/AccountsService/users/{{ ansible_user_id }}
-        content: |
-          [User]
-          Languages=en_US.UTF-8;
-          Session=uwsm-hyprland
-          PasswordHint=
-          SystemAccount=false
-          Icon={%- if ansible_user_id == 'dparo' -%}/usr/share/pixmaps/faces/calculator.jpg{%- else -%}/usr/share/pixmaps/faces/gamepad.jpg{%- endif -%}
-        mode: "0600"
-      become: true
+    - when: False
+      block:
+        - name: GDM config - Automatic Login default session
+          ansible.builtin.copy:
+            dest: /var/lib/AccountsService/users/{{ ansible_user_id }}
+            content: |
+              [User]
+              Languages=en_US.UTF-8;
+              Session=uwsm-hyprland
+              PasswordHint=
+              SystemAccount=false
+              Icon={%- if ansible_user_id == 'dparo' -%}/usr/share/pixmaps/faces/calculator.jpg{%- else -%}/usr/share/pixmaps/faces/gamepad.jpg{%- endif -%}
+            mode: "0600"
+          become: true
