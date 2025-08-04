@@ -141,7 +141,6 @@
     - rofi
     - xdg_terminal_exec
     - nautilus
-    - pcmanfm
     - dragon
     - ripdrag
     - feh
