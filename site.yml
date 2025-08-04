@@ -97,7 +97,6 @@
     - fzf
     - starship
     - lazygit
-    - git_utils
     - gitui
     - gnu_parallel
     - jless
