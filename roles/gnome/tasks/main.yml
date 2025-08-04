@@ -395,30 +395,3 @@
           command: "'screenshot.sh'"
           binding: "'<Shift><Super>s'"
 
-
-
-    - name: Remove unwanted packages
-      ansible.builtin.dnf:
-        name:
-          - orca
-          - epiphany-runtime
-        state: absent
-        autoremove: true
-      become: true
-
-    - name: Remove gnome-software (--noautoremove)
-      ansible.builtin.dnf:
-        name:
-          - gnome-software
-        state: absent
-        autoremove: true
-      become: true
-
-
-    - name: Reinstall flatpak if it was removed
-      ansible.builtin.dnf:
-        name:
-          - flatpak
-        state: present
-      become: true
-

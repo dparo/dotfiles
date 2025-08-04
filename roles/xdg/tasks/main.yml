@@ -2,200 +2,89 @@
 - name: Install
   ansible.builtin.dnf:
     name:
-      - xdg-desktop-portal
+      - openssl
+      - nano
+      - direnv
+      - openssh
+      - polkit
+      - sqlite
+      - wget
+      - curl
+      - httpie
+      - rclone
+      - restic # Modern backup program with support for rclone (Cloud based backups)
+      - rsync
+      - jq
+      - rsync
+      - p7zip
+      - p7zip-plugins
+      - unrar
+      - unzip
+      - atool # atool is a script for managing file archives of various types (tar,tar+gzip, zip etc)
+      - make
+      - automake
+      - gcc
+      - gcc-c++
+      - kernel-devel
+      - python3-pip
+      - bat
+      - tree
+      - fd-find
+      - htop
+      - btop
+      - nvtop
+      - net-tools
+      - lm_sensors
+      - ffmpeg
+      - speedtest-cli
+      - zbar # QR Code reader
+      - qrencode # QR Code encoder
+      - openldap-clients
+      - calc # Arbitrary precision C-like calculator
+      - p11-kit
+      - inotify-tools
+      - miller # Miller is a command-line tool for querying, shaping, and reformatting data files in various formats including CSV, TSV, JSON, and JSON Lines.
+      - ncdu # ncdu (NCurses Disk Usage) is a curses-based version of the well-known 'du', and provides a fast way to see what directories are using your disk space.
+      - aspell
+      - aspell-it
+      - hunspell
+      - hunspell-it
+      - fuse-sshfs # Mount remote ssh/sftp servers  as a filsystem in userspace (FUSE)
+      - squashfs-tools  # Required to run AppImages
     state: present
   become: true
   tags:
-    - xdg
+    - core-pkgs
 
-- name: Create items
-  ansible.builtin.file:
-    path: "{{ item }}"
-    state: directory
-    mode: "0755"
-  loop:
-    - "{{ ansible_user_dir }}/Desktop"
-    - "{{ ansible_user_dir }}/Downloads"
-    - "{{ ansible_user_dir }}/Documents"
-    - "{{ ansible_user_dir }}/Pictures"
-    - "{{ ansible_user_dir }}/Pictures/Screenshots"
-    - "{{ ansible_user_dir }}/Music"
-    - "{{ ansible_user_dir }}/Videos"
-    - "{{ ansible_user_dir }}/.local/share/Templates"
-    - "{{ ansible_user_dir }}/opt"
-    - "{{ ansible_user_dir }}/.local/bin"
-    - "{{ ansible_user_dir }}/.local/share/terminals"
-    - "{{ ansible_user_dir }}/.local/share/bin"
-    - "{{ ansible_user_dir }}/.local/share/fonts"
-    - "{{ ansible_user_dir }}/.local/share/sounds"
-    - "{{ ansible_user_dir }}/.local/share/backgrounds"
-    - "{{ ansible_user_dir }}/.local/share/applications"
-    - "{{ ansible_user_dir }}/.local/share/keyrings"
-    - "{{ ansible_user_dir }}/.local/share/pki"
-    - "{{ ansible_user_dir }}/.local/share/icons"
-    - "{{ ansible_user_dir }}/.local/share/icons/hicolor"
-    - "{{ ansible_user_dir }}/.local/share/dotnet"
-    - "{{ ansible_user_dir }}/.cache"
-    - "{{ ansible_user_dir }}/.cache/bash"
-    - "{{ ansible_user_dir }}/.cache/zsh"
-    - "{{ ansible_user_dir }}/.config"
-    - "{{ ansible_user_dir }}/.config/autostart"
-  tags:
-    - xdg
 
-- name: Delete items
-  ansible.builtin.file:
-    path: "{{ item }}"
+- name: Uninstall
+  ansible.builtin.dnf:
+    name:
+      - plocate # Plocate is a package that allows to use the command `locate` to quickly find files (as opposed to find). It works by employing a database built at boot-time (plocate-updatedb.service). This service usually slows down boot time by quite a lot
     state: absent
-  loop:
-    - "{{ ansible_user_dir }}/.bash_history"
-    - "{{ ansible_user_dir }}/.bash_profile"
-    - "{{ ansible_user_dir }}/.bash_logout"
-    - "{{ ansible_user_dir }}/.bashrc"
-    - "{{ ansible_user_dir }}/.profile"
-    - "{{ ansible_user_dir }}/.python_history"
-    - "{{ ansible_user_dir }}/.lesshst"
-    - "{{ ansible_user_dir }}/.sudo_as_admin_successful"
-    - "{{ ansible_user_dir }}/.xsession-errors"
-    - "{{ ansible_user_dir }}/.gnome"
-    - "{{ ansible_user_dir }}/Templates"
-    - "{{ ansible_user_dir }}/.gnome"
+  become: true
   tags:
-    - xdg
+    - core-pkgs
 
-- name: Symlink items
-  ansible.builtin.file:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    state: link
-  loop:
-    - src: "{{ ansible_user_dir }}/.local/share/pki"
-      dest: "{{ ansible_user_dir }}/.pki"
+- name: Install sad (https://github.com/ms-jpq/sad)
+  ansible.builtin.unarchive:
+    src: https://github.com/ms-jpq/sad/releases/latest/download/x86_64-unknown-linux-gnu.zip
+    dest: "{{ ansible_user_dir }}/.local/bin"
+    remote_src: true
   tags:
-    - xdg
+    - core-pkgs
+    - sad
 
-- name: Remove broken symlinks in directories
-  ansible.builtin.command: find -L "{{ item }}" -maxdepth 1 -type l -delete
-  loop:
-    - "{{ ansible_user_dir }}"
-    - "{{ ansible_user_dir }}/.config"
-    - "{{ ansible_user_dir }}/.local/bin"
-    - "{{ ansible_user_dir }}/.local/share/bin"
-    - "{{ ansible_user_dir }}/.local/share/applications"
-  tags:
-    - xdg
-    - remove-broken-symlinks
-
-- name: Update desktop database
-  ansible.builtin.shell: |
-    update-desktop-database ~/.local/share/applications
-  ignore_errors: true
-  tags:
-    - xdg
-
-- name: Symlink desktop applications
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ ansible_user_dir }}/.local/share/applications/{{ item | basename }}"
-    state: link
-  with_fileglob: "{{ role_path }}/files/applications/*"
-  ignore_errors: true
-  tags:
-    - xdg
-
-- name: Symlink scripts
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ ansible_user_dir }}/.local/share/bin/{{ item | basename }}"
-    state: link
-  with_fileglob: "{{ role_path }}/files/bin/*"
-  tags:
-    - xdg
-    - xdg-scripts
-
-- name: Symlink backgrounds
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ ansible_user_dir }}/.local/share/backgrounds/{{ item | basename }}"
-    state: link
-  with_fileglob: "{{ role_path }}/files/backgrounds/*"
-  tags:
-    - xdg
-    - xdg-backgrounds
-
-- name: Symlink sounds
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ ansible_user_dir }}/.local/share/sounds/{{ item | basename }}"
-    state: link
-  with_fileglob: "{{ role_path }}/files/sounds/*"
-  tags:
-    - xdg
-
-- name: Symlink config
+- name: Symlink config files
   ansible.builtin.file:
     src: "{{ item }}"
     dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
     state: link
-    force: true
   loop:
-    - "{{ role_path }}/files/config/user-dirs.dirs"
+    - "{{ role_path }}/files/direnv"
+    - "{{ role_path }}/files/bat"
+    - "{{ role_path }}/files/nano"
+    - "{{ role_path }}/files/readline"
+    - "{{ role_path }}/files/wgetrc"
   tags:
-    - xdg
-
-- name: Clone xdg-ninja
-  ansible.builtin.git:
-    clone: true
-    depth: 1
-    dest: "{{ ansible_user_dir }}/opt/github.com/xdg-ninja"
-    force: true
-    repo: https://github.com/b3nj5m1n/xdg-ninja
-    single_branch: true
-    update: true
-    version: main
-  register: clone
-  tags:
-    - xdg
-    - xdg-ninja
-
-- name: Symlink xdg-ninja binaries
-  ansible.builtin.file:
-    src: "{{ ansible_user_dir }}/opt/github.com/xdg-ninja/{{ item }}"
-    dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
-    state: link
-  loop:
-    - xdg-ninja.sh
-  tags:
-    - xdg
-    - xdg-ninja
-
-- name: Fetch BirdNord background
-  ansible.builtin.get_url:
-    dest: "{{ ansible_user_dir }}/.local/share/backgrounds/BirdNord.png"
-    url: https://raw.githubusercontent.com/linuxdotexe/nordic-wallpapers/refs/heads/master/wallpapers/BirdNord.png
-    mode: "0644"
-  ignore_errors: true
-  tags:
-    - xdg
-    - xdg-backgrounds
-
-- name: Fetch flatppuccin_4k_macchiato background
-  ansible.builtin.get_url:
-    dest: "{{ ansible_user_dir }}/.local/share/backgrounds/flatppuccin_4k_macchiato.png"
-    url: https://raw.githubusercontent.com/zhichaoh/catppuccin-wallpapers/refs/heads/main/flatppuccin/flatppuccin_4k_macchiato.png
-    mode: "0644"
-  ignore_errors: true
-  tags:
-    - xdg
-    - xdg-backgrounds
-
-- name: Fetch retro_exoplanet.png background
-  ansible.builtin.get_url:
-    dest: "{{ ansible_user_dir }}/.local/share/backgrounds/retro_exoplanet.png"
-    url: '{{ retro_exoplanet_png_background_url }}'
-    mode: "0644"
-  ignore_errors: true
-  tags:
-    - xdg
-    - xdg-backgrounds
-
+    - core-pkgs

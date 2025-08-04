@@ -29,7 +29,7 @@ if status is-interactive
     #     docker completion fish | source
     # end
 
-    if builtin type go-task 1>/dev/null 2>/dev/null
-        go-task --completion fish | source
-    end
+    # if builtin type go-task 1>/dev/null 2>/dev/null
+    #     go-task --completion fish | source
+    # end
 end

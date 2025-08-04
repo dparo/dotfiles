@@ -30,12 +30,6 @@
            source "$HOME/.config/nvm/nvm.sh"
            nvm install --lts          # Install latest LTS
            nvm alias default 'lts/*'  # Alias the default node to point to the latest LTS
-        - name: Install yarn
-          community.general.npm:
-           name: "yarn"
-           global: true
-           state: latest
-
 
 
     - when: False
@@ -83,4 +77,4 @@
             dest: "{{ ansible_user_dir }}/.config/angular"
             state: link
           tags:
-            - angular
+            - angula

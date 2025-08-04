@@ -97,7 +97,6 @@
     - fzf
     - starship
     - lazygit
-    - git_utils
     - gitui
     - gnu_parallel
     - jless
@@ -142,7 +141,6 @@
     - rofi
     - xdg_terminal_exec
     - nautilus
-    - pcmanfm
     - dragon
     - ripdrag
     - feh
@@ -158,7 +156,6 @@
     - copyq
     - flameshot
     - zathura
-    - misc
     - fonts
     - docker
     - flatpak

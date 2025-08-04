@@ -90,29 +90,10 @@
         state: present
       become: true
 
-    - name: Install runtime deps (CARGO)
-      when: false
-      community.general.cargo:
-        name:
-          - tokei
-          - tree-sitter-cli
-        state: latest
-
     - name: Install runtime deps (PIP)
       ansible.builtin.pip:
         name:
           - cpplint
-        state: latest
-
-    - name: Install required providers - npm neovim
-      community.general.npm:
-        name: neovim
-        state: latest
-        global: true
-
-    - name: Install required providers - pip3 pynvim
-      ansible.builtin.pip:
-        name: pynvim
         state: latest
 
     - name: Symlink config
@@ -137,20 +118,22 @@
         version: stable
         update: true
 
-    - name: Lazy.nvim install plugins
-      ansible.builtin.shell: |
-        nvim --headless -c "Lazy! restore" -c qall
-        - neovim-plugins
+    - when: False
+      block:
+        - name: Lazy.nvim install plugins
+          ansible.builtin.shell: |
+            nvim --headless -c "Lazy! restore" -c qall
+            - neovim-plugins
 
-    - name: Update remote plugins
-      ansible.builtin.shell: |
-        nvim --headless -c 'UpdateRemotePlugins' -c qall
-        - neovim-plugins
+        - name: Update remote plugins
+          ansible.builtin.shell: |
+            nvim --headless -c 'UpdateRemotePlugins' -c qall
+            - neovim-plugins
 
-    - name: MasonInstall {{ mason_dependencies | join(' ') }}
-      ansible.builtin.shell: |
-        nvim --headless -c "MasonInstall {{ mason_dependencies | join(' ') }}" -c "qall"
-        - neovim-lsp
-        - mason
-        - mason.nvim
-        - nvim-mason
+        - name: MasonInstall {{ mason_dependencies | join(' ') }}
+          ansible.builtin.shell: |
+            nvim --headless -c "MasonInstall {{ mason_dependencies | join(' ') }}" -c "qall"
+            - neovim-lsp
+            - mason
+            - mason.nvim
+            - nvim-mason
