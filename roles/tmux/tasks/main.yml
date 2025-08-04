@@ -8,17 +8,9 @@
       ansible.builtin.dnf:
         name:
           - tmux
-          - python3-tmux
+          - python3-tmuxp
         state: present
       become: true
-
-    - when: False
-      block:
-      - name: Install tmuxp trough pip
-        ansible.builtin.pip:
-          name:
-            - tmuxp
-          state: latest
 
     - name: Symlink config
       ansible.builtin.file:
