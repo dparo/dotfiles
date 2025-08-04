@@ -52,6 +52,21 @@
         - i3
         - bspwm
 
+    - name: Create desktop entry to allow display managers to execute uwsm
+      ansible.builtin.copy:
+        dest: /usr/share/wayland-sessions/uwsm-{{ item }}.desktop
+        content: |
+          [Desktop Entry]
+          Encoding=UTF-8
+          Type=Application
+          Name=uwsm-{{ item }}
+          Comment=Executes uwsm start {{ item }}.desktop
+          Exec=uwsm start {{item}}.desktop
+        mode: "0644"
+      become: true
+      loop:
+        - hyprland
+
     - name: GDM config
       community.general.ini_file:
         path: /etc/gdm/custom.conf
@@ -71,7 +86,7 @@
         content: |
           [User]
           Languages=en_US.UTF-8;
-          Session=xinitrc-i3
+          Session=uwsm-hyprland
           PasswordHint=
           SystemAccount=false
           Icon={%- if ansible_user_id == 'dparo' -%}/usr/share/pixmaps/faces/calculator.jpg{%- else -%}/usr/share/pixmaps/faces/gamepad.jpg{%- endif -%}
