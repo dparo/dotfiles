@@ -18,8 +18,6 @@
           - python3-requests
           - python3-mypy
           - python3-beautifulsoup4
-          - python3-requests_nltm
-          - python3-dnf5
           - ruff
           - poetry # Python dependency management and packaging made easy
         state: present
