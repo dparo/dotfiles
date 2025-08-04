@@ -11,6 +11,11 @@
           - waybar
           - wl-clipboard
           - swaybg
+          - swaylock
+          - swayidle
+          - sway-systemd
+          - sway-wallpapers
+          - SwayNotificationCenter
           - fuzzel
         state: present
       become: true
