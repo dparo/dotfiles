@@ -27,7 +27,7 @@ Wants=i3-battery-notifier.service
 Wants=spotifyd.service
 
 Wants=picom.service
-Wants=davmail.service
+# Wants=davmail.service
 
 # Wants=redshift.service
 
