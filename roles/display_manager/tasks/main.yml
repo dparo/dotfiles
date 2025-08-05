@@ -67,21 +67,21 @@
       loop:
         - hyprland
 
-    - name: GDM config
-      community.general.ini_file:
-        path: /etc/gdm/custom.conf
-        section: daemon
-        option: "{{ item.key }}"
-        value: "{{ item.value }}"
-        no_extra_spaces: true
-      loop:
-        - { key: WaylandEnable, value: true }
-        - { key: AutomaticLoginEnable, value: true }
-        - { key: AutomaticLogin, value: dparo }
-      become: true
-
     - when: False
       block:
+        - name: GDM config
+          community.general.ini_file:
+            path: /etc/gdm/custom.conf
+            section: daemon
+            option: "{{ item.key }}"
+            value: "{{ item.value }}"
+            no_extra_spaces: true
+          loop:
+            - { key: WaylandEnable, value: true }
+            - { key: AutomaticLoginEnable, value: true }
+            - { key: AutomaticLogin, value: dparo }
+          become: true
+
         - name: GDM config - Automatic Login default session
           ansible.builtin.copy:
             dest: /var/lib/AccountsService/users/{{ ansible_user_id }}
