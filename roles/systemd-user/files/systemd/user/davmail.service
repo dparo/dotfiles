@@ -1,0 +1,10 @@
+[Unit]
+Description=DavMail Exchange
+PartOf=graphical-session.target
+
+[Service]
+ExecStart=%h/opt/davmail/davmail %h/opt/davmail/davmail.properties
+Slice=session.slice
+
+Restart=always
+
