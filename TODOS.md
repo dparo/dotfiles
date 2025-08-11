@@ -1,14 +1,14 @@
 # TODOS
-- [ ] AI
-  - [ ] Install Gemini CLI: https://github.com/google-gemini/gemini-cli
-  - [ ] Install TUI AI Coding Agent
-    - [ ] [sst/opencode](https://github.com/sst/opencode)
-    - [ ] [Crush](https://github.com/charmbracelet/crush)
+- [ ] AI Coding Agents
+  - [ ] [Google Gemini CLI](https://github.com/google-gemini/gemini-cli)
+  - [ ] [sst/opencode](https://github.com/sst/opencode)
+  - [ ] [Crush](https://github.com/charmbracelet/crush)
 - [ ] Install TUI File Manager
   - [ ] https://github.com/sxyazi/yazi
   - [ ] https://github.com/yorukot/superfile
 - [ ] Integrate background image: https://wallhaven.cc/w/dpvp1j
-- [ ] https://heynote.com/
+- [ ] Desktop Applications
+  - [ ] https://heynote.com/
 - [ ] Utils
   - [ ] https://github.com/ajeetdsouza/zoxide
   - [ ] https://atuin.sh/
