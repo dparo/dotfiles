@@ -1,9 +1,9 @@
 # TODOS
 - [ ] AI
   - [ ] Install Gemini CLI: https://github.com/google-gemini/gemini-cli
-  - [ ] Install OpenCode, i dunno which one, i think it is the first (yes correct, confirmed. Install the `sst/opencode` package)
-    - [ ] https://github.com/sst/opencode
-    - [ ] https://github.com/opencode-ai/opencode
+  - [ ] Install TUI AI Coding Agent
+    - [ ] [sst/opencode](https://github.com/sst/opencode)
+    - [ ] [Crush](https://github.com/charmbracelet/crush)
 - [ ] Install TUI File Manager
   - [ ] https://github.com/sxyazi/yazi
   - [ ] https://github.com/yorukot/superfile
