@@ -1,0 +1,13 @@
+[Unit]
+Description=Borg backup
+After=syslog.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+ExecStartPre=-/usr/bin/notify-send "(Borg Backup) Started backup"
+ExecStart=/usr/bin/bash %h/opt/borg-backup/backup.sh
+
+[Install]
+WantedBy=multi-user.target
+

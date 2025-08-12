@@ -1,0 +1,9 @@
+[Unit]
+Description=Run Borg Backup on calendar
+
+[Timer]
+OnCalendar=Mon,Tue,Wed,Thu,Fri *-*-* 17:45:00
+
+[Install]
+WantedBy=timers.target
+
