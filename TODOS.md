@@ -9,6 +9,9 @@
 - [ ] Integrate background image: https://wallhaven.cc/w/dpvp1j
 - [ ] Desktop Applications
   - [ ] https://heynote.com/
+- [ ] Wayland
+  - [ ] Setup hyprland
+  - [ ] [Omarchy](https://omarchy.org/)
 - [ ] Utils
   - [ ] https://github.com/ajeetdsouza/zoxide
   - [ ] https://atuin.sh/
