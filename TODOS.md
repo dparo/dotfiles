@@ -19,7 +19,7 @@
   - [ ] Install typst: https://github.com/typst/typst
   - [ ] Install JJ VSC: https://github.com/jj-vcs/jj
   - [ ] https://hurl.dev/
-  - [ ] https://github.com/jesseduffield/lazydocker
+  - [x] https://github.com/jesseduffield/lazydocker
   - [ ] https://www.mock-server.com
   - [ ] https://mitmproxy.org
   - [ ] https://github.com/alufers/mitmproxy2swagger
