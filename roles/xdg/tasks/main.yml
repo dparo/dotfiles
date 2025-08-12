@@ -15,6 +15,7 @@
       - restic # Modern backup program with support for rclone (Cloud based backups)
       - rsync
       - jq
+      - yq
       - rsync
       - p7zip
       - p7zip-plugins
