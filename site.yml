@@ -101,6 +101,7 @@
     - gnu_parallel
     - jless
     - ranger
+    - yazi
 
     ## Devel command line programs
     - awscli

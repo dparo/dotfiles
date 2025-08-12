@@ -1,0 +1,36 @@
+---
+- name: yazi
+  tags:
+    - yazi
+  block:
+    - name: Check latest yazi
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/sxyazi/yazi/releases/latest
+        return_content: true
+      register: yazi
+
+    - name: Create install dir
+      ansible.builtin.file:
+        path: /opt/yazi
+        state: directory
+        mode: "0755"
+      become: true
+
+    # https://github.com/sxyazi/yazi/releases/download/v25.5.31/yazi-x86_64-unknown-linux-gnu.zip
+    - name: Download and unpack latest yazi
+      ansible.builtin.unarchive:
+        src: "https://github.com/sxyazi/yazi/releases/download/{{ yazi['json']['tag_name'] }}/yazi-x86_64-unknown-linux-gnu.zip"
+        dest: /opt/yazi
+        remote_src: true
+      become: true
+
+    - name: Symlink binaries
+      ansible.builtin.file:
+        src: "/opt/yazi/yazi-x86_64-unknown-linux-gnu/{{ item }}"
+        dest: "/usr/local/bin/{{ item }}"
+        state: link
+      become: true
+      loop:
+        - yazi
+        - ya
+
