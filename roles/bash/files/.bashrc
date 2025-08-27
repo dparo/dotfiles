@@ -28,6 +28,9 @@ if [ -d ~/.bashrc.d ]; then
 fi
 unset rc
 
+if command -v starship 1> /dev/null 2> /dev/null; then
+    eval "$(starship init bash)"
+fi
 
 shopt -s globstar
 shopt -s dotglob
