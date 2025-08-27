@@ -44,8 +44,8 @@ bindkey -e
 # Edit the current command line in $EDITOR (C-x C-e)
 autoload -z edit-command-line
 zle -N edit-command-line
-bindkey "^X^E" edit-command-line
-
+bindkey "^X^E" edit-command-line # C-x C-e : Edit command prompt with $EDITOR
+bindkey '^[e' edit-command-line  # Alt-e   : Edit command prompt with $EDITOR
 
 # [Home] bind
 if [[ -n "$TMUX" ]] && [[ "${terminfo[khome]}" != "" ]]; then
