@@ -20,7 +20,13 @@ not_executable_symbol = " "
 
 [os]
 format = "[$symbol]($style)"
+disabled = true
+
+[shell]
 disabled = false
+# fish_indicator = '󰈺 '
+# powershell_indicator = '_'
+
 
 [git_status]
 stashed = ' 󰜦 '
