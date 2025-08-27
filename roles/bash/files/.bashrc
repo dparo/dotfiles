@@ -38,6 +38,8 @@ shopt -s histappend
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
+bind '"\ee": edit-and-execute-command' # Alt-e   : Edit command prompt with $EDITOR
+
 # Alias definitions.
 # You may want to put all your additions into a separate file like
 # ~/.bash_aliases, instead of adding them here directly.
