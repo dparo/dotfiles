@@ -23,6 +23,7 @@ if false; then
     hsetroot -solid '#7f7f7f' || xsetroot -solid '#7f7f7f'
 else
     set_wallpaper \
+        "${XDG_DATA_HGOME:-"$HOME/.local/share"}/backgrounds/Platform (1).png" \
         "${XDG_DATA_HGOME:-"$HOME/.local/share"}/backgrounds/wallhaven-dpvp1j_1920x1080.png" \
         /usr/share/backgrounds/gnome/adwaita-d.* \
         "${XDG_DATA_HGOME:-"$HOME/.local/share"}/backgrounds/flatppuccin_4k_macchiato.png" \
