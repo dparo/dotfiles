@@ -86,7 +86,7 @@
     writeToTemp = true
     prompt = false
 [mergetool "meld"]
-    ; cmd = meld --output "$MERGED" "$LOCAL" "$BASE" "$REMOTE"
+    cmd = meld --output "$MERGED" --diff "$LOCAL" "$BASE" "$REMOTE"
     keepBackup = false
     keepTemporaries = false
     writeToTemp = true
