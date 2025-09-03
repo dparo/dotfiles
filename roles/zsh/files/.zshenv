@@ -18,6 +18,11 @@ export VISUAL=nvim
 export MANROFFOPT="-c"
 export MANPAGER="sh -c 'col -bx | bat -l man -p --paging always'"
 
+if builtin type nvim  1>/dev/null 2>/dev/null; then
+    export MANPAGER='nvim +Man!'
+fi
+
+
 
 # https://git-scm.com/docs/merge-options?ref=blog.mergify.com#Documentation/merge-options.txt---no-edit
 export GIT_MERGE_AUTOEDIT=no
