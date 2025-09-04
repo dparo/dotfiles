@@ -6,6 +6,7 @@ promptToReturnFromSubprocess: false # display confirmation when subprocess termi
 go:
   parseEmoji: true
 gui:
+  nerdFontsVersion: "3"
   mouseEvents: true
   expandFocusedSidePanel: true
   showRandomTip: true
