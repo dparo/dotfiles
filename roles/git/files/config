@@ -1,4 +1,8 @@
 # vi: ft=gitconfig
+[include]
+    path = ~/.config/git/catppuccin.gitconfig
+
+
 [core]
     editor = nvim
     pager = delta
@@ -118,23 +122,15 @@
     diffFilter = delta --color-only --features=interactive
 [delta]
     navigate=true
-    features = decorations
+    features = decorations catppuccin-macchiato
     whitespace-error-style = 22 reverse
-    syntax-theme = ansi
+    ; syntax-theme = ansi
+    syntax-theme = Catppuccin Macchiato
+    ; syntax-theme = tokyonight_storm
+    keep-plus-minus-markers = true
     diff-so-fancy=false
     side-by-side=false
     hyperlinks = true
-    minus-style                   = syntax "#3f2d3d"
-    minus-non-emph-style          = syntax "#3f2d3d"
-    minus-emph-style              = syntax "#763842"
-    minus-empty-line-marker-style = syntax "#3f2d3d"
-    line-numbers-minus-style      = "#914c54"
-    plus-style                    = syntax "#283b4d"
-    plus-non-emph-style           = syntax "#283b4d"
-    plus-emph-style               = syntax "#316172"
-    plus-empty-line-marker-style  = syntax "#283b4d"
-    line-numbers-plus-style       = "#449dab"
-    line-numbers-zero-style       = "#3b4261"
 [delta "interactive"]
     keep-plus-minus-markers = true
 [delta "decorations"]

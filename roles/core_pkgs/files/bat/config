@@ -2,5 +2,6 @@
 #--theme="Visual Studio Dark+"
 #--theme="base16-256"
 #--theme="ansi"
+# --theme="tokyonight_storm"
 --theme="Catppuccin Macchiato"
 --style="header"
