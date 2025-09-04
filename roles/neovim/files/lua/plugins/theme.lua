@@ -179,7 +179,7 @@ local theme_list = {
         colorscheme = "tokyonight",
         config = function()
             require("tokyonight").setup {
-                style = "night",
+                style = "storm",
                 light_style = "day",
             }
         end,
