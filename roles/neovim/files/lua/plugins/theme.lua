@@ -122,7 +122,7 @@ vim.diagnostic.config({
 })
 
 ---
-local theme = vim.env.NVIM_THEME or "catppuccin"
+local theme = vim.env.NVIM_THEME or "tokyonight"
 ---
 
 local theme_list = {
