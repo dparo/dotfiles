@@ -16,8 +16,8 @@ fi
 
 if [ $# -eq 0 ]; then
   # No arguments → just attach
-  tmux attach -t "$session"
+  exec tmux attach -t "$session"
 else
   # With arguments → create new window running command
-  tmux attach -t "$session" \; new-window $@
+  exec tmux attach -t "$session" \; new-window $@
 fi
