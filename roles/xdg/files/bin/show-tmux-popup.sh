@@ -5,7 +5,7 @@ session="_popup_$(tmux display -p '#S')"
 has_session=1
 
 if ! tmux has -t "$session" 2> /dev/null; then
-  session_id="$(tmux new-session -dP -s "$session" -F '#{session_id}')"
+  session_id="$(tmux new-session -dP -s "$session" -F '#{session_id}' $@)"
   tmux set-option -s -t "$session_id" key-table popup
   tmux set-option -s -t "$session_id" status off
   tmux set-option -s -t "$session_id" prefix None
@@ -14,10 +14,10 @@ if ! tmux has -t "$session" 2> /dev/null; then
 fi
 
 
-if [ $# -eq 0 ]; then
-  # No arguments → just attach
-  exec tmux attach -t "$session"
-else
-  # With arguments → create new window running command
+if [ $# -gt 0 -a $has_session -eq 1 ]; then
+  tmux set-option -s -t "$session" status on
   exec tmux attach -t "$session" \; new-window $@
+else
+  exec tmux attach -t "$session"
 fi
+
