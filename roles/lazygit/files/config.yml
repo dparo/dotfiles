@@ -16,14 +16,30 @@ gui:
   showFileTree: true # for rendering changes files in a tree format
   showIcons: true
   theme:
-    lighttheme: false
+    activeBorderColor:
+      - "#ff9e64"
+      - "bold"
+    inactiveBorderColor:
+      - "#29a4bd"
+    searchingActiveBorderColor:
+      - "#ff9e64"
+      - "bold"
+    optionsTextColor:
+      - "#7aa2f7"
     selectedLineBgColor:
-      - reverse
-    selectedRangeBgColor:
-      - reverse
-    activebordercolor:
-      - cyan
-      - bold
+      - "#2e3c64"
+    cherryPickedCommitFgColor:
+      - "#7aa2f7"
+    cherryPickedCommitBgColor:
+      - "#bb9af7"
+    markedBaseCommitFgColor:
+      - "#7aa2f7"
+    markedBaseCommitBgColor:
+      - "#e0af68"
+    unstagedChangesColor:
+      - "#db4b4b"
+    defaultFgColor:
+      - "#c0caf5"
 git:
   paging:
     colorArg: always
