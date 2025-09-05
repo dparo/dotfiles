@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
 # set -x
-selection="$(find ~/src -maxdepth 6 -name .git -type d | fzf)"
+
+selection="$(find ~/src -maxdepth 10 \( -name node_modules -o -name target -o -name build \) -prune -o \( -type f -o -type d \) -name '*.git' -print | fzf)"
 
 if test "$?" -ne 0; then
     exit 1
