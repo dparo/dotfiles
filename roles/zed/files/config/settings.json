@@ -47,7 +47,7 @@
     "soft_wrap": "none",
     "use_autoclose": true,
     "ensure_final_newline_on_save": true,
-    "format_on_save": "on",
+    "format_on_save": "off",
     "formatter": "auto",
     "indent_guides": {
         "enabled": true,
