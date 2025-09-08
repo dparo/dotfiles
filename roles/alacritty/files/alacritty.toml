@@ -2,60 +2,51 @@
 live_config_reload = true
 working_directory = "None"
 
-[colors]
-draw_bold_text_with_bright_colors = false
+# -----------------------------------------------------------------------------
+# TokyoNight Alacritty Colors
+# Theme: Tokyo Night Storm
+# Upstream: https://github.com/folke/tokyonight.nvim/raw/main/extras/alacritty/tokyonight_storm.toml
+# -----------------------------------------------------------------------------
 
-[[colors.indexed_colors]]
-color = "0xb65611"
-index = 16
-
-[[colors.indexed_colors]]
-color = "0xd43552"
-index = 17
-
-[[colors.indexed_colors]]
-color = "0x292824"
-index = 18
-
-[[colors.indexed_colors]]
-color = "0x6e6b5e"
-index = 19
-
-[[colors.indexed_colors]]
-color = "0x999580"
-index = 20
-
-[[colors.indexed_colors]]
-color = "0xe8e4cf"
-index = 21
-
-[colors.bright]
-black = "0x7d7a68"
-blue = "0x6684e1"
-cyan = "0x1fad83"
-green = "0x60ac39"
-magenta = "0xb854d4"
-red = "0xd73737"
-white = "0xfefbec"
-yellow = "0xae9513"
-
-[colors.cursor]
-cursor = "0xa6a28c"
-text = "0x20201d"
-
-[colors.normal]
-black = "0x20201d"
-blue = "0x6684e1"
-cyan = "0x1fad83"
-green = "0x60ac39"
-magenta = "0xb854d4"
-red = "0xd73737"
-white = "0xa6a28c"
-yellow = "0xae9513"
-
+# Default colors
 [colors.primary]
-background = "0x20201d"
-foreground = "0xa6a28c"
+background = '#24283b'
+foreground = '#c0caf5'
+
+#[colors.cursor]
+#cursor = '#c0caf5'
+#text = '#24283b'
+
+# Normal colors
+[colors.normal]
+black = '#1d202f'
+red = '#f7768e'
+green = '#9ece6a'
+yellow = '#e0af68'
+blue = '#7aa2f7'
+magenta = '#bb9af7'
+cyan = '#7dcfff'
+white = '#a9b1d6'
+
+# Bright colors
+[colors.bright]
+black = '#414868'
+red = '#ff899d'
+green = '#9fe044'
+yellow = '#faba4a'
+blue = '#8db0ff'
+magenta = '#c7a9ff'
+cyan = '#a4daff'
+white = '#c0caf5'
+
+# Indexed Colors
+[[colors.indexed_colors]]
+index = 16
+color = '#ff9e64'
+
+[[colors.indexed_colors]]
+index = 17
+color = '#db4b4b'
 
 [cursor]
 style = "Block"
