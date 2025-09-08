@@ -1,5 +1,5 @@
 [general]
-live_config_reload = false
+live_config_reload = true
 working_directory = "None"
 
 [colors]
@@ -64,7 +64,7 @@ style = "Block"
 size = 10.0
 
 [font.normal]
-family = "Monaspace Neon"
+family = "JetbrainsMono Nerd Font"
 style = "Regular"
 
 [scrolling]
