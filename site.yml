@@ -137,6 +137,7 @@
 
     ## Basic GUI programs
     - kitty
+    - wezterm
     - alacritty
     - ghostty
     - st
