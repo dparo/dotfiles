@@ -19,7 +19,7 @@ vim.o.history = 4096
 vim.o.selection = "exclusive"
 
 vim.o.background = "dark"
-vim.o.guifont = "Monaspace Neon:h9.0"
+vim.o.guifont = "IBM Plex Mono:h9.0"
 
 vim.o.list = true
 vim.o.listchars = "tab:→ ,trail:·,extends:↷,precedes:↶" -- eol:↵,

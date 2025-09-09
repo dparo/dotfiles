@@ -12,7 +12,7 @@ cursor-style=block
 
 adjust-cell-height = +2
 font-family = ""
-font-family = "Monaspace Neon"
+font-family = "IBM Plex Mono"
 font-family = "Symbols Nerd Font"
 font-feature = +calt
 font-feature = -liga

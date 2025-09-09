@@ -14,7 +14,7 @@ config.hide_tab_bar_if_only_one_tab = true
 config.window_decorations = "NONE"
 
 config.font_size = 10
-config.font = wezterm.font 'JetBrains Mono Nerd Font'
+config.font = wezterm.font 'BlexMono Nerd Font'
 config.color_scheme = 'tokyonight_storm'
 
 return config
