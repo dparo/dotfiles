@@ -273,6 +273,7 @@ M.list = {
                             "org.junit.jupiter.api.Assertions.*",
                             "java.util.Objects.requireNonNull",
                             "java.util.Objects.requireNonNullElse",
+                            "java.util.Objects.equals",
                             "org.mockito.Mockito.*",
                         },
                         sources = {
