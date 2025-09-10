@@ -81,7 +81,7 @@ fi
 
 set -x
 
-export MAVEN_OPTS="-Xms64m -XX:MaxRAM=768m"
+export MAVEN_OPTS="-Xms64m -XX:MaxRAM=1024m"
 
 if test "$USE_MVN_SPRING_BOOT_RUN" -ne 0; then
     mvn  -DcheckStyle.skip -DskipTests -Dmaven.test.skip -Dmaven.compiler.useIncrementalCompilation=false \
