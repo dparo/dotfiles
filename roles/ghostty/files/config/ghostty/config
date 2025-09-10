@@ -1,6 +1,6 @@
 command = /usr/bin/fish
 
-theme = tokyonight
+theme = tokyonight-storm
 
 # gtk-adwaita = false
 window-theme = dark
