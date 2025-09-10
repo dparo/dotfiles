@@ -281,11 +281,6 @@ local function setup_saner_defaults()
     nmap("]]", "]]zz")
     nmap("g[", "<C-^>")
 
-    -- Better undo break points, so when pressing undo, vim doesn't undo way too much typing like it usually does
-    for _, v in ipairs { ",", ".", "!", "?", ":", ":", "'", '"', "(", ")", "[", "]", "{", "}", "<Space>" } do
-        imap(v, v .. "<C-g>u")
-    end
-
     -- Avoid polluting the clipboard when changing text
     for _, v in ipairs { "c", "C" } do
         vmap(v, '"_' .. v, nil)
