@@ -81,8 +81,12 @@ return {
                     }
                 elseif name == "jdtls" then
                     -- NOTE(dparo): jdtls plugin is automatically started from an autocommand triggered from `ftplugin/java.lua`
+                    vim.lsp.config("jdtls", config)
+                    vim.lsp.enable("jdtls")
                 elseif name == "metals" then
                     -- NOTE(dparo): metals plugin needs to be attached in another way
+                    vim.lsp.config("metals", config)
+                    vim.lsp.enable("metals")
                 else
                     lspconfig[name].setup(config)
                 end
