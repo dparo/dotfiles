@@ -266,6 +266,15 @@ M.list = {
                             downloadSources = true,
                         },
                         signatureHelp = { enabled = true },
+                        favoriteStaticMembers = {
+                            "org.hamcrest.MatcherAssert.assertThat",
+                            "org.hamcrest.Matchers.*",
+                            "org.hamcrest.CoreMatchers.*",
+                            "org.junit.jupiter.api.Assertions.*",
+                            "java.util.Objects.requireNonNull",
+                            "java.util.Objects.requireNonNullElse",
+                            "org.mockito.Mockito.*",
+                        },
                         sources = {
                             organizeImports = {
                                 starThreshold = 9999,
@@ -311,10 +320,10 @@ M.list = {
                                     name = "JavaSE-17",
                                     path = "/usr/lib/jvm/temurin-17-jdk/",
                                 },
-                                -- {
-                                --     name = "JavaSE-21",
-                                --     path = "/usr/lib/jvm/temurin-21-jdk/",
-                                -- },
+                                {
+                                    name = "JavaSE-21",
+                                    path = "/usr/lib/jvm/temurin-21-jdk/",
+                                },
                             },
                         },
                         format = {
