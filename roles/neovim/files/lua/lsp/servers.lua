@@ -230,8 +230,8 @@ M.list = {
                     -- https://projectlombok.org/
                     "-javaagent:" .. path.concat { nvim_data_path, "mason", "packages", "jdtls", "lombok.jar" },
                     "-Xms128m",
-                    -- "-Xmx2G",
-                    "-Xmx1G",
+                    "-Xmx2G",
+                    -- "-Xmx1G",
                     "--add-modules=ALL-SYSTEM",
                     "--add-opens",
                     "java.base/java.util=ALL-UNNAMED",
