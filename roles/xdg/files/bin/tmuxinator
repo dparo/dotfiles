@@ -2,7 +2,7 @@
 
 # set -x
 
-selection="$(find ~/src -maxdepth 8 \( -name node_modules -o -name target -o -name build \) -prune -o \( -type f -o -type d \) -name '*.git' -print | fzf)"
+selection="$(find ~/src -maxdepth 8 \( -name node_modules -o -name target -o -name build \) -prune -o \( -type f -o -type d \) -name '.git' -print | fzf)"
 
 if test "$?" -ne 0; then
     exit 1
