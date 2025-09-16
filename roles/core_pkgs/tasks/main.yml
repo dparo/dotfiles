@@ -54,7 +54,7 @@
       - fuse-sshfs # Mount remote ssh/sftp servers  as a filsystem in userspace (FUSE)
       - squashfs  # Required to run AppImages
       - figlet #  A program for making large letters out of ordinary text
-      - visidata # (vd) Terminal interface for exploring and arranging tabular data
+      - visidata # (vd) Terminal interface for exploring and arranging tabular data (https://www.visidata.org/)
     state: present
   become: true
   tags:
