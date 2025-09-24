@@ -51,7 +51,14 @@ return {
             require("telescope").setup {
                 pickers = {
                     find_files = {
-                        theme = "ivy",
+                        preview = true,
+                        -- theme = "ivy"
+                    },
+                    grep_string = {
+                        preview = true,
+                    },
+                    live_grep = {
+                        preview = true,
                     },
                 },
                 defaults = {
@@ -67,13 +74,14 @@ return {
                     sorting_strategy = "descending",
                     layout_strategy = "horizontal",
                     layout_config = {
-                        prompt_position = "top",
+                        prompt_position = "bottom",
                         mirror = false,
-                        width = 0.80,
-                        height = 0.80,
+                        width = 0.90,
+                        height = 0.90,
                         preview_cutoff = 120,
+                        preview_width = 40,
                     },
-
+                    preview = false,
                     find_command = { "rg", "-S", "--files", "--hidden", "-g", "!.ccls-cache", "-g", "!.git", "-g", "!.vcs", "-g", "!.svn" },
                     vimgrep_arguments = {
                         "rg",
