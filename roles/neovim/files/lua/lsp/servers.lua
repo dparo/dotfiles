@@ -190,7 +190,9 @@ M.list = {
     -- { name = "eslint", config = {} },
     -- { name = "rome", config = {} },
     -- { name = "relay_lsp", config = {} }, -- https://github.com/facebook/relay
-    { name = "angularls", config = {} },
+    { name = "angularls", config = {
+        root_markers = { 'angular.json' }
+    } },
     { name = "ansiblels", config = {} },
     { name = "terraformls", config = {} },
     {
@@ -411,6 +413,7 @@ M.list = {
         name = "denols",
         config = {
             -- cmd = { "deno", "lsp"},
+            root_markers = { 'deno.json', 'deno.jsonc' }
             init_options = {
                 enable = true,
                 lint = true,
