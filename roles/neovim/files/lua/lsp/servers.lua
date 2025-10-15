@@ -4,7 +4,7 @@ local path = require "core.os.path"
 local nvim_data_path = path.get_nvim_data_path()
 local nvim_cache_path = path.get_nvim_cache_path()
 
-local lspconfig = require "lspconfig"
+local lspconfig = vim.lsp.config
 
 local home = os.getenv "HOME"
 local project_path = vim.fn.getcwd()
@@ -12,21 +12,6 @@ local project_basename = vim.fn.fnamemodify(project_path, ":p:h:t")
 
 local jdtls_root_path = path.concat { nvim_data_path, "mason", "packages", "jdtls" }
 
-local function deno_root_dir(fname)
-    -- If the top level directory __DOES__ contain a file named `deno.proj` determine that this is a Deno project.
-    if (vim.env.DENO_VERSION ~= nil) or (lspconfig.util.root_pattern "deno.proj"(fname) ~= nil) then
-        return lspconfig.util.root_pattern("package.json", "tsconfig.json", ".git")(fname)
-    end
-    return nil
-end
-
-local function nodejs_root_dir(fname)
-    -- If the top level directory __DOES NOT__ contain a file named `deno.proj` determine that this is a Nodejs project
-    if deno_root_dir(fname) == nil then
-        return (lspconfig.util.root_pattern "tsconfig.json"(fname) or lspconfig.util.root_pattern("package.json", "jsconfig.json", ".git")(fname))
-    end
-    return nil
-end
 
 M.list = {
     ----- Python: Pyright seems the best performant and modern solution
@@ -171,7 +156,6 @@ M.list = {
     {
         name = "ts_ls",
         config = {
-            root_dir = nodejs_root_dir,
             settings = {
                 typescript = {
 
@@ -431,8 +415,7 @@ M.list = {
                 enable = true,
                 lint = true,
                 unstable = false,
-            },
-            root_dir = deno_root_dir,
+            }
         },
     },
     { name = "elixirls", config = {

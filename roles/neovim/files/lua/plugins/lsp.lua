@@ -10,7 +10,7 @@ return {
             "SmiteshP/nvim-navic",
             "b0o/SchemaStore.nvim",
             { "j-hui/fidget.nvim", branch = "legacy" },
-            "simrat39/rust-tools.nvim",
+            "mrcjkb/rustaceanvim",
             "mfussenegger/nvim-jdtls",
             "scalameta/nvim-metals",
         },
@@ -51,44 +51,20 @@ return {
 
             require("fidget").setup {}
 
-            local lspconfig = require "lspconfig"
+            local lspconfig = vim.lsp.config
 
             for _, server in ipairs(require("lsp.servers").list) do
                 local name = server.name
                 local config = require("lsp.utils").update_server_config(server.config)
 
-                if name == "rust_analyzer" then
-                    -- `rust-tools` plugin plugin automatically sets up nvim-lspconfig for rust_analyzer for you,
-                    --  so don't do that manually, as it causes conflicts.
-                    -- NOTE(dparo): Rust tools seems to fuck around too much with our configuration just to get some inline type hints
-                    -- require('rust-tools').setup({ tools = {hover_with_actions = false}, server = config })
 
-                    -- @param server:  all the opts to send to nvim-lspconfig
-                    -- these override the defaults set by rust-tools.nvim
-                    require("rust-tools").setup {
-                        tools = {
-                            runnables = {
-                                use_telescope = true,
-                            },
-                            inlay_hints = {
-                                auto = true,
-                                show_parameter_hints = false,
-                                parameter_hints_prefix = "",
-                                other_hints_prefix = "",
-                            },
-                        },
-                        server = config,
-                    }
-                elseif name == "jdtls" then
-                    -- NOTE(dparo): jdtls plugin is automatically started from an autocommand triggered from `ftplugin/java.lua`
-                    vim.lsp.config("jdtls", config)
-                    vim.lsp.enable("jdtls")
+                vim.lsp.config(name, config)
+                if name == "jdtls" then
+                    -- DO NOT AUTOSTART
                 elseif name == "metals" then
-                    -- NOTE(dparo): metals plugin needs to be attached in another way
-                    vim.lsp.config("metals", config)
-                    vim.lsp.enable("metals")
+                    -- DO NOT AUTOSTART
                 else
-                    lspconfig[name].setup(config)
+                    vim.lsp.enable(name)
                 end
             end
 
