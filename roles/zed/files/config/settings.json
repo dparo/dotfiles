@@ -22,13 +22,12 @@
     // Font & Theme
     "ui_font_size": 16,
     "buffer_font_size": 12,
-    "buffer_font_family": "IBM Plex Mono Neon",
+    "buffer_font_family": "IBM Plex Mono",
     "ui_font_family": "Noto Sans",
     "buffer_font_features": {
         "calt": true,
         "liga": false
     },
-    "file_icons": true,
     "toolbar": {
         "breadcrumbs": true,
         "quick_actions": true
@@ -75,14 +74,16 @@
 
     // Terminal
     "terminal": {
-        "dock": "right",
+        "dock": "bottom",
         "shell": {
             "program": "/usr/bin/fish"
         }
     },
 
     // Journal
-    "hour_format": "hour24",
+    "journal": {
+        "hour_format": "hour24"
+    },
 
     // Languages
     "languages": {
