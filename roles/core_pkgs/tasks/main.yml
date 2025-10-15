@@ -55,6 +55,7 @@
       - squashfs  # Required to run AppImages
       - figlet #  A program for making large letters out of ordinary text
       - visidata # (vd) Terminal interface for exploring and arranging tabular data (https://www.visidata.org/)
+      - rlwrap # Wrapper for GNU readline
     state: present
   become: true
   tags:
