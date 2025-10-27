@@ -151,7 +151,7 @@ M.list = {
         },
     },
     -- { name = "vuels", config = {} },      -- npm install -g vls or MasonInstall vetur-vls [[OLD]], only for Vue 2
-    { name = "volar", config = {} }, -- npm install -g @vue/language-server or MasonInstall vue-language-server, supports Vue 2 and Vue 3r
+    { name = "vue_ls", config = {} }, -- https://github.com/vuejs/language-tools/ or MasonInstall vue-language-server
     { name = "svelte", config = {} }, -- npm install -g svelte-language-server or MasonInstall svelte-language-server
     {
         name = "ts_ls",
