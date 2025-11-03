@@ -60,6 +60,16 @@
     - gaming
     - steam
 
+
+- name: Unlock steam h.264 codecs
+  ansible.builtin.command: steam steam://unlockh264/
+  become: false
+  ignore_errors: true
+  tags:
+    - never
+    - gaming
+    - steam
+
 - name: Install steamtinkerlaunch script
   ansible.builtin.get_url:
     url: https://raw.githubusercontent.com/sonic2kk/steamtinkerlaunch/master/steamtinkerlaunch
