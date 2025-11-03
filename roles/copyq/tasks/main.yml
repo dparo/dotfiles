@@ -2,7 +2,7 @@
 - name: CopyQ
   tags:
     - copyq
-  when: false
+    - never
   block:
   - name: Install
     ansible.builtin.dnf:

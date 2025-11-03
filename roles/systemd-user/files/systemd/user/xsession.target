@@ -14,7 +14,7 @@ Wants=dbus.socket
 Wants=pipewire.service
 Wants=pipewire-pulse.service
 
-Wants=org.gnome.GPaste.service
+# Wants=org.gnome.GPaste.service
 
 Wants=dunst.service
 Wants=policykit-agent.service

@@ -201,6 +201,10 @@ export FZF_ALT_C_COMMAND='find -type d'
 
 export MAKEFLAGS=--no-print-directory
 
+# IBM MQ Redist Client
+if [ -d "/opt/mqm/lib64" ]; then
+    export LD_LIBRARY_PATH="/opt/mqm/lib64:$LD_LIBRARY_PATH"
+fi
 
 export FZF_DEFAULT_OPTS="$FZF_DEFAULT_OPTS \
 --highlight-line \
