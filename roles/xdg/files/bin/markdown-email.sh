@@ -1,5 +1,5 @@
 # Create temporary CSS file
-TEMP_CSS=$(mktemp)
+TEMP_CSS="$(mktemp).css"
 trap "rm -f $TEMP_CSS" EXIT
 
 cat > "$TEMP_CSS" << 'EOF'
@@ -221,6 +221,7 @@ pre code {
     tr:nth-child(even) {
         background-color: #222222;
     }
+
     /* Invert colors for math display images in dark mode */
     img.math {
         filter: invert(1);
@@ -228,21 +229,31 @@ pre code {
 }
 EOF
 
-if [ -n "${1:-}" ]; then
-    INPUT="$1"
-else
-    INPUT="-"
-fi
+# Parse arguments
+CLIPBOARD=false
+INPUT="-"
+
+while [ $# -gt 0 ]; do
+    case "$1" in
+        --clipboard)
+            CLIPBOARD=true
+            shift
+            ;;
+        *)
+            INPUT="$1"
+            shift
+            ;;
+    esac
+done
 
     # --toc \
     # TODO Use pandoc filter to strip metadata instead of the sed expression
     # --lua-filter=strip-metadata.lua \
 
-# STRIP Yaml front matter
-sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
+# STRIP Yaml front matter and convert to HTML
+HTML_OUTPUT=$(sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
     -s \
     --embed-resources \
-    --metadata-file=/dev/null \
     --metadata title=" " \
     --webtex='https://latex.codecogs.com/png.image?' \
     -V lang=it \
@@ -250,5 +261,11 @@ sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
      --css "$TEMP_CSS" \
     -f markdown+smart \
     --to=html5 \
-    "${INPUT}" \
-    | xclip -t text/html -selection clipboard -i
+    "${INPUT}")
+
+# Output to clipboard or stdout based on --clipboard flag
+if [ "$CLIPBOARD" = true ]; then
+    echo "$HTML_OUTPUT" | xclip -t text/html -selection clipboard -i
+else
+    echo "$HTML_OUTPUT"
+fi
