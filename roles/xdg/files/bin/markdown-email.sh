@@ -136,6 +136,10 @@ tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
+tbody tr:hover {
+    background-color: #e8f4f8;
+}
+
 figure {
     margin: 1em 0;
 }
@@ -222,6 +226,10 @@ pre code {
         background-color: #222222;
     }
 
+    tbody tr:hover {
+        background-color: #2a2a2a;
+    }
+
     /* Invert colors for math display images in dark mode */
     img.math {
         filter: invert(1);
@@ -257,7 +265,7 @@ HTML_OUTPUT=$(sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
     --metadata title=" " \
     --webtex='https://latex.codecogs.com/png.image?' \
     -V lang=it \
-    --highlight-style=pygments \
+    --highlight-style=zenburn \
      --css "$TEMP_CSS" \
     -f markdown+smart \
     --to=html5 \
@@ -269,3 +277,4 @@ if [ "$CLIPBOARD" = true ]; then
 else
     echo "$HTML_OUTPUT"
 fi
+
