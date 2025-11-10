@@ -342,6 +342,8 @@ done
 HTML_OUTPUT=$(sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
     -s \
     --embed-resources \
+    --toc=false \
+    --metadata toc-title="Indice" \
     --metadata title=" " \
     --metadata date-meta="$(date --iso-8601=minutes)" \
     --metadata author-meta="$(git config get user.name) <$(git config get user.email)>" \
