@@ -8,10 +8,10 @@ CompileFlags:
 
 
 InlayHints:
-  Designators: true
-  Enabled: true
-  ParameterNames: true
-  DeducedTypes: true
+  Enabled: false
+  Designators: false
+  ParameterNames: false
+  DeducedTypes: false
 
 Style:
   FullyQualifiedNamespaces:
