@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # -*- coding: utf-8 -*-
 
-if ! test -x "$(command -v ansible)"; then
-    pipx install --include-deps ansible
-fi
-
-# Upgrade Ansible to latest with pipx
-pipx upgrade --include-injected ansible
+# if ! test -x "$(command -v ansible)"; then
+#     pipx install --include-deps ansible
+# fi
+#
+# # Upgrade Ansible to latest with pipx
+# pipx upgrade --include-injected ansible
 
 show_all_facts() {
     # Dumps all the ansible facts / variables available
