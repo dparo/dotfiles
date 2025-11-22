@@ -23,7 +23,7 @@ if false; then
     hsetroot -solid '#7f7f7f' || xsetroot -solid '#7f7f7f'
 else
     set_wallpaper \
-        "/usr/share/wallpapers/Next/contents/images_dark/5120x2880.png" \
+        /usr/share/backgrounds/f43/default/f*-01-day.jxl \
         /usr/share/backgrounds/f42/default/f*-01-day.jxl \
         "${XDG_DATA_HGOME:-"$HOME/.local/share"}/backgrounds/Platform (1).png" \
         "${XDG_DATA_HGOME:-"$HOME/.local/share"}/backgrounds/wallhaven-dpvp1j_1920x1080.png" \
