@@ -47,3 +47,7 @@ if test "$ID" = "arch" && command -v yay >/dev/null 2>&1; then
     yay -Scc --no-confirm
 fi
 
+# Cleanup regularly the Spotify cache directory to avoid huge buildup. See:
+# - https://www.reddit.com/r/spotify/comments/14kqpl5/why_is_spotifys_cache_so_crazy_big_mine_is_over/
+# - https://www.reddit.com/r/spotify/comments/8fyzqp/why_in_the_world_does_the_spotify_app_cache_eat/
+rm -rf /home/dparo/.var/app/com.spotify.Client/cache
