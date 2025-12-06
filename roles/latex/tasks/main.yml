@@ -47,6 +47,7 @@
           - texlive-hardwrap
           - texlive-fontsize
           - texlive-tcolorbox
+          - texlive-adjustbox
 
           - biber
           - latexmk
