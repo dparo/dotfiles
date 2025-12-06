@@ -343,6 +343,8 @@ HTML_OUTPUT=$(sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
     -s \
     --embed-resources \
     --toc=false \
+    --toc-depth=3 \
+    --number-sections \
     --metadata toc-title="Indice" \
     --metadata title=" " \
     --metadata abstract-title="Sommario" \
@@ -351,10 +353,14 @@ HTML_OUTPUT=$(sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
     --metadata date="$(date --iso-8601=minutes)" \
     --metadata author="$(git config get user.name) <$(git config get user.email)>" \
     --webtex='https://latex.codecogs.com/png.image?' \
-    -V lang=it \
+    --variable lang=it \
+    --variable mainfont="Liberation Serif" \
+    --variable monofont="Liberation Mono" \
+    --variable colorlinks=true \
+    --variable papersize=a4 \
     --highlight-style=zenburn \
-     --template "$TEMP_HTML_TEMPLATE" \
-     --css "$TEMP_CSS" \
+    --template "$TEMP_HTML_TEMPLATE" \
+    --css "$TEMP_CSS" \
     -f markdown+smart \
     --to=html5 \
     "${INPUT}")
