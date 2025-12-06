@@ -1,3 +1,12 @@
+# To produce a PDF from the HTML contents, use a QT headless Web Engine to produce an output
+
+# `wkhtmltopdf --page-size A4 --margin-top 40mm --margin-bottom 40mm --margin-left 20mm --margin-right 20mm --minimum-font-size 20 input.html output.pdf`
+
+# Equivalently, using Chrome in headless mode:
+
+# `chromium-browser --headless --disable-gpu --run-all-compositor-stages-before-draw --no-pdf-header-footer --print-to-pdf-no-header input.html --print-to-pdf=output.pdf`
+
+
 # Create temporary CSS file
 TEMP_CSS="$(mktemp).css"
 TEMP_HTML_TEMPLATE="$(mktemp).html"
