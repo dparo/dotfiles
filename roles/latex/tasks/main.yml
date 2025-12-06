@@ -45,6 +45,8 @@
           - texlive-titling
           - texlive-pagecolor
           - texlive-hardwrap
+          - texlive-fontsize
+          - texlive-tcolorbox
 
           - biber
           - latexmk
