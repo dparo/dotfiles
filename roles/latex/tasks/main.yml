@@ -33,6 +33,19 @@
           - texlive-bytefield
           - texlive-lm # lmodern
           - texlive-chktex # latex semantic linter: https://www.nongnu.org/chktex/
+          - texlive-upquote
+          - texlive-microtype
+          - texlive-fvextra
+          - texlive-footnotehyper
+          - texlive-soul
+          - texlive-sectsty
+
+          - texlive-footnotebackref
+          - texlive-mdframed
+          - texlive-titling
+          - texlive-pagecolor
+          - texlive-hardwrap
+
           - biber
           - latexmk
           - ghostscript
