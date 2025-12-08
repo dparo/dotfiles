@@ -18,11 +18,14 @@
         state: present
       become: true
 
-    - name: Remove extensions
+    - name: Remove unwanted applications/extensions
       ansible.builtin.dnf:
         name:
           - gnome-shell-extension-background-logo
-        state: absent
+          - gnome-clocks
+          - ibus-typing-booster
+          - emoji-picker
+      state: absent
       become: true
 
 
