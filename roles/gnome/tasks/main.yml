@@ -26,6 +26,9 @@
           - ibus-typing-booster
           - emoji-picker
           - gnome-calendar
+          - gnome-software
+          - PackageKit
+          - PackageKit-command-not-found
       state: absent
       become: true
 
