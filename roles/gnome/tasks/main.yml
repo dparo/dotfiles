@@ -28,6 +28,12 @@
       state: absent
       become: true
 
+    # gsettings set org.gnome.evolution-data-server.calendar notify-with-tray true
+    - name: Stop evolution-data-server notify
+      dconf:
+        key: "/org/gnome/evolution-data-server/calendar/notify-with-tray"
+        value: false
+
 
     # gsettings set org.gnome.shell.app-switcher current-workspace-only true
     - name: Restrict Alt-Tab to same workspace
