@@ -25,6 +25,7 @@
           - gnome-clocks
           - ibus-typing-booster
           - emoji-picker
+          - gnome-calendar
       state: absent
       become: true
 
