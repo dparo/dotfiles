@@ -9,15 +9,15 @@ if ! test -x "$(command -v ansible)"; then
     case $ID in
     ubuntu)
         sudo apt update
-        sudo apt install -y git pre-commit pipx
+        sudo apt install -y git pre-commit pipx ansible
         ;;
 
     arch)
-        sudo pacman -S --noconfirm git pre-commit pipx
+        sudo pacman -S --noconfirm git pre-commit pipx ansible
         ;;
     fedora)
         sudo dnf upgrade -y
-        sudo dnf install -y git pre-commit pipx python3-libdnf5
+        sudo dnf install -y git pre-commit pipx python3-libdnf5 ansible
         ;;
     esac
 fi

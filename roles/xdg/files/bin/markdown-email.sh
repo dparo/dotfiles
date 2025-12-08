@@ -1,3 +1,12 @@
+# To produce a PDF from the HTML contents, use a QT headless Web Engine to produce an output
+
+# `wkhtmltopdf --page-size A4 --margin-top 40mm --margin-bottom 40mm --margin-left 20mm --margin-right 20mm --minimum-font-size 20 input.html output.pdf`
+
+# Equivalently, using Chrome in headless mode:
+
+# `chromium-browser --headless --disable-gpu --run-all-compositor-stages-before-draw --no-pdf-header-footer --print-to-pdf-no-header input.html --print-to-pdf=output.pdf`
+
+
 # Create temporary CSS file
 TEMP_CSS="$(mktemp).css"
 TEMP_HTML_TEMPLATE="$(mktemp).html"
@@ -10,6 +19,11 @@ cat > "$TEMP_CSS" << 'EOF'
  * Designed for readability and email client compatibility.
  * Updated to support light and dark themes with responsive layout.
  */
+
+@page {
+    margin: 2cm;
+    size: A4;
+}
 
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
@@ -43,23 +57,50 @@ body {
     }
 }
 
+@media print {
+    body {
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+        background-color: white;
+        color: black;
+    }
+
+    a {
+        color: #0066cc;
+        text-decoration: underline;
+    }
+
+    a[href^="http"]:after {
+        content: " (" attr(href) ")";
+        font-size: 0.8em;
+        font-style: italic;
+    }
+}
+
 h1, h2, h3, h4, h5, h6 {
     margin-top: 1.5em;
     margin-bottom: 0.5em;
     font-weight: 600;
     color: #000;
+    page-break-after: avoid;
+    break-after: avoid-page;
 }
 
 h1 {
     font-size: 1.8em;
     border-bottom: 1px solid #ddd;
     padding-bottom: 0.4em;
+    page-break-before: auto;
+    break-before: auto;
 }
 
 h2 {
     font-size: 1.5em;
     border-bottom: 1px solid #eee;
     padding-bottom: 0.3em;
+    page-break-before: auto;
+    break-before: auto;
 }
 
 h3 {
@@ -109,6 +150,8 @@ pre {
     padding: 1em;
     border-radius: 3px;
     overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 pre code {
@@ -120,6 +163,8 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 1em;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 th, td {
@@ -144,12 +189,16 @@ tbody tr:hover {
 
 figure {
     margin: 1em 0;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 img {
     max-width: 100%;
     height: auto;
     border-radius: 3px;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 div.sourceCode {
@@ -157,6 +206,8 @@ div.sourceCode {
     padding: 1em;
     border-radius: 3px;
     overflow-x: auto;
+    page-break-inside: avoid;
+    break-inside: avoid;
 }
 
 pre {
@@ -235,6 +286,60 @@ pre code {
     /* Invert colors for math display images in dark mode */
     img.math {
         filter: invert(1);
+    }
+}
+
+@media print {
+    h1, h2, h3, h4, h5, h6 {
+        page-break-after: avoid;
+        break-after: avoid-page;
+    }
+
+    h1 {
+        page-break-before: auto;
+        break-before: auto;
+    }
+
+    h2, h3 {
+        page-break-before: avoid;
+        break-before: avoid-page;
+    }
+
+    p, blockquote, ul, ol {
+        orphans: 3;
+        widows: 3;
+    }
+
+    blockquote {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    ul, ol {
+        page-break-before: avoid;
+        break-before: avoid-page;
+    }
+
+    pre, code, div.sourceCode {
+        page-break-inside: avoid;
+        break-inside: avoid;
+        background-color: #f5f5f5 !important;
+        border: 1px solid #ddd;
+        color: black !important;
+    }
+
+    pre code {
+        color: black !important;
+    }
+
+    table, figure, img {
+        page-break-inside: avoid;
+        break-inside: avoid;
+    }
+
+    tr {
+        page-break-inside: avoid;
+        break-inside: avoid;
     }
 }
 EOF
@@ -343,6 +448,8 @@ HTML_OUTPUT=$(sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
     -s \
     --embed-resources \
     --toc=false \
+    --toc-depth=3 \
+    --number-sections \
     --metadata toc-title="Indice" \
     --metadata title=" " \
     --metadata abstract-title="Sommario" \
@@ -351,10 +458,14 @@ HTML_OUTPUT=$(sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
     --metadata date="$(date --iso-8601=minutes)" \
     --metadata author="$(git config get user.name) <$(git config get user.email)>" \
     --webtex='https://latex.codecogs.com/png.image?' \
-    -V lang=it \
+    --variable lang=it \
+    --variable mainfont="Liberation Serif" \
+    --variable monofont="Liberation Mono" \
+    --variable colorlinks=true \
+    --variable papersize=a4 \
     --highlight-style=zenburn \
-     --template "$TEMP_HTML_TEMPLATE" \
-     --css "$TEMP_CSS" \
+    --template "$TEMP_HTML_TEMPLATE" \
+    --css "$TEMP_CSS" \
     -f markdown+smart \
     --to=html5 \
     "${INPUT}")
