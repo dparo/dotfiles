@@ -12,9 +12,9 @@
           # - gnome-shell-extension-pop-shell
           - gnome-shell-extension-blur-my-shell
           - gnome-shell-extension-dash-to-dock
-          - gnome-shell-extension-gpaste
-          - gpaste
-          - gpaste-ui
+          # - gnome-shell-extension-gpaste
+          # - gpaste
+          # - gpaste-ui
         state: present
       become: true
 
@@ -29,6 +29,8 @@
           - gnome-software
           - PackageKit
           - PackageKit-command-not-found
+          - blueman
+          - blueman-nautilus
       state: absent
       become: true
 
@@ -54,7 +56,7 @@
     - name: Enable extensions
       dconf:
         key: "/org/gnome/shell/enabled-extensions"
-        value: "['appindicatorsupport@rgcjonas.gmail.com', 'GPaste@gnome-shell-extensions.gnome.org']"
+        value: "['appindicatorsupport@rgcjonas.gmail.com']"
 
     - name: Disabled extensions
       dconf:
