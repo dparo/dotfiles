@@ -1,0 +1,9 @@
+{
+  "client_id": "your-application-client-id",
+  "tenant_id": "your-tenant-id",
+  "authority": "https://login.microsoftonline.com/your-tenant-id",
+  "scopes": [
+    "https://graph.microsoft.com/Mail.Send"
+  ],
+  "user_email": "your-email@example.com"
+}
