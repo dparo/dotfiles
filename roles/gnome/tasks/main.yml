@@ -31,7 +31,7 @@
           - PackageKit-command-not-found
           - blueman
           - blueman-nautilus
-      state: absent
+        state: absent
       become: true
 
     # gsettings set org.gnome.evolution-data-server.calendar notify-with-tray true
