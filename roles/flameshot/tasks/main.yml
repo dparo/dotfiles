@@ -1,4 +1,8 @@
 ---
+
+# Reset permissions on Gnome if cannot spawn flameshot:
+# dbus-send --session  --print-reply=literal --dest=org.freedesktop.impl.portal.PermissionStore /org/freedesktop/impl/portal/PermissionStore org.freedesktop.impl.portal.PermissionStore.DeletePermission string:'screenshot' string:'screenshot' string:''
+
 - name: Install
   ansible.builtin.dnf:
     name:
