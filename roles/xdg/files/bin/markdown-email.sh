@@ -424,12 +424,17 @@ EOF
 
 # Parse arguments
 CLIPBOARD=false
+TOC=false
 INPUT="-"
 
 while [ $# -gt 0 ]; do
     case "$1" in
         --clipboard)
             CLIPBOARD=true
+            shift
+            ;;
+        --toc)
+            TOC=true
             shift
             ;;
         *)
@@ -447,7 +452,7 @@ done
 HTML_OUTPUT=$(sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
     -s \
     --embed-resources \
-    --toc=false \
+    --toc="${TOC}" \
     --toc-depth=3 \
     --number-sections \
     --metadata toc-title="Indice" \

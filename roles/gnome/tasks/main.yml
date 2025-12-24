@@ -32,7 +32,7 @@
           - blueman
           - blueman-nautilus
           - gnome-abrt
-      state: absent
+        state: absent
       become: true
 
     # gsettings set org.gnome.evolution-data-server.calendar notify-with-tray true

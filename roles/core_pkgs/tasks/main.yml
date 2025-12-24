@@ -56,6 +56,11 @@
       - figlet #  A program for making large letters out of ordinary text
       - visidata # (vd) Terminal interface for exploring and arranging tabular data (https://www.visidata.org/)
       - rlwrap # Wrapper for GNU readline
+
+      - krb5-workstation
+      - krb5-libs
+      - krb5-devel
+      - gssntlmssp # A GSSAPI Mechanism that implements NTLMSSP
     state: present
   become: true
   tags:
