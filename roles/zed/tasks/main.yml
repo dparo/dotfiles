@@ -3,6 +3,13 @@
   tags:
     - zed
   block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - zed
+        state: present
+      become: true
+
     - name: Symlink config
       ansible.builtin.file:
         src: "{{ role_path }}/files/config"
