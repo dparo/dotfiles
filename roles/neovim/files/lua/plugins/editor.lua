@@ -203,6 +203,7 @@ return {
     -- "Jetpack" like movement within the buffer. Quickly jump where you want to go
     {
         'https://codeberg.org/andyg/leap.nvim.git',
+        enabled = false,
         dependencies = {
             "tpope/vim-repeat",
         },
@@ -216,7 +217,8 @@ return {
     { "tpope/vim-surround" }, -- Surround.vim is all about "surroundings": parentheses, brackets, quotes, XML tags, and more
 
     -- Automatically detect shiftwidth and tabstop heuristically from file
-    -- { "tpope/vim-sleuth" },
+    { "tpope/vim-sleuth" },
+
     {
         "editorconfig/editorconfig-vim",
         enabled = function()
