@@ -157,13 +157,6 @@ return {
         end,
     },
 
-    {
-        "m-demare/hlargs.nvim",
-        dependencies = { "nvim-treesitter/nvim-treesitter" },
-        config = function()
-            require("hlargs").setup()
-        end,
-    },
     {"aklt/plantuml-syntax" },
     { "isobit/vim-caddyfile" },
 }
