@@ -3,7 +3,7 @@ return {
     {
         "junegunn/fzf.vim",
         dependencies = {
-            -- { "junegunn/fzf", dir = vim.env.HOME .. "/opt/fzf" },
+            { "junegunn/fzf" },
         },
         config = function()
             vim.g.fzf_buffers_jump = 1
