@@ -39,15 +39,15 @@ return {
     ----
     {
         "nvim-treesitter/nvim-treesitter",
-        branch = "master",
-        build = function()
-            vim.cmd [[:TSUpdateSync ]]
-        end,
-        dependencies = { "nvim-treesitter/playground", "p00f/nvim-ts-rainbow",
+        branch = "main",
+        build = ":TSUpdateSync",
+        lazy = false, -- This plugin does not support lazy loading
+        dependencies = {
+            -- "nvim-treesitter/playground",
             -- "nvim-treesitter/nvim-treesitter-context"
         },
         config = function()
-            require("nvim-treesitter.configs").setup {
+            require("nvim-treesitter").setup {
                 ensure_installed = {
                     "bash",
                     "lua",
