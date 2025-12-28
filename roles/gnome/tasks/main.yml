@@ -31,6 +31,7 @@
           - PackageKit-command-not-found
           - blueman
           - blueman-nautilus
+          - gnome-abrt
         state: absent
       become: true
 

@@ -1,39 +1,47 @@
 ---
-- name: Check latest fzf
-  ansible.builtin.uri:
-    url: https://api.github.com/repos/junegunn/fzf/releases/latest
-    return_content: true
-  register: fzf_latest
+- name: Fzf
   tags:
-    - fzf
+    - fzz
+  block:
+    - name: FZF clone from source
+      when: fzf_clone_from_source
+      block:
+        - name: Check latest fzf
+          ansible.builtin.uri:
+            url: https://api.github.com/repos/junegunn/fzf/releases/latest
+            return_content: true
+          register: fzf_latest
 
-- name: Clone fzf {{ fzf_latest['json']['tag_name'] | default('master') }}
-  ansible.builtin.git:
-    clone: true
-    depth: 1
-    dest: "{{ ansible_user_dir }}/opt/fzf"
-    force: true
-    repo: https://github.com/junegunn/fzf
-    single_branch: true
-    update: true
-    version: "{{ fzf_latest['json']['tag_name'] | default('master') }}"
-  register: fzf_clone
-  tags:
-    - fzf
+        - name: Clone fzf {{ fzf_latest['json']['tag_name'] | default('master') }}
+          ansible.builtin.git:
+            clone: true
+            depth: 1
+            dest: "{{ ansible_user_dir }}/opt/fzf"
+            force: true
+            repo: https://github.com/junegunn/fzf
+            single_branch: true
+            update: true
+            version: "{{ fzf_latest['json']['tag_name'] | default('master') }}"
+          register: fzf_clone
 
-- name: Install fzf {{ fzf_latest['json']['tag_name'] | default('master') }}
-  ansible.builtin.command: "{{ ansible_user_dir }}/opt/fzf/install --xdg --key-bindings --completion --no-update-rc"
-  when: fzf_clone.changed
-  tags:
-    - fzf
+        - name: Install fzf {{ fzf_latest['json']['tag_name'] | default('master') }}
+          ansible.builtin.command: "{{ ansible_user_dir }}/opt/fzf/install --xdg --key-bindings --completion --no-update-rc"
+          when: fzf_clone.changed
 
-- name: Symlink fzf {{ fzf_latest['json']['tag_name'] | default('master') }}
-  ansible.builtin.file:
-    src: "{{ item }}"
-    dest: "{{ ansible_user_dir }}/.local/bin/{{ item | basename }}"
-    state: link
-  loop:
-    - "{{ ansible_user_dir }}/opt/fzf/bin/fzf"
-    - "{{ ansible_user_dir }}/opt/fzf/bin/fzf-tmux"
-  tags:
-    - fzf
+        - name: Symlink fzf {{ fzf_latest['json']['tag_name'] | default('master') }}
+          ansible.builtin.file:
+            src: "{{ item }}"
+            dest: "{{ ansible_user_dir }}/.local/bin/{{ item | basename }}"
+            state: link
+          loop:
+            - "{{ ansible_user_dir }}/opt/fzf/bin/fzf"
+            - "{{ ansible_user_dir }}/opt/fzf/bin/fzf-tmux"
+
+    - name: Install (DNF)
+      ansible.builtin.dnf:
+        name:
+          - fzf
+        state: present
+      become: true
+      when: not fzf_clone_from_source
+

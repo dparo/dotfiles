@@ -1,5 +1,6 @@
 {
     // BASIC
+    "base_keymap": "VSCode",
     "telemetry": {
         "diagnostics": false,
         "metrics": false
