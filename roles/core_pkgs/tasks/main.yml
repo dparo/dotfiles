@@ -56,6 +56,7 @@
       - figlet #  A program for making large letters out of ordinary text
       - visidata # (vd) Terminal interface for exploring and arranging tabular data (https://www.visidata.org/)
       - rlwrap # Wrapper for GNU readline
+      - python3-oletools # To process extracted embedding from Microsoft Word Documents
 
       - krb5-workstation
       - krb5-libs
