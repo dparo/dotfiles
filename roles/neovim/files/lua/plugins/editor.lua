@@ -202,13 +202,12 @@ return {
 
     -- "Jetpack" like movement within the buffer. Quickly jump where you want to go
     {
-        'https://codeberg.org/andyg/leap.nvim.git',
+        "https://codeberg.org/andyg/leap.nvim.git",
         enabled = false,
         dependencies = {
             "tpope/vim-repeat",
         },
-        config = function()
-        end,
+        config = function() end,
     },
 
     -- Utils functions for common Unix like utilities such as mkdir, touch, mv inside of vim
@@ -337,6 +336,19 @@ return {
             hl(0, "MultiCursorDisabledCursor", { reverse = true })
             hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
             hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
+        end,
+    },
+    {
+        "MagicDuck/grug-far.nvim",
+        -- Note (lazy loading): grug-far.lua defers all it's requires so it's lazy by default
+        -- additional lazy config to defer loading is not really needed...
+        config = function()
+            -- optional setup call to override plugin options
+            -- alternatively you can set options with vim.g.grug_far = { ... }
+            require("grug-far").setup {
+                -- options, see Configuration section below
+                -- there are no required options atm
+            }
         end,
     },
 }
