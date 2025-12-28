@@ -12,8 +12,8 @@ return {
     {
         "Saghen/blink.cmp",
 
-        build = "cargo build --release",
-        -- version = "1.*",
+        -- build = "cargo build --release",
+        version = "1.*",
 
         -- optional: provides snippets for the snippet source
         dependencies = {

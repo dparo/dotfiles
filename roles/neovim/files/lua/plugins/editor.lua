@@ -202,12 +202,11 @@ return {
 
     -- "Jetpack" like movement within the buffer. Quickly jump where you want to go
     {
-        "ggandor/leap.nvim",
+        'https://codeberg.org/andyg/leap.nvim.git',
         dependencies = {
             "tpope/vim-repeat",
         },
         config = function()
-            require("leap").add_default_mappings()
         end,
     },
 
