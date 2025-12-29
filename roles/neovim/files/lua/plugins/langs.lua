@@ -40,7 +40,7 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         branch = "main",
-        build = ":TSUpdateSync",
+        build = ":TSUpdate",
         lazy = false, -- This plugin does not support lazy loading
         dependencies = {
             -- "nvim-treesitter/playground",
