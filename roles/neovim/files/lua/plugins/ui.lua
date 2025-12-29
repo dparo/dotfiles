@@ -19,7 +19,7 @@ return {
         -- build = function()
         --     vim.fn["mkdp#util#install"]()
         -- end,
-        build = "cd app && yarn install",
+        build = "cd app && npm install",
         init = function()
             vim.g.mkdp_filetypes = { "markdown", "plantuml", "dot" }
         end,
