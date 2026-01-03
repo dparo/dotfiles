@@ -32,6 +32,13 @@
           - blueman
           - blueman-nautilus
           - gnome-abrt
+          - cockpit-bridge
+          - cockpit-storaged
+          - cockpit-system
+          - cockpit-ws
+          - cockpit-ws-selinux
+          - anacoda-live
+          - anaconda-webui
         state: absent
       become: true
 

@@ -2,8 +2,6 @@
 - name: Cockpit
   tags:
     - never
-    - qemu
-    - kvm
     - cockpit
   block:
     - name: Install
