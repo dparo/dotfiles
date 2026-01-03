@@ -125,6 +125,7 @@
     - dunst
     - gnome
     - hyprland
+    - sway
     - neomutt
 
     ## Text editors
