@@ -8,7 +8,7 @@
       ansible.builtin.dnf:
         name:
           - cliphist
-          - hyprland
+          # - hyprland       # Unfortunately, was removed in Fedora 43 (It was present in Fedora 42)
           - hyprlock.x86_64
           - hypridle.x86_64
           - hyprcursor.x86_64
