@@ -1,12 +1,16 @@
 ---
 - name: hyprland
   tags:
+    - never
     - hyprland
   block:
     - name: Install
       ansible.builtin.dnf:
         name:
           - hyprland
+          - hyprlock.x86_64
+          - hypridle.x86_64
+          - hyprcursor.x86_64
           - xdg-desktop-portal-hyprland
           - waybar
           - wl-clipboard
