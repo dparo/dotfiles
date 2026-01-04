@@ -20,7 +20,6 @@
           - sway-wallpapers
           - SwayNotificationCenter
           - fuzzel
-          - greamshot
         state: present
       become: true
 
