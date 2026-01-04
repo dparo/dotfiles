@@ -1,0 +1,3 @@
+# Sourced and exported from start-sway when starting sway
+
+QT_QPA_PLATFORM=wayland

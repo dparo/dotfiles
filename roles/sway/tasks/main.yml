@@ -9,7 +9,7 @@
           - cliphist
           - sway
           - swayidle
-          - sway-config-fedora
+          - sway-config-fedora           # Provides base configuration and  desktop session files for fedora. See /usr/share/sway/config.d/*. Provides also executable script start-sway
           # - sway-config-upstream
           - waybar
           - wl-clipboard
@@ -20,6 +20,9 @@
           - sway-wallpapers
           - SwayNotificationCenter
           - fuzzel
+          - lxqt-policykit
+          - brightnessctl
+          - playerctl
         state: present
       become: true
 
