@@ -9,6 +9,8 @@
           - cliphist
           - sway
           - swayidle
+          - sway-config-fedora
+          # - sway-config-upstream
           - waybar
           - wl-clipboard
           - swaybg
