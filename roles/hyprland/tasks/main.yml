@@ -33,4 +33,4 @@
         force: true
       loop:
         - "{{ role_path }}/files/hypr"
-        - "{{ role_path }}/files/waybar"
+        - "{{ role_path }}/files/waybar/hyprland"

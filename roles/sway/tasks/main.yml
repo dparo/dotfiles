@@ -20,6 +20,7 @@
           - sway-wallpapers
           - SwayNotificationCenter
           - fuzzel
+          - greamshot
         state: present
       become: true
 
@@ -30,6 +31,6 @@
         state: link
         force: true
       loop:
-        - "{{ role_path }}/files/hypr"
-        - "{{ role_path }}/files/waybar"
+        - "{{ role_path }}/files/sway"
+        - "{{ role_path }}/files/waybar/sway"
 
