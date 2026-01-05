@@ -28,8 +28,8 @@
 
     - name: Symlink hyprland config
       ansible.builtin.file:
-        src: "{{ role_path }}/files/hyprland"
-        dest: "{{ ansible_user_dir }}/.config/hyprland"
+        src: "{{ role_path }}/files/hypr"
+        dest: "{{ ansible_user_dir }}/.config/hypr"
         state: link
         force: true
 
