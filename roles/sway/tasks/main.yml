@@ -23,6 +23,7 @@
           - lxqt-policykit
           - brightnessctl
           - playerctl
+          - grimshot
         state: present
       become: true
 
