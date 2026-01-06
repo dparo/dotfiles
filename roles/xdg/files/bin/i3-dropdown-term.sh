@@ -4,6 +4,13 @@
 # FILTER='instance="kitty" class="^dropdown-term$"'
 FILTER='instance="st-256color|kitty|dropdown-term" class="^dropdown-term$"'
 
+# Detect sway (Wayland) vs i3 (X11)
+if [ -n "$SWAYSOCK" ] || [ -n "$WAYLAND_DISPLAY" ]; then
+    MSG="swaymsg"
+else
+    MSG="i3-msg"
+fi
+
 term() {
     local cmd
     #cmd='exec tmux new-session -A -s dropdown-term -c "${XDG_DATA_HOME:-$HOME/.local/share}/dotfiles"'
@@ -16,7 +23,7 @@ term() {
     fi
 }
 
-i3-msg "[ $FILTER ] scratchpad show, move position center" ||
-    i3-msg "[ $FILTER ] move workspace current, focus" ||
+$MSG "[ $FILTER ] scratchpad show, move position center" ||
+    $MSG "[ $FILTER ] move workspace current, focus" ||
     term "$@"
 
