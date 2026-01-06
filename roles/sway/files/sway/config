@@ -32,6 +32,35 @@ set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
 # Requires: desktop-backgrounds-compat, swaybg, jxl-pixbuf-loader
 output * bg /usr/share/backgrounds/default.jxl fill
+
+set $laptop eDP-1
+set $external HDMI-A-1
+
+output $laptop resolution 1920x1080 position 0,0
+# Right
+output $external resolution 1920x1080 position 1920,0
+# Left
+# output $external resolution 1920x1080 position -1920,0
+# Up
+# output $external resolution 1920x1080 position 0,-1080
+
+# Enable outputs
+output $laptop enable
+output $external enable
+
+# Workspace → output mapping
+workspace 1 output $external
+workspace 2 output $external
+workspace 3 output $external
+workspace 4 output $external
+workspace 5 output $external
+
+workspace 6 output $laptop
+workspace 7 output $laptop
+workspace 8 output $laptop
+workspace 9 output $laptop
+workspace 10 output $laptop
+
 #
 # Example configuration:
 #
