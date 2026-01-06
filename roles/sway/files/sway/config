@@ -66,7 +66,10 @@ input "type:touchpad" {
 input "type:keyboard" {
     repeat_delay 300
     repeat_rate 30
+    xkb_layout us
+    xkb_options compose:ralt,terminate:ctrl_alt_bksp,ctrl:nocaps
 }
+
 #
 # You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
