@@ -24,6 +24,7 @@
           - brightnessctl
           - playerctl
           - grimshot
+          - SwayOSD # Repository: terra (Not available in stadard repos)
         state: present
       become: true
 
