@@ -8,6 +8,8 @@
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+set $alt Mod1
+
 # Home row direction keys, like vim
 set $left h
 set $down j
@@ -251,6 +253,20 @@ bindsym $mod+t          exec --no-startup-id      i3-teams-for-linux.sh
 
 set $font Noto Sans 9
 font pango:$font
+floating_modifier $alt
+tiling_drag modifier
+
+focus_follows_mouse yes
+mouse_warping output
+popup_during_fullscreen leave_fullscreen
+# focus_wrapping yes
+focus_wrapping workspace
+focus_on_window_activation smart
+workspace_layout tabbed
+workspace_auto_back_and_forth no
+force_display_urgency_hint 1000 ms
+gaps inner 16
+smart_gaps on
 
 # Include configs from 3 locations:
 #  - /usr/share/sway/config.d
