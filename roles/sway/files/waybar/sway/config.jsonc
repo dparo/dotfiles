@@ -22,7 +22,7 @@
         "memory",
         "temperature",
         "backlight",
-        "sway/language",
+        // "sway/language",
         "battery",
         "tray",
         "clock",

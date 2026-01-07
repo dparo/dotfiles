@@ -10,8 +10,8 @@
 set $mod Mod4
 set $alt Mod1
 
-set lock_timeout 300
-set screen_timeout 60
+set $lock_timeout 300
+set $screen_timeout 60
 
 bindsym --release button2             kill
 
