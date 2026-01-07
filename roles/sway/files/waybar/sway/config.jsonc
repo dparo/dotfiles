@@ -24,10 +24,10 @@
         "backlight",
         "sway/language",
         "battery",
-        "power-profiles-daemon",
+        "tray",
         "clock",
-        "custom/notification",
-        "tray"
+        "power-profiles-daemon",
+        "custom/notification"
     ],
     // Modules configuration
     // "sway/workspaces": {
@@ -211,10 +211,10 @@
             "suspend": "systemctl suspend",
             "hibernate": "systemctl hibernate"
         }
-    }
+    },
     "custom/notification": {
         "tooltip": true,
-        "format": "<span size='16pt'>{0} {icon}</span>",
+        "format": "{0} <span size='14pt'>{icon}</span>",
         "format-icons": {
             "notification": "󱅫",
             "none": "󰂜",
