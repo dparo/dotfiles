@@ -11,5 +11,6 @@
         - wl-clipboard
         - foot
         - cliphist
+        - swappy # Wayland native snapshot editing tool, inspired by Snappy on macOS
       state: present
     become: true
