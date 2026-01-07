@@ -10,6 +10,17 @@
 set $mod Mod4
 set $alt Mod1
 
+bindsym --release button2             kill
+
+bindsym --release button3             floating toggle
+bindsym --whole-window $mod+button2   kill
+
+# Disable mousewhell from switching over windows in tabbed mode
+bindsym button4 nop
+bindsym button5 nop
+bindsym button6 nop
+bindsym button7 nop
+
 # Home row direction keys, like vim
 set $left h
 set $down j
