@@ -123,7 +123,7 @@ input "type:keyboard" {
     # Despite the name, also works for non-floating windows.
     # Change normal to inverse to use left mouse button for resizing and right
     # mouse button for dragging.
-    floating_modifier $mod normal
+    floating_modifier $alt normal
 
     # Reload the configuration file
     bindsym $mod+Shift+c reload
@@ -254,7 +254,7 @@ bindsym $mod+t          exec --no-startup-id      i3-teams-for-linux.sh
 set $font Noto Sans 9
 font pango:$font
 floating_modifier $alt
-tiling_drag modifier
+tiling_drag enable
 
 focus_follows_mouse yes
 mouse_warping output
