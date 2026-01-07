@@ -6,8 +6,10 @@ FILTER='instance="st-256color|kitty|dropdown-term" class="^dropdown-term$"'
 
 # Detect sway (Wayland) vs i3 (X11)
 if [ -n "$SWAYSOCK" ] || [ -n "$WAYLAND_DISPLAY" ]; then
+    FILTER='app_id="^dropdown-term$"'
     MSG="swaymsg"
 else
+    FILTER='instance="st-256color|kitty|dropdown-term" class="^dropdown-term$"'
     MSG="i3-msg"
 fi
 
