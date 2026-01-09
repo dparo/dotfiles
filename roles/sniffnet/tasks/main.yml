@@ -1,19 +1,18 @@
 ---
-- name: Install build deps
-  ansible.builtin.dnf:
-    name:
-      - fontconfig-devel
-    state: present
-  become: true
+- name: Sniffnet
   tags:
     - never
     - sniffnet
+  block:
+    - name: Install build deps
+      ansible.builtin.dnf:
+        name:
+          - fontconfig-devel
+        state: present
+      become: true
 
-- name: Install sniffnet (CARGO)
-  community.general.cargo:
-    name:
-      - sniffnet
-    state: latest
-  tags:
-    - never
-    - sniffnet
+    - name: Install sniffnet (CARGO)
+      community.general.cargo:
+        name:
+          - sniffnet
+        state: latest
