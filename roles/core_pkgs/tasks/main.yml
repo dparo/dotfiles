@@ -72,20 +72,6 @@
   ansible.builtin.dnf:
     name:
       - plocate # Plocate is a package that allows to use the command `locate` to quickly find files (as opposed to find). It works by employing a database built at boot-time (plocate-updatedb.service). This service usually slows down boot time by quite a lot
-      - abrt
-      - abrt-addon-ccpp
-      - abrt-addon-kerneloops
-      - abrt-addon-pstoreoops
-      - abrt-addon-vmcore
-      - abrt-addon-xorg
-      - abrt-cli
-      - abrt-dbus
-      - abrt-desktop
-      - abrt-gui
-      - abrt-gui-libs
-      - abrt-libs
-      - abrt-plugin-bodhi
-      - abrt-tui
     state: absent
 
   become: true

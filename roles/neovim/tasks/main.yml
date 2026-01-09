@@ -70,6 +70,25 @@
       become: true
       when: not neovim_build_from_source
 
+    # - name: Check latest tree-sitter-cli
+    #   ansible.builtin.uri:
+    #     url: https://api.github.com/repos/tree-sitter/tree-sitter/releases/latest
+    #     return_content: true
+    #   register: treesitter_latest
+    #
+    # TODO(d.paro): Fix me: Ansible does not handle unarchive of .gz files (must be .tar.gz)
+    # - name: "Download and unpack latest tree-sitter-cli (https://github.com/tree-sitter/tree-sitter/releases/download/{{ treesitter_latest['json']['tag_name'] }}/tree-sitter-linux-x86.gz)"
+    #   ansible.builtin.unarchive:
+    #     # https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.3/tree-sitter-linux-x86.gz
+    #     src: https://github.com/tree-sitter/tree-sitter/releases/download/{{ treesitter_latest['json']['tag_name'] }}/tree-sitter-linux-x86.gz
+    #     dest: "{{ ansible_user_dir }}/.local/bin"
+    #     remote_src: true
+    #
+    # - name: Make tree-sitter executable
+    #   ansible.builtin.file:
+    #     path: "{{ ansible_user_dir }}/.local/bin/tree-sitter"
+    #     mode: u+x
+
     - name: Install runtime deps (package manager)
       ansible.builtin.dnf:
         name:

@@ -477,7 +477,16 @@ HTML_OUTPUT=$(sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
 
 # Output to clipboard or stdout based on --clipboard flag
 if [ "$CLIPBOARD" = true ]; then
-    echo "$HTML_OUTPUT" | xclip -t text/html -selection clipboard -i
+    if [ -n "$WAYLAND_DISPLAY" ] && command -v wl-copy >/dev/null 2>&1; then
+        # Wayland / sway
+        echo "$HTML_OUTPUT" | wl-copy --type text/html
+    elif [ -n "$DISPLAY" ] && command -v xclip >/dev/null 2>&1; then
+        # X11 fallback
+        echo "$HTML_OUTPUT" | xclip -t text/html -selection clipboard -i
+    else
+        echo "Error: No clipboard utility found (need wl-copy or xclip)" >&2
+        exit 1
+    fi
 else
     echo "$HTML_OUTPUT"
 fi
