@@ -52,6 +52,9 @@ if test "$AUTO_START_GRAPHICAL_SESSION" -eq 1 \
     # Refetch the DISPLAY env variable from systemd
     eval "export $(systemctl --user show-environment | grep -E '^DISPLAY=:[0-9]+$')" 1> /dev/null 2> /dev/null
 
+
+    mkdir -p "/tmp/$USER"
+
     # Test connection to Xserver. If it's already running do not create a new one
     if test -z "$DISPLAY" || ! timeout 1s xset q 1> /dev/null 2> /dev/null; then
         if test -x "${XDG_CONFIG_HOME-:$HOME/.config}/xorg/startx"; then
