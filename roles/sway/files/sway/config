@@ -127,6 +127,7 @@ input "type:keyboard" {
     bindsym $mod+Return exec $term
 
     # Kill focused window
+    bindsym $mod+q kill
     bindsym $mod+Shift+q kill
 
     # Start your launcher
@@ -140,6 +141,7 @@ input "type:keyboard" {
     floating_modifier $alt normal
 
     # Reload the configuration file
+    bindsym $mod+Shift+r reload
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
