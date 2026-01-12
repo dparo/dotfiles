@@ -13,3 +13,15 @@
         state: present
       when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
       become: true
+
+    - name: Remove
+      ansible.builtin.dnf:
+        name:
+          - cockpit-bridge
+          - cockpit-storaged
+          - cockpit-system
+          - cockpit-ws
+          - cockpit-ws-selinux
+        state: absent
+      when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+      become: true
