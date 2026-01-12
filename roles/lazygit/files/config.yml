@@ -42,9 +42,9 @@ gui:
     defaultFgColor:
       - "#c0caf5"
 git:
-  paging:
-    colorArg: always
-    pager: delta --dark --paging=never
+  pagers:
+    - colorArg: always
+      pager: delta --dark --paging=never
   autoFetch: false
   autoRefresh: true
   disableForcePushing: true
