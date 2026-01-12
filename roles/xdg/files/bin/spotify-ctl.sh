@@ -44,21 +44,21 @@ arg1="$1"
 shift 1
 case "$arg1" in
     play)
-        dbus_send Play "$@" || playerctl -p "$mediaplayer" play;;
+        dbus_send Play "$@" || playerctl -p "$mediaplayer" play || playerctl play;;
     pause)
-        dbus_send Pause "$@" ||playerctl -p "$mediaplayer" pause;;
+        dbus_send Pause "$@" || playerctl -p "$mediaplayer" pause || playerctl pause;;
     play-pause|toggle)
-        dbus_send PlayPause "$@" || playerctl -p "$mediaplayer" play-pause;;
+        dbus_send PlayPause "$@" || playerctl -p "$mediaplayer" play-pause || playerctl play-pause;;
     stop)
-        dbus_send Stop "$@" || playerctl -p "$mediaplayer" stop;;
+        dbus_send Stop "$@" || playerctl -p "$mediaplayer" stop || playerctl stop;;
     next)
-        dbus_send Next "$@" || playerctl -p "$mediaplayer" next;;
+        dbus_send Next "$@" || playerctl -p "$mediaplayer" next || playerctl next;;
     prev|previous|prior)
-        dbus_send Previous "$@" || playerctl -p "$mediaplayer" previous;;
+        dbus_send Previous "$@" || playerctl -p "$mediaplayer" previous || playerctl previous;;
     mute)
-        dbus_send Volume 0.0 "$@" || playerctl -p "$mediaplayer" volume 0.0;;
+        dbus_send Volume 0.0 "$@" || playerctl -p "$mediaplayer" volume 0.0 || playerctl volume 0.0;;
     volume-up)
-        dbus_send VolumeUp || playerctl -p "$mediaplayer" volume 0.05+;;
+        dbus_send VolumeUp || playerctl -p "$mediaplayer" volume 0.05+ || playerctl volume 0.05+;;
     volume-down)
-        dbus_send VolumeDown || playerctl -p "$mediaplayer" volume 0.05-;;
+        dbus_send VolumeDown || playerctl -p "$mediaplayer" volume 0.05- || playerctl volume 0.05-;;
 esac
