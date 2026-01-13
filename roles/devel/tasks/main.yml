@@ -9,6 +9,12 @@
       - xxd
       - python3-pywatchman # https://facebook.github.io/watchman/docs/watchman-make
       - entr # https://github.com/eradman/entr
+      - asciinema # Terminal session recorder: https://github.com/asciinema/asciinema
+      - reuse # https://github.com/fsfe/reuse-tool: reuse is a tool for compliance with the REUSE recommendations.
+      - pandoc
+      - proselint # A python3 linter for English prose
+      - codespell # Fix common misspellings in text files
+      - gitlint # Git commit message linting tool
       - rubygem-asciidoctor
       - rubygem-asciidoctor-pdf
       - rubygem-rouge
@@ -67,15 +73,10 @@
 - name: Install additional language tools
   ansible.builtin.pip:
     name:
-      - codespell
       - cmakelang
       - cmake-language-server
-      - gitlint
       - vim-vint
-      - proselint
-      - reuse # https://github.com/fsfe/reuse-tool: reuse is a tool for compliance with the REUSE recommendations.
       - frogmouth # A Markdown browser for your terminal: https://github.com/Textualize/frogmouth
-      - asciinema # Terminal session recorder: https://github.com/asciinema/asciinema
     state: latest
   tags:
     - devel
