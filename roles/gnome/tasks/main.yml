@@ -249,6 +249,7 @@
     # gsettings set org.gnome.mutter dynamic-workspaces true
     # gsettings set org.gnome.mutter edge-tiling true
     # gsettings set org.gnome.mutter workspaces-only-on-primary false
+    # gsettings set org.gnome.mutter check-alive-timeout 20000
     - name: Mutter
       dconf:
         key: "/org/gnome/mutter/{{ item.key }}"
@@ -259,6 +260,7 @@
           dynamic-workspaces: false
           edge-tiling: true
           workspaces-only-on-primary: true
+          check-alive: 20000
 
 
     # gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Noto Sans Bold 10'
