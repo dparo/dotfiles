@@ -260,7 +260,7 @@
           dynamic-workspaces: false
           edge-tiling: true
           workspaces-only-on-primary: true
-          check-alive: 20000
+          check-alive: 20000 # Extend the time required for dialog "Application not responding (Force Quit)"  to appear under Gnome/Mutter (Gnome sets it to an aggressive 5 seconds)
 
 
     # gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Noto Sans Bold 10'
