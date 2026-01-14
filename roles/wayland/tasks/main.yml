@@ -14,3 +14,31 @@
         - swappy # Wayland native snapshot editing tool, inspired by Snappy on macOS
       state: present
     become: true
+
+  - name: Create global directory for wallapers
+    ansible.builtin.file:
+      path: "{{ item }}"
+      state: directory
+      mode: '0755'
+      recurse: yes
+    loop:
+      - /usr/local/share/wallpapers/Next/contents/images/
+      - /usr/local/share/wallpapers/Next/contents/images_dark/
+    become: True
+
+  - name: Fetch Plasma Breeze Sub-Arctic wallaper (light)
+    ansible.builtin.get_url:
+      dest: "/usr/local/share/wallpapers/Next/contents/images/Sub-Arctic-5120x2880.png"
+      url: "https://invent.kde.org/plasma/breeze/-/raw/991d2d6b40aac4ff53531c0d3de7cd7f02b7ee83/wallpapers/Next/contents/images/5120x2880.png"
+      mode: "0644"
+    ignore_errors: true
+    become: True
+
+
+  - name: Fetch Plasma Breeze Sub-Arctic wallaper (dark)
+    ansible.builtin.get_url:
+      dest: "/usr/local/share/wallpapers/Next/contents/images_dark/Sub-Arctic-5120x2880.png"
+      url: "https://invent.kde.org/plasma/breeze/-/raw/991d2d6b40aac4ff53531c0d3de7cd7f02b7ee83/wallpapers/Next/contents/images_dark/5120x2880.png"
+      mode: "0644"
+    ignore_errors: true
+    become: True
