@@ -12,6 +12,14 @@
         - foot
         - cliphist
         - swappy # Wayland native snapshot editing tool, inspired by Snappy on macOS
+        # - nwg-bar # GTK3-based button bar for wlroots-based compositors
+        # - nwg-dock # GTK3-based dock for sway
+        # - nwg-dock-hyprland # GTK3-based dock for Hyprland
+        # - nwg-drawer # Application drawer for wlroots-based Wayland compositors
+        # - nwg-launchers # GTK-based launchers for sway and other window managers
+        # - nwg-look # GTK3 settings editor adapted to work in the wlroots environment
+        # - nwg-panel # GTK3-based panel for sway and Hyprland Wayland compositors
+        # - nwg-wrapper # GTK3 wrapper to display text on the desktop for wlroots
       state: present
     become: true
 
