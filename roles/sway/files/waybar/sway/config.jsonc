@@ -248,7 +248,8 @@
             "kitty",
             "Alacritty",
             "foot",
-            "org.wezfurlong.wezterm"
+            "org.wezfurlong.wezterm",
+            "com.obsproject.Studio"
       ]
     }
 }
