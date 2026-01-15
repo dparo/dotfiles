@@ -47,6 +47,9 @@
         //     "default": ""
         // }
     },
+    "sway/window": {
+        "max-length": 64
+    },
     "keyboard-state": {
         "numlock": true,
         "capslock": true,
