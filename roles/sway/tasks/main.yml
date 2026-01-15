@@ -36,6 +36,13 @@
         state: link
         force: true
 
+    - name: Symlink swaylock config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/sway"
+        dest: "{{ ansible_user_dir }}/.config/sway"
+        state: link
+        force: true
+
     - name: Symlink waybar sway config
       ansible.builtin.file:
         src: "{{ role_path }}/files/waybar/sway"
