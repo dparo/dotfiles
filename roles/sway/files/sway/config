@@ -270,7 +270,7 @@ bindsym $mod+t          exec --no-startup-id      i3-teams-for-linux.sh
 
 
 
-set $font Noto Sans 9
+set $font Noto Sans 8
 font pango:$font
 floating_modifier $alt
 tiling_drag enable
