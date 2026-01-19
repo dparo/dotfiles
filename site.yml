@@ -103,6 +103,7 @@
     - jless
     - ranger
     - yazi
+    - vacuum # https://github.com/daveshanley/vacuum (vacuum is the worlds fastest OpenAPI 3, OpenAPI 2 / Swagger linter and quality analysis tool)
 
     ## Devel command line programs
     - awscli

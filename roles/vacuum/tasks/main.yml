@@ -1,0 +1,8 @@
+- name: Vacuum
+  tags:
+    - vacuum
+  block:
+
+    # TODO: Install
+
+    # https://github.com/daveshanley/vacuum (vacuum is the worlds fastest OpenAPI 3, OpenAPI 2 / Swagger linter and quality analysis tool)
