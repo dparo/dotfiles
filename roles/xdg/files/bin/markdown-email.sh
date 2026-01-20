@@ -453,46 +453,89 @@ done
     # TODO Use pandoc filter to strip metadata instead of the sed expression
     # --lua-filter=strip-metadata.lua \
 
-# Set input format based on --asciidoc flag
+# Process based on input format
 if [ "$ASCIIDOC" = true ]; then
-    INPUT_FORMAT="asciidoc"
+    # Use asciidoctor for AsciiDoc files
+    if ! command -v asciidoctor >/dev/null 2>&1; then
+        echo "Error: asciidoctor is not installed. Please install it to process AsciiDoc files." >&2
+        exit 1
+    fi
+    
+    # Build asciidoctor command with options
+    ASCIIDOCTOR_OPTS="-a embedcss -a linkcss!"
+    
+    # Add TOC if requested
+    if [ "$TOC" = true ]; then
+        ASCIIDOCTOR_OPTS="$ASCIIDOCTOR_OPTS -a toc -a toc-title='Indice'"
+    fi
+    
+    # Convert AsciiDoc to HTML using asciidoctor
+    TEMP_ASCIIDOC_HTML="$(mktemp).html"
+    trap "rm -f $TEMP_ASCIIDOC_HTML" EXIT
+    
+    asciidoctor $ASCIIDOCTOR_OPTS -o "$TEMP_ASCIIDOC_HTML" "${INPUT}"
+    
+    # Extract the body content and wrap it with our custom template
+    BODY_CONTENT=$(sed -n '/<body/,/<\/body>/p' "$TEMP_ASCIIDOC_HTML" | sed '1d;$d')
+    
+    # Apply custom CSS styling
+    HTML_OUTPUT=$(cat <<EOHTML
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="$(git config get user.name) <$(git config get user.email)>" />
+  <meta name="dcterms.date" content="$(date --iso-8601=minutes)" />
+  <title> </title>
+  <style>
+$(cat "$TEMP_CSS")
+  </style>
+</head>
+<body>
+$BODY_CONTENT
+</body>
+</html>
+EOHTML
+)
 else
+    # Use pandoc for Markdown files
     INPUT_FORMAT="markdown+smart"
+    
+    # Check if mermaid-filter is available
+    MERMAID_FILTER=""
+    if command -v mermaid-filter >/dev/null 2>&1; then
+        MERMAID_FILTER="-F mermaid-filter"
+    fi
+    
+    # STRIP Yaml front matter and convert to HTML
+    HTML_OUTPUT=$(sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
+        -s \
+        ${MERMAID_FILTER} \
+        --embed-resources \
+        --toc="${TOC}" \
+        --toc-depth=3 \
+        --number-sections \
+        --metadata toc-title="Indice" \
+        --metadata title=" " \
+        --metadata abstract-title="Sommario" \
+        --metadata date-meta="$(date --iso-8601=minutes)" \
+        --metadata author-meta="$(git config get user.name) <$(git config get user.email)>" \
+        --metadata date="$(date --iso-8601=minutes)" \
+        --metadata author="$(git config get user.name) <$(git config get user.email)>" \
+        --webtex='https://latex.codecogs.com/png.image?' \
+        --variable lang=it \
+        --variable mainfont="Liberation Serif" \
+        --variable monofont="Liberation Mono" \
+        --variable colorlinks=true \
+        --variable papersize=a4 \
+        --highlight-style=zenburn \
+        --template "$TEMP_HTML_TEMPLATE" \
+        --css "$TEMP_CSS" \
+        -f "${INPUT_FORMAT}" \
+        --to=html5 \
+        "${INPUT}")
 fi
-
-# Check if mermaid-filter is available
-MERMAID_FILTER=""
-if command -v mermaid-filter >/dev/null 2>&1; then
-    MERMAID_FILTER="-F mermaid-filter"
-fi
-
-# STRIP Yaml front matter and convert to HTML
-HTML_OUTPUT=$(sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
-    -s \
-    ${MERMAID_FILTER} \
-    --embed-resources \
-    --toc="${TOC}" \
-    --toc-depth=3 \
-    --number-sections \
-    --metadata toc-title="Indice" \
-    --metadata title=" " \
-    --metadata abstract-title="Sommario" \
-    --metadata date-meta="$(date --iso-8601=minutes)" \
-    --metadata author-meta="$(git config get user.name) <$(git config get user.email)>" \
-    --metadata date="$(date --iso-8601=minutes)" \
-    --metadata author="$(git config get user.name) <$(git config get user.email)>" \
-    --webtex='https://latex.codecogs.com/png.image?' \
-    --variable lang=it \
-    --variable mainfont="Liberation Serif" \
-    --variable monofont="Liberation Mono" \
-    --variable colorlinks=true \
-    --variable papersize=a4 \
-    --highlight-style=zenburn \
-    --template "$TEMP_HTML_TEMPLATE" \
-    --css "$TEMP_CSS" \
-    -f "${INPUT_FORMAT}" \
-    --to=html5 \
-    "${INPUT}")
 
 # Output to clipboard or stdout based on --clipboard flag
 if [ "$CLIPBOARD" = true ]; then
@@ -509,6 +552,8 @@ if [ "$CLIPBOARD" = true ]; then
 else
     echo "$HTML_OUTPUT"
 fi
+
+
 
 
 
