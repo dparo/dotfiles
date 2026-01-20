@@ -425,6 +425,7 @@ EOF
 # Parse arguments
 CLIPBOARD=false
 TOC=false
+ASCIIDOC=false
 INPUT="-"
 
 while [ $# -gt 0 ]; do
@@ -435,6 +436,10 @@ while [ $# -gt 0 ]; do
             ;;
         --toc)
             TOC=true
+            shift
+            ;;
+        --asciidoc)
+            ASCIIDOC=true
             shift
             ;;
         *)
@@ -448,9 +453,23 @@ done
     # TODO Use pandoc filter to strip metadata instead of the sed expression
     # --lua-filter=strip-metadata.lua \
 
+# Set input format based on --asciidoc flag
+if [ "$ASCIIDOC" = true ]; then
+    INPUT_FORMAT="asciidoc"
+else
+    INPUT_FORMAT="markdown+smart"
+fi
+
+# Check if mermaid-filter is available
+MERMAID_FILTER=""
+if command -v mermaid-filter >/dev/null 2>&1; then
+    MERMAID_FILTER="-F mermaid-filter"
+fi
+
 # STRIP Yaml front matter and convert to HTML
 HTML_OUTPUT=$(sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
     -s \
+    ${MERMAID_FILTER} \
     --embed-resources \
     --toc="${TOC}" \
     --toc-depth=3 \
@@ -471,7 +490,7 @@ HTML_OUTPUT=$(sed '/^---$/,/^---$/d' "${INPUT}" | pandoc \
     --highlight-style=zenburn \
     --template "$TEMP_HTML_TEMPLATE" \
     --css "$TEMP_CSS" \
-    -f markdown+smart \
+    -f "${INPUT_FORMAT}" \
     --to=html5 \
     "${INPUT}")
 
@@ -490,4 +509,6 @@ if [ "$CLIPBOARD" = true ]; then
 else
     echo "$HTML_OUTPUT"
 fi
+
+
 
