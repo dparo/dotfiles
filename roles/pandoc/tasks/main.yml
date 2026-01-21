@@ -1,0 +1,20 @@
+- name: Pandoc
+  tags:
+    - writing
+    - pandoc
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - pandoc
+        state: present
+      become: true
+
+    - name: Install Pandoc mermaid-filter
+      community.general.npm:
+        name: "{{ item }}"
+        global: true
+        state: latest
+      loop:
+        - mermaid-filter
+

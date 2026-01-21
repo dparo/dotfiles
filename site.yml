@@ -93,6 +93,7 @@
 
     # Templating / Writing / Diagramming
     - zk_notebook
+    - pandoc
     - latex
     - typst
     - d2 # D2 is a modern diagram scripting language that turns text to diagrams.
