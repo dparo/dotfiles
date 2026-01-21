@@ -479,7 +479,11 @@ M.list = {
             }
         end,
     },
-    { name = "vacuum", config = {} },
+    { name = "vacuum", config = {
+        cmd = { "vacuum", "language-server" },
+        filetypes = { "yaml.openapi", "json.openapi" },
+        root_markers = { ".git" },
+    } },
 }
 
 if vim.env.NVIM_LSP_DISABLED ~= nil and vim.env.NVIM_LSP_DISABLED ~= "0" then
