@@ -1,9 +1,12 @@
 ---
-- name: Install bitwarden desktop
-  community.general.flatpak:
-    name: com.bitwarden.desktop
-    state: present
-    remote: flathub
+- name: Bitwarden
   tags:
+    - never
     - bitwarden
     - bitwarden-cli
+  block:
+    - name: Install bitwarden desktop
+      community.general.flatpak:
+        name: com.bitwarden.desktop
+        state: present
+        remote: flathub

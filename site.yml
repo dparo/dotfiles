@@ -91,7 +91,32 @@
     - maven
     - tomcat
 
-    # Templating / Writing / Diagramming
+    ##
+    ## Browsers / Web
+    ##
+    - firefox
+    - brave_browser
+    - chromium
+    - google_chrome
+    - microsoft_edge
+
+    ##
+    ## Office Suite / Email
+    ##
+    - onlyoffice
+    - libreoffice
+    - thunderbird
+    - neomutt
+    - masterpdfeditor5
+    - zathura
+    - newsboat
+    - keepassxc
+    - bitwarden
+
+
+    ##
+    ## Templating / Writing / Diagramming
+    ##
     - zk_notebook
     - pandoc
     - latex
@@ -101,6 +126,9 @@
     - graphviz
     - mermaid
     - vega
+    - joplin
+    - logseq
+    - marktext
     # - kroki (online): https://kroki.io/
     # - blockdiag # block diagram
     # - seqdiag # sequence diagram
@@ -109,8 +137,23 @@
     # - erd # entity relation graph (https://github.com/BurntSushi/erd)
 
 
-    # Image manipulations
+    ##
+    ##  Media
+    ##
     - imagemagick
+    - mpd
+    - mpv
+
+
+    ##
+    ## Backup and syncing
+    ##
+    # - rsync
+    # - rclone
+    - syncthing
+
+
+
 
     ## Command line programs
     - tmux
@@ -147,7 +190,6 @@
     - gnome
     - hyprland
     - sway
-    - neomutt
 
     ## Text editors
     - neovim
@@ -172,36 +214,27 @@
 
 
     # TODO(d.paro): Sort out these roles
-    - newsboat
     - gtk
-    - mpd
-    - mpv
     - clipboard
     - copyq
     - flameshot
-    - zathura
     - fonts
     - docker
     - flatpak
+
     - k6
     - k8s
     - k9s
     - popeye
+
     - pulumi
     - terraform
+
     - vagrant
     - vault
     - consul
+
     - liquibase
-    - syncthing
-    - keepassxc
-    - bitwarden
-    - firefox
-    - chromium
-    - brave_browser
-    - google_chrome
-    - microsoft_edge
-    - masterpdfeditor5
     - p4merge
     - vscode
     - intellij
@@ -212,7 +245,6 @@
     - jdgui
     - tailwindcss
     - nwjs
-    - postman
     - mattermost
     - splunk
     - caddy
@@ -222,34 +254,32 @@
     - infer # https://github.com/facebook/infer
     - gaming
     - clamav
-    - thunderbird
     - teams-for-linux
     - burp_suite
-    - joplin
-    - libreoffice
     - sqlplus
-    - dbeaver
     - dbvis
-    - dbgate
     - apache_ldap_studio
     - davinci_resolve
     - godot_engine
     - audacity
-    - openapi-generator-cli
 
     # Flatpaks
     - flatpak
     - rnote
     - drawio
-    - onlyoffice
     - obsidian
     - obs_studio
-    - logseq
-    - beekeeper_studio
+
+    # - beekeeper_studio
+    - dbeaver
+    - dbgate
+
     - easyeffects
     - podman-desktop
     - redisinsight
-    - insomnia
+    # - insomnia
+    # - postman
+    - openapi-generator-cli
+
     - spotify
-    - marktext
     - imhex
