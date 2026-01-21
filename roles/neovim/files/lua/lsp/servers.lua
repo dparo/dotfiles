@@ -479,6 +479,7 @@ M.list = {
             }
         end,
     },
+    { name = "vacuum", config = {} },
 }
 
 if vim.env.NVIM_LSP_DISABLED ~= nil and vim.env.NVIM_LSP_DISABLED ~= "0" then
