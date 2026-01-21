@@ -92,6 +92,7 @@
     - tomcat
     - latex
     - typst
+    - d2 # D2 is a modern diagram scripting language that turns text to diagrams.
 
     ## Command line programs
     - tmux

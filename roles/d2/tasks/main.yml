@@ -1,0 +1,13 @@
+- name: D2
+  tags:
+    - d2
+  block:
+    # D2 is a modern diagram scripting language that turns text to diagrams.
+    - name: Install (Fedora repository)
+      ansible.builtin.dnf:
+        name:
+          - d2
+        state: present
+      become: true
+
+
