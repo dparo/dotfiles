@@ -1,13 +1,13 @@
 ---
 nerd_fonts:
   - NerdFontsSymbolsOnly
-  - Hack
+  # - Hack
   # - SourceCodePro
-  - JetBrainsMono
-  - Ubuntu
-  - UbuntuMono
+  # - JetBrainsMono
+  # - Ubuntu
+  # - UbuntuMono
   # - IntelOneMono
-  - IBMPlexMono
+  # - IBMPlexMono
   # - GeistMono
   # - Monaspace     # https://monaspace.githubnext.com, https://github.com/githubnext/monaspace
   # - CascadiaCode

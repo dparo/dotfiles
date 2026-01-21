@@ -23,7 +23,7 @@
     // Font & Theme
     "ui_font_size": 16,
     "buffer_font_size": 12,
-    "buffer_font_family": "IBM Plex Mono",
+    "buffer_font_family": "JetBrains Mono NL",
     "ui_font_family": "Noto Sans",
     "buffer_font_features": {
         "calt": true,
