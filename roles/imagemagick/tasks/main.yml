@@ -1,0 +1,15 @@
+---
+- name: ImageMagick
+  tags:
+    - ImageMagick
+    - image-magick
+    - imagemagick
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - ImageMagick
+        state: present
+      become: true
+
+

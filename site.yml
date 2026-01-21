@@ -109,6 +109,8 @@
     # - erd # entity relation graph (https://github.com/BurntSushi/erd)
 
 
+    # Image manipulations
+    - imagemagick
 
     ## Command line programs
     - tmux
