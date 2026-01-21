@@ -72,7 +72,6 @@
 
     # Development toolchains
     - python
-    - pypoetry
     - anaconda3
     - cpp
     - rust
