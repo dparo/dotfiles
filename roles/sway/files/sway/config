@@ -4,6 +4,9 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+seat seat0 xcursor_theme Adwaita 24
+
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
