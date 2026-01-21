@@ -101,7 +101,7 @@
     - graphviz
     - mermaid
     - vega
-    # - kroki (online)
+    # - kroki (online): https://kroki.io/
     # - blockdiag # block diagram
     # - seqdiag # sequence diagram
     # - actdiag # activity diagram
