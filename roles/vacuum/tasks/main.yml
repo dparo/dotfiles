@@ -2,7 +2,36 @@
   tags:
     - vacuum
   block:
-
-    # TODO: Install
+    - name: Check latest vacuum
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/daveshanley/vacuum/releases/latest
+        return_content: true
+      register: vacuum
 
     # https://github.com/daveshanley/vacuum (vacuum is the worlds fastest OpenAPI 3, OpenAPI 2 / Swagger linter and quality analysis tool)
+
+    - name: Create install dir
+      ansible.builtin.file:
+        path: /opt/vacuum
+        state: directory
+        mode: "0755"
+      become: true
+
+    # Contais files:
+    #  - LICENSE
+    #  - README.md
+    #  - vacuum          (the actual executable)
+    - name: Download and unpack latest vacuum
+      ansible.builtin.unarchive:
+        src: "https://github.com/daveshanley/vacuum/releases/download/{{vacuum['json']['tag_name'] }}/vacuum_{{ vacuum['json']['tag_name'][1:] }}_linux_x86_64.tar.gz"
+        dest: /opt/vacuum
+        remote_src: true
+      become: true
+
+
+    - name: Symlink binaries
+      ansible.builtin.file:
+        src: /opt/vacuum/vacuum
+        dest: /usr/local/bin/vacuum
+        state: link
+      become: true
