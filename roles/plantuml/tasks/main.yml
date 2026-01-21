@@ -1,0 +1,12 @@
+---
+- name: PlantUml
+  tags:
+    - writing
+    - plantuml
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - plantuml
+        state: present
+      become: true

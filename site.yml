@@ -90,9 +90,24 @@
     - kotlin
     - maven
     - tomcat
+
+    # Templating / Writing / Diagramming
+    - zk_notebook
     - latex
     - typst
     - d2 # D2 is a modern diagram scripting language that turns text to diagrams.
+    - gomplate
+    - graphviz
+    - mermaid
+    - vega
+    # - kroki (online)
+    # - blockdiag # block diagram
+    # - seqdiag # sequence diagram
+    # - actdiag # activity diagram
+    # - nwdiag # logical network diagram
+    # - erd # entity relation graph (https://github.com/BurntSushi/erd)
+
+
 
     ## Command line programs
     - tmux
@@ -152,7 +167,6 @@
     - ripdrag
     - feh
 
-    - zk_notebook
 
     # TODO(d.paro): Sort out these roles
     - newsboat
@@ -194,8 +208,6 @@
     - lnav
     - jdgui
     - tailwindcss
-    - gomplate
-    - diagram_tools
     - nwjs
     - postman
     - mattermost

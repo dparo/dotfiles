@@ -1,0 +1,14 @@
+---
+- name: Mermaid
+  tags:
+    - never
+    - writing
+    - mermaid
+  block:
+    - name: Install mermaid-cli
+      community.general.npm:
+        name: "{{ item }}"
+        global: true
+        state: latest
+      loop:
+        - "@mermaid-js/mermaid-cli"

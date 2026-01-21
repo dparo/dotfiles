@@ -1,0 +1,13 @@
+---
+- name: GraphViz
+  tags:
+    - writing
+    - graphviz
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - graphviz
+        state: present
+      become: true
+

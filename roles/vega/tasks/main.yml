@@ -1,0 +1,15 @@
+---
+- name: Vega
+  tags:
+    - never
+    - writing
+    - vega
+  block:
+
+    - name: Install vega-cli (A Visualization Grammar, interactive visualization designs)
+      community.general.npm:
+        name: "{{ item }}"
+        global: true
+        state: latest
+      loop:
+        - vega-cli
