@@ -2,6 +2,8 @@
    pattern = {
      ['openapi.*%.ya?ml'] = 'yaml.openapi',
      ['openapi.*%.json'] = 'json.openapi',
+     ['swagger.*%.ya?ml'] = 'yaml.openapi',
+     ['swagger.*%.json'] = 'json.openapi',
    },
  }
 
