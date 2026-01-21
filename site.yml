@@ -91,6 +91,7 @@
     - maven
     - tomcat
     - latex
+    - typst
 
     ## Command line programs
     - tmux

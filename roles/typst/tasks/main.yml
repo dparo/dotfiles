@@ -1,0 +1,11 @@
+- name: Typst
+  tags:
+    - typst
+  block:
+    - name: Install (terra repository)
+      ansible.builtin.dnf:
+        name:
+          - typst        # Requires terra repository
+        state: present
+      become: true
+
