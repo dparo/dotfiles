@@ -1,6 +1,6 @@
 ---
-nerd_fonts:
-  - NerdFontsSymbolsOnly
+nerd_fonts: []
+  # - NerdFontsSymbolsOnly
   # - Hack
   # - SourceCodePro
   # - JetBrainsMono
