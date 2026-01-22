@@ -1,0 +1,14 @@
+---
+- name: Thunar
+  tags:
+    - thunar
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - Thunar
+          - thunar-archive-plugin
+          - thunar-volman
+        state: present
+      become: true
+
