@@ -17,6 +17,7 @@
           # - adobe-source-serif-pro-fonts
           - jetbrains-mono-fonts-all.noarch # Repository: Fedora
           - jetbrainsmono-nerd-fonts # Repository: Terra
+          # ibmplexmono-nerd-fonts # Repository: Terra
           # - monaspace-nerd-fonts # Repository: Terra
         state: present
       become: true
