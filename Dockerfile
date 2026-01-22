@@ -1,4 +1,4 @@
-FROM fedora:37
+FROM fedora:43
 COPY . /dotfiles
 RUN dnf upgrade -y \
     && DEBIAN_FRONTEND=noninteractive TZ=Etc/UTC dnf install -y tzdata \
