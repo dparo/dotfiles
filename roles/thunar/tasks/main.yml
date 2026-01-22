@@ -12,3 +12,7 @@
         state: present
       become: true
 
+
+  # TODO: ln -s /usr/share/dbus-1/services/org.xfce.Thunar.FileManager1.service $HOME/.local/share/dbus-1/services/org.freedesktop.FileManager1.service
+
+  # TODO: xdg-mime default thunar.desktop inode/directory
