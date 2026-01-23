@@ -4,32 +4,40 @@
     - git
     - lazygit
   block:
-    - name: Check latest lazygit
-      ansible.builtin.uri:
-        url: https://api.github.com/repos/jesseduffield/lazygit/releases/latest
-        return_content: true
-      register: lazygit
+    # - name: Check latest lazygit
+    #   ansible.builtin.uri:
+    #     url: https://api.github.com/repos/jesseduffield/lazygit/releases/latest
+    #     return_content: true
+    #   register: lazygit
+    #
+    # - name: Create install dir
+    #   ansible.builtin.file:
+    #     path: /opt/lazygit
+    #     state: directory
+    #     mode: "0755"
+    #   become: true
+    #
+    # - name: Download and unpack latest lazygit
+    #   ansible.builtin.unarchive:
+    #     src: "{{ gh_repo }}/releases/latest/download/lazygit_{{ lazygit['json']['tag_name'][1:] }}_Linux_x86_64.tar.gz"
+    #     dest: /opt/lazygit
+    #     remote_src: true
+    #   become: true
+    #
+    # - name: Symlink binaries
+    #   ansible.builtin.file:
+    #     src: /opt/lazygit/lazygit
+    #     dest: /usr/local/bin/lazygit
+    #     state: link
+    #   become: true
 
-    - name: Create install dir
-      ansible.builtin.file:
-        path: /opt/lazygit
-        state: directory
-        mode: "0755"
-      become: true
+    - name: Install (Terra repository)
+      ansible.builtin.dnf:
+        name:
+          - golang-github-jesseduffield-lazygit
+        state: present
+      become: True
 
-    - name: Download and unpack latest lazygit
-      ansible.builtin.unarchive:
-        src: "{{ gh_repo }}/releases/latest/download/lazygit_{{ lazygit['json']['tag_name'][1:] }}_Linux_x86_64.tar.gz"
-        dest: /opt/lazygit
-        remote_src: true
-      become: true
-
-    - name: Symlink binaries
-      ansible.builtin.file:
-        src: /opt/lazygit/lazygit
-        dest: /usr/local/bin/lazygit
-        state: link
-      become: true
 
     - name: Symlink config
       ansible.builtin.file:

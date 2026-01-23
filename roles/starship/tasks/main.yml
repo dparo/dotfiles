@@ -3,17 +3,25 @@
   tags:
     - starship
   block:
-    - name: Check latest starship
-      ansible.builtin.uri:
-        url: https://api.github.com/repos/starship/starship/releases/latest
-        return_content: true
-      register: starship_latest
+    # - name: Check latest starship
+    #   ansible.builtin.uri:
+    #     url: https://api.github.com/repos/starship/starship/releases/latest
+    #     return_content: true
+    #   register: starship_latest
+    #
+    # - name: Download and unpack latest starship
+    #   ansible.builtin.unarchive:
+    #     src: https://github.com/starship/starship/releases/download/{{ starship_latest['json']['tag_name'] }}/starship-x86_64-unknown-linux-gnu.tar.gz
+    #     dest: "{{ ansible_user_dir }}/.local/bin"
+    #     remote_src: true
+    #
 
-    - name: Download and unpack latest starship
-      ansible.builtin.unarchive:
-        src: https://github.com/starship/starship/releases/download/{{ starship_latest['json']['tag_name'] }}/starship-x86_64-unknown-linux-gnu.tar.gz
-        dest: "{{ ansible_user_dir }}/.local/bin"
-        remote_src: true
+    - name: Install (Terra repository)
+      ansible.builtin.dnf:
+        name:
+          - starship
+        state: present
+      become: True
 
     - name: Symlink config
       ansible.builtin.file:
