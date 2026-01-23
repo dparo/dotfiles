@@ -9,6 +9,7 @@
           - ibm-plex-mono-fonts
           - ibm-plex-sans-fonts
           - ibm-plex-serif-fonts
+          - nerdfontssymbolsonly-nerd-fonts    # Repository: Terra
           - source-foundry-hack-fonts
           # - cascadia-mono-fonts    # Cascadia Mono is identical to Cascadia Code when ligatures are disabled
           # - cascadia-mono-nf-fonts # Same as Cascadia but with Nerd fonts embedded
@@ -17,6 +18,7 @@
           # - adobe-source-serif-pro-fonts
           - jetbrains-mono-fonts-all.noarch # Repository: Fedora
           - jetbrainsmono-nerd-fonts # Repository: Terra
+          # ibmplexmono-nerd-fonts # Repository: Terra
           # - monaspace-nerd-fonts # Repository: Terra
         state: present
       become: true
