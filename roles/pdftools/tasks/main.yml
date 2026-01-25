@@ -10,6 +10,7 @@
         name:
           - pdfgrep
           - tesseract
+          - tesseract-langpack-ita
           - ocrmypdf
         state: present
       become: true
