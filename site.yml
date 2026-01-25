@@ -107,6 +107,7 @@
     ##
     ## Office Suite / Email
     ##
+    - pdftools
     - onlyoffice
     - libreoffice
     - thunderbird

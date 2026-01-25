@@ -1,0 +1,15 @@
+---
+
+- name: Pdf Tools
+  tags:
+    - pdftools
+    - pdf-tools
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - pdfgrep
+          - tesseract
+          - ocrmypdf
+        state: present
+      become: true
