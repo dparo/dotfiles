@@ -45,6 +45,7 @@ export ANSIBLE_CONFIG="${XDG_CONFIG_HOME}/ansible.cfg"
 export ANSIBLE_GALAXY_CACHE_DIR="${XDG_CACHE_DIR:-$HOME/.cache}/ansible/galaxy"
 export ANSIBLE_LOCAL_TEMP="${XDG_CACHE_DIR:-$HOME/.cache}/ansible/tmp"
 
+export NOTMUCH_CONFIG="$XDG_CONFIG_HOME/not‐much/default/config"
 
 export PNPM_HOME="/home/dparo/.local/share/pnpm"
 
