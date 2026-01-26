@@ -1,0 +1,8 @@
+---
+- name: Harper
+  tags:
+    - harper
+    - writing
+  block:
+    # https://writewithharper.com/docs/integrations/neovim
+

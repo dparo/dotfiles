@@ -107,6 +107,7 @@
     ##
     ## Office Suite / Email
     ##
+    # - harper # https://writewithharper.com/
     - markdown
     - pdftools
     - onlyoffice

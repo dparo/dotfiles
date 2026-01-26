@@ -479,6 +479,10 @@ M.list = {
             }
         end,
     },
+
+    -- https://writewithharper.com
+    { name = "harper_ls", config = {} },
+
     { name = "vacuum", config = {
         cmd = { "vacuum", "language-server" },
         filetypes = { "yaml.openapi", "json.openapi" },
