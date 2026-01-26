@@ -107,6 +107,7 @@
     ##
     ## Office Suite / Email
     ##
+    - markdown
     - pdftools
     - onlyoffice
     - libreoffice

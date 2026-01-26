@@ -1,0 +1,13 @@
+---
+- name: Markdown
+  tags:
+    - markdown
+    - markdown-utils
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - glow
+        state: present
+      become: true
+
