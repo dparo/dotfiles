@@ -1,43 +1,39 @@
 ---
 # https://github.com/Slackadays/Clipboard
 
-- name: Create install dir
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/opt/clipboard"
-    state: directory
-    mode: "0755"
+- name: Slackadays Clipboard
   tags:
-    - clipboard
+    - never
+    - slackadays-clipboard
+  block:
 
-- name: Check latest Clipboard
-  ansible.builtin.uri:
-    url: https://api.github.com/repos/Slackadays/Clipboard/releases/latest
-    return_content: true
-  register: clipboard_latest
-  tags:
-    - clipboard
+    - name: Create install dir
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/opt/clipboard"
+        state: directory
+        mode: "0755"
 
-- name: Download and unpack clipboard {{ clipboard_latest['json']['tag_name'] }}
-  ansible.builtin.unarchive:
-    src: https://github.com/Slackadays/Clipboard/releases/download/{{ clipboard_latest['json']['tag_name'] }}/clipboard-linux-amd64.zip
-    dest: "{{ ansible_user_dir }}/opt/clipboard"
-    remote_src: true
-  tags:
-    - clipboard
+    - name: Check latest Clipboard
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/Slackadays/Clipboard/releases/latest
+        return_content: true
+      register: clipboard_latest
 
-- name: Mark as executable
-  ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/opt/clipboard/bin/cb"
-    mode: "0755"
-  tags:
-    - clipboard
+    - name: Download and unpack clipboard {{ clipboard_latest['json']['tag_name'] }}
+      ansible.builtin.unarchive:
+        src: https://github.com/Slackadays/Clipboard/releases/download/{{ clipboard_latest['json']['tag_name'] }}/clipboard-linux-amd64.zip
+        dest: "{{ ansible_user_dir }}/opt/clipboard"
+        remote_src: true
 
-- name: Symlink binaries
-  ansible.builtin.file:
-    src: "{{ ansible_user_dir }}/opt/clipboard/bin/{{ item }}"
-    dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
-    state: link
-  loop:
-    - cb
-  tags:
-    - clipboard
+    - name: Mark as executable
+      ansible.builtin.file:
+        path: "{{ ansible_user_dir }}/opt/clipboard/bin/cb"
+        mode: "0755"
+
+    - name: Symlink binaries
+      ansible.builtin.file:
+        src: "{{ ansible_user_dir }}/opt/clipboard/bin/{{ item }}"
+        dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+        state: link
+      loop:
+        - cb
