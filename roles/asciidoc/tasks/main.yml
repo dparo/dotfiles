@@ -3,7 +3,7 @@
     - asciidoc
     - asciidoctor
   block:
-    - name: Install generic devel deps
+    - name: Install asciidoctor
       ansible.builtin.dnf:
         name:
           - rubygem-asciidoctor
