@@ -11,6 +11,11 @@
     - pipewire
     - wireplumber
 
+# TODO: https://wiki.archlinux.org/title/PipeWire#Automatic_profile_selection
+#    wpctl settings --save bluetooth.autoswitch-to-headset-profile false
+# To disable automatic headset profile switching
+#
+
 # https://github.com/werman/noise-suppression-for-voice
 - name: Download and unpack latest noise-suppression-for-voice
   ansible.builtin.unarchive:
