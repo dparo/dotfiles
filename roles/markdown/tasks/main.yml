@@ -11,3 +11,9 @@
         state: present
       become: true
 
+    - name: Install frogmouth
+      ansible.builtin.pip:
+        name:
+          - frogmouth # A Markdown browser for your terminal: https://github.com/Textualize/frogmouth
+        state: latest
+

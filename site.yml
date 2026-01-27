@@ -107,8 +107,6 @@
     ##
     ## Office Suite / Email
     ##
-    # - harper # https://writewithharper.com/
-    - markdown
     - pdftools
     - onlyoffice
     - libreoffice
@@ -124,8 +122,12 @@
     ##
     ## Templating / Writing / Diagramming
     ##
+    # - harper # https://writewithharper.com/
+    - gramma
+    - markdown
     - zk_notebook
     - pandoc
+    - asciidoc
     - latex
     - typst
     - d2 # D2 is a modern diagram scripting language that turns text to diagrams.
@@ -136,6 +138,7 @@
     - joplin
     - logseq
     - marktext
+    - marpit
     # - kroki (online): https://kroki.io/
     # - blockdiag # block diagram
     # - seqdiag # sequence diagram

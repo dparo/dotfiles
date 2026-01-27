@@ -1,0 +1,13 @@
+- name: Asciidoc
+  tags:
+    - asciidoc
+    - asciidoctor
+  block:
+    - name: Install generic devel deps
+      ansible.builtin.dnf:
+        name:
+          - rubygem-asciidoctor
+          - rubygem-asciidoctor-pdf
+          - rubygem-rouge
+        state: present
+      become: true
