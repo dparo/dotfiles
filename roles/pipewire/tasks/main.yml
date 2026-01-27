@@ -11,8 +11,12 @@
     - pipewire
     - wireplumber
 
-# TODO: https://wiki.archlinux.org/title/PipeWire#Automatic_profile_selection
+# TODO:
+#    - https://wiki.archlinux.org/title/PipeWire#Automatic_profile_selection
+#    - https://wiki.archlinux.org/title/WirePlumber#Disable_Bluetooth_profile_auto-switching
+#    ```sh
 #    wpctl settings --save bluetooth.autoswitch-to-headset-profile false
+#    ```
 # To disable automatic headset profile switching
 #
 
