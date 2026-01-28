@@ -1,0 +1,11 @@
+- name: Marpit
+  tags:
+    - marp
+    - marpit
+  block:
+    - name: Install NPM
+      community.general.npm:
+        name: "@marp-team/marp-cli" # Presentation mode for markdown files.
+        global: true
+        state: latest
+
