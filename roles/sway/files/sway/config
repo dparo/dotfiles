@@ -269,8 +269,8 @@ bindsym $mod+Shift+Escape  exec loginctl lock-session
 # Applications
 #
 bindsym $mod+grave      exec --no-startup-id      i3-dropdown-term.sh kitty
-# bindsym $mod+t          exec --no-startup-id      i3-teams-for-linux.sh
-bindsym $mod+t          exec --no-startup-id      i3-microsoft-teams.sh
+bindsym $mod+t          exec --no-startup-id      i3-teams-for-linux.sh
+# bindsym $mod+t          exec --no-startup-id      i3-microsoft-teams.sh
 
 
 
