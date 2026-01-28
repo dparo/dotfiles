@@ -6,11 +6,42 @@
     - podman
   when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
   block:
-    - name: Adding docker repo
-      ansible.builtin.shell: |
-        dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+    # dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
+    - name: Enable docker repository
+      ansible.builtin.copy:
+        dest: /etc/yum.repos.d/microsoft-edge.repo
+        content: |
+          [docker-ce-stable]
+          name=Docker CE Stable - $basearch
+          baseurl=https://download.docker.com/linux/fedora/$releasever/$basearch/stable
+          enabled=1
+          gpgcheck=1
+          gpgkey=https://download.docker.com/linux/fedora/gpg
+
+          [docker-ce-stable-source]
+          name=Docker CE Stable - Sources
+          baseurl=https://download.docker.com/linux/fedora/$releasever/source/stable
+          enabled=0
+          gpgcheck=1
+          gpgkey=https://download.docker.com/linux/fedora/gpg
+
+          [docker-ce-test]
+          name=Docker CE Test - $basearch
+          baseurl=https://download.docker.com/linux/fedora/$releasever/$basearch/test
+          enabled=0
+          gpgcheck=1
+          gpgkey=https://download.docker.com/linux/fedora/gpg
+
+          [docker-ce-test-source]
+          name=Docker CE Test - Sources
+          baseurl=https://download.docker.com/linux/fedora/$releasever/source/test
+          enabled=0
+          gpgcheck=1
+          gpgkey=https://download.docker.com/linux/fedora/gpg
+        mode: "0644"
       become: true
       when: not podman_docker_emulation
+
 
     - name: Install Docker
       ansible.builtin.dnf:
