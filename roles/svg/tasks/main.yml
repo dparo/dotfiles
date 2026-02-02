@@ -1,0 +1,14 @@
+---
+- name: Svg
+  tags:
+    - svg
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - inkscape
+          - potrace # Potrace is a utility for tracing a bitmap, which means, transforming a bitmap into a smooth, scalable image
+        state: present
+      become: true
+
+
