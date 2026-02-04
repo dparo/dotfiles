@@ -1,0 +1,12 @@
+---
+- name: Hugo
+  tags:
+    - hugo
+    - blogging
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - hugo
+        state: present
+      become: true
