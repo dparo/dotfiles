@@ -292,7 +292,7 @@ force_display_urgency_hint 1000 ms
 gaps inner 16
 smart_gaps on
 
-exec bash -c 'sleep 5 && pactl load-module module-virtual-source source_name=virtual_recording'
+# exec bash -c 'sleep 5 && pactl load-module module-virtual-source source_name=virtual_recording'
 exec bash -c 'mkdir -p /tmp/$USER'
 
 # Include configs from 3 locations:
