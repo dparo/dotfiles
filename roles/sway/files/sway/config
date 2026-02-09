@@ -62,8 +62,9 @@ set $external HDMI-A-1
 # output $external resolution 1920x1080 position 1920,0
 
 # Left
-# output $laptop resolution 1920x1080 position 0,0
-# output $external resolution 1920x1080 position -1920,0
+# output $laptop resolution 1920x1080 position 1920,0
+# output $external resolution 1920x1080 position 0,0
+
 # Up
 output $laptop resolution 1920x1080 position 0,1080
 output $external resolution 1920x1080 position 0,0
