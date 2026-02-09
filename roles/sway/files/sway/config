@@ -57,6 +57,12 @@ output * bg /usr/share/backgrounds/gnome/fold-d.jxl fill
 set $laptop eDP-1
 set $external HDMI-A-1
 
+# NOTE(d.paro): __NOTE ON NEGATIVE COORDINATES FOR SCREEN POSITIONING__
+#
+#               SwayWM has known, persistent issues handling negative coordinates for monitor positioning,
+#               particularly with Xwayland applications. Using negative output positions (e.g., placing a monitor to the left or top of the primary)
+#               often causes, unclickable windows, broken mouse cursor positioning, or transparent window issues
+
 # Right
 # output $laptop resolution 1920x1080 position 0,0
 # output $external resolution 1920x1080 position 1920,0
