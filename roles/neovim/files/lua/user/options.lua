@@ -41,6 +41,7 @@ vim.o.signcolumn = "auto:3"
 
 vim.o.showmode = false
 vim.o.cursorline = true
+vim.o.cursorcolumn = true
 vim.o.scrolloff = 4
 vim.o.sidescroll = 1
 vim.o.sidescrolloff = 8
