@@ -2,6 +2,7 @@
 - name: Zed
   tags:
     - zed
+    - never
   block:
     - name: Install
       ansible.builtin.dnf:
