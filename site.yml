@@ -69,6 +69,7 @@
     - git
     - wget
     - keyring
+    - httpie
 
     # Development toolchains
     - python

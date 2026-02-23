@@ -1,0 +1,16 @@
+---
+- name: Httpie
+  tags:
+    - httpie
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - httpie
+      become: true
+
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files"
+        dest: "{{ ansible_user_dir }}/.config/httpie"
+        state: link

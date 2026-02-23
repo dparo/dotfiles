@@ -10,7 +10,6 @@
       - sqlite
       - wget
       - curl
-      - httpie
       - rclone
       - restic # Modern backup program with support for rclone (Cloud based backups)
       - rsync

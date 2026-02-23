@@ -1,0 +1,5 @@
+{
+    "default_options": [
+        "--format-options=headers.sort:false,json.sort_keys:false,json.indent:4"
+    ]
+}
