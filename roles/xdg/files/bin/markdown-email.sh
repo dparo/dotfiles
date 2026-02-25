@@ -425,6 +425,7 @@ EOF
 # Parse arguments
 CLIPBOARD=false
 TOC=false
+NUMBER_SECTIONS=false
 ASCIIDOC=false
 INPUT="-"
 
@@ -436,6 +437,10 @@ while [ $# -gt 0 ]; do
             ;;
         --toc)
             TOC=true
+            shift
+            ;;
+        --number-sections)
+            NUMBER_SECTIONS=true
             shift
             ;;
         --asciidoc)
@@ -515,7 +520,7 @@ else
         --embed-resources \
         --toc="${TOC}" \
         --toc-depth=3 \
-        --number-sections \
+        --number-sections=${NUMBER_SECTIONS:false} \
         --metadata toc-title="Indice" \
         --metadata title=" " \
         --metadata abstract-title="Sommario" \
