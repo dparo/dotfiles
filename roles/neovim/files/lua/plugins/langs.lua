@@ -1,6 +1,7 @@
 return {
     { "dag/vim-fish" },
     { "mboughaba/i3config.vim" },
+    { 'jidn/vim-dbml' },
     {
         "plasticboy/vim-markdown",
         config = function()
