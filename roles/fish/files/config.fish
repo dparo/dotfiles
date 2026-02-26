@@ -25,12 +25,35 @@ if status is-interactive
     bind \cH backward-kill-word
 
 
+    # if builtin type /usr/local/bin/aws 1>/dev/null 2>/dev/null; then
+    #     complete -C '/usr/local/bin/aws_completer' aws
+    # fi
+    #
+    # if builtin type /usr/bin/kubectl 1>/dev/null 2>/dev/null; then
+    #     source <(/usr/bin/kubectl completion fish)
+    # fi
+    #
+    #
+    # if builtin type /usr/bin/flutter 1>/dev/null 2>/dev/null; then
+    #     source <(/usr/bin/flutter fish-completion)
+    # fi
+    #
+    # if builtin type /usr/bin/terraform 1> /dev/null 2> /dev/null; then
+    #     complete -o nospace -C /usr/bin/terraform terraform
+    # fi
+    #
+    #
+    # if builtin type /usr/bin/atlas 1>/dev/null 2>/dev/null; then
+    #     source <(/usr/bin/atlas completion fish)
+    # fi
+
+
     # if builtin type docker 1>/dev/null 2>/dev/null
     #     docker completion fish | source
     # end
 
-    # if builtin type go-task 1>/dev/null 2>/dev/null
-    #     go-task --completion fish | source
+    # if builtin type /usr/bin/go-task 1>/dev/null 2>/dev/null
+    #     /usr/bin/go-task --completion fish | source
     # end
     #
 
