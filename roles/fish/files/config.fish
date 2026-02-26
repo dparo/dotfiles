@@ -32,4 +32,9 @@ if status is-interactive
     # if builtin type go-task 1>/dev/null 2>/dev/null
     #     go-task --completion fish | source
     # end
+    #
+
+    if builtin type /usr/bin/mise 1> /dev/null 2> /dev/null
+        /usr/bin/mise activate fish | source
+    end
 end
