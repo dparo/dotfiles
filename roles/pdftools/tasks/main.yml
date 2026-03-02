@@ -12,5 +12,6 @@
           - tesseract
           - tesseract-langpack-ita
           - ocrmypdf
+          - pdf2svg
         state: present
       become: true
