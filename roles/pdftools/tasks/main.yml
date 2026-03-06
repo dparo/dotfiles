@@ -13,5 +13,6 @@
           - tesseract-langpack-ita
           - ocrmypdf
           - pdf2svg
+          - weasyprint # Utility to render HTML and CSS to PDF
         state: present
       become: true

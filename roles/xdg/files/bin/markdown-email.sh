@@ -23,6 +23,13 @@ cat > "$TEMP_CSS" << 'EOF'
 @page {
     margin: 2cm;
     size: A4;
+
+    @bottom-center {
+        content: counter(page) "/" counter(pages);
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        font-size: 0.8em;
+        color: #666;
+    }
 }
 
 body {
