@@ -61,6 +61,7 @@
       - krb5-libs
       - krb5-devel
       - gssntlmssp # A GSSAPI Mechanism that implements NTLMSSP
+      - util-linux-script # Provides executable `script`: Utilities for creating and replaying typescripts of terminal session
     state: present
   become: true
   tags:
