@@ -62,6 +62,7 @@
       - krb5-devel
       - gssntlmssp # A GSSAPI Mechanism that implements NTLMSSP
       - util-linux-script # Provides executable `script`: Utilities for creating and replaying typescripts of terminal session
+      - colorized-logs # ansi2txt: drop ANSI control codes
     state: present
   become: true
   tags:
