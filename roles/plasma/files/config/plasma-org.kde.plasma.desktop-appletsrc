@@ -5,6 +5,17 @@ RightButton;NoModifier=org.kde.contextmenu
 [ActionPlugins][1]
 RightButton;NoModifier=org.kde.contextmenu
 
+[Containments][1]
+ItemGeometries-1920x1080=
+ItemGeometriesHorizontal=
+activityId=6cd40726-ab52-4b7a-9db1-9595458fd565
+formfactor=0
+immutability=1
+lastScreen=1
+location=0
+plugin=org.kde.plasma.folder
+wallpaperplugin=org.kde.image
+
 [Containments][27]
 ItemGeometries-1920x1080=
 ItemGeometriesHorizontal=

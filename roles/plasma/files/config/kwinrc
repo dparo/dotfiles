@@ -19,6 +19,10 @@ zoomEnabled=false
 [Tiling][012adb82-10c4-4daa-b33f-7d306919f550][b1481527-a16a-49f6-96d0-72ac7ae66c47]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][0846654f-7e23-4f30-9ce1-6d63db798228][b1481527-a16a-49f6-96d0-72ac7ae66c47]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][29e66169-c73b-43e2-b90c-e448f9bc2098][b1481527-a16a-49f6-96d0-72ac7ae66c47]
 padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
@@ -80,7 +84,6 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Wayland]
-InputMethod[$d]
 VirtualKeyboardEnabled=false
 
 [Xwayland]
