@@ -1,0 +1,22 @@
+---
+- name: KDE Plasma
+  tags:
+    - plasma
+    - kde
+  block:
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/{{item}}"
+        dest: "{{ ansible_user_dir }}/.config/{{item}}"
+        state: link
+      loop:
+        - kdeglobals
+        - kwinrc
+        - kwinrulesrc
+        - plasmarc
+        - plasma-org.kde.plasma.desktop-appletsrc
+        - kscreenlockerrc
+        - kcminputrc
+        - kxkbrc
+        - khotkeysrc
+        - kglobalshortcutsrc

@@ -1,0 +1,13 @@
+[General]
+count=1
+rules=aebe0e60-e7a7-49e0-ba3d-2b1a5898744c
+
+[aebe0e60-e7a7-49e0-ba3d-2b1a5898744c]
+Description=Window settings for org.mozilla.firefox
+shortcut=Meta+F
+shortcutrule=3
+title=
+types=1
+wmclass=firefox org.mozilla.firefox
+wmclasscomplete=true
+wmclassmatch=1
