@@ -1,0 +1,9 @@
+[Keyboard]
+RepeatDelay=300
+RepeatRate=30
+
+[Libinput][7805][11310][ROCCAT ROCCAT Lua]
+ScrollFactor=1
+
+[Mouse]
+cursorTheme=Adwaita
