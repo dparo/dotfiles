@@ -158,20 +158,28 @@ plugin=org.kde.plasma.mediacontroller
 extraItems=org.kde.plasma.vault,org.kde.plasma.battery,org.kde.plasma.brightness,org.kde.plasma.networkmanagement,org.kde.plasma.cameraindicator,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.manage-inputmethod,org.kde.plasma.mediacontroller,org.kde.plasma.notifications,org.kde.plasma.keyboardlayout,org.kde.plasma.printmanager,org.kde.plasma.volume,org.kde.kscreen,org.kde.plasma.keyboardindicator,org.kde.plasma.weather,org.kde.plasma.bluetooth
 knownItems=org.kde.plasma.vault,org.kde.plasma.battery,org.kde.plasma.brightness,org.kde.plasma.networkmanagement,org.kde.plasma.cameraindicator,org.kde.plasma.clipboard,org.kde.plasma.devicenotifier,org.kde.plasma.manage-inputmethod,org.kde.plasma.mediacontroller,org.kde.plasma.notifications,org.kde.plasma.keyboardlayout,org.kde.plasma.printmanager,org.kde.plasma.volume,org.kde.kscreen,org.kde.plasma.keyboardindicator,org.kde.plasma.weather,org.kde.plasma.bluetooth
 
-[Containments][72][Applets][92]
-immutability=1
-plugin=org.kde.plasma.digitalclock
-
-[Containments][72][Applets][92][Configuration]
-popupHeight=400
-popupWidth=560
-
 [Containments][72][Applets][93]
 immutability=1
 plugin=org.kde.plasma.showdesktop
 
+[Containments][72][Applets][98]
+immutability=1
+plugin=org.kde.plasma.digitalclock
+
+[Containments][72][Applets][98][Configuration]
+popupHeight=400
+popupWidth=560
+
+[Containments][72][Applets][98][Configuration][Appearance]
+dateFormat=isoDate
+use24hFormat=2
+
+[Containments][72][Applets][98][Configuration][ConfigDialog]
+DialogHeight=630
+DialogWidth=810
+
 [Containments][72][General]
-AppletOrder=73;74;75;76;77;92;93
+AppletOrder=73;74;75;76;77;98;93
 
 [ScreenMapping]
 itemsOnDisabledScreens=
