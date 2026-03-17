@@ -69,31 +69,31 @@
     - gtk
     - gtk-theme
 
-- name: Install default cursor
-  ansible.builtin.copy:
-    dest: /usr/share/icons/default/index.theme
-    content: |
-      [Icon Theme]
-      Name=default
-      Comment=Default Cursor Theme
-      Inherits=Adwaita
-    mode: "0644"
-    force: true
-  become: true
-  tags:
-    - gtk
-    - gtk-theme
-
-- name: Update x-cursor-theme alternatives
-  ansible.builtin.lineinfile:
-    path: /etc/alternatives/x-cursor-theme
-    line: Inherits=Adwaita
-    regexp: ^Inherits
-    create: true
-  become: true
-  tags:
-    - gtk
-    - gtk-theme
+# - name: Install default cursor
+#   ansible.builtin.copy:
+#     dest: /usr/share/icons/default/index.theme
+#     content: |
+#       [Icon Theme]
+#       Name=default
+#       Comment=Default Cursor Theme
+#       Inherits=Adwaita
+#     mode: "0644"
+#     force: true
+#   become: true
+#   tags:
+#     - gtk
+#     - gtk-theme
+#
+# - name: Update x-cursor-theme alternatives
+#   ansible.builtin.lineinfile:
+#     path: /etc/alternatives/x-cursor-theme
+#     line: Inherits=Adwaita
+#     regexp: ^Inherits
+#     create: true
+#   become: true
+#   tags:
+#     - gtk
+#     - gtk-theme
 
 - name: Gnome set default cursor
   ansible.builtin.command: gsettings set org.gnome.desktop.interface cursor-theme default
