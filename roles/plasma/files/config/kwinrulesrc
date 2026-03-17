@@ -1,13 +1,29 @@
-[General]
-count=1
-rules=aebe0e60-e7a7-49e0-ba3d-2b1a5898744c
-
-[aebe0e60-e7a7-49e0-ba3d-2b1a5898744c]
-Description=Window settings for org.mozilla.firefox
-shortcut=Meta+F
-shortcutrule=3
-title=
+[7d2b5947-0e96-41b8-ae94-53ddeda03af6]
+Description=Window settings for brave-cifhbcnohmdccbgoicgdjpfamggdegmo-Default
+shortcut=Meta+T
+shortcutrule=4
+title=Microsoft Teams (PWA) - (2) Calendar | Calendar | Microsoft Teams
 types=1
-wmclass=firefox org.mozilla.firefox
+wmclass=brave brave-cifhbcnohmdccbgoicgdjpfamggdegmo-Default
 wmclasscomplete=true
 wmclassmatch=1
+
+[81305e73-7941-4ccd-aaff-60acd78497b6]
+Description=Window settings for brave-browser
+shortcut=Meta+S
+shortcutrule=4
+title=Spotify – Search - Brave
+types=1
+wmclass=brave brave-browser
+wmclasscomplete=true
+wmclassmatch=1
+
+[98fb0e65-8ddc-4576-89b8-d913a92509be]
+shortcutrule=3
+
+[General]
+count=2
+rules=7d2b5947-0e96-41b8-ae94-53ddeda03af6,81305e73-7941-4ccd-aaff-60acd78497b6
+
+[bb1aac4b-6cc4-4179-922d-258d9419b5ab]
+shortcutrule=3

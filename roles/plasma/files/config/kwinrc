@@ -44,14 +44,38 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 [Tiling][7baa7708-cffd-4e29-a207-43bcd143779b][b1481527-a16a-49f6-96d0-72ac7ae66c47]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][94420e3c-0ca7-4902-aaad-f6ad6f84ef6c][92b32c6b-fa20-4fec-986f-292d4842bbad]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][94420e3c-0ca7-4902-aaad-f6ad6f84ef6c][b1481527-a16a-49f6-96d0-72ac7ae66c47]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][94420e3c-0ca7-4902-aaad-f6ad6f84ef6c][e615e791-323f-4e54-85e3-0ea56c0149cd]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][94420e3c-0ca7-4902-aaad-f6ad6f84ef6c][f3bbf0a9-ef8b-4ed1-8960-ae1aa3936238]
 padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][94b073b3-17c9-48f9-b059-891103ead10e][b1481527-a16a-49f6-96d0-72ac7ae66c47]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][b40da750-f5d6-4b04-9eb4-4fa593c6c9f6][92b32c6b-fa20-4fec-986f-292d4842bbad]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][b40da750-f5d6-4b04-9eb4-4fa593c6c9f6][b1481527-a16a-49f6-96d0-72ac7ae66c47]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][b40da750-f5d6-4b04-9eb4-4fa593c6c9f6][e615e791-323f-4e54-85e3-0ea56c0149cd]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][b40da750-f5d6-4b04-9eb4-4fa593c6c9f6][f3bbf0a9-ef8b-4ed1-8960-ae1aa3936238]
 padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
@@ -59,15 +83,39 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][be787f7b-3238-4862-8f53-cf1d1d892389][92b32c6b-fa20-4fec-986f-292d4842bbad]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][be787f7b-3238-4862-8f53-cf1d1d892389][b1481527-a16a-49f6-96d0-72ac7ae66c47]
 padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.15364583333333331},{"width":0.8463541666666667}]}
+
+[Tiling][be787f7b-3238-4862-8f53-cf1d1d892389][e615e791-323f-4e54-85e3-0ea56c0149cd]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][be787f7b-3238-4862-8f53-cf1d1d892389][f3bbf0a9-ef8b-4ed1-8960-ae1aa3936238]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][ccb53910-87f2-49d8-8021-f4d78c471fc0][b1481527-a16a-49f6-96d0-72ac7ae66c47]
 padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
+[Tiling][d93d0507-e6b5-4498-93d7-d3fe15bb1352][92b32c6b-fa20-4fec-986f-292d4842bbad]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][d93d0507-e6b5-4498-93d7-d3fe15bb1352][b1481527-a16a-49f6-96d0-72ac7ae66c47]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][d93d0507-e6b5-4498-93d7-d3fe15bb1352][e615e791-323f-4e54-85e3-0ea56c0149cd]
+padding=4
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][d93d0507-e6b5-4498-93d7-d3fe15bb1352][f3bbf0a9-ef8b-4ed1-8960-ae1aa3936238]
 padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
@@ -88,7 +136,3 @@ VirtualKeyboardEnabled=false
 
 [Xwayland]
 Scale=1
-
-[org.kde.kdecoration2]
-library=org.kde.breeze
-theme=Breeze

@@ -2,8 +2,14 @@
 RepeatDelay=300
 RepeatRate=30
 
+[Libinput][1133][50504][Logitech USB Receiver]
+NaturalScroll=false
+
+[Libinput][1739][52781][MSFT0001:01 06CB:CE2D Touchpad]
+NaturalScroll=true
+
 [Libinput][7805][11310][ROCCAT ROCCAT Lua]
 ScrollFactor=1
 
 [Mouse]
-cursorTheme=Adwaita
+cursorTheme=breeze_cursors

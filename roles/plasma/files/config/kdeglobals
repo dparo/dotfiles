@@ -138,7 +138,8 @@ ColorSchemeHash=2c3f86428c11011a7c64ee1e7f47c274d498ff10
 [KDE]
 AnimationDurationFactor=0
 LookAndFeelPackage=org.kde.breezedark.desktop
-widgetStyle=Breeze
+contrast=4
+frameContrast=0.2
 
 [KFileDialog Settings]
 Allow Expansion=false
