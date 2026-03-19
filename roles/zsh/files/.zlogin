@@ -43,11 +43,15 @@ if test "$AUTO_START_GRAPHICAL_SESSION" -eq 1 \
     && [ -z "$SSH_CLIENT" ] \
     && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -le 4 ]; then
 
+    # if test "$USE_WAYLAND" -eq 1 && test -x /usr/bin/startplasma-wayland; then
+    #     exec /usr/libexec/plasma-dbus-run-session-if-needed /usr/bin/startplasma-wayland
+    # fi
     if test "$USE_WAYLAND" -eq 1 && test -x /usr/bin/start-sway; then
         exec start-sway
-    elif test "$USE_WAYLAND" -eq 1 && uwsm check may-start && uwsm select; then
+    fi
+    if test "$USE_WAYLAND" -eq 1 && uwsm check may-start && uwsm select; then
         exec systemd-cat -t uwsm_start uwsm start hyprland.desktop
-    elif
+    fi
 
     # Refetch the DISPLAY env variable from systemd
     eval "export $(systemctl --user show-environment | grep -E '^DISPLAY=:[0-9]+$')" 1> /dev/null 2> /dev/null
