@@ -10,6 +10,7 @@
           - i3
           - i3status
           - i3lock
+          - i3blocks
         state: present
       become: true
 

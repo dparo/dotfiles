@@ -147,6 +147,10 @@ plugin=org.kde.plasma.battery
 immutability=1
 plugin=org.kde.plasma.bluetooth
 
+[Containments][101][Applets][106][Applets][126]
+immutability=1
+plugin=org.kde.plasma.mediacontroller
+
 [Containments][101][Applets][106][Applets][96]
 immutability=1
 plugin=org.kde.plasma.mediacontroller
