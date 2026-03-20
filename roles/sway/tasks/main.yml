@@ -7,6 +7,7 @@
       ansible.builtin.dnf:
         name:
           - i3status # For populating the status bar
+          - i3blocks # For populating the status bar
           - cliphist
           - sway
           - swayidle
