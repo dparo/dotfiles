@@ -307,4 +307,6 @@ if t ~= nil and t.name ~= "default" then
             end,
         },
     }
+else
+    return {}
 end
