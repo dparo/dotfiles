@@ -9,7 +9,7 @@
 if [ -n "$SWAYSOCK" ] || [ -n "$WAYLAND_DISPLAY" ]; then
     MSG="swaymsg"
     FILTER_MS='app_id="brave-cifhbcnohmdccbgoicgdjpfamggdegmo-Default"'
-    FILTER_TFL='instance="teams-for-linux|microsoft teams|crx_+cifhbcnohmdccbgoicgdjpfamggdegmo" class="teams-for-linux|Microsoft Teams|Google-chrome|Microsoft-edge|Brave-browser|Chromium-browser"'
+    FILTER_TFL='app_id="teams-for-linux"'
 else
     MSG="i3-msg"
     FILTER_MS='instance="crx_cifhbcnohmdccbgoicgdjpfamggdegmo" class="Google-chrome"'
