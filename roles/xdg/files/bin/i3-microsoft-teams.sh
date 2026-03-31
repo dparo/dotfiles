@@ -6,14 +6,19 @@
 # ---------------------------------------------------------------------------
 # 1. Pick the correct compositor message tool and set per-app filters
 # ---------------------------------------------------------------------------
+
+set -x
+FILTER_TFL2=''
+
 if [ -n "$SWAYSOCK" ] || [ -n "$WAYLAND_DISPLAY" ]; then
     MSG="swaymsg"
     FILTER_MS='app_id="brave-cifhbcnohmdccbgoicgdjpfamggdegmo-Default"'
-    FILTER_TFL='app_id="teams-for-linux"'
+    FILTER_TFL1='app_id="teams-for-linux"'
+    FILTER_TFL2='instance="teams-for-linux" class="teams-for-linux"'
 else
     MSG="i3-msg"
     FILTER_MS='instance="crx_cifhbcnohmdccbgoicgdjpfamggdegmo" class="Google-chrome"'
-    FILTER_TFL='instance="teams-for-linux|microsoft teams|crx_+cifhbcnohmdccbgoicgdjpfamggdegmo" class="teams-for-linux|Microsoft Teams|Google-chrome|Microsoft-edge|Brave-browser|Chromium-browser"'
+    FILTER_TFL1='instance="teams-for-linux|microsoft teams|crx_+cifhbcnohmdccbgoicgdjpfamggdegmo" class="teams-for-linux|Microsoft Teams|Google-chrome|Microsoft-edge|Brave-browser|Chromium-browser"'
 fi
 
 # ---------------------------------------------------------------------------
@@ -25,8 +30,12 @@ $MSG "[ $FILTER_MS ] focus"                                 2>/dev/null && exit 
 # ---------------------------------------------------------------------------
 # 3. Priority 2 – teams-for-linux (broad filter)
 # ---------------------------------------------------------------------------
-$MSG "[ $FILTER_TFL ] scratchpad show, move position center" 2>/dev/null && exit 0
-$MSG "[ $FILTER_TFL ] focus"                                 2>/dev/null && exit 0
+$MSG "[ $FILTER_TFL1 ] scratchpad show, move position center" 2>/dev/null && exit 0
+$MSG "[ $FILTER_TFL1 ] focus"                                 2>/dev/null && exit 0
+if [ -n "$FILTER_TFL2" ]; then
+    $MSG "[ $FILTER_TFL2 ] scratchpad show, move position center" 2>/dev/null && exit 0
+    $MSG "[ $FILTER_TFL2 ] focus"                                 2>/dev/null && exit 0
+fi
 
 # ---------------------------------------------------------------------------
 # 4. Fallback – launch a .desktop file
