@@ -117,6 +117,8 @@ vim.o.ttimeoutlen = 20
 -- Number of milliseconds before triggering a cursorhold autocommand
 vim.o.updatetime = 250
 
+vim.o.foldenable = false
+
 -- Winbar support nvim version 0.8 and above
 if vim.fn.has "nvim-0.8" == 1 then
     vim.o.winbar = "=%=%m %f"
