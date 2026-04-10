@@ -1,1064 +1,601 @@
-(defvar bootstrap-version)
-(let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" user-emacs-directory))
-      (bootstrap-version 5))
-  (unless (file-exists-p bootstrap-file)
-    (with-current-buffer
-        (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
-         'silent 'inhibit-cookies)
-      (goto-char (point-max))
-      (eval-print-last-sexp)))
-  (load bootstrap-file nil 'nomessage))
+;; -*- lexical-binding: t; -*-
 
-(straight-use-package 'use-package)
-(setq straight-use-package-by-default t)
-
-
-;; Do not load Xresources. This fixes the cursor color being different in emacs daemon vs a normal emacs client
-(setq inhibit-x-resources t)
-
-
-(setq custom-file (concat user-emacs-directory "custom.el"))
-(setq backup-directory-alist '(("." . "~/.emacs.d/backup")))
-(setq create-lockfiles nil)
-(setq make-backup-files nil)
-
-
-(setq auto-save-file-name-transforms `((".*" "~/.emacs.d/saves/" t)))
-(setq-default auto-save-file-name-transforms `((".*" "~/.emacs.d/saves/" t)))
-(setq auto-save-default nil)
-(setq-default auto-save-default nil)
-(setq auto-save-interval 0)
-(setq-default auto-save-interval 0)
-(setq auto-save-timeout 0)
-(setq-default auto-save-timeout 0)
-(setq-default create-lockfiles nil)
-(setq-default make-backup-files nil)
-
-
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-(use-package crux)
-(use-package diff-hl
-  :config
-  (global-diff-hl-mode +1))
-
-
-(use-package git-commit)
-
-;; Programming languages mode
-(use-package rust-mode)
-(use-package go-mode)
-(use-package cmake-mode)
-(use-package meson-mode)
-(use-package julia-mode)
-(use-package ess)     ;; For R-lang
-
-(use-package highlight-symbol
-  :config
-  (setq highlight-symbol-idle-delay 0.25)
-  :hook
-  (text-mode . highlight-symbol-mode)
-  )
-
-;; Folding support in emacs
-(use-package origami
-  :hook
-  (prog-mode . origami-mode)
-  )
-
-(use-package cargo
-  :after rust-mode
-  :hook
-  (rust-mode . cargo-minor-mode))
-
-
-(use-package edit-indirect)
-(use-package markdown-mode
-
-  ;; NOTE: Use mostly github flavoured markdown (gfm-mode) since it supports
-  ;; underscore in between letters without generating underscores:
-  ;; example: `my_little_variable` will not be underscored
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . gfm-mode)
-         ("\\.markdown\\'" . gfm-mode))
-
-  :init
-  (setq markdown-command '("pandoc" "--from=markdown" "--to=html5"))
-  (setq markdown-open-image-command "imv-x11")
-  :config
-  (setq markdown-enable-math t)
-  (setq-default markdown-enable-math t)
-  (setq markdown-header-scaling t)
-  (setq-default markdown-header-scaling t)
-  (setq markdown-enable-wiki-links t)
-  (setq-default markdown-enable-wiki-links t)
-  (setq markdown-fontify-code-blocks-natively t)
-  (setq-default markdown-fontify-code-blocks-natively t))
-
-
-(use-package fish-mode)
-
-(use-package lua-mode)
-(use-package yaml-mode)
-(use-package toml-mode)
-
-(use-package sudo-edit)
-
-(use-package ansi-color
-  :config
-  (require 'ansi-color)
-  (defun colorize-compilation-buffer ()
-    ;(toggle-read-only)
-    (ansi-color-apply-on-region compilation-filter-start (point-max))
-    ;(toggle-read-only)
-
-    )
-  (add-hook 'compilation-filter-hook 'colorize-compilation-buffer))
-
-(use-package beacon
-  :config
-  (setq beacon-push-mark 35)       ;; If the jump is bigger than N, than push the mark
-  :hook
-  (prog-mode . beacon-mode)
-  )
-
-(use-package js2-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.mjs\\'" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
-  (add-to-list 'interpreter-mode-alist '("node" . js2-mode))
-  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-jsx-mode))
-  )
-
-;; For javascript development: Node.js OR Chrome debugger attachnent, console and REPL
-(use-package indium)
-;; js-comint: send to node.js REPL
-(use-package js-comint)
-
-(use-package json-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.json\\'" . json-mode))
-  )
-
-
-(use-package typescript-mode
-  :config
-  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-mode))
-  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
-  )
-
-
-(use-package find-file
-  :config
-  (setq ff-always-in-other-window t)
-  (setq ff-always-try-to-create t)
-  (setq cc-search-directories '("." "../src" "../source" "../include" "/usr/include" "/usr/local/include/*"))
-  :bind
-  ("<C-tab>" . ff-find-other-file)
-  )
-
-
-(use-package modus-vivendi-theme :ensure t :defer t)
-(use-package vscode-dark-plus-theme :ensure t :defer t)
-(use-package ample-theme :ensure t :defer t)
-(use-package nimbus-theme :ensure t :defer t)
-(use-package gruvbox-theme :ensure t :defer t)
-
-;; Generic packages usefull in every scenario
-(use-package monokai-theme
-  :ensure t
-  :defer t
-  :config
-  (set-cursor-color "#00ff7f")
-  (setq default-frame-alist '((cursor-color . "#00ff7f")))
-  )
-
-
-(use-package ag
-  :config
-  (setq ag-arguments '("--smart-case" "--stats" "--follow"))
-  )
-(use-package rg)
-(use-package ace-window
-  :bind
-  ("M-o" . ace-window)
-  )
-
-(use-package ivy
-  :config
-  (ivy-mode 1)
-  )
-
-
-(use-package swiper)
-(use-package counsel)
-
-;; (use-package multiple-cursors
-;;   :after (company lsp lsp-ui)
-;;   :config
-;;   (require 'multiple-cursors)
-
-;;   :bind
-;;   ("C-d".  mc/mark-next-like-this-symbol)
-;;   ("M-d" . mc/unmark-next-like-this)
-;;   ("C-x SPC" . set-rectangular-region-anchor)
-;;   :bind (:map mc/keymap
-;;           ("<return>" . nil)
-;;           ("ESC ESC" . mc/keyboard-quit)
-;;           )
-;;   )
-
-
-;; (use-package helm
-;;   :init
-;;   (helm-mode +1)
-;;   :bind
-;;   ("M-x" . helm-M-x)
-;;   ("C-x C-f" . helm-find-files)
-;;   :bind (:map helm-map
-
-;;            ("TAB" . #'helm-execute-persistent-action))
-;;   )
-
-;; (use-package popwin
-;;   :config
-;;   ;; (setq display-buffer-function 'popwin:display-buffer)
-;;   ;; (push '("^\*helm .+\*$" :regexp t) popwin:special-display-config)
-;;   ;; (push '("^\*helm-.+\*$" :regexp t) popwin:special-display-config)
-;; )
-
-
-(use-package undo-fu
-  :bind
-  ("C-S--" . undo-fu-only-undo)
-  ("M-_" . undo-fu-only-redo))
-
-(use-package rainbow-delimiters
-  :hook (prog-mode . rainbow-delimiters-mode)
-  )
-
-
-;; COG stuff.
-(defun dparo/cog ()
+(defun start/org-babel-tangle-config ()
+  "Automatically tangle our init.org config file and refresh package-quickstart when we save it. Credit to Emacs From Scratch for this one!"
   (interactive)
-  (save-buffer)
-  (call-process "python3" nil (get-buffer-create "cog-msgs") nil "-m" "cogapp" "-r" (buffer-file-name))
-  (revert-buffer nil t))
+  (when (string-equal (file-name-directory (buffer-file-name))
+                      (expand-file-name user-emacs-directory))
+    ;; Dynamic scoping to the rescue
+    (let ((org-confirm-babel-evaluate nil))
+      (org-babel-tangle)
+      (package-quickstart-refresh)
+      )))
 
+(add-hook 'org-mode-hook (lambda () (add-hook 'after-save-hook #'start/org-babel-tangle-config)))
 
-(defun dparo/modeline-reset ()
-  "Resets and redraw the modeline"
+(defun start/display-startup-time ()
   (interactive)
+  (message "Emacs loaded in %s with %d garbage collections."
+           (format "%.2f seconds"
+                   (float-time
+                    (time-subtract after-init-time before-init-time)))
+           gcs-done))
 
+(add-hook 'emacs-startup-hook #'start/display-startup-time)
 
-  (let* ((height (face-attribute 'default :height))
-         (modeline-font-ratio 0.8)
-         (modeline-height (truncate (* height modeline-font-ratio))))
+(require 'use-package-ensure) ;; Load use-package-always-ensure
+(setq use-package-always-ensure t) ;; Always ensures that a package is installed
 
-    (set-face-attribute 'mode-line nil :family (face-attribute 'default :family) :height modeline-height)
-    (set-face-attribute 'mode-line-inactive nil :family (face-attribute 'default :family) :height modeline-height)
-    (setq doom-modeline-height 1)
-    (doom-modeline-refresh-font-width-cache)
-    (doom-modeline-refresh-bars)
-    (doom-modeline-redisplay)
-    )
+(setq package-archives '(("melpa" . "https://melpa.org/packages/") ;; Sets default package repositories
+                         ("elpa" . "https://elpa.gnu.org/packages/")
+                         ("nongnu" . "https://elpa.nongnu.org/nongnu/"))) ;; For Eat Terminal
+
+(setq package-quickstart t) ;; For blazingly fast startup times, this line makes startup miles faster
+
+(use-package async
+  :defer
+  :custom
+  (dired-async-mode t)
+  (async-bytecomp-package-mode t)
+  (async-bytecomp-allowed-packages '(all))
+  (async-package-do-action t))
+
+(use-package emacs
+  :custom
+  ;; Still needed for terminals
+  (menu-bar-mode nil)         ;; Disable the menu bar
+  (scroll-bar-mode nil)       ;; Disable the scroll bar
+  (tool-bar-mode nil)         ;; Disable the tool bar
+
+  ;;(inhibit-startup-screen t)  ;; Disable welcome screen
+
+  (delete-selection-mode t)   ;; Select text and delete it by typing.
+  (electric-indent-mode nil)  ;; Turn off the weird indenting that Emacs does by default.
+  (electric-pair-mode t)      ;; Turns on automatic parens pairing
+
+  (blink-cursor-mode nil)     ;; Don't blink cursor
+  (global-auto-revert-mode t) ;; Automatically reload file and show changes if the file has changed
+  ;; (use-short-answers t)   ;; Since Emacs 29, `yes-or-no-p' will use `y-or-n-p'
+
+  ;;(dired-kill-when-opening-new-dired-buffer t) ;; Dired don't create new buffer
+  ;;(recentf-mode t) ;; Enable recent file mode
+  ;;(context-menu-mode t) ;; Right-click menu
+
+  ;;(global-visual-line-mode t)           ;; Enable line wrapping (NOTE: breaks vundo)
+  (global-display-line-numbers-mode t)  ;; Display line numbers
+  ;;(display-line-numbers-type 'relative) ;; Relative line numbers
+  (global-hl-line-mode t)               ;; Highlight current line
+
+  (native-comp-async-report-warnings-errors 'silent) ;; Don't show native comp errors
+  (warning-minimum-level :error) ;; Only show errors in warnings buffer
+
+  (mouse-wheel-progressive-speed nil) ;; Disable progressive speed when scrolling
+  (scroll-conservatively 10) ;; Smooth scrolling
+  (scroll-margin 8)
+
+  ;; (pixel-scroll-precision-mode t) ;; Precise pixel scrolling. i.e. smooth scrolling (GUI only)
+  ;; (pixel-scroll-precision-use-momentum nil)
+
+  (indent-tabs-mode nil) ;; Only use spaces for indentation
+  (tab-width 4)
+  (sgml-basic-offset 4) ;; Set Html mode indentation to 4
+  (c-ts-mode-indent-offset 4) ;; Fix weird indentation in c-ts (C, C++)
+  (go-ts-mode-indent-offset 4) ;; Fix weird indentation in go-ts
+
+  ;; (display-fill-column-indicator-column 80) ;; Set line length indicator to 80 characters
+  (whitespace-style '(face tabs tab-mark trailing))
+
+  (make-backup-files nil) ;; Stop creating ~ backup files
+  (auto-save-default nil) ;; Stop creating # auto save files
+  (delete-by-moving-to-trash t)
+  :hook
+  (prog-mode . hs-minor-mode) ;; Enable folding hide/show globally
+  ;; (prog-mode . display-fill-column-indicator-mode) ;; Display line length indicator
+  (prog-mode . whitespace-mode)
+  :config
+  ;; Move customization variables to a separate file and load it, avoid filling up init.el with unnecessary variables
+  (setq custom-file (locate-user-emacs-file "custom-vars.el"))
+  (load custom-file 'noerror 'nomessage)
+  :bind (
+         ([escape] . keyboard-escape-quit) ;; Makes Escape quit prompts (Minibuffer Escape)
+         ;; Zooming In/Out
+         ("C-+" . text-scale-increase)
+         ("C--" . text-scale-decrease)
+         ("<C-wheel-up>" . text-scale-increase)
+         ("<C-wheel-down>" . text-scale-decrease)
+         ))
+
+(defun start/open-init-file ()
+  "Open init.org configuration file"
+  (interactive)
+  (find-file "~/.config/emacs/init.org"))
+
+(defun start/reload-config()
+  "Reload Emacs config"
+  (interactive)
+  (load-file "~/.config/emacs/init.el"))
+
+(use-package general
+  ;; :after (evil) ;; <- evil
+  :config
+  ;; (general-evil-setup) ;; <- evil
+  ;; Set up 'C-SPC' as the leader key
+  (general-create-definer start/leader-keys
+    ;; :states '(normal insert visual motion emacs) ;; <- evil
+    :keymaps 'override
+    :prefix "C-SPC"
+    :global-prefix "C-SPC") ;; Set global leader key so we can access our keybindings from any state
+
+  (start/leader-keys
+    "." '(find-file :wk "Find file")
+    "," '(embark-act :wk "Embark act")
+    "TAB" '(comment-line :wk "Comment lines")
+    "q" '(flymake-show-buffer-diagnostics :wk "Flymake buffer diagnostic")
+    "c" '(eat :wk "Eat terminal")
+
+    ;; Projectile
+    "p" '(projectile-command-map :wk "Projectile")
+    "s p" '(projectile-discover-projects-in-search-path :wk "Search for projects"))
+
+  (start/leader-keys
+    "m" '(:ignore t :wk "Bookmarks & Registers")
+    ;; Registers
+    "m s" '(consult-register :wk "Consult register")
+    "m k" '(jump-to-register :wk "Jump to register")
+    "m e" '(point-to-register :wk "Point to register")
+    ;; Bookmarks
+    "m a" '(bookmark-set :wk "Bookmark Set")
+    "m d" '(bookmark-jump :wk "Bookmark Jump")
+    "m r" '(bookmark-delete :wk "Bookmark Delete")
+    "m R" '(bookmark-delete-all :wk "Bookmark Delete All")
+    "m l" '(bookmark-bmenu-list :wk "Bookmark bmenu list")
+    "m c" '(consult-bookmark :wk "Consult Bookmark"))
+
+  (start/leader-keys
+    "s" '(:ignore t :wk "Search")
+    "s c" '(start/open-init-file :wk "Open init file")
+    "s r" '(consult-recent-file :wk "Search recent files")
+    "s f" '(consult-fd :wk "Search files with fd")
+    "s g" '(consult-ripgrep :wk "Search with ripgrep")
+    "s l" '(consult-line :wk "Search line")
+    "s i" '(consult-imenu :wk "Search Imenu buffer locations")) ;; This one is really cool
+
+  (start/leader-keys
+    "d" '(:ignore t :wk "Buffers & Dired")
+    "d s" '(consult-buffer :wk "Switch buffer")
+    "d k" '(kill-current-buffer :wk "Kill current buffer")
+    "d i" '(ibuffer :wk "Ibuffer")
+    "d n" '(next-buffer :wk "Next buffer")
+    "d p" '(previous-buffer :wk "Previous buffer")
+    "d r" '(revert-buffer :wk "Reload buffer")
+    "d v" '(dired :wk "Open dired")
+    "d j" '(dired-jump :wk "Dired jump to current"))
+
+  (start/leader-keys
+    "e" '(:ignore t :wk "Languages")
+    "e e" '(eglot-reconnect :wk "Eglot Reconnect")
+    "e d" '(eldoc-doc-buffer :wk "Eldoc Buffer")
+    "e f" '(eglot-format :wk "Eglot Format")
+
+    "e l" '(consult-flymake :wk "Consult Flymake")
+    "e n" '(flymake-goto-next-error :wk "Flymake next error")
+    "e p" '(flymake-goto-prev-error :wk "Flymake previous error")
+
+    "e a" '(eglot-code-actions :wk "Eglot code actions")
+    "e r" '(eglot-rename :wk "Eglot Rename")
+    "e i" '(xref-find-definitions :wk "Find definition")
+    "e s" '(xref-find-references :wk "Find references")
+
+    "e v" '(:ignore t :wk "Elisp")
+    "e v b" '(eval-buffer :wk "Evaluate elisp in buffer")
+    "e v r" '(eval-region :wk "Evaluate elisp in region"))
+
+  (start/leader-keys
+    "g" '(:ignore t :wk "Git")
+    "g s" '(magit-status :wk "Magit status"))
+
+  (start/leader-keys
+    "r" '(:ignore t :wk "Reload & Packages") ;; To get more help use C-h commands (describe variable, function, etc.)
+    ;; Mason.el
+    "r m" '(mason-manager :wk "Mason manager")
+    "r i" '(mason-install :wk "Mason install")
+    ;; Package-menu-mode
+    "r p" '(list-packages :wk "List packages")
+    "r c" '(package-menu-clear-filter :wk "Package clear filters")
+    "r n" '(package-menu-filter-by-name :wk "Package filter by name")
+    "r N" '(package-menu-filter-by-name-or-description :wk "Package filter by name or descriptions")
+    "r s" '(package-menu-filter-by-status :wk "Package filter by status")
+    "r u" '(package-menu-filter-upgradable :wk "Package filter by upgradable")
+
+    "r q" '(save-buffers-kill-emacs :wk "Quit Emacs and Daemon")
+    "r r" '(start/reload-config :wk "Reload Emacs config"))
+
+  (start/leader-keys
+    "t" '(:ignore t :wk "Toggle")
+    "t t" '(visual-line-mode :wk "Toggle truncated lines (wrap)")
+    "t l" '(display-line-numbers-mode :wk "Toggle line numbers"))
   )
+
+;; Fix general.el leader key not working instantly in messages buffer with evil mode
+;;(use-package emacs
+;;  :after (evil general)
+;;  :ghook ('after-init-hook
+;;          (lambda (&rest _)
+;;            (when-let ((messages-buffer (get-buffer "*Messages*")))
+;;              (with-current-buffer messages-buffer
+;;                (evil-normalize-keymaps))))
+;;          nil nil t))
+
+(use-package gruvbox-theme
+  :config
+  (setq gruvbox-bold-constructs t)
+  (load-theme 'gruvbox-dark-medium t)) ;; We need to add t to trust this package
+
+(add-to-list 'default-frame-alist '(alpha-background . 90)) ;; For all new frames henceforth
+
+;; Transparency in terminal
+(defun start/tui-enable-transparency ()
+  (unless (display-graphic-p (selected-frame))
+    (set-face-background 'default "unspecified-bg" (selected-frame))))
+
+(add-hook 'window-setup-hook 'start/tui-enable-transparency)
 
 (use-package doom-modeline
-  :init (doom-modeline-mode 1)
-  :config
-  (doom-modeline-mode 1)
-  (dparo/modeline-reset)
-  )
-
-
-(use-package winum
-  :config
-  (winum-mode +1)
-  )
-
-(defun dparo/append-projectile-dir (dir)
-  "Add dir to the search path of projectile to discover available projects."
-  (if (file-directory-p dir) (push dir projectile-project-search-path))
-  )
-
-;; Useful packages for development
-(use-package projectile
-  :requires ivy
   :custom
-  (projectile-completion-system 'ivy)
-  :config
+  (doom-modeline-height 25) ;; Set modeline height
+  :hook (after-init . doom-modeline-mode))
 
-  (dparo/append-projectile-dir "~/git-clone")
-  (dparo/append-projectile-dir "~/Dropbox/develop")
-  (dparo/append-projectile-dir "~/Dropbox/UniversityProjects")
-  (dparo/append-projectile-dir "~/develop")
-  (projectile-discover-projects-in-search-path)
+(use-package nerd-icons :defer)
+
+(use-package nerd-icons-dired
+  :hook (dired-mode . nerd-icons-dired-mode))
+
+(use-package nerd-icons-ibuffer
+  :hook (ibuffer-mode . nerd-icons-ibuffer-mode))
+
+(use-package projectile
+  :hook (after-init . projectile-mode)
+  :config
+  (projectile-mode)
+  :custom
+  ;; (projectile-auto-discover nil) ;; Disable auto search for better startup times ;; Search with a keybind
+  (projectile-run-use-comint-mode t) ;; Interactive run dialog when running projects inside emacs (like giving input)
+  (projectile-switch-project-action #'projectile-dired) ;; Open dired when switching to a project
+  (projectile-project-search-path '("~/projects/" "~/work/" ("~/github" . 1)))) ;; . 1 means only search the first subdirectory level for projects
+
+(use-package eglot
+  :ensure nil ;; Don't install eglot because it's now built-in
+  :hook ((c-mode c++-mode ;; Autostart lsp servers for a given mode
+                 lua-mode) ;; Lua-mode needs to be installed
+         . eglot-ensure)
+  :custom
+  ;; Good default
+  (eglot-events-buffer-size 0) ;; No event buffers (LSP server logs)
+  (eglot-autoshutdown t);; Shutdown unused servers.
+  (eglot-report-progress nil) ;; Disable LSP server logs (Don't show lsp messages at the bottom, java)
+  ;; Manual lsp servers
+  ;;:config
+  ;;(add-to-list 'eglot-server-programs
+  ;;             `(lua-mode . ("PATH_TO_THE_LSP_FOLDER/bin/lua-language-server" "-lsp"))) ;; Adds our lua lsp server to eglot's server list
   )
 
-(use-package smex)
+(use-package mason
+  :hook (after-init . mason-ensure))
 
-
-(use-package counsel-projectile
-  :requires projectile smex
-  :bind
-  )
-
-(use-package company
-  :hook
-  (prog-mode . company-mode)
-  (latex-mode . company-mode)
-  (LaTeX-mode . company-mode)
-  (tex-mode . company-mode)
-  (TeX-mode . company-mode)
-  (company-mode . company-tng-mode)
-
-
-  :bind (:map company-active-map
-          ("RET" . nil)
-          ("C-j" . company-complete-selection)
-          ("<up>" . nil)
-          ("<down>" . nil)
-          )
-  :config
-  (setq company-idle-delay 0.25)
-  (setq company-dabbrev-code-time-limit 0.25)
-  (setq company-dabbrev-time-limit 0.25)
-
-  (setq company-dabbrev-downcase 0)
-  (setq company-dabbrev-ignore-case 1)
-  (setq company-require-match nil)
-  (setq company-minimum-prefix-length 1)
-  (setq company-clang-insert-arguments t)
-
-  (add-to-list 'company-backends 'company-files)
-  )
-
-(use-package prescient
-  :config
-  (prescient-persist-mode +1))
-
-(use-package ivy-prescient
-  :after ivy
-  :config
-  (ivy-prescient-mode 1))
-
-(use-package company-prescient
-  :after company
-  :config
-  (company-prescient-mode 1))
-
-
-;; For editing jupyter notebooks
-(use-package ein)
-
-
-(defun dired-open-rifle ()
-  "Try to run `xdg-open' to open the file under point."
-  (interactive)
-  (if (executable-find "rifle")
-      (let ((file (ignore-errors (dired-get-file-for-visit))))
-        (start-process "rifle-open" nil
-                       "rifle" (file-truename file)))
-    nil))
-
-(use-package dired-open
-  :config
-
-
-  ;; When pressing from dired, it will always run the rifle way of visiting files.
-  ;; (add-to-list 'dired-open-functions #'dired-open-rifle)
-  (setq dired-open-extensions '(("png" . "rifle")
-                                ("jpg" . "rifle")
-                                ("jpeg" . "rifle")
-                                ("bmp" . "rifle")
-                                ("mkv" . "rifle")
-                                ("mp4" . "rifle"))))
-
-
-(use-package all-the-icons)
-
-;;;; Disabled cause it is kinda weird, and makes the buffer less readable with tab-mode displayed
-;; (use-package all-the-icons-dired
-;;   :hook
-;;   (dired-mode . all-the-icons-dired-mode))
-
-;; (use-package dashboard
-;;   :after (all-the-icons org projectile)
-;;   :if (< (length command-line-args) 2)
-;;   :config
-;;   (dashboard-setup-startup-hook)
-;;   (setq initial-buffer-choice (lambda () (get-buffer "*dashboard*")))
-;;   (setq dashboard-startup-banner (concat user-emacs-directory "logos/math1.png"))
-;;   (setq dashboard-center-content t)
-;;   (add-to-list 'dashboard-items '(agenda) t)
-;;   (setq show-week-agenda-p t)
-;;   )
-
-;; (use-package company-box
-;;   :after all-the-icons
-;;   :hook
-;;   (company-mode . company-box-mode))
-
-(use-package which-key
-  :config
-  (which-key-mode 1)
-  (setq which-key-idle-delay 0.5)
-  )
-
-
-(use-package expand-region
-  :config
-  (require 'expand-region))
+(use-package sideline-flymake
+  :hook (flymake-mode . sideline-mode)
+  :custom
+  (sideline-flymake-display-mode 'line) ;; Show errors on the current line
+  (sideline-backends-right '(sideline-flymake)))
 
 (use-package yasnippet
-  :after company
-  :config
-  (yas-global-mode +1)
-  (define-key yas-minor-mode-map (kbd "<tab>") nil)
-  (define-key yas-minor-mode-map (kbd "TAB") nil)
-  (define-key yas-minor-mode-map (kbd "C-j") yas-maybe-expand)
-  (define-key yas-minor-mode-map (kbd "C-c y") #'yas-expand)
-  )
+  :hook (prog-mode . yas-minor-mode))
 
+(use-package yasnippet-snippets :defer)
 
-;; Use PCRE regexp please. Thank you
-(use-package pcre2el
-  :config
-  (rxt-global-mode 1)
-  )
-
-
-(use-package yasnippet-snippets
-  :after
-  yasnippet)
-
-
-(if (functionp 'module-load)
-    (progn
-      ;; Use TreeSitter (A Rust library) to provide syntax hightlight instead
-      ;; of the shitty EMACS font-lock-mode which is based on regexp. Unfortenately
-      ;; This requires emacs to be built with modules support (--with-modules)
-      (use-package tree-sitter
-        :config
-        (global-tree-sitter-mode)
-        (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
-        )
-      (use-package tree-sitter-langs)
-      )
-  )
-
-;; (defun dparo/sp-insert-only-if (_id action _context)
-;;   (or
-;;    (sp-in-string-p _id action _context)
-;;    (sp-in-comment-p _id action _context)
-
-;;    (sp-point-before-word-p _id action _context)
-;;    (sp-point-before-same-p "(" action _context)
-;;    (sp-point-before-same-p "[" action _context)
-;;    (sp-point-before-same-p "{" action _context)
-;;    (sp-point-before-same-p "'" action _context)
-;;    (sp-point-before-same-p "\"" action _context)))
-
-;; (use-package smartparens
-;;   :hook
-;;   (prog-mode . smartparens-mode)
-;;   :config
-;;   (require 'smartparens-config)
-
-;;   (setq sp-highlight-pair-overlay nil)
-
-;;   ;; https://smartparens.readthedocs.io/en/latest/permissions.html#filters
-;;   (sp-pair "(" nil :unless '(dparo/sp-insert-only-if))
-;;   (sp-pair "[" nil :unless '(dparo/sp-insert-only-if))
-;;   (sp-pair "{" nil :unless '(dparo/sp-insert-only-if))
-;;   (sp-pair "\"" nil :unless '(dparo/sp-insert-only-if))
-;;   (sp-pair "'" nil :unless '(dparo/sp-insert-only-if))
-;;   (sp-pair "\\'" nil :unless '(dparo/sp-insert-only-if))
-;;   )
-
-;; (use-package autopair
-;;   :config
-;;   (setq autopair-blink nil)
-;;   (setq autopair-skip-whitespace t) ;; when set to non-nil, tells autopair to skip over whitespace when attempting to skip over a closing brace. If you set this to 'chomp, the whitespace is not only jumped over but also deleted
-;;   :hook
-;;   (prog-mode . autopair-mode)
-;;   )
-
-
-(use-package clang-format+
-  :config
-  (setq clang-format+-always-enable nil)         ;; If t, always reformat even if .clang_format is not present
-  (setq clang-format+-context 'definition)
-  ;;:hook
-  ;;(c-mode . 'clang-format+-mode)
-  ;;(c++-mode . 'clang-format+-mode)
-  )
-
-(use-package flycheck
-  :config
-  (setq flycheck-idle-change-delay 0.5)
-  :hook
-  (prog-mode . flycheck-mode)
-  )
-
-(use-package treemacs
+(defun start/corfu-yas-tab-handler ()
+  "Prioritize corfu over yasnippet when yasnippet is active"
+  (interactive)
+  ;; There is no direct way to get if corfu is currently displayed so we watch the completion index
+  (if (> corfu--index -1)
+      (corfu-complete)
+    (yas-next-field-or-maybe-expand)
+    ))
+(use-package emacs
+  :after (yasnippet corfu)
   :bind
-  ("C-S-t" . treemacs)
-  )
-(use-package magit)
-(use-package forge
-  :after magit)
+  (:map yas-keymap
+        ("TAB" . start/corfu-yas-tab-handler)))
 
-
-(use-package lsp-treemacs
-  :after lsp-mode
-  :config
-  (lsp-treemacs-sync-mode 0))
-
-
-(use-package dap-mode
-  :config
-  (setq lsp-enable-dap-auto-configure t)
-  (setq dap-auto-configure-features '(ui expressions locals controls tooltip breakpoints))
-
-  (require 'dap-python)
-  (require 'dap-cpptools)
-  (require 'dap-firefox)
-  (require 'dap-node)
-
-  (progn
-    (dap-cpptools-setup)
-    (dap-firefox-setup)
-    (dap-node-setup)
-    )
-  )
-
-
-;; Eclipse like CTRL+T functionality to jump to definitions of types by search
-(use-package lsp-ivy
-  :after lsp-mode)
-
-(use-package ccls
-  :after lsp-mode
-  :config
-  (require 'ccls)
-  )
-
-
-(use-package lsp-mode
-  :config
-
-  (setq lsp-breadcrumb-enable nil)
-  (setq-default lsp-breadcrumb-enable nil)
-  (lsp-headerline-breadcrumb-mode 0)
-
-  ;; Other linters which are not supported from this LSP package are:
-  ;;      these packages are usually supported by CMD line usage, or throught flycheck/flymake
-  ;;      but do not support the LANGUAGE SERVER PROTOCOL
-  ;; - pychecker: (another older tool - not support by LSP). --- http://pychecker.sourceforge.net/
-  ;; - mypy: Written in Python. Static type checker which supports decorators on function return values and arguments to "describe" the expected type
-  ;;         Microsoft pyright is an equivalent choice supporting the LSP protocol
-  ;;         --- https://github.com/python/mypy
-  (setq lsp-enable-snippet t)
-
-  ;; Another linter. Compared to flake8 is slower and provides more __FALSE POSITIVES__.
-  ;; But sometimes it can report more errors compared to flake8. So we might use them
-  ;; both at the same time.
-  (setq lsp-pyls-plugins-pylint-enabled t)
-  ;; Combines pyflakes and pycodestyle to provide both common error in source code
-  ;; and style violations
-  (setq lsp-pyls-plugins-flake8-enabled t)
-  ;; Pyflakes isa plugin for flake 8. The docs says it is faster than pylint and pychecker
-  ;; This alone does not check for any style issue
-  ;; Disabling it makes flake8 pretty useless.
-  (setq lsp-pyls-plugins-pyflakes-enabled t)
-
-  ;; Yapf is a python formatter made by google
-  (setq lsp-pyls-plugins-yapf-enabled t)
-
-  ;; pycodestyle is a checker that checks if the source code is formatted according to PEP8.
-  ;; autopep8 is a formatter using pycodestyle that guarantess that after the formatting
-  ;; pycodestyle will not report any more error
-  (setq lsp-pyls-plugins-autopep8-enabled nil)
-  ;; Used by flake8. Disable it if you don't want to use it from flake8.
-  (setq lsp-pyls-plugins-pycodestyle-enabled t)
-
-  ;; Plugin for flake8. It implements McCabe complexity. That is it can emit
-  ;; warnings when code becomes too complex. It thus can provide
-  ;; a good measure when a function is too complex and it must be refactored
-  (setq lsp-pyls-plugins-mccabe-enabled nil)
-
-
-  (setq lsp-pyls-configuration-sources ["pycodestyle" "flake8" "pylintrc"])
-
-  (setq lsp-idle-delay 0.5)
-  (setq lsp-restart 'ignore)
-  (setq lsp-clients-clangd-args '("--clang-tidy" "--background-index"))
-  (add-to-list 'lsp-disabled-clients 'bash-ls)
-
-
-  (add-to-list 'lsp-file-watch-ignored  "[/\\\\]build\\'")
-  (add-to-list 'lsp-file-watch-ignored  "[/\\\\]build-release\\'")
-  (add-to-list 'lsp-file-watch-ignored  "[/\\\\]build-debug\\'")
-  (add-to-list 'lsp-file-watch-ignored  "[/\\\\]dist\\'")
-
-
+(use-package org
+  :ensure nil
+  :custom
+  (org-edit-src-content-indentation 4) ;; Set src block automatic indent to 4 instead of 2.
+  (org-return-follows-link t)   ;; Sets RETURN key in org-mode to follow links
   :hook
-  (prog-mode . lsp)
-  (latex-mode . lsp)
-  (LaTeX-mode . lsp)
-  (tex-mode . lsp)
-  (TeX-mode . lsp)
-
-  ;; breadcumb mode generates an IDE-like status line at the top showing in which file -> class -> method that we are in
-  ;;(lsp-mode . lsp-headerline-breadcrumb-mode)
-  (lsp-mode . lsp-lens-mode)
-  (lsp-mode . lsp-enable-which-key-integration)
-  (lsp-mode . (lambda ()
-        (remove-hook 'before-save-hook #'lsp-format-buffer t)
-        (remove-hook 'before-save-hook #'lsp-organize-imports t)))
+  (org-mode . org-indent-mode) ;; Indent text
   )
 
-(use-package auctex
-  :defer t
+(use-package toc-org
+  :commands toc-org-enable
+  :hook (org-mode . toc-org-mode))
+
+(use-package org-superstar
+  :after org
+  :hook (org-mode . org-superstar-mode))
+
+(use-package eat
+  :defer
+  :hook ('eshell-load-hook #'eat-eshell-mode))
+
+(use-package exec-path-from-shell
+  :hook (after-init . exec-path-from-shell-initialize))
+
+;; (add-to-list 'load-path (expand-file-name "lisp" user-emacs-directory))
+
+;; (require 'start-multiFileExample)
+
+;; (start/hello)
+
+(use-package transient
+  :defer
   :config
-  (setq TeX-auto-save t)
-  (setq TeX-parse-self t)
-  (setq TeX-PDF-mode t)
-  (setq-default TeX-master nil)
+  (define-key transient-map (kbd "<escape>") 'transient-quit-one)) ;; Make escape quit magit prompts
 
-  (setq TeX-command-default "LatexMk")
-
-  (setq TeX-view-program-selection
-    '((output-dvi "DVI Viewer")
-      (output-pdf "PDF Viewer")
-      (output-html "HTML Viewer")))
-  (setq TeX-view-program-list
-    '(("DVI Viewer" "evince %o")
-      ("PDF Viewer" "zathura %o")
-      ("HTML Viewer" "firefox %o")))
-  )
-
-(use-package auctex-latexmk
-  :after auctex)
-
-
-(use-package company-auctex
-  :after company
-  )
-
-(use-package lsp-ui
-  :requires lsp-mode
+(use-package magit
+  :defer
+  :custom (magit-diff-refine-hunk (quote all)) ;; Shows inline diff
   :config
-  (setq lsp-ui-doc-show-with-mouse t)       ;; When the mouse goes over the symbol do not show docs
-  (setq lsp-ui-doc-show-with-cursor t)      ;; When the typing cursor goes over the symbol show docs
-  (setq track-mouse nil)                    ;; Reset back to not track since lsp activates it
+  (setopt magit-format-file-function #'magit-format-file-nerd-icons) ;; Magit nerd icons
+  )
+
+(use-package diff-hl
+  :hook ((dired-mode         . diff-hl-dired-mode-unless-remote)
+         (magit-post-refresh . diff-hl-magit-post-refresh)
+         (after-init . global-diff-hl-mode)))
+
+(use-package corfu
+  ;; Optional customizations
+  :custom
+  (corfu-cycle t)                ;; Enable cycling for `corfu-next/previous'
+  (corfu-auto t)                 ;; Enable auto completion
+  (corfu-auto-prefix 2)          ;; Minimum length of prefix for auto completion.
+  (corfu-popupinfo-mode t)       ;; Enable popup information
+  (corfu-popupinfo-delay 0.5)    ;; Lower popup info delay to 0.5 seconds from 2 seconds
+  (corfu-separator ?\s)          ;; Orderless field separator, Use M-SPC to enter separator
+  ;; (corfu-quit-at-boundary nil)   ;; Never quit at completion boundary
+  ;; (corfu-quit-no-match nil)      ;; Never quit, even if there is no match
+  ;; (corfu-preview-current nil)    ;; Disable current candidate preview
+  ;; (corfu-preselect 'prompt)      ;; Preselect the prompt
+  ;; (corfu-on-exact-match nil)     ;; Configure handling of exact matches
+  ;; (corfu-scroll-margin 5)        ;; Use scroll margin
+  (completion-ignore-case t)
+
+  ;; Emacs 30 and newer: Disable Ispell completion function.
+  ;; Try `cape-dict' as an alternative.
+  (text-mode-ispell-word-completion nil)
+
+  ;; Enable indentation+completion using the TAB key.
+  ;; `completion-at-point' is often bound to M-TAB.
+  (tab-always-indent 'complete)
+
+  (corfu-preview-current nil) ;; Don't insert completion without confirmation
+  ;; Recommended: Enable Corfu globally.  This is recommended since Dabbrev can
+  ;; be used globally (M-/).  See also the customization variable
+  ;; `global-corfu-modes' to exclude certain modes.
+  :init
+  (global-corfu-mode))
+
+(use-package nerd-icons-corfu
+  :after corfu
+  :init (add-to-list 'corfu-margin-formatters #'nerd-icons-corfu-formatter))
+
+(use-package yasnippet-capf :defer)
+
+(defun start/setup-capfs ()
+  "Configure completion backends"
+  ;; Take care when adding Capfs to the list since each of the Capfs adds a small runtime cost.
+  (let ((merge-backends (list
+                         #'cape-keyword      ;; Keyword completion
+                         ;; #'cape-abbrev       ;; Complete abbreviation
+                         #'cape-dabbrev      ;; Complete word from current buffers
+                         ;; #'cape-line         ;; Complete entire line from current buffer
+                         ;; #'cape-history      ;; Complete from Eshell, Comint or minibuffer history
+                         ;; #'cape-dict         ;; Dictionary completion (Needs Dictionary file installed)
+                         ;; #'cape-tex          ;; Complete Unicode char from TeX command, e.g. \hbar
+                         ;; #'cape-sgml         ;; Complete Unicode char from SGML entity, e.g., &alpha
+                         ;; #'cape-rfc1345      ;; Complete Unicode char using RFC 1345 mnemonics
+                         ;; #'snippy-capf       ;; Vscode Snippets (Snippy needs to be installed)
+                         #'yasnippet-capf    ;; Yasnippet snippets
+                         ))
+        (seperate-backends (list
+                            #'cape-file ;; Path completion
+                            #'cape-elisp-block ;; Complete elisp in Org or Markdown mode
+                            )))
+    ;; Remove keyword completion in git commits
+    (when (derived-mode-p 'git-commit-mode)
+      (setq merge-backends (remq #'cape-keyword merge-backends)))
+
+    ;; Add Elisp symbols only in Elisp modes
+    (when (derived-mode-p 'emacs-lisp-mode 'ielm-mode)
+      (setq merge-backends (cons #'cape-elisp-symbol merge-backends))) ;; Emacs Lisp code (functions, variables)
+
+    ;; Add Eglot to the front of the list if it's active
+    (when (bound-and-true-p eglot--managed-mode)
+      (setq merge-backends (cons #'eglot-completion-at-point merge-backends)))
+
+    ;; Create the super-capf and set it buffer-locally
+    (setq-local completion-at-point-functions
+                (append
+                 seperate-backends
+                 (list (apply #'cape-capf-super merge-backends)))
+                )))
+
+(use-package cape
+  :after (corfu)
+  :init
+  ;; Add to the global default value of `completion-at-point-functions' which is
+  ;; used by `completion-at-point'.  The order of the functions matters, the
+  ;; first function returning a result wins.  Note that the list of buffer-local
+  ;; completion functions takes precedence over the global list.
+
+  ;; Seperate function needed, because we use setq-local (everything is replaced)
+  (add-hook 'eglot-managed-mode-hook #'start/setup-capfs)
+  (add-hook 'prog-mode-hook #'start/setup-capfs)
+  (add-hook 'text-mode-hook #'start/setup-capfs))
+
+(use-package orderless
+  :defer
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles basic partial-completion)))))
+
+(use-package vertico
+  :hook (after-init . vertico-mode)
+  ;; Vim keybinds
+  ;; :bind (:map vertico-map
+  ;;            ("C-j" . vertico-next)
+  ;;            ("C-k" . vertico-previous)
+  ;;            ("C-u" . vertico-scroll-down)
+  ;;            ("C-d" . vertico-scroll-up))
+  :custom
+  (vertico-cycle t) ;; Enable cycling for `vertico-next/previous'
+  )
+
+(savehist-mode) ;; Enables save history mode
+
+(use-package marginalia
+  :after vertico
+  :config
+  (marginalia-mode))
+
+(use-package nerd-icons-completion
+  :after marginalia
+  :config
+  (nerd-icons-completion-mode)
   :hook
-  (lsp-mode . lsp-ui-mode)
-  (lsp-ui-mode . (lambda () (setq track-mouse nil))))
+  (marginalia-mode . nerd-icons-completion-marginalia-setup))
 
-
-;; Package from microsoft: https://github.com/microsoft/pyright
-;; Written in typescript
-;; Provides common static deducable type checking errors in python code.
-;; It supports typesheds (https://github.com/python/typeshed)
-;; that is markup decorators types that can be provided to function arguments
-;; or function return values in order to help the type checker
-(use-package lsp-pyright
-  :ensure t
-  :hook (python-mode . (lambda ()
-             (require 'lsp-pyright)
-                          (lsp))))  ; or lsp-deferred
-(use-package lsp-latex
+(use-package embark :defer)
+(use-package embark-consult
   :hook
-  (latex-mode . (lambda ()
-            (require 'lsp-latex)
-            (lsp)))
-  (tex-mode . (lambda ()
-        (require 'lsp-latex)
-        (lsp)))
-  (LaTeX-mode . (lambda ()
-          (require 'lsp-latex)
-          (lsp)))
-  (TeX-mode . (lambda ()
-        (require 'lsp-latex)
-        (lsp)))
+  (embark-collect-mode . consult-preview-at-point-mode))
+
+(use-package consult
+  ;; Enable automatic preview at point in the *Completions* buffer. This is
+  ;; relevant when you use the default completion UI.
+  :hook (completion-list-mode . consult-preview-at-point-mode)
+  :init
+  ;; Optionally configure the register formatting. This improves the register
+  ;; preview for `consult-register', `consult-register-load',
+  ;; `consult-register-store' and the Emacs built-ins.
+  (setq register-preview-delay 0.5
+        register-preview-function #'consult-register-format)
+
+  ;; Optionally tweak the register preview window.
+  ;; This adds thin lines, sorting and hides the mode line of the window.
+  (advice-add #'register-preview :override #'consult-register-window)
+
+  ;; Use Consult to select xref locations with preview
+  (setq xref-show-xrefs-function #'consult-xref
+        xref-show-definitions-function #'consult-xref)
   :config
-  (setq tex-directory "~/.cache/emacs/tex-dir")
+  ;; Optionally configure preview. The default value
+  ;; is 'any, such that any key triggers the preview.
+  ;; (setq consult-preview-key 'any)
+  ;; (setq consult-preview-key "M-.")
+  ;; (setq consult-preview-key '("S-<down>" "S-<up>"))
+
+  ;; For some commands and buffer sources it is useful to configure the
+  ;; :preview-key on a per-command basis using the `consult-customize' macro.
+  ;; (consult-customize
+  ;; consult-theme :preview-key '(:debounce 0.2 any)
+  ;; consult-ripgrep consult-git-grep consult-grep
+  ;; consult-bookmark consult-recent-file consult-xref
+  ;; consult--source-bookmark consult--source-file-register
+  ;; consult--source-recent-file consult--source-project-recent-file
+  ;; :preview-key "M-."
+  ;; :preview-key '(:debounce 0.4 any))
+
+  ;; By default `consult-project-function' uses `project-root' from project.el.
+  ;; Optionally configure a different project root function.
+   ;;;; 1. project.el (the default)
+  ;; (setq consult-project-function #'consult--default-project--function)
+   ;;;; 2. vc.el (vc-root-dir)
+  ;; (setq consult-project-function (lambda (_) (vc-root-dir)))
+   ;;;; 3. locate-dominating-file
+  ;; (setq consult-project-function (lambda (_) (locate-dominating-file "." ".git")))
+   ;;;; 4. projectile.el (projectile-project-root)
+  (autoload 'projectile-project-root "projectile")
+  (setq consult-project-function (lambda (_) (projectile-project-root)))
+   ;;;; 5. No project support
+  ;; (setq consult-project-function nil)
   )
 
-(use-package python-mode
-  :config
-  (setq python-shell-completion-native-enable nil)
-  (setq python-shell-interpreter "python3")
-  :hook
-  (python-mode . (lambda () (add-to-list 'company-backends 'company-jedi)))
+(use-package helpful
+  :bind
+  ;; Note that the built-in `describe-function' includes both functions
+  ;; and macros. `helpful-function' is functions only, so we provide
+  ;; `helpful-callable' as a drop-in replacement.
+  ("C-h f" . helpful-callable)
+  ("C-h v" . helpful-variable)
+  ("C-h k" . helpful-key)
+  ("C-h x" . helpful-command)
   )
 
+(use-package diminish :defer)
 
-(use-package graphviz-dot-mode
-    :mode (("\\.diag\\'"      . graphviz-dot-mode)
-           ("\\.blockdiag\\'" . graphviz-dot-mode)
-           ("\\.nwdiag\\'"    . graphviz-dot-mode)
-           ("\\.rackdiag\\'"  . graphviz-dot-mode)
-           ("\\.dot\\'"       . graphviz-dot-mode)
-           ("\\.gv\\'"        . graphviz-dot-mode))
-    :config
-    :hook
-    (graphiv-dot-mode . graphviz-turn-on-live-preview))
-
-
-(use-package lice
-  :config
-  (setq lice:default-license "mit")
-  )
+(use-package rainbow-delimiters
+  :hook (prog-mode . rainbow-delimiters-mode))
 
 (use-package hl-todo
   :hook
-  (prog-mode . hl-todo-mode))
-
-
-(use-package org-projectile
-  :after (projectile org)
+  ((prog-mode yaml-ts-mode) . hl-todo-mode)
   :config
-  (org-projectile-per-project)
-  (setq org-projectile-per-project-filepath "todos.org")
-  (setq org-agenda-files (append org-agenda-files (org-projectile-todo-files)))
-
-  :bind
-  ("C-c c" . 'org-capture)
-  ("C-c n p" . 'org-projectile-project-todo-completing-read)
+  ;; From doom emacs
+  (setq hl-todo-highlight-punctuation ":"
+        hl-todo-keyword-faces
+        '(;; For reminders to change or add something at a later date.
+          ("TODO" warning bold)
+          ;; For code (or code paths) that are broken, unimplemented, or slow,
+          ;; and may become bigger problems later.
+          ("FIXME" error bold)
+          ;; For code that needs to be revisited later, either to upstream it,
+          ;; improve it, or address non-critical issues.
+          ("REVIEW" font-lock-keyword-face bold)
+          ;; For code smells where questionable practices are used
+          ;; intentionally, and/or is likely to break in a future update.
+          ("HACK" font-lock-constant-face bold)
+          ;; For sections of code that just gotta go, and will be gone soon.
+          ;; Specifically, this means the code is deprecated, not necessarily
+          ;; the feature it enables.
+          ("DEPRECATED" font-lock-doc-face bold)
+          ;; Extra keywords commonly found in the wild, whose meaning may vary
+          ;; from project to project.
+          ("NOTE" success bold)
+          ("BUG" error bold)
+          ("XXX" font-lock-constant-face bold)))
   )
 
-
-(use-package org
-  :ensure org-plus-contrib
-  :config
-
-  (require 'org-tempo)
-  (require 'rx)
-  (define-obsolete-function-alias 'org-define-error 'define-error)
-
-  (if (file-directory-p "~/Dropbox/org")
-      (progn
-        (setq org-directory "~/Dropbox/org")
-        (setq org-agenda-files '("~/Dropbox/org")))
-    (progn
-      (setq org-directory "~/org")
-      (setq org-agenda-files '("~/org"))))
-
-  (setq org-babel-python-command "python3")
-  (setq org-export-babel-evaluate nil)
-  (setq org-export-html-validation-link nil)
-  (setq org-html-validation-link nil)
-  (setq org-html-htmlize-output-type 'css)
-  (setq org-support-shift-select 'always)
-  (setq org-catch-invisible-edits 'error)
-
-  (setq org-preview-latex-default-process 'dvipng) ;; You can also try with 'imagemagick but it does not seem to work
-  (setq org-format-latex-options '(:foreground default :background default :scale 2.0 :html-foreground "Black" :html-background "Transparent" :html-scale 1.0 :matchers
-                                               ("begin" "$1" "$" "$$" "\\(" "\\[")))
-
-  (setq org-preview-latex-image-directory "~/.cache/emacs/ltximg")
-  (setq org-latex-preview-ltxpng-directory "~/.cache/emacs/ltximg")
-
-  (setq org-babel-default-header-args '((:session . "none")             ; Use session nil to use sessions by default (do not work for some reason)
-                                        (:results . "replace")
-                                        (:exports . "code")
-                                        (:cache . "no")
-                                        (:noweb . "no")
-                                        (:hlines . "no")
-                                        (:tangle . "no")))
-
-  (setq org-confirm-babel-evaluate nil)
-  (setq-default org-confirm-babel-evaluate nil)
-
-
-  (org-babel-do-load-languages
-   'org-babel-load-languages
-   '((shell . t) (python . t) (ein . t) (dot . t) (ruby . t) (js . t) (java . t) (dot . t)))
-
-  (add-to-list 'org-babel-default-header-args:python '((:results . "output")))
-  (add-to-list 'org-babel-default-header-args:js '((:session . "js-comint") (:results . "output")))
-  (add-to-list 'org-babel-default-header-args:ruby '((:results . "value"))) ;; When using :session, :results output does not work
-
-  (setq org-src-lang-modes
-    (append '(("dot" . graphviz-dot))
-        (delete '("dot" . fundamental) org-src-lang-modes)))
-
-  )
-
-
-;; Org-download allows quick drag and drop functionality to embed images.
-;; It also allows to take screenshot trough scrot or maim and quickly embedding them
-;; in the document.
-(use-package org-download
-  :after org
-  :config
-  (setq-default org-download-image-dir "~/Pictures/org")
-
+(use-package indent-guide
   :hook
-  (dired-mode . org-download-enable))
+  (prog-mode . indent-guide-mode)
+  :config
+  (setq indent-guide-char "│")) ;; Set the character used for the indent guide.
 
-(use-package org-roam
-  :hook
-  (after-init . org-roam-mode)
+(use-package which-key
+  :ensure nil ;; Don't install which-key because it's now built-in
+  :hook (after-init . which-key-mode)
+  :diminish
   :custom
-  (org-roam-directory org-directory)
-  :bind (:map org-roam-mode-map
-              (("C-c n l" . org-roam)
-               ("C-c n f" . org-roam-find-file)
-               ("C-c n g" . org-roam-graph))
-              :map org-mode-map
-              (("C-c n i" . org-roam-insert))
-              (("C-c n I" . org-roam-insert-immediate))))
+  (which-key-side-window-location 'bottom)
+  (which-key-sort-order #'which-key-key-order-alpha) ;; Same as default, except single characters are sorted alphabetically
+  (which-key-sort-uppercase-first nil)
+  (which-key-add-column-padding 1) ;; Number of spaces to add to the left of each column
+  (which-key-min-display-lines 6)  ;; Increase the minimum lines to display because the default is only 1
+  (which-key-idle-delay 0.8)       ;; Set the time delay (in seconds) for the which-key popup to appear
+  (which-key-max-description-length 25)
+  (which-key-allow-imprecise-window-fit nil)) ;; Fixes which-key window slipping out in Emacs Daemon
 
-(use-package cc-mode
-  :config
-  (setq c-basic-offset 4)
-  (setq c-default-style (quote
-             ((c-mode . "bsd")
-              (c++-mode . "bsd")
-              (java-mode . "bsd")
-              (awk-mode . "awk")
-              (other . "gnu"))))
-  (c-set-offset 'case-label '+)
-  (add-to-list 'auto-mode-alist '("\\.h\\'" . c-mode))
-  :hook
-  (c-mode . (lambda () (add-hook 'before-save-hook 'clang-format-buffer nil 'local)))
-  (c++-mode . (lambda () (add-hook 'before-save-hook 'clang-format-buffer nil 'local)))
-  )
-
-
-(use-package highlight-numbers
-  :hook
-  (prog-mode . highlight-numbers-mode))
-
-(use-package ido
-  :config
-  (setq ido-everywhere t)
-  (setq ido-auto-merge-delay-time 3)
-  (setq ido-confirm-unique-completion t)
-  (setq ido-enable-flex-matching t)
-  )
-
-;; Requires
-(require 'compile)
-(require 'git-commit)
-(require 'multiple-cursors)
-(require 'winum)
-(require 'saveplace)
-
-
-;; Emacs customization
-(defvar winparams
-  '(window-parameters . ((no-other-window . t)
-                         (no-delete-other-windows . t))))
-
-(setq fit-window-to-buffer-horizontally t)
-(setq window-resize-pixelwise t)
-
-(setq
- display-buffer-alist
- `(("\\*Buffer List\\*" display-buffer-in-side-window
-    (side . top) (slot . 0) (window-height . fit-window-to-buffer)
-    (preserve-size . (nil . t)) ,winparams)
-   ("\\*Tags List\\*" display-buffer-in-side-window
-    (side . right) (slot . 0) (window-width . fit-window-to-buffer)
-    (preserve-size . (t . nil)) ,winparams)
-   ("\\*\\(?:help\\|grep\\|Completions\\)\\*"
-    display-buffer-in-side-window
-    (side . bottom) (slot . -1) (preserve-size . (nil . t))
-    ,winparams)
-   ("\\*\\(?:shell\\|compilation\\)\\*" display-buffer-in-side-window
-    (side . bottom) (slot . 1) (preserve-size . (nil . t))
-    ,winparams)))
-
-
-(setenv "PROJ_WORKING_DIR" (getenv "PWD") t)
-
-(setq-default save-place t)
-
-
-(defvar original-font-size nil)
-
-(defun adjust-font-size (delta)
-  (let* ((old-size (face-attribute 'default :height))
-         (new-size (max (max (max delta (- delta)) (min 400 (+ delta old-size))) 50)))
-
-    (setq original-font-size (or original-font-size old-size))
-    (set-face-attribute 'default nil :height new-size)
-    (set-face-attribute 'default nil :height new-size)
-
-    (dparo/modeline-reset)
-    ;; (message "Font size set to %d (was %d)" (face-attribute 'default :height) old-size)
-    ))
-
-(defun zoom-in ()
-  (interactive)
-  (adjust-font-size +10))
-
-(defun zoom-out ()
-  (interactive)
-  (adjust-font-size -10))
-
-(defun zoom-reset ()
-  (interactive)
-  (when original-font-size
-    (set-face-attribute 'default nil :height original-font-size)
-    (dparo/modeline-reset)
-))
-
-
-(visual-line-mode 0)
-(toggle-word-wrap 0)
-(toggle-truncate-lines 1)
-
-(setq initial-scratch-message "")
-(setq-default initial-scratch-message "")
-(setq initial-major-mode 'org-mode)
-(setq-default initial-major-mode 'org-mode)
-
-(setq truncate-lines t)
-(setq word-wrap nil)
-(setq-default truncate-lines t)
-(setq-default word-wrap nil)
-
-
-(load-theme 'gruvbox t)
-
-(set-face-attribute 'mode-line nil :family "JetbrainsMono Nerd Font" :height 90)
-(set-face-attribute 'mode-line-inactive nil :family "JetbrainsMono Nerd Font" :height 90)
-(setq doom-modeline-height 0)
-(set-face-attribute 'default nil
-                    :family "JetbrainsMono Nerd Font"
-                    :height 105
-                    :weight 'normal
-                    :width 'normal)
-
-(global-hl-line-mode 0)
-(delete-selection-mode 1)
-(menu-bar-mode 0)
-(tool-bar-mode 0)
-(scroll-bar-mode 0)
-(fringe-mode '(8 . 8))
-(global-auto-revert-mode 1)
-(global-linum-mode 0)
-(auto-insert-mode)
-(save-place-mode 1)
-(add-hook 'before-save-hook 'whitespace-cleanup)
-(add-hook 'latex-mode-hook 'flyspell-mode)
-(add-hook 'LaTeX-mode-hook 'flyspell-mode)
-(column-number-mode 1)
-(show-paren-mode 1)
-(size-indication-mode 1)
-(tooltip-mode 0)
-(transient-mark-mode 1)
-(window-divider-mode 0)
-(blink-cursor-mode 0)
-(savehist-mode 1)
-
-
-;; Global super mode word makes identifiers such as `num_bytes` behave as a single word (underscore is part of the word)
-(global-superword-mode 1)
-;; Subword instead makes the behaviour consistent when using camelCase.
-;; That is IF SUPER-MODE would be disabled, `numBytes` behaves as `num_bytes` and are thus considered 2 separated words
-;; ENABLE THIS IF YOU DISABLE SUPERWORD MODE
-;; (global-subword-mode 1)
-
-
-;; Major mode for specific files
-(add-to-list 'auto-mode-alist '("\\.y$" . text-mode))
-(add-to-list 'auto-mode-alist '("\\.m$"  . octave-mode))
-
-
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 8)
-;; Highlight trailing whitespaces and tabs in red
-(setq fill-column 100)
-(setq whitespace-line-column 100)
-(setq whitespace-style '(empty tabs indentation trailing lines-tail space-after-tab space-before-tab tab-mark trailing-mark))
-(setq-default show-trailing-whitespace t)
-(global-whitespace-mode 1)
-
-
-(setq auto-insert-query nil)
-(setq-default auto-insert-query nil)
-(setq set-mark-command-repeat-pop t)
-(setq window-divider-default-right-width 1)
-
-(setq compilation-always-kill t)
-(setq compilation-ask-about-save nil)
-(setq compilation-scroll-output (quote first-error))
-(setq compile-command "bash -c \"$BUILD\"")
-
-(setq next-error-recenter (quote (4)))
-
-(setq scroll-conservatively 10000)
-(setq scroll-step 0)
-(setq scroll-conservatively most-positive-fixnum)
-(setq scroll-margin 4)
-
-(setq mouse-wheel-progressive-speed nil)
-(setq mouse-wheel-scroll-amount (quote (3 ((shift) . 6) ((control)))))
-
-(setq case-fold-search t)   ; make searches case insensitive
-(setq vc-follow-symlinks t)
-(setq inhibit-startup-screen t)
-(setq search-whitespace-regexp ".*")
-(setq isearch-lax-whitespace nil)
-(setq isearch-regexp-lax-whitespace t)
-(setq isearch-allow-scroll t)
-
-;; For terminal stuff
-(setq xterm-mouse-mode 1)
-(xterm-mouse-mode 1)
-(setq mouse-sel-mode 1)
-(setq select-enable-primary nil)
-(setq select-enable-clipboard t)
-(setq auto-window-vscroll 1)
-(setq track-mouse nil)
-(setq-default track-mouse nil)
-(setq delete-by-moving-to-trash t)
-(setq-default delete-by-moving-to-trash t)
-
-
-;; Funcs
-(defun marker-is-point-p (marker)
-  "Test if marker is current point."
-  (and (eq (marker-buffer marker) (current-buffer))
-       (= (marker-position marker) (point))))
-
-(defun push-mark-maybe ()
-  "Push mark onto `global-mark-ring' if mark head or tail is not current location."
-  (if (not global-mark-ring) (error "global-mark-ring empty")
-    (unless (or (marker-is-point-p (car global-mark-ring))
-                (marker-is-point-p (car (reverse global-mark-ring))))
-      (push-mark))))
-
-
-(defun backward-global-mark ()
-  "Use `pop-global-mark', pushing current point if not on ring."
-  (interactive)
-  (push-mark-maybe)
-  (when (marker-is-point-p (car global-mark-ring))
-    (call-interactively 'pop-global-mark))
-  (call-interactively 'pop-global-mark))
-
-(defun forward-global-mark ()
-  "Hack `pop-global-mark' to go in reverse, pushing current point if not on ring."
-  (interactive)
-  (push-mark-maybe)
-  (setq global-mark-ring (nreverse global-mark-ring))
-  (when (marker-is-point-p (car global-mark-ring))
-    (call-interactively 'pop-global-mark))
-  (call-interactively 'pop-global-mark)
-  (setq global-mark-ring (nreverse global-mark-ring)))
-
-
-;; (load "~/.emacs.d/binds.el")
-(load custom-file 'noerror)
-(put 'dired-find-alternate-file 'disabled nil)
+(use-package ws-butler
+  :hook (after-init . ws-butler-global-mode))
