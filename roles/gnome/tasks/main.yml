@@ -398,25 +398,25 @@
           command: "'kitty'"
           binding: "'<Super>Return'"
 
-    - name: Screenshot - <Print>
-      dconf:
-        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/{{ item.key }}"
-        value: "{{ item.value }}"
-      loop: "{{ data | dict2items }}"
-      vars:
-        data:
-          name: "'screenshot - <Print>'"
-          command: "'screenshot.sh'"
-          binding: "'Print'"
-
-    - name: Screenshot - <Shift><Super>s
-      dconf:
-        key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/{{ item.key }}"
-        value: "{{ item.value }}"
-      loop: "{{ data | dict2items }}"
-      vars:
-        data:
-          name: "'screenshot - <Shift><Super>s'"
-          command: "'screenshot.sh'"
-          binding: "'<Shift><Super>s'"
-
+    # - name: Screenshot - <Print>
+    #   dconf:
+    #     key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/{{ item.key }}"
+    #     value: "{{ item.value }}"
+    #   loop: "{{ data | dict2items }}"
+    #   vars:
+    #     data:
+    #       name: "'screenshot - <Print>'"
+    #       command: "'screenshot.sh'"
+    #       binding: "'Print'"
+    #
+    # - name: Screenshot - <Shift><Super>s
+    #   dconf:
+    #     key: "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/{{ item.key }}"
+    #     value: "{{ item.value }}"
+    #   loop: "{{ data | dict2items }}"
+    #   vars:
+    #     data:
+    #       name: "'screenshot - <Shift><Super>s'"
+    #       command: "'screenshot.sh'"
+    #       binding: "'<Shift><Super>s'"
+    #
