@@ -48,7 +48,7 @@
         content: |
           {
             "TorDisabled": true,
-            "BraveRewardsDisabled": false,
+            "BraveRewardsDisabled": true,
             "BraveWalletDisabled": true,
             "BraveVPNDisabled": true,
             "BraveAIChatEnabled": false,
