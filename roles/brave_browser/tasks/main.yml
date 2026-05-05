@@ -47,14 +47,21 @@
         mode: '0644'
         content: |
           {
+            "TorDisabled": true,
             "BraveRewardsDisabled": false,
             "BraveWalletDisabled": true,
             "BraveVPNDisabled": true,
             "BraveAIChatEnabled": false,
-            "TorDisabled": true,
             "PasswordManagerEnabled": false,
             "BraveStatsPingEnabled": false,
-            "BraveWebDiscoveryEnabled": false
+            "BraveP3AEnabled": false,
+            "BraveWebDiscoveryEnabled": false,
+            "BraveTalkDisabled": true,
+            "BraveWaybackMachineEnabled": false,
+            "BraveSpeedreaderEnabled": false,
+            "BravePlaylistEnabled": false,
+            "BraveNewsDisabled": true,
+            "BraveShieldsEnabledForUrls": []
           }
       become: True
 
