@@ -47,12 +47,14 @@
         mode: '0644'
         content: |
           {
-            "BraveRewardsDisabled": true,
-            "BraveWalletDisabled": true,
+            "BraveRewardsDisabled": 0,
+            "BraveWalletDisabled": 1,
             "BraveVPNDisabled": 1,
-            "BraveAIChatEnabled": false,
-            "TorDisabled": true,
-            "PasswordManagerEnabled": false
+            "BraveAIChatEnabled": 0,
+            "TorDisabled": 1,
+            "PasswordManagerEnabled": 0,
+            "BraveStatsPingEnabled": 0,
+            "BraveWebDiscoveryEnabled": 0,
           }
       become: True
 
