@@ -11,6 +11,8 @@ if status is-interactive
 
     # source "$HOME/opt/fzf/shell/key-bindings.fish"
 
+    set --erase --universal fish_key_bindings
+
     direnv hook fish | source
 
     abbr --add v nvim
