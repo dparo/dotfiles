@@ -4,6 +4,7 @@
     name:
       - steam
       - lutris
+      - protonplus # Compatbility Manager
     state: present
   become: true
   tags:
