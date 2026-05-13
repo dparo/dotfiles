@@ -11,6 +11,14 @@ audit=false
 fund=false
 update-notifier=false
 
+##
+## SUPPLY CHAIN ATTACK MITIGATION
+##
+# Do not execute bundled scripts on install
+ignore-scripts=true
+# Ignore newer package version, unless older of X days
+min-release-age=7
+
 progress=false
 
 logs-max=5
