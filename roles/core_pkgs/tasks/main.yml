@@ -56,6 +56,8 @@
       - visidata # (vd) Terminal interface for exploring and arranging tabular data (https://www.visidata.org/)
       - rlwrap # Wrapper for GNU readline
       - python3-oletools # To process extracted embedding from Microsoft Word Documents
+      - at # Schedule execution of sh scripts once at particular times of the day
+      - zenity
 
       - krb5-workstation
       - krb5-libs
