@@ -481,7 +481,7 @@ M.list = {
     },
 
     -- https://writewithharper.com
-    { name = "harper_ls", config = {} },
+    -- { name = "harper_ls", config = {} },
 
     { name = "vacuum", config = {
         cmd = { "vacuum", "language-server" },
