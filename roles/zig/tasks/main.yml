@@ -23,13 +23,13 @@
         - name: Download and unpack ZIG {{ rel['json']['tag_name'] }}
           ansible.builtin.unarchive:
             src: https://ziglang.org/download/{{ rel['json']['tag_name'] }}/zig-linux-x86_64-{{ rel['json']['tag_name'] }}.tar.xz
-            dest: "{{ ansible_user_dir }}/opt"
+            dest: "{{ ansible_facts['user_dir'] }}/opt"
             remote_src: true
 
         - name: Symlink binaries
           ansible.builtin.file:
-            src: "{{ ansible_user_dir }}/opt/zig-linux-x86_64-{{ rel['json']['tag_name'] }}/{{ item }}"
-            dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+            src: "{{ ansible_facts['user_dir'] }}/opt/zig-linux-x86_64-{{ rel['json']['tag_name'] }}/{{ item }}"
+            dest: "{{ ansible_facts['user_dir'] }}/.local/bin/{{ item }}"
             state: link
           loop:
             - zig

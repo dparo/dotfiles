@@ -33,7 +33,7 @@
     - name: Download and unpack latest kustomize
       ansible.builtin.unarchive:
         src: https://github.com/kubernetes-sigs/kustomize/releases/download/{{ kustomize_latest['json']['tag_name'] }}/kustomize_{{ kustomize_latest['json']['tag_name'][('kustomize/' | length):] }}_linux_amd64.tar.gz
-        dest: "{{ ansible_user_dir }}/.local/bin"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin"
         remote_src: true
 
     - name: Minikube
@@ -53,7 +53,7 @@
             state: directory
             mode: "0755"
           loop:
-            - "{{ ansible_user_dir }}/.local/share/minikube"
+            - "{{ ansible_facts['user_dir'] }}/.local/share/minikube"
 
         - name: Minikube - Symlink additional items
           ansible.builtin.file:
@@ -61,8 +61,8 @@
             dest: "{{ item.dest }}"
             state: link
           loop:
-            - src: "{{ ansible_user_dir }}/.local/share/minikube"
-              dest: "{{ ansible_user_dir }}/.minikube"
+            - src: "{{ ansible_facts['user_dir'] }}/.local/share/minikube"
+              dest: "{{ ansible_facts['user_dir'] }}/.minikube"
 
         - name: Enable minikube addons
           ansible.builtin.command: "minikube addons enable {{ item }}"

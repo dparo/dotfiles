@@ -23,7 +23,7 @@
 
     - name: Create config dir
       ansible.builtin.file:
-        path: "{{ ansible_user_dir }}/.config/maven"
+        path: "{{ ansible_facts['user_dir'] }}/.config/maven"
         state: directory
         mode: "0755"
 
@@ -45,7 +45,7 @@
         - name: Symlink maven binaries
           ansible.builtin.file:
             src: "{{ item }}"
-            dest: "{{ ansible_user_dir }}/.local/bin/{{ item | basename }}"
+            dest: "{{ ansible_facts['user_dir'] }}/.local/bin/{{ item | basename }}"
             state: link
           loop:
             - "{{ maven_install_dir }}/apache-maven-{{ maven_version }}/bin/mvn"
@@ -64,20 +64,20 @@
     - name: Symlink templates
       ansible.builtin.file:
         src: "{{ role_path }}/templates"
-        dest: "{{ ansible_user_dir }}/.config/maven/templates"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/maven/templates"
         state: link
 
     - name: Render current config
       ansible.builtin.template:
         src: "{{ role_path }}/templates/default.xml.j2"
-        dest: "{{ ansible_user_dir }}/.config/maven/settings_local_default.xml"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/maven/settings_local_default.xml"
         mode: "0644"
         force: true
 
     - name: Symlink current config
       ansible.builtin.file:
-        src: "{{ ansible_user_dir }}/.config/maven/settings_local_default.xml"
-        dest: "{{ ansible_user_dir }}/.config/maven/settings_local.xml"
+        src: "{{ ansible_facts['user_dir'] }}/.config/maven/settings_local_default.xml"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/maven/settings_local.xml"
         state: link
 
     - name: Create items
@@ -86,9 +86,9 @@
         state: directory
         mode: "0755"
       loop:
-        - "{{ ansible_user_dir }}/.cache/maven/repository"
-        # - "{{ ansible_user_dir }}/.local/share/java"
-        # - "{{ ansible_user_dir }}/.local/share/java/.m2"
+        - "{{ ansible_facts['user_dir'] }}/.cache/maven/repository"
+        # - "{{ ansible_facts['user_dir'] }}/.local/share/java"
+        # - "{{ ansible_facts['user_dir'] }}/.local/share/java/.m2"
 
     - name: Symlink items
       ansible.builtin.file:
@@ -97,7 +97,7 @@
         state: link
         force: true
       loop:
-        - src: "{{ ansible_user_dir }}/.cache/maven/repository"
-          dest: "{{ ansible_user_dir }}/.m2/repository"
-        - src: "{{ ansible_user_dir }}/.config/maven/settings_local.xml"
-          dest: "{{ ansible_user_dir }}/.m2/settings.xml"
+        - src: "{{ ansible_facts['user_dir'] }}/.cache/maven/repository"
+          dest: "{{ ansible_facts['user_dir'] }}/.m2/repository"
+        - src: "{{ ansible_facts['user_dir'] }}/.config/maven/settings_local.xml"
+          dest: "{{ ansible_facts['user_dir'] }}/.m2/settings.xml"

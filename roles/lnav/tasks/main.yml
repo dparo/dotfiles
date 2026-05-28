@@ -13,14 +13,14 @@
 
     - name: Create config dir
       ansible.builtin.file:
-        path: "{{ ansible_user_dir }}/.config/lnav"
+        path: "{{ ansible_facts['user_dir'] }}/.config/lnav"
         state: directory
         mode: "0755"
 
     - name: Symlink config
       ansible.builtin.file:
         src: "{{ role_path }}/files/config.json"
-        dest: "{{ ansible_user_dir }}/.config/lnav/config.json"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/lnav/config.json"
         state: link
 
 

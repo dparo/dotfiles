@@ -10,9 +10,9 @@
           state: link
         loop:
           - src: "{{ role_path }}/files/systemd"
-            dest: "{{ ansible_user_dir }}/.config/systemd"
+            dest: "{{ ansible_facts['user_dir'] }}/.config/systemd"
           - src: "{{ role_path }}/files/environment.d"
-            dest: "{{ ansible_user_dir }}/.config/environment.d"
+            dest: "{{ ansible_facts['user_dir'] }}/.config/environment.d"
 
       - name: Reload user services
         ansible.builtin.systemd:

@@ -12,13 +12,13 @@
 
     - name: Create config dir
       ansible.builtin.file:
-        path: "{{ ansible_user_dir }}/.config/keepassxc"
+        path: "{{ ansible_facts['user_dir'] }}/.config/keepassxc"
         state: directory
         mode: "0755"
 
     - name: Setup keepassxc config - General
       community.general.ini_file:
-        path: "{{ ansible_user_dir }}/.config/keepassxc/keepassxc.ini"
+        path: "{{ ansible_facts['user_dir'] }}/.config/keepassxc/keepassxc.ini"
         section: General
         option: "{{ item.key }}"
         value: "{{ item.value }}"
@@ -29,7 +29,7 @@
 
     - name: Setup keepassxc config - Browser
       community.general.ini_file:
-        path: "{{ ansible_user_dir }}/.config/keepassxc/keepassxc.ini"
+        path: "{{ ansible_facts['user_dir'] }}/.config/keepassxc/keepassxc.ini"
         section: Browser
         option: "{{ item.key }}"
         value: "{{ item.value }}"
@@ -39,7 +39,7 @@
 
     - name: Setup keepassxc config - GUI
       community.general.ini_file:
-        path: "{{ ansible_user_dir }}/.config/keepassxc/keepassxc.ini"
+        path: "{{ ansible_facts['user_dir'] }}/.config/keepassxc/keepassxc.ini"
         section: GUI
         option: "{{ item.key }}"
         value: "{{ item.value }}"
@@ -54,7 +54,7 @@
 
     - name: Create wrapper script
       ansible.builtin.copy:
-        dest: "{{ ansible_user_dir }}/.config/keepassxc/xdg-autostart-wrapper-script.sh"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/keepassxc/xdg-autostart-wrapper-script.sh"
         content: |
           #!/usr/bin/env bash
           DB="$(find ~/.local/share/ -maxdepth 1 -type f -regex ".*/keepass.*\.kdbx$" | head -n 1)"
@@ -65,12 +65,12 @@
 
     - name: Create autostart desktop file
       ansible.builtin.copy:
-        dest: "{{ ansible_user_dir }}/.config/autostart/org.keepassxc.KeePassXC.desktop"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/autostart/org.keepassxc.KeePassXC.desktop"
         content: |
           [Desktop Entry]
           Name=KeePassXC
           GenericName=Password Manager
-          Exec={{ ansible_user_dir }}/.config/keepassxc/xdg-autostart-wrapper-script.sh
+          Exec={{ ansible_facts['user_dir'] }}/.config/keepassxc/xdg-autostart-wrapper-script.sh
           TryExec=keepassxc
           Icon=keepassxc
           StartupWMClass=keepassxc

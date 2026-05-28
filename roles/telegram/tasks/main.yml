@@ -1,30 +1,30 @@
 ---
 - name: Telegram
-  when: ansible_user_id == "dparo" and ansible_hostname is regex('^dparo.*')
+  when: ansible_facts['user_id'] == "dparo" and ansible_facts['hostname'] is regex('^dparo.*')
   tags:
     - telegram
   block:
     - name: Download and unpack Telegram
       ansible.builtin.unarchive:
         src: https://telegram.org/dl/desktop/linux
-        dest: "{{ ansible_user_dir }}/opt"
+        dest: "{{ ansible_facts['user_dir'] }}/opt"
         remote_src: true
 
     - name: Symlink binaries
       ansible.builtin.file:
-        src: "{{ ansible_user_dir }}/opt/Telegram/Telegram"
-        dest: "{{ ansible_user_dir }}/.local/bin/telegram"
+        src: "{{ ansible_facts['user_dir'] }}/opt/Telegram/Telegram"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin/telegram"
         state: link
 
     - name: Create desktop entry
       ansible.builtin.copy:
-        dest: "{{ ansible_user_dir }}/.local/share/applications/org.telegram.desktop._8325fc46f45e8a57ce27d7615967501c.desktop"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/share/applications/org.telegram.desktop._8325fc46f45e8a57ce27d7615967501c.desktop"
         content: |
           [Desktop Entry]
           Name=Telegram Desktop
           Comment=Official desktop version of Telegram messaging app
-          TryExec={{ ansible_user_dir }}/opt/Telegram/Telegram
-          Exec={{ ansible_user_dir }}/Telegram/Telegram -- %u
+          TryExec={{ ansible_facts['user_dir'] }}/opt/Telegram/Telegram
+          Exec={{ ansible_facts['user_dir'] }}/Telegram/Telegram -- %u
           Icon=telegram
           Terminal=false
           StartupWMClass=TelegramDesktop
@@ -45,13 +45,13 @@
 
     - name: Create autostart desktop file
       ansible.builtin.copy:
-        dest: "{{ ansible_user_dir }}/.config/autostart/org.telegram.desktop.Telegram.desktop"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/autostart/org.telegram.desktop.Telegram.desktop"
         content: |
           [Desktop Entry]
           Name=Telegram Desktop
           Comment=Official desktop version of Telegram messaging app
-          TryExec={{ ansible_user_dir }}/opt/Telegram/Telegram
-          Exec={{ ansible_user_dir }}/opt/Telegram/Telegram -autostart
+          TryExec={{ ansible_facts['user_dir'] }}/opt/Telegram/Telegram
+          Exec={{ ansible_facts['user_dir'] }}/opt/Telegram/Telegram -autostart
           Icon=telegram
           Terminal=false
           StartupWMClass=TelegramDesktop

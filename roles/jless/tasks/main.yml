@@ -10,7 +10,7 @@
 - name: Download and unpack latest jless
   ansible.builtin.unarchive:
     src: "{{ gh_repo }}/releases/download/{{ jless['json']['tag_name'] }}/jless-{{ jless['json']['tag_name'] }}-x86_64-unknown-linux-gnu.zip"
-    dest: "{{ ansible_user_dir }}/.local/bin"
+    dest: "{{ ansible_facts['user_dir'] }}/.local/bin"
     remote_src: true
   tags:
     - jless

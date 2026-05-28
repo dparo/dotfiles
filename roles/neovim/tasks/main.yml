@@ -44,21 +44,21 @@
         # sudo make install
         - name: Build
           community.general.make:
-            chdir: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim"
+            chdir: "{{ ansible_facts['user_dir'] }}/opt/github.com/neovim/neovim"
             params:
               CMAKE_BUILD_TYPE: Release
           when: clone.changed
 
         - name: Install
           community.general.make:
-            chdir: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim"
+            chdir: "{{ ansible_facts['user_dir'] }}/opt/github.com/neovim/neovim"
             target: install
           become: true
           when: clone.changed
 
         - name: Remove build folder
           ansible.builtin.file:
-            path: "{{ ansible_user_dir }}/opt/github.com/neovim/neovim/build"
+            path: "{{ ansible_facts['user_dir'] }}/opt/github.com/neovim/neovim/build"
             state: absent
           become: true
 
@@ -81,12 +81,12 @@
     #   ansible.builtin.unarchive:
     #     # https://github.com/tree-sitter/tree-sitter/releases/download/v0.26.3/tree-sitter-linux-x86.gz
     #     src: https://github.com/tree-sitter/tree-sitter/releases/download/{{ treesitter_latest['json']['tag_name'] }}/tree-sitter-linux-x86.gz
-    #     dest: "{{ ansible_user_dir }}/.local/bin"
+    #     dest: "{{ ansible_facts['user_dir'] }}/.local/bin"
     #     remote_src: true
     #
     # - name: Make tree-sitter executable
     #   ansible.builtin.file:
-    #     path: "{{ ansible_user_dir }}/.local/bin/tree-sitter"
+    #     path: "{{ ansible_facts['user_dir'] }}/.local/bin/tree-sitter"
     #     mode: u+x
 
     - name: Install runtime deps (package manager)
@@ -119,19 +119,19 @@
     - name: Symlink config
       ansible.builtin.file:
         src: "{{ role_path }}/files"
-        dest: "{{ ansible_user_dir }}/.config/nvim"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/nvim"
         state: link
 
     - name: Clean packer.nvim cache
       ansible.builtin.file:
-        path: "{{ ansible_user_dir }}.config/nvim/plugin/packer_compiled.lua"
+        path: "{{ ansible_facts['user_dir'] }}.config/nvim/plugin/packer_compiled.lua"
         state: absent
 
     - name: Clone lazy.nvim
       ansible.builtin.git:
         clone: true
         depth: 1
-        dest: "{{ ansible_user_dir }}/.local/share/nvim/lazy/lazy.nvim"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/share/nvim/lazy/lazy.nvim"
         force: true
         repo: https://github.com/folke/lazy.nvim.git
         single_branch: true

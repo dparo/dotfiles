@@ -1,9 +1,9 @@
 ---
-- name: Allow specific SUID programs without password for user {{ ansible_user_id }}
+- name: Allow specific SUID programs without password for user {{ ansible_facts['user_id'] }}
   ansible.builtin.lineinfile:
-    path: /etc/sudoers.d/01-user-{{ ansible_user_id }}
-    line: "{{ ansible_user_id }} ALL=(ALL) NOPASSWD: {{ item }}"
-    regexp: "^{{ ansible_user_id }} ALL=(ALL) NOPASSWD: {{ item }}$"
+    path: /etc/sudoers.d/01-user-{{ ansible_facts['user_id'] }}
+    line: "{{ ansible_facts['user_id'] }} ALL=(ALL) NOPASSWD: {{ item }}"
+    regexp: "^{{ ansible_facts['user_id'] }} ALL=(ALL) NOPASSWD: {{ item }}$"
     create: true
   loop:
     - /usr/sbin/openconnect

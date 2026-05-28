@@ -13,13 +13,13 @@
 
   - name: Create config dir
     ansible.builtin.file:
-      path: "{{ ansible_user_dir }}/.config/copyq"
+      path: "{{ ansible_facts['user_dir'] }}/.config/copyq"
       state: directory
       mode: "0755"
 
   - name: Setup copyq config - Options
     community.general.ini_file:
-      path: "{{ ansible_user_dir }}/.config/copyq/copyq.conf"
+      path: "{{ ansible_facts['user_dir'] }}/.config/copyq/copyq.conf"
       section: Options
       option: "{{ item.key }}"
       value: "{{ item.value }}"
@@ -50,7 +50,7 @@
 
   - name: Create autostart desktop file
     ansible.builtin.copy:
-      dest: "{{ ansible_user_dir }}/.config/autostart/copyq.desktop"
+      dest: "{{ ansible_facts['user_dir'] }}/.config/autostart/copyq.desktop"
       content: |
         [Desktop Entry]
         Name=CopyQ

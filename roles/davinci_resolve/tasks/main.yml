@@ -31,5 +31,5 @@
     - name: Download DaVinci Resolve
       ansible.builtin.unarchive:
         src: "{{ download_url['content'] }}"
-        dest: "{{ ansible_user_dir }}/Downloads"
+        dest: "{{ ansible_facts['user_dir'] }}/Downloads"
         remote_src: true

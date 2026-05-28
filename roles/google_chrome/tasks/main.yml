@@ -31,4 +31,4 @@
         path: "{{ item }}"
         state: absent
       loop:
-        - "{{ ansible_user_dir }}/.config/google-chrome/Default/GPUCache"
+        - "{{ ansible_facts['user_dir'] }}/.config/google-chrome/Default/GPUCache"

@@ -15,7 +15,7 @@
 
 - name: Create proton-ge installation directory
   ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.steam/root/compatibilitytools.d/"
+    path: "{{ ansible_facts['user_dir'] }}/.steam/root/compatibilitytools.d/"
     state: directory
     mode: "0755"
   tags:
@@ -40,7 +40,7 @@
 - name: "Download and unpack latest proton-ge {{ proton_ge_latest['json']['tag_name'] }}'"
   ansible.builtin.unarchive:
     src: https://github.com/GloriousEggroll/proton-ge-custom/releases/latest/download/{{ proton_ge_latest['json']['tag_name'] }}.tar.gz
-    dest: "{{ ansible_user_dir }}/.steam/root/compatibilitytools.d/"
+    dest: "{{ ansible_facts['user_dir'] }}/.steam/root/compatibilitytools.d/"
     remote_src: true
   tags:
     - never

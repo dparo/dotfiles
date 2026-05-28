@@ -30,6 +30,6 @@
     - name: Download and unpack latest terragrunt
       ansible.builtin.get_url:
         url: "https://github.com/gruntwork-io/terragrunt/releases/download/{{ terragrunt_latest['json']['tag_name'] }}/terragrunt_linux_amd64"
-        dest: "{{ ansible_user_dir }}/.local/bin/terragrunt"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin/terragrunt"
         mode: "0755"
         force: true

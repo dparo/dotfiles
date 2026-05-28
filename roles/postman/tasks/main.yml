@@ -7,7 +7,7 @@
     - name: Download and unpack Postman
       ansible.builtin.unarchive:
         src: https://dl.pstmn.io/download/latest/linux64
-        dest: "{{ ansible_user_dir }}/opt"
+        dest: "{{ ansible_facts['user_dir'] }}/opt"
         remote_src: true
 
     - name: Download and install latest postman-cli
@@ -26,15 +26,15 @@
 
     - name: Install desktop file integration
       ansible.builtin.copy:
-        dest: "{{ ansible_user_dir }}/.local/share/applications/postman.desktop"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/share/applications/postman.desktop"
         content: |
           [Desktop Entry]
           Name=Postman
-          Exec={{ ansible_user_dir }}/opt/Postman/Postman %U
-          TryExec={{ ansible_user_dir }}/opt/Postman/Postman
+          Exec={{ ansible_facts['user_dir'] }}/opt/Postman/Postman %U
+          TryExec={{ ansible_facts['user_dir'] }}/opt/Postman/Postman
           Terminal=false
           Type=Application
-          Icon={{ ansible_user_dir }}/.local/share/icons/hicolor/Postman.svg
+          Icon={{ ansible_facts['user_dir'] }}/.local/share/icons/hicolor/Postman.svg
           Categories=Development;WebDevelopment;
           MimeType=x-scheme-handler/postman;
           StartupNotify=true
@@ -44,5 +44,5 @@
     - name: Install Postman Icon
       ansible.builtin.get_url:
         url: https://raw.githubusercontent.com/flathub/com.getpostman.Postman/master/logo-mark.svg
-        dest: "{{ ansible_user_dir }}/.local/share/icons/hicolor/Postman.svg"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/share/icons/hicolor/Postman.svg"
         mode: "0755"

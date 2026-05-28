@@ -30,13 +30,13 @@
         state: directory
         mode: "0755"
       loop:
-        - "{{ ansible_user_dir }}/.cache/mpd"
-        - "{{ ansible_user_dir }}/.local/share/mpd/playlists"
+        - "{{ ansible_facts['user_dir'] }}/.cache/mpd"
+        - "{{ ansible_facts['user_dir'] }}/.local/share/mpd/playlists"
 
     - name: Symlink config
       ansible.builtin.file:
         src: "{{ item }}"
-        dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/{{ item | basename }}"
         state: link
       loop:
         - "{{ role_path }}/files/mpd"

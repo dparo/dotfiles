@@ -15,12 +15,12 @@
         state: directory
         mode: "0700"
       loop:
-        - "{{ ansible_user_dir }}/.config/libfm"
-        - "{{ ansible_user_dir }}/.config/pcmanfm"
+        - "{{ ansible_facts['user_dir'] }}/.config/libfm"
+        - "{{ ansible_facts['user_dir'] }}/.config/pcmanfm"
 
     - name: Setup libfm config
       community.general.ini_file:
-        path: "{{ ansible_user_dir }}/.config/libfm/libfm.conf"
+        path: "{{ ansible_facts['user_dir'] }}/.config/libfm/libfm.conf"
         section: config
         option: "{{ item.key }}"
         value: "{{ item.value }}"

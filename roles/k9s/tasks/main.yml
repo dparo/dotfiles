@@ -7,7 +7,7 @@
   block:
     - name: Create install dir
       ansible.builtin.file:
-        path: "{{ ansible_user_dir }}/opt/k9s"
+        path: "{{ ansible_facts['user_dir'] }}/opt/k9s"
         state: directory
         mode: "0755"
     - name: Check latest k9s release
@@ -20,13 +20,13 @@
     - name: Download and unpack k9s {{ rel['json']['tag_name'] }}
       ansible.builtin.unarchive:
         src: "https://github.com/derailed/k9s/releases/download/{{ rel['json']['tag_name'] }}/k9s_Linux_amd64.tar.gz"
-        dest: "{{ ansible_user_dir }}/opt/k9s"
+        dest: "{{ ansible_facts['user_dir'] }}/opt/k9s"
         remote_src: true
 
     - name: Symlink binaries
       ansible.builtin.file:
-        src: "{{ ansible_user_dir }}/opt/k9s/{{ item }}"
-        dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+        src: "{{ ansible_facts['user_dir'] }}/opt/k9s/{{ item }}"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin/{{ item }}"
         state: link
       loop:
         - k9s
@@ -34,5 +34,5 @@
     - name: Symlink config
       ansible.builtin.file:
         src: "{{ role_path }}/files"
-        dest: "{{ ansible_user_dir }}/.config/k9s"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/k9s"
         state: link

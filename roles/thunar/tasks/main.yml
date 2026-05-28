@@ -14,13 +14,13 @@
 
     - name: Check if directory exists
       ansible.builtin.stat:
-        path: "{{ ansible_user_dir }}/.local/share/dbus-1/services/"
+        path: "{{ ansible_facts['user_dir'] }}/.local/share/dbus-1/services/"
       register: dbus_dir
 
     # mkdir -p "$HOME/.local/share/dbus-1/services/"
-    - name: "Create dbus-1 services directory ({{ ansible_user_dir }}/.local/share/dbus-1/services)"
+    - name: "Create dbus-1 services directory ({{ ansible_facts['user_dir'] }}/.local/share/dbus-1/services)"
       ansible.builtin.file:
-        path: "{{ ansible_user_dir }}/.local/share/dbus-1/services"
+        path: "{{ ansible_facts['user_dir'] }}/.local/share/dbus-1/services"
         state: directory
         mode: '0755'
         recurse: true
@@ -30,7 +30,7 @@
     - name: Symlink dbus-1 service
       ansible.builtin.file:
         src: "/usr/share/dbus-1/services/org.xfce.Thunar.FileManager1.service"
-        dest: "{{ ansible_user_dir }}/.local/share/dbus-1/services/org.freedesktop.FileManager1.service"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/share/dbus-1/services/org.freedesktop.FileManager1.service"
         state: link
 
     # xdg-mime default thunar.desktop inode/directory

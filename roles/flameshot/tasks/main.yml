@@ -14,7 +14,7 @@
 
 - name: Create config dir
   ansible.builtin.file:
-    path: "{{ ansible_user_dir }}/.config/flameshot"
+    path: "{{ ansible_facts['user_dir'] }}/.config/flameshot"
     state: directory
     mode: "0755"
   tags:
@@ -26,13 +26,13 @@
     state: directory
     mode: "0755"
   loop:
-    - "{{ ansible_user_dir }}/Desktop/Pictures/Screenshots"
+    - "{{ ansible_facts['user_dir'] }}/Desktop/Pictures/Screenshots"
   tags:
     - flameshot
 
 - name: Setup flameshot config - General
   community.general.ini_file:
-    path: "{{ ansible_user_dir }}/.config/flameshot/flameshot.ini"
+    path: "{{ ansible_facts['user_dir'] }}/.config/flameshot/flameshot.ini"
     section: General
     option: "{{ item.key }}"
     value: "{{ item.value }}"
@@ -46,7 +46,7 @@
     - { key: copyPathAfterSave, value: "true" }
     - { key: saveAfterCopy, value: "true" }
     - { key: filenamePattern, value: "%FT%H:%M:%SZ" }
-    - { key: savePath, value: "{{ ansible_user_dir }}/Pictures/Screenshots" }
+    - { key: savePath, value: "{{ ansible_facts['user_dir'] }}/Pictures/Screenshots" }
     - { key: savePathFixed, value: "false" }
   tags:
     - flameshot

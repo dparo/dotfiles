@@ -5,18 +5,18 @@
   block:
     - name: Create config dir
       ansible.builtin.file:
-        path: "{{ ansible_user_dir }}/.config/nautilus"
+        path: "{{ ansible_facts['user_dir'] }}/.config/nautilus"
         state: directory
         mode: "0755"
     - name: Create script dir
       ansible.builtin.file:
-        path: "{{ ansible_user_dir }}/.local/share/nautilus/scripts"
+        path: "{{ ansible_facts['user_dir'] }}/.local/share/nautilus/scripts"
         state: directory
         mode: "0755"
 
     - name: Create scripts-accels config
       ansible.builtin.copy:
-        dest: "{{ ansible_user_dir }}/.config/nautilus/scripts-accels"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/nautilus/scripts-accels"
         content: |
           ; Modifiers: <Control> <Alt> <Shift>
           F4 open-terminal-here
@@ -30,7 +30,7 @@
     #   NAUTILUS_SCRIPT_WINDOW_GEOMETRY
     - name: Create open-terminal-here script
       ansible.builtin.copy:
-        dest: "{{ ansible_user_dir }}/.local/share/nautilus/scripts/open-terminal-here"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/share/nautilus/scripts/open-terminal-here"
         content: |
           #/bin/sh
 

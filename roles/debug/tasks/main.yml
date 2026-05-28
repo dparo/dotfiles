@@ -6,4 +6,4 @@
   block:
     - name: Debug msg
       ansible.builtin.debug:
-        msg: "{{ ansible_hostname }}"
+        msg: "{{ ansible_facts['hostname'] }}"

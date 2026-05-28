@@ -19,7 +19,7 @@
 
     - name: Create install dir
       ansible.builtin.file:
-        path: "{{ ansible_user_dir }}/opt/kitty"
+        path: "{{ ansible_facts['user_dir'] }}/opt/kitty"
         state: directory
         mode: "0755"
 
@@ -27,13 +27,13 @@
 
       ansible.builtin.unarchive:
         src: "{{ gh_repo }}/releases/download/{{ kitty['json']['tag_name'] }}/kitty-{{ kitty['json']['tag_name'][1:] }}-x86_64.txz"
-        dest: "{{ ansible_user_dir }}/opt/kitty"
+        dest: "{{ ansible_facts['user_dir'] }}/opt/kitty"
         remote_src: true
 
 
     - name: Install desktop file integration
       ansible.builtin.copy:
-        dest: "{{ ansible_user_dir }}/.local/share/applications/kitty.desktop"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/share/applications/kitty.desktop"
         content: |
           [Desktop Entry]
           Version=1.0
@@ -42,9 +42,9 @@
           GenericName=Terminal emulator
           Comment=Fast, feature-rich, GPU based terminal
           Roles=Terminal;
-          TryExec={{ansible_user_dir }}/opt/kitty/bin/kitty
-          Exec={{ ansible_user_dir }}/opt/kitty/bin/kitty
-          Icon={{ ansible_user_dir }}/opt/kitty/share/icons/hicolor/256x256/apps/kitty.png
+          TryExec={{ansible_facts['user_dir'] }}/opt/kitty/bin/kitty
+          Exec={{ ansible_facts['user_dir'] }}/opt/kitty/bin/kitty
+          Icon={{ ansible_facts['user_dir'] }}/opt/kitty/share/icons/hicolor/256x256/apps/kitty.png
           Keywords=shell;prompt;command;commandline;cmd;
           Categories=System;TerminalEmulator;
           StartupWMClass=kitty
@@ -54,15 +54,15 @@
           [Desktop Action open-url]
           Name=kitty URL Launcher=
           Comment=Open URLs with kitty
-          Exec={{ ansible_user_dir }}/opt/kitty/bin/kitty +open %U
+          Exec={{ ansible_facts['user_dir'] }}/opt/kitty/bin/kitty +open %U
           NoDisplay=true
           MimeType=image/*;application/x-sh;application/x-shellscript;inode/directory;text/*;x-scheme-handler/kitty;x-scheme-handler/ssh;
         mode: "0644"
 
     - name: Symlink binary
       ansible.builtin.file:
-        src: "{{ ansible_user_dir }}/opt/kitty/bin/{{ item }}"
-        dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+        src: "{{ ansible_facts['user_dir'] }}/opt/kitty/bin/{{ item }}"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin/{{ item }}"
         state: link
       loop:
         - kitty
@@ -71,13 +71,13 @@
     - name: Symlink config
       ansible.builtin.file:
         src: "{{ role_path }}/files"
-        dest: "{{ ansible_user_dir }}/.config/kitty"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/kitty"
         state: link
 
     - name: Setup x-terminal-emulator
       ansible.builtin.file:
-        src: "{{ ansible_user_dir }}/.local/bin/kitty"
-        dest: "{{ ansible_user_dir }}/.local/bin/x-terminal-emulator"
+        src: "{{ ansible_facts['user_dir'] }}/.local/bin/kitty"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin/x-terminal-emulator"
         state: link
 
 # Setup xdg-terminal-exec (Overrides default terminal used by `glib/gio/gdesktopappinfo.c` which affects programs such as `gtk-launch` and `nautilus`)
@@ -85,8 +85,8 @@
 # See: https://gitlab.freedesktop.org/xdg/xdg-specs/-/issues/54
 # - name: Setup xdg-terminal-exec
 #   ansible.builtin.file:
-#     src: "{{ ansible_user_dir }}/.local/bin/kitty"
-#     dest: "{{ ansible_user_dir }}/.local/bin/xdg-terminal-exec"
+#     src: "{{ ansible_facts['user_dir'] }}/.local/bin/kitty"
+#     dest: "{{ ansible_facts['user_dir'] }}/.local/bin/xdg-terminal-exec"
 #     state: link
 #   tags:
 #     - kitty

@@ -6,7 +6,7 @@
     - name: Symlink config
       ansible.builtin.file:
         src: "{{ role_path }}/files/config"
-        dest: "{{ ansible_user_dir }}/.config/go"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/go"
         state: link
 
     - when: golang_install_from_package_manager

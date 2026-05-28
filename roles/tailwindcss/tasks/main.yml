@@ -14,6 +14,6 @@
       ansible.builtin.get_url:
         # https://github.com/tailwindlabs/tailwindcss/releases/download/v3.3.3/tailwindcss-linux-x64
         url: "https://github.com/tailwindlabs/tailwindcss/releases/download/{{ rel['json']['tag_name'] }}/tailwindcss-linux-x64"
-        dest: '{{ ansible_user_dir }}/.local/bin/tailwindcss'
+        dest: '{{ ansible_facts['user_dir'] }}/.local/bin/tailwindcss'
         mode: "0755"
         force: "yes"

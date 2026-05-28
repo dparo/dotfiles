@@ -6,7 +6,7 @@
   block:
     - name: Install if cargo is installed
       ansible.builtin.stat:
-        path: "{{ ansible_user_dir }}/.local/bin/cargo"
+        path: "{{ ansible_facts['user_dir'] }}/.local/bin/cargo"
       register: cargo_stat
       ignore_errors: true
 
@@ -23,5 +23,5 @@
       ansible.builtin.command: /tmp/sh.rustup.rs -y --no-modify-path --profile default --component rustc,cargo,rust-src,rustfmt,clippy
 
     - name: Update
-      ansible.builtin.command: "{{ ansible_user_dir }}/.local/share/cargo/bin/rustup update"
+      ansible.builtin.command: "{{ ansible_facts['user_dir'] }}/.local/share/cargo/bin/rustup update"
       when: cargo_stat.stat.exists

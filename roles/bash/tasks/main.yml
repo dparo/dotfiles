@@ -11,7 +11,7 @@
 - name: Symlink config
   ansible.builtin.file:
     src: "{{ role_path }}/files/{{item}}"
-    dest: "{{ ansible_user_dir }}/{{item}}"
+    dest: "{{ ansible_facts['user_dir'] }}/{{item}}"
     state: link
   tags:
     - bash

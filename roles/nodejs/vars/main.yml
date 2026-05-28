@@ -7,4 +7,4 @@ node_versions:
   - 18.17.1
   - 20.3.1
 default_node_version: 18.17.1
-node_install_dir: "{{ ansible_user_dir }}/opt"
+node_install_dir: "{{ ansible_facts['user_dir'] }}/opt"

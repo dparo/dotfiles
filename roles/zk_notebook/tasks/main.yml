@@ -20,12 +20,12 @@
     - name: Download and unpack latest zk-org/zk
       ansible.builtin.unarchive:
         src: "https://github.com/zk-org/zk/releases/latest/download/zk-{{ zk_latest['json']['tag_name'][0:] }}-linux-amd64.tar.gz"
-        dest: "{{ ansible_user_dir }}/.local/bin"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin"
         remote_src: true
       become: true
 
     - name: Symlink config
       ansible.builtin.file:
         src: "{{ role_path }}/files"
-        dest: "{{ ansible_user_dir }}/.config/zk"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/zk"
         state: link

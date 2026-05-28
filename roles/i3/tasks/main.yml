@@ -27,9 +27,9 @@
         state: link
       loop:
         - src: "{{ role_path }}/files/i3"
-          dest: "{{ ansible_user_dir }}/.config/i3"
+          dest: "{{ ansible_facts['user_dir'] }}/.config/i3"
         - src: "{{ role_path }}/files/i3status"
-          dest: "{{ ansible_user_dir }}/.config/i3status"
+          dest: "{{ ansible_facts['user_dir'] }}/.config/i3status"
 
     - name: Reload i3
       ansible.builtin.command: i3-msg reload

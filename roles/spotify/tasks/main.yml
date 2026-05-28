@@ -18,7 +18,7 @@
   - name: Create autostart desktop file
     when: false
     ansible.builtin.copy:
-      dest: "{{ ansible_user_dir }}/.config/autostart/spotify.desktop"
+      dest: "{{ ansible_facts['user_dir'] }}/.config/autostart/spotify.desktop"
       content: |
         [Desktop Entry]
         Type=Application
@@ -105,13 +105,13 @@
 
       - name: Create spotifyd config dir
         ansible.builtin.file:
-          path: "{{ ansible_user_dir }}/.config/spotifyd/"
+          path: "{{ ansible_facts['user_dir'] }}/.config/spotifyd/"
           state: directory
           mode: "0755"
 
       - name: Setup spotifyd configuration
         ansible.builtin.copy:
-          dest: '{{ ansible_user_dir }}/.config/spotifyd/spotifyd.conf'
+          dest: '{{ ansible_facts['user_dir'] }}/.config/spotifyd/spotifyd.conf'
           content: |
             # vi: ft=toml
 
@@ -120,7 +120,7 @@
             ##
             ## Device identity
             ##
-            device_name = "spotifyd@{{ ansible_hostname | replace(' ', '-') }}"
+            device_name = "spotifyd@{{ ansible_facts['hostname'] | replace(' ', '-') }}"
             device_type = "computer"
 
             ##
@@ -156,7 +156,7 @@
             ## Misc
             ##
             no_audio_cache = false
-            cache_path = "{{ ansible_user_dir }}/.cache/spotifyd"
+            cache_path = "{{ ansible_facts['user_dir'] }}/.cache/spotifyd"
             max_cache_size = 134217728          # 128 MegaBytes (property specified in bytes)
 
             ##

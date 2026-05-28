@@ -6,5 +6,5 @@
     - name: Install dbgate (https://github.com/dbgate/dbgate)
       ansible.builtin.get_url:
         url: https://github.com/dbgate/dbgate/releases/latest/download/dbgate-latest.AppImage
-        dest: "{{ ansible_user_dir }}/opt/dbgate.AppImage"
+        dest: "{{ ansible_facts['user_dir'] }}/opt/dbgate.AppImage"
         mode: "0755"

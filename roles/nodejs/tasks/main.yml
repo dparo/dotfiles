@@ -18,7 +18,7 @@
           ansible.builtin.git:
             clone: true
             depth: 1
-            dest: "{{ ansible_user_dir}}/.config/nvm"
+            dest: "{{ ansible_facts['user_dir']}}/.config/nvm"
             force: true
             repo: https://github.com/nvm-sh/nvm
             single_branch: true
@@ -54,7 +54,7 @@
         - name: Symlink binaries {{ default_node_version }}
           ansible.builtin.file:
             src: "{{ node_install_dir }}/node-v{{ default_node_version }}-linux-x64/bin/{{ item }}"
-            dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+            dest: "{{ ansible_facts['user_dir'] }}/.local/bin/{{ item }}"
             state: link
           loop:
             - node
@@ -66,7 +66,7 @@
         - name: Symlink config
           ansible.builtin.file:
             src: "{{ item }}"
-            dest: "{{ ansible_user_dir }}/.config/{{ item | basename }}"
+            dest: "{{ ansible_facts['user_dir'] }}/.config/{{ item | basename }}"
             state: link
           loop:
             - "{{ role_path }}/files/npm"
@@ -74,7 +74,7 @@
         - name: Symlink Angular config
           ansible.builtin.file:
             src: "{{ role_path }}/files/angular"
-            dest: "{{ ansible_user_dir }}/.config/angular"
+            dest: "{{ ansible_facts['user_dir'] }}/.config/angular"
             state: link
           tags:
             - angula

@@ -85,7 +85,7 @@
     #     state: directory
     #     mode: "0755"
     #   loop:
-    #     - "{{ ansible_user_dir }}/.local/share/java"
+    #     - "{{ ansible_facts['user_dir'] }}/.local/share/java"
     #   tags:
     #     - java
     #     - jdk
@@ -94,7 +94,7 @@
     - name: Fetch PMD binary (https://github.com/pmd/pmd)
       ansible.builtin.unarchive:
         src: https://github.com/pmd/pmd/releases/download/pmd_releases%2F7.0.0-rc3/pmd-dist-7.0.0-rc3-bin.zip
-        dest: "{{ ansible_user_dir }}/opt/"
+        dest: "{{ ansible_facts['user_dir'] }}/opt/"
         remote_src: true
       tags:
         - java
@@ -102,13 +102,13 @@
 
     - name: Create PMD binary wrapper
       ansible.builtin.copy:
-        dest: "{{ ansible_user_dir }}/.local/bin/pmd"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin/pmd"
         content: |
           #!/usr/bin/env bash
 
           export PMD_JAVA_OPTS="$_JAVA_OPTIONS"
           unset _JAVA_OPTIONS
-          exec "{{ ansible_user_dir }}/opt/pmd-bin-7.0.0-rc3/bin/pmd" "$@"
+          exec "{{ ansible_facts['user_dir'] }}/opt/pmd-bin-7.0.0-rc3/bin/pmd" "$@"
         mode: "0755"
       tags:
         - java
@@ -126,7 +126,7 @@
     - name: Unpack latest spotbugs
       ansible.builtin.unarchive:
         src: https://github.com/spotbugs/spotbugs/releases/download/{{ spotbugs['json']['tag_name'] }}/spotbugs-{{ spotbugs['json']['tag_name'] }}.tgz
-        dest: "{{ ansible_user_dir }}/opt"
+        dest: "{{ ansible_facts['user_dir'] }}/opt"
         remote_src: true
       tags:
         - java
@@ -134,7 +134,7 @@
 
     - name: Make spotbugs executable
       ansible.builtin.file:
-        path: "{{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs['json']['tag_name'] }}/bin/{{ item }}"
+        path: "{{ ansible_facts['user_dir'] }}/opt/spotbugs-{{ spotbugs['json']['tag_name'] }}/bin/{{ item }}"
         mode: "0755"
       loop:
         - spotbugs
@@ -144,8 +144,8 @@
 
     - name: Symlink binary
       ansible.builtin.file:
-        src: "{{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs['json']['tag_name'] }}/bin/{{ item }}"
-        dest: "{{ ansible_user_dir }}/.local/bin/{{ item }}"
+        src: "{{ ansible_facts['user_dir'] }}/opt/spotbugs-{{ spotbugs['json']['tag_name'] }}/bin/{{ item }}"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin/{{ item }}"
         state: link
       loop:
         - spotbugs
@@ -155,14 +155,14 @@
 
     - name: Create spotbugs desktop file integration
       ansible.builtin.copy:
-        dest: "{{ ansible_user_dir }}/.local/share/applications/spotbugs.desktop"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/share/applications/spotbugs.desktop"
         content: |
           [Desktop Entry]
           Name=Spotbugs
           Exec=spotbugs %U
           Terminal=false
           Type=Application
-          Icon={{ ansible_user_dir }}/opt/spotbugs-{{ spotbugs['json']['tag_name'] }}/bin/spotbugs.ico
+          Icon={{ ansible_facts['user_dir'] }}/opt/spotbugs-{{ spotbugs['json']['tag_name'] }}/bin/spotbugs.ico
           Categories=Development;
           StartupNotify=true
           StartupWMClass=spotbugs
@@ -183,7 +183,7 @@
     - name: Fetch latest checkstyle
       ansible.builtin.get_url:
         url: https://github.com/checkstyle/checkstyle/releases/download/{{ checkstyle['json']['tag_name'] }}/{{ checkstyle['json']['tag_name'] }}-all.jar
-        dest: "{{ ansible_user_dir }}/opt/{{ checkstyle['json']['tag_name'] }}-all.jar"
+        dest: "{{ ansible_facts['user_dir'] }}/opt/{{ checkstyle['json']['tag_name'] }}-all.jar"
         mode: "0644"
         force: true
       tags:
@@ -192,13 +192,13 @@
 
     - name: Create checkstyle binary wrapper
       ansible.builtin.copy:
-        dest: "{{ ansible_user_dir }}/.local/bin/checkstyle"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin/checkstyle"
         content: |
           #!/usr/bin/env bash
 
           export CHECKSTYLE_JAVA_OPTS="$_JAVA_OPTIONS"
           unset _JAVA_OPTIONS
-          exec java $CHECKSTYLE_JAVA_OPTS -jar "{{ ansible_user_dir }}/opt/{{ checkstyle['json']['tag_name'] }}-all.jar" "$@"
+          exec java $CHECKSTYLE_JAVA_OPTS -jar "{{ ansible_facts['user_dir'] }}/opt/{{ checkstyle['json']['tag_name'] }}-all.jar" "$@"
         mode: "0755"
       tags:
         - java

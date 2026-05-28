@@ -16,19 +16,19 @@
     - name: Download and unpack Insomnia Core {{ insomnia_version }}
       ansible.builtin.unarchive:
         src: https://github.com/Kong/insomnia/releases/download/core@{{ insomnia_version }}/Insomnia.Core-{{ insomnia_version }}.tar.gz
-        dest: "{{ ansible_user_dir }}/opt"
+        dest: "{{ ansible_facts['user_dir'] }}/opt"
         remote_src: true
 
     - name: Symlink binary
       ansible.builtin.file:
-        src: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/insomnia"
-        dest: "{{ ansible_user_dir }}/.local/bin/insomnia"
+        src: "{{ ansible_facts['user_dir'] }}/opt/Insomnia.Core-{{ insomnia_version }}/insomnia"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin/insomnia"
         state: link
 
     - name: Download and unpack insomnia-cli version {{ insomnia_cli_version }}
       ansible.builtin.unarchive:
         src: https://github.com/Kong/insomnia/releases/download/core@{{ insomnia_cli_version }}/inso-linux-{{ insomnia_cli_version }}.tar.xz
-        dest: "{{ ansible_user_dir }}/.local/bin"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/bin"
         remote_src: true
 
       # Fixes issue https://github.com/Kong/insomnia/issues/5088
@@ -38,18 +38,18 @@
         - name: Fetch older cups-lib-2.4.1.7
           ansible.builtin.get_url:
             url: https://kojipkgs.fedoraproject.org//packages/cups/2.4.1/7.fc36/x86_64/cups-libs-2.4.1-7.fc36.x86_64.rpm
-            dest: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/"
+            dest: "{{ ansible_facts['user_dir'] }}/opt/Insomnia.Core-{{ insomnia_version }}/"
             mode: "0644"
 
         - name: Unpack older cups-lib-2.4.1.7
           ansible.builtin.shell: rpm2cpio cups-libs-2.4.1-7.fc36.x86_64.rpm | cpio -idmv
           args:
-            chdir: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}"
+            chdir: "{{ ansible_facts['user_dir'] }}/opt/Insomnia.Core-{{ insomnia_version }}"
 
         - name: Symlink libcups.so.2 libcupsimage.so.2 from older cups-lib-2.4.1.7
           ansible.builtin.file:
-            src: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/usr/lib64/{{ item }}"
-            dest: "{{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/{{ item }}"
+            src: "{{ ansible_facts['user_dir'] }}/opt/Insomnia.Core-{{ insomnia_version }}/usr/lib64/{{ item }}"
+            dest: "{{ ansible_facts['user_dir'] }}/opt/Insomnia.Core-{{ insomnia_version }}/{{ item }}"
             state: link
             force: true
           loop:
@@ -58,15 +58,15 @@
 
     - name: Install desktop file integration
       ansible.builtin.copy:
-        dest: "{{ ansible_user_dir }}/.local/share/applications/insomnia.desktop"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/share/applications/insomnia.desktop"
         content: |
           [Desktop Entry]
           Name=Insomnia
-          Exec={{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/insomnia %U
-          TryExec={{ ansible_user_dir }}/opt/Insomnia.Core-{{ insomnia_version }}/insomnia
+          Exec={{ ansible_facts['user_dir'] }}/opt/Insomnia.Core-{{ insomnia_version }}/insomnia %U
+          TryExec={{ ansible_facts['user_dir'] }}/opt/Insomnia.Core-{{ insomnia_version }}/insomnia
           Terminal=false
           Type=Application
-          Icon={{ ansible_user_dir }}/.local/share/icons/hicolor/insomnia.png
+          Icon={{ ansible_facts['user_dir'] }}/.local/share/icons/hicolor/insomnia.png
           Categories=Development;WebDevelopment;
           StartupNotify=true
           StartupWMClass=insomnia
@@ -75,5 +75,5 @@
     - name: Install insomnia Icon
       ansible.builtin.get_url:
         url: https://raw.githubusercontent.com/flathub/rest.insomnia.Insomnia/master/insomnia.png
-        dest: "{{ ansible_user_dir }}/.local/share/icons/hicolor/insomnia.png"
+        dest: "{{ ansible_facts['user_dir'] }}/.local/share/icons/hicolor/insomnia.png"
         mode: "0755"

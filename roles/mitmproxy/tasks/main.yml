@@ -3,7 +3,7 @@
 - name: Install mitmproxy {{ mitmproxy_version }}
   ansible.builtin.unarchive:
     src: https://snapshots.mitmproxy.org/{{ mitmproxy_version }}/mitmproxy-{{ mitmproxy_version }}-linux.tar.gz
-    dest: "{{ ansible_user_dir }}/.local/bin"
+    dest: "{{ ansible_facts['user_dir'] }}/.local/bin"
     remote_src: true
   tags:
     - mitmproxy
