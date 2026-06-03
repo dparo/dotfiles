@@ -1,5 +1,28 @@
 {
     // BASIC
+    "show_edit_predictions": false,
+    "edit_predictions": {
+        "allow_data_collection": "no"
+    },
+    "disable_ai": true,
+    "project_panel": {
+        "dock": "left"
+    },
+    "outline_panel": {
+        "dock": "left"
+    },
+    "collaboration_panel": {
+        "dock": "left"
+    },
+    "agent": {
+        "enable_feedback": false,
+        "dock": "right",
+        "favorite_models": [],
+        "model_parameters": []
+    },
+    "git_panel": {
+        "dock": "left"
+    },
     "base_keymap": "VSCode",
     "telemetry": {
         "diagnostics": false,
