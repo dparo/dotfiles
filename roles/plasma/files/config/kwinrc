@@ -2,17 +2,26 @@
 Id_1=be787f7b-3238-4862-8f53-cf1d1d892389
 Id_2=d93d0507-e6b5-4498-93d7-d3fe15bb1352
 Id_3=94420e3c-0ca7-4902-aaad-f6ad6f84ef6c
-Id_4=b40da750-f5d6-4b04-9eb4-4fa593c6c9f6
+Id_4=80cd8822-da2e-487b-84fd-8a7c096907b9
+Name_4=New Desktop
 Number=4
 Rows=2
 
+[Effect-diminactive]
+Strength=75
+
 [Effect-shakecursor]
 Magnification=10
+
+[Effect-translucency]
+Inactive=51
 
 [MouseBindings]
 CommandAllKey=Alt
 
 [Plugins]
+desktopchangeosdEnabled=false
+minimizeallEnabled=false
 shakecursorEnabled=false
 zoomEnabled=false
 
@@ -42,6 +51,10 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][7baa7708-cffd-4e29-a207-43bcd143779b][b1481527-a16a-49f6-96d0-72ac7ae66c47]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][80cd8822-da2e-487b-84fd-8a7c096907b9][b1481527-a16a-49f6-96d0-72ac7ae66c47]
+padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][94420e3c-0ca7-4902-aaad-f6ad6f84ef6c][92b32c6b-fa20-4fec-986f-292d4842bbad]
@@ -134,8 +147,9 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 [Wayland]
 VirtualKeyboardEnabled=false
 
-[Windows]
-FocusPolicy=FocusFollowsMouse
-
 [Xwayland]
 Scale=1
+
+[org.kde.kdecoration2]
+library=org.kde.breeze
+theme=Breeze
