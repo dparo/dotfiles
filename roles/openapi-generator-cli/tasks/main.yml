@@ -6,7 +6,7 @@
     - name: Get JAR
       ansible.builtin.get_url:
         url: 'https://repo1.maven.org/maven2/org/openapitools/openapi-generator-cli/7.4.0/openapi-generator-cli-7.4.0.jar'
-        dest: '{{ ansible_facts['user_dir'] }}/opt/openapi-generator-cli.jar'
+        dest: '{{ ansible_facts["user_dir"] }}/opt/openapi-generator-cli.jar'
         mode: "0755"
 
     - name: Create binary wrapper

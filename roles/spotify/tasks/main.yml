@@ -111,7 +111,7 @@
 
       - name: Setup spotifyd configuration
         ansible.builtin.copy:
-          dest: '{{ ansible_facts['user_dir'] }}/.config/spotifyd/spotifyd.conf'
+          dest: '{{ ansible_facts["user_dir"] }}/.config/spotifyd/spotifyd.conf'
           content: |
             # vi: ft=toml
 
