@@ -15,5 +15,6 @@
       ansible.builtin.pip:
         name:
           - frogmouth # A Markdown browser for your terminal: https://github.com/Textualize/frogmouth
-        state: latest
+        state: present
+        version: 0.9.1
 

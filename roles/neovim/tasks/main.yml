@@ -110,11 +110,12 @@
         state: present
       become: true
 
-    - name: Install runtime deps (PIP)
-      ansible.builtin.pip:
-        name:
-          - cpplint
-        state: latest
+    # - name: Install runtime deps (PIP)
+    #   ansible.builtin.pip:
+    #     name:
+    #       - cpplint
+    #     state: present
+    #     version: 2.0.2
 
     - name: Symlink config
       ansible.builtin.file:

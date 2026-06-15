@@ -11,14 +11,9 @@
           - i3status
           - i3lock
           - i3blocks
+          - python3-i3ipc.noarch
         state: present
       become: true
-
-    - name: Install i3ipc
-      ansible.builtin.pip:
-        name:
-          - i3ipc
-        state: latest
 
     - name: Symlink config
       ansible.builtin.file:

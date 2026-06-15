@@ -37,7 +37,8 @@
       ansible.builtin.pip:
         name:
           - mutt_ics
-        state: latest
+        state: present
+        version: 0.9.2
 
     - name: Symlink config
       ansible.builtin.file:

@@ -21,7 +21,8 @@
       ansible.builtin.pip:
         name:
           - spotdl
-        state: latest
+        state: present
+        version: 4.4.1
 
 
     - name: Create items
