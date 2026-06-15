@@ -9,7 +9,14 @@
 - [ ] Install TUI File Manager
   - [x] https://github.com/sxyazi/yazi
   - [ ] https://github.com/yorukot/superfile
-- [ ] Integrate background image: https://wallhaven.cc/w/dpvp1j
+- [ ] Integrate background image:
+  - [ ] https://wallhaven.cc/w/qd3wlr  (Pokemon Emerald terrain Background)
+  - [ ] https://wallhaven.cc/w/dpvp1j (Mountain)
+  - [ ] https://wallhaven.cc/w/mp2l68 (Mountain 2)
+  - [ ] https://wallhaven.cc/w/jexkwm (Mill House)
+  - [ ] https://wallhaven.cc/w/9dvl38 (needs resize. Generic Pixel Art)
+  - [ ] https://wallhaven.cc/w/0jk7jw (Pokemon Lapras)
+  - [ ] https://wallhaven.cc/w/gjwg7l
 - [ ] Desktop Applications
   - [ ] https://heynote.com/
 - [ ] Wayland
