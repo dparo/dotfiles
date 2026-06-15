@@ -1,4 +1,7 @@
 # TODOS
+- [ ] Security
+  - [ ] Pin the versions for git clone and latest version JSON fetch
+
 - [ ] AI Coding Agents
   - [x] [Google Gemini CLI](https://github.com/google-gemini/gemini-cli)
   - [x] [sst/opencode](https://github.com/sst/opencode)
