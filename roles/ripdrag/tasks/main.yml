@@ -16,4 +16,5 @@
       community.general.cargo:
         name:
           - ripdrag
-        state: latest
+        state: present
+        version: 0.4.12

@@ -15,4 +15,5 @@
       community.general.cargo:
         name:
           - sniffnet
-        state: latest
+        state: present
+        version: 1.4.2

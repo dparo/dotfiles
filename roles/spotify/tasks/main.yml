@@ -166,8 +166,3 @@
           mode: '0644'
         no_log: true
 
-      - name: Install spotify-tui
-        community.general.cargo:
-          name:
-            - spotify-tui
-
