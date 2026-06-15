@@ -7,5 +7,6 @@
       community.general.npm:
         name: "@marp-team/marp-cli" # Presentation mode for markdown files.
         global: true
-        state: latest
+        state: present
+        version: 4.1.2
 

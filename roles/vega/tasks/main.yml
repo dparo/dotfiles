@@ -10,6 +10,7 @@
       community.general.npm:
         name: "{{ item }}"
         global: true
-        state: latest
+        state: present
+        version: 6.2.0
       loop:
         - vega-cli

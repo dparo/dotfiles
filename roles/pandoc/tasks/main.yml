@@ -14,7 +14,8 @@
       community.general.npm:
         name: "{{ item }}"
         global: true
-        state: latest
+        state: present
+        version: 1.4.7
       loop:
         - mermaid-filter
 

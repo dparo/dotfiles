@@ -3,6 +3,7 @@
   tags:
     - postman
     - postman-cli
+    - never
   block:
     - name: Download and unpack Postman
       ansible.builtin.unarchive:
@@ -22,7 +23,8 @@
       community.general.npm:
         name: newman
         global: true
-        state: latest
+        state: present
+        version: 6.2.2
 
     - name: Install desktop file integration
       ansible.builtin.copy:

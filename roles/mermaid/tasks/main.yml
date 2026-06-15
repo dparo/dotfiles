@@ -9,6 +9,7 @@
       community.general.npm:
         name: "{{ item }}"
         global: true
-        state: latest
+        state: present
+        version: 11.14.0
       loop:
         - "@mermaid-js/mermaid-cli"
