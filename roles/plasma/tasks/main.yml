@@ -3,12 +3,18 @@
   tags:
     - plasma
     - kde
+    - never
   block:
-
-        # TODO: Isntall
-        # - yakuake
-        # - bibata-cursor-theme # Nicer cursor theme (Terra repository)
-        # - klassy # Better theme (Terra Repository)
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - plasma-desktop
+          # - yakuake
+          - bibata-cursor-theme # Nicer cursor theme (Terra repository)
+          # - klassy # Better theme (Terra Repository)
+        state: absent
+        autoremove: true
+      become: true
 
     - name: Symlink config
       ansible.builtin.file:
