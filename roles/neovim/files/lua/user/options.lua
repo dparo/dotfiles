@@ -29,6 +29,8 @@ vim.o.statusline = "%f %h%w%m%r%=%y %{&fileformat} %{&fileencoding?&fileencoding
 vim.o.swapfile = false
 vim.o.backup = false
 vim.o.undofile = true
+vim.o.undolevels = 100 -- Default: 1000. Limit it to avoid explosion of ~/.cache/nvim/nvim/undo/
+vim.o.undoreload = 1000 -- Default: 10000. Limit it to avoid explosion of ~/.cache/nvim/nvim/undo/
 vim.o.writebackup = false
 
 vim.o.number = true
