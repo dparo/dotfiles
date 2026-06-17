@@ -52,5 +52,7 @@ fi
 # - https://www.reddit.com/r/spotify/comments/8fyzqp/why_in_the_world_does_the_spotify_app_cache_eat/
 rm -rf /home/dparo/.var/app/com.spotify.Client/cache
 
-# Delete nvim undo history
-rm -rf /home/dparo/.cache/nvim/nvim/undo/
+# Delete nvim undo history, older than 90 days
+find /home/dparo/.cache/nvim/nvim/undo -type f -mtime +90 -delete
+#   Otherwise go for hard delete: rm -rf /home/dparo/.cache/nvim/nvim/undo/
+
