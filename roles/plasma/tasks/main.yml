@@ -4,6 +4,12 @@
     - plasma
     - kde
   block:
+
+        # TODO: Isntall
+        # - yakuake
+        # - bibata-cursor-theme # Nicer cursor theme (Terra repository)
+        # - klassy # Better theme (Terra Repository)
+
     - name: Symlink config
       ansible.builtin.file:
         src: "{{ role_path }}/files/config/{{item}}"
@@ -19,6 +25,3 @@
         - kcminputrc
         - kxkbrc
         - kglobalshortcutsrc
-        - yakuake
-        - bibata-cursor-theme # Nicer cursor theme (Terra repository)
-        # - klassy # Better theme (Terra Repository)
