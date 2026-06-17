@@ -147,6 +147,9 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 [Wayland]
 VirtualKeyboardEnabled=false
 
+[Windows]
+PerOutputVirtualDesktops=true
+
 [Xwayland]
 Scale=1
 
