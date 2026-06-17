@@ -18,7 +18,7 @@ mason_dependencies:
   - ruff
   - clangd
   - clang-format
-  - codelldb
+  # - codelldb
   - cpptools
   - cpplint
   - cmakelang
@@ -51,7 +51,7 @@ mason_dependencies:
   - proselint
   - codespell
   - misspell
-  - ltex-ls
+  # - ltex-ls
   - ansible-language-server
   - terraform-ls
   - tfsec
@@ -64,7 +64,7 @@ mason_dependencies:
   # - sonarlint-language-server
   - hadolint
   - angular-language-server
-  - cucumber-language-server
+  # - cucumber-language-server
   - js-debug-adapter # https://github.com/microsoft/vscode-js-debug
   # - chrome-debug-adapter # Deprecated in favour of js-debug-adapter
   - firefox-debug-adapter
