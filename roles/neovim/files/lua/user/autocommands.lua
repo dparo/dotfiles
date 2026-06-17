@@ -58,6 +58,14 @@ core.utils.augroup("USER_SKELETONS", {
     },
 })
 
+-- Disable persistent undo for noisy paths
+vim.api.nvim_create_autocmd("BufWritePre", {
+    pattern = { "/tmp/*", "/var/tmp/*" },
+    callback = function()
+      vim.opt_local.undofile = false
+    end,
+})
+
 vim.api.nvim_create_autocmd("FileType", {
   pattern = { "*" },
   callback = function(args)
