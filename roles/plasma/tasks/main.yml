@@ -32,6 +32,8 @@
       # plasma-discover-libs
       # plasma-discover-notifier
       # plasma-discover-offline-updates
+      # kdeconnect
+      # kdeconnectd
 
     - name: Symlink config
       ansible.builtin.file:
