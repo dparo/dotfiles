@@ -16,6 +16,23 @@
         autoremove: true
       become: true
 
+      # TODO: REmove
+      # akonadi-calendar
+      # akonadi-contacts
+      # akonadi-import-wizard
+      # akonadi-mime
+      # akonadi-search
+      # akonadi-server
+      # akonadi-server-mysql
+      # PackageKit
+      # PackageKit-command-not-found
+      # plasma-discover
+      # plasma-discover-flatpak
+      # plasma-discover-kns
+      # plasma-discover-libs
+      # plasma-discover-notifier
+      # plasma-discover-offline-updates
+
     - name: Symlink config
       ansible.builtin.file:
         src: "{{ role_path }}/files/config/{{item}}"
