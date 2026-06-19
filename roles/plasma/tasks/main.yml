@@ -12,8 +12,7 @@
           # - yakuake
           - bibata-cursor-theme # Nicer cursor theme (Terra repository)
           # - klassy # Better theme (Terra Repository)
-        state: absent
-        autoremove: true
+        state: present
       become: true
 
       # TODO: REmove
@@ -50,3 +49,4 @@
         - kcminputrc
         - kxkbrc
         - kglobalshortcutsrc
+        - plasmakeyboardrc
