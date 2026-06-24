@@ -48,7 +48,7 @@
         name: "{{ item }}"
         enabled: true
       become: true
-      when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+      when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined
       loop:
         - systemd-resolved
 
@@ -57,7 +57,7 @@
         name: NetworkManager
         enabled: true
       become: true
-      when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+      when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined
 
     - name: Ensure NetworkManager config dirs exists
       ansible.builtin.file:

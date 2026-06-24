@@ -7,10 +7,10 @@
   tags:
     - never
     - nvidia
-  when: ansible_distribution == 'Fedora'
+  when: ansible_facts['distribution'] == 'Fedora'
   block:
 
-    - name: Enable the RPM Fusion repository for {{ ansible_distribution ~ ' ' ~ ansible_facts['distribution_major_version'] }}
+    - name: Enable the RPM Fusion repository for {{ ansible_facts['distribution'] ~ ' ' ~ ansible_facts['distribution_major_version'] }}
       ansible.builtin.dnf:
         name:
           - https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_facts['distribution_major_version'] }}.noarch.rpm

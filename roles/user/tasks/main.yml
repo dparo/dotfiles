@@ -1,7 +1,7 @@
 ---
-- name: Sets additional groups for user {{ ansible_env.USER }}
+- name: Sets additional groups for user {{ ansible_facts['env']['USER'] }}
   ansible.builtin.user:
-    name: "{{ ansible_env.USER }}"
+    name: "{{ ansible_facts['env']['USER'] }}"
     append: true
     groups:
       - wheel

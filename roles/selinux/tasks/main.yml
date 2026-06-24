@@ -1,7 +1,7 @@
 - name: SeLinux
   tags:
     - selinux
-  when: ansible_distribution == 'Fedora'
+  when: ansible_facts['distribution'] == 'Fedora'
   block:
     # - name: Disable SeLinux kernel boot option
     #   ansible.builtin.command: grubby --update-kernel ALL --args selinux=0

@@ -20,9 +20,9 @@
         create: true
       become: true
 
-    - name: Sets the user shell to zsh for user {{ ansible_env.USER }}
+    - name: Sets the user shell to zsh for user {{ ansible_facts['env']['USER'] }}
       ansible.builtin.user:
-        name: "{{ ansible_env.USER }}"
+        name: "{{ ansible_facts['env']['USER'] }}"
         shell: /bin/zsh
       become: true
 

@@ -17,14 +17,14 @@
         name: gnome-keyring-daemon.service
         enabled: true
         scope: user
-      when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+      when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined
 
     - name: Enable keyring socket
       ansible.builtin.systemd:
         name: gnome-keyring-daemon.socket
         enabled: true
         scope: user
-      when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+      when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined
 
     - name: Unlock keyring on login
       ansible.builtin.lineinfile:
@@ -32,7 +32,7 @@
         line: "{{ item.line }}"
         regexp: "{{ item.regexp }}"
         create: false
-      when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+      when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined
       become: true
       loop:
         - regexp: ^auth\s+optional\s+pam_gnome_keyring.so$

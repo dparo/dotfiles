@@ -23,7 +23,7 @@
         content: "{{ ssh_key_item.value }}"
         mode: "0400"
       no_log: true
-      when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+      when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined
       loop_control:
         loop_var: ssh_key_item
       with_items: "{{ ssh_key | default({}) | dict2items }}"

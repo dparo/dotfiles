@@ -4,7 +4,7 @@
     - dnf
     - dnf.conf
     - fedora
-  when: ansible_distribution == 'Fedora'
+  when: ansible_facts['distribution'] == 'Fedora'
   block:
     - name: Setup max_parallel_downloads
       ansible.builtin.lineinfile:

@@ -4,7 +4,7 @@
     - never
     - docker
     - podman
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined
   block:
     # dnf config-manager --add-repo https://download.docker.com/linux/fedora/docker-ce.repo
     - name: Enable docker repository
@@ -80,11 +80,11 @@
         name: docker.socket
         enabled: "{{ not podman_docker_emulation }}"
       become: true
-      when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and podman_docker_emulation
+      when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined and podman_docker_emulation
 
-    - name: Append docker group to user {{ ansible_env.USER }}
+    - name: Append docker group to user {{ ansible_facts['env']['USER'] }}
       ansible.builtin.user:
-        name: "{{ ansible_env.USER }}"
+        name: "{{ ansible_facts['env']['USER'] }}"
         append: true
         groups:
           - docker
@@ -119,7 +119,7 @@
         name: podman
         enabled: "{{ podman_docker_emulation }}"
       become: true
-      when: ansible_env.RUNNING_INSIDE_DOCKER is undefined and podman_docker_emulation
+      when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined and podman_docker_emulation
 #
     - name: Add host entry for host.docker.internal
       ansible.builtin.lineinfile:

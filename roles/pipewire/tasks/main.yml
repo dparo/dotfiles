@@ -38,7 +38,7 @@
     scope: user
   tags:
     - pipewire
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined
 
 - name: Enable wireplumber user service
   ansible.builtin.systemd:
@@ -48,7 +48,7 @@
   tags:
     - pipewire
     - wireplumber
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined
 
 - name: Symlink config
   ansible.builtin.file:
@@ -67,7 +67,7 @@
     scope: user
   tags:
     - pipewire
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined
 
 - name: Restart wireplumber service
   ansible.builtin.systemd:
@@ -78,4 +78,4 @@
   tags:
     - pipewire
     - wireplumber
-  when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+  when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined

@@ -1,7 +1,7 @@
 - name: Abrt
   tags:
     - abrt
-  when: ansible_distribution == 'Fedora'
+  when: ansible_facts['distribution'] == 'Fedora'
   block:
     - name: Uninstall abrt
       ansible.builtin.dnf:

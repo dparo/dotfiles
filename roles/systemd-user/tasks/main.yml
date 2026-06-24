@@ -18,7 +18,7 @@
         ansible.builtin.systemd:
           daemon_reload: true
           scope: user
-        when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+        when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined
         ignore_errors: true
 
       - name: Enable user services
@@ -26,7 +26,7 @@
           name: "{{ item }}"
           enabled: true
           scope: user
-        when: ansible_env.RUNNING_INSIDE_DOCKER is undefined
+        when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined
         loop:
           - systemd-dump-env-at-login.service
 
