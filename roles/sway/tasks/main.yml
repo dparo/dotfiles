@@ -22,6 +22,7 @@
           - sway-wallpapers
           - SwayNotificationCenter
           - fuzzel
+          - wofi
           - lxqt-policykit
           - brightnessctl
           - playerctl
@@ -56,5 +57,12 @@
       ansible.builtin.file:
         src: "{{ role_path }}/files/swaync"
         dest: "{{ ansible_facts['user_dir'] }}/.config/swaync"
+        state: link
+        force: true
+
+    - name: Symlink xdg-desktop-portal-wlr config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/xdg-desktop-portal-wlr"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/xdg-desktop-portal-wlr"
         state: link
         force: true

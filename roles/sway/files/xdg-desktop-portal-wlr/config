@@ -1,0 +1,3 @@
+[screencast]
+exec_before=swaync-client --inhibitor-add "screencast"
+exec_after=swaync-client --inhibitor-remove "screencast"
