@@ -36,47 +36,44 @@ return {
         },
     },
     -- A high-performance #RRGGBB format color highlighter for Neovim which has no external dependencies! Written in performant Luajit
-    {
-        "NvChad/nvim-colorizer.lua",
-        config = function()
-            require("colorizer").setup {}
-        end,
-    },
+    -- {
+    --     "NvChad/nvim-colorizer.lua",
+    --     config = function()
+    --         require("colorizer").setup {}
+    --     end,
+    -- },
     { "echasnovski/mini.nvim", version = false },
 
     -- Better quickfix window in Neovim, polish old quickfix window.
     { "kevinhwang91/nvim-bqf" },
 
-    -- A search panel for neovim: Find the enemy and replace them with dark power
-    { "windwp/nvim-spectre" },
-
     -- Treesitter based structural search and replace plugin for Neovim.
-    {
-        "cshuaimin/ssr.nvim",
-        config = function()
-            require("ssr").setup {}
-        end,
-    },
-    {
-        -- "ekickx/clipboard-image.nvim",
-        "postfen/clipboard-image.nvim", -- This fork contains fixes to vim.health support provided in nvim 0.9
-        config = function()
-            require("clipboard-image").setup {
-                -- Default configuration for all filetype
-                default = {
-                    img_dir = "assets/img",
-                    img_dir_txt = "assets/img",
-                    img_name = function()
-                        return os.date "%Y-%m-%dT%H-%M-%SZ"
-                    end, -- Example result: "2021-04-13-10-04-18"
-                },
-                asciidoc = {
-                    img_dir = "assets/img",
-                    img_dir_txt = "",
-                },
-            }
-        end,
-    },
+    -- {
+    --     "cshuaimin/ssr.nvim",
+    --     config = function()
+    --         require("ssr").setup {}
+    --     end,
+    -- },
+    -- {
+    --     -- "ekickx/clipboard-image.nvim",
+    --     "postfen/clipboard-image.nvim", -- This fork contains fixes to vim.health support provided in nvim 0.9
+    --     config = function()
+    --         require("clipboard-image").setup {
+    --             -- Default configuration for all filetype
+    --             default = {
+    --                 img_dir = "assets/img",
+    --                 img_dir_txt = "assets/img",
+    --                 img_name = function()
+    --                     return os.date "%Y-%m-%dT%H-%M-%SZ"
+    --                 end, -- Example result: "2021-04-13-10-04-18"
+    --             },
+    --             asciidoc = {
+    --                 img_dir = "assets/img",
+    --                 img_dir_txt = "",
+    --             },
+    --         }
+    --     end,
+    -- },
     -- {
     --     "supermaven-inc/supermaven-nvim",
     --     config = function()
@@ -148,12 +145,12 @@ return {
     -- { 'rstacruz/vim-closer' }
 
     -- Easily move selected lines (visual mode) up, down, left and right
-    {
-        "matze/vim-move",
-        config = function()
-            vim.g.move_map_keys = 0
-        end,
-    },
+    -- {
+    --     "matze/vim-move",
+    --     config = function()
+    --         vim.g.move_map_keys = 0
+    --     end,
+    -- },
 
     {
         "numToStr/Comment.nvim",
@@ -172,26 +169,26 @@ return {
         end,
     },
 
-    {
-        "windwp/nvim-autopairs",
-        enabled = false,
-        config = function()
-            require("nvim-autopairs").setup {
-                disable_filetype = { "TelescopePrompt", "lua" },
-                check_ts = true,
-                fast_wrap = {
-                    map = "<M-e>",
-                    chars = { "{", "[", "(", '"', "'" },
-                    pattern = [=[[%'%"%)%>%]%)%}%,]]=],
-                    end_key = "$",
-                    keys = "qwertyuiopzxcvbnmasdfghjkl",
-                    check_comma = true,
-                    highlight = "Search",
-                    highlight_grey = "Comment",
-                },
-            }
-        end,
-    },
+    -- {
+    --     "windwp/nvim-autopairs",
+    --     enabled = false,
+    --     config = function()
+    --         require("nvim-autopairs").setup {
+    --             disable_filetype = { "TelescopePrompt", "lua" },
+    --             check_ts = true,
+    --             fast_wrap = {
+    --                 map = "<M-e>",
+    --                 chars = { "{", "[", "(", '"', "'" },
+    --                 pattern = [=[[%'%"%)%>%]%)%}%,]]=],
+    --                 end_key = "$",
+    --                 keys = "qwertyuiopzxcvbnmasdfghjkl",
+    --                 check_comma = true,
+    --                 highlight = "Search",
+    --                 highlight_grey = "Comment",
+    --             },
+    --         }
+    --     end,
+    -- },
 
     ----
     ---- Plugins for cursor motion or for text editing
