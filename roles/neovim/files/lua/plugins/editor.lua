@@ -132,10 +132,10 @@ return {
                     before = "",
                     keyword = "fg",
                     after = "",
-                    pattern = [[.*<(KEYWORDS)>(\(.*\))?\s*:?]],
+                    pattern = [[.*\b(KEYWORDS)(%b())?%s*:?]],
                 },
                 search = {
-                    pattern = [[\b(KEYWORDS)\b(\(.*\))?\s*:?]],
+                    pattern = [[\b(KEYWORDS)(%b())?%s*:?]],
                 },
             }
         end,
