@@ -1,3 +1,9 @@
+
+-- NOTE(d.paro): Disable DAP support for the time being
+if true then
+    return {}
+end
+
 return {
     {
         "mfussenegger/nvim-dap",
