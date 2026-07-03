@@ -1,4 +1,26 @@
 {
-  "url": "https://teams.microsoft.com/v2",
-  "disableGpu": false
+  "url": "https://teams.cloud.microsoft/",
+  "disableGpu": false,
+  "multiAccount": {
+    "enabled": true
+  },
+  "graphApi": {
+    "enabled": true
+  },
+  "screenSharing": {
+    "thumbnail": {
+      "enabled": true,
+      "alwaysOnTop": true
+    },
+    "lockInhibitionMethod": "Electron"
+  },
+  "media": {
+    "microphone": {
+      "disableAutogain": true,
+      "speakingIndicator": true
+    },
+    "video": {
+      "menuEnabled": true
+    }
+  }
 }
