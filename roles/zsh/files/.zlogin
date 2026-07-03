@@ -39,6 +39,8 @@ USE_WAYLAND=1
 
 
 if test "$AUTO_START_GRAPHICAL_SESSION" -eq 1 \
+    && [ -t 0 ] \
+    && [ -z "$DISPLAY" ] \
     && systemctl -q is-active graphical.target \
     && [ -z "$SSH_CLIENT" ] \
     && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -le 4 ]; then
