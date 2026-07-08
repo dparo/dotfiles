@@ -350,4 +350,19 @@ return {
             }
         end,
     },
+    {
+        'vimwiki/vimwiki',
+        init = function()
+          vim.g.vimwiki_path = '~/wiki/'
+          vim.g.vimwiki_syntax = 'markdown'
+          vim.g.vimwiki_ext = 'md'
+        end,
+    },
+    {
+      "zk-org/zk-nvim",
+      name = "zk",
+      opts = {
+        -- See Setup section below
+      },
+    }
 }
