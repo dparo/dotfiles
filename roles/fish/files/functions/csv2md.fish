@@ -10,12 +10,12 @@ function csv2md
             return x
         return (
             x
-             .replace("\r\n", "\n")
-             .replace("\r", "\n")
-             .replace("\\", "\\\\")
-             .replace("|", "\\|")
-             .replace("\n", "<br>")
-             # .replace("\n", "\\n")      # or "<br>"
+             .replace("\\r\\n", "\\\\n")
+             .replace("\\r", "\\\\n")
+             .replace("\\\\", "\\\\\\\\")
+             .replace("|", "\\\\|")
+             .replace("\\n", "<br>")
+             # .replace("\\n", "\\\\n")      # or "<br>"
         )
 
 
