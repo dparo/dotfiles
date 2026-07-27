@@ -9,7 +9,10 @@ function csv2md
         if not isinstance(x, str):
             return x
         return (
-            x.replace("\\", "\\\\")
+            x
+             .replace("\r\n", "\n")
+             .replace("\r", "\n")
+             .replace("\\", "\\\\")
              .replace("|", "\\|")
              .replace("\n", "\\n")      # or "<br>"
         )
