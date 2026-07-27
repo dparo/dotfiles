@@ -14,7 +14,8 @@ function csv2md
              .replace("\r", "\n")
              .replace("\\", "\\\\")
              .replace("|", "\\|")
-             .replace("\n", "\\n")      # or "<br>"
+             .replace("\n", "<br>")
+             # .replace("\n", "\\n")      # or "<br>"
         )
 
 
