@@ -3,6 +3,7 @@
 
 set -eou pipefail
 
+
 # Load OS information
 if [ -f /etc/os-release ]; then
     . /etc/os-release
@@ -29,6 +30,8 @@ case "$ID" in
 esac
 
 
+
+set -x
 
 rm -rf "$HOME/.cache/pre-commit/"
 
