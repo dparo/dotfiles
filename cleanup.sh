@@ -36,6 +36,7 @@ go clean -modcache
 go clean -cache
 pip cache purge
 
+docker builder prune -f
 
 npm cache clean --force
 
