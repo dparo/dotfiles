@@ -38,6 +38,7 @@ rm -rf "$HOME/.cache/pre-commit/"
 go clean -modcache
 go clean -cache
 pip cache purge
+uv cache clean
 
 docker builder prune -f
 
