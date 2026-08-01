@@ -1,0 +1,37 @@
+# Code Review Tool: a code review TUI with vim keybindings
+---
+- name: tuicr
+  tags:
+    - tuicr
+  when: true
+  block:
+    - name: Check latest tuicr release
+      ansible.builtin.uri:
+        url: https://api.github.com/repos/agavra/tuicr/releases/latest
+        return_content: true
+      register: tuicr_latest
+
+    - name: Create temporary extraction directory
+      ansible.builtin.tempfile:
+        state: directory
+        suffix: tuicr
+      register: tuicr_tmpdir
+
+    - name: Download and extract tuicr
+      ansible.builtin.unarchive:
+        src: >-
+          https://github.com/agavra/tuicr/releases/download/{{ tuicr_latest.json.tag_name }}/tuicr-{{ tuicr_latest.json.tag_name | regex_replace('^v', '') }}-x86_64-unknown-linux-gnu.tar.gz
+        dest: "{{ tuicr_tmpdir.path }}"
+        remote_src: true
+
+    - name: Install tuicr
+      ansible.builtin.copy:
+        src: "{{ tuicr_tmpdir.path }}/tuicr"
+        dest: "{{ ansible_facts.user_dir }}/.local/bin/tuicr"
+        mode: "0755"
+        remote_src: true
+
+    - name: Remove temporary extraction directory
+      ansible.builtin.file:
+        path: "{{ tuicr_tmpdir.path }}"
+        state: absent

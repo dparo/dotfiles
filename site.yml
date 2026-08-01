@@ -70,6 +70,7 @@
     - wget
     - keyring
     - httpie
+    - tuicr     # Code Review Tool: a code review TUI with vim keybindings
 
     # Development toolchains
     - python
@@ -268,7 +269,6 @@
     - caddy
     - wireshark
     - mitmproxy
-    - trunkrs
     - infer # https://github.com/facebook/infer
     - gaming
     - clamav
