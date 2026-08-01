@@ -35,3 +35,9 @@
       ansible.builtin.file:
         path: "{{ tuicr_tmpdir.path }}"
         state: absent
+
+    - name: Symlink tuicr config
+      ansible.builtin.file:
+        src: "{{ ansible_facts.user_dir }}/.local/share/tuicr"
+        dest: "{{ ansible_facts.user_dir }}/.config/tuicr"
+        state: link
