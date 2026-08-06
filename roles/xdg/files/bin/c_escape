@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+
+import sys
+
+data = (" ".join(sys.argv[1:]).encode("utf-8")
+        if len(sys.argv) > 1 else sys.stdin.buffer.read())
+
+out = ['"']
+for b in data:
+    if b == 0x22:
+        out.append(r"\"")
+    elif b == 0x5c:
+        out.append(r"\\")
+    elif b == 0x07:
+        out.append(r"\a")
+    elif b == 0x08:
+        out.append(r"\b")
+    elif b == 0x09:
+        out.append(r"\t")
+    elif b == 0x0a:
+        out.append(r"\n")
+    elif b == 0x0b:
+        out.append(r"\v")
+    elif b == 0x0c:
+        out.append(r"\f")
+    elif b == 0x0d:
+        out.append(r"\r")
+    elif 0x20 <= b <= 0x7e:
+        out.append(chr(b))
+    else:
+        # Fixed-width octal avoids ambiguity with following characters.
+        out.append(f"\\{b:03o}")
+out.append('"')
+
+sys.stdout.write("".join(out))
