@@ -1,0 +1,10 @@
+- name: Configure Cloudflare DNS
+  tags:
+    - dns
+    - cloudflare
+  block:
+    - name: Restart systemd-resolved
+      become: True
+      ansible.builtin.systemd:
+        name: systemd-resolved
+        state: restarted

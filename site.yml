@@ -5,6 +5,8 @@
   roles:
     - debug
 
+    - dns
+
     # OS System configuration
     - sysctl
     - systemd-oomd

@@ -1,0 +1,24 @@
+---
+- name: Configure Cloudflare DNS
+  tags:
+    - dns
+    - cloudflare
+  block:
+    - name: Configure systemd-resolved
+      become: True
+      ansible.builtin.copy:
+        dest: /etc/systemd/resolved.conf
+        mode: "0644"
+        content: |
+          [Resolve]
+          DNS=1.1.1.1 1.0.0.1
+          FallbackDNS=1.1.1.1 1.0.0.1
+          DNSStubListener=yes
+      notify: Restart systemd-resolved
+
+    - name: Ensure systemd-resolved is enabled
+      become: True
+      ansible.builtin.systemd:
+        name: systemd-resolved
+        enabled: true
+        state: started
