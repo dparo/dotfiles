@@ -1,0 +1,19 @@
+---
+- name: Noctalia
+  tags:
+    - noctalia
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - noctalia
+        state: present
+      become: true
+
+    - name: Symlink Noctalia config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/noctalia"
+        state: link
+        force: true
+
