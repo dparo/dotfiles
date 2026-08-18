@@ -15,7 +15,6 @@ end = [
     "group:g1",
     "brightness",
     "battery",
-    "control-center",
     "session",
     "clock"
 ]
@@ -23,7 +22,7 @@ font_family = "JetBrainsMono Nerd Font Mono"
 font_weight = 400
 margin_ends = 0
 position = "top"
-start = [ "launcher", "workspaces", "active_window" ]
+start = [ "control-center", "launcher", "workspaces", "active_window" ]
 
     [[bar.default.capsule_group]]
     accordion = false
@@ -129,3 +128,7 @@ enabled = false
 [widget.active_window]
 title_scroll = "on_hover"
 
+[widget.control-center]
+custom_image = "/usr/share/icons/hicolor/32x32/apps/fedora-logo-icon.png"
+custom_image_colorize = true
+icon_color = "primary"
