@@ -7,7 +7,6 @@ capsule_thickness = 0.69999998807907104
 center = []
 end = [
     "media",
-    "tray",
     "notifications",
     "clipboard",
     "network",
@@ -15,8 +14,9 @@ end = [
     "group:g1",
     "brightness",
     "battery",
-    "session",
-    "clock"
+    "group:g2",
+    "clock",
+    "tray"
 ]
 font_family = "JetBrainsMono Nerd Font Mono"
 font_weight = 400
@@ -31,6 +31,16 @@ start = [ "control-center", "launcher", "workspaces", "active_window" ]
     fill = "surface_variant"
     id = "g1"
     members = [ "input_volume", "volume" ]
+    opacity = 1.0
+    padding = 6.0
+
+    [[bar.default.capsule_group]]
+    accordion = false
+    accordion_direction = "end"
+    enabled = true
+    fill = "surface_variant"
+    id = "g2"
+    members = [ "session" ]
     opacity = 1.0
     padding = 6.0
 
