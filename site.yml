@@ -59,6 +59,7 @@
     - core_pkgs
 
     # Shells
+    - atuin
     - bash
     - zsh
     - fish

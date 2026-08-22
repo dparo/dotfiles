@@ -1,0 +1,11 @@
+---
+- name: Atuin
+  tags:
+    - Atuin
+  block:
+    - name: Install
+      ansible.builtin.dnf:
+        name:
+          - atuin
+        state: present
+      become: true
