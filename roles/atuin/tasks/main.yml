@@ -9,3 +9,9 @@
           - atuin
         state: present
       become: true
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/atuin"
+        state: link
+
