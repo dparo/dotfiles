@@ -64,4 +64,8 @@ if status is-interactive
     if builtin type /usr/bin/mise 1> /dev/null 2> /dev/null
         /usr/bin/mise activate fish | source
     end
+
+    if builtin type /usr/bin/atuin 1> /dev/null 2> /dev/null
+        /usr/bin/atuin init fish | source
+    end
 end
