@@ -29,6 +29,7 @@
           - grimshot
           - SwayOSD # Repository: terra (Not available in stadard repos)
           - swappy # Wayland native snapshot editing tool, inspired by Snappy on macOS
+          - noctalia
         state: present
       become: true
 
