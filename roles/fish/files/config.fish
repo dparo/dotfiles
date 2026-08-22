@@ -65,7 +65,11 @@ if status is-interactive
         /usr/bin/mise activate fish | source
     end
 
+    if builtin type /usr/bin/fzf 1> /dev/null 2> /dev/null
+        /usr/bin/fzf --fish | source
+    end
+
     if builtin type /usr/bin/atuin 1> /dev/null 2> /dev/null
-        /usr/bin/atuin init fish | source
+        /usr/bin/atuin init fish  --disable-up-arrow | source
     end
 end
