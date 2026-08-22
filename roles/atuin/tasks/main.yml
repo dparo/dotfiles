@@ -1,7 +1,7 @@
 ---
 - name: Atuin
   tags:
-    - Atuin
+    - atuin
   block:
     - name: Install
       ansible.builtin.dnf:
