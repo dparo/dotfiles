@@ -111,3 +111,5 @@ custom_image = "/usr/share/icons/hicolor/32x32/apps/fedora-logo-icon.png"
 custom_image_colorize = true
 icon_color = "primary"
 
+[widget.clock]
+format = "{:%a  %Y-%m-%d  %H:%M}"
