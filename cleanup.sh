@@ -35,6 +35,7 @@ set -x
 
 dnf clean all
 sudo dnf clean all
+sudo dnf autoremove
 
 rm -rf "$HOME/.cache/pre-commit/"
 
