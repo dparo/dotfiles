@@ -124,3 +124,57 @@ elif have rpm && have uname; then
         printf 'A newer kernel is installed (%s); reboot when convenient.\n' "$newest_kernel"
     fi
 fi
+
+
+
+# Check reboot state without refreshing or downloading DNF metadata. These
+# commands use nonzero statuses as normal results, so do not use run_step.
+section "Restart checks"
+if [[ -e /run/ostree-booted ]]; then
+    REBOOT_REASONS+=("a new rpm-ostree deployment may be pending")
+elif have dnf5; then
+    sudo dnf5 --cacheonly --quiet needs-restarting >/dev/null 2>&1
+    restart_status=$?
+    case $restart_status in
+        0) printf 'DNF5: no reboot required.\n' ;;
+        1) REBOOT_REASONS+=("DNF5 reports updated system components") ;;
+        *) printf 'DNF5 restart check unavailable (status %d).\n' "$restart_status" >&2 ;;
+    esac
+elif have dnf; then
+    sudo dnf --cacheonly --quiet needs-restarting --reboothint >/dev/null 2>&1
+    restart_status=$?
+    case $restart_status in
+        0) printf 'DNF: no reboot required.\n' ;;
+        1) REBOOT_REASONS+=("DNF reports updated system components") ;;
+        *) printf 'DNF restart check unavailable (status %d).\n' "$restart_status" >&2 ;;
+    esac
+fi
+
+if have fwupdmgr; then
+    # JSON mode prevents the interactive "Restart now?" prompt. fwupdmgr uses
+    # status 0 when a reboot action is pending and 2 for "nothing to do".
+    sudo fwupdmgr check-reboot-needed --json >/dev/null 2>&1
+    restart_status=$?
+    case $restart_status in
+        0) REBOOT_REASONS+=("fwupd reports a pending firmware reboot") ;;
+        2) printf 'fwupd: no reboot required.\n' ;;
+        *) printf 'fwupd restart check unavailable (status %d).\n' "$restart_status" >&2 ;;
+    esac
+fi
+
+section "Update summary"
+if ((${#REBOOT_REASONS[@]})); then
+    printf 'Restart recommended:\n'
+    printf '  - %s\n' "${REBOOT_REASONS[@]}"
+else
+    printf 'No restart is currently indicated by the available checks.\n'
+fi
+
+if ((${#FAILURES[@]})); then
+    printf 'Completed with %d failed component(s):\n' "${#FAILURES[@]}" >&2
+    printf '  - %s\n' "${FAILURES[@]}" >&2
+    printf 'Review the messages above; successful components are already updated.\n' >&2
+    exit 1
+fi
+
+printf 'All detected update sources completed successfully.\n'
