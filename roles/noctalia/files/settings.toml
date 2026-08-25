@@ -120,3 +120,7 @@ format = "{:%a  %Y-%m-%d  %H:%M}"
 type = "sysmon"
 stat = "disk_free"
 path = "/home"
+
+[widget.media]
+hide_when_no_media = true
+
