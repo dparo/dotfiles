@@ -33,6 +33,9 @@ esac
 
 set -x
 
+dnf clean all
+sudo dnf clean all
+
 rm -rf "$HOME/.cache/pre-commit/"
 
 go clean -modcache
