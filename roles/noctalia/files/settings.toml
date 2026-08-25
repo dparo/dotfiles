@@ -10,6 +10,7 @@ end = [
     "media",
     "notifications",
     "clipboard",
+    "group:g2",
     "network",
     "bluetooth",
     "group:g1",
@@ -33,6 +34,17 @@ start = [ "control-center", "launcher", "workspaces", "active_window" ]
     members = [ "input_volume", "volume" ]
     opacity = 1.0
     padding = 6.0
+
+    [[bar.default.capsule_group]]
+    accordion = false
+    accordion_direction = "end"
+    enabled = true
+    fill = "surface_variant"
+    id = "g2"
+    members = [ "ram", "cpu", "DISK" ]
+    opacity = 1.0
+    padding = 6.0
+
 
 [calendar]
 enabled = true
@@ -103,3 +115,8 @@ icon_color = "primary"
 
 [widget.clock]
 format = "{:%a  %Y-%m-%d  %H:%M}"
+
+[widget.DISK]
+type = "sysmon"
+stat = "disk_free"
+path = "/home"
