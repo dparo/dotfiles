@@ -6,6 +6,7 @@
     - name: Install
       ansible.builtin.dnf:
         name:
+          - cosmic-wallpapers
           - i3status # For populating the status bar
           - i3blocks # For populating the status bar
           - cliphist
