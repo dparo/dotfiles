@@ -62,7 +62,7 @@ widget_order = []
     [desktop_widgets.widget]
 
 [dock]
-enabled = true
+enabled = false
 launcher_position = "start"
 position = "right"
 reserve_space = false
