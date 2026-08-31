@@ -78,6 +78,9 @@ auto_locate = true
 [lockscreen]
 wallpaper = "/usr/share/backgrounds/gnome/adwaita-l.jxl"
 
+[notification]
+position = "bottom_right"
+
 [shell]
 font_family = "JetBrainsMono Nerd Font"
 panel_anchor_bar = "default"
