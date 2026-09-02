@@ -2,7 +2,7 @@
   "url": "https://teams.cloud.microsoft/",
   "disableGpu": false,
   "multiAccount": {
-    "enabled": true
+    "enabled": false
   },
   "graphApi": {
     "enabled": true
