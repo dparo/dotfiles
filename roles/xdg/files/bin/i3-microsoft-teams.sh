@@ -12,13 +12,13 @@ FILTER_TFL2=''
 
 if [ -n "$SWAYSOCK" ] || [ -n "$WAYLAND_DISPLAY" ]; then
     MSG="swaymsg"
-    FILTER_MS='app_id="brave-cifhbcnohmdccbgoicgdjpfamggdegmo-Default"'
+    FILTER_MS='app_id="brave-ompifgpmddkgmclendfeacglnodjjndh-Default"'
     FILTER_TFL1='app_id="teams-for-linux"'
     FILTER_TFL2='instance="teams-for-linux" class="teams-for-linux"'
 else
     MSG="i3-msg"
-    FILTER_MS='instance="crx_cifhbcnohmdccbgoicgdjpfamggdegmo" class="Google-chrome"'
-    FILTER_TFL1='instance="teams-for-linux|microsoft teams|crx_+cifhbcnohmdccbgoicgdjpfamggdegmo" class="teams-for-linux|Microsoft Teams|Google-chrome|Microsoft-edge|Brave-browser|Chromium-browser"'
+    FILTER_MS='instance="crx_ompifgpmddkgmclendfeacglnodjjndh" class="Google-chrome"'
+    FILTER_TFL1='instance="teams-for-linux|microsoft teams|crx_+ompifgpmddkgmclendfeacglnodjjndh" class="teams-for-linux|Microsoft Teams|Google-chrome|Microsoft-edge|Brave-browser|Chromium-browser"'
 fi
 
 # ---------------------------------------------------------------------------
@@ -42,6 +42,6 @@ fi
 #      1st choice: Brave PWA desktop entry
 #      2nd choice: teams-for-linux desktop entry
 # ---------------------------------------------------------------------------
-gtk-launch brave-cifhbcnohmdccbgoicgdjpfamggdegmo-Default.desktop 2>/dev/null && exit 0
+gtk-launch brave-ompifgpmddkgmclendfeacglnodjjndh-Default.desktop 2>/dev/null && exit 0
 gtk-launch teams-for-linux.desktop
 
