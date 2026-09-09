@@ -110,6 +110,12 @@
     - thunar
 
     ##
+    ## Task / Time Tracking
+    ##
+    - taskwarrior
+    - timewarrior
+
+    ##
     ## Office Suite / Email
     ##
     - pdftools

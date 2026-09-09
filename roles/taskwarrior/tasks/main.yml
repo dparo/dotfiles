@@ -1,0 +1,33 @@
+---
+- name: TaskWarrior
+  tags:
+    - taskwarrior
+  block:
+    - name: Install taskwarrior
+      ansible.builtin.dnf:
+        name:
+          - task
+        state: present
+      become: true
+
+    - name: Symlink config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/taskrc"
+        dest: "{{ ansible_facts['user_dir'] }}/.taskrc"
+        state: link
+
+    # TaskWarrior TUI
+    # - name: Check latest taskwarrior_tui
+    #   ansible.builtin.uri:
+    #     url: https://api.github.com/repos/kdheepak/taskwarrior-tui/releases/latest
+    #     return_content: true
+    #   register: taskwarrior
+
+    - name: Install taskwarrior-tui {{ taskwarrior_tui_version }}
+      ansible.builtin.dnf:
+        # https://github.com/kdheepak/taskwarrior-tui/releases/download/v0.27.0/taskwarrior-tui-0.27.0-1.x86_64.rpm
+        name: "https://github.com/kdheepak/taskwarrior-tui/releases/download/{{ taskwarrior_tui_version }}/taskwarrior-tui-{{ taskwarrior_tui_version[1:] }}-1.x86_64.rpm"
+        state: present
+        disable_gpg_check: true
+      become: true
+
