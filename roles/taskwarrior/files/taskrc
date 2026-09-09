@@ -1,3 +1,3 @@
 include /usr/share/task/dark-256.theme
 
-data.location=~/.tasks
+data.location=~/.local/share/tasks
