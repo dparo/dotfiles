@@ -23,6 +23,34 @@
     #     return_content: true
     #   register: taskwarrior
 
+    - name: Check if TaskWarrior DB Directory exists
+      ansible.builtin.stat:
+        path: "{{ ansible_facts['user_dir'] }}/.local/share/tasks"
+      register: taskwarrior_db_dir
+
+    - name: "Create TaskWarrior DB Directory ({{ ansible_facts['user_dir'] }}/.local/share/tasks)"
+      ansible.builtin.file:
+        path: "{{ ansible_facts['user_dir'] }}/.local/share/tasks"
+        state: directory
+        mode: '0755'
+        recurse: true
+      when: not taskwarrior_db_dir
+
+    - name: "Check if TaskWarrior Hooks Directory exists ({{ ansible_facts['user_dir'] }}/.local/share/tasks/hooks)"
+      ansible.builtin.stat:
+        path: "{{ ansible_facts['user_dir'] }}/.local/share/tasks/hooks"
+      register: taskwarrior_db_hooks_dir
+
+    - name: "Create TaskWarrior Hooks Directory ({{ ansible_facts['user_dir'] }}/.local/share/tasks/hooks)"
+      ansible.builtin.file:
+        path: "{{ ansible_facts['user_dir'] }}/.local/share/tasks/hooks"
+        state: directory
+        mode: '0755'
+        recurse: true
+      when: not taskwarrior_db_hooks_dir
+
+
+
     - name: Install taskwarrior-tui {{ taskwarrior_tui_version }}
       ansible.builtin.dnf:
         # https://github.com/kdheepak/taskwarrior-tui/releases/download/v0.27.0/taskwarrior-tui-0.27.0-1.x86_64.rpm

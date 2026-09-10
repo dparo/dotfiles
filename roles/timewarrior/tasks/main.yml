@@ -31,3 +31,12 @@
         recurse: true
       when: not timewarrior_db_dir
 
+
+      # Add hook for taskwarrior /usr/lib64/timew/ext/on-modify.timewarrior
+
+    - name: Install taskwarrior hook for start/stop tracking
+      ansible.builtin.copy:
+        src: /usr/lib64/timew/ext/on-modify.timewarrior
+        dest: "{{ ansible_facts['user_dir'] }}/.local/share/tasks/hooks/on-modify.timewarrior"
+        mode: '0755'
+
