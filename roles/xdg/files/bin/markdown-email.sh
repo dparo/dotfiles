@@ -7,13 +7,24 @@
 # `chromium-browser --headless --disable-gpu --run-all-compositor-stages-before-draw --no-pdf-header-footer --print-to-pdf-no-header input.html --print-to-pdf=output.pdf`
 
 
-# Create temporary CSS file
-TEMP_CSS="$(mktemp).css"
-TEMP_HTML_TEMPLATE="$(mktemp).html"
-trap "rm -f $TEMP_CSS" EXIT
-trap "rm -f $TEMP_HTML_TEMPLATE" EXIT
+# Create temporary files
+TEMP_CSS="$(mktemp --suffix=.css)"
+TEMP_HTML_TEMPLATE="$(mktemp --suffix=.html)"
+TEMP_ASCIIDOC_HTML=""
+TEMP_RENDER_HTML=""
+TEMP_PDF=""
+
+cleanup() {
+    rm -f "$TEMP_CSS" "$TEMP_HTML_TEMPLATE" "$TEMP_ASCIIDOC_HTML" "$TEMP_RENDER_HTML" "$TEMP_PDF"
+}
+trap cleanup EXIT
 
 cat > "$TEMP_CSS" << 'EOF'
+@page {
+    size: A4;
+    margin: 0;
+}
+
 body {
     font-family: Arial, sans-serif;
     font-size: 16px;
@@ -183,6 +194,7 @@ CLIPBOARD=false
 TOC=false
 NUMBER_SECTIONS=false
 ASCIIDOC=false
+PDF_OUTPUT=""
 INPUT="-"
 
 while [ $# -gt 0 ]; do
@@ -202,6 +214,14 @@ while [ $# -gt 0 ]; do
         --asciidoc)
             ASCIIDOC=true
             shift
+            ;;
+        --pdf)
+            if [ $# -lt 2 ] || [ -z "$2" ]; then
+                echo "Error: --pdf requires an output file path" >&2
+                exit 1
+            fi
+            PDF_OUTPUT="$2"
+            shift 2
             ;;
         *)
             INPUT="$1"
@@ -231,8 +251,7 @@ if [ "$ASCIIDOC" = true ]; then
     fi
 
     # Convert AsciiDoc to HTML using asciidoctor
-    TEMP_ASCIIDOC_HTML="$(mktemp).html"
-    trap "rm -f $TEMP_ASCIIDOC_HTML" EXIT
+    TEMP_ASCIIDOC_HTML="$(mktemp --suffix=.html)"
 
     asciidoctor $ASCIIDOCTOR_OPTS -o "$TEMP_ASCIIDOC_HTML" "${INPUT}"
 
@@ -298,8 +317,37 @@ else
         "${INPUT}")
 fi
 
-# Output to clipboard or stdout based on --clipboard flag
-if [ "$CLIPBOARD" = true ]; then
+# Output as PDF, to clipboard, or stdout
+if [ -n "$PDF_OUTPUT" ]; then
+    if ! command -v google-chrome >/dev/null 2>&1; then
+        echo "Error: google-chrome is required to generate PDF output" >&2
+        exit 1
+    fi
+
+    TEMP_RENDER_HTML="$(mktemp --suffix=.html)"
+    TEMP_PDF="$(mktemp --suffix=.pdf)"
+    printf '%s\n' "$HTML_OUTPUT" > "$TEMP_RENDER_HTML"
+
+    if ! google-chrome --headless --disable-gpu --no-pdf-header-footer \
+        --print-to-pdf="$TEMP_PDF" "file://$TEMP_RENDER_HTML"; then
+        echo "Error: Google Chrome could not generate the PDF" >&2
+        exit 1
+    fi
+
+    if [ "$CLIPBOARD" = true ]; then
+        if ! command -v wl-copy >/dev/null 2>&1; then
+            echo "Error: wl-copy is required to copy PDF output to the clipboard" >&2
+            exit 1
+        fi
+        if ! wl-copy --type application/pdf < "$TEMP_PDF"; then
+            echo "Error: Could not copy PDF output to the clipboard" >&2
+            exit 1
+        fi
+    else
+        mv "$TEMP_PDF" "$PDF_OUTPUT"
+        TEMP_PDF=""
+    fi
+elif [ "$CLIPBOARD" = true ]; then
     if [ -n "$WAYLAND_DISPLAY" ] && command -v wl-copy >/dev/null 2>&1; then
         # Wayland / sway
         echo "$HTML_OUTPUT" | wl-copy --type text/html
@@ -313,7 +361,6 @@ if [ "$CLIPBOARD" = true ]; then
 else
     echo "$HTML_OUTPUT"
 fi
-
 
 
 
