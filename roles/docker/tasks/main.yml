@@ -93,17 +93,6 @@
       become: true
       when: not podman_docker_emulation
 
-# - name: Symlink docker config
-#   ansible.builtin.file:
-#     src: "{{ item }}"
-#     dest: "{{ ansible_facts['user_dir'] }}/.config/{{ item | basename }}"
-#     state: link
-#   loop:
-#     - "{{ role_path }}/files/config/docker"
-#   tags:
-#     - podman
-#     - podman-desktop
-#     - docker
 
 
     - name: Enable podman service
@@ -125,3 +114,9 @@
           hostname: host.docker.internal
         - ip: 127.0.0.1
           hostname: kubernetes.docker.internal
+
+    - name: Symlink podman config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/config/containers"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/containers"
+        state: link
