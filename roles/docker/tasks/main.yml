@@ -131,10 +131,13 @@
 
     - name: Symlink podman config
       ansible.builtin.file:
-        src: "{{ role_path }}/files/config/containers/containers.conf"
-        dest: "{{ ansible_facts['user_dir'] }}/.config/containers/containers.conf"
+        src: "{{ role_path }}/files/config/containers/{{ item }}"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/containers/{{ item }}"
         state: link
       when: not podman_config_dir
+      loop:
+        - containers.conf
+        - storage.conf
 
     - name: Touch /etc/containers/nodocker
       ansible.builtin.file:
