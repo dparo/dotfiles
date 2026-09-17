@@ -76,13 +76,15 @@
           }
         mode: "0644"
       become: true
+      when: not podman_docker_emulation
+
 
     - name: Enable docker socket (starts dockerd service lazily when invoked)
       ansible.builtin.systemd:
         name: docker.socket
         enabled: "{{ not podman_docker_emulation }}"
       become: true
-      when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined and podman_docker_emulation
+      when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined and not podman_docker_emulation
 
     - name: Append docker group to user {{ ansible_facts['env']['USER'] }}
       ansible.builtin.user:
@@ -92,8 +94,6 @@
           - docker
       become: true
       when: not podman_docker_emulation
-
-
 
     - name: Enable podman service
       ansible.builtin.systemd:
@@ -115,8 +115,30 @@
         - ip: 127.0.0.1
           hostname: kubernetes.docker.internal
 
+    - name: Check if Podman config idr exists
+      ansible.builtin.stat:
+        path: "{{ ansible_facts['user_dir'] }}/.config/containers"
+      register: podman_config_dir
+
+    # mkdir -p "$HOME/.local/share/dbus-1/services/"
+    - name: "Create Podman config dir ({{ ansible_facts['user_dir'] }}/.config/containers)"
+      ansible.builtin.file:
+        path: "{{ ansible_facts['user_dir'] }}/.local/share/timewarrior"
+        state: directory
+        mode: '0755'
+        recurse: true
+      when: not podman_config_dir and not podman_docker_emulation
+
     - name: Symlink podman config
       ansible.builtin.file:
-        src: "{{ role_path }}/files/config/containers"
-        dest: "{{ ansible_facts['user_dir'] }}/.config/containers"
+        src: "{{ role_path }}/files/config/containers/containers.conf"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/containers/containers.conf"
         state: link
+      when: not podman_config_dir
+
+    - name: Touch /etc/containers/nodocker
+      ansible.builtin.file:
+        path: /etc/containers/nodocker
+        state: touch
+      become: true
+      when: podman_docker_emulation
