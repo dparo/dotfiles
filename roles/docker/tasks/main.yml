@@ -61,6 +61,8 @@
         name:
           - podman
           - podman-tui
+          - podman-docker
+          - podman-compose
         state: present
       become: true
       when: podman_docker_emulation
@@ -74,13 +76,15 @@
           }
         mode: "0644"
       become: true
+      when: not podman_docker_emulation
+
 
     - name: Enable docker socket (starts dockerd service lazily when invoked)
       ansible.builtin.systemd:
         name: docker.socket
         enabled: "{{ not podman_docker_emulation }}"
       become: true
-      when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined and podman_docker_emulation
+      when: ansible_facts['env']['RUNNING_INSIDE_DOCKER'] is undefined and not podman_docker_emulation
 
     - name: Append docker group to user {{ ansible_facts['env']['USER'] }}
       ansible.builtin.user:
@@ -90,29 +94,6 @@
           - docker
       become: true
       when: not podman_docker_emulation
-
-# - name: Symlink docker config
-#   ansible.builtin.file:
-#     src: "{{ item }}"
-#     dest: "{{ ansible_facts['user_dir'] }}/.config/{{ item | basename }}"
-#     state: link
-#   loop:
-#     - "{{ role_path }}/files/config/docker"
-#   tags:
-#     - podman
-#     - podman-desktop
-#     - docker
-
-    - name: Install podman-docker
-      ansible.builtin.dnf:
-        name:
-          - podman
-          - podman-tui
-          - podman-docker
-          - podman-compose
-        state: present
-      become: true
-      when: podman_docker_emulation
 
     - name: Enable podman service
       ansible.builtin.systemd:
@@ -133,3 +114,34 @@
           hostname: host.docker.internal
         - ip: 127.0.0.1
           hostname: kubernetes.docker.internal
+
+    - name: Check if Podman config idr exists
+      ansible.builtin.stat:
+        path: "{{ ansible_facts['user_dir'] }}/.config/containers"
+      register: podman_config_dir
+
+    # mkdir -p "$HOME/.local/share/dbus-1/services/"
+    - name: "Create Podman config dir ({{ ansible_facts['user_dir'] }}/.config/containers)"
+      ansible.builtin.file:
+        path: "{{ ansible_facts['user_dir'] }}/.local/share/timewarrior"
+        state: directory
+        mode: '0755'
+        recurse: true
+      when: not podman_config_dir and not podman_docker_emulation
+
+    - name: Symlink podman config
+      ansible.builtin.file:
+        src: "{{ role_path }}/files/config/containers/{{ item }}"
+        dest: "{{ ansible_facts['user_dir'] }}/.config/containers/{{ item }}"
+        state: link
+      when: not podman_config_dir
+      loop:
+        - containers.conf
+        - storage.conf
+
+    - name: Touch /etc/containers/nodocker
+      ansible.builtin.file:
+        path: /etc/containers/nodocker
+        state: touch
+      become: true
+      when: podman_docker_emulation
