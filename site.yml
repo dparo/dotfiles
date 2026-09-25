@@ -120,6 +120,7 @@
     ##
     - pdftools
     - onlyoffice
+    - collabora_office
     - libreoffice
     - thunderbird
     - neomutt

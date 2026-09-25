@@ -1,0 +1,21 @@
+---
+# - name: Install
+#   ansible.builtin.command: snap install onlyoffice-desktopeditors
+#   become: true
+#   ignore_errors: true
+#   tags:
+#     - snap
+#     - onlyoffice
+#
+- name: Collabora Office
+  tags:
+    - collabora
+    - collabora-office
+
+  block:
+    - name: Install Collabora Office (flatpak)
+      community.general.flatpak:
+        name: com.collaboraoffice.Office
+        state: present
+        remote: flathub
+
