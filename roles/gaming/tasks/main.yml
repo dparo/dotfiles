@@ -53,7 +53,8 @@
   ansible.builtin.dnf:
     name:
       - mangohud
-      - gamemode
+      - gamemode.i686
+      - gamemode.x86_64
     state: present
   become: true
   tags:
