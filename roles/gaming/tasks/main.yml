@@ -61,6 +61,18 @@
     - gaming
     - steam
 
+- name: Add user to gamemode group
+  ansible.builtin.user:
+    name: "{{ ansible_facts['env']['USER'] }}"
+    append: true
+    groups:
+      - gamemode
+  become: true
+  tags:
+    - never
+    - gaming
+    - steam
+
 
 - name: Unlock steam h.264 codecs
   ansible.builtin.command: steam steam://unlockh264/
