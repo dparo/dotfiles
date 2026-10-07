@@ -137,6 +137,11 @@
     - hugo
 
     ##
+    ## Bookmarking
+    ##
+    - buku
+
+    ##
     ## Templating / Writing / Diagramming
     ##
     # - harper # https://writewithharper.com/

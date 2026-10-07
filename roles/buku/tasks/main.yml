@@ -1,0 +1,13 @@
+---
+- name: "Buku: Powerful command-line bookmark manager (https://github.com/jarun/Buku)"
+  tags:
+    - buku
+    - bookmark
+  block:
+    - name: Install Buku
+      ansible.builtin.dnf:
+        name:
+          - buku
+        state: present
+      become: true
+
