@@ -11,6 +11,12 @@ enter_accept = false
 
 keymap_mode = "emacs"
 
+history_filter = [
+  "^poweroff",
+  "^reboot",
+  "^env",
+]
+
 [dotfiles]
 enabled = false
 
