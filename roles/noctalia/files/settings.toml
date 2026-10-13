@@ -77,6 +77,8 @@ auto_locate = true
 
 [lockscreen]
 wallpaper = "/usr/share/backgrounds/gnome/adwaita-l.jxl"
+transition = []
+
 
 [notification]
 position = "bottom_right"
@@ -88,6 +90,10 @@ polkit_agent = true
 
     [shell.panel]
     floating_layer = "top"
+
+    [shell.window_switcher]
+    mru = true
+    style = "compact"
 
 [theme]
 builtin = "Tokyo-Night"
