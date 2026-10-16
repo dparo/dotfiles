@@ -1,0 +1,29 @@
+#!/usr/bin/env bash
+
+set -o pipefail
+
+file="${XDG_DATA_HOME:-$HOME/.local/share}/emoji-picker/emoji.tsv"
+
+[[ -r "$file" ]] || {
+    printf 'Emoji database not found: %s\n' "$file" >&2
+    exit 1
+}
+
+selection=$(
+    fzf \
+    --delimiter="$(printf '\t')" \
+    --with-nth=1,2 \
+    --nth=2 \
+    --layout=reverse \
+    --border \
+    --prompt='Emoji> ' \
+    --height=100% \
+    --header='Ctrl-Y: copy emoji (keep open) | Enter: copy & exit' \
+    --bind 'ctrl-y:execute-silent(printf %s {1} | wl-copy)' \
+    < "$file"
+) || exit 0
+
+emoji="${selection%%$'\t'*}"
+
+[[ -n "$emoji" ]] && printf '%s' "$emoji" | wl-copy
+

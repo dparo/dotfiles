@@ -187,3 +187,15 @@
   tags:
     - xdg
     - xdg-backgrounds
+
+- name: Symlink emoji-picker database
+  ansible.builtin.file:
+    src: "{{ role_path }}/files/emoji-picker"
+    dest: "{{ ansible_facts['user_dir'] }}/.local/share/emoji-picker"
+    state: link
+  with_fileglob: "{{ role_path }}/files/applications/*"
+  ignore_errors: true
+  tags:
+    - xdg
+    - xdg-scripts
+
