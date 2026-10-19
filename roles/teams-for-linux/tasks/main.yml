@@ -44,3 +44,23 @@
       - config.json
 
 
+  - name: Configure Teams for Linux to use Wayland
+    block:
+      - name: Ensure local applications directory exists
+        ansible.builtin.file:
+          path: "{{ ansible_env.HOME }}/.local/share/applications"
+          state: directory
+          mode: "0755"
+
+      - name: Copy Teams desktop entry locally
+        ansible.builtin.copy:
+          src: /usr/share/applications/teams-for-linux.desktop
+          dest: "{{ ansible_env.HOME }}/.local/share/applications/teams-for-linux.desktop"
+          remote_src: true
+          mode: "0644"
+
+      - name: Use Wayland for Teams
+        ansible.builtin.replace:
+          path: "{{ ansible_env.HOME }}/.local/share/applications/teams-for-linux.desktop"
+          regexp: --ozone-platform=x11
+          replace: --ozone-platform=wayland
