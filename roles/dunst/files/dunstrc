@@ -189,7 +189,8 @@
 
 [teams_from_brave]
 appname = "Brave"
-body = ".*teams\\.(microsoft\\.com|cloud\\.microsoft).*"
+desktop_entry = "brave-browser"
+body = "*teams.cloud.microsoft*"
 
 urgency = normal
 override_pause_level = 30

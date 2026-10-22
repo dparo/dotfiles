@@ -140,13 +140,16 @@ hide_when_no_media = true
 enabled = true
 
 # Chromium identifies the sender as its browser name.
-match = "Brave"
+match = "brave-browser"
 
 # Restrict that broad browser match to Teams notifications.
-match_content = "teams\\.microsoft\\.com|teams\\.cloud\\.microsoft"
+match_content = "^teams\\.cloud\\.microsoft"
+
+show_toast = true
+save_history = true
+play_sound = true
 
 bypass_dnd = false
 allow_permanent = false
 override_duration = 5000
-
 
