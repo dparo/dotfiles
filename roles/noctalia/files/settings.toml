@@ -82,6 +82,8 @@ transition = []
 
 [notification]
 position = "bottom_right"
+filter_order = ["teams_from_brave"]
+
 
 [shell]
 font_family = "JetBrainsMono Nerd Font"
@@ -132,4 +134,19 @@ path = "/home"
 
 [widget.media]
 hide_when_no_media = true
+
+
+[notification.filter.teams_from_brave]
+enabled = true
+
+# Chromium identifies the sender as its browser name.
+match = "Brave"
+
+# Restrict that broad browser match to Teams notifications.
+match_content = "teams\\.microsoft\\.com|teams\\.cloud\\.microsoft"
+
+bypass_dnd = false
+allow_permanent = false
+override_duration = 5000
+
 

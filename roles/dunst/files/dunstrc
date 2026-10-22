@@ -1,6 +1,8 @@
 # vi: ft=cfg
 
 [global]
+    enable_posix_regex = true
+
     font = SansSerif 10.5
 
     icon_position = left
@@ -183,3 +185,13 @@
     # Do not show appname if app is notify-osd,
     # i.e. possible notification generating from an arcaic bash script
     format = "<b>%s</b>\n%b"
+
+
+[teams_from_brave]
+appname = "Brave"
+body = ".*teams\\.(microsoft\\.com|cloud\\.microsoft).*"
+
+urgency = normal
+override_pause_level = 30
+timeout = 5s
+override_dbus_timeout = 5s
