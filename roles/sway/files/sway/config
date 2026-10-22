@@ -53,7 +53,8 @@ set $menu $rofi_cmd -show drun
 # output * bg /usr/share/backgrounds/default.jxl fill
 # output * bg /usr/local/share/wallpapers/Next/contents/images/Sub-Arctic-5120x2880.png fill
 # output * bg /usr/share/backgrounds/gnome/adwaita-d.jxl fill
-output * bg /usr/share/backgrounds/cosmic/orion_nebula_nasa_heic0601a.jpg fill
+output * bg /usr/share/backgrounds/gnome/adwaita-d.jxl fill
+# output * bg /usr/share/backgrounds/cosmic/orion_nebula_nasa_heic0601a.jpg fill
 
 set $laptop eDP-1
 set $external HDMI-A-1
@@ -140,7 +141,7 @@ input "type:keyboard" {
 # Basics:
 #
     # Start a terminal
-    bindsym $mod+Return exec $term
+    bindsym $mod+Return exec ~/.local/bin/kitty
 
     # Kill focused window
     bindsym $mod+q kill
