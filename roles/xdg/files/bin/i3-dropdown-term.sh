@@ -19,9 +19,9 @@ term() {
     cmd='exec tmuxp load -y home'
 
     if test "$1" = kitty; then
-        exec kitty --name "kitty" --class "dropdown-term" --override 'initial_window_width=150c' --override 'initial_window_height=40c' -e bash -c "$cmd"
+        exec kitty --name "kitty" --class "dropdown-term" --override 'initial_window_width=240c' --override 'initial_window_height=50c' -e bash -c "$cmd"
     else
-        exec st -c "dropdown-term" -g 200x60 -e bash -c "$cmd"
+        exec st -c "dropdown-term" -g 240x50 -e bash -c "$cmd"
     fi
 }
 
