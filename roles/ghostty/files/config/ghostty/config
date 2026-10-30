@@ -5,7 +5,7 @@ theme = tokyonight-storm
 # gtk-adwaita = false
 window-theme = dark
 gtk-titlebar = false
-window-decoration = false
+window-decoration = true
 
 shell-integration = none
 cursor-style=block
