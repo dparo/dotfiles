@@ -1,5 +1,8 @@
 return {
     {
+        "dhruvasagar/vim-table-mode" -- VIM Table Mode for instant table creation. Supports simple formulas
+    },
+    {
         "folke/snacks.nvim",
         priority = 1000,
         lazy = false,
