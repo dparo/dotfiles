@@ -162,30 +162,25 @@
     mouse_right_click = close_all
 
 [urgency_low]
-    # IMPORTANT: colors have to be defined in quotation marks.
-    # Otherwise the '#' and following  would be interpreted as a comment.
-    background = "#a6e3a1"
-    foreground = "#11111b"
-    frame_color = "#1e1e2e"
+    background = "#1f2335"
+    foreground = "#c0caf5"
+    frame_color = "#9ece6a"
     timeout = 16
 
 [urgency_normal]
-    background = "#a6e3a1"
-    foreground = "#11111b"
-    frame_color = "#1e1e2e"
+    background = "#292e42"
+    foreground = "#c0caf5"
+    frame_color = "#7aa2f7"
     timeout = 16
 
 [urgency_critical]
-    background = "#eba0ac"
-    foreground = "#11111b"
-    frame_color = "#f38ba8"
+    background = "#3b2335"
+    foreground = "#f7768e"
+    frame_color = "#f7768e"
     timeout = 0
 
 [appname=notify-osd]
-    # Do not show appname if app is notify-osd,
-    # i.e. possible notification generating from an arcaic bash script
     format = "<b>%s</b>\n%b"
-
 
 [teams_from_brave]
 appname = "Brave"
