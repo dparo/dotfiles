@@ -21,7 +21,7 @@
           - swayidle
           - sway-systemd
           - sway-wallpapers
-          - SwayNotificationCenter
+          # - SwayNotificationCenter
           - fuzzel
           - wofi
           - lxqt-policykit

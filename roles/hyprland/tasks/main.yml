@@ -20,7 +20,7 @@
           - swayidle
           - sway-systemd
           - sway-wallpapers
-          - SwayNotificationCenter
+          # - SwayNotificationCenter
           - fuzzel
         state: present
       become: true
