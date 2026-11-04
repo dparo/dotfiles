@@ -70,7 +70,7 @@ if test "$mediaplayer" = "mpd"; then
         prev|previous|prior)
             mpc prev;;
         mute)
-            mpc pause;;
+            mpc volume 0;;
         volume-up)
             mpc volume +5;;
         volume-down)
