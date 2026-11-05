@@ -71,6 +71,7 @@ sudo dnf clean all
 sudo dnf autoremove
 
 rm -rf "$HOME/.cache/pre-commit/"
+rm -rf "$HOME/.local/share/opencode/snapshot"
 
 go clean -modcache
 go clean -cache
