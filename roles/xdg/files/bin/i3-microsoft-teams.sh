@@ -22,12 +22,6 @@ else
 fi
 
 # ---------------------------------------------------------------------------
-# 2. Priority 1 – Microsoft Teams via Brave PWA
-# ---------------------------------------------------------------------------
-$MSG "[ $FILTER_MS ] scratchpad show, move position center" 2>/dev/null && exit 0
-$MSG "[ $FILTER_MS ] focus"                                 2>/dev/null && exit 0
-
-# ---------------------------------------------------------------------------
 # 3. Priority 2 – teams-for-linux (broad filter)
 # ---------------------------------------------------------------------------
 $MSG "[ $FILTER_TFL1 ] scratchpad show, move position center" 2>/dev/null && exit 0
@@ -37,11 +31,19 @@ if [ -n "$FILTER_TFL2" ]; then
     $MSG "[ $FILTER_TFL2 ] focus"                                 2>/dev/null && exit 0
 fi
 
+
+# ---------------------------------------------------------------------------
+# 2. Priority 1 – Microsoft Teams via Brave PWA
+# ---------------------------------------------------------------------------
+$MSG "[ $FILTER_MS ] scratchpad show, move position center" 2>/dev/null && exit 0
+$MSG "[ $FILTER_MS ] focus"                                 2>/dev/null && exit 0
+
+
 # ---------------------------------------------------------------------------
 # 4. Fallback – launch a .desktop file
 #      1st choice: Brave PWA desktop entry
 #      2nd choice: teams-for-linux desktop entry
 # ---------------------------------------------------------------------------
-gtk-launch brave-ompifgpmddkgmclendfeacglnodjjndh-Default.desktop 2>/dev/null && exit 0
 gtk-launch teams-for-linux.desktop
+gtk-launch brave-ompifgpmddkgmclendfeacglnodjjndh-Default.desktop 2>/dev/null && exit 0
 

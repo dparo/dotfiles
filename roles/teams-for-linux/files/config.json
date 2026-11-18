@@ -1,6 +1,10 @@
 {
-  "url": "https://teams.cloud.microsoft/",
-  "disableGpu": false,
+  "app": {
+    "url": "https://teams.cloud.microsoft/"
+  },
+  "performance": {
+    "disableGpu": false
+  },
   "multiAccount": {
     "enabled": false
   },
