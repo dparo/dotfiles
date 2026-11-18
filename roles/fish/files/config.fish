@@ -5,6 +5,10 @@ if status is-login
     # Is login shell only
 end
 
+function bell_on_error --on-event fish_postexec
+    test $status -ne 0; and printf '\a'
+end
+
 if status is-interactive
     # Commands to run in interactive sessions can go here
     starship init fish | source
