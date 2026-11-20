@@ -129,6 +129,14 @@
         recurse: true
       when: not podman_config_dir and not podman_docker_emulation
 
+
+    - name: Enable podman socket
+      ansible.builtin.systemd:
+        name: podman.socket
+        enabled: "{{ not podman_docker_emulation }}"
+        scope: user
+      when: podman_docker_emulation
+
     - name: Symlink podman config
       ansible.builtin.file:
         src: "{{ role_path }}/files/config/containers/{{ item }}"
